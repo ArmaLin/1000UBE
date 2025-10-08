@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_base"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnMediaApp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/netflix"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/btn_app_netflix"
+        tools:ignore="ImageContrastCheck|SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMediaApp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/inter_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineSpacingMultiplier="0.8"
+        android:maxLines="2"
+        android:textColor="@color/colorwhite80"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/cl_base"
+        app:layout_constraintStart_toStartOf="@+id/cl_base"
+        app:layout_constraintTop_toBottomOf="@+id/btnMediaApp"
+        tools:text="Weather Forecast"
+        tools:textColor="@color/colorwhite80" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBadge"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:background="@drawable/shape_oval_e24b44"
+        android:visibility="invisible"
+        app:layout_constraintCircle="@id/btnMediaApp"
+        app:layout_constraintCircleAngle="44"
+        app:layout_constraintCircleRadius="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnMediaApp"
+        app:layout_constraintTop_toTopOf="@+id/btnMediaApp"
+        tools:ignore="ImageContrastCheck,VisualLintBounds"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvPer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintCircle="@id/btnMediaApp"
+        app:layout_constraintCircleAngle="44"
+        app:layout_constraintCircleRadius="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnMediaApp"
+        app:layout_constraintTop_toTopOf="@+id/btnMediaApp"
+        tools:text="2" />
+
+
+<!--    <com.dyaco.spirit_commercial.support.custom_view.CircularProgressView-->
+<!--        android:id="@+id/circularProgressView"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:backgroundColorSS="@android:color/transparent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/btnMediaApp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/btnMediaApp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnMediaApp"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/btnMediaApp"-->
+<!--        app:progressColorSS="@color/half_transparent50"-->
+<!--        app:progressSS="90"-->
+<!--        app:strokeWidthSS="50" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

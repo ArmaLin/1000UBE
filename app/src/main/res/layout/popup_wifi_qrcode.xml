@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="795dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_overlay_settings"
+    tools:context=".settings.WifiQrCodePopupWindow">
+    <!--+48-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="70sp"
+        android:autoSizeTextType="uniform"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="144dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/inboxTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="WiFi Shared"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_close"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+        app:layout_constraintTop_toTopOf="@+id/btn_close" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginBottom="240dp"
+        app:layout_constraintStart_toStartOf="@+id/action_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tvSSID"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tvPWD"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/action_image"
+        android:layout_width="384dp"
+        android:layout_height="384dp"
+        android:outlineProvider="bounds"
+        android:layout_marginEnd="163dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/bText"-->
+<!--        android:layout_marginEnd="56dp"-->
+<!--        android:layout_marginBottom="64dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:textColor="@color/colorADB8C2"-->
+<!--        android:textSize="32sp"-->
+<!--        android:fontFamily="@font/inter_regular"-->
+<!--        android:text="@string/scan_the_code_with_the_mobile_app_to_connect_to_this_machine_via_bluetooth"-->
+<!--        android:layout_width="591dp"-->
+<!--        android:layout_height="wrap_content" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

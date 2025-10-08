@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_tv_scanning"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".maintenance_mode.MaintenanceTvSearchUsWindow">
+
+
+    <TextureView
+        android:id="@+id/videoFullViewContainer2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vTop"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/color1c242a"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="56dp"
+            android:layout_marginStart="56dp"
+            android:textSize="70sp"
+            android:textColor="@color/white"
+            android:text="@string/tv_settings"/>
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintStart_toEndOf="@+id/tvTitle"
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="32dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            app:strokeWidth="1dp"-->
+<!--            app:strokeColor="@color/color252e37"-->
+<!--            style="@style/MButton_252e37"-->
+<!--            android:id="@+id/btnStartScan"-->
+<!--            android:visibility="visible"-->
+<!--            android:textSize="24sp"-->
+<!--            android:paddingStart="34dp"-->
+<!--            android:paddingEnd="34dp"-->
+<!--            android:textColor="@color/btn_white_5a7085"-->
+<!--            android:text="@string/start_scan"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnDone"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:layout_marginTop="56dp"-->
+<!--            app:backgroundTint="@color/btn_1396ef_445565"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="88dp"/>-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            style="@style/MButton_252e37"-->
+<!--            android:paddingStart="62dp"-->
+<!--            android:paddingEnd="62dp"-->
+<!--            android:visibility="invisible"-->
+<!--            android:id="@+id/btnMenu"-->
+<!--            android:textSize="24sp"-->
+<!--            android:text="@string/Menu"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnDone"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:layout_marginTop="56dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="88dp"/>-->
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:indeterminate="true"-->
+<!--        android:indeterminateDrawable="@drawable/progressbar_hr"-->
+<!--        android:visibility="invisible"-->
+<!--        android:layout_marginBottom="378dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

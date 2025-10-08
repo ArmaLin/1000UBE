@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="formulaUtil"
+            type="com.dyaco.spirit_commercial.support.FormulaUtil" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color11151a"
+        tools:context=".dashboard_training.ProgramsFragment">
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/back"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_back"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:includeFontPadding="false"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/programs"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            tools:ignore="VisualLintBounds,VisualLintOverlap" />
+
+        <RadioGroup
+            android:id="@+id/rgSelectProgram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
+            tools:ignore="VisualLintBounds">
+
+            <RadioButton
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:id="@+id/rbDefaultPrograms"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:tag="0"
+                android:text="@string/default_programs"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <RadioButton
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:id="@+id/rbFitnessTests"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:tag="1"
+                android:text="@string/fitness_tests"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintBounds" />
+
+        </RadioGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewDefaultPrograms"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="88dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_manual"
+                style="@style/ProgramsButtonStyle"
+                android:tag="0"
+                android:text="@string/manual"
+                android:transitionName="sharedView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Hill"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="474dp"
+                android:drawableBottom="@drawable/diagram_hill_default"
+                android:tag="0"
+                android:text="@string/hill"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Fatburn"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="948dp"
+                android:drawableBottom="@drawable/diagram_fatburn_default"
+                android:tag="0"
+                android:text="@string/fatburn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Cardio"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="1422dp"
+                android:drawableBottom="@drawable/diagram_cardio_default"
+                android:tag="0"
+                android:text="@string/cardio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Strength"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginTop="224dp"
+                android:drawableBottom="@drawable/diagram_strength_default"
+                android:text="@string/strength"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_HIIT"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="474dp"
+                android:layout_marginTop="224dp"
+                android:drawableBottom="@drawable/diagram_hiit_default"
+                android:text="@string/hiit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintBounds,VisualLintButtonSize" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_5KRun"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="948dp"
+                android:layout_marginTop="224dp"
+                android:text="@string/k5_run"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
+                tools:ignore="DuplicateClickableBoundsCheck,VisualLintOverlap,VisualLintBounds,VisualLintButtonSize" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_10KRun"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="1422dp"
+                android:layout_marginTop="224dp"
+                android:text="@string/k10_run"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
+                tools:ignore="DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_HeartRate"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginTop="448dp"
+                android:text="@string/heart_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+
+            <com.google.android.material.button.MaterialButton
+                android:visibility="visible"
+                android:id="@+id/btn_Interval"
+                style="@style/ProgramsButtonStyle"
+                android:text="@string/Interval"
+                android:drawableBottom="@drawable/diagram_interval_default"
+                app:layout_constraintStart_toStartOf="@+id/btn_HIIT"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="448dp"
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+
+            <com.google.android.material.button.MaterialButton
+                android:visibility="visible"
+                android:id="@+id/btn_Custom"
+                style="@style/ProgramsButtonStyle"
+                android:text="@string/Custom"
+                android:layout_marginStart="948dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_Interval"
+                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+
+
+            <!--            BIKE-->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_HeartRate_BIKE"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="948dp"
+                android:layout_marginTop="224dp"
+                android:text="@string/heart_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintBounds,VisualLintButtonSize" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_Watts"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="1422dp"
+                android:layout_marginTop="224dp"
+                android:text="@string/Watts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintBounds,VisualLintButtonSize" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_FitnessTest"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginTop="448dp"
+                android:text="@string/fitness_test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewFitnessTests"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="88dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:id="@+id/btn_AirForce"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/air_force"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_AirForce"
+                    app:layout_constraintStart_toStartOf="@+id/btn_AirForce"
+                    app:layout_constraintTop_toTopOf="@+id/btn_AirForce" />
+
+                <TextView
+                    android:id="@+id/airForceUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_AirForce"
+                    app:layout_constraintStart_toStartOf="@+id/btn_AirForce"
+                    app:layout_constraintTop_toTopOf="@+id/btn_AirForce" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_Army"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="474dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/army"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_Army"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Army"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Army" />
+
+                <TextView
+                    android:id="@+id/armyUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_Army"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Army"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Army" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_CoastGuard"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="948dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/coast_guard"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_CoastGuard"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CoastGuard"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CoastGuard" />
+
+                <TextView
+                    android:id="@+id/coastGuardUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_CoastGuard"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CoastGuard"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CoastGuard" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_Gerkin"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="1422dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/gerkin"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_Gerkin"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Gerkin"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Gerkin" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/_85_max_hr"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_Gerkin"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Gerkin"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Gerkin" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_PEB"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="224dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/peb"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_PEB"
+                    app:layout_constraintStart_toStartOf="@+id/btn_PEB"
+                    app:layout_constraintTop_toTopOf="@+id/btn_PEB" />
+
+                <TextView
+                    android:id="@+id/pebUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_PEB"
+                    app:layout_constraintStart_toStartOf="@+id/btn_PEB"
+                    app:layout_constraintTop_toTopOf="@+id/btn_PEB" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_MarineCorps"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="474dp"
+                android:layout_marginTop="224dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/marine_corps"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_MarineCorps"
+                    app:layout_constraintStart_toStartOf="@+id/btn_MarineCorps"
+                    app:layout_constraintTop_toTopOf="@+id/btn_MarineCorps" />
+
+                <TextView
+                    android:id="@+id/marineCorpsUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_MarineCorps"
+                    app:layout_constraintStart_toStartOf="@+id/btn_MarineCorps"
+                    app:layout_constraintTop_toTopOf="@+id/btn_MarineCorps" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_Navy"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="948dp"
+                android:layout_marginTop="224dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/navy"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_Navy"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Navy"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Navy" />
+
+                <TextView
+                    android:id="@+id/navyUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_Navy"
+                    app:layout_constraintStart_toStartOf="@+id/btn_Navy"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Navy" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_WFI"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="1422dp"
+                android:layout_marginTop="224dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/wfi"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_WFI"
+                    app:layout_constraintStart_toStartOf="@+id/btn_WFI"
+                    app:layout_constraintTop_toTopOf="@+id/btn_WFI" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/_85_max_hr"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_WFI"
+                    app:layout_constraintStart_toStartOf="@+id/btn_WFI"
+                    app:layout_constraintTop_toTopOf="@+id/btn_WFI" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_CTTPrediction"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="448dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/ctt_prediction"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_CTTPrediction"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CTTPrediction"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CTTPrediction" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/_80_max_hr"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_CTTPrediction"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CTTPrediction"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CTTPrediction" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_CTTPerformance"
+                android:layout_width="450dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="474dp"
+                android:layout_marginTop="448dp"
+                android:background="@drawable/panel_bg_all_20_252e37_press"
+                android:tag="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:maxLines="1"
+                    android:autoSizeMaxTextSize="44sp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/ctt_performance"
+                    android:textColor="@color/btn_blue_white"
+                    android:textSize="44sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_CTTPerformance"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CTTPerformance"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CTTPerformance" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="@string/_12_min"
+                    android:textColor="@color/btn_blue_8192a2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@id/btn_CTTPerformance"
+                    app:layout_constraintStart_toStartOf="@+id/btn_CTTPerformance"
+                    app:layout_constraintTop_toTopOf="@+id/btn_CTTPerformance" />
+
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

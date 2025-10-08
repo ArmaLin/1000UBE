@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="workoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llegym"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:background="@drawable/bg_bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mC"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ProgressBar
+                android:id="@+id/egym_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/progressbar_hr"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnEgymSyncText"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnEgymSyncText"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/syncing_workout_history"
+                android:textAllCaps="false"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/egym_progress" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHomeE"
+                android:layout_width="480dp"
+                android:layout_height="96dp"
+                android:background="@color/color1c242a"
+                android:fontFamily="@font/inter_bold"
+                android:letterSpacing="0.01"
+                android:stateListAnimator="@null"
+                android:text="@string/home"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                android:visibility="invisible"
+                app:backgroundTint="@color/btn_click_252e37_323f4b"
+                app:icon="@drawable/icon_home"
+                app:iconGravity="textStart"
+                app:iconPadding="-10dp"
+                app:iconSize="95dp"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnLogoutE"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpUsage,TextSizeCheck,VisualLintButtonSize" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogoutE"
+                android:layout_width="480dp"
+                android:layout_height="96dp"
+                android:alpha="@{workoutData.isWorkoutReadyStart ? 1f : 0.5f}"
+                android:background="@color/btn_click_1396ef"
+                android:clickable="@{workoutData.isWorkoutReadyStart}"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/log_out"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.button.MaterialButton
+                app:rippleColor="@null"
+                android:id="@+id/tvEgymApiResult"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="774dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:maxWidth="700dp"
+                android:stateListAnimator="@null"
+                android:text="@string/synced_successfully"
+                android:textAllCaps="false"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:backgroundTint="@android:color/transparent"
+                app:backgroundTintMode="src_in"
+                app:icon="@drawable/icon_success"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="32dp"
+                app:iconTint="@color/color0dac87"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEgymLogoutTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tvEgymApiResult"
+                app:layout_constraintStart_toEndOf="@+id/tvEgymApiResult"
+                app:layout_constraintTop_toTopOf="@+id/tvEgymApiResult"
+                tools:text="Auto logout in 0:29" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,1313 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+        <variable
+            name="isGGG"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.R" />
+
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <import type="com.dyaco.spirit_commercial.support.CommonUtils" />
+    </data>
+
+    <!--    android:animateLayoutChanges="true"-->
+    <!--    Tab增加或減少時會有動畫-->
+
+
+    <!--
+        android:layout_width="1398dp"
+        android:layout_height="856dp"
+        -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:animateLayoutChanges="true"
+        app:layout_height="@{isUs &amp;&amp; !isGGG ? 584 : 856 }"
+        app:layout_width="@{isUs &amp;&amp; !isGGG ? 1296 : 1398 }"
+        tools:context=".workout.WorkoutStatsFragment"
+        tools:layout_height="856dp"
+        tools:layout_width="1398dp">
+
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"-->
+        <!--            app:constraint_referenced_ids="view,btn_stats,btn_charts,btn_Track,btn_Garmin"-->
+        <!--            android:id="@+id/groupStatsss"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"/>-->
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{WorkoutData.isGarminConnected ? @drawable/element_frame_garmin_stats : @drawable/element_frame_stats}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />
+
+        <TextView
+            android:id="@+id/btn_stats"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Stats"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{WorkoutData.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            tools:layout_width="@dimen/garmin_y" />
+
+        <TextView
+            android:id="@+id/btn_charts"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Charts"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_stats"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{WorkoutData.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            tools:layout_width="@dimen/garmin_y" />
+
+
+        <!--        android:enabled="@{WorkoutData.selProgram != programEnum.GERKIN}"-->
+        <!--        android:visibility="@{WorkoutData.selProgram == programEnum.GERKIN ? View.INVISIBLE : View.VISIBLE}"-->
+        <TextView
+            android:id="@+id/btn_Track"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Track"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layoutMarginEnd="@{WorkoutData.isGarminConnected ? @dimen/garmin_y_end : @dimen/garmin_n_end}"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Garmin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{WorkoutData.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            tools:layout_width="@dimen/garmin_y" />
+
+        <TextView
+            android:id="@+id/btn_Garmin"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Garmin"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            android:visibility="@{isUs ? View.GONE : WorkoutData.isGarminConnected ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--    NormalView Start-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsNormal1"
+            android:layout_width="400dp"
+            android:layout_height="248dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 164 : 360}"
+            app:layout_constraintEnd_toStartOf="@+id/statsNormal2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginTop="360dp">
+
+            <TextView
+                android:id="@+id/tv_State_show_1"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tv_State_show_Select_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_1" />
+
+            <TextView
+                android:id="@+id/tv_State_show_1_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsNormal2"
+            android:layout_width="400dp"
+            android:layout_height="248dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/statsNormal1"
+            app:layout_constraintEnd_toStartOf="@+id/statsNormal3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/statsNormal1"
+            app:layout_constraintTop_toTopOf="@+id/statsNormal1">
+
+            <TextView
+                android:id="@+id/tv_State_show_2"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_State_show_Select_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_2" />
+
+            <TextView
+                android:id="@+id/tv_State_show_2_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_State_show_Select_2"
+                app:layout_constraintStart_toStartOf="@+id/tv_State_show_Select_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsNormal3"
+            android:layout_width="400dp"
+            android:layout_height="248dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/statsNormal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/statsNormal2"
+            app:layout_constraintTop_toTopOf="@+id/statsNormal1">
+
+            <TextView
+                android:id="@+id/tv_State_show_3"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="100:00" />
+
+            <TextView
+                android:id="@+id/tv_State_show_Select_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_3" />
+
+            <TextView
+                android:id="@+id/tv_State_show_3_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--    NormalView End-->
+
+
+        <!--    HR Start-->
+
+        <TextView
+            android:id="@+id/tvTargetHeartRate"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:layout_marginStart="86dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.selTargetHrBpm)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 180 : 368}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginTop="368dp" />
+
+        <TextView
+            android:id="@+id/targetHeartRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Target_Heart_Rate"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTargetHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvTargetHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/tvTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/tvCurrentHeartRate"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.currentHeartRate)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/currentHeartRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:text="@string/Current_Heart_Rate"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCurrentHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvCurrentHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentHeartRate" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvHrStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/panel_bg_all_4_0dac87"
+            android:fontFamily="@font/inter_bold"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="@string/Just_Right"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvCurrentHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvCurrentHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/currentHeartRateText" />
+
+        <TextView
+            android:id="@+id/tvRecommendedSpeed"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="86dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.recommendedSpeed)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/recommendedSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Recommendedspeed"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvRecommendedSpeed"
+            app:layout_constraintStart_toStartOf="@+id/tvRecommendedSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecommendedSpeed" />
+
+        <TextView
+            android:id="@+id/recommendedSpeedTextUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mph : @string/kph}"
+            android:textColor="@color/color80FFFFFF"
+            android:textSize="32sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvRecommendedSpeed"
+            app:layout_constraintStart_toStartOf="@+id/tvRecommendedSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/recommendedSpeedText" />
+
+        <!--    HR End-->
+
+
+        <!--Gerkin Start-->
+        <TextView
+            android:id="@+id/tvGerkinTargetHeartRate"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.selTargetHrBpm)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 90 : 216}"
+            app:layout_constraintEnd_toStartOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginTop="216dp" />
+
+        <TextView
+            android:id="@+id/gerkinTargetHeartRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Target_Heart_Rate"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinTargetHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinTargetHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/tvGerkinCurrentHeartRate"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.currentHeartRate)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvGerkinStage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvGerkinTargetHeartRate"
+            app:layout_constraintTop_toTopOf="@+id/tvGerkinTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/gerkinCurrentHeartRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Current_Heart_Rate"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinCurrentHeartRate" />
+
+
+        <TextView
+            android:id="@+id/tvGerkinStage"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{CommonUtils.subZeroAndDot(String.valueOf(WorkoutData.currentStage))}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintTop_toTopOf="@+id/tvGerkinTargetHeartRate" />
+
+        <TextView
+            android:id="@+id/gerkinStageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Stage"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinStage"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinStage"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinStage" />
+
+
+        <TextView
+            android:id="@+id/tvGerkinSpeed"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:layout_marginTop="184dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.currentSpeed)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinTargetHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinTargetHeartRate"
+            app:layout_constraintTop_toBottomOf="@+id/gerkinTargetHeartRateText" />
+
+        <TextView
+            android:id="@+id/gerkinSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Speed"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinSpeed"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinSpeed" />
+
+        <TextView
+            android:id="@+id/gerkinSpeedUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mph : @string/kph}"
+            android:textColor="@color/color80FFFFFF"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinSpeed"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/gerkinSpeedText" />
+
+
+        <TextView
+            android:id="@+id/tvGerkinTime"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGerkinSpeed"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinCurrentHeartRate"
+            app:layout_constraintTop_toTopOf="@+id/tvGerkinSpeed"
+            app:text="@{WorkoutData.currentShowTimeText}" />
+
+        <TextView
+            android:id="@+id/gerkinTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Time"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinTime"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinTime" />
+
+        <TextView
+            android:id="@+id/tvGerkinIncline"
+            android:layout_width="301dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(WorkoutData.currentInclineValue)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGerkinSpeed"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinStage"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinStage"
+            app:layout_constraintTop_toTopOf="@+id/tvGerkinSpeed" />
+
+        <TextView
+            android:id="@+id/gerkinInclineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Incline"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGerkinIncline"
+            app:layout_constraintStart_toStartOf="@+id/tvGerkinIncline"
+            app:layout_constraintTop_toBottomOf="@+id/tvGerkinIncline" />
+
+        <!--Gerkin End-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 184 : 284}"
+            android:id="@+id/intervalEgym"
+            android:layout_width="470dp"
+            android:layout_height="208dp"
+            tools:layout_marginBottom="184dp"
+            android:background="@drawable/btn_stats"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/tvIntervalMM"
+                android:layout_width="0dp"
+                android:layout_height="104dp"
+                android:minWidth="90dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="end|center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvIntervalCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:text="@{CommonUtils.getMinutesOnly(WorkoutData.egymTimePerSets)}"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/tvIntervalSS"
+                android:layout_width="0dp"
+                android:layout_height="104dp"
+                android:minWidth="90dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="start|center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintStart_toEndOf="@+id/tvIntervalCenter"
+                app:layout_constraintEnd_toStartOf="@+id/tvIntervalTotal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:text="@{CommonUtils.getSecondsOnly(WorkoutData.egymTimePerSets)}"
+                tools:text="00" />
+
+            <TextView
+               android:layout_marginTop="-12dp"
+                android:id="@+id/tvIntervalCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvIntervalSS"
+                app:layout_constraintStart_toEndOf="@+id/tvIntervalMM"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text=":"
+                tools:text=":" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.WavyTextView
+                android:id="@+id/tvIntervalTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginBottom="-6dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="start|center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvIntervalSS"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvIntervalSS"
+                tools:text="/ 00:00" />
+
+
+            <com.dyaco.spirit_commercial.egym.EgymIntervalViewBySet
+                android:id="@+id/egymIntervalView"
+                android:layout_width="440dp"
+                android:layout_height="12dp"
+                android:layout_marginBottom="62dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvIntervalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/interval_time"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym1"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 90 : 228}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="228dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow1_egym"
+                android:layout_width="301dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow1_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tvShow1_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow1_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow1_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:id="@+id/tvShow1_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow1_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow1_egym"
+                tools:text="Time" />
+
+            <TextView
+                android:id="@+id/tvShow1_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow1_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow1_egym"
+                tools:text="" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym2"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 32 : 80}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statsEgym1"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="80dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow2_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tvShow2_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow2_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow2_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow2_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow2_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow2_egym"
+                tools:text="Calories" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow2_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow2_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow2_egym"
+                tools:text="kcal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym3"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="480dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 80 : 112}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="112dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow3_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow3_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tvShow3_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow3_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow3_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow3_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow3_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow3_egym"
+                tools:text="Calories" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow3_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow3_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow3_egym"
+                tools:text="kcal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym4"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="941dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 90 : 228}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="228dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow4_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow4_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tvShow4_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow4_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow4_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow4_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow4_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow4_egym"
+                tools:text="Calories" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow4_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow4_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow4_egym"
+                tools:text="kcal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym5"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="941dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 32 : 80}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statsEgym4"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="80dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow5_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow5_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10.6" />
+
+            <TextView
+                android:id="@+id/tvShow5_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow5_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow5_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow5_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow5_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow5_egym"
+                tools:text="Calories" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow5_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow5_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow5_egym"
+                tools:text="kcal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statsEgym6"
+            android:layout_width="440dp"
+            android:layout_height="196dp"
+            android:layout_marginStart="480dp"
+            android:background="@drawable/btn_stats"
+            android:clickable="true"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 80 : 628}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+            tools:layout_marginTop="628dp"
+            tools:layout_width="440dp">
+
+            <TextView
+                android:id="@+id/tvShow6_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="76sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow6_2_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:10" />
+
+            <TextView
+                android:id="@+id/tvShow6_2_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="-8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow6_egym"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow6_egym"
+                tools:text="/4" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow6_Select_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvShow6_unit_egym"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow6_egym"
+                tools:text="Calories" />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvShow6_unit_egym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color80FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvShow6_Select_egym"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvShow6_egym"
+                tools:text="kcal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupEgym"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="intervalEgym,statsEgym1,statsEgym2,statsEgym3,statsEgym4,statsEgym5,statsEgym6"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupNormal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="statsNormal1,statsNormal2,statsNormal3" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupHR"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tvTargetHeartRate,targetHeartRateText,tvCurrentHeartRate,currentHeartRateText,tvHrStatus" />
+        <!--            app:constraint_referenced_ids="tvTargetHeartRate,targetHeartRateText,tvCurrentHeartRate,currentHeartRateText,tvHrStatus,tvRecommendedSpeed,recommendedSpeedText,recommendedSpeedTextUnit"/>-->
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupGerkin"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tvGerkinTargetHeartRate,gerkinTargetHeartRateText,gerkinCurrentHeartRateText,tvGerkinCurrentHeartRate,tvGerkinIncline,tvGerkinSpeed,tvGerkinStage,tvGerkinTime,gerkinInclineText,gerkinSpeedText,gerkinSpeedUnit,gerkinStageText,gerkinTimeText" />
+
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/groupNormal"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:constraint_referenced_ids="statsNormal1,statsNormal2,statsNormal3"-->
+        <!--            app:visibility="@{WorkoutData.selProgram == programEnum.HEART_RATE || WorkoutData.selProgram == programEnum.GERKIN ? View.INVISIBLE : View.VISIBLE}" />-->
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/groupHR"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:constraint_referenced_ids="tvTargetHeartRate,targetHeartRateText,tvCurrentHeartRate,currentHeartRateText,tvHrStatus,tvRecommendedSpeed,recommendedSpeedText,recommendedSpeedTextUnit"-->
+        <!--            app:visibility="@{WorkoutData.selProgram == programEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}" />-->
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/groupGerkin"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:constraint_referenced_ids="tvGerkinTargetHeartRate,gerkinTargetHeartRateText,gerkinCurrentHeartRateText,tvGerkinCurrentHeartRate,tvGerkinIncline,tvGerkinSpeed,tvGerkinStage,tvGerkinTime,gerkinInclineText,gerkinSpeedText,gerkinSpeedUnit,gerkinStageText,gerkinTimeText"-->
+        <!--            app:visibility="@{WorkoutData.selProgram == programEnum.GERKIN || WorkoutData.selProgram == programEnum.GERKIN? View.VISIBLE : View.INVISIBLE}" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

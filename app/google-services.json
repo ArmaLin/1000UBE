@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "136499290029",
+    "project_id": "spiritcommercial-385c0",
+    "storage_bucket": "spiritcommercial-385c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136499290029:android:ca026c749f4c537effcb24",
+        "android_client_info": {
+          "package_name": "com.dyaco.spirit_commercial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136499290029-ffug38n8k28u8kvehf6od2pkc0ge9gev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDccZ95eSeL4v-agPIaXtM9JuQe-LWn-IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136499290029-ffug38n8k28u8kvehf6od2pkc0ge9gev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

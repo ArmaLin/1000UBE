@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_base"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:layout_width="734dp"
+    android:layout_height="272dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <View-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:id="@+id/vBG"-->
+<!--        android:layout_width="724dp"-->
+<!--        android:layout_height="230dp"/>-->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        tools:background="@drawable/icon_inbox_new_0"
+        android:id="@+id/ivInboxIcon"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="32dp"
+        android:layout_height="32dp" />
+
+    <TextView
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        tools:text="靠北邊"
+        android:layout_marginStart="16dp"
+        android:id="@+id/tvInboxTitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvInboxDate"
+        app:layout_constraintBottom_toBottomOf="@+id/ivInboxIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivInboxIcon"
+        app:layout_constraintStart_toEndOf="@+id/ivInboxIcon" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:ellipsize="end"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="24sp"
+        android:maxLines="3"
+        android:textColor="@color/colorADB8C2"
+        tools:text="大大大大大大大大大大大大大大大大大大大大大大大大大大大大大大大大"
+        android:id="@+id/tvInboxContent"
+        app:layout_constraintEnd_toEndOf="@+id/tvInboxDate"
+        android:layout_width="0dp"
+        android:layout_height="102dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvInboxRead"
+        app:layout_constraintTop_toBottomOf="@+id/ivInboxIcon"
+        app:layout_constraintStart_toStartOf="@+id/ivInboxIcon" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:drawableTint="@color/btn_1396ef_445565"
+        android:drawablePadding="12dp"
+        app:drawableEndCompat="@drawable/icon_next"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:textColor="@color/btn_1396ef_445565"
+        android:text="@string/Read"
+        android:id="@+id/tvInboxRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintStart_toStartOf="@+id/tvInboxContent" />
+
+    <TextView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="56dp"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="18sp"
+        android:textColor="@color/color5a7085"
+        tools:text="12/2/2020"
+        android:id="@+id/tvInboxDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

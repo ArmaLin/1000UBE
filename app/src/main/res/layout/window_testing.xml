@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color11151a"
+    android:layout_width="match_parent"
+    tools:context=".maintenance_mode.TestingWindow"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="392dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="261dp"
+        android:text="@string/Testing"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="70sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <SeekBar
+        style="@style/download_seekbar"
+        android:id="@+id/seekBar2"
+        android:layout_width="1398dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="261dp"
+        android:layout_marginStart="261dp"
+        android:layout_marginTop="560dp"
+        android:max="100"
+        android:progress="70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="32sp"
+        android:layout_marginTop="616dp"
+        android:layout_marginStart="261dp"
+        android:textColor="@color/colorADB8C2"
+        android:text="@string/estimated_time_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

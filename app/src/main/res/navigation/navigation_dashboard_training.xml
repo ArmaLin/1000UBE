@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_dashboard_training"
+    app:startDestination="@id/dashboardTrainingFragment">
+
+    <fragment
+        android:id="@+id/dashboardTrainingFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.DashboardTrainingFragment"
+        android:label="fragment_dashboard_training"
+        tools:layout="@layout/fragment_dashboard_training">
+        <action
+            android:id="@+id/action_dashboardTrainingFragment_to_programsFragment"
+            app:destination="@id/programsFragment"
+            app:enterAnim="@android:anim/fade_in" />
+
+        <!--        popEnterAnim 按下返回鍵 或 popBackStack
+        app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+        -->
+        <action
+            android:id="@+id/action_dashboardTrainingFragment_to_allRankFragment"
+            app:destination="@id/allRankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/action_dashboardTrainingFragment_to_setTimeFragment"
+            app:destination="@id/setTimeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popUpTo="@id/setTimeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_dashboardTrainingFragment_to_programsBannerFragment"
+            app:destination="@id/programsBannerFragment"
+            app:enterAnim="@android:anim/fade_in" />
+        <action
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            android:id="@+id/action_dashboardTrainingFragment_to_egymPlanFragment"
+            app:destination="@id/egymPlanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/programsFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.ProgramsFragment"
+        android:label="fragment_programs"
+        tools:layout="@layout/fragment_programs">
+
+        <action
+            android:id="@+id/action_programsFragment_to_programsBannerFragment"
+            app:destination="@id/programsBannerFragment"
+            app:enterAnim="@android:anim/fade_in" />
+
+<!--        app:exitAnim="@android:anim/fade_out"-->
+        <action
+            android:id="@+id/action_programsFragment_to_dashboardTrainingFragment"
+            app:destination="@id/dashboardTrainingFragment"
+            app:enterAnim="@android:anim/fade_in" />
+        <argument
+            android:name="programType"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/programsBannerFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.ProgramsBannerFragment"
+        android:label="fragment_programs_banner"
+        tools:layout="@layout/fragment_programs_banner">
+        <argument
+            android:name="programId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_programsBannerFragment_to_programsFragment"
+            app:destination="@id/programsFragment" />
+
+
+        <!--  app:popUpTo="@id/programsBannerFragment"
+        app:popUpToInclusive="true"
+         programsBannerFragment 會被Destroy-->
+
+        <!--        app:enterAnim="@android:anim/fade_in"-->
+        <!--        app:exitAnim="@android:anim/fade_out"-->
+
+<!--        app:enterAnim="@android:anim/fade_in"-->
+<!--        app:popUpTo="@id/setTimeFragment"-->
+<!--        app:popUpToInclusive="true"-->
+<!--        -->
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            android:id="@+id/action_programsBannerFragment_to_setTimeFragment"
+            app:destination="@id/setTimeFragment" />
+        <argument
+            android:name="programType"
+            app:argType="integer" />
+
+        <action
+            app:popUpTo="@id/dashboardTrainingFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_programsBannerFragment_to_dashboardTrainingFragment"
+            app:destination="@id/dashboardTrainingFragment" />
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            android:id="@+id/action_programsBannerFragment_to_setupCustomProgramFragment"
+            app:destination="@id/setupCustomProgramFragment" />
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            android:id="@+id/action_programsBannerFragment_to_customProgramLevelFragment"
+            app:destination="@id/customProgramLevelFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/allRankFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.AllRankFragment"
+        android:label="fragment_all_rank"
+        tools:layout="@layout/fragment_all_rank" />
+
+    <fragment
+        android:id="@+id/setTimeFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.SetTimeFragment"
+        android:label="fragment_set_time"
+        tools:layout="@layout/fragment_set_time">
+
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <action
+            android:id="@+id/action_setTimeFragment_to_programsFragment"
+            app:destination="@id/programsFragment"
+            app:popUpTo="@id/setTimeFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_setTimeFragment_to_setTimeStep2Fragment"
+            app:destination="@id/setTimeStep2Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/setTimeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/setTimeStep2Fragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.SetTimeStep2Fragment"
+        android:label="SetTimeStep2Fragment"
+        tools:layout="@layout/fragment_set_time_step_2">
+
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <action
+            android:id="@+id/action_setTimeStep2Fragment_to_programsFragment"
+            app:destination="@id/programsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/dashboardTrainingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_setTimeStep2Fragment_to_setTimeStep3Fragment"
+            app:destination="@id/setTimeStep3Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/setTimeStep2Fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_setTimeStep2Fragment_to_setTimeFragment"
+            app:destination="@id/setTimeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/setTimeStep2Fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/setTimeStep3Fragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.SetTimeStep3Fragment"
+        android:label="SetTimeStep3Fragment"
+        tools:layout="@layout/fragment_set_time_step_3">
+
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+        <action
+            android:id="@+id/action_setTimeStep3Fragment_to_programsFragment"
+            app:destination="@id/programsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/dashboardTrainingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_setTimeStep3Fragment_to_setTimeStep2Fragment"
+            app:destination="@id/setTimeStep2Fragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/setTimeStep3Fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_program_custom_speed"
+        android:id="@+id/setupCustomProgramFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.CustomProgramSpeedFragment"
+        android:label="setupCustomProgramFragment" >
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_setupCustomProgramFragment_to_programsFragment"
+            app:destination="@id/programsFragment" />
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_setupCustomProgramFragment_to_customProgramInclineFragment"
+            app:destination="@id/customProgramInclineFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_program_custom_incline"
+        android:id="@+id/customProgramInclineFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.CustomProgramInclineFragment"
+        android:label="CustomProgramInclineFragment" >
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_customProgramInclineFragment_to_setupCustomProgramFragment"
+            app:destination="@id/setupCustomProgramFragment" />
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_customProgramInclineFragment_to_programsFragment"
+            app:destination="@id/programsFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_program_custom_level"
+        android:id="@+id/customProgramLevelFragment"
+        android:name="com.dyaco.spirit_commercial.dashboard_training.CustomProgramLevelFragment"
+        android:label="CustomProgramLevelFragment" >
+        <argument
+            android:name="programEnum"
+            app:argType="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_customProgramLevelFragment_to_programsFragment"
+            app:destination="@id/programsFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_egym_plan"
+        android:id="@+id/egymPlanFragment"
+        android:name="com.dyaco.spirit_commercial.egym.EgymPlanFragment"
+        android:label="EgymPlanFragment" >
+        <action
+            android:id="@+id/action_egymPlanFragment_to_dashboardTrainingFragment"
+            app:destination="@id/dashboardTrainingFragment" />
+    </fragment>
+
+
+</navigation>

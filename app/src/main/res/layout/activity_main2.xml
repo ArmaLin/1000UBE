@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.R" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="userProfileViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="general"
+            type="com.dyaco.spirit_commercial.support.intdef.GENERAL" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity2">
+
+        <include
+            android:id="@+id/topDashboard"
+            app:comm="@{comm}"
+            app:deviceSetting="@{deviceSetting}"
+            app:userProfileViewModel="@{userProfileViewModel}"
+            layout="@layout/include_top_dashboard"
+            app:WorkoutData="@{WorkoutData}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

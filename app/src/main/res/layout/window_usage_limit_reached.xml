@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color11151a"
+    tools:context=".maintenance_mode.UsageLimitReachedWindow">
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btnSave"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="96dp"-->
+<!--        android:background="@color/color1396ef"-->
+<!--        android:fontFamily="@font/inter_bold"-->
+<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--        android:stateListAnimator="@null"-->
+<!--        android:text="@string/update_weight"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="498dp"
+        android:layout_marginTop="216dp"
+        android:autoSizeMaxTextSize="70sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="@string/usage_limit_reached"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="916dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="498dp"
+        android:layout_marginTop="320dp"
+        android:fontFamily="@font/inter_regular"
+        android:gravity="center_vertical"
+        android:text="@string/to_continue_using_this_machine_please_enter_the_6_digit_reset_code_or_contact_your_dealer"
+        android:textColor="@color/colorCBD2D8"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:imeOptions="actionDone"
+        android:id="@+id/etLimitCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:fontFamily="@font/inter_regular"
+        android:inputType="numberPassword"
+        android:maxLength="6"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/color5a7085"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toTopOf="@+id/lineline"
+        app:layout_constraintEnd_toEndOf="@+id/lineline"
+        app:layout_constraintStart_toStartOf="@+id/lineline" />
+
+    <View
+        android:id="@+id/lineline"
+        android:layout_width="916dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/color323f4b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/MButton_252e37"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

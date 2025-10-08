@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        tools:context=".dashboard_training.SetTimeFragment">
+
+        <View
+            android:id="@+id/viewStep1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="86dp"
+            android:layout_marginEnd="130dp"
+            android:background="@drawable/shape_oval_1396ef"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.HIIT ? View.VISIBLE : View.INVISIBLE}" />
+
+        <View
+            android:id="@+id/viewStep2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="86dp"
+            android:layout_marginEnd="94dp"
+            android:background="@drawable/shape_oval_323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.HIIT ? View.VISIBLE : View.INVISIBLE}" />
+
+        <View
+            android:id="@+id/viewStep3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="86dp"
+            android:layout_marginEnd="58dp"
+            android:background="@drawable/shape_oval_323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.HIIT ? View.VISIBLE : View.INVISIBLE}" />
+
+
+        <RadioGroup
+            android:id="@+id/rgHrFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}"
+            tools:ignore="VisualLintBounds">
+
+            <RadioButton
+                android:id="@+id/rbSetManually"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:text="@string/Set_Manually"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="TextContrastCheck" />
+
+            <RadioButton
+                android:id="@+id/rb65Max"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:text="@string/_65_of_Max"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintBounds" />
+
+            <RadioButton
+                android:id="@+id/rb85Max"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:text="@string/_85_of_Max"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintBounds" />
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/back"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_back"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProgramName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="12dp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@{WorkoutData.selProgram.programName}"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toStartOf="@+id/rgHrFilter"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            tools:text="@string/heart_rate" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timeView"
+            android:layout_width="0dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTimeNum"
+                android:layout_width="228dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/color_252e37_323f4b"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center_vertical|center_horizontal"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnTimeMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="52dp"
+                android:background="@drawable/btn_minus"
+                android:contentDescription="@string/minus"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTimeNum"
+                app:layout_constraintEnd_toStartOf="@+id/tvTimeNum"
+                app:layout_constraintTop_toTopOf="@+id/tvTimeNum"
+                tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnTimePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="@drawable/btn_plus"
+                android:contentDescription="@string/plus"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTimeNum"
+                app:layout_constraintStart_toEndOf="@+id/tvTimeNum"
+                app:layout_constraintTop_toTopOf="@+id/tvTimeNum"
+                tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/topRuleViewIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="78.4dp"
+                android:background="@drawable/icon_time_48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTimeTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="128.06dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="30dp"
+                android:autoSizeMaxTextSize="44sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/time_min"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnTimeMinus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck"
+                tools:text="@string/sprint_time_sec" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.RulerView
+                android:id="@+id/rulerViewTime"
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="48dp"
+                android:background="@color/color252e37"
+                android:clipToPadding="false"
+                android:paddingStart="52dp"
+                android:paddingEnd="52dp"
+                app:layout_constraintBottom_toBottomOf="@+id/timeView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rulerColor="@color/colorADB8C2"
+                app:rulerDivideByFiveHeight="40dp"
+                app:rulerDivideByFiveWidth="3dp"
+                app:rulerDivideByTenHeight="40dp"
+                app:rulerDivideByTenWidth="3dp"
+                app:rulerHighlightColor="@color/white"
+                app:rulerIntervalDistance="40dp"
+                app:rulerIntervalValue="1"
+                app:rulerIsDivideByFive="true"
+                app:rulerIsDivideByTen="true"
+                app:rulerLineHeight="28dp"
+                app:rulerLineWidth="3dp"
+                app:rulerMaxValue="99"
+                app:rulerMinValue="0"
+                app:rulerOrientation2="horizontal"
+                app:rulerRetainLength="1"
+                app:rulerTextBaseLineDistance="16dp"
+                app:rulerTextColor="@color/color5a7085"
+                app:rulerTextSize="24sp" />
+
+            <!--    小數點-->
+            <!--    app:rulerIntervalValue="0.1"-->
+            <!--    app:rulerRetainLength="1"-->
+
+            <View
+                android:id="@+id/rulerViewTimeCenter1"
+                android:layout_width="6dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/colore24b44"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerViewTime"
+                app:layout_constraintEnd_toEndOf="@+id/rulerViewTime"
+                app:layout_constraintStart_toStartOf="@+id/rulerViewTime"
+                app:layout_constraintTop_toTopOf="@+id/rulerViewTime" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/speedView"
+            android:layout_width="0dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeView"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.MANUAL || WorkoutData.selProgram == programsEnum.RUN_5K || WorkoutData.selProgram == programsEnum.RUN_10K  ? View.INVISIBLE : View.VISIBLE}">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSpeedNum"
+                android:layout_width="228dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/color_252e37_323f4b"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center_vertical|center_horizontal"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="52dp"
+                android:background="@drawable/btn_minus"
+                android:contentDescription="@string/minus"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSpeedNum"
+                app:layout_constraintEnd_toStartOf="@+id/tvSpeedNum"
+                app:layout_constraintTop_toTopOf="@+id/tvSpeedNum"
+                tools:ignore="VisualLintBounds" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="@drawable/btn_plus"
+                android:contentDescription="@string/plus"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSpeedNum"
+                app:layout_constraintStart_toEndOf="@+id/tvSpeedNum"
+                app:layout_constraintTop_toTopOf="@+id/tvSpeedNum"
+                tools:ignore="VisualLintBounds" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bottomRuleViewIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:background="@drawable/icon_speed_48"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSpeedTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvSpeedTitle"
+                tools:ignore="ImageContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSpeedTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="128.06dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="30dp"
+                android:autoSizeMaxTextSize="44sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/max_speed_mph"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnSpeedMinus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+            <!--    小數點-->
+            <!--    app:rulerIntervalValue="0.1"-->
+            <!--    app:rulerRetainLength="1"-->
+
+            <com.dyaco.spirit_commercial.support.custom_view.RulerView
+                android:id="@+id/rulerViewSpeed"
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="48dp"
+                android:background="@color/color252e37"
+                android:paddingStart="52dp"
+                android:paddingEnd="52dp"
+                app:layout_constraintBottom_toBottomOf="@+id/speedView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rulerColor="@color/colorADB8C2"
+                app:rulerDivideByFiveHeight="40dp"
+                app:rulerDivideByFiveWidth="3dp"
+                app:rulerDivideByTenHeight="40dp"
+                app:rulerDivideByTenWidth="3dp"
+                app:rulerHighlightColor="@color/white"
+                app:rulerIntervalDistance="40dp"
+                app:rulerIntervalValue="0.1"
+                app:rulerIsDivideByFive="true"
+                app:rulerIsDivideByTen="true"
+                app:rulerLineHeight="28dp"
+                app:rulerLineWidth="3dp"
+                app:rulerMaxValue="15"
+                app:rulerMinValue="0"
+                app:rulerOrientation2="horizontal"
+                app:rulerRetainLength="1"
+                app:rulerTextBaseLineDistance="16dp"
+                app:rulerTextColor="@color/color5a7085"
+                app:rulerTextSize="24sp" />
+
+            <View
+                android:id="@+id/rulerViewTimeCenter2"
+                android:layout_width="6dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/colore24b44"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerViewSpeed"
+                app:layout_constraintEnd_toEndOf="@+id/rulerViewSpeed"
+                app:layout_constraintStart_toStartOf="@+id/rulerViewSpeed"
+                app:layout_constraintTop_toTopOf="@+id/rulerViewSpeed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topView"
+            android:layout_width="0dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_line_323f4b"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="30dp"
+                android:autoSizeMaxTextSize="44sp"
+                android:autoSizeTextType="uniform"
+                android:drawablePadding="32dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/target_heart_rate_bpm"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:drawableStartCompat="@drawable/icon_hr_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/topViewEstimatedTime"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/topViewEstimatedTime"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="150" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomView"
+            android:layout_width="0dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_line_323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeView"
+            app:visibility="@{WorkoutData.selProgram == programsEnum.RUN_5K || WorkoutData.selProgram == programsEnum.RUN_10K ? View.VISIBLE : View.INVISIBLE}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:drawablePadding="32dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:text="@string/estimated_time"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:drawableStartCompat="@drawable/icon_time_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintBounds,VisualLintOverlap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bottomViewEstimatedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="01:00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

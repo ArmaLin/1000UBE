@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceKeyTestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/key_test"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewKeyTestTreadmill"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp" >
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnKeyStart"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="344dp"
+                android:background="@drawable/btn_key_start"
+                app:layout_constraintEnd_toEndOf="@+id/btnKeyEnter"
+                app:layout_constraintStart_toStartOf="@+id/btnKeyEnter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnKeyEnter"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="504dp"
+                android:background="@drawable/btn_key_enter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnKeyStop"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="696dp"
+                android:background="@drawable/btn_key_stop"
+                app:layout_constraintEnd_toEndOf="@+id/btnKeyEnter"
+                app:layout_constraintStart_toStartOf="@+id/btnKeyEnter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnInclinePlus"
+                app:layout_constraintStart_toStartOf="@+id/btnInclinePlus"
+                android:layout_marginTop="384dp"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="24sp"
+                android:textColor="@color/color8192a2"
+                android:text="@string/Incline"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnInclinePlus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="448dp"
+                android:layout_marginStart="229dp"
+                android:background="@drawable/btn_key_incline_more_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnInclineMinus"
+                app:layout_constraintStart_toStartOf="@+id/btnInclinePlus"
+                app:layout_constraintEnd_toEndOf="@+id/btnInclinePlus"
+                app:layout_constraintTop_toBottomOf="@+id/btnInclinePlus"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_key_incline_less_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="384dp"
+                app:layout_constraintEnd_toEndOf="@+id/btnSpeedPlus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/btnSpeedPlus"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="24sp"
+                android:textColor="@color/color8192a2"
+                android:text="@string/Speed"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedPlus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="448dp"
+                android:layout_marginEnd="228dp"
+                android:background="@drawable/btn_key_speed_more_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedMinus"
+                app:layout_constraintStart_toStartOf="@+id/btnSpeedPlus"
+                app:layout_constraintEnd_toEndOf="@+id/btnSpeedPlus"
+                app:layout_constraintTop_toBottomOf="@+id/btnSpeedPlus"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_key_speed_less_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/viewKeyTestBike"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp" >
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnKeyEnter2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="484dp"
+                android:background="@drawable/btn_key_enter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedPlus2"
+                app:layout_constraintTop_toTopOf="@+id/btnKeyEnter2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/btnKeyEnter2"
+                android:layout_marginEnd="56.5dp"
+                android:background="@drawable/btn_key_speed_more_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnSpeedMinus2"
+                android:layout_marginStart="56.5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/btnKeyEnter2"
+                app:layout_constraintTop_toTopOf="@+id/btnKeyEnter2"
+                android:background="@drawable/btn_key_speed_less_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_marginTop="30dp"
+                android:id="@+id/btnKeyStart2"
+                android:layout_marginStart="240.5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/btn_key_start"
+                app:layout_constraintBottom_toBottomOf="@+id/btnKeyEnter2"
+                app:layout_constraintTop_toTopOf="@+id/btnKeyEnter2"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnKeyStop2"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="240.5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/btn_key_stop"
+                app:layout_constraintBottom_toBottomOf="@+id/btnKeyEnter2"
+                app:layout_constraintTop_toTopOf="@+id/btnKeyEnter2"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvTip"
+            android:layout_marginBottom="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/inter_regular"
+            android:textSize="24sp"
+            android:textColor="@color/color8192a2"
+            android:text="@string/press_physical_key_to_check_its_response"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

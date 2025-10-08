@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--    add：兩層繪製疊加融合-->
+<!--    multiply：取兩層繪製的交集-->
+<!--    screen：上下層都顯示（就像是多了塊tint色的玻璃）-->
+<!--    src_atop：-->
+<!--    src_in：取交集，顯示上層-->
+<!--    src_over：tint色覆蓋住圖片，都顯示-->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="workoutViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="appStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="userProfileViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel" />
+
+        <variable
+            name="appStatusIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="general"
+            type="com.dyaco.spirit_commercial.support.intdef.GENERAL" />
+
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        tools:context=".dashboard_training.DashboardTrainingFragment">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStart"
+            android:layout_width="450dp"
+            android:layout_height="352dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="26dp"
+            android:alpha="@{workoutViewModel.isWorkoutReadyStart ? 1f : 0.4f}"
+            android:background="@drawable/btn_tile_start_xml"
+            android:fontFamily="@font/inter_bold"
+            android:letterSpacing="0.01"
+            android:paddingTop="100dp"
+            android:text="@{userProfileViewModel.userType == general.USER_TYPE_EGYM ? @string/Free_Workout :@string/Start}"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:backgroundTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSetTime"
+            style="@style/MButton_252e37"
+            android:layout_width="450dp"
+            android:layout_height="352dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="26dp"
+            android:autoSizeMaxTextSize="44sp"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:text="@string/Set_Time"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:backgroundTint="@color/btn_323f4b_445565_d"
+            app:icon="@drawable/icon_time_b"
+            app:iconGravity="textTop"
+            app:iconPadding="20dp"
+            app:iconSize="80dp"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+
+
+        <!--        app:setTextL="@{@string/fatburn}"-->
+        <!--        app:locale="@{deviceSetting.locale}"-->
+        <!--        android:text="@string/fatburn"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Fatburn"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:drawableBottom="@drawable/diagram_fatburn_default"
+            android:text="@string/fatburn"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Cardio"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:drawableBottom="@drawable/diagram_cardio_default"
+            android:text="@string/cardio"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Fatburn" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Hill"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:drawableBottom="@drawable/diagram_hill_default"
+            android:text="@string/hill"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Cardio" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_HIIT"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:drawableBottom="@drawable/diagram_hiit_default"
+            android:text="@string/hiit"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Hill" />
+
+
+<!--        android:src="@drawable/pt_gym_rankings_egym"-->
+        <ImageView
+            android:id="@+id/iv_left_bg"
+            android:layout_width="924dp"
+            android:layout_height="856dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/img"
+            android:src="@{userProfileViewModel.userType == general.USER_TYPE_EGYM ? @drawable/pt_gym_rankings_egym : @drawable/pt_gym_rankings}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Fatburn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewEgymNoPlan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"
+            tools:visibility="gone"
+            tools:ignore="VisualLintBounds">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/inter_semibold"
+                android:includeFontPadding="false"
+                android:text="@string/Egym_text"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvEgymTitleNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="146dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@string/welcome__"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEgymUserNameNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@{userProfileViewModel.userDisplayName + '!'}"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvEgymTitleNo"
+                app:layout_constraintStart_toEndOf="@+id/tvEgymTitleNo"
+                app:layout_constraintTop_toTopOf="@+id/tvEgymTitleNo"
+                tools:text="Name" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEgymNoPlan"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:src="@drawable/icon_activity_48"
+                app:layout_constraintBottom_toTopOf="@+id/tvEgymNoPlanText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEgymNoPlanText"
+                android:layout_width="429dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/you_don_t_have_any_planned_treadmill_activities"
+                android:textColor="@color/white_text"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toTopOf="@+id/btnBrowsePrograms"
+                app:layout_constraintEnd_toEndOf="@+id/ivEgymNoPlan"
+                app:layout_constraintStart_toStartOf="@+id/ivEgymNoPlan"
+                tools:ignore="TextSizeCheck" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBrowsePrograms"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginBottom="220dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:text="@string/browse_programs"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:backgroundTint="@color/btn_1396ef_20_d"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewEgym"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"
+            tools:visibility="visible">
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.WavyTextViewR
+                android:visibility="visible"
+                android:id="@+id/tvEgymText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="55dp"
+                android:fontFamily="@font/inter_semibold"
+                android:includeFontPadding="false"
+                android:text="@string/Egym_text"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            <com.dyaco.spirit_commercial.support.base_component.AutoStartImageView-->
+<!--                android:scaleType="center"-->
+<!--                android:layout_marginStart="48dp"-->
+<!--                android:layout_marginTop="64dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:id="@+id/tvEgymText3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:src="@drawable/egym_avd_fade_anim" />-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:visibility="gone"
+                android:id="@+id/tvEgymText2"
+                android:src="@drawable/egym_svg_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="64dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEgymTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="129dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@string/welcome__"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEgymUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@{userProfileViewModel.userDisplayName + '!'}"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvEgymTitle"
+                app:layout_constraintStart_toEndOf="@+id/tvEgymTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvEgymTitle"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/tvPlanText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:includeFontPadding="false"
+                android:text="@string/you_have_3_planned_treadmill_activities"
+                android:textColor="@color/white_text"
+                android:textSize="32sp"
+                app:layout_constraintStart_toStartOf="@+id/tvEgymTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvEgymTitle" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.banner.Banner
+                android:id="@+id/programsBanner"
+                android:layout_width="924dp"
+                android:layout_height="440dp"
+                android:layout_marginTop="320dp"
+                app:banner_infinite_loop="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.banner.indicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_marginBottom="36dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/egymProgress"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:indeterminateTint="@color/colorADB8C2"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/iv_left_bg" />-->
+
+        <com.dyaco.spirit_commercial.support.custom_view.CustomProgressView
+            android:id="@+id/egymProgress"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_left_bg"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewNormal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"
+            tools:visibility="gone">
+            <!--            app:visibility="@{userProfileViewModel.userType == general.USER_TYPE_GUEST  ? View.GONE : View.VISIBLE}"-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Ranking"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/viewNormalLine1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="182dp"
+                app:dividerColor="@color/color15white"
+                app:dividerThickness="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/viewNormal"
+                app:layout_constraintStart_toStartOf="@+id/viewNormal"
+                app:layout_constraintTop_toTopOf="@+id/viewNormal" />
+
+            <!--            <View-->
+            <!--                android:id="@+id/viewNormalLine1"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="2dp"-->
+            <!--                android:layout_marginTop="182dp"-->
+            <!--                android:background="@color/color15white"-->
+            <!--                app:layout_constraintEnd_toEndOf="@+id/viewNormal"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/viewNormal"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/viewNormal" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="#"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/viewNormalLine2"
+                app:layout_constraintStart_toStartOf="@+id/viewNormal"
+                app:layout_constraintTop_toBottomOf="@+id/viewNormalLine1"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="132dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/Member"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/viewNormalLine2"
+                app:layout_constraintStart_toStartOf="@+id/viewNormal"
+                app:layout_constraintTop_toBottomOf="@+id/viewNormalLine1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/total_hours"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/viewNormalLine2"
+                app:layout_constraintEnd_toEndOf="@+id/viewNormal"
+                app:layout_constraintTop_toBottomOf="@+id/viewNormalLine1" />
+
+            <View
+                android:id="@+id/viewNormalLine2"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="270dp"
+                android:background="@color/color33ADB8C2"
+                app:layout_constraintEnd_toEndOf="@+id/viewNormal"
+                app:layout_constraintStart_toStartOf="@+id/viewNormal"
+                app:layout_constraintTop_toTopOf="@+id/viewNormal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fadeScrollbars="false"
+                android:fadingEdge="none"
+                android:overScrollMode="never"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btnAllRank"
+                app:layout_constraintEnd_toEndOf="@+id/viewNormal"
+                app:layout_constraintStart_toStartOf="@+id/viewNormal"
+                app:layout_constraintTop_toBottomOf="@+id/viewNormalLine2"
+                tools:itemCount="5"
+                tools:listitem="@layout/items_rank1_list" />
+
+            <!--            <com.dyaco.spirit_commercial.support.custom_view.placeholder.MockPlaceHolder-->
+            <!--                android:id="@+id/placeholderView"-->
+            <!--                app:layoutRes="@layout/placeholder_rank_list"-->
+            <!--                app:repeat="5"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/recycler_view"-->
+            <!--                app:layout_constraintEnd_toEndOf="@+id/recycler_view"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/recycler_view"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/recycler_view"-->
+            <!--                android:layout_height="0dp"/>-->
+
+            <ProgressBar
+                android:id="@+id/progress_circulars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorADB8C2"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+                app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAllRank"
+                style="@style/MButton_252e37"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:text="@string/all_rankings"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_more"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:iconTint="@color/colorADB8C2"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewGuest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"
+            app:visibility="@{userProfileViewModel.userType == general.USER_TYPE_GUEST ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvGuestTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="136dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@string/hello_guest"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/goAdRom"
+                android:layout_width="320dp"
+                android:layout_height="110dp"
+                app:layout_constraintStart_toStartOf="@+id/viewGuest"
+                app:layout_constraintTop_toBottomOf="@+id/tvGuestDesc" />
+
+            <TextView
+                android:id="@+id/tvGuestDesc"
+                android:layout_width="450dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="240dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_horizontal"
+                android:text="@string/providing_your_age_and_weight_will_help_calculate_more_accurate_results"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toTopOf="@+id/rulerViewCenter1"
+                app:layout_constraintEnd_toEndOf="@+id/rulerViewCenter1"
+                app:layout_constraintStart_toStartOf="@+id/rulerViewCenter1"
+                tools:text="30" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/years"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAge"
+                app:layout_constraintStart_toEndOf="@+id/tvAge" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.RulerView
+                android:id="@+id/rulerView1"
+                android:layout_width="636dp"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent"
+                android:paddingStart="52dp"
+                android:paddingEnd="52dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerViewCenter1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rulerViewCenter1"
+                app:rulerColor="@color/color5a7085"
+                app:rulerDivideByFiveHeight="34dp"
+                app:rulerDivideByFiveWidth="3dp"
+                app:rulerDivideByTenHeight="34dp"
+                app:rulerDivideByTenWidth="3dp"
+                app:rulerHighlightColor="@color/white"
+                app:rulerIntervalDistance="25dp"
+                app:rulerIntervalValue="1"
+                app:rulerIsDivideByFive="true"
+                app:rulerIsDivideByTen="true"
+                app:rulerLineHeight="24dp"
+                app:rulerLineWidth="3dp"
+                app:rulerMaxValue="99"
+                app:rulerMinValue="10"
+                app:rulerOrientation2="horizontal"
+                app:rulerRetainLength="0"
+                app:rulerTextColor="@android:color/transparent"
+                app:rulerTextSize="0sp" />
+
+            <View
+                android:id="@+id/rulerViewCenter1"
+                android:layout_width="6dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="504dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/rulerView1"
+                app:layout_constraintStart_toStartOf="@+id/rulerView1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnAgeMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="34dp"
+                android:background="@drawable/btn_minus"
+                android:contentDescription="@string/img"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerView1"
+                app:layout_constraintEnd_toStartOf="@+id/rulerView1"
+                app:layout_constraintTop_toTopOf="@+id/rulerView1" />
+
+            <ImageButton
+                android:id="@+id/btnAgePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:background="@drawable/btn_plus"
+                android:contentDescription="@string/img"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerView1"
+                app:layout_constraintStart_toEndOf="@+id/rulerView1"
+                app:layout_constraintTop_toTopOf="@+id/rulerView1" />
+
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toTopOf="@+id/rulerViewCenter2"
+                app:layout_constraintEnd_toEndOf="@+id/rulerViewCenter2"
+                app:layout_constraintStart_toStartOf="@+id/rulerViewCenter2" />
+
+            <TextView
+                android:id="@+id/tvWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvWeight"
+                app:layout_constraintStart_toEndOf="@+id/tvWeight" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.RulerView
+                android:id="@+id/rulerView2"
+                android:layout_width="636dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="728dp"
+                android:background="@android:color/transparent"
+                android:paddingStart="52dp"
+                android:paddingEnd="52dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rulerColor="@color/color5a7085"
+                app:rulerDivideByFiveHeight="34dp"
+                app:rulerDivideByFiveWidth="3dp"
+                app:rulerDivideByTenHeight="34dp"
+                app:rulerDivideByTenWidth="3dp"
+                app:rulerHighlightColor="@color/white"
+                app:rulerIntervalDistance="25dp"
+                app:rulerIntervalValue="1"
+                app:rulerIsDivideByFive="true"
+                app:rulerIsDivideByTen="true"
+                app:rulerLineHeight="24dp"
+                app:rulerLineWidth="3dp"
+                app:rulerMaxValue="300"
+                app:rulerMinValue="10"
+                app:rulerOrientation2="horizontal"
+                app:rulerRetainLength="0"
+                app:rulerTextColor="@android:color/transparent"
+                app:rulerTextSize="0sp" />
+
+            <View
+                android:id="@+id/rulerViewCenter2"
+                android:layout_width="6dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="728dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerView2"
+                app:layout_constraintEnd_toEndOf="@+id/rulerView2"
+                app:layout_constraintStart_toStartOf="@+id/rulerView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnWeightMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="34dp"
+                android:background="@drawable/btn_minus"
+                android:contentDescription="@string/img"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerView2"
+                app:layout_constraintEnd_toStartOf="@+id/rulerView2"
+                app:layout_constraintTop_toTopOf="@+id/rulerView2" />
+
+            <ImageButton
+                android:id="@+id/btnWeightPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:background="@drawable/btn_plus"
+                android:contentDescription="@string/img"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerView2"
+                app:layout_constraintStart_toEndOf="@+id/rulerView2"
+                app:layout_constraintTop_toTopOf="@+id/rulerView2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewNoGymRankings"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
+            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"
+            tools:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRankTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="12dp"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/gym_rankings"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="540dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_horizontal"
+                android:text="@string/you_are_not_a_participant_yet_would_you_like_to_join_the_leaderboard_to_compete_in_training_results_with_other_gym_members"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRankTitle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnJoinGymRanking"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:layout_marginTop="496dp"
+                android:drawablePadding="12dp"
+                android:paddingStart="27dp"
+                android:paddingEnd="31dp"
+                android:text="@string/join_rankings"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:backgroundTint="@color/btn_1396ef_20_d"
+                app:icon="@drawable/ic_baseline_add_24"
+                app:iconSize="34dp"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="628dp"
+                android:clickable="true"
+                android:drawableStart="@drawable/icon_info"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/inter_bold"
+                android:padding="20dp"
+                android:text="@string/terms_conditions"
+                android:textColor="@color/btn_adb872_50"
+                android:textSize="24sp"
+                app:drawableTint="@color/btn_adb872_50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        android:background="@drawable/button_ripple"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAllProgram"
+            style="@style/MButton_252e37"
+            android:layout_width="450dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/all_programs"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_more"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="isGGG" type="Boolean" />
+        <variable name="isUs" type="Boolean" />
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+        <variable
+            name="workoutViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:animateLayoutChanges="true"
+        tools:layout_width="1296dp"
+        tools:layout_height="584dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_width="@{isUs &amp;&amp; !isGGG ? 1296 : 1398 }"
+        app:layout_height="@{isUs &amp;&amp; !isGGG ? 584 : 856 }"
+        android:background="@color/color11151a"
+        tools:context=".workout.WorkoutTrackFragment">
+
+<!--        <androidx.constraintlayout.widget.Group-->
+<!--            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"-->
+<!--            app:constraint_referenced_ids="view,btn_stats,btn_charts,btn_Track,btn_Garmin"-->
+<!--            android:id="@+id/groupStatsss"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+        <View
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/viewB"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{workoutViewModel.isGarminConnected ? @drawable/element_frame_garmin_track : @drawable/element_frame_track}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_stats"
+            android:layout_width="0dp"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            android:layout_height="80dp"
+            android:layout_marginStart="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Stats"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_charts"
+            android:layout_width="0dp"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Charts"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_stats"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_Track"
+            android:layout_width="0dp"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            android:layout_height="80dp"
+            app:layoutMarginEnd="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y_end : @dimen/garmin_n_end}"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Track"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Garmin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:visibility="@{isUs ? View.GONE : workoutViewModel.isGarminConnected ? View.VISIBLE : View.GONE}"
+            android:id="@+id/btn_Garmin"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Garmin"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_lap_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toTopOf="@+id/lapText"
+            app:layout_constraintEnd_toEndOf="@+id/lapText"
+            app:layout_constraintStart_toStartOf="@+id/lapText"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/lapText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_marginStart="425dp"
+            tools:layout_marginTop="376dp"
+            app:layoutMarginStart="@{isUs &amp;&amp; !isGGG ? 380 : 425}"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 180 : 376}"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:text="@string/Laps"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_distance_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical"
+            android:text="@{comm.formatDecimal(workoutViewModel.currentDistance,2)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toTopOf="@+id/distanceText"
+            app:layout_constraintEnd_toEndOf="@+id/distanceText"
+            app:layout_constraintStart_toStartOf="@+id/distanceText" />
+
+        <TextView
+            android:id="@+id/distanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="367dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:text="@string/Distance"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toEndOf="@+id/lapText"
+            app:layout_constraintTop_toTopOf="@+id/lapText" />
+
+        <TextView
+            android:id="@+id/tvDistanceAndPowerUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mi : @string/km}"
+            android:textColor="@color/color50FFFFFF"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/distanceText"
+            app:layout_constraintStart_toStartOf="@+id/distanceText"
+            app:layout_constraintTop_toBottomOf="@+id/distanceText" />
+
+<!--        android:layout_marginTop="479dp"-->
+        <com.dyaco.spirit_commercial.support.custom_view.LevelImageView
+            android:id="@+id/iv_lap_animation"
+            tools:layout_marginTop="200dp"
+            android:layout_width="924dp"
+            android:layout_height="512dp"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 240 : 470}"
+            android:scaleType="fitEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/trackFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_marginStart="549dp"
+            tools:layout_marginBottom="96dp"
+            app:layoutMarginStart="@{isUs &amp;&amp; !isGGG ? 430 : 549}"
+            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 66 : 96}"
+            android:background="@drawable/element_finish"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,2080 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.dyaco.spirit_commercial.support.CommonUtils" />
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="modeEnum"
+            type="com.dyaco.spirit_commercial.product_flavor.ModeEnum" />
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+        <variable
+            name="deviceSettingViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/baseView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color11151a"
+        tools:context=".maintenance_mode.MaintenanceModeFragment">
+
+        <TextView
+            android:id="@+id/tvTitleTTT"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="@string/Maintenance_Mode"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck" />
+
+        <View
+            android:id="@+id/btnToAndroid"
+            android:layout_width="360dp"
+            android:layout_height="140dp"
+            android:layout_marginEnd="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnExit"
+            app:layout_constraintEnd_toStartOf="@+id/btnExit"
+            app:layout_constraintTop_toTopOf="@+id/btnExit" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnToAndroid"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="46dp"-->
+<!--            android:drawableStart="@drawable/icon_android"-->
+<!--            android:drawablePadding="13.75dp"-->
+<!--            app:drawableTint="@color/btn_adb872_50"-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:paddingTop="30dp"-->
+<!--            android:paddingBottom="30dp"-->
+<!--            android:paddingStart="60dp"-->
+<!--            android:paddingEnd="10dp"-->
+<!--            android:text="@string/to_android"-->
+<!--            android:textColor="@color/btn_adb872_50"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/btnExit"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnExit"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/btnExit" />-->
+
+        <!--About This Machine-->
+
+        <View
+            android:id="@+id/viewAbout"
+            android:layout_width="450dp"
+            android:layout_height="624dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="176dp"
+            android:background="@drawable/panel_bg_all_20_1c242a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/about_this_machine"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout"
+            app:layout_constraintTop_toTopOf="@+id/viewAbout" />
+
+        <TextView
+            android:id="@+id/tvTypeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/type"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout1"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout1"
+            tools:ignore="VisualLintOverlap" />
+
+
+<!--        android:text="@{deviceSettingViewModel.typeName}"-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginStart="20dp"
+            android:gravity="end|center_vertical"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/tvType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{CommonUtils.getDeviceStrName(deviceSettingViewModel.typeCode)}"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/tvTypeTitle"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout1"
+            app:layout_constraintEnd_toStartOf="@+id/ivType"
+            tools:text="@string/upright_bike" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sharp_arrow_drop_down_32"
+            app:layout_constraintBottom_toBottomOf="@+id/tvType"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout1"
+            app:layout_constraintTop_toTopOf="@+id/tvType" />
+
+        <View
+            android:id="@+id/btnMachineType"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout1"
+            app:layout_constraintEnd_toEndOf="@+id/ivType"
+            app:layout_constraintStart_toStartOf="@+id/tvTypeTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvTypeTitle" />
+
+
+        <View
+            android:id="@+id/lineAbout1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="148dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout"
+            app:layout_constraintTop_toTopOf="@+id/viewAbout" />
+
+        <TextView
+            android:id="@+id/tvTitleModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Model"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout1"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout2"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout2"
+            tools:ignore="VisualLintOverlap" />
+
+        <TextView
+            android:id="@+id/tvModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{deviceSettingViewModel.modelName}"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="@+id/tvTitleModel"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitleModel"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout2" />
+
+        <View
+            android:id="@+id/lineAbout2"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout1"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Total_Distance"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout2"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout4"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout4" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout4"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout2"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout2"
+            tools:text="304.98 mi" />
+
+
+        <View
+            android:id="@+id/lineAbout4"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout2"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Total_Time"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout4"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout5"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout5"
+            tools:ignore="VisualLintOverlap" />
+
+        <TextView
+            android:id="@+id/tvTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineAbout5"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout2"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout4" />
+
+        <View
+            android:id="@+id/lineAbout5"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout4"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUsageRestrictions"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/Usage_Restrictions"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout5"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout5"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout5" />
+
+
+        <TextView
+            android:visibility="visible"
+            android:gravity="center_vertical"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/btnEgymSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/egym_system"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout6"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout6" />
+
+
+        <CheckBox
+            android:visibility="visible"
+            android:id="@+id/cbSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnEgymSystem"
+            app:layout_constraintEnd_toEndOf="@id/viewAbout"
+            app:layout_constraintTop_toTopOf="@+id/btnEgymSystem"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+
+        <View
+            android:id="@+id/lineAbout7"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout6"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@+id/viewAbout" />
+
+        <View
+            android:visibility="visible"
+            android:id="@+id/lineAbout6"
+            android:layout_marginTop="66dp"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout5"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout5"
+            app:layout_constraintTop_toBottomOf="@+id/lineAbout5" />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="24sp"
+            android:maxWidth="380dp"
+            android:maxLines="1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="@+id/lineAbout5"
+            android:id="@+id/btnResetOdometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:layout_marginBottom="14dp"
+            android:drawablePadding="11.68dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:paddingStart="0dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/reset_odometer"
+            android:textColor="@color/btn_1396ef_20"
+            android:textSize="24sp"
+            app:drawableEndCompat="@drawable/icon_update"
+            app:drawableTint="@color/btn_1396ef_20"
+            app:layout_constraintBottom_toBottomOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@+id/lineAbout5" />
+
+
+        <View
+            android:id="@+id/viewTerritory"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewAbout"
+            app:layout_constraintStart_toStartOf="@id/viewAbout"
+            app:layout_constraintEnd_toEndOf="@+id/viewAbout"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+
+        <!--    Engineering-->
+        <View
+            android:id="@+id/viewPreferences"
+            android:layout_width="450dp"
+            android:layout_height="880dp"
+            android:layout_marginStart="498dp"
+            android:layout_marginTop="176dp"
+            android:background="@drawable/panel_bg_all_20_1c242a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/linePreferences1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Preferences"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences" />
+
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/titleBeep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/Beep"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/linePreferences1"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences1" />
+
+        <CheckBox
+            android:id="@+id/cbBeep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="339dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            android:checked="@={deviceSettingViewModel.beep}"
+            app:layout_constraintBottom_toBottomOf="@+id/titleBeep"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/titleBeep"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+        <View
+            android:id="@+id/linePreferences1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="148dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences" />
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/titleGsMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/GS_Mode"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/linePreferences3"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences1"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences1"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+        <CheckBox
+            android:id="@+id/cbGsMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            android:checked="@={deviceSettingViewModel.gsMode}"
+            app:layout_constraintBottom_toBottomOf="@+id/titleGsMode"
+            app:layout_constraintEnd_toEndOf="@+id/cbBeep"
+            app:layout_constraintTop_toTopOf="@+id/titleGsMode"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            tools:ignore="VisualLintBounds" />
+
+
+        <View
+            android:id="@+id/linePreferences3"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences1"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences" />
+
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/titlePauseMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/pause_mode"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layoutMarginTop="@{isTreadmill ? 234 : 166}"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences1"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences"
+            tools:layout_marginTop="234dp" />
+
+        <CheckBox
+            android:id="@+id/cbPauseMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="@+id/titlePauseMode"
+            app:layout_constraintEnd_toEndOf="@+id/cbBeep"
+            app:layout_constraintTop_toTopOf="@+id/titlePauseMode"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+        <View
+            android:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/linePreferences4"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            app:layoutMarginTop="@{isTreadmill ? 66 : 0}"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences3"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences" />
+
+
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/titleAutoPause"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@{isTreadmill ? @string/auto_pause_amp_logout : @string/auto_logout}"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences4"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/when_no_user_detected"
+            android:textColor="@color/color445565"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/titleAutoPause"
+            app:layout_constraintTop_toBottomOf="@+id/titleAutoPause"
+            tools:ignore="TextContrastCheck" />
+
+        <CheckBox
+            android:id="@+id/cbAutoPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/titleAutoPause"
+            app:layout_constraintEnd_toEndOf="@+id/cbBeep"
+            app:layout_constraintTop_toTopOf="@+id/titleAutoPause"/>
+
+
+<!--        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView-->
+<!--            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            android:id="@+id/pickPauseAfterHour"-->
+<!--            android:layout_width="106dp"-->
+<!--            android:layout_height="64dp"-->
+<!--            android:layout_marginTop="26dp"-->
+<!--            android:background="@drawable/panel_bg_all_16_252e37"-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/titleAutoPause"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/titleAutoPause" />-->
+
+<!--        <TextView-->
+<!--            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            android:layout_width="10dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:text=":"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="32sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterHour"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/pickPauseAfterHour"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/pickPauseAfterHour"-->
+<!--            tools:ignore="HardcodedText" />-->
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickPauseAfterMin"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="88dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences4"
+            app:layout_constraintStart_toStartOf="@+id/titleAutoPause" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="10dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterMin"
+            app:layout_constraintStart_toEndOf="@+id/pickPauseAfterMin"
+            app:layout_constraintTop_toTopOf="@+id/pickPauseAfterMin"
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickPauseAfterSec"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterMin"
+            app:layout_constraintTop_toTopOf="@+id/pickPauseAfterMin"
+            app:layout_constraintStart_toEndOf="@+id/pickPauseAfterMin"/>
+
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/hideAutoPauseSec"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterSec"
+            app:layout_constraintEnd_toEndOf="@+id/pickPauseAfterSec"
+            app:layout_constraintStart_toStartOf="@+id/pickPauseAfterSec"
+            app:layout_constraintTop_toTopOf="@+id/pickPauseAfterSec" />
+
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/hidePauseAfter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.8"
+            android:background="@color/color1c242a"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterMin"
+            app:layout_constraintEnd_toEndOf="@+id/pickPauseAfterSec"
+            app:layout_constraintStart_toStartOf="@+id/pickPauseAfterMin"
+            app:layout_constraintTop_toTopOf="@+id/pickPauseAfterMin" />
+
+
+<!--        非電跑,sleep mode 與 workout time 之間的線-->
+        <View
+            tools:visibility="visible"
+            android:visibility="@{!isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/linePreferences6_1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="376dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences" />
+
+        <View
+            android:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/linePreferences6"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="160dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences4"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences" />
+
+        <TextView
+            android:id="@+id/titleSleepMode"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/sleep_mode"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layoutMarginTop="@{isTreadmill ? 462 : 398}"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences1"
+            app:layout_constraintTop_toTopOf="@id/viewPreferences"
+            tools:layout_marginTop="462dp" />
+
+<!--        <CheckBox-->
+<!--            android:visibility="gone"-->
+<!--            android:id="@+id/cbSleepMode"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="328dp"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:background="@drawable/btn_checkbox_s"-->
+<!--            android:button="@null"-->
+<!--            android:checked="false"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/titleSleepMode"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/viewPreferences"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/titleSleepMode" />-->
+
+
+
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:visibility="visible"
+            android:id="@+id/scSleepMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="232dp"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/titleSleepMode"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/titleSleepMode"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TooManyViews,TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Retail"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Retail"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/On"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/On"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Off"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Off"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+
+        <View
+            android:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/linePreferences7"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="588dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            tools:layout_marginTop="606dp"
+            app:layoutMarginTop="@{isTreadmill ? 606 : 540}"
+            android:id="@+id/titleUseTimeLimit"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/use_time_limit"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            android:layout_marginTop="670dp"
+            app:layout_constraintTop_toTopOf="@+id/viewPreferences"
+            app:layout_constraintEnd_toEndOf="@+id/linePreferences7"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences7" />
+
+        <CheckBox
+            android:id="@+id/cbUseTimeLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="339dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="@+id/titleUseTimeLimit"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences"
+            app:layout_constraintTop_toTopOf="@+id/titleUseTimeLimit" />
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickUseTimeLimitHour"
+            android:layout_width="114dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toBottomOf="@+id/titleUseTimeLimit"
+            app:layout_constraintStart_toStartOf="@+id/titleUseTimeLimit" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="10dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour"
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickUseTimeLimitMin"
+            android:layout_width="114dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="10dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitMin"
+            app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitMin"
+            app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitMin"
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickUseTimeLimitSec"
+            android:layout_width="114dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitMin"
+            app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitMin"
+            app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitMin"/>
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/hideUseTimeLimit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.8"
+            android:background="@color/color1c242a"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintEnd_toEndOf="@+id/pickUseTimeLimitSec"
+            app:layout_constraintStart_toStartOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour" />
+
+
+
+        <View
+            android:id="@+id/linePreferences8"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            tools:layout_marginTop="24dp"
+            app:layoutMarginTop="@{isTreadmill ? 24 : -124}"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/pickUseTimeLimitHour"
+            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"
+            app:layout_constraintStart_toStartOf="@+id/viewPreferences" />
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickSleepAfterMin"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/titleSleepMode"
+            app:layout_constraintStart_toStartOf="@+id/titleSleepMode" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="10dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickSleepAfterMin"
+            app:layout_constraintStart_toEndOf="@+id/pickSleepAfterMin"
+            app:layout_constraintTop_toTopOf="@+id/pickSleepAfterMin"
+            tools:ignore="HardcodedText,TextSizeCheck,TextContrastCheck" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            android:id="@+id/pickSleepAfterSec"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="@+id/pickSleepAfterMin"
+            app:layout_constraintBottom_toBottomOf="@+id/pickSleepAfterMin"
+            app:layout_constraintStart_toEndOf="@+id/pickSleepAfterMin" />
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/hideSleepSec"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/pickSleepAfterSec"
+            app:layout_constraintEnd_toEndOf="@+id/pickSleepAfterSec"
+            app:layout_constraintStart_toStartOf="@+id/pickSleepAfterSec"
+            app:layout_constraintTop_toTopOf="@+id/pickSleepAfterSec" />
+
+
+        <View
+            android:id="@+id/hideSleepAfter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.8"
+            android:background="@color/color1c242a"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/pickSleepAfterMin"
+            app:layout_constraintEnd_toEndOf="@+id/pickSleepAfterSec"
+            app:layout_constraintStart_toStartOf="@+id/pickSleepAfterMin"
+            app:layout_constraintTop_toTopOf="@+id/pickSleepAfterMin"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+<!--        android:text="@{@string/minimal_speed + `, ` + (deviceSettingViewModel.unitCode == deviceIntDef.IMPERIAL ? @string/mi : @string/km)}"-->
+        <TextView
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:text="@{@string/Speed + `, ` + (deviceSettingViewModel.unitCode == deviceIntDef.IMPERIAL ? @string/mph : @string/kph)}"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="24sp"
+            android:id="@+id/titleMinSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/linePreferences8"
+            app:layout_constraintTop_toBottomOf="@+id/linePreferences8" />
+
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/sc_speedMM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/titleMinSpeed"
+            app:layout_constraintTop_toTopOf="@+id/titleMinSpeed"
+            app:layout_constraintEnd_toEndOf="@+id/linePreferences8"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <!--            app:position="@={deviceSettingViewModel.protocol}"-->
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@null"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Minimal"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TooManyViews,TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@null"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Maximum"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/pickMaxSpeed1"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toBottomOf="@+id/titleMinSpeed"
+            app:layout_constraintStart_toStartOf="@+id/titleMinSpeed" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/pickMaxSpeed2"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pickMaxSpeed1"
+            app:layout_constraintTop_toTopOf="@+id/pickMaxSpeed1"
+            app:layout_constraintStart_toEndOf="@+id/pickMaxSpeed1"/>
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+           tools:visibility="visible"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/pickMinSpeed1"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toBottomOf="@+id/titleMinSpeed"
+            app:layout_constraintStart_toStartOf="@+id/titleMinSpeed" />
+
+        <TextView
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_width="10dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="."
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pickMinSpeed1"
+            app:layout_constraintStart_toEndOf="@+id/pickMinSpeed1"
+            app:layout_constraintTop_toTopOf="@+id/pickMinSpeed1"
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            tools:visibility="visible"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/pickMinSpeed2"
+            android:layout_width="181dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="26dp"
+            android:background="@drawable/panel_bg_all_16_252e37"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pickMinSpeed1"
+            app:layout_constraintTop_toTopOf="@+id/pickMinSpeed1"
+            app:layout_constraintStart_toEndOf="@+id/pickMinSpeed1"/>
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnUsageRestrictions"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:paddingTop="14dp"-->
+<!--            android:paddingBottom="14dp"-->
+<!--            android:text="@string/Usage_Restrictions"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/linePreferences8"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/linePreferences7"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/linePreferences7" />-->
+
+<!--        <View-->
+<!--            android:visibility="invisible"-->
+<!--            android:id="@+id/linePreferences9"-->
+<!--            android:layout_width="386dp"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:background="@color/color252e37"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/viewPreferences"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/viewPreferences"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btnUsageRestrictions" />-->
+
+
+        <!--Service-->
+
+
+        <View
+            android:id="@+id/viewMachineSetup"
+            android:layout_width="450dp"
+            android:layout_height="880dp"
+            android:layout_marginStart="972dp"
+            android:layout_marginTop="176dp"
+            android:background="@drawable/panel_bg_all_20_1c242a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/machine_setup"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup"
+            app:layout_constraintTop_toTopOf="@+id/viewMachineSetup" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClubInformation"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/club_information"
+            app:layout_constraintBottom_toTopOf="@+id/lineService1"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1"
+            tools:ignore="TooManyViews" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnClubInformation"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/club_information"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService1"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1"-->
+<!--            tools:ignore="TooManyViews" />-->
+
+        <View
+            android:id="@+id/lineService1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="148dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup"
+            app:layout_constraintTop_toTopOf="@+id/viewMachineSetup" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLanguage"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/Language"
+            app:layout_constraintBottom_toTopOf="@+id/lineService2"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnLanguage"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/Language"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService2"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1" />-->
+
+        <View
+            android:id="@+id/lineService2"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService1"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDateTime"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/date_time"
+            app:layout_constraintBottom_toTopOf="@+id/lineService3"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnDateTime"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/date_time"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService3"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1" />-->
+
+        <View
+            android:id="@+id/lineService3"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService2"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <View
+            android:id="@+id/lineService4"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService3"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <TextView
+            android:id="@+id/titleVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Video"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineService4_1"
+            app:layout_constraintStart_toStartOf="@+id/lineService4"
+            app:layout_constraintTop_toBottomOf="@+id/lineService4" />
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/sc_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:iPosition="@={deviceSettingViewModel.video}"
+            app:layout_constraintTop_toBottomOf="@+id/lineService4"
+            app:layout_constraintBottom_toTopOf="@+id/lineService4_1"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TooManyViews,TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/STB"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/STB"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                app:visibility="@{isUs ? View.GONE : View.VISIBLE}"
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/TV"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/TV"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/None"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/None"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+        <View
+            android:id="@+id/lineService4_1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService4"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+<!--        android:enabled="@{isUs ? true : (deviceSettingViewModel.video == DeviceIntDef.VIDEO_TV)}"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tvTvSettings"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:enabled="@{isUs ? (deviceSettingViewModel.video == DeviceIntDef.VIDEO_STB) : (deviceSettingViewModel.video == DeviceIntDef.VIDEO_TV)}"
+            android:text="@string/tv_settings"
+            app:layout_constraintBottom_toTopOf="@+id/lineService5"
+            app:layout_constraintEnd_toEndOf="@+id/lineService5"
+            app:layout_constraintStart_toStartOf="@+id/lineService5"
+            app:layout_constraintTop_toBottomOf="@+id/lineService4_1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tvTvSettings"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:enabled="@{deviceSettingViewModel.video == DeviceIntDef.VIDEO_TV}"-->
+<!--            android:text="@string/tv_settings"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService5"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService5"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService5"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineService4_1" />-->
+
+
+        <TextView
+            android:id="@+id/unitsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Units"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineService3"
+            app:layout_constraintBottom_toTopOf="@+id/lineService4"
+            app:layout_constraintStart_toStartOf="@+id/lineService4"
+            tools:ignore="VisualLintOverlap" />
+
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/sc_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:iPosition="@{deviceSettingViewModel.unitCode}"
+            app:layout_constraintTop_toTopOf="@+id/unitsTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/unitsTitle"
+            app:layout_constraintEnd_toEndOf="@+id/lineService4"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Imperial"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Imperial"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Metric"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Metric"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+        <View
+            android:id="@+id/lineService5"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService4_1"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <TextView
+            android:id="@+id/titleProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/Protocol"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/lineService5"
+            app:layout_constraintBottom_toTopOf="@+id/lineService6"
+            app:layout_constraintStart_toStartOf="@+id/lineService6" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:visibility="invisible"
+            android:id="@+id/btnProtocolHow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="1dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/icon_protocol_how"
+            app:layout_constraintEnd_toStartOf="@+id/sc_protocol"
+            app:layout_constraintBottom_toBottomOf="@+id/titleProtocol"
+           app:layout_constraintTop_toTopOf="@+id/titleProtocol"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/sc_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:iPosition="@={deviceSettingViewModel.protocol}"
+            app:layout_constraintBottom_toBottomOf="@+id/titleProtocol"
+            app:layout_constraintTop_toTopOf="@+id/titleProtocol"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <!--            app:position="@={deviceSettingViewModel.protocol}"-->
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Csafe"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Csafe"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/cardio_desc_bike"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/CAB"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+        <View
+            android:id="@+id/lineService6"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            app:layout_constraintTop_toBottomOf="@+id/lineService5"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWifi"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/Wifi"
+            app:layout_constraintTop_toBottomOf="@+id/lineService6"
+            app:layout_constraintBottom_toTopOf="@+id/lineService7"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1" />
+
+
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnWifi"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/Wifi"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineService6"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService7"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1" />-->
+
+        <View
+            android:id="@+id/lineService7"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService6"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSoftware"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/Software"
+            app:layout_constraintTop_toBottomOf="@+id/lineService7"
+            app:layout_constraintBottom_toTopOf="@+id/lineService8"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1" />
+
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnSoftware"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/Software"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineService7"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService8"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1" />-->
+
+        <View
+            android:id="@+id/lineService8"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService7"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/btnUseLimits"-->
+        <!--            style="@style/MaintenanceTextStyle"-->
+        <!--            android:text="@string/use_limit"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/lineService9"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/lineService1"-->
+        <!--            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/inter_regular"-->
+        <!--            android:paddingTop="18dp"-->
+        <!--            android:paddingBottom="18dp"-->
+        <!--            android:text="@string/use_time_limit"-->
+        <!--            android:textColor="@color/color8192a2"-->
+        <!--            android:textSize="24sp"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/lineService9"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/lineService1"-->
+        <!--            app:visibility="@{isTreadmill ? View.INVISIBLE : View.VISIBLE}" />-->
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFirmware"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/Firmware"
+            app:layout_constraintTop_toBottomOf="@+id/lineService8"
+            app:layout_constraintBottom_toTopOf="@+id/lineService9"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnFirmware"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/Firmware"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineService8"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService9"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1" />-->
+
+        <View
+            android:id="@+id/lineService9"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/lineService8"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MaintenanceTextStyleMaterial"
+            android:id="@+id/btnAppManager"
+            android:text="@string/app_manager"
+            app:layout_constraintBottom_toTopOf="@+id/lineService11"
+            app:layout_constraintEnd_toEndOf="@+id/lineService1"
+            app:layout_constraintStart_toStartOf="@+id/lineService1"
+            app:layout_constraintTop_toBottomOf="@+id/lineService9" />
+
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnAppManager"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/app_manager"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineService11"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineService1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineService1"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineService9" />-->
+
+        <View
+            android:id="@+id/lineService11"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+           app:layout_constraintTop_toBottomOf="@+id/lineService9"
+            app:layout_constraintEnd_toEndOf="@+id/viewMachineSetup"
+            app:layout_constraintStart_toStartOf="@+id/viewMachineSetup" />
+
+        <!--Service-->
+        <View
+            android:id="@+id/viewService"
+            android:layout_width="450dp"
+            android:layout_height="588dp"
+            android:layout_marginTop="176dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_1c242a"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Service"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toTopOf="@+id/viewService" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnKeyTest"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/key_test"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service1"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnKeyTest"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/key_test"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service1"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1" />-->
+
+        <View
+            android:id="@+id/line2Service1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="148dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toTopOf="@+id/viewService" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNfcTest"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/nfc_test"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service1"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service3"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnNfcTest"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/nfc_test"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service1"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service3"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1" />-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/line2Service2"-->
+        <!--            android:layout_width="370dp"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:layout_marginTop="238dp"-->
+        <!--            android:background="@color/color252e37"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/viewService"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/viewService"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/viewService" />-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/btnTouchPanelTest"-->
+        <!--            style="@style/MaintenanceTextStyle"-->
+        <!--            android:text="@string/touch_panel_test"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/line2Service3"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/line2Service1" />-->
+
+        <View
+            android:id="@+id/line2Service3"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service1"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCommunicationTest"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/communication_test"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service3"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service4"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnCommunicationTest"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/communication_test"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service3"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service4"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1" />-->
+
+        <View
+            android:id="@+id/line2Service4"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service3" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBrakeTest"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/brake_test"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service4"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service5"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1"
+            app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnBrakeTest"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/brake_test"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service4"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service5"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1"-->
+<!--            app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}" />-->
+
+        <View
+            android:id="@+id/line2Service5"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service4" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSensorTests"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/sensor_tests"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service5"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service6"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1"
+            app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnSensorTests"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/sensor_tests"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service5"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service6"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1"-->
+<!--            app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}" />-->
+
+        <View
+            android:id="@+id/line2Service6"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service5" />
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/btnWattCalibration"-->
+        <!--            style="@style/MaintenanceTextStyle"-->
+        <!--            android:text="@string/watt_calibration"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/line2Service7"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/line2Service1"-->
+        <!--            app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}" />-->
+
+        <View
+            android:id="@+id/line2Service7"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewService"
+            app:layout_constraintStart_toStartOf="@+id/viewService"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service6" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDriveMotorTest"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/drive_motor_test"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service4"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service5"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnDriveMotorTest"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/drive_motor_test"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service4"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service5"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1"-->
+<!--            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/line2Service8"-->
+        <!--            android:layout_width="370dp"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:layout_marginTop="670dp"-->
+        <!--            android:background="@color/color252e37"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/viewService"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/viewService"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/viewService"-->
+        <!--            app:visibility="@{isTreadmill ? View.INVISIBLE : View.VISIBLE}" />-->
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInclineMotor"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/incline_motor"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service5"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service6"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnInclineMotor"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/incline_motor"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service5"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service6"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1"-->
+<!--            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />-->
+
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnErrorCodeLog"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/error_code_log"
+            app:layout_constraintTop_toBottomOf="@+id/line2Service6"
+            app:layout_constraintBottom_toTopOf="@+id/line2Service7"
+            app:layout_constraintEnd_toEndOf="@+id/line2Service1"
+            app:layout_constraintStart_toStartOf="@+id/line2Service1" />
+
+        <!--        app:layoutMarginTop="@{isTreadmill ? @dimen/T_MaintenanceErrorLog : @dimen/MaintenanceErrorLog}"-->
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/btnErrorCodeLog"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/error_code_log"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/line2Service6"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/line2Service7"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/line2Service1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/line2Service1" />-->
+
+
+
+
+        <View
+            android:visibility="visible"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/viewCustomization"
+            android:layout_width="450dp"
+            android:layout_height="268dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_1c242a"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:visibility="visible"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@+id/lineCustom1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/customization"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewCustomization"
+            app:layout_constraintTop_toTopOf="@+id/viewCustomization" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:visibility="visible"
+            android:id="@+id/btnSplashScreenImage"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/splash_screen_image"
+            app:layout_constraintBottom_toTopOf="@+id/lineCustom1"
+            app:layout_constraintEnd_toEndOf="@+id/lineCustom1"
+            app:layout_constraintStart_toStartOf="@+id/lineCustom1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:visibility="visible"-->
+<!--            android:id="@+id/btnSplashScreenImage"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/splash_screen_image"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineCustom1"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineCustom1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineCustom1" />-->
+
+        <View
+            android:visibility="visible"
+            android:id="@+id/lineCustom1"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="148dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewCustomization"
+            app:layout_constraintStart_toStartOf="@+id/viewCustomization"
+            app:layout_constraintTop_toTopOf="@+id/viewCustomization" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:visibility="visible"
+            android:id="@+id/btnRetailModeVideo"
+            style="@style/MaintenanceTextStyleMaterial"
+            android:text="@string/retail_mode_video"
+            app:layout_constraintTop_toBottomOf="@+id/lineCustom1"
+            app:layout_constraintBottom_toTopOf="@+id/lineCustom2"
+            app:layout_constraintEnd_toEndOf="@+id/lineCustom1"
+            app:layout_constraintStart_toStartOf="@+id/lineCustom1" />
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:visibility="visible"-->
+<!--            android:id="@+id/btnRetailModeVideo"-->
+<!--            style="@style/MaintenanceTextStyle"-->
+<!--            android:text="@string/retail_mode_video"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/lineCustom1"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/lineCustom2"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/lineCustom1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/lineCustom1" />-->
+        <View
+            android:visibility="visible"
+            android:id="@+id/lineCustom2"
+            android:layout_width="386dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="66dp"
+            android:background="@color/color252e37"
+            app:layout_constraintEnd_toEndOf="@+id/viewCustomization"
+            app:layout_constraintStart_toStartOf="@+id/viewCustomization"
+            app:layout_constraintTop_toBottomOf="@+id/lineCustom1" />
+
+
+
+
+
+        <!--    DisplayBrightness-->
+        <View
+            android:id="@+id/viewDisplayBrightness"
+            android:layout_width="450dp"
+            android:layout_height="232dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/panel_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/Display_Brightness"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/viewDisplayBrightness"
+            app:layout_constraintTop_toTopOf="@+id/viewDisplayBrightness"
+            tools:ignore="TextSizeCheck" />
+
+
+<!--        app:rsb_max="255"-->
+<!--        app:rsb_min="10"-->
+        <com.jaygoo.widget.RangeSeekBar
+            app:rsb_min="10"
+            app:rsb_max="255"
+            android:id="@+id/DisplayBrightnessBar"
+            android:layout_width="456dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="74dp"
+            app:layout_constraintEnd_toEndOf="@+id/viewDisplayBrightness"
+            app:layout_constraintStart_toStartOf="@+id/viewDisplayBrightness"
+            app:layout_constraintTop_toTopOf="@+id/viewDisplayBrightness"
+            app:rsb_gravity="center"
+            app:rsb_min_interval="1"
+            app:rsb_mode="single"
+            app:rsb_progress_color="@color/color1396ef"
+            app:rsb_progress_default_color="@color/color445565"
+            app:rsb_progress_height="16dp"
+            app:rsb_progress_radius="40dp"
+            app:rsb_thumb_drawable="@drawable/element_drag"
+            app:rsb_thumb_height="94dp"
+            app:rsb_thumb_width="94dp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnExit"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Exit"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent20"
+            android:clickable="true"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

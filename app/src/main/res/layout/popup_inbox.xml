@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fl_root"
+        android:layout_width="795dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_overlay_settings"
+        tools:context=".settings.InboxPopupWindow">
+        <!--+48-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/inboxTitle"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_width="wrap_content"
+            android:maxWidth="380dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="70sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Inbox"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+            app:layout_constraintEnd_toStartOf="@+id/btn_close"
+            app:layout_constraintTop_toTopOf="@+id/btn_close" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:visibility="@{deviceSetting.alertNotifyCount > 0 ? View.VISIBLE : View.GONE}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_oval_e24b44"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@{String.valueOf(deviceSetting.alertNotifyCount)}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="-40dp"
+            app:layout_constraintBottom_toTopOf="@+id/inboxTitle"
+            app:layout_constraintStart_toEndOf="@+id/inboxTitle"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btn_close"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/inboxTopView"
+            android:layout_width="734dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="200dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--    可以超過-->
+        <!--    android:paddingTop="32dp"-->
+        <!--    android:clipToPadding="false"-->
+        <androidx.recyclerview.widget.RecyclerView
+            tools:visibility="gone"
+            android:visibility="visible"
+            tools:listitem="@layout/items_inbox_list"
+            tools:itemCount="12"
+            android:paddingBottom="20dp"
+            android:clipToPadding="false"
+            android:background="@drawable/recycler_bg_1c242a"
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/inboxTopView"
+            app:layout_constraintStart_toStartOf="@+id/inboxTopView"
+            app:layout_constraintTop_toBottomOf="@+id/inboxTopView" />
+
+
+        <androidx.core.widget.NestedScrollView
+            tools:visibility="visible"
+            android:scrollbarThumbVertical="@android:color/white"
+            android:background="@drawable/recycler_bg_252e37"
+            android:id="@+id/scContentView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:fillViewport="true"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:scrollbars="vertical"
+            android:paddingBottom="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/inboxTopView"
+            app:layout_constraintStart_toStartOf="@+id/inboxTopView"
+            app:layout_constraintTop_toBottomOf="@+id/inboxTopView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:includeFontPadding="false"
+                    android:paddingTop="30dp"
+                    android:paddingStart="30dp"
+                    android:paddingBottom="30dp"
+                    android:paddingEnd="200dp"
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="26dp"
+                    android:drawablePadding="13dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/back"
+                    android:textColor="@color/btn_adb872_50"
+                    android:textSize="24sp"
+                    app:drawableStartCompat="@drawable/icon_back"
+                    app:drawableTint="@color/btn_adb872_50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="56dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/tvInboxTitle"
+                    android:layout_width="606dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="44sp"
+                    tools:text="Christmas Working Hours" />
+
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="190dp"
+                    android:id="@+id/tvInboxFrom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/colorfa994a"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvInboxTitle"
+                    tools:text="Announcements" />
+
+                <TextView
+                    android:id="@+id/tvInboxDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/color5a7085"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/tvInboxFrom"
+                    app:layout_constraintTop_toTopOf="@+id/tvInboxFrom"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvInboxFrom"
+                    tools:text="12/2/2020" />
+
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/inter_regular"
+                    android:id="@+id/tvInboxContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="248dp"
+                    android:layout_marginEnd="56dp"
+                    android:textColor="@color/colorADB8C2"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="xxxxxxxxxxxxxf32f2f23f23f32f23f32f23f23f32f32f23f2x" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <ProgressBar
+            android:id="@+id/progress_circulars"
+            android:indeterminateTint="@color/colorADB8C2"
+            app:layout_constraintTop_toTopOf="@+id/inboxTopView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/inboxTopView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

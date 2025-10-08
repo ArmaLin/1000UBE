@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@drawable/icon_garmin2"
+        android:state_checked="true"
+        android:state_pressed="true" />
+    <item
+        android:drawable="@drawable/icon_garmin"
+        android:state_pressed="true" />
+    <item
+        android:drawable="@drawable/icon_garmin"
+        android:state_checked="true" />
+    <item
+        android:drawable="@drawable/icon_garmin2" />
+</selector>

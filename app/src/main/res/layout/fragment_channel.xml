@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="904dp"
+    android:background="@color/color11151a"
+    tools:context=".dashboard_media.ChannelsFragment">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:letterSpacing="0.01"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btnBack"
+        android:layout_width="165dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/panel_bg_all_20_252e37"
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:text="@string/back"
+        android:textAllCaps="false"
+        android:textColor="@color/colorADB8C2"
+        android:textSize="24sp"
+        app:backgroundTint="@color/color252e37"
+        app:backgroundTintMode="src_in"
+        app:icon="@drawable/icon_back"
+        app:iconGravity="textStart"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:includeFontPadding="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="261dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/TV"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+    <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+        android:id="@+id/rgSelectChannel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbAll"
+            android:layout_width="98dp"
+            android:layout_height="88dp"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:checked="true"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/All"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbNews"
+            android:layout_width="144dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="24dp"
+            android:layout_toEndOf="@+id/rbAll"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/News"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbMovies"
+            android:layout_width="196dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="24dp"
+            android:layout_toEndOf="@+id/rbNews"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Movies"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbMusic"
+            android:layout_width="151dp"
+            android:layout_height="88dp"
+            android:layout_below="@+id/rbAll"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Music"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbSports"
+            android:layout_width="151dp"
+            android:layout_height="88dp"
+            android:layout_below="@+id/rbAll"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/rbMusic"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Sports"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+        <RadioButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/rbComedy"
+            android:layout_width="151dp"
+            android:layout_height="88dp"
+            android:layout_below="@+id/rbAll"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/rbSports"
+            android:background="@drawable/btn_nine_select"
+            android:button="@null"
+            android:checked="false"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Comedy"
+            android:textColor="@drawable/check_text_5a7085"
+            android:textSize="32sp" />
+
+    </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="428dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/Input_Number"
+        android:textColor="@color/color5a7085"
+        android:textSize="44sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="536dp"
+        android:layout_marginTop="444dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/Select"
+        android:textColor="@color/color1396ef"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tvLine1"
+        android:layout_width="563dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="510dp"
+        android:background="@color/color323f4b"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:id="@+id/btn_num1"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/inter_bold"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLine1"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num2"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num1"
+        app:layout_constraintStart_toEndOf="@+id/btn_num1"
+        app:layout_constraintTop_toTopOf="@+id/btn_num1"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num3"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num1"
+        app:layout_constraintStart_toEndOf="@+id/btn_num2"
+        app:layout_constraintTop_toTopOf="@+id/btn_num1"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num4"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="48dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_num1"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num5"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num4"
+        app:layout_constraintStart_toEndOf="@+id/btn_num4"
+        app:layout_constraintTop_toTopOf="@+id/btn_num4"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num6"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num4"
+        app:layout_constraintStart_toEndOf="@+id/btn_num2"
+        app:layout_constraintTop_toTopOf="@+id/btn_num4"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:id="@+id/btn_num7"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="48dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="7"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_num4"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num8"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="8"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num7"
+        app:layout_constraintStart_toEndOf="@+id/btn_num7"
+        app:layout_constraintTop_toTopOf="@+id/btn_num7"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num9"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="9"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_num7"
+        app:layout_constraintStart_toEndOf="@+id/btn_num2"
+        app:layout_constraintTop_toTopOf="@+id/btn_num7"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/color11151a"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_num0"
+        android:layout_width="171.67dp"
+        android:layout_height="88dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_num8"
+        app:layout_constraintStart_toStartOf="@id/btn_num8"
+        app:layout_constraintTop_toBottomOf="@+id/btn_num8"
+        tools:ignore="HardcodedText" />
+
+<!--    可以超過-->
+<!--    android:paddingTop="32dp"-->
+<!--    android:clipToPadding="false"-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="48dp"
+        android:clipToPadding="false"
+        android:fadeScrollbars="false"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:paddingTop="32dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvLine1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_circulars"
+        android:indeterminateTint="@color/colorADB8C2"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+
+</androidx.constraintlayout.widget.ConstraintLayout>

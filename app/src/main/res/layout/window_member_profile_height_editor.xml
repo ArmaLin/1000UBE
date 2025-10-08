@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="904dp"
+    tools:context=".settings.MemberProfileHeightEditorWindow">
+    <!-- +24-->
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        app:shapeAppearanceOverlay="@style/roundedCornerTop"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Cancel"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/panel_bg_top_1c242a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_close">
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/sc_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="44dp"
+            android:background="@color/color323f4b"
+            android:orientation="horizontal"
+            app:draggable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:position="0"
+            app:radius="20dp"
+            app:ripple="true"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Imperial"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Imperial"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Metric"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Metric"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+        <!--        <RadioGroup-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="64dp"-->
+        <!--            android:layout_marginEnd="44dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            >-->
+
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/btnImperial"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginEnd="24dp"-->
+        <!--                android:button="@null"-->
+        <!--                android:checked="true"-->
+        <!--                android:drawablePadding="12dp"-->
+        <!--                android:fontFamily="@font/inter_bold"-->
+        <!--                android:text="Imperial"-->
+        <!--                android:textColor="@color/color1396ef"-->
+        <!--                android:textSize="24sp" />-->
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/btnMetric"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginEnd="24dp"-->
+        <!--                android:button="@null"-->
+        <!--                android:drawablePadding="12dp"-->
+        <!--                android:fontFamily="@font/inter_bold"-->
+        <!--                android:text="Metric"-->
+        <!--                android:textColor="@color/colorADB8C2"-->
+        <!--                android:textSize="24sp" />-->
+        <!--        </RadioGroup>-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topLine">
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickFtHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="460dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unitFt"
+                android:layout_width="213dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="735dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/ft"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickInHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1180dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unitIn"
+                android:layout_width="213dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="1446dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/in"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupM"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topLine">
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickCmHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unitCM"
+                android:layout_width="213dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="300dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/cm"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="324dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bottomLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="329dp"
+            android:background="@color/color252e37"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:background="@color/color1396ef"
+            android:fontFamily="@font/inter_bold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:stateListAnimator="@null"
+            android:text="@string/Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

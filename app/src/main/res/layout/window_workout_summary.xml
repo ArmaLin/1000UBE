@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.R" />
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+        <variable
+            name="workoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="appStatusIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+
+        <import type="com.dyaco.spirit_commercial.support.CommonUtils" />
+
+        <variable
+            name="userProfileViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel" />
+
+        <variable
+            name="general"
+            type="com.dyaco.spirit_commercial.support.intdef.GENERAL" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBase"
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:background="@color/color11151a"
+        android:keepScreenOn="true"
+        tools:context=".workout.WorkoutSummaryWindow">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClose"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="@color/btn_click_252e37_323f4b"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@string/Close"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCloseAndLogout"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCloseAndLogout"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:alpha="@{workoutData.isWorkoutReadyStart ? 1f : 0.5f}"
+            android:background="@color/btn_click_1396ef"
+            android:clickable="@{workoutData.isWorkoutReadyStart}"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@{isUs ? @string/Log_Out_Apps_and_Close : @string/close_and_log_out }"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnClose" />
+
+        <!--        android:background="@drawable/img_summary_egym"-->
+        <View
+            android:id="@+id/summaryLeftView"
+            android:layout_width="1240dp"
+            android:layout_height="856dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@{workoutData.selProgram == programsEnum.EGYM ? @drawable/img_summary_egym : @drawable/img_summary}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSpiritSummaryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="64dp"
+            android:autoSizeMaxTextSize="96sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|start"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@{workoutData.selProgram.getProgramType() != workoutIntDef.FITNESS_TESTS ? R.string.workout_finished : R.string.test_finished}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/summaryLeftView"
+            tools:text="@string/workout_finished" />
+        <!--        android:text="@{programsEnum.getProgram(workoutData.selProgramId).getProgramType == workoutIntDef.DEFAULT_PROGRAM ? R.string.workout_finished : R.string.test_finished}"-->
+
+        <View
+            android:id="@+id/lline1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="208dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@id/summaryLeftView" />
+
+        <TextView
+            android:id="@+id/tvTimeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:drawablePadding="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Time"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:drawableStartCompat="@drawable/icon_time_40"
+            app:layout_constraintBottom_toTopOf="@+id/lline2"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline1" />
+
+
+        <!--        android:text="@{comm.formatSecToM2(workoutData.totalElapsedTime)}"-->
+        <TextView
+            android:id="@+id/tvSummaryTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="357dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{CommonUtils.formatSecToM(workoutData.totalElapsedTimeShow)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeTitle"
+            app:layout_constraintStart_toEndOf="@+id/tvTimeTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeTitle" />
+
+        <TextView
+            android:id="@+id/tvTimeUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="—"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeTitle"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeTitle"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/lline2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="102dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@id/lline1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDistanceAndPowerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:drawableStart="@{isTreadmill ? @drawable/icon_distance_40 : @drawable/icon_power_32}"
+            android:drawablePadding="27.17dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{isTreadmill ? R.string.Distance : R.string.Power}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/lline3"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline2" />
+
+        <TextView
+            android:id="@+id/tvSummaryDistanceAndPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? comm.formatDecimal(workoutData.currentDistance,2) : comm.formatDecimal(workoutData.avgPower)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDistanceAndPowerTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvSummaryTime"
+            app:layout_constraintStart_toStartOf="@+id/tvSummaryTime"
+            app:layout_constraintTop_toTopOf="@+id/tvDistanceAndPowerTitle" />
+
+        <TextView
+            android:id="@+id/tvDistanceAndPowerUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mi : @string/km) : @string/W}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDistanceAndPowerTitle"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvDistanceAndPowerTitle" />
+
+        <View
+            android:id="@+id/lline3"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="102dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@id/lline2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPaceAndSpeedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:drawableStart="@{isTreadmill ? @drawable/icon_pace_40 : @drawable/icon_speed_32}"
+            android:drawablePadding="25.49dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{isTreadmill ? @string/Pace : @string/Speed}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/lline4"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline3" />
+
+        <TextView
+            android:id="@+id/tvSummaryPaceAndSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? CommonUtils.formatSecToM(workoutData.summaryPace) : comm.formatDecimal(workoutData.avgRpm)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPaceAndSpeedTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvSummaryTime"
+            app:layout_constraintStart_toStartOf="@+id/tvSummaryTime"
+            app:layout_constraintTop_toTopOf="@+id/tvPaceAndSpeedTitle" />
+
+        <TextView
+            android:id="@+id/tvPaceAndSpeedUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/min_per_mi : @string/min_per_km) : @string/rpm}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSummaryPaceAndSpeed"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvSummaryPaceAndSpeed" />
+
+        <View
+            android:id="@+id/lline4"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="102dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@id/lline3" />
+
+        <TextView
+            android:id="@+id/tvCaloriesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:drawablePadding="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Calories"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:drawableStartCompat="@drawable/icon_calories_40"
+            app:layout_constraintBottom_toTopOf="@+id/lline5"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline4" />
+
+        <TextView
+            android:id="@+id/tvSummaryCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{comm.formatDecimal(workoutData.currentCalories)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCaloriesTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvSummaryTime"
+            app:layout_constraintStart_toStartOf="@+id/tvSummaryTime"
+            app:layout_constraintTop_toTopOf="@+id/tvCaloriesTitle" />
+
+        <TextView
+            android:id="@+id/tvCaloriesUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/kcal"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCaloriesTitle"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvCaloriesTitle" />
+
+        <View
+            android:id="@+id/lline5"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="102dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@id/lline4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvElevationAndDistanceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:drawableStart="@{isTreadmill ? @drawable/icon_elevation_40 : @drawable/icon_distance_40}"
+            android:drawablePadding="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{isTreadmill ? @string/Elevation_Gain : @string/Distance}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/lline6"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline5" />
+
+        <TextView
+            android:id="@+id/tvSummaryElevationAndDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? comm.formatDecimal(workoutData.currentElevationGain) : comm.formatDecimal(workoutData.currentDistance,2)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvElevationAndDistanceTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvSummaryTime"
+            app:layout_constraintStart_toStartOf="@+id/tvSummaryTime"
+            app:layout_constraintTop_toTopOf="@+id/tvElevationAndDistanceTitle" />
+
+        <TextView
+            android:id="@+id/tvElevationAndDistanceUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/ft : @string/m ) : (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mi : @string/km)}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvElevationAndDistanceTitle"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvElevationAndDistanceTitle" />
+
+        <View
+            android:id="@+id/lline6"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="102dp"
+            android:background="@color/half_transparent15"
+            app:layout_constraintEnd_toEndOf="@+id/summaryLeftView"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@id/lline5" />
+
+        <TextView
+            android:id="@+id/tvMetsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="30dp"
+            android:drawablePadding="24dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/METs"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:drawableStartCompat="@drawable/icon_mets_40"
+            app:layout_constraintStart_toStartOf="@+id/summaryLeftView"
+            app:layout_constraintTop_toBottomOf="@+id/lline6" />
+
+        <TextView
+            android:id="@+id/tvSummaryMets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{comm.formatDecimal(workoutData.summaryMets)}"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMetsTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvSummaryTime"
+            app:layout_constraintStart_toStartOf="@+id/tvSummaryTime"
+            app:layout_constraintTop_toTopOf="@+id/tvMetsTitle" />
+
+        <TextView
+            android:id="@+id/tvMetsUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="—"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMetsTitle"
+            app:layout_constraintEnd_toEndOf="@id/summaryLeftView"
+            app:layout_constraintTop_toTopOf="@+id/tvMetsTitle"
+            tools:ignore="HardcodedText" />
+
+<!--        EGYM-->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/baseScrollViewEgym"
+            android:layout_width="608dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="24dp"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btnCloseAndLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <View
+                    android:id="@+id/viewSpeedAndLevelE"
+                    android:layout_width="608dp"
+                    android:layout_height="616dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="48dp"
+                    android:text="@string/speed_chart"
+                    android:id="@+id/tvSpeedAndLevelNumE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewSpeedAndLevelE"
+                    app:layout_constraintTop_toTopOf="@+id/viewSpeedAndLevelE"/>
+
+                <TextView
+                    tools:text="@string/km_h"
+                    android:layout_marginStart="4dp"
+                    android:id="@+id/tvSpeedAndLevelUnitE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toEndOf="@+id/tvSpeedAndLevelNumE"
+                    app:layout_constraintTop_toTopOf="@+id/tvSpeedAndLevelNumE"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSpeedQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="96dp"
+                    android:drawableStart="@drawable/square_speed"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Outcome"
+                    android:textColor="@color/color8192a2"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/viewSpeedAndLevelE"
+                    app:layout_constraintTop_toTopOf="@id/viewSpeedAndLevelE" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTargetQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="96dp"
+                    android:drawableStart="@drawable/square_1a1396ef"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Target"
+                    android:textColor="@color/color8192a2"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/tvSpeedQ"
+                    app:layout_constraintTop_toTopOf="@id/viewSpeedAndLevelE" />
+
+
+                <com.dyaco.spirit_commercial.egym.StackedBarChartView
+                    android:id="@+id/stackedBarChartSpeedView"
+                    android:layout_width="512dp"
+                    android:layout_height="429dp"
+                    android:layout_marginTop="153dp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewSpeedAndLevelE"
+                    app:layout_constraintStart_toStartOf="@+id/viewSpeedAndLevelE"
+                    app:layout_constraintTop_toTopOf="@id/viewSpeedAndLevelE" />
+
+
+
+<!--                EGYM INCLINE CHART-->
+
+                <View
+                    android:id="@+id/viewInclineE"
+                    android:layout_width="608dp"
+                    android:layout_height="616dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintTop_toBottomOf="@+id/viewSpeedAndLevelE"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="48dp"
+                    android:text="@string/incline_chart"
+                    android:id="@+id/tvInclineTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewInclineE"
+                    app:layout_constraintTop_toTopOf="@+id/viewInclineE"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvInclineQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="96dp"
+                    android:drawableStart="@drawable/square_incline"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Outcome"
+                    android:textColor="@color/color8192a2"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/viewInclineE"
+                    app:layout_constraintTop_toTopOf="@id/viewInclineE" />
+
+
+                <com.dyaco.spirit_commercial.egym.StackedBarChartView
+                    android:id="@+id/stackedBarChartInclineView"
+                    android:layout_width="512dp"
+                    android:layout_height="429dp"
+                    android:layout_marginTop="153dp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewInclineE"
+                    app:layout_constraintStart_toStartOf="@+id/viewInclineE"
+                    app:layout_constraintTop_toTopOf="@id/viewInclineE" />
+
+
+
+<!--                EGYM HR CHART-->
+
+
+                <View
+                    android:layout_marginBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewInclineE"
+                    android:id="@+id/viewHeartRateE"
+                    android:layout_width="608dp"
+                    android:layout_height="616dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="48dp"
+                    android:text="@string/heart_rate_chart"
+                    android:id="@+id/tvHrNumE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewHeartRateE"
+                    app:layout_constraintTop_toTopOf="@+id/viewHeartRateE"/>
+
+                <TextView
+                    android:text="@string/bpm"
+                    android:layout_marginStart="4dp"
+                    android:id="@+id/tvHrUnitE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toEndOf="@+id/tvHrNumE"
+                    app:layout_constraintTop_toTopOf="@+id/tvHrNumE"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvHrQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="96dp"
+                    android:drawableStart="@drawable/square_heartrate"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Speed"
+                    android:textColor="@color/color8192a2"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/viewHeartRateE"
+                    app:layout_constraintTop_toTopOf="@id/viewHeartRateE" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTargetHrQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="96dp"
+                    android:drawableStart="@drawable/square_heartrate_t"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Target"
+                    android:textColor="@color/color8192a2"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/tvHrQ"
+                    app:layout_constraintTop_toTopOf="@id/viewHeartRateE" />
+
+
+                <com.dyaco.spirit_commercial.egym.StackedBarChartView
+                    android:id="@+id/stackedBarChartHrView"
+                    android:layout_width="512dp"
+                    android:layout_height="429dp"
+                    android:layout_marginTop="153dp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewHeartRateE"
+                    app:layout_constraintStart_toStartOf="@+id/viewHeartRateE"
+                    app:layout_constraintTop_toTopOf="@id/viewHeartRateE" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/baseScrollView"
+            android:layout_width="608dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="24dp"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnCloseAndLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/viewScore"
+                    android:layout_width="608dp"
+                    android:layout_height="608dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_summary_score"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{workoutData.selProgram.getProgramType() == workoutIntDef.FITNESS_TESTS ? View.VISIBLE : View.GONE}"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/viewScoreText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="208dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/Your_Score"
+                    android:textColor="@color/color5a7085"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewScore"
+                    app:layout_constraintStart_toStartOf="@+id/viewScore"
+                    app:layout_constraintTop_toTopOf="@+id/viewScore" />
+
+                <TextView
+                    android:id="@+id/viewScoreTextNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="272dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:textSize="96sp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewScore"
+                    app:layout_constraintStart_toStartOf="@+id/viewScore"
+                    app:layout_constraintTop_toTopOf="@+id/viewScore" />
+
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@+id/viewScore"
+                    app:layout_constraintStart_toStartOf="@+id/viewScore"
+                    app:layout_constraintTop_toBottomOf="@+id/viewScoreTextNum"
+                    tools:text="@string/satisfactory" />
+
+
+                <View
+                    android:id="@+id/viewSpeedAndLevel"
+                    android:layout_width="608dp"
+                    android:layout_height="608dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewScore" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/speedAndLevelIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="68dp"
+                    app:backgroundResource="@{isTreadmill ? R.drawable.icon_speed_32 : R.drawable.icon_level_40}"
+                    app:layout_constraintStart_toStartOf="@id/viewSpeedAndLevel"
+                    app:layout_constraintTop_toTopOf="@+id/viewSpeedAndLevel" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@{isTreadmill ? R.string.Speed : R.string.Level}"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/speedAndLevelIcon"
+                    app:layout_constraintStart_toStartOf="@+id/viewSpeedAndLevel"
+                    app:layout_constraintTop_toTopOf="@+id/speedAndLevelIcon" />
+
+                <TextView
+                    android:id="@+id/tvSpeedAndLevelNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@{isTreadmill ? comm.formatDecimal(workoutData.avgSpeed) : comm.formatDecimal(workoutData.avgLevel)}"
+                    android:textColor="@color/white"
+                    android:textSize="44sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/speedAndLevelIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/tvSpeedAndLevelNumUnit"
+                    app:layout_constraintTop_toTopOf="@+id/speedAndLevelIcon"
+                    tools:text="10.5" />
+
+                <TextView
+                    android:id="@+id/tvSpeedAndLevelNumUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="64dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@{isTreadmill ? deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? ` ` + @string/mph : ` ` + @string/kph : ``}"
+                    android:textColor="@color/white"
+                    android:textSize="44sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/speedAndLevelIcon"
+                    app:layout_constraintEnd_toEndOf="@+id/viewSpeedAndLevel"
+                    app:layout_constraintTop_toTopOf="@+id/speedAndLevelIcon"
+                    tools:text="mph" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDiagramSpeedAndLevel"
+                    android:layout_width="480dp"
+                    android:layout_height="408dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewSpeedAndLevel"
+                    app:layout_constraintEnd_toEndOf="@+id/viewSpeedAndLevel"
+                    app:layout_constraintStart_toStartOf="@+id/viewSpeedAndLevel"
+                    tools:ignore="ImageContrastCheck" />
+
+<!--                <com.dyaco.spirit_commercial.ProfileChartView-->
+<!--                    android:id="@+id/ivDiagramSpeedAndLevel"-->
+<!--                    android:layout_width="480dp"-->
+<!--                    android:layout_height="408dp"-->
+<!--                    app:levelColorCustom="@color/color5a7085"-->
+<!--                    app:barSpacingCustom="4dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/viewSpeedAndLevel"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/viewSpeedAndLevel"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/viewSpeedAndLevel"/>-->
+
+
+                <View
+                    android:id="@+id/viewIncline"
+                    android:layout_width="608dp"
+                    android:layout_height="608dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewSpeedAndLevel" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/inclineIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="68dp"
+                    android:background="@drawable/icon_incline_32"
+                    app:layout_constraintStart_toStartOf="@id/viewIncline"
+                    app:layout_constraintTop_toTopOf="@+id/viewIncline" />
+
+                <TextView
+                    android:id="@+id/inclineTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Incline"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/inclineIcon"
+                    app:layout_constraintStart_toStartOf="@+id/viewIncline"
+                    app:layout_constraintTop_toTopOf="@+id/inclineIcon" />
+
+                <TextView
+                    android:id="@+id/tvSummaryInclineNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="64dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@{String.valueOf(workoutData.avgIncline) + ` %`}"
+                    android:textColor="@color/white"
+                    android:textSize="44sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/inclineIcon"
+                    app:layout_constraintEnd_toEndOf="@+id/viewIncline"
+                    app:layout_constraintTop_toTopOf="@+id/inclineIcon" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDiagramIncline"
+                    android:layout_width="480dp"
+                    android:layout_height="408dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewIncline"
+                    app:layout_constraintEnd_toEndOf="@+id/viewIncline"
+                    app:layout_constraintStart_toStartOf="@+id/viewIncline" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/viewInclineGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:constraint_referenced_ids="ivDiagramIncline,tvSummaryInclineNum,inclineTitleText,inclineIcon,viewIncline"
+                    app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}" />
+
+                <View
+                    android:id="@+id/viewHR"
+                    android:layout_width="608dp"
+                    android:layout_height="608dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/panel_bg_all_20_1c242a"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewIncline" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hrIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="68dp"
+                    android:background="@drawable/icon_hr_32"
+                    app:layout_constraintStart_toStartOf="@id/viewHR"
+                    app:layout_constraintTop_toTopOf="@+id/viewHR" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="128dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Heart_Rate"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/hrIcon"
+                    app:layout_constraintStart_toStartOf="@+id/viewHR"
+                    app:layout_constraintTop_toTopOf="@+id/hrIcon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="64dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@{String.valueOf(workoutData.avgHeartRate == 0 ? @string/dash : workoutData.avgHeartRate) , default=`—`}"
+                    android:textColor="@color/white"
+                    android:textSize="44sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/hrIcon"
+                    app:layout_constraintEnd_toEndOf="@id/viewHR"
+                    app:layout_constraintTop_toTopOf="@+id/hrIcon" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivDiagramHeartRate"
+                    android:layout_width="480dp"
+                    android:layout_height="408dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewHR"
+                    app:layout_constraintEnd_toEndOf="@+id/viewHR"
+                    app:layout_constraintStart_toStartOf="@+id/viewHR" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivNoHr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_hrm_none"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivDiagramHeartRate"
+                    app:layout_constraintEnd_toEndOf="@+id/ivDiagramHeartRate"
+                    app:layout_constraintStart_toStartOf="@+id/ivDiagramHeartRate"
+                    app:layout_constraintTop_toTopOf="@+id/ivDiagramHeartRate" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gSpirit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{workoutData.selProgram != programsEnum.EGYM  ? View.VISIBLE : View.INVISIBLE}"
+            app:constraint_referenced_ids="tvSpiritSummaryTitle,btnCloseAndLogout,btnClose,tvMetsUnit,tvSummaryMets,tvMetsTitle,tvElevationAndDistanceUnit,tvSummaryElevationAndDistance,tvElevationAndDistanceTitle,tvCaloriesUnit,tvSummaryCalories,tvCaloriesTitle,tvPaceAndSpeedUnit,tvSummaryPaceAndSpeed,tvPaceAndSpeedTitle,tvDistanceAndPowerUnit,tvDistanceAndPowerTitle,tvSummaryDistanceAndPower,lline1,tvTimeTitle,tvSummaryTime,tvTimeUnit,lline2,lline3,lline4,lline5,lline6"
+            tools:visibility="visible" />
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/gEgym"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:visibility="visible"-->
+        <!--            app:constraint_referenced_ids="ivAvgOutputE,tvAvgOutputTextE,tvAvgOutputUnitE,tvAvgOutputUnitText,ivAvgPaceE,tvAvgPaceTextE,tvAvgPaceUnitE,tvAvgPaceUnitText,ivAvgMetE,tvAvgMetsTextE,tvAvgMetsUnitText,ivActiveCaloriesE,tvActiveCalorieTextE,tvActiveCalorieUnitE,tvActiveCalorieUnitText,ivInclineE,tvInclineTextE,tvInclineUnitTextE,ivSpeedE,tvSpeedTextE,tvSpeedUnitE,tvSpeedUnitTextE,ivHR_e,tvHrTextE,tvHrUnitE,tvHrUnitTextE,ivAscent,tvAscentText,tvAscentUnit,tvAscentUnitText,tvTotalTimeText,ivTotalTime,tvTotalTimeUnitText,tvDistanceUnitText,ivDistance,tvDistanceUnit,tvDistanceText,tvEgymSummaryTitle,lEgymline1,lEgymline2,lEgymline3,lEgymline4,llegym,lEgymline6,lEgymline7,lEgymline8,lEgymline9,lEgymline5" />-->
+
+        <include
+            android:id="@+id/layout_egym"
+            layout="@layout/include_summary_egym"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:visibility="@{workoutData.selProgram == programsEnum.EGYM  ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+
+        <include
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/layout_egym_bottom"
+            layout="@layout/include_summary_egym_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="136dp"
+            android:visibility="@{deviceSetting.consoleSystem == deviceSettingIntDef.CONSOLE_SYSTEM_EGYM  ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+
+
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent50"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cLoginEgym"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/panel_bg_all_40_252e37_e"
+            android:layout_width="924dp"
+            android:layout_height="368dp" >
+
+            <ImageView
+                android:id="@+id/ivEgymIcon"
+                android:layout_marginTop="64dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/icon_footer_rfid_104"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCloseEE"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="@color/btn_egym_select"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:text="@string/Close"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_cancel"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEgymDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginBottom="64dp"
+                android:gravity="center_horizontal"
+                android:text="@string/hold_your_rfid_tag_near_the_reader_below_the_screen_to_login_as_an_egym_member"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <ViewStub-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            tools:visibility="visible"-->
+        <!--            android:id="@+id/viewSSS"-->
+        <!--            android:layout="@layout/include_summary_egym"/>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

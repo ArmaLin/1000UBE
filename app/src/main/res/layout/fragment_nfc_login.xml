@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:id="@+id/baseView"
+    tools:context=".login.NfcLoginFragmentBottom">
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--        android:id="@+id/btn_close"-->
+<!--        android:background="@drawable/panel_close"-->
+<!--        android:layout_marginEnd="56dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/v_1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="88dp" >-->
+
+<!--        <TextView-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:id="@+id/tv_cancel"-->
+<!--            android:textColor="@color/colorADB8C2"-->
+<!--            android:text="@string/Cancel"-->
+<!--            android:textSize="24sp"-->
+<!--            android:layout_marginStart="34dp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="32dp" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:src="@drawable/icon_cancel"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tv_cancel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        app:shapeAppearanceOverlay="@style/roundedCornerTop"
+        android:paddingEnd="40dp"
+        android:paddingStart="40dp"
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Cancel"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintBottom_toTopOf="@+id/v_1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_overlay_notification_512"
+        android:layout_gravity="bottom"
+        android:id="@+id/v_1"
+        android:layout_width="match_parent"
+        android:layout_height="562dp" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:alpha="0.3"
+            android:outlineProvider="bounds"
+            android:id="@+id/action_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="67dp"
+            android:background="@drawable/icon_nfc"
+            android:layout_width="384dp"
+            android:layout_height="384dp"/>
+
+        <TextView
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="64dp"
+            android:text="@string/log_in_via_nfc"
+            android:id="@+id/tvText1"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:fontFamily="@font/inter_regular"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="64dp"
+            android:text="@string/nfc_login_text2"
+            android:id="@+id/tvText2"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="44sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvText1"
+            android:layout_width="877dp"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

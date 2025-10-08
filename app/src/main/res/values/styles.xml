@@ -1,0 +1,479 @@
+<resources>
+    <!--    <item name="android:layoutAnimation">@null</item>-->
+    <!--    <item name="android:windowAnimationStyle">@null</item>-->
+    <!--    <item name="android:windowHideAnimation">@null</item>-->
+    <!--    <item name="android:windowEnterAnimation">@null</item>-->
+    <!--    <item name="android:windowShowAnimation">@null</item>-->
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="text_in_layout_error_hint_Style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="behavior_draggable">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="TranslucentAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="SomeStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <!--        <item name="android:windowFrame">@null</item>-->
+        <!--        <item name="android:windowIsFloating">true</item>-->
+        <!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!--        <item name="android:background">@android:color/transparent</item>-->
+        <!--        <item name="android:backgroundDimEnabled">false</item>-->
+
+        <item name="behavior_draggable">false</item>
+        <item name="behavior_peekHeight">auto</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_skipCollapsed">false</item>
+    </style>
+
+    <!--    <style name="DialogAnimationHorizontal">-->
+    <!--        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>-->
+    <!--        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+    <!--        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
+    <!--        <item name="android:activityCloseExitAnimation">@anim/slide_out_left</item>-->
+    <!--        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>-->
+    <!--        <item name="android:windowExitAnimation">@anim/slide_out_left</item>-->
+    <!--    </style>-->
+
+    <!--    MaterialButton 下方圓角-->
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded.ALL" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+    </style>
+<!--    MaterialButton 左下圓角-->
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded.BottomLeft" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+    </style>
+
+    <!--    MaterialButton 右下圓角-->
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded.BottomRight" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+    </style>
+
+    <style name="WorkoutButtonStyleUs" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="background">@null</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/btn_white_press</item>
+        <item name="android:textSize">37sp</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="strokeColor">@android:color/transparent</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="WorkoutButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="background">@null</item>
+        <item name="android:drawableTint">@color/btn_blue_grey</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">32sp</item>
+        <item name="backgroundTint">@color/btn_workout_button</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+<!--    <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Button.Rounded</item>-->
+
+    <style name="ProgramsButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">450dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="background">@null</item>
+        <item name="android:drawableTint">@color/btn_blue_grey</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/btn_blue_white</item>
+        <item name="android:textSize">44sp</item>
+        <item name="backgroundTint">@color/btn_252e37_331396ef</item>
+        <item name="backgroundTintMode">src_in</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="iconPadding">-46dp</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogAnimation2">
+        <item name="android:windowEnterAnimation">@anim/no</item>
+        <item name="android:windowExitAnimation">@anim/no</item>
+    </style>
+
+    <style name="fragment_dialog2" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="fragment_dialog" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="left_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_left</item>
+    </style>
+
+    <style name="bottom_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_bottom_to_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_top_to_bottom</item>
+    </style>
+
+    <style name="fade_animation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="fade_animation2">
+        <item name="android:windowEnterAnimation">@anim/fade_in_2</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_2</item>
+    </style>
+
+    <style name="SegmentedButtonStyle">
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="textSize">18sp</item>
+    </style>
+
+    <style name="MaintenanceTextStyle">
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMaxTextSize">24sp</item>
+        <item name="android:textColor">@color/btn_8192a2_8192a2_30</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="drawableEndCompat">@drawable/icon_extend</item>
+        <item name="drawableTint">@color/btn_5a7089_5a7089_30</item>
+    </style>
+
+    <style name="MaintenanceTextStyleMaterial" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">2dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMaxTextSize">24sp</item>
+        <item name="android:textColor">@color/btn_8192a2_8192a2_30</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="icon">@drawable/icon_extend</item>
+        <item name="iconTint">@color/btn_5a7089_5a7089_30</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="backgroundTintMode">src_in</item>
+        <item name="iconSize">12dp</item>
+        <item name="iconGravity">end</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+
+    <style name="AvatarRadioButton">
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <!--    <style name="BottomSheet.StyleDialog" parent="CustomBottomSheetDialogTheme">-->
+    <!--        <item name="android:backgroundDimAmount">0.5</item>-->
+    <!--        <item name="android:windowAnimationStyle">@style/BottomSheet.Animation</item>-->
+    <!--        <item name="bs_listStyle">@style/BottomSheet.StyleList</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="BottomSheet.StyleList" parent="BottomSheet.List">-->
+    <!--        <item name="android:layoutAnimation">@null</item>-->
+    <!--    </style>-->
+
+
+    <style name="download_seekbar" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/seekbar_download</item>
+        <item name="android:thumb">@android:color/transparent</item>
+        <item name="android:thumbOffset">0dp</item>
+    </style>
+
+
+    <!--圓角-->
+    <style name="roundedCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="roundedCorner24">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!--圓角-->
+    <style name="roundedCornerTop">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+    </style>
+
+    <style name="roundedCornerLeft">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
+    </style>
+
+    <style name="roundedCornerRight">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">24dp</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+    </style>
+
+    <style name="roundedCornerBottomLeft">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+    </style>
+
+    <!--圓形-->
+    <style name="rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!--角-->
+    <style name="cutImageView">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <!--菱形-->
+    <style name="cutImageView2">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!--右上-->
+    <style name="topRightCorner">
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopRight">50dp</item>
+    </style>
+
+    <!--右邊-->
+    <style name="rightCut">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeTopRight">50%</item>
+        <item name="cornerSizeBottomRight">50%</item>
+    </style>
+
+
+    <style name="DialogProgressTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+    <style name="MButton_252e37">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="backgroundTintMode">src_in</item>
+        <item name="backgroundTint">@color/btn_252e37_323f4b</item>
+        <item name="iconTint">@color/colorADB8C2</item>
+        <item name="shapeAppearanceOverlay">@style/roundedCorner</item>
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/colorADB8C2</item>
+        <item name="android:maxWidth">800dp</item>
+    </style>
+
+
+    <style name="scrollbar_shape_style">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/track</item>
+        <item name="android:scrollbarSize">8dp</item>
+    </style>
+
+    <style name="ZoomItemRecyclerViewStyle">
+        <item name="android:scrollbarThumbVertical">@drawable/aa_scrollbar</item>
+        <item name="android:scrollbarTrackVertical">@drawable/aa_scrollbar_bg</item>
+        <item name="android:scrollbarSize">8dp</item>
+        <item name="android:fadeScrollbars">true</item>  <!--true 在滑塊不滾動時，隱藏-->
+        <item name="android:fadingEdge">none</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarStyle">insideOverlay</item>
+
+    </style>
+
+    <style name="PopupAnimation" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_show</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_hide</item>
+    </style>
+
+    <style name="PopupAnimationApple" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_show</item>
+    </style>
+
+    <declare-styleable name="CircleBarView">
+        <attr format="integer" name="barCount"/>
+        <attr format="integer" name="barMaxLevel"/>
+        <attr format="integer" name="barMinLevel"/>
+        <attr format="color" name="barColor"/>
+        <attr format="color" name="backColor"/>
+        <attr format="integer" name="barWidth"/>
+        <attr format="integer" name="sideWidth"/>
+        <attr format="boolean" name="paintFingerPath"/>
+        <attr format="integer" name="fingerPaintColor"/>
+        <attr format="boolean" name="touchable"/>
+        <attr format="color" name="barSelectColor"/>
+        <attr format="color" name="barSelectSolidColor"/>
+        <attr format="color" name="lineColor"/>
+        <attr format="float" name="barCircleRadius"/>
+        <attr format="float" name="barCircleWidth"/>
+        <attr format="integer" name="pb_lineWidth"/>
+    </declare-styleable>
+
+    <declare-styleable name="EgymBarChartView">
+        <attr name="lineWidth" format="dimension" />
+    </declare-styleable>
+
+    <style name="button_login_style" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">24dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="iconPadding">32dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:autoSizeMaxTextSize">32sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">608dp</item>
+        <item name="android:layout_height">272dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">32sp</item>
+
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="backgroundTint">@color/btn_color_login</item>
+        <item name="backgroundTintMode">src_in</item>
+        <item name="iconTint">@color/white</item>
+        <item name="iconGravity">textStart</item>
+        <item name="strokeColor">@android:color/transparent</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+
+
+    <declare-styleable name="ButterflyView">
+        <attr name="segment" format="integer" />
+        <attr name="segmentLevel" format="integer" />
+        <attr name="segmentPullColor" format="integer" />
+        <attr name="segmentPushColor" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularProgressViewGG">
+        <attr name="progressSS" format="float" />
+        <attr name="strokeWidthSS" format="float" />
+        <attr name="backgroundColorSS" format="color" />
+        <attr name="progressColorSS" format="color" />
+    </declare-styleable>
+
+</resources>

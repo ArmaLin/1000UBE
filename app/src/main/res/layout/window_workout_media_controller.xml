@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable name="isTreadmill" type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.support.WorkoutUtil" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fl_root"
+        android:layout_width="match_parent"
+        android:layout_height="472dp"
+        android:background="@drawable/panel_bg_top_1c242a"
+        tools:context=".alert_message.WorkoutMediaControllerWindow">
+
+        <RadioGroup
+            android:id="@+id/rgSelectProgram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintBounds">
+
+            <RadioButton
+                android:id="@+id/rbDefaultPrograms"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:tag="0"
+                android:text="@string/Speed"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <RadioButton
+                android:id="@+id/rbFitnessTests"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:tag="1"
+                android:text="@string/Incline"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp"
+                tools:ignore="VisualLintBounds" />
+
+        </RadioGroup>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/btnPause"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/btn_e24b44_20_d"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/pause"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_pause_20"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/btn_close"
+            app:layout_constraintTop_toTopOf="@id/btn_close" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_close"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="28dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/lLeft"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="260dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorADB8C2_20"
+            app:layout_constraintEnd_toStartOf="@+id/tvTopTextUs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lRight"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/colorADB8C2_20"
+            app:layout_constraintBottom_toBottomOf="@+id/lLeft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTopTextUs"
+            app:layout_constraintTop_toTopOf="@+id/lLeft" />
+
+        <TextView
+            android:id="@+id/tvTopTextUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lLeft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lLeft"
+            tools:text="@string/direct_incline" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTimeNum"
+            android:layout_width="228dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="92dp"
+            android:background="@color/color1c242a"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnTimeMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="52dp"
+            android:background="@drawable/btn_minus"
+            android:contentDescription="@string/minus"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeNum"
+            app:layout_constraintEnd_toStartOf="@+id/tvTimeNum"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeNum"
+            tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnTimePlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:background="@drawable/btn_plus"
+            android:contentDescription="@string/plus"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeNum"
+            app:layout_constraintStart_toEndOf="@+id/tvTimeNum"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeNum"
+            tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/c12"
+            android:layout_width="1248dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="92dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs1"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs2"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs3"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs4"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs5"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs6"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs7"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs8"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs9"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs10"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="11"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs11"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs11"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="13"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs12"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs12"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="15"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs11"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/c16"
+            android:layout_width="1792dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="92dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_1"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_2"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_3"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_4"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_5"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_6"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_7"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_8"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_9"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_10"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_11"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_11"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="11"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_12"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_12"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_13"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_11"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_13"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="13"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_14"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_12"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_14"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_15"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_13"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_15"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="15"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv16_16"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_14"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv16_16"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv16_15"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/ggg"
+            app:constraint_referenced_ids="btnTimeMinus,btnTimePlus,tvTimeNum,tvTopTextUs,lLeft,lRight"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

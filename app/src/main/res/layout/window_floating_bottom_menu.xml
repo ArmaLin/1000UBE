@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bbgg"
+        android:background="@drawable/bg_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="136dp">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_training"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="@color/color1c242a"
+            android:fontFamily="@font/inter_bold"
+            android:letterSpacing="0.01"
+            android:stateListAnimator="@null"
+            android:text="@string/Training"
+            android:textAllCaps="false"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24dp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? @drawable/icon_training : deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_ELLIPTICAL ? @drawable/icon_training_elliptical : @drawable/icon_ride }"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mb_media"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpUsage,TextSizeCheck,VisualLintButtonSize" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_media"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="@color/color1c242a"
+            android:fontFamily="@font/inter_bold"
+            android:letterSpacing="0.01"
+            android:stateListAnimator="@null"
+            android:text="@string/Media"
+            android:textAllCaps="false"
+            android:textColor="@color/color1396ef"
+            android:textSize="24dp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/icon_media"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            app:iconTint="@color/color1396ef"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/mb_training"
+            tools:ignore="SpUsage,TextSizeCheck,VisualLintButtonSize" />
+
+        <View
+            android:id="@+id/viewIndicator"
+            android:layout_width="486dp"
+            android:layout_height="6dp"
+            android:background="@drawable/panel_bg_all_4_1396ef"
+            app:layout_constraintEnd_toEndOf="@+id/mb_media"
+            app:layout_constraintStart_toStartOf="@+id/mb_media"
+            app:layout_constraintTop_toTopOf="@+id/mb_media"
+            tools:ignore="VisualLintBounds" />
+
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent20"
+            android:clickable="true"
+            android:visibility="gone" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

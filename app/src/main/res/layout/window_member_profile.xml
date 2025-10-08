@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="userProfileViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/baseView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color11151a"
+        tools:context=".settings.MemberProfileWindow">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="@string/Member_Profile"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btn_close"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewAvatarBg"
+            android:layout_width="924dp"
+            android:layout_height="552dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/panel_bg_all_20_tran"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_profile"
+            app:layout_constraintBottom_toTopOf="@+id/btnAge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        app:backgroundResource="@{userProfileViewModel.userAvatar}"-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnAvatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginBottom="34dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="@+id/memberLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnAvatarWeb"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginBottom="20dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="center"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/memberLine"
+            app:layout_constraintStart_toStartOf="@+id/viewAvatarBg"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg" />
+
+
+        <!--        android:background="@{userProfileViewModel.isVip ? @drawable/icon_vip_member : 0}"-->
+        <View
+            android:id="@+id/vMemberType"
+            android:layout_width="176dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="236dp"
+            app:layout_constraintStart_toStartOf="@+id/viewAvatarBg"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="228dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/icon_edit_profile"
+            app:layout_constraintStart_toStartOf="@+id/viewAvatarBg"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg" />
+
+        <TextView
+            android:includeFontPadding="false"
+            android:id="@+id/tvMemberName"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginStart="320dp"
+            android:layout_marginTop="130dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@{userProfileViewModel.userDisplayName}"
+            android:textColor="@color/white"
+            android:textSize="54sp"
+            app:layout_constraintStart_toStartOf="@+id/viewAvatarBg"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg"
+            tools:text="Anna Johnson" />
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:clickable="false"
+            android:id="@+id/sc_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/color323f4b"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            app:draggable="false"
+            app:layout_constraintStart_toStartOf="@+id/tvMemberName"
+            app:layout_constraintTop_toBottomOf="@+id/tvMemberName"
+            app:position="0"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Female"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Female"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Male"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Male"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+        <!--    <RadioGroup-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginTop="32.4dp"-->
+        <!--        android:orientation="horizontal"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/tvMemberName"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/tvMemberName">-->
+
+        <!--        <RadioButton-->
+        <!--            android:id="@+id/btnFemale"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:button="@null"-->
+        <!--            android:checked="true"-->
+        <!--            android:drawablePadding="12dp"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:text="Female"-->
+        <!--            android:textColor="@color/color1396ef"-->
+        <!--            android:textSize="24sp" />-->
+
+        <!--        <RadioButton-->
+        <!--            android:id="@+id/btnMale"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:button="@null"-->
+        <!--            android:drawablePadding="12dp"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:text="Male"-->
+        <!--            android:textColor="@color/colorADB8C2"-->
+        <!--            android:textSize="24sp" />-->
+
+        <!--    </RadioGroup>-->
+
+        <View
+            android:id="@+id/memberLine"
+            android:layout_width="924dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="368dp"
+            android:background="@color/color33ADB8C2"
+            app:layout_constraintEnd_toEndOf="@+id/viewAvatarBg"
+            app:layout_constraintStart_toStartOf="@+id/viewAvatarBg"
+            app:layout_constraintTop_toTopOf="@+id/viewAvatarBg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="62dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Member_Since"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memberLine" />
+
+        <TextView
+            android:id="@+id/tvMemberSinceDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="102dp"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memberLine"
+            tools:text="November 21, 2020" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:layout_width="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="498dp"
+            android:layout_marginTop="62dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Membership_Expiration_Date"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/viewAvatarBg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memberLine" />
+
+        <TextView
+            android:id="@+id/tvMemberExpirationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="498dp"
+            android:layout_marginTop="102dp"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memberLine"
+            tools:text="November 21, 2021" />
+
+
+        <!--    AGE-->
+        <com.google.android.material.card.MaterialCardView
+            app:cardBackgroundColor="@color/btn_1c242a_252e37"
+            app:rippleColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            android:id="@+id/btnAge"
+            android:layout_width="450dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:elevation="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Age"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/btnAge"
+            app:layout_constraintTop_toTopOf="@+id/btnAge" />
+
+        <View
+            android:elevation="1dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/icon_edit_profile"
+            app:layout_constraintEnd_toEndOf="@+id/btnAge"
+            app:layout_constraintTop_toTopOf="@+id/btnAge" />
+
+        <TextView
+            android:elevation="1dp"
+            android:id="@+id/tvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAge"
+            app:layout_constraintStart_toStartOf="@+id/btnAge"
+            tools:text="20" />
+
+        <!--    HEIGHT-->
+        <com.google.android.material.card.MaterialCardView
+            app:cardBackgroundColor="@color/btn_1c242a_252e37"
+            app:rippleColor="@android:color/transparent"
+            app:cardCornerRadius="20dp"
+            android:id="@+id/btnHeight"
+            android:layout_width="450dp"
+            android:layout_height="280dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAge"
+            app:layout_constraintStart_toEndOf="@+id/btnAge"
+            app:layout_constraintTop_toTopOf="@+id/btnAge" />
+
+        <TextView
+            android:elevation="1dp"
+            android:id="@+id/heightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Height"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/btnHeight"
+            app:layout_constraintTop_toTopOf="@+id/btnHeight" />
+
+        <View
+            android:elevation="1dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/icon_edit_profile"
+            app:layout_constraintEnd_toEndOf="@+id/btnHeight"
+            app:layout_constraintTop_toTopOf="@+id/btnHeight" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:elevation="1dp"
+            android:id="@+id/heightImperial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginBottom="40dp"
+            android:visibility="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHeight"
+            app:layout_constraintEnd_toEndOf="@+id/btnHeight"
+            app:layout_constraintStart_toStartOf="@+id/btnHeight">
+
+            <TextView
+                android:id="@+id/tvHeightMetricFt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/heightMetricFtUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/ft"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeightMetricFt"
+                app:layout_constraintStart_toEndOf="@+id/tvHeightMetricFt" />
+
+            <TextView
+                android:id="@+id/tvHeightMetricIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/heightMetricFtUnit"
+                tools:text="7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/in"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeightMetricIn"
+                app:layout_constraintStart_toEndOf="@+id/tvHeightMetricIn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:elevation="1dp"
+            android:id="@+id/heightMetric"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginBottom="40dp"
+            android:visibility="@{deviceSetting.unitCode == deviceSettingIntDef.METRIC ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnHeight"
+            app:layout_constraintEnd_toEndOf="@+id/btnHeight"
+            app:layout_constraintStart_toStartOf="@+id/btnHeight">
+
+            <TextView
+                android:id="@+id/tvHeightMetricCm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="70" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/cm"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeightMetricCm"
+                app:layout_constraintStart_toEndOf="@+id/tvHeightMetricCm" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/rightView"
+            android:layout_width="924dp"
+            android:layout_height="856dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--    <com.github.mikephil.charting.charts.LineChart-->
+        <!--        android:id="@+id/chart1"-->
+        <!--        android:layout_width="0dp"-->
+        <!--        android:layout_height="0dp"-->
+        <!--        android:layout_margin="40dp"-->
+        <!--        android:visibility="visible"-->
+        <!--        app:layout_constraintBottom_toTopOf="@+id/memberLine2"-->
+        <!--        app:layout_constraintTop_toTopOf="@+id/rightView"-->
+        <!--        app:layout_constraintStart_toStartOf="@+id/rightView"-->
+        <!--        app:layout_constraintEnd_toEndOf="@+id/rightView" />-->
+
+        <HorizontalScrollView
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:fillViewport="true"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:scrollbars="horizontal"
+            android:id="@+id/chartScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/Charts"
+            app:layout_constraintBottom_toTopOf="@+id/memberLine2"
+            app:layout_constraintEnd_toEndOf="@+id/rightView"
+            app:layout_constraintStart_toStartOf="@+id/rightView"
+            app:layout_constraintTop_toTopOf="@+id/rightView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart1"
+                    android:layout_width="0dp"
+                    android:layout_height="576dp"
+                    android:minWidth="924dp" />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progress_circulars"-->
+<!--            android:indeterminateTint="@color/colorADB8C2"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/chartScroll"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/chartScroll"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/chartScroll"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/chartScroll"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content" />-->
+
+        <View
+            android:id="@+id/memberLine2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginBottom="278dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintBottom_toBottomOf="@+id/rightView"
+            app:layout_constraintEnd_toEndOf="@+id/rightView"
+            app:layout_constraintStart_toStartOf="@+id/rightView" />
+
+
+        <TextView
+            android:id="@+id/weightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Weight"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/heightTitle"
+            app:layout_constraintStart_toStartOf="@+id/rightView"
+            app:layout_constraintTop_toTopOf="@+id/heightTitle" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAge"
+            app:layout_constraintStart_toStartOf="@+id/weightTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvAge"
+            tools:text="70" />
+
+        <!--        android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? ` mph` : ` kph`}"-->
+
+
+        <TextView
+            android:id="@+id/tvWeightUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvWeight"
+            app:layout_constraintStart_toEndOf="@+id/tvWeight"
+            tools:text="@string/kg" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            app:backgroundTint="@color/btn_1396ef_20_d"
+            app:icon="@drawable/icon_add"
+            app:iconTint="@color/white"
+            app:iconGravity="start"
+            app:iconPadding="12dp"
+            android:paddingStart="42dp"
+            android:paddingEnd="42dp"
+            android:maxLines="1"
+            android:id="@+id/btnAddTodayWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="104dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="72dp"
+            android:text="@string/add_today_s_weight"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent40"
+            android:clickable="true"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+        <ProgressBar
+            android:id="@+id/progressCirculars2"
+            android:indeterminateTint="@color/colorADB8C2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,392 @@
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.27447916666666666" />
+        <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/activity_list_item.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/drawable-mdpi/af.xml" value="0.2255" />
+        <entry key="app/src/main/res/drawable-mdpi/btn_garmin.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/drawable-mdpi/btn_garmin_c.xml" value="0.2435" />
+        <entry key="app/src/main/res/drawable/bg_green.xml" value="0.1955" />
+        <entry key="app/src/main/res/drawable/btn_10k_banner.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_5k_banner.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_app_bbc.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_fb.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_hulu.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_ig.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_iheart.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_netflix.xml" value="0.2786458333333333" />
+        <entry key="app/src/main/res/drawable/btn_app_spotify.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_twitter.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_app_weather.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_1.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_19.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_20.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_21.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_26.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_30.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_31.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_32.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_4.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_9.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_tag_32.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_tag_33.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_avatar_selected_tag_34.xml" value="0.2671875" />
+        <entry key="app/src/main/res/drawable/btn_banner_10k.xml" value="0.252" />
+        <entry key="app/src/main/res/drawable/btn_banner_hr.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_banner_manual.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_banner_watt.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_blue_white.xml" value="0.27447916666666666" />
+        <entry key="app/src/main/res/drawable/btn_checkbox_l.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/btn_checkbox_m.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/btn_checkbox_s.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/btn_header_notification.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_header_qrcode.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_header_setting.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_key_stop.xml" value="0.1725" />
+        <entry key="app/src/main/res/drawable/btn_login_nfc.xml" value="0.1765625" />
+        <entry key="app/src/main/res/drawable/btn_login_qrcode.xml" value="0.1765625" />
+        <entry key="app/src/main/res/drawable/btn_login_workout.xml" value="0.1765625" />
+        <entry key="app/src/main/res/drawable/btn_manual_banner.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/btn_menu_drawer_pause.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/drawable/btn_menu_drawer_workout.xml" value="0.246" />
+        <entry key="app/src/main/res/drawable/btn_notify_warring_right.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_num_0.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/btn_num_9.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/btn_plus.xml" value="0.208" />
+        <entry key="app/src/main/res/drawable/btn_round_icon_re.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/drawable/btn_set_time.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/btn_stats.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/btn_tile_start_xml.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/btn_top_bluetooth.xml" value="0.2045" />
+        <entry key="app/src/main/res/drawable/btn_top_exit.xml" value="0.2325" />
+        <entry key="app/src/main/res/drawable/btn_top_hr.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/drawable/btn_tv_num_0.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/drawable/btn_tv_num_7.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/btn_wifi_0.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_wifi_none.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/btn_workout_0.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_1.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_10.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_12.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_15.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_2.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_3.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_5.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_6.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_9.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_16.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_24.xml" value="0.2359375" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_32.xml" value="0.2101851851851852" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_40.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_8.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_minus.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_bike_plus.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_incline_minus.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_minus.xml" value="0.14537037037037037" />
+        <entry key="app/src/main/res/drawable/btn_workout_pause.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/drawable/btn_workout_plus.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/drawable/btn_workout_resume.xml" value="0.221" />
+        <entry key="app/src/main/res/drawable/button_ripple.xml" value="0.2296875" />
+        <entry key="app/src/main/res/drawable/check_text_white.xml" value="0.2484375" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/circle2.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/circle3.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/circle4.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/circle_1396ef.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.2305" />
+        <entry key="app/src/main/res/drawable/divider_line.xml" value="0.2025" />
+        <entry key="app/src/main/res/drawable/divider_line_1c242a.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/divider_line_252e37.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/drawable/divider_line_323f4b.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/drawable/divider_line_5a7085.xml" value="0.2305" />
+        <entry key="app/src/main/res/drawable/frame_animation.xml" value="0.2325" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_20.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_left_24.xml" value="0.244" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23072916666666668" />
+        <entry key="app/src/main/res/drawable/icon_ethernet.xml" value="0.197" />
+        <entry key="app/src/main/res/drawable/load_animation.xml" value="0.2484375" />
+        <entry key="app/src/main/res/drawable/loading_placeholder.xml" value="0.229" />
+        <entry key="app/src/main/res/drawable/panel_bg.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_16_0dac87.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_16_252e37.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_16_252e37_2.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_0dac87.xml" value="0.27291666666666664" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_1396ef.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_1c242a.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_20adb8c2.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_252e37.xml" value="0.23020833333333332" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_252e37_press.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_30252e37.xml" value="0.224" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_331396ef.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_33adb8c2.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_e24b44.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_menu_1396ef.xml" value="0.22135416666666666" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_stats_33adb8c2.xml" value="0.4083333333333333" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_tra.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_20_tran.xml" value="0.4338461538461538" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_24_0dac87.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_252e37.xml" value="0.26979166666666665" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_2_0dac87.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_2_1396ef.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_2_e4002b.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_4_0dac87.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/panel_bg_all_4_e24b44.xml" value="0.2145" />
+        <entry key="app/src/main/res/drawable/panel_bg_bottomleft_20_252e37.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/panel_bg_left_32_1c242a.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/panel_bg_top_menu.xml" value="0.252" />
+        <entry key="app/src/main/res/drawable/panel_close.xml" value="0.2786458333333333" />
+        <entry key="app/src/main/res/drawable/panel_no_cooldown.xml" value="0.26927083333333335" />
+        <entry key="app/src/main/res/drawable/panel_summary_score.xml" value="0.195" />
+        <entry key="app/src/main/res/drawable/progressbar_c.xml" value="0.2484375" />
+        <entry key="app/src/main/res/drawable/progressbar_hr.xml" value="0.2484375" />
+        <entry key="app/src/main/res/drawable/radio_text_selected.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/radiobutton_ga.xml" value="0.2735" />
+        <entry key="app/src/main/res/drawable/rectan.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/drawable/recycler_bg.xml" value="0.2265625" />
+        <entry key="app/src/main/res/drawable/recycler_bg_1c242a.xml" value="0.2265625" />
+        <entry key="app/src/main/res/drawable/recycler_bg_252e37.xml" value="0.375" />
+        <entry key="app/src/main/res/drawable/seekbar_download.xml" value="0.208" />
+        <entry key="app/src/main/res/drawable/selected_btn_close.xml" value="0.2786458333333333" />
+        <entry key="app/src/main/res/drawable/selected_check.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/selected_check2.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/selected_check_341.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/selected_check_press.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/selected_check_press2.xml" value="0.2515625" />
+        <entry key="app/src/main/res/drawable/selected_check_press_341.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/shadow_bg.xml" value="0.2075" />
+        <entry key="app/src/main/res/drawable/shape_bg.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/shape_oval_1396ef.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/shape_oval_323f4b.xml" value="0.1625" />
+        <entry key="app/src/main/res/drawable/shape_oval_cd5bff.xml" value="0.1625" />
+        <entry key="app/src/main/res/drawable/shape_oval_e24b44.xml" value="0.1955" />
+        <entry key="app/src/main/res/drawable/shape_oval_empty.xml" value="0.1955" />
+        <entry key="app/src/main/res/drawable/shape_oval_grey.xml" value="0.1625" />
+        <entry key="app/src/main/res/drawable/state_list_animator.xml" value="0.23020833333333332" />
+        <entry key="app/src/main/res/drawable/state_list_animator2.xml" value="0.23020833333333332" />
+        <entry key="app/src/main/res/drawable/thumb.xml" value="0.2305" />
+        <entry key="app/src/main/res/drawable/track.xml" value="0.2305" />
+        <entry key="app/src/main/res/drawable/triangle_a_e24b44.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout-land/fragment_product_registration.xml" value="0.17768959435626103" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2565982404692082" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.22852223714192707" />
+        <entry key="app/src/main/res/layout/custom_toast_layout.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/dialog_progress2.xml" value="1.0" />
+        <entry key="app/src/main/res/layout/fragment_all_rank.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_channel.xml" value="0.35306243896484374" />
+        <entry key="app/src/main/res/layout/fragment_create_account_age.xml" value="0.3768939393939394" />
+        <entry key="app/src/main/res/layout/fragment_create_account_gender.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_create_account_height.xml" value="0.38645833333333335" />
+        <entry key="app/src/main/res/layout/fragment_create_account_weight.xml" value="0.2763888888888889" />
+        <entry key="app/src/main/res/layout/fragment_create_account_welcome.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/fragment_dashboard_main_media.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/fragment_dashboard_media.xml" value="0.3645833333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard_training.xml" value="0.38508682328907046" />
+        <entry key="app/src/main/res/layout/fragment_gotoworkout_login.xml" value="1.5" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.44846491228070173" />
+        <entry key="app/src/main/res/layout/fragment_main_dashboard.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/fragment_main_dashboard2.xml" value="0.3284722222222222" />
+        <entry key="app/src/main/res/layout/fragment_main_dashboard_training.xml" value="0.20643363728470113" />
+        <entry key="app/src/main/res/layout/fragment_main_workout_training.xml" value="0.48814778645833334" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_advertisement.xml" value="0.17552083333333332" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_appmanager.xml" value="0.17552083333333332" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_brake_test.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_communication_test.xml" value="0.40312876052948254" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_datetime.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_device_id.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_device_type_choose.xml" value="0.275" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_drive_motor_test.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_error_code_log.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_firmware_test.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_incline_motor_test.xml" value="0.40162037037037035" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_key_test.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_language.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_nfc_test.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_organization.xml" value="0.4081439393939394" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_rest_odometer.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_sensor_test.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_software_test.xml" value="0.3932411674347158" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_touch_panel.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_tv_channels.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_tv_scan.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_tv_seacher.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_tv_search.xml" value="0.384375" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_tv_settings.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_use_limits.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_watt_calibration.xml" value="0.2046875" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_watt_callibration.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_maintenance_wifi.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/fragment_nfc_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_product_registration.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/fragment_programs.xml" value="0.165625" />
+        <entry key="app/src/main/res/layout/fragment_programs_banner.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_qrcode_login.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_set_time.xml" value="0.35271317829457366" />
+        <entry key="app/src/main/res/layout/fragment_set_time_step_2.xml" value="1.5" />
+        <entry key="app/src/main/res/layout/fragment_set_time_step_3.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.20643363728470113" />
+        <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/fragment_workout_charts.xml" value="0.312492681367992" />
+        <entry key="app/src/main/res/layout/fragment_workout_garmin.xml" value="0.43784530386740333" />
+        <entry key="app/src/main/res/layout/fragment_workout_pause.xml" value="0.45166666666666666" />
+        <entry key="app/src/main/res/layout/fragment_workout_stats.xml" value="0.352522639068564" />
+        <entry key="app/src/main/res/layout/fragment_workout_track.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/include_top_dashboard.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/items_app_manager_list.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/items_avatar_list.xml" value="0.2477355072463768" />
+        <entry key="app/src/main/res/layout/items_bt_device_list.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/items_channel_list.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/items_error_log_list.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/items_garmin_device_list.xml" value="0.654510556621881" />
+        <entry key="app/src/main/res/layout/items_garmin_device_list_last.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/items_garmin_device_select.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/items_hr_device_list.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/items_inbox_list.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/items_no_data.xml" value="0.221875" />
+        <entry key="app/src/main/res/layout/items_no_data2.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/items_rank1_list.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/items_rank_all_list.xml" value="1.5748260498046875" />
+        <entry key="app/src/main/res/layout/items_select_country_list.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/items_tv_scan_list.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/layout_date_picker_view_eu.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/layout_loading.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/placeholder_country.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/placeholder_mock_main.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/popup_default_user_settings.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/popup_inbox.xml" value="0.3136792452830189" />
+        <entry key="app/src/main/res/layout/popup_maintenance.xml" value="0.45435466946484787" />
+        <entry key="app/src/main/res/layout/popup_qrcode.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/popup_readystart.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/popup_setting.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/programs_details_item.xml" value="0.2361111111111111" />
+        <entry key="app/src/main/res/layout/toast_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/tttttttttt.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/view_quantity.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/view_stub_webview.xml" value="0.21875" />
+        <entry key="app/src/main/res/layout/window_background.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_bt.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/window_chart_msg.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/window_date_time_settings.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/window_download.xml" value="2.5" />
+        <entry key="app/src/main/res/layout/window_floating_bottom_menu.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/window_floating_top_dashboard.xml" value="0.3685185185185185" />
+        <entry key="app/src/main/res/layout/window_garmin_connect_failed.xml" value="0.2760416666666667" />
+        <entry key="app/src/main/res/layout/window_garmin_devices.xml" value="0.41083743842364534" />
+        <entry key="app/src/main/res/layout/window_garmin_new_1.xml" value="0.38657407407407407" />
+        <entry key="app/src/main/res/layout/window_garmin_new_2.xml" value="0.42613636363636365" />
+        <entry key="app/src/main/res/layout/window_garmin_new_3.xml" value="0.5347222222222222" />
+        <entry key="app/src/main/res/layout/window_garmin_new_4.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/window_garmin_pair.xml" value="0.32608695652173914" />
+        <entry key="app/src/main/res/layout/window_garmin_prepare_device_msg.xml" value="0.2760416666666667" />
+        <entry key="app/src/main/res/layout/window_garmin_warring_msg.xml" value="0.32608695652173914" />
+        <entry key="app/src/main/res/layout/window_how_to_mirror.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/window_hr.xml" value="0.3803317535545024" />
+        <entry key="app/src/main/res/layout/window_keyboard.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_maintenance_tv_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/window_media_menu.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/window_member_profile.xml" value="0.45085470085470086" />
+        <entry key="app/src/main/res/layout/window_member_profile_age_editor.xml" value="0.1766304347826087" />
+        <entry key="app/src/main/res/layout/window_member_profile_avatar_editor.xml" value="0.13919753086419753" />
+        <entry key="app/src/main/res/layout/window_member_profile_height_editor.xml" value="0.3693181818181818" />
+        <entry key="app/src/main/res/layout/window_member_profile_weight_editor.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/window_moda_physical_keys.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_modal_hr_high_finish.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/window_modal_hr_max.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_modal_hr_program_high.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/window_modal_hr_update.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/layout/window_modal_hr_update2.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/window_modal_no_device.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_modal_no_heart_rate.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/window_modal_quick_key.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/window_modal_target_reached.xml" value="0.192481884057971" />
+        <entry key="app/src/main/res/layout/window_notify_num.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/window_resuming.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/window_safety_key.xml" value="0.2677083333333333" />
+        <entry key="app/src/main/res/layout/window_settings_app_update.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/window_sound.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/window_system_error.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/window_system_test_invalid.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/window_testing.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/window_tv_controller.xml" value="0.4618850708007811" />
+        <entry key="app/src/main/res/layout/window_update_app.xml" value="0.7363636363636363" />
+        <entry key="app/src/main/res/layout/window_update_firmware.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/window_update_restart.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/window_warring_count_down.xml" value="0.20729166666666668" />
+        <entry key="app/src/main/res/layout/window_warring_msg.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/window_warring_no_button.xml" value="0.253125" />
+        <entry key="app/src/main/res/layout/window_workout_settings.xml" value="0.371875" />
+        <entry key="app/src/main/res/layout/window_workout_summary.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/window_youtube.xml" value="0.16757246376811594" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
+    <option name="myNullables">
+      <value>
+        <list size="17">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          <item index="3" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+          <item index="5" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
+          <item index="6" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="7" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+          <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
+          <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
+          <item index="14" class="java.lang.String" itemvalue="org.jspecify.nullness.Nullable" />
+          <item index="15" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="16" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="17">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+          <item index="2" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+          <item index="3" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+          <item index="5" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
+          <item index="6" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+          <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="11" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
+          <item index="12" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="13" class="java.lang.String" itemvalue="lombok.NonNull" />
+          <item index="14" class="java.lang.String" itemvalue="org.jspecify.nullness.NonNull" />
+          <item index="15" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="16" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+        </list>
+      </value>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.46232626188734455" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

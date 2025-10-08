@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".maintenance_mode.MaintenanceDateTimeFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        tools:context=".maintenance_mode.MaintenanceDateTimeFragment">
+        <!-- +24-->
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:letterSpacing="0.01"-->
+        <!--            android:id="@+id/btn_close"-->
+        <!--            android:paddingStart="40dp"-->
+        <!--            android:paddingEnd="40dp"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="88dp"-->
+        <!--            android:layout_marginEnd="48dp"-->
+        <!--            android:background="@drawable/panel_close"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:foreground="?attr/selectableItemBackgroundBorderless"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            android:text="@string/Cancel"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="@color/colorADB8C2"-->
+        <!--            android:textSize="24sp"-->
+        <!--            app:backgroundTint="@null"-->
+        <!--            app:icon="@drawable/icon_cancel"-->
+        <!--            app:iconGravity="textEnd"-->
+        <!--            app:iconPadding="12dp"-->
+        <!--            app:iconTint="@null"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_close"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/Cancel"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCornerTop" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/panel_bg_top_1c242a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_close">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnTimeZone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingStart="0dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:drawableEndCompat="@drawable/icon_update"
+                app:drawableTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/scTimeUnit"
+                app:layout_constraintEnd_toStartOf="@+id/scTimeUnit"
+                app:layout_constraintTop_toTopOf="@+id/scTimeUnit"
+                tools:text="TimeZone" />
+
+
+            <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+                android:id="@+id/scTimeUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="27dp"
+                android:background="@color/color323f4b"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                app:draggable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="0"
+                app:radius="20dp"
+                app:ripple="false"
+                app:selectedBackground="@color/color1396ef"
+                app:selectedButtonRadius="16dp"
+                app:selectionAnimationDuration="200"
+                tools:ignore="TouchTargetSizeCheck">
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                    style="@style/SegmentedButtonStyle"
+                    android:contentDescription="@string/am_pm"
+                    app:selectedTextColor="@color/white"
+                    app:selectedTextStyle="normal"
+                    app:text="@string/am_pm"
+                    app:textColor="@color/color8192a2"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                    style="@style/SegmentedButtonStyle"
+                    android:contentDescription="@string/hours_24"
+                    app:selectedTextColor="@color/white"
+                    app:selectedTextStyle="normal"
+                    app:text="@string/hours_24"
+                    app:textColor="@color/color8192a2"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+            <!--            <RadioGroup-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="64dp"-->
+            <!--                android:layout_marginEnd="44dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent">-->
+
+            <!--                <RadioButton-->
+            <!--                    android:id="@+id/btn12H"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginEnd="24dp"-->
+            <!--                    android:button="@null"-->
+            <!--                    android:checked="true"-->
+            <!--                    android:drawablePadding="12dp"-->
+            <!--                    android:fontFamily="@font/inter_bold"-->
+            <!--                    android:text="am/pm"-->
+            <!--                    android:textColor="@color/color1396ef"-->
+            <!--                    android:textSize="24sp" />-->
+
+            <!--                <RadioButton-->
+            <!--                    android:id="@+id/btn24H"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginEnd="24dp"-->
+            <!--                    android:button="@null"-->
+            <!--                    android:drawablePadding="12dp"-->
+            <!--                    android:fontFamily="@font/inter_bold"-->
+            <!--                    android:text="12 hours"-->
+            <!--                    android:textColor="@color/colorADB8C2"-->
+            <!--                    android:textSize="24sp" />-->
+            <!--            </RadioGroup>-->
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.DatePickerView
+                android:id="@+id/dateTimePickerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLine" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/group24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLine">
+
+                <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                    android:id="@+id/pick24hHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="139dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/center24H"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/center24H"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="358dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:includeFontPadding="false"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="54sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pick24hHour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/pick24hHour"
+                    tools:ignore="HardcodedText" />
+
+                <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                    android:id="@+id/pick24hMinute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="132dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/center24H"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/group12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/bottomLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLine">
+
+                <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                    android:id="@+id/pick12hHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/center12H"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/center12H"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="479dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:includeFontPadding="false"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="54sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pick12hHour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/pick12hHour"
+                    tools:ignore="HardcodedText" />
+
+                <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                    android:id="@+id/pick12hMinute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="63dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/center12H"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                    android:id="@+id/pickAmPm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="89dp"
+                    android:text=":"
+                    app:layout_constraintBottom_toBottomOf="@+id/pick12hHour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/pick12hHour"
+                    tools:ignore="HardcodedText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/topLine"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="298dp"
+                android:background="@color/color252e37"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/bottomLine"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="302dp"
+                android:background="@color/color252e37"
+                app:layout_constraintBottom_toTopOf="@+id/btnSave" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:background="@color/btn_click_1396ef"
+                android:stateListAnimator="@null"
+                android:text="@string/Save"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <View
+                android:id="@+id/hideView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/half_transparent30"
+                android:clickable="true"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/progressbar_hr"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

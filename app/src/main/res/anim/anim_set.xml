@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:shareInterpolator="true">
+    <alpha
+        android:duration="600"
+        android:fillAfter="true"
+        android:fillBefore="false"
+        android:fromAlpha="0.8"
+        android:repeatCount="-1"
+        android:repeatMode="restart"
+        android:toAlpha="0.0" />
+    <scale
+        android:duration="600"
+        android:fillAfter="true"
+        android:fillBefore="false"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="-1"
+        android:repeatMode="restart"
+        android:toXScale="4.0"
+        android:toYScale="4.0" />
+    <!--    <set-->
+    <!--        android:interpolator="@android:anim/bounce_interpolator"-->
+    <!--        android:shareInterpolator="true"-->
+    <!--        android:startOffset="1000">-->
+    <!--        <scale-->
+    <!--            android:duration="500"-->
+    <!--            android:fillAfter="true"-->
+    <!--            android:fillBefore="false"-->
+    <!--            android:fromXScale="1.0"-->
+    <!--            android:fromYScale="1.0"-->
+    <!--            android:pivotX="50%"-->
+    <!--            android:pivotY="50%"-->
+    <!--            android:repeatCount="-1"-->
+    <!--            android:repeatMode="restart"-->
+    <!--            android:toXScale="2.0"-->
+    <!--            android:toYScale="2.0"/>-->
+    <!--&lt;!&ndash;        <translate&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:duration="2000"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:fillAfter="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:fillBefore="false"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:fromXDelta="0"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:fromYDelta="0"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:repeatCount="-1"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:repeatMode="reverse"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:toXDelta="200%"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:toYDelta="200%"/>&ndash;&gt;-->
+    <!--    </set>-->
+</set>

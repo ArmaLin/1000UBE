@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color11151a"
+    android:id="@+id/baseView"
+    tools:context=".workout.ReadyStartPopupWindow">
+
+
+    <TextView
+        android:fontFamily="@font/inter_bold"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="264dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/starting_in"
+        android:layout_width="264dp"
+        android:layout_height="64dp"/>
+
+    <com.github.lzyzsd.circleprogress.DonutProgress
+        custom:donut_finished_color="@color/color1396ef"
+        custom:donut_unfinished_color="@color/color252e37"
+        android:id="@+id/donut_progress"
+        android:layout_width="640dp"
+        android:layout_height="640dp"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        custom:donut_finished_stroke_width="30dp"
+        custom:donut_unfinished_stroke_width="30dp"
+        custom:donut_max="100"
+        custom:donut_prefix_text=""
+        custom:donut_progress="25"
+        custom:donut_suffix_text=""
+        custom:donut_text_color="@android:color/transparent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="@string/GO_"
+        android:autoSizeMaxTextSize="160sp"
+        android:maxLines="1"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/inter_extrabold"
+        android:textColor="@color/white"
+        android:id="@+id/tv_donut_progress"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="160sp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/donut_progress"
+        app:layout_constraintEnd_toEndOf="@+id/donut_progress"
+        app:layout_constraintStart_toStartOf="@+id/donut_progress"
+        app:layout_constraintTop_toTopOf="@+id/donut_progress"
+        tools:ignore="HardcodedText" />
+
+
+    <View
+        android:visibility="invisible"
+        android:background="@color/black"
+        android:id="@+id/b_bike"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="200dp"
+    android:viewportWidth="300"
+    android:viewportHeight="200">
+
+    <!-- 绘制红白条纹 -->
+    <group>
+        <!-- 红色条纹 -->
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,0h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,30h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,60h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,90h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,120h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,150h300v15h-300z"/>
+        <path
+            android:fillColor="#B22234"
+            android:pathData="M0,180h300v15h-300z"/>
+
+        <!-- 白色条纹 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,15h300v15h-300z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,45h300v15h-300z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,75h300v15h-300z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,105h300v15h-300z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,135h300v15h-300z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,165h300v15h-300z"/>
+    </group>
+
+    <!-- 蓝色矩形 -->
+    <path
+        android:fillColor="#3C3B6E"
+        android:pathData="M0,0h120v105h-120z"/>
+
+    <!-- 绘制星星 -->
+    <group>
+        <!-- 第一行: 6颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M50,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M70,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M90,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M110,10 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第二行: 5颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,20 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,20 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M60,20 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M80,20 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M100,20 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第三行: 6颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M50,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M70,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M90,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M110,30 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第四行: 5颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,40 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,40 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M60,40 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M80,40 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M100,40 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第五行: 6颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M50,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M70,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M90,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M110,50 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第六行: 5颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,60 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,60 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M60,60 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M80,60 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M100,60 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第七行: 6颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M50,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M70,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M90,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M110,70 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第八行: 5颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,80 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,80 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M60,80 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M80,80 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M100,80 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+
+        <!-- 第九行: 6颗星 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M50,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M70,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M90,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M110,90 l5,15 l-12.5,-9.5 l15,0 l-12.5,9.5z"/>
+    </group>
+
+</vector>

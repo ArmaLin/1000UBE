@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.R" />
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+
+        <import type="com.dyaco.spirit_commercial.support.CommonUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        android:background="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? @drawable/img_workout_pause : @drawable/img_workout_pause_dark}"
+        tools:context=".workout.WorkoutPauseFragment">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResume"
+            style="@style/MButton_252e37"
+            android:layout_width="0dp"
+            android:layout_height="272dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:paddingStart="1dp"
+            android:paddingEnd="2dp"
+            android:text="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? R.string.stop : R.string.resume}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_0dac87_20_d"
+            app:icon="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? @drawable/ic_baseline_stop_48 : @drawable/icon_start_b}"
+            app:iconGravity="textStart"
+            app:iconPadding="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? 10 : 20}"
+            app:iconSize="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? 80 : 56}"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCoolDown"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:icon="@drawable/ic_baseline_stop_48"
+            tools:iconSize="80dp"
+            tools:text="@string/resume" />
+
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/btnResume"-->
+        <!--            android:layout_width="608dp"-->
+        <!--            android:layout_height="272dp"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:insetTop="0dp"-->
+        <!--            android:insetBottom="0dp"-->
+        <!--            android:letterSpacing="0.01"-->
+        <!--            android:paddingStart="70dp"-->
+        <!--            android:paddingEnd="0dp"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            android:text="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? R.string.stop : R.string.resume}"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="32sp"-->
+        <!--            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? R.drawable.btn_workout_stop : R.drawable.btn_workout_resume}"-->
+        <!--            app:backgroundTint="@null"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            tools:background="@drawable/btn_workout_resume"-->
+        <!--            tools:text="@string/resume" />-->
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/btnCoolDown"-->
+        <!--            android:layout_width="608dp"-->
+        <!--            android:layout_height="272dp"-->
+        <!--            android:layout_marginStart="656dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:background="@drawable/btn_workout_cooldown"-->
+        <!--            android:enabled="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? false : (WorkoutData.coolDownTime > 0)}"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:insetTop="0dp"-->
+        <!--            android:insetBottom="0dp"-->
+        <!--            android:letterSpacing="0.01"-->
+        <!--            android:paddingStart="70dp"-->
+        <!--            android:paddingEnd="0dp"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            android:text="@string/Cool_Down"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="@color/btn_white_20ffffff"-->
+        <!--            android:textSize="32sp"-->
+        <!--            app:backgroundTint="@null"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            tools:enabled="false" />-->
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCoolDown"
+            style="@style/MButton_252e37"
+            android:layout_width="0dp"
+            android:layout_height="272dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:alpha="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? 0.4f : (WorkoutData.coolDownTime > 0 ? 1f : 0.4f)}"
+            android:enabled="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? false : (WorkoutData.coolDownTime > 0)}"
+            android:paddingStart="1dp"
+            android:paddingEnd="2dp"
+            android:text="@string/Cool_Down"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_1396ef_20"
+            app:icon="@drawable/icon_time_b"
+            app:iconGravity="textStart"
+            app:iconPadding="20dp"
+            app:iconSize="56dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnFinish"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnResume"
+            app:shapeAppearanceOverlay="@style/roundedCorner24" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFinish"
+            style="@style/MButton_252e37"
+            android:layout_width="0dp"
+            android:layout_height="272dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:alpha="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? 0.4f : 1f}"
+            android:enabled="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? false : true}"
+            android:paddingStart="1dp"
+            android:paddingEnd="2dp"
+            android:text="@string/Finish"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_e24b44_20_d"
+            app:icon="@drawable/icon_finish_b"
+            app:iconGravity="textStart"
+            app:iconPadding="20dp"
+            app:iconSize="56dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnCoolDown"
+            app:shapeAppearanceOverlay="@style/roundedCorner24" />
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/btnFinish"-->
+        <!--            android:layout_width="608dp"-->
+        <!--            android:layout_height="272dp"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:background="@drawable/btn_workout_finish"-->
+        <!--            android:enabled="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? false : true}"-->
+        <!--            android:fontFamily="@font/inter_bold"-->
+        <!--            android:insetTop="0dp"-->
+        <!--            android:insetBottom="0dp"-->
+        <!--            android:letterSpacing="0.01"-->
+        <!--            android:paddingStart="70dp"-->
+        <!--            android:paddingEnd="0dp"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            android:text="@string/Finish"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="@color/btn_white_20ffffff"-->
+        <!--            android:textSize="32sp"-->
+        <!--            app:backgroundTint="@null"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent" />-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFtNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="264dp"
+            android:autoSizeMaxTextSize="96sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:maxWidth="380dp"
+            android:maxLines="2"
+            android:text="@{isTreadmill ? (comm.formatDecimal(WorkoutData.currentElevationGain) +` `+ (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/ft : @string/m)) : comm.formatDecimal(WorkoutData.currentPower)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            android:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="@+id/tvFtUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvFtUnit"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="374.9 m" />
+
+        <TextView
+            android:id="@+id/tvFtUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="177dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{isTreadmill ? @string/Elevation : @string/Power}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFtNum" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMiNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="264dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_vertical|center_horizontal"
+            android:maxWidth="380dp"
+            android:text="@{comm.formatDecimal(WorkoutData.currentDistance,1) +` `+ (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mi : @string/km)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvMiUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvMiUnit"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="374.9 英尺" />
+
+        <TextView
+            android:id="@+id/tvMiUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Distance"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layoutMarginStart="@{isTreadmill ? 654 : 417}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMiNum"
+            tools:layout_marginStart="654dp" />
+
+        <TextView
+            android:id="@+id/tvTimeNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="264dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@{CommonUtils.formatSecToM(WorkoutData.totalElapsedTime)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTimeUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvTimeUnit"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTimeUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Total_Time"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layoutMarginStart="@{isTreadmill ? 1116 : 878}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeNum"
+            tools:layout_marginStart="1116dp" />
+
+        <TextView
+            android:id="@+id/tvCaloriesNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="264dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@{comm.formatDecimal(WorkoutData.currentCalories)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCaloriesUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvCaloriesUnit"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCaloriesUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Calories"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layoutMarginStart="@{isTreadmill ? 1607 : 1369}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCaloriesNum"
+            tools:layout_marginStart="1607dp" />
+
+
+        <TextView
+            android:id="@+id/tvReadyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="264dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/resuming_in"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvReadyNum"
+            app:layout_constraintStart_toStartOf="@+id/tvReadyNum"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING &amp;&amp; isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+        <TextView
+            android:id="@+id/tvReadyNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="308dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center_horizontal|center_vertical"
+            android:includeFontPadding="false"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="160sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING &amp;&amp; isTreadmill ? View.VISIBLE : View.INVISIBLE}"
+            tools:ignore="HardcodedText" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:constraint_referenced_ids="tvCaloriesNum,tvCaloriesUnit,tvMiNum,tvMiUnit,tvTimeNum,tvTimeUnit"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_PAUSE ? View.VISIBLE : View.INVISIBLE}" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="tvFtUnit,tvFtNum"
+            app:visibility="@{(AppStatusViewModel.currentStatus == status.STATUS_PAUSE &amp;&amp; isTreadmill) ? View.VISIBLE : View.INVISIBLE}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent50"
+            android:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone" />
+
+
+        <!--        <View-->
+        <!--            android:id="@+id/v_background"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:background="@color/half_transparent50"-->
+        <!--            android:clickable="true"-->
+        <!--            android:visibility="gone" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

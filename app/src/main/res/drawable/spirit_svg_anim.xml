@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="431dp"
+    android:height="64dp"
+    android:viewportWidth="431"
+    android:viewportHeight="64">
+
+    <!-- 第一條圖形 -->
+    <path
+        android:name="draw_path1"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M219.642,0H200.716C198.724,0 197.23,1.24514 196.731,2.98833L178.801,63.751H197.728C199.72,63.751 201.214,62.5059 201.712,60.7627L219.642,0Z" />
+
+    <!-- 第二條圖形 -->
+    <path
+        android:name="draw_path2"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M339.673,0H320.747C318.755,0 317.261,1.24514 316.763,2.98833L298.833,63.751H317.759C319.751,63.751 321.245,62.5059 321.743,60.7627L339.673,0Z" />
+
+    <!-- 第三條圖形 -->
+    <path
+        android:name="draw_path3"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M182.288,5.22957C179.3,1.74319 172.825,0 162.864,0H113.058C111.066,0 109.572,1.24514 109.074,2.98833L91.1439,63.751H110.319C112.311,63.751 113.805,62.5059 114.303,60.7627L122.521,32.3736L126.008,37.6031C126.755,38.8483 128,39.5953 129.494,39.5953H147.922C170.335,39.5953 181.541,31.3774 185.525,17.93C187.268,12.4514 185.027,7.96887 182.288,5.22957ZM161.868,18.677C159.128,27.642 148.918,30.8794 140.451,30.8794H123.019L125.51,22.9105L129.494,8.96498H145.432C151.658,8.96498 157.883,9.21401 160.623,12.4514C161.619,13.6965 162.615,15.6887 161.868,18.677Z" />
+
+    <!-- 第四條圖形 -->
+    <path
+        android:name="draw_path4"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M349.136,0C347.144,0 345.65,1.24514 345.152,2.98833L343.16,8.96498H373.292L356.856,63.751H375.782C377.774,63.751 379.268,62.5059 379.766,60.7627L395.206,8.96498H417.619C419.362,8.96498 420.856,8.46693 421.852,7.47082L430.568,0H349.136V0Z" />
+
+    <!-- 第五條圖形 -->
+    <path
+        android:name="draw_path5"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M302.07,5.22957C298.833,1.74319 292.358,0 282.646,0H232.093C230.101,0 228.607,1.24514 228.109,2.98833L210.179,64H229.852C231.844,64 233.339,62.7549 233.837,61.0117L242.802,30.3813L262.724,61.0117C263.969,62.7549 265.961,64 268.202,64H290.117L272.436,37.3541C291.86,36.607 301.323,30.8794 305.058,18.179C306.802,12.4514 304.56,7.96887 302.07,5.22957ZM281.401,18.677C278.661,27.642 269.198,28.3891 260.732,28.3891H243.3L249.027,9.21401H264.965C271.191,9.21401 277.416,9.46303 280.156,12.7004C281.152,13.6965 282.397,15.6887 281.401,18.677Z" />
+
+    <!-- 第六條圖形 -->
+    <path
+        android:name="draw_path6"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFFFF"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0"
+        android:trimPathStart="0"
+        android:trimPathEnd="0"
+        android:pathData="M63.0039,0C38.8482,0 19.1751,8.2179 19.1751,18.179C19.1751,23.1595 24.1556,27.642 31.8755,30.8794L54.537,40.5914C58.0233,42.0856 60.2646,44.0778 60.2646,46.3191C60.2646,50.5525 51.7977,54.2879 41.0895,54.2879H13.4475C11.7043,54.2879 10.2101,54.786 9.21401,55.7821L0,64H42.0856C67.9844,64 89.1517,55.284 89.1517,44.5759C89.1517,38.8482 83.1751,33.8677 73.9611,30.1323L51.2996,21.6654C47.8132,20.4202 45.821,18.428 45.821,16.4358C45.821,12.4514 53.7899,9.21401 63.5019,9.21401H92.1401C93.8833,9.21401 95.3774,8.71595 96.3735,7.71984L104.591,0H63.0039Z" />
+
+</vector>

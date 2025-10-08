@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_base"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="168dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_marginStart="56dp"
+        android:id="@+id/ivHrIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:layout_marginStart="56dp"
+        android:id="@+id/progress"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressbar_k"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        tools:text="HW702B-0591431"
+        android:layout_marginStart="136dp"
+        android:id="@+id/tvHrTitle"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="24sp"
+        android:textColor="@color/color5a7085"
+        tools:text="0633587"
+        android:id="@+id/tvHrNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvHrTitle" />
+
+
+    <TextView
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="24sp"
+        android:textColor="@color/color5a7085"
+        tools:text="-49 dB"
+        android:id="@+id/tvHrDb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/tvHrNum"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHrNum"
+        app:layout_constraintStart_toEndOf="@+id/tvHrNum" />
+
+    <View
+        android:id="@+id/vConnectedUnderline"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/color1396ef"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

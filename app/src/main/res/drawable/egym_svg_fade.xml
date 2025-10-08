@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="25dp"
+    android:viewportWidth="150"
+    android:viewportHeight="25">
+    <group>
+        <!-- 定義剪裁區域，與 SVG 中 clipPath 效果相同 -->
+        <clip-path
+            android:pathData="M0,0h149.993v25h-149.993z" />
+
+        <!-- 第一個圖案 -->
+        <path
+            android:name="draw_path1"
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M50.6065,3.95891 C53.2114,3.95891 55.3979,4.82723 57.3069,6.73619 L60.1535,3.95891 C57.8641,1.35395 54.4602,0 50.3983,0 C42.7938,0 37.2393,5.24349 37.2393,12.5011 C37.2393,19.7588 42.7938,25 50.329,25 C53.7664,25 57.3069,23.9594 59.8424,21.9094 V11.3933 H59.8402 V11.0174 H50.7273 V15.0121 H55.5725 V19.7901 C54.0104,20.692 52.3095,21.0389 50.5729,21.0389 C45.4346,21.0389 41.789,17.4291 41.789,12.4989 C41.789,7.5687 45.4346,3.95667 50.6087,3.95667 L50.6065,3.95891 Z" />
+        <!-- 第二個圖案 -->
+        <path
+            android:name="draw_path2"
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M91.4063,12.1878 L84.2897,0.346863 H79.4624 L89.0117,16.1445 V24.6531 H93.5256 V16.0751 L103.039,0.346863 H98.5946 L91.4063,12.1878 Z" />
+        <!-- 第三個圖案 -->
+        <path
+            android:name="draw_path3"
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M149.96,0.346863 H146.243 L136.765,16.4578 L127.113,0.346863 H123.398 V24.6531 H127.703 V8.75032 L135.688,21.8736 H137.703 L145.687,8.54219 L145.723,24.6531 H149.993 L149.96,0.346863 Z" />
+        <!-- 第四個圖案 -->
+
+        <path
+            android:name="draw_path4"
+            android:fillColor="#D15B05"
+            android:pathData="M0,0.48114 H17.9214 V4.27892 H4.24761 V10.563 H16.3683 V14.3608 H4.24761 V20.8531 H18.0937 V24.6509 H0 V0.48114 Z" />
+
+    </group>
+</vector>

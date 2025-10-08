@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="848dp"
+    tools:context=".settings.MemberProfileHeightEditorWindow">
+    <!-- +24-->
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        app:shapeAppearanceOverlay="@style/roundedCornerTop"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Cancel"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--        android:id="@+id/btn_close"-->
+<!--        android:layout_width="182dp"-->
+<!--        android:layout_height="88dp"-->
+<!--        android:layout_marginTop="48dp"-->
+<!--        android:layout_marginEnd="48dp"-->
+<!--        android:background="@drawable/panel_close"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:id="@+id/tv_cancel"-->
+<!--            android:layout_width="82dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:layout_marginStart="34dp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            android:text="@string/Cancel"-->
+<!--            android:textColor="@color/colorADB8C2"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:src="@drawable/icon_cancel"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tv_cancel" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bgbg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_close"
+        android:background="@drawable/panel_bg_top_1c242a"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/inter_bold"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            android:textSize="24sp"
+            android:background="@color/color1396ef"
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:textColor="@color/white"
+            android:text="@string/update_weight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:selectAllOnFocus="true"
+        android:maxLength="3"
+        android:cursorVisible="false"
+        android:background="@null"
+        android:singleLine="true"
+        android:inputType="numberPassword"
+        android:id="@+id/etWeight"
+        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_regular"
+        android:hint="@string/input_your_weight"
+        android:textColorHint="@color/color5a7085"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintStart_toStartOf="@+id/lineline"
+        app:layout_constraintEnd_toEndOf="@+id/lineline"
+        app:layout_constraintBottom_toTopOf="@+id/lineline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/lineline"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:background="@color/color323f4b"
+        android:layout_marginTop="166dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgbg"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

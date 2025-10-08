@@ -1,0 +1,1941 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+        <variable name="isGGG" type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.support.WorkoutUtil" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        tools:context=".workout.MainWorkoutTrainingFragment">
+
+        <!--        android:background="@drawable/img_workout_1"-->
+        <ImageView
+            android:id="@+id/view_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color11151a"
+            android:contentDescription="@string/img" />
+
+<!--        android:layout_marginBottom="-8dp"-->
+        <com.dyaco.spirit_commercial.support.custom_view.LevelImageView
+            android:visibility="gone"
+            android:src="@drawable/element_track_24"
+            android:id="@+id/ivLapAnimationM"
+            app:layoutMarginBottom="@{isUs ? -8 : -102}"
+            android:layout_width="924dp"
+            android:layout_height="512dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="fitEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+<!--        android:layout_marginTop="400dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+
+        <!--        US 1296 * 504  >>>>  1296 * 584
+                    android:layout_marginStart="312dp"
+                    android:layout_marginTop="200dp" > 160
+                    android:layout_marginEnd="312dp"
+                    android:layout_marginBottom="200dp" > 160
+                    -->
+
+        <!--        global
+                android:layout_marginStart="261dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="261dp"
+               android:layout_marginBottom="24dp"
+                -->
+
+        <!--        中間頁籤-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/workoutFragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginBottom="200dp"
+            tools:layout_marginEnd="312dp"
+            tools:layout_marginStart="312dp"
+            tools:layout_marginTop="200dp" />
+
+        <!--Center Text START-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewWarmUpAndCoolDown"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="261dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="261dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isTreadmill ? (WorkoutData.selProgram != programsEnum.MANUAL ? View.VISIBLE : View.GONE) : (WorkoutData.selProgram == programsEnum.HIIT ? View.VISIBLE : View.GONE) }">
+            <!--            app:visibility="@{isTreadmill ? () >View.VISIBLE : View.GONE programsEnum.programType == workoutIntDef.FITNESS_TESTS || WorkoutData.selProgram == programsEnum.HIIT ? View.VISIBLE : View.GONE}">-->
+
+            <TextView
+                android:id="@+id/warmUpAndCoolDownTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginTop="276dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Warm_up"
+                android:textColor="@color/white"
+                android:textSize="44sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvWarmUpAndCoolDownTime"
+                android:layout_width="501dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="356dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="160sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <!--            android:text="                                "-->
+            <!--            android:text="@string/Skip_and_Finish"-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSkip"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="104dp"
+                android:layout_marginTop="584dp"
+                android:drawableEnd="@drawable/icon_next"
+                android:drawablePadding="13dp"
+                android:drawableTint="@color/white"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:text="@string/Skip_Warm_up"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:backgroundTint="@color/btn_click_1396ef"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Center Text END-->
+
+        <!--Treadmill Incline View START-->
+
+        <View
+            android:id="@+id/treadmillControllerInclineViewBackground"
+            android:layout_width="213dp"
+            android:layout_height="720dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/view_inclineTitle"
+            android:layout_width="213dp"
+            android:layout_height="80dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/Incline"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/treadmillControllerInclineViewBackground" />
+
+        <View
+            android:id="@+id/view_inclineLine1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineTitle" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_workout_incline_plus"
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            android:background="@drawable/btn_workout_plus"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintEnd_toEndOf="@+id/btn_workout_incline_minus"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine1"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+        <View
+            android:id="@+id/view_inclineLine2"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_incline_plus" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_workout_incline_minus"
+            android:layout_width="105.5dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_workout_incline_minus"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine2" />
+
+        <View
+            android:id="@+id/view_inclineLine3"
+            android:layout_width="2dp"
+            android:layout_height="640dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineTitle" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_0"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="105.5dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine1"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_0"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_0"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine1" />-->
+
+        <View
+            android:id="@+id/view_inclineLine4"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_0"
+            app:visibility="@{WorkoutData.selProgram != programsEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_2"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="0dp"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_inclineLine5"
+            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine4"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_2"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_2"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine4" />-->
+
+        <View
+            android:id="@+id/view_inclineLine5"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_2"
+            app:visibility="@{WorkoutData.selProgram != programsEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_5"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_inclineLine6"
+            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine5"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_5"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:background="@drawable/btn_workout_5"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/view_inclineLine6"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine5"-->
+        <!--            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />-->
+
+        <View
+            android:id="@+id/view_inclineLine6"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="464dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/treadmillControllerInclineViewBackground"
+            app:visibility="@{WorkoutData.selProgram != programsEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_10"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine6"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_10"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/btn_workout_10"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine6" />-->
+
+        <View
+            android:id="@+id/view_inclineLine7"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_10"
+            app:visibility="@{WorkoutData.selProgram != programsEnum.HEART_RATE ? View.VISIBLE : View.INVISIBLE}" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_15"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerInclineViewBackground"
+            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"
+            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine7"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded.BottomRight"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_15"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:background="@drawable/btn_workout_15"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerInclineViewBackground"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/view_inclineLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_inclineLine7" />-->
+
+        <!--Treadmill Incline View END-->
+
+        <!--CoolDown Button START-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCoolDown"
+            android:layout_width="213dp"
+            android:layout_height="112dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/panel_no_cooldown"
+            android:clickable="false"
+            android:enabled="false"
+            android:fontFamily="@font/inter_bold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="@{WorkoutData.disabledSpeedUpdate || WorkoutData.disabledInclineUpdate ? View.GONE : isUs ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!--CoolDown Button END-->
+
+        <!--Treadmill SPEED View START-->
+
+        <View
+            android:id="@+id/treadmillControllerSpeedViewBackground"
+            android:layout_width="213dp"
+            android:layout_height="720dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/view_SpeedTitle"
+            android:layout_width="213dp"
+            android:layout_height="80dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/Speed"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/treadmillControllerSpeedViewBackground" />
+
+        <View
+            android:id="@+id/view_speedLine1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_SpeedTitle" />
+
+        <View
+            android:id="@+id/view_speedLine3"
+            android:layout_width="2dp"
+            android:layout_height="640dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_SpeedTitle" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_workout_speed_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="320dp"
+            android:background="@drawable/btn_workout_plus"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine1" />
+
+        <View
+            android:id="@+id/view_speedLine2"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_speed_plus" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_workout_speed_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_workout_minus"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintEnd_toEndOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine2" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_1"-->
+        <!--            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_speedLine1" />-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_1"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_speedLine4"
+            app:layout_constraintStart_toStartOf="@+id/view_speedLine1"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine1"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <View
+            android:id="@+id/view_speedLine4"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_1" />
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_3"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_3"-->
+        <!--            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_speedLine4" />-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_3"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_speedLine5"
+            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"
+            app:layout_constraintStart_toStartOf="@+id/view_speedLine4"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine4"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/btnBikeLevelNum40"-->
+        <!--            style="@style/WorkoutButtonStyle"-->
+        <!--            android:clickable="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            android:text="40"-->
+        <!--            app:enabled="@{!WorkoutData.disabledInclineUpdate}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/bikeControllerLevelViewBackground"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line5"-->
+        <!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />-->
+
+
+        <View
+            android:id="@+id/view_speedLine5"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_6"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_speedLine6"
+            app:layout_constraintStart_toStartOf="@+id/view_speedLine1"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine5"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_6"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_6"-->
+        <!--            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_speedLine5"-->
+        <!--            tools:ignore="ImageContrastCheck" />-->
+
+        <View
+            android:id="@+id/view_speedLine6"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_6" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_9"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_speedLine7"
+            app:layout_constraintStart_toStartOf="@+id/view_speedLine1"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine6"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_9"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_9"-->
+        <!--            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/view_speedLine7"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_speedLine6" />-->
+
+        <View
+            android:id="@+id/view_speedLine7"
+            android:layout_width="105.5dp"
+            android:layout_height="2dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/btn_workout_9" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_workout_12"
+            style="@style/WorkoutButtonStyle"
+            android:layout_width="106dp"
+            android:layout_height="128dp"
+            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"
+            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerSpeedViewBackground"
+            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"
+            app:layout_constraintStart_toStartOf="@+id/view_speedLine4"
+            app:layout_constraintTop_toBottomOf="@+id/view_speedLine7"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded.BottomLeft"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btn_workout_12"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="129.2dp"-->
+        <!--            android:background="@drawable/btn_workout_12"-->
+        <!--            android:clickable="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            android:contentDescription="@string/__"-->
+        <!--            app:enabled="@{!WorkoutData.disabledSpeedUpdate}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/treadmillControllerSpeedViewBackground"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/view_speedLine3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/view_speedLine7"-->
+        <!--            tools:ignore="ImageContrastCheck" />-->
+        <!--Treadmill SPEED View END-->
+
+        <!-- Incline NO View START-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewNoIncline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_workout_incline_disable"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/viewNoInclineTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Incline"
+            android:textColor="@color/color33ADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/viewNoIncline"
+            app:layout_constraintStart_toStartOf="@+id/viewNoIncline"
+            app:layout_constraintTop_toTopOf="@+id/viewNoIncline" />
+
+        <!-- Incline NO View END-->
+
+        <!-- Speed NO View START-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewNoSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/btn_workout_speed_disable"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/viewNoSpeedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Speed"
+            android:textColor="@color/color33ADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/viewNoSpeed"
+            app:layout_constraintStart_toStartOf="@+id/viewNoSpeed"
+            app:layout_constraintTop_toTopOf="@+id/viewNoSpeed" />
+
+
+        <!-- Speed NO View END-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTreadmillViewIncline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="treadmillControllerInclineViewBackground,view_inclineTitle,view_inclineLine1,btn_workout_incline_plus,view_inclineLine2,view_inclineLine3,view_inclineLine4,view_inclineLine5,view_inclineLine6,view_inclineLine7,btn_workout_incline_minus,btn_workout_0,btn_workout_2,btn_workout_5,btn_workout_10,btn_workout_15"
+            app:visibility="@{isTreadmill ? isUs ? View.GONE : (!WorkoutData.disabledInclineUpdate ? View.VISIBLE : View.GONE) : View.GONE}"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTreadmillViewInclineNoView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{WorkoutData.disabledInclineUpdate ? (isUs ? View.GONE : View.VISIBLE) : View.GONE}"
+            app:constraint_referenced_ids="viewNoIncline,viewNoInclineTitle"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTreadmillViewSpeed"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="treadmillControllerSpeedViewBackground,view_SpeedTitle,view_speedLine1,btn_workout_speed_plus,view_speedLine2,view_speedLine3,view_speedLine4,view_speedLine5,view_speedLine6,view_speedLine7,btn_workout_speed_minus,btn_workout_1,btn_workout_3,btn_workout_6,btn_workout_9,btn_workout_12"
+            app:visibility="@{isUs ? View.GONE : isTreadmill ? (!WorkoutData.disabledSpeedUpdate ? View.VISIBLE : View.GONE): View.GONE}"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTreadmillViewSpeedNoView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{WorkoutData.disabledSpeedUpdate ? (isUs ? View.GONE : View.VISIBLE) : View.GONE}"
+            app:constraint_referenced_ids="viewNoSpeed,viewNoSpeedTitle"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupViewLevel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="bikeControllerLevelViewBackground,view_bike_level_Title,btnBikeLevelNum8,btnBikeLevelNum16,btnBikeLevelNum24,btnBikeLevelNum32,btnBikeLevelNum40,view_bike_level_Line1,view_bike_level_Line2,view_bike_level_Line3,view_bike_level_Line4,view_bike_level_Line5"
+            app:visibility="@{isUs ? View.GONE : isTreadmill ? View.GONE : (WorkoutData.disabledLevelUpdate || WorkoutData.selProgram == programsEnum.HEART_RATE || WorkoutData.selProgram == programsEnum.FITNESS_TEST ? View.INVISIBLE : View.VISIBLE)}"
+            tools:visibility="gone" />
+
+        <!--        app:visibility   == 比 !=  ! 快執行-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupViewLevelRight"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="bikeControllerLevelViewBackgroundRight,view_bike_level_Title_right,view_bike_level_Line_right_1,btn_bike_level_plus,btn_bike_level_minus,view_bike_level_Line_right_2"
+            app:visibility="@{isUs ? View.GONE : isTreadmill ? View.GONE : (WorkoutData.disabledLevelUpdate || WorkoutData.selProgram == programsEnum.FITNESS_TEST ? View.INVISIBLE : View.VISIBLE)}"
+            tools:visibility="gone" />
+
+        <!--        bikeControllerLevelView LEFT START-->
+        <View
+            android:id="@+id/bikeControllerLevelViewBackground"
+            android:layout_width="213dp"
+            android:layout_height="720dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/view_bike_level_Title"
+            android:layout_width="213dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBikeLevelNum8"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_bike_level_Line2"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBikeLevelNum16"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_bike_level_Line3"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBikeLevelNum24"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_bike_level_Line4"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBikeLevelNum32"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/view_bike_level_Line5"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBikeLevelNum40"
+            style="@style/WorkoutButtonStyle"
+            android:clickable="@{!WorkoutData.disabledInclineUpdate}"
+            app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line1"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line1"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line5"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
+
+        <View
+            android:id="@+id/view_bike_level_Line1"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+
+        <View
+            android:id="@+id/view_bike_level_Line2"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="208dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+
+        <View
+            android:id="@+id/view_bike_level_Line3"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="336dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+
+        <View
+            android:id="@+id/view_bike_level_Line4"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="464dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+
+        <View
+            android:id="@+id/view_bike_level_Line5"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="592dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackground"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackground" />
+        <!--        bikeControllerLevelView LEFT END-->
+
+        <!--        bikeControllerLevelView RIGHT START-->
+        <View
+            android:id="@+id/bikeControllerLevelViewBackgroundRight"
+            android:layout_width="213dp"
+            android:layout_height="720dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/view_bike_level_Title_right"
+            android:layout_width="213dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/bikeControllerLevelViewBackgroundRight"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackgroundRight"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackgroundRight" />
+
+        <View
+            android:id="@+id/view_bike_level_Line_right_1"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackgroundRight"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackgroundRight" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_bike_level_plus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_workout_bike_plus"
+            android:clickable="@{!WorkoutData.disabledLevelUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledLevelUpdate}"
+            app:layout_constraintBottom_toTopOf="@+id/view_bike_level_Line_right_2"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line_right_2"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line_right_2"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line_right_1" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_bike_level_minus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_workout_bike_minus"
+            android:clickable="@{!WorkoutData.disabledLevelUpdate}"
+            android:contentDescription="@string/__"
+            app:enabled="@{!WorkoutData.disabledLevelUpdate}"
+            app:layout_constraintBottom_toBottomOf="@+id/bikeControllerLevelViewBackgroundRight"
+            app:layout_constraintEnd_toEndOf="@+id/view_bike_level_Line_right_2"
+            app:layout_constraintStart_toStartOf="@+id/view_bike_level_Line_right_2"
+            app:layout_constraintTop_toBottomOf="@+id/view_bike_level_Line_right_2" />
+
+        <View
+            android:id="@+id/view_bike_level_Line_right_2"
+            android:layout_width="213dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="400dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintStart_toStartOf="@+id/bikeControllerLevelViewBackgroundRight"
+            app:layout_constraintTop_toTopOf="@+id/bikeControllerLevelViewBackgroundRight" />
+        <!--bikeControllerLevelView LEFT END-->
+
+
+        <!--STOP Button START-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnWorkoutStop"
+            android:layout_width="213dp"
+            android:layout_height="112dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="22dp"
+            android:background="@{WorkoutUtil.checkWorkStopButtonBackground(WorkoutData,WorkoutData.isWarmUpIng,WorkoutData.isCoolDowning)}"
+            android:backgroundTintMode="@null"
+            android:clickable="@{WorkoutUtil.checkWorkStopButton(WorkoutData,WorkoutData.isWarmUpIng,WorkoutData.isCoolDowning)}"
+            android:contentDescription="@string/__"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:background="@drawable/btn_workout_pause" />
+        <!--        android:background="@{WorkoutData.selProgram.programType == workoutIntDef.FITNESS_TESTS ? @drawable/panel_no_cooldown : @drawable/btn_workout_pause}"-->
+        <!--        android:clickable="@{WorkoutData.selProgram.programType == workoutIntDef.FITNESS_TESTS ? false : true}"-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cStatsUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioGroup
+                android:id="@+id/rgStatss"
+                android:layout_width="232dp"
+                android:layout_height="400dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbStats"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_stats_select_1"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:tag="0"
+                    android:text="@string/Stats"
+                    android:textColor="@drawable/check_text_white_8192a2"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbCharts"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_stats_select"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:tag="1"
+                    android:text="@string/Charts"
+                    android:textColor="@drawable/check_text_white_8192a2"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbTrack"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@{WorkoutData.isGarminConnected ? @drawable/btn_stats_select : @drawable/btn_stats_select_2}"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="28dp"
+                    android:tag="2"
+                    android:text="@string/Track"
+                    android:textColor="@drawable/check_text_white_8192a2"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbGarmin"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_stats_select_2"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:tag="3"
+                    android:text="@string/Garmin"
+                    android:textColor="@drawable/check_text_white_8192a2"
+                    android:textSize="24sp"
+                    app:visibility="@{WorkoutData.isGarminConnected ? View.VISIBLE : View.GONE }" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/incline_controller_us"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/panel_bg_20_252e37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isTreadmill ? !isUs ? View.GONE : (!WorkoutData.disabledInclineUpdate ? View.VISIBLE : View.GONE) : View.GONE}">
+
+            <TextView
+                android:id="@+id/viewInclineTitleUs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Incline"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/usLineIncline1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/usLineIncline1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="80dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_workout_incline_plus_us"
+                android:layout_width="232dp"
+                android:layout_height="160dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_incline_add_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineIncline1"
+                app:rippleColor="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+            <View
+                android:id="@+id/usLineIncline2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="160dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineIncline1" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_workout_incline_minus_us"
+                android:layout_width="232dp"
+                android:layout_height="160dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_incline_reduce_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineIncline2"
+                app:rippleColor="@android:color/transparent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.Placeholder
+            android:id="@+id/ph_leftStats_treadmill_us"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!--        app:content="@id/speed_controller_us"-->
+
+
+        <!--        android:background="@drawable/panel_bg_20_252e37"-->
+        <androidx.constraintlayout.widget.Placeholder
+            android:id="@+id/ph_right_top_controller_us"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="40dp"
+            tools:layout_marginEnd="40dp"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        SPEED + - -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/speed_controller_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/panel_bg_20_252e37"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isTreadmill ? !isUs ? View.GONE : (!WorkoutData.disabledInclineUpdate ? View.VISIBLE : View.GONE) : View.GONE}"
+            tools:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Speed"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/usLineSpeed1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/usLineSpeed1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="80dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_workout_speed_plus_us"
+                android:layout_width="232dp"
+                android:layout_height="160dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_speed_add_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineSpeed1"
+                app:rippleColor="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+            <View
+                android:id="@+id/usLineSpeed2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="160dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineSpeed1" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_workout_speed_minus_us"
+                android:layout_width="232dp"
+                android:layout_height="160dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_speed_lower_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineSpeed2"
+                app:rippleColor="@android:color/transparent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        LEVEL +- -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupViewLevelUs"
+            android:layout_width="232dp"
+            android:layout_height="824dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:background="@drawable/panel_bg_20_252e37"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/view_Bike_Level_Title_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Level"
+                android:textColor="@color/colorADB8C2"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/usLineLevel1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/usLineLevel1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="80dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_bike_level_plus_us"
+                android:layout_width="232dp"
+                android:layout_height="372dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_speed_add_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineLevel1"
+                app:rippleColor="@android:color/transparent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+            <View
+                android:id="@+id/usLineLevel2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="372dp"
+                android:background="@color/colorADB8C2_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineLevel1" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_bike_level_minus_us"
+                android:layout_width="232dp"
+                android:layout_height="372dp"
+                android:backgroundTint="@color/btn_workout_button"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/icon_speed_lower_40"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usLineLevel2"
+                app:rippleColor="@android:color/transparent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        US STOP WORKOUT-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWorkoutStopUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="188dp"
+            tools:layout_marginEnd="40dp"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            android:layout_marginBottom="40dp"
+            android:alpha="@{WorkoutUtil.checkWorkStopButtonAlpha(WorkoutData,WorkoutData.isWarmUpIng,WorkoutData.isCoolDowning)}"
+            android:clickable="@{WorkoutUtil.checkWorkStopButton(WorkoutData,WorkoutData.isWarmUpIng,WorkoutData.isCoolDowning)}"
+            android:visibility="invisible"
+            app:icon="@drawable/icon_pause_40"
+            app:iconGravity="textStart"
+            app:iconSize="56dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:setBackgroundTintColor="@{WorkoutUtil.checkWorkStopButtonBackgroundUs(WorkoutData,WorkoutData.isWarmUpIng,WorkoutData.isCoolDowning)}"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="visible" />
+        <!--        app:backgroundTint="@color/btn_e24b44_20_d"-->
+
+        <!--        US SKIP WARM UP-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSkipUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="188dp"
+            tools:layout_marginEnd="40dp"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            android:layout_marginBottom="252dp"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/Skip_Warm_up"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/btn_click_1396ef"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCoolDownUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="188dp"
+            tools:layout_marginEnd="40dp"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            android:layout_marginBottom="24dp"
+            android:text="@string/Cool_Down"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/btn_252e37_323f4b"
+            app:layout_constraintBottom_toTopOf="@+id/btnWorkoutStopUs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24" />
+
+
+        <!--        US下面的按鈕-->
+        <View
+            android:id="@+id/v_bottom_us_1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="312dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="144dp"
+            android:background="@color/colorADB8C2_20"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvBottomTextUs"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/v_bottom_us_2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="312dp"
+            android:layout_marginBottom="144dp"
+            android:background="@color/colorADB8C2_20"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvBottomTextUs" />
+
+        <TextView
+            android:id="@+id/tvBottomTextUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_bottom_us_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bottom_us_1"
+            tools:text="@string/direct_speed" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cBottomNumberUs"
+            android:layout_width="1248dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBottomTextUs">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs1"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="1"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs2"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="2"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs3"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="3"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs4"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="4"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs5"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="5"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs6"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="6"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs7"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="7"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs8"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="8"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs9"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="9"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs10"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="10"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs11"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs11"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="11"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvBottomNumberUs12"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvBottomNumberUs12"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="12"
+                app:enabled="@{!WorkoutData.disabledSpeedUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvBottomNumberUs11"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Group
+            tools:visibility="visible"
+            android:id="@+id/groupBottomNumberUs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="cBottomNumberUs,tvBottomTextUs,v_bottom_us_1,v_bottom_us_2" />
+
+
+        <!--        US上面的按鈕-->
+        <View
+            android:id="@+id/v_top_us_1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="312dp"
+            android:layout_marginTop="144dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorADB8C2_20"
+            app:layout_constraintEnd_toStartOf="@+id/tvTopTextUs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v_top_us_2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="312dp"
+            android:background="@color/colorADB8C2_20"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top_us_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTopTextUs"
+            app:layout_constraintTop_toTopOf="@+id/v_top_us_1" />
+
+        <TextView
+            android:id="@+id/tvTopTextUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top_us_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_top_us_1"
+            tools:text="@string/direct_incline" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cTopNumberUs"
+            android:layout_width="1248dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvTopTextUs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs1"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="0"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs2"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="1"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs3"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="2"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs4"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="3"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs5"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="4"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs6"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="5"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs7"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="6"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs8"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="7"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs9"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="9"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs10"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="11"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs11"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs11"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="13"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvTopNumberUs12"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tvTopNumberUs12"
+                style="@style/WorkoutButtonStyleUs"
+                android:text="15"
+                app:enabled="@{!WorkoutData.disabledInclineUpdate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvTopNumberUs11"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Group
+            tools:visibility="visible"
+            android:id="@+id/groupTopNumberUs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="cTopNumberUs,tvTopTextUs,v_top_us_1,v_top_us_2" />
+
+
+        <!--        android:visibility="@{WorkoutData.disabledInclineUpdate ? (!isUs ? View.GONE : View.VISIBLE) : View.GONE}"-->
+        <!--        US 隱藏 LEVEL-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/groupTreadmillViewLevelNoViewUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="824dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/level_nnot_available"
+            android:textColor="@color/color6b6b6b"
+            android:textSize="24sp"
+            android:visibility="@{WorkoutUtil.checkLevelView(WorkoutData.disabledLevelUpdate)}"
+            app:backgroundTint="@color/btn_252e37_323f4b"
+            app:icon="@drawable/icon_level_not_available_48"
+            app:iconGravity="textTop"
+            app:iconPadding="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="gone" />
+
+
+        <!--        US 隱藏 INCLINE-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/groupTreadmillViewInclineNoViewUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/incline_nnot_available"
+            android:textColor="@color/color6b6b6b"
+            android:textSize="24sp"
+            android:visibility="@{WorkoutData.disabledInclineUpdate ? (!isUs ? View.GONE : View.VISIBLE) : View.GONE}"
+            app:backgroundTint="@color/btn_252e37_323f4b"
+            app:icon="@drawable/icon_incline_not_available_48"
+            app:iconGravity="textTop"
+            app:iconPadding="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="gone" />
+
+
+        <!--        US 隱藏 SPEED-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/groupTreadmillViewSpeedNoViewUs"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            android:layout_marginTop="40dp"
+            tools:layout_marginEnd="40dp"
+            android:text="@string/speed_nnot_available"
+            android:textColor="@color/color6b6b6b"
+            android:textSize="24sp"
+            android:visibility="@{WorkoutData.disabledSpeedUpdate ? (!isUs ? View.GONE : View.VISIBLE) : View.GONE}"
+            app:backgroundTint="@color/color252e37"
+            app:icon="@drawable/icon_speed_not_available_48"
+            app:iconGravity="textTop"
+            app:iconPadding="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="gone" />
+
+
+        <!--        US 隱藏MENU-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cStatsUsNoView"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            tools:layout_marginStart="40dp"
+            app:layoutMarginStart="@{isGGG ? 18 : 40}"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            android:text="@string/views_nnot_available"
+            android:textColor="@color/color6b6b6b"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:backgroundTint="@color/color252e37"
+            app:icon="@drawable/icon_not_available_48"
+            app:iconGravity="textTop"
+            app:iconPadding="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="invisible" />
+
+
+        <!--     bike   US 隱藏MENU-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cStatsUsNoViewBike"
+            style="@style/MButton_252e37"
+            android:layout_width="232dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="40dp"
+            tools:layout_marginEnd="40dp"
+            app:layoutMarginEnd="@{isGGG ? 18 : 40}"
+            android:text="@string/views_nnot_available"
+            android:textColor="@color/color6b6b6b"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:backgroundTint="@color/color252e37"
+            app:icon="@drawable/icon_not_available_48"
+            app:iconGravity="textTop"
+            app:iconPadding="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCorner24"
+            tools:visibility="invisible" />
+
+
+<!--        <TextView-->
+<!--            android:text="GGGGGGG"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:visibility="@{isGGG ? View.VISIBLE : View.GONE}"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:textSize="190sp"-->
+<!--            android:layout_width="500dp"-->
+<!--            android:layout_height="500dp"/>-->
+
+
+        <View
+            android:visibility="gone"
+            android:clickable="true"
+            android:id="@+id/hhBG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

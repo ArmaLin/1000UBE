@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="688dp"
+    android:background="@drawable/panel_bg_top_1c242a"
+    tools:context=".alert_message.CautionSpeedWindow">
+
+
+
+    <TextView
+        android:id="@+id/tvText"
+        android:gravity="center"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="54sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="176dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/caution_speed_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvSpeedNumber"
+        android:gravity="center"
+        android:fontFamily="@font/inter_extrabold"
+        android:textSize="96sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="336dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="12.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:id="@+id/btnGotIt"
+        android:background="@color/btn_click_1396ef"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/Got_it"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="96dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

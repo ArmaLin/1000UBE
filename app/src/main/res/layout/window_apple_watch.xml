@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/half_transparent50"
+    tools:context=".settings.AppleWatchWindow">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/panel_bg_all_40_1c242a"
+        android:layout_width="924dp"
+        android:layout_height="675dp">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:layout_marginTop="195dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/inboxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/how_it_works"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:alpha="0.3"
+        android:id="@+id/a1"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/icon_nfc_75"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+    <TextView
+        android:gravity="center"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="275dp"
+        android:id="@+id/bText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorCBD2D8"
+        android:textSize="32sp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/apple_watch_works"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:alpha="0.3"
+            android:id="@+id/a2"
+            android:layout_marginBottom="64dp"
+            android:src="@drawable/button_apple_watch_80_"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

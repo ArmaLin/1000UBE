@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下时半透明 -->
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/icon_samsung_connected"
+        android:alpha="0.6" />
+
+    <!-- 禁用时，用灰色版；如果你已经在布局里 via android:tint 处理 disabled 颜色，
+         这里也可以只写 drawable -->
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/icon_samsung_connected" />
+
+    <!-- 默认状态 -->
+    <item
+        android:drawable="@drawable/icon_samsung_connected" />
+</selector>

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/welcomeFragment">
+
+    <navigation
+        android:id="@+id/navigation_login"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.dyaco.spirit_commercial.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_qrcodeLoginFragment"
+                app:destination="@id/qrcodeLoginFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_nfcLoginFragment"
+                app:destination="@id/nfcLoginFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_gotoWorkoutsFragment"
+                app:destination="@id/gotoWorkoutsFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_createAccountWelcomeFragment"
+                app:destination="@id/createAccountWelcomeFragment" />
+        </fragment>
+
+        <dialog
+            android:id="@+id/qrcodeLoginFragment"
+            android:name="com.dyaco.spirit_commercial.login.QrcodeLoginFragmentBottom"
+            android:label="fragment_qrcode_login"
+            tools:layout="@layout/fragment_qrcode_login">
+            <action
+                android:id="@+id/action_qrcodeLoginFragment_to_createAccountWelcomeFragment"
+                app:destination="@id/createAccountWelcomeFragment" />
+        </dialog>
+
+        <dialog
+            android:id="@+id/nfcLoginFragment"
+            android:name="com.dyaco.spirit_commercial.login.NfcLoginFragmentBottom"
+            android:label="fragment_nfc_login"
+            tools:layout="@layout/fragment_nfc_login" />
+
+        <action
+            android:id="@+id/action_global_mainBlankFragment"
+            app:destination="@id/mainBlankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <!--app:popUpTo="@id/loginFragment" 才會觸發 LoginFragment onDestroy
+            沒onDestroy，Event會持續監聽-->
+
+        <dialog
+            android:id="@+id/gotoWorkoutsFragment"
+            android:name="com.dyaco.spirit_commercial.login.GotoWorkoutsFragmentBottom"
+            android:label="GotoWorkoutsFragment"
+            tools:layout="@layout/fragment_gotoworkout_login" />
+        <dialog
+            android:id="@+id/createAccountWelcomeFragment"
+            android:name="com.dyaco.spirit_commercial.login.CreateAccountWelcomeFragmentBottom"
+            android:label="fragment_create_account_welcome"
+            tools:layout="@layout/fragment_create_account_welcome"/>
+        <dialog
+            android:id="@+id/createAccountAgeFragment"
+            android:name="com.dyaco.spirit_commercial.login.CreateAccountAgeFragmentBottom"
+            android:label="fragment_create_account_age"
+            tools:layout="@layout/fragment_create_account_age">
+
+        </dialog>
+        <dialog
+            android:id="@+id/createAccountHeightFragment"
+            android:name="com.dyaco.spirit_commercial.login.CreateAccountHeightFragmentBottom"
+            android:label="fragment_create_account_height"
+            tools:layout="@layout/fragment_create_account_height" />
+        <dialog
+            android:id="@+id/createAccountWeightFragment"
+            android:name="com.dyaco.spirit_commercial.login.CreateAccountWeightFragmentBottom"
+            android:label="fragment_create_account_weight"
+            tools:layout="@layout/fragment_create_account_weight">
+
+        </dialog>
+        <dialog
+            android:id="@+id/createAccountGenderFragment"
+            android:name="com.dyaco.spirit_commercial.login.CreateAccountGenderFragmentBottom"
+            android:label="fragment_create_account_gender"
+            tools:layout="@layout/fragment_create_account_gender">
+
+        </dialog>
+        <action
+            android:id="@+id/action_global_navigation_maintenance"
+            app:destination="@id/navigation_maintenance" />
+
+
+    </navigation>
+
+    <!--    <argument> android:name -> 參數名稱-->
+    <!--    app:argType -> 參數型態-->
+    <!--    app:nullable -> 參數是否可為null-->
+    <!--    android:defaultValue -> 參數預設值，@null代表null-->
+
+    <!--    app:popUpToInclusive="true" popUpInclusive 的意思是pop到A，且把A destination也pop掉。-->
+
+    <!--
+     <action
+     app:popUpTo="@id/programsBannerFragment"
+     programsBannerFragment 會被Destroy-->
+
+    <!--    enterAnim：目標頁進來的動畫-->
+    <!--    exitAnim：當前頁退出的動畫-->
+    <!--    popEnterAnim：按下返回鍵，目標頁進來的動畫-->
+    <!--    popExitAnim：按下返回鍵，當前頁退出的動畫-->
+
+
+    <fragment
+        android:id="@+id/mainBlankFragment"
+        android:name="com.dyaco.spirit_commercial.MainDashboardFragment"
+        android:label="fragment_main_blank"
+        tools:layout="@layout/fragment_main_dashboard">
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_mainBlankFragment_to_navigation_login"
+            app:destination="@id/navigation_login"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <navigation
+        android:id="@+id/navigation_maintenance"
+        app:startDestination="@id/maintenanceModeFragment">
+        <fragment
+            android:id="@+id/maintenanceModeFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceModeFragment"
+            android:label="MaintenanceModeFragment"
+            tools:layout="@layout/popup_maintenance">
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_deviceIdFragment"
+                app:destination="@id/deviceIdFragment2"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceErrorCodeLogFragment"
+                app:destination="@id/maintenanceErrorCodeLogFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceDriveMotorTestFragment"
+                app:destination="@id/maintenanceDriveMotorTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceSensorTestFragment"
+                app:destination="@id/maintenanceSensorTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceTouchPanelFragment"
+                app:destination="@id/maintenanceTouchPanelFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceNfcTestFragment"
+                app:destination="@id/maintenanceNfcTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceSoftwareTestFragment"
+                app:destination="@id/maintenanceSoftwareTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceCommunicationTestFragment"
+                app:destination="@id/maintenanceCommunicationTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceBrakeTestFragment"
+                app:destination="@id/maintenanceBrakeTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceKeyTestFragment"
+                app:destination="@id/maintenanceKeyTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceLanguageFragment"
+                app:destination="@id/maintenanceLanguageFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceWifiTestFragment"
+                app:destination="@id/maintenanceWifiTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceWattCallibrationFragment"
+                app:destination="@id/maintenanceWattCallibrationFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceRestOdometerFragment"
+                app:destination="@id/maintenanceRestOdometerFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceOrganizationFragment"
+                app:destination="@id/maintenanceOrganizationFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceInclineMotorTestFragment"
+                app:destination="@id/maintenanceInclineMotorTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceUseLimitsFragment"
+                app:destination="@id/maintenanceUseLimitsFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceFirmwareTestFragment"
+                app:destination="@id/maintenanceFirmwareTestFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceDateTimeFragment"
+                app:destination="@id/maintenanceDateTimeFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceDeviceTypeChooseFragment"
+                app:destination="@id/maintenanceDeviceTypeChooseFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceTvSettingsFragment"
+                app:destination="@id/maintenanceTvSettingsFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceAdvertisementFragment"
+                app:destination="@id/maintenanceAdvertisementFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceAppManagerFragment"
+                app:destination="@id/maintenanceAppManagerFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceUsageRestrictionsFragment"
+                app:destination="@id/maintenanceUsageRestrictionsFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceRetailModeVideoFragment3"
+                app:destination="@id/maintenanceRetailModeVideoFragment3" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceSplashScreenImageFragment"
+                app:destination="@id/maintenanceSplashScreenImageFragment" />
+            <action
+                android:id="@+id/action_maintenanceModeFragment_to_maintenanceDeviceTerritoryChooseFragment"
+                app:destination="@id/maintenanceDeviceTerritoryChooseFragment" />
+
+        </fragment>
+        <action
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            android:id="@+id/action_global_navigation_login"
+            app:destination="@id/navigation_login"
+            app:popUpTo="@id/navigation_login"
+            app:popUpToInclusive="true" />
+        <dialog
+            android:id="@+id/deviceIdFragment2"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDeviceIdFragment"
+            android:label="fragment_device_id"
+            tools:layout="@layout/fragment_maintenance_device_id" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_key_test"
+            android:id="@+id/maintenanceKeyTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceKeyTestFragment"
+            android:label="MaintenanceKeyTestFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_language"
+            android:id="@+id/maintenanceLanguageFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceLanguageFragment"
+            android:label="MaintenanceLanguageFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_nfc_test"
+            android:id="@+id/maintenanceNfcTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceNfcTestFragment"
+            android:label="MaintenanceNfcTestFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_software_test"
+            android:id="@+id/maintenanceSoftwareTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceSoftwareTestFragment"
+            android:label="MaintenanceSoftwareTestFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_touch_panel"
+            android:id="@+id/maintenanceTouchPanelFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceTouchPanelFragment"
+            android:label="MaintenanceTouchPanelFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_use_limits"
+            android:id="@+id/maintenanceUseLimitsFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceUseLimitsFragment"
+            android:label="MaintenanceUseLimitsFragment" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_wifi"
+            android:id="@+id/maintenanceWifiTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceWifiTestFragment"
+            android:label="MaintenanceWifiTestFragment" />
+        <dialog
+            android:id="@+id/maintenanceBrakeTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceBrakeTestFragment"
+            android:label="fragment_maintenance_brake_test"
+            tools:layout="@layout/fragment_maintenance_brake_test" />
+        <dialog
+            android:id="@+id/maintenanceCommunicationTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceCommunicationTestFragment"
+            android:label="fragment_maintenance_communication_test"
+            tools:layout="@layout/fragment_maintenance_communication_test" />
+        <dialog
+            android:id="@+id/maintenanceDriveMotorTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDriveMotorTestFragment"
+            android:label="fragment_maintenance_drive_motor_test"
+            tools:layout="@layout/fragment_maintenance_drive_motor_test" />
+        <dialog
+            android:id="@+id/maintenanceErrorCodeLogFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceErrorCodeLogFragment"
+            android:label="fragment_maintenance_error_code_log"
+            tools:layout="@layout/fragment_maintenance_error_code_log" />
+        <dialog
+            android:id="@+id/maintenanceFirmwareTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceFirmwareTestFragment"
+            android:label="fragment_maintenance_firmware_test"
+            tools:layout="@layout/fragment_maintenance_firmware_test" />
+        <dialog
+            android:id="@+id/maintenanceInclineMotorTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceInclineMotorTestFragment"
+            android:label="fragment_maintenance_incline_motor_test"
+            tools:layout="@layout/fragment_maintenance_incline_motor_test" />
+        <dialog
+            android:id="@+id/maintenanceOrganizationFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceOrganizationFragment"
+            android:label="fragment_maintenance_organization"
+            tools:layout="@layout/fragment_maintenance_organization" />
+        <dialog
+            android:id="@+id/maintenanceRestOdometerFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceRestOdometerFragment"
+            android:label="fragment_maintenance_rest_odometer"
+            tools:layout="@layout/fragment_maintenance_rest_odometer" />
+        <dialog
+            android:id="@+id/maintenanceSensorTestFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceSensorTestFragment"
+            android:label="fragment_maintenance_sensor_test"
+            tools:layout="@layout/fragment_maintenance_sensor_test" />
+        <dialog
+            android:id="@+id/maintenanceWattCallibrationFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceWattCallibrationFragment"
+            android:label="fragment_maintenance_watt_callibration"
+            tools:layout="@layout/fragment_maintenance_watt_calibration" />
+        <dialog
+            android:id="@+id/maintenanceDateTimeFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDateTimeFragment"
+            android:label="fragment_maintenance_datetime"
+            tools:layout="@layout/fragment_maintenance_datetime" />
+        <dialog
+            tools:layout="@layout/fragment_maintenance_device_type_choose"
+            android:id="@+id/maintenanceDeviceTypeChooseFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDeviceTypeChooseFragment"
+            android:label="MaintenanceDeviceTypeChooseFragment" />
+
+        <dialog
+            tools:layout="@layout/fragment_maintenance_device_territory_choose"
+            android:id="@+id/maintenanceDeviceTerritoryChooseFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDeviceTerritoryChooseFragment"
+            android:label="MaintenanceDeviceTerritoryChooseFragment" />
+
+        <dialog
+            tools:layout="@layout/fragment_maintenance_tv_settings"
+            android:id="@+id/maintenanceTvSettingsFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceTvSettingsFragment"
+            android:label="MaintenanceTvSettingsFragment" />
+
+
+        <dialog
+            android:id="@+id/maintenanceAdvertisementFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceAdvertisementFragment"
+            android:label="fragment_maintenance_advertisement"
+            tools:layout="@layout/fragment_maintenance_advertisement" />
+        <dialog
+            android:id="@+id/maintenanceAppManagerFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceAppManagerFragment"
+            android:label="fragment_maintenance_appmanager"
+            tools:layout="@layout/fragment_maintenance_appmanager" />
+
+        <dialog
+            android:id="@+id/maintenanceUsageRestrictionsFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceUsageRestrictionsFragment"
+            android:label="MaintenanceUsageRestrictionsFragment"
+            tools:layout="@layout/fragment_maintenance_usage_restrictions">
+        </dialog>
+
+        <dialog
+            tools:layout="@layout/fragment_maintenance_retail_mode_video"
+            android:id="@+id/maintenanceRetailModeVideoFragment3"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceRetailModeVideoFragment"
+            android:label="MaintenanceRetailModeVideoFragment" >
+        </dialog>
+
+        <dialog
+            tools:layout="@layout/fragment_maintenance_splash_screen_image"
+            android:id="@+id/maintenanceSplashScreenImageFragment"
+            android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceSplashScreenImageFragment"
+            android:label="MaintenanceSplashScreenImageFragment" />
+
+
+
+    </navigation>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.dyaco.spirit_commercial.maintenance_mode.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.dyaco.spirit_commercial.login.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_welcomeFragment_to_navigation_login"
+            app:destination="@id/navigation_login" />
+        <action
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_welcomeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_welcomeFragment_to_productRegistrationFragment"
+            app:destination="@id/productRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productRegistrationFragment"
+        android:name="com.dyaco.spirit_commercial.maintenance_mode.ProductRegistrationFragment"
+        android:label="fragment_product_registration"
+        tools:layout="@layout/fragment_product_registration" />
+    <dialog
+        android:id="@+id/maintenanceDeviceTerritoryChooseFragment2"
+        android:name="com.dyaco.spirit_commercial.maintenance_mode.MaintenanceDeviceTerritoryChooseFragment"
+        android:label="fragment_maintenance_device_territory_choose"
+        tools:layout="@layout/fragment_maintenance_device_territory_choose" />
+
+</navigation>

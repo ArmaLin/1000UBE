@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:state_pressed="true">
+        <bitmap android:alpha="0.6"
+            android:src="@drawable/icon_samsung_default" />
+    </item>
+
+    <item android:state_enabled="false"
+        android:state_pressed="false">
+        <bitmap android:alpha="1"
+            android:src="@drawable/icon_samsung_default"
+            android:tintMode="src_atop"
+            android:tint="@color/half_transparent50" />
+    </item>
+
+    <item android:drawable="@drawable/icon_samsung_default"
+        android:state_enabled="true"
+        android:state_pressed="false" />
+</selector>

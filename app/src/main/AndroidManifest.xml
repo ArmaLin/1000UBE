@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:sharedUserId="android.uid.system"
+    package="com.dyaco.spirit_commercial">
+
+<!--    &lt;!&ndash; Include these declarations if your application does not function without BLE features. &ndash;&gt;-->
+<!--    <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>-->
+<!--    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>-->
+<!--    <uses-feature android:name="android.hardware.telephony" android:required="false" />-->
+<!--    <uses-feature android:name="android.software.companion_device_setup" android:required="false" />-->
+<!--    <uses-feature android:name="android.hardware.usb.host" android:required="false" />-->
+
+<!--    &lt;!&ndash; (OPTIONAL) PERMISSIONS REQUIRED FOR HEALTH SDK SERVICE &ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>-->
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />-->
+
+<!--    &lt;!&ndash; (OPTIONAL) APPS USING COMPANION DEVICE MANAGER PAIRING SHOULD DECLARE THESE PERMISSIONS &ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND" />-->
+<!--    <uses-permission android:name="android.permission.REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND" />-->
+<!--    <uses-permission android:name="android.permission.REQUEST_COMPANION_PROFILE_WATCH" />-->
+
+
+    <!-- Permission used by Health SDK Sample, not required for SDK use -->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>-->
+
+
+<!--    android:sharedUserId="android.uid.system"-->
+    <uses-permission android:name="android.permission.SERIAL_PORT" tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+
+<!--    <uses-permission android:name="android.permission.INJECT_EVENTS" tools:ignore="ProtectedPermissions" />-->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!--SystemApp改時間-->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" tools:ignore="ProtectedPermissions" />
+    <!--SystemApp改時區-->
+    <uses-permission android:name="android.permission.SET_TIME_ZONE" tools:ignore="ProtectedPermissions" />
+    <!--SystemApp重開機-->
+    <uses-permission android:name="android.permission.REBOOT" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="com.dyaco.spirit_commercial.broadcast.permission" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature android:name="android.hardware.nfc" />
+
+    <uses-permission
+        android:name="android.permission.LOCAL_MAC_ADDRESS"
+        tools:ignore="ProtectedPermissions" /> <!-- Foreground Permission required for newer Android SDKs -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Required to access notification protocols and to check for other Garmin app on the mobile device -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" /> <!-- SDK Required Permission -->
+    <uses-permission android:name="${applicationId}.permission.RECEIVE_BROADCASTS" />
+    <uses-permission android:name="android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND" />
+    <uses-permission android:name="android.permission.REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND" />
+    <permission
+        android:name="${applicationId}.permission.RECEIVE_BROADCASTS"
+        android:protectionLevel="normal" /> <!-- Media Control Permission for Advanced Music Controls -->
+    <uses-permission android:name="android.Manifest.permission.MEDIA_CONTENT_CONTROL" /> <!-- Permission needed for Android Oreo call handling -->
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions" />
+
+
+
+    <uses-permission
+        android:name="android.permission.SET_TIME"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" tools:ignore="ProtectedPermissions" />
+<!--    未知來源安裝權限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--  ??garmin會用到 允許訪問後台?? -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <uses-permission android:name="android.permission.MANAGE_APP_OPS_MODES" tools:ignore="ProtectedPermissions" />
+
+    <!--
+ 使用全螢幕通知 Required for apps targeting Build.VERSION_CODES.Q that want to use notification full screen intents.
+ -->
+<!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
+
+<!--    android:persistent="true"-->
+    <application
+        android:requestLegacyExternalStorage="true"
+        android:name=".App"
+        android:allowBackup="true"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:extractNativeLibs="true"
+        android:fullBackupContent="@xml/my_backup_rules"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/${appIcon}"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@drawable/${appIcon}"
+        android:screenOrientation="landscape"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup,android:label">
+
+        <!--
+        android:icon="@drawable/${appIcon}" >> manifestPlaceholders
+        android:theme="@style/AppTheme" -->
+        <activity
+            android:screenOrientation="landscape"
+            android:configChanges="orientation"
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/LauncherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.nfc.action.TAG_DISCOVERED" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
+
+        </activity> <!-- authorities：你app的包名.fileProvider -->
+        <!-- grantUriPermissions：必須是true，表示授予URI臨時訪問權限 -->
+        <!-- exported：必須是false -->
+        <!-- resource：中的@xml/file_paths是我們接下來要添加的文件 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.dyaco.spirit_commercial.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider> <!-- 安裝完畢 -->
+        <receiver
+            android:name=".product_flavor.InstalledReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!--        android:enabled="false" GARMIN連線成功時會ANR-->
+<!--        <service-->
+<!--            android:name="com.garmin.health.GarminHealthService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false"-->
+<!--            android:process=":ghProcess"-->
+<!--            tools:replace="android:enabled,android:process" />-->
+<!--        <service-->
+<!--            android:name="com.garmin.android.gncs.GNCSListenerService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false"-->
+<!--            android:process=":ghProcess"-->
+<!--            tools:replace="android:enabled,android:process" />-->
+<!--        <service-->
+<!--            android:name="com.garmin.android.services.ForegroundServiceBroker"-->
+<!--            android:foregroundServiceType="connectedDevice|dataSync|location"-->
+<!--            android:process=":ghProcess"-->
+<!--            android:exported="false"-->
+<!--            tools:replace="android:process" />-->
+
+
+        <!-- REQUIRED - This metadata tag is required to allow normal Health SDK function, include exactly as it appears here. -->
+        <meta-data
+            android:name="com.garmin.android.gncs.permission"
+            android:value="${applicationId}.permission.RECEIVE_BROADCASTS"/>
+
+        <!-- Some common metadata configs used for special cases of SDK behavior -->
+        <meta-data
+            android:name="com.garmin.health.suppress_sync_on_reconnect"
+            android:value="false"/>
+        <meta-data
+            android:name="com.garmin.health.should_probe_to_scan"
+            android:value="true"/>
+        <meta-data
+            android:name="com.garmin.health.keep_database_data_on_unpair"
+            android:value="false"/>
+
+        <!-- Configurations used to turn on Health SDK file logging -->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.force_file_logging"-->
+<!--            android:value="true"/>-->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.use_sync_file_logger"-->
+<!--            android:value="true"/>-->
+
+        <!-- Metadata used by the Health SDK Service to post a foreground notification describing use of the Health SDK -->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.foreground_notification_icon"-->
+<!--            android:resource="@drawable/health_logo"/>-->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.notification_channel_name"-->
+<!--            android:value="Garmin Health Service"/>-->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.notification_channel_description"-->
+<!--            android:value="Channel for notification related to the Garmin Health SDK on Behalf of Partner Applications"/>-->
+<!--        <meta-data-->
+<!--            android:name="com.garmin.health.foreground_notification_title"-->
+<!--            android:value="Garmin Health Service"/>-->
+    </application>
+
+</manifest>

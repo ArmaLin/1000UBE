@@ -1,0 +1,738 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "53515e093ed964c1e801bdd1c48b05fb",
+    "entities": [
+      {
+        "tableName": "user_profile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userName` TEXT, `userId` INTEGER NOT NULL, `userImage` INTEGER NOT NULL, `userType` INTEGER NOT NULL, `weight_metric` INTEGER NOT NULL, `height_metric` INTEGER NOT NULL, `weight_imperial` INTEGER NOT NULL, `height_imperial` INTEGER NOT NULL, `birthday` TEXT, `age` INTEGER NOT NULL, `gender` INTEGER NOT NULL, `unit` INTEGER NOT NULL, `customLevelNum` TEXT, `customInclineNum` TEXT, `totalDistance_metric` REAL NOT NULL, `totalDistance_imperial` REAL NOT NULL, `totalRun` REAL NOT NULL, `avgPaceInMonth` REAL NOT NULL, `sleepMode` INTEGER NOT NULL, `levelDiagram` BLOB, `inclineDiagram` BLOB, `soleAccountNo` TEXT, `soleAccount` TEXT, `solePassword` TEXT, `soleEmail` TEXT, `soleSyncPassword` TEXT, `soleRegistType` TEXT, `soleHeaderImgUrl` TEXT, `wattAccumulate` REAL NOT NULL, `wattFrequency` INTEGER NOT NULL, `workoutMonth` INTEGER NOT NULL, `avatarTag` INTEGER NOT NULL, `memberSince` INTEGER, `membershipExpirationDate` INTEGER, `isVip` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userImage",
+            "columnName": "userImage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userType",
+            "columnName": "userType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight_metric",
+            "columnName": "weight_metric",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height_metric",
+            "columnName": "height_metric",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight_imperial",
+            "columnName": "weight_imperial",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height_imperial",
+            "columnName": "height_imperial",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "customLevelNum",
+            "columnName": "customLevelNum",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "customInclineNum",
+            "columnName": "customInclineNum",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalDistance_metric",
+            "columnName": "totalDistance_metric",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalDistance_imperial",
+            "columnName": "totalDistance_imperial",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalRun",
+            "columnName": "totalRun",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgPaceInMonth",
+            "columnName": "avgPaceInMonth",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepMode",
+            "columnName": "sleepMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelDiagram",
+            "columnName": "levelDiagram",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "inclineDiagram",
+            "columnName": "inclineDiagram",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleAccountNo",
+            "columnName": "soleAccountNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleAccount",
+            "columnName": "soleAccount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "solePassword",
+            "columnName": "solePassword",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleEmail",
+            "columnName": "soleEmail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleSyncPassword",
+            "columnName": "soleSyncPassword",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleRegistType",
+            "columnName": "soleRegistType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleHeaderImgUrl",
+            "columnName": "soleHeaderImgUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wattAccumulate",
+            "columnName": "wattAccumulate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wattFrequency",
+            "columnName": "wattFrequency",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "workoutMonth",
+            "columnName": "workoutMonth",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avatarTag",
+            "columnName": "avatarTag",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberSince",
+            "columnName": "memberSince",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "membershipExpirationDate",
+            "columnName": "membershipExpirationDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isVip",
+            "columnName": "isVip",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_user_profile_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_profile_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "error_msg",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `errorCode` TEXT, `errorMessage` TEXT, `errorDate` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "errorCode",
+            "columnName": "errorCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorMessage",
+            "columnName": "errorMessage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorDate",
+            "columnName": "errorDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_error_msg_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_error_msg_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ranks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `memberName` TEXT, `memberNo` INTEGER NOT NULL, `memberHours` INTEGER NOT NULL, `memberSpeed` REAL NOT NULL, `memberCal` REAL NOT NULL, `memberDistance` REAL NOT NULL, `memberAvatar` BLOB, `isMe` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberName",
+            "columnName": "memberName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "memberNo",
+            "columnName": "memberNo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberHours",
+            "columnName": "memberHours",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberSpeed",
+            "columnName": "memberSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberCal",
+            "columnName": "memberCal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberDistance",
+            "columnName": "memberDistance",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberAvatar",
+            "columnName": "memberAvatar",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isMe",
+            "columnName": "isMe",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ranks_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ranks_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "device",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`deviceId` INTEGER NOT NULL, `deviceRunningTime` INTEGER NOT NULL, `deviceDistance` REAL NOT NULL, `deviceStep` INTEGER NOT NULL, `deviceFirstLaunchTime` INTEGER, `e050hour` INTEGER NOT NULL, `e052hour` INTEGER NOT NULL, `e0BAhour` INTEGER NOT NULL, `e051time` INTEGER, `e052time` INTEGER, `e053time` INTEGER, `e054time` INTEGER, `e0BAtime` INTEGER, `e0BBtime` INTEGER, `e0BCtime` INTEGER, `e0E0time` INTEGER, `e0E1time` INTEGER, `e0E2time` INTEGER, `type` INTEGER NOT NULL, `model` INTEGER NOT NULL, `antPlusDeviceId` INTEGER NOT NULL, `units` INTEGER NOT NULL, `nfc` INTEGER NOT NULL, `video` INTEGER NOT NULL, `tv` INTEGER NOT NULL, `protocol` INTEGER NOT NULL, `beep` INTEGER NOT NULL, `pauseMode` INTEGER NOT NULL, `sleepMode` INTEGER NOT NULL, `sleepAfter` INTEGER NOT NULL, PRIMARY KEY(`deviceId`))",
+        "fields": [
+          {
+            "fieldPath": "deviceId",
+            "columnName": "deviceId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceRunningTime",
+            "columnName": "deviceRunningTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceDistance",
+            "columnName": "deviceDistance",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceStep",
+            "columnName": "deviceStep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deviceFirstLaunchTime",
+            "columnName": "deviceFirstLaunchTime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e050hour",
+            "columnName": "e050hour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "e052hour",
+            "columnName": "e052hour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "e0BAhour",
+            "columnName": "e0BAhour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "e051time",
+            "columnName": "e051time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e052time",
+            "columnName": "e052time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e053time",
+            "columnName": "e053time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e054time",
+            "columnName": "e054time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0BAtime",
+            "columnName": "e0BAtime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0BBtime",
+            "columnName": "e0BBtime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0BCtime",
+            "columnName": "e0BCtime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0E0time",
+            "columnName": "e0E0time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0E1time",
+            "columnName": "e0E1time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "e0E2time",
+            "columnName": "e0E2time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "model",
+            "columnName": "model",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "antPlusDeviceId",
+            "columnName": "antPlusDeviceId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "units",
+            "columnName": "units",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nfc",
+            "columnName": "nfc",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "video",
+            "columnName": "video",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tv",
+            "columnName": "tv",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "protocol",
+            "columnName": "protocol",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beep",
+            "columnName": "beep",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pauseMode",
+            "columnName": "pauseMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepMode",
+            "columnName": "sleepMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepAfter",
+            "columnName": "sleepAfter",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "deviceId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_device_deviceId",
+            "unique": false,
+            "columnNames": [
+              "deviceId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_device_deviceId` ON `${TABLE_NAME}` (`deviceId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "upload_workout_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dataJson` TEXT, `isUploaded` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataJson",
+            "columnName": "dataJson",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isUploaded",
+            "columnName": "isUploaded",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "media_apps_entity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`packageName` TEXT NOT NULL, `appName` TEXT, `mediaType` TEXT, `version` TEXT, `comment` TEXT, `gmsNeeded` TEXT, `forceUpdates` TEXT, `versionCode` INTEGER NOT NULL, `sort` INTEGER NOT NULL, `md5` TEXT, `downloadUrl` TEXT, `path` TEXT, `webUrl` TEXT, `updateTime` INTEGER NOT NULL, `isUpdate` INTEGER NOT NULL, `appIconS` BLOB, `appIconM` BLOB, `appIconL` BLOB, PRIMARY KEY(`packageName`))",
+        "fields": [
+          {
+            "fieldPath": "packageName",
+            "columnName": "packageName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appName",
+            "columnName": "appName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mediaType",
+            "columnName": "mediaType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gmsNeeded",
+            "columnName": "gmsNeeded",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forceUpdates",
+            "columnName": "forceUpdates",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "versionCode",
+            "columnName": "versionCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sort",
+            "columnName": "sort",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "md5",
+            "columnName": "md5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "downloadUrl",
+            "columnName": "downloadUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "webUrl",
+            "columnName": "webUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updateTime",
+            "columnName": "updateTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isUpdate",
+            "columnName": "isUpdate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appIconS",
+            "columnName": "appIconS",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appIconM",
+            "columnName": "appIconM",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appIconL",
+            "columnName": "appIconL",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "packageName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '53515e093ed964c1e801bdd1c48b05fb')"
+    ]
+  }
+}

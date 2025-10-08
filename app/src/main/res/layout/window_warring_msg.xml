@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notifyMsg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_test"
+    android:fontFamily="@font/inter_bold"
+    android:includeFontPadding="false"
+    android:gravity="center_vertical"
+    android:text=""
+    android:textColor="@color/white"
+    android:textSize="24sp"
+    tools:context=".alert_message.NotifyWarringWindow" />
+
+<!-- 要移除 getBinding().notifyMsg.setBackgroundResource(drawableRes);
+        用 shape_test.xml-->
+
+
+<!--<TextView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:paddingStart="24dp"-->
+<!--    android:paddingTop="28dp"-->
+<!--    android:paddingBottom="20dp"-->
+<!--    android:paddingEnd="64dp"-->
+<!--    android:id="@+id/notifyMsg"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:background="@drawable/shape_test"-->
+<!--    android:fontFamily="@font/inter_bold"-->
+<!--    android:includeFontPadding="false"-->
+<!--    android:gravity="center_vertical"-->
+<!--    android:text=""-->
+<!--    android:textColor="@color/white"-->
+<!--    android:textSize="24sp"-->
+<!--    tools:context=".alert_message.NotifyWarringWindow" />-->

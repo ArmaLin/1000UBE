@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.dyaco.spirit_commercial.R" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="userProfileViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="general"
+            type="com.dyaco.spirit_commercial.support.intdef.GENERAL" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+        <variable
+            name="comm"
+            type="com.dyaco.spirit_commercial.support.CommonUtils" />
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <!--    tools:viewBindingIgnore="true"-->
+
+        <fragment
+            android:id="@+id/mainNavigation"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation_main" />
+
+        <!--    app:navGraph="@navigation/navigation_main"-->
+
+
+        <!--TOP ICON-->
+        <!--                    app:visibility="@{AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.INVISIBLE}"-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:alpha="@{AppStatusViewModel.isAudioConnected ? 1f : 0.5f}"
+            android:clickable="@{AppStatusViewModel.isAudioConnected}"
+            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? R.drawable.btn_click_sound_alpha : R.drawable.btn_top_sound}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.INVISIBLE}"
+            tools:background="@drawable/btn_top_sound"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <!--        <androidx.appcompat.widget.AppCompatImageButton-->
+        <!--            android:id="@+id/btnFan"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="12dp"-->
+        <!--            android:background="@drawable/btn_top_fan"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/btnSound"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_PAUSE ? View.VISIBLE : View.GONE}"-->
+        <!--            tools:ignore="SpeakableTextPresentCheck" />-->
+
+
+        <!--        app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}"-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{AppStatusViewModel.isGem3On ? 1f : 0.5f}"
+            android:clickable="@{AppStatusViewModel.isGem3On}"
+            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? R.drawable.btn_click_hr_alpha : R.drawable.btn_top_hr}"
+            app:layout_constraintStart_toEndOf="@+id/btnSound"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}"
+            tools:background="@drawable/btn_top_hr"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivHrNotify"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shape_oval_0dac87"
+            android:visibility="@{(AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY) ? (AppStatusViewModel.topHrIconConnected ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"
+            app:layout_constraintCircle="@id/btnHR"
+            app:layout_constraintCircleAngle="52"
+            app:layout_constraintCircleRadius="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnHR"
+            app:layout_constraintTop_toTopOf="@+id/btnHR"
+            tools:ignore="ImageContrastCheck,VisualLintBounds" />
+
+        <!--        android:alpha="@{AppStatusViewModel.isMediaPlaying ? 0.5f : 1f}"-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{AppStatusViewModel.isBtOn ? 1f : 0.5f}"
+            android:clickable="@{AppStatusViewModel.isBtOn}"
+            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? R.drawable.btn_click_bt_alpha : R.drawable.btn_top_bluetooth}"
+            app:layout_constraintStart_toEndOf="@+id/btnHR"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}"
+            tools:background="@drawable/btn_top_bluetooth"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBtNotify"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shape_oval_0dac87"
+            android:visibility="@{(AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY) ? (AppStatusViewModel.isAudioConnected ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"
+            app:layout_constraintCircle="@id/btnBT"
+            app:layout_constraintCircleAngle="52"
+            app:layout_constraintCircleRadius="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnBT"
+            app:layout_constraintTop_toTopOf="@+id/btnBT"
+            tools:ignore="ImageContrastCheck,VisualLintBounds" />
+
+        <!--     有bug   app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? (AppStatusViewModel.isAudioConnected ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"-->
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ibWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundResource="@{AppStatusViewModel.wifiState}"
+            app:layout_constraintStart_toEndOf="@+id/btnBT"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE ? View.INVISIBLE : View.VISIBLE}"
+            tools:background="@drawable/btn_wifi_0"
+            tools:ignore="ImageContrastCheck" />
+
+
+        <!--        <item> tag requires a 'drawable' attribute or child tag defining a drawable-->
+        <!--        android:background="@color/btn_1c242a_252e37"-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnMemberProfile"
+            android:layout_width="322dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="328dp"
+            android:background="@drawable/color_1c242a_252e37"
+            android:visibility="@{comm.memberProfileIconShow(userProfileViewModel.userType, AppStatusViewModel.currentStatus, deviceSetting.consoleSystem)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--            android:visibility="@{comm.memberProfileIconShow(userProfileViewModel.userType, AppStatusViewModel.currentStatus)}"-->
+
+            <!--            app:backgroundResource="@{userProfileViewModel.userAvatar}"-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:background="@drawable/avatar_normal_1_default"
+                android:id="@+id/ivMemberIcon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMemberName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{userProfileViewModel.userDisplayName}"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivMemberIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMemberType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{userProfileViewModel.isVip ? @string/VIP : ``}"
+                android:textColor="@color/color5a7085"
+                android:textSize="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvMemberName"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/workoutTopViewTreadmill"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING &amp;&amp; deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? View.VISIBLE : View.INVISIBLE}">
+
+            <!--            android:text="@{@string/present(WorkoutData.currentIncline)}"-->
+            <!--            android:text="@{String.valueOf(WorkoutData.currentIncline) + `%`}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopIncline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="395dp"
+                android:drawableStart="@drawable/icon_incline_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{String.valueOf(WorkoutData.currentInclineValue) + `%`}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopDistance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="565.8dp"
+                android:layout_marginEnd="8dp"
+                android:autoSizeMaxTextSize="32dp"
+                android:autoSizeTextType="uniform"
+                android:drawableStart="@drawable/icon_distance_32"
+                android:drawablePadding="18.53dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@{comm.formatDecimal(WorkoutData.currentDistance,2) + (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? ` ` +@string/mi :  ` ` +@string/km)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintEnd_toStartOf="@+id/vTopTime"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopIncline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="779dp"
+                android:drawableStart="@drawable/icon_time_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:minEms="4"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopIncline"
+                app:text="@{WorkoutData.currentShowTimeText, default=`00:00`}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopHR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="987dp"
+                android:drawableStart="@drawable/icon_hr_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{String.valueOf(WorkoutData.currentHeartRate)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopIncline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1165dp"
+                android:drawableStart="@drawable/icon_calories_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{comm.formatDecimal(WorkoutData.currentCalories)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopIncline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1349dp"
+                android:drawableStart="@drawable/icon_speed_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{String.valueOf(WorkoutData.currentSpeed) + (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? ` ` +@string/mph : ` ` +@string/kph)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopIncline" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/workoutTopViewBike"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING &amp;&amp; deviceSetting.typeCode != deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? View.VISIBLE : View.INVISIBLE}">
+
+<!--            android:text="@{String.valueOf(WorkoutData.currentRpm) + ` ` +@string/rpm}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopSpeedBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="413.5dp"
+                android:drawableStart="@drawable/icon_speed_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                app:deviceSetting="@{deviceSetting}"
+                app:bikeRpmText="@{WorkoutData.currentRpm}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopPowerBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="646.5dp"
+                android:drawableStart="@drawable/icon_mets_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{String.valueOf(WorkoutData.currentPower) + ` ` +@string/W}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopSpeedBike" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopTimeBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="865.5dp"
+                android:drawableStart="@drawable/icon_time_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:text="@{WorkoutData.currentShowTimeText, default=`00:00`}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopSpeedBike" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopHRBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1073.5dp"
+                android:drawableStart="@drawable/icon_hr_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{String.valueOf(WorkoutData.currentHeartRate)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopSpeedBike" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopCaloriesBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1251.5dp"
+                android:drawableStart="@drawable/icon_calories_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{comm.formatDecimal(WorkoutData.currentCalories)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopSpeedBike" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vTopLevelBike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1435.5dp"
+                android:drawableStart="@drawable/icon_level_32"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{comm.formatDecimal(WorkoutData.currentLevel,0)}"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vTopSpeedBike" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        app:layoutMarginEnd="@{comm.setSettingIconDimen(AppStatusViewModel.currentStatus)}"-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPauseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/workout_paused"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_PAUSE ? View.VISIBLE : View.INVISIBLE}"
+            app:layoutMarginStart="@{comm.setPauseTimeDimen(deviceSetting.pauseMode)}"
+            app:layout_constraintBottom_toBottomOf="@+id/workoutTopViewTreadmill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginStart="760dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPauseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{WorkoutData.currentPauseTimeText}"
+            android:textColor="@color/color5a7085"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvPauseTitle"
+            app:layout_constraintStart_toEndOf="@+id/tvPauseTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvPauseTitle"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_PAUSE ? View.VISIBLE : View.INVISIBLE}" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="20dp"
+            android:autoSizeMaxTextSize="24dp"
+            android:autoSizeTextType="uniform"
+            android:clickable="@{AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE ? false : true}"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:stateListAnimator="@drawable/state_list_animator2"
+            android:text="@{deviceSetting.timeText, default=`00:00 午前`}"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{deviceSetting.time_unit == deviceSettingIntDef.TF_AM_PM ? @dimen/time_12 : @dimen/time_24}"
+            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE ? View.INVISIBLE : View.VISIBLE}"
+            tools:layout_width="121dp" />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:alpha="@{WorkoutData.isWorkoutReadyStart ? 1f : 0.5f}"
+            android:background="@drawable/btn_top_exit"
+            android:clickable="@{WorkoutData.isWorkoutReadyStart}"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{comm.logoutViewChk(isUs, AppStatusViewModel.currentStatus, deviceSetting.consoleSystem)}"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:visibility="gone" />
+        <!--        app:visibility="@{isUs ? View.GONE : AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.GONE}"-->
+
+
+        <!--        <androidx.appcompat.widget.AppCompatButton-->
+        <!--            android:alpha="@{userProfileViewModel.userType == general.USER_TYPE_GUEST ? 0.5f : 1f}"-->
+        <!--            android:id="@+id/ibAlert"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="18dp"-->
+        <!--            android:clickable="@{AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE}"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            app:backgroundResource="@{(AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || userProfileViewModel.userType == general.USER_TYPE_GUEST) ? R.drawable.btn_click_notify_alpha : R.drawable.btn_header_notification}"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/tvTime"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}"-->
+        <!--            tools:background="@drawable/btn_notification_default"-->
+        <!--            tools:ignore="SpeakableTextPresentCheck" />-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/ibAlertNotify"-->
+        <!--            android:layout_width="16dp"-->
+        <!--            android:layout_height="16dp"-->
+        <!--            android:background="@{deviceSetting.alertNotifyCount > 0 ? @drawable/shape_oval_e24b44 : @drawable/shape_oval_empty}"-->
+        <!--            android:translationZ="90dp"-->
+        <!--            app:layout_constraintCircle="@id/ibAlert"-->
+        <!--            app:layout_constraintCircleAngle="72"-->
+        <!--            app:layout_constraintCircleRadius="24dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/ibAlert"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/ibAlert"-->
+        <!--            app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? (deviceSetting.alertNotifyCount > 0 ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}" />-->
+
+
+        <!--        app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}" />-->
+        <!--        android:clickable="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? false : true}"-->
+        <!--        app:layoutMarginEnd="@{comm.setSettingIconDimen(AppStatusViewModel.currentStatus)}"-->
+
+
+        <!--        app:layout_C_Constraint_EndToStart="@{AppStatusViewModel.currentStatus == status.STATUS_PAUSE ? @id/tvTime : @id/btnLogout}"-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ibSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stateListAnimator="@null"
+            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? R.drawable.btn_click_setting_alpha : R.drawable.btn_header_setting}"
+            app:layoutMarginEnd="@{(comm.settingMarginChk(isUs, AppStatusViewModel.currentStatus, deviceSetting.consoleSystem))}"
+            app:layout_C_Constraint_EndToStart="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? @id/tvTime : @id/btnLogout}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{comm.settingIconShow(AppStatusViewModel.currentStatus)}"
+            tools:background="@drawable/btn_header_setting_default"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:layout_constraintEnd_toStartOf="@+id/tvTime" />
+
+        <!--        app:layoutMarginEnd="@{(AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || isUs) ? 20 : 4}"-->
+
+
+        <!--        app:visibility="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? View.VISIBLE : View.INVISIBLE}"-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ibQrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:stateListAnimator="@null"
+            app:backgroundResource="@{AppStatusViewModel.currentStatus == status.STATUS_LOGIN_PAGE ? R.drawable.btn_click_qr_alpha : R.drawable.btn_header_qrcode}"
+            app:layout_constraintEnd_toStartOf="@+id/ibSetting"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{comm.qrcodeIconShow(AppStatusViewModel.currentStatus)}"
+            tools:background="@drawable/btn_qrcode_default"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+<!--        android:alpha="@{AppStatusViewModel.isGem3On ? 1f : 0.5f}"-->
+<!--    隱藏 apple watch
+android:alpha="0"-->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnAppleWatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="@drawable/btn_apple_watch_xml"
+            android:clickable="@{AppStatusViewModel.isGem3On}"
+            app:layout_constraintEnd_toStartOf="@id/btnSamsungWatch"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />
+
+        <!--        btnGarmin 不在就找 tvSpo2Unit -->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:barrierMargin="0dp"
+            app:constraint_referenced_ids="btnGarmin,tvSpo2Unit,ivGarmin,tvTime" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAppleWatchEnabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:src="@drawable/btn_apple_watch_c_xml"
+            android:tint="@{WorkoutData.isAppleWatchConnected ? @color/colorb5ff00 : @color/colorbebebe}"
+            app:layoutMarginEnd="@{WorkoutData.isWorkoutGarmin ? -6 : 12}"
+            app:layout_constraintEnd_toStartOf="@id/barrierA"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isAppleWatchEnabled ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.GONE) : WorkoutData.isAppleWatchEnabled ? View.VISIBLE : View.GONE}" />
+        <!--            app:visibility="@{WorkoutData.isAppleWatchEnabled ? (AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.GONE) : WorkoutData.isAppleWatchEnabled ? View.VISIBLE : View.GONE}" />-->
+
+
+
+        <!-- android:alpha="@{AppStatusViewModel.isGem3On ? 1f : 0.5f}"-->
+        <!--    隱藏 btnSamsungWatch
+        android:alpha="0"     -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/btnSamsungWatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="@drawable/btn_samsung_watch_xml"
+            android:clickable="@{AppStatusViewModel.isGem3On}"
+            app:layout_constraintEnd_toStartOf="@id/barrierA"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSamsungWatchEnabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_samsung_connected"
+            app:layoutMarginEnd="@{WorkoutData.isWorkoutGarmin ? -6 : 12}"
+            app:layout_constraintEnd_toStartOf="@id/barrierA"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isSamsungWatchEnabled ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.GONE) : WorkoutData.isSamsungWatchEnabled ? View.VISIBLE : View.GONE}" />
+
+
+        <!--Garmin未連線，且不在workout pause MAINTENANCE STATUS_LOGIN_PAGE -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/btnGarmin"
+            android:layout_width="144dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="@{deviceSetting.isGarminEnabled ? 1f : 0.5f}"
+            android:background="@drawable/aaaaaaaa"
+            android:clickable="@{deviceSetting.isGarminEnabled}"
+            android:contentDescription="@string/Garmin"
+            android:stateListAnimator="@null"
+            app:layout_constraintEnd_toStartOf="@id/ibQrCode"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || WorkoutData.isGarminConnected ? View.GONE : (AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE  ? View.GONE : View.VISIBLE)}" />
+
+        <!--        <androidx.appcompat.widget.AppCompatButton-->
+        <!--            android:id="@+id/btnGarmin"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/btn_garmin"-->
+        <!--            android:contentDescription="@string/Garmin"-->
+        <!--            android:stateListAnimator="@null"-->
+        <!--            app:layoutMarginEnd="@{AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY ? @dimen/garmin_1 : @dimen/garmin_2}"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:visibility="@{!WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus == status.STATUS_PAUSE || AppStatusViewModel.currentStatus == status.STATUS_IDLE || AppStatusViewModel.currentStatus == status.STATUS_SUMMARY || WorkoutData.isWorkoutGarmin ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"-->
+        <!--            tools:layout_marginEnd="470dp" />-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivGarmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="35dp"
+            android:paddingTop="18dp"
+            android:paddingEnd="35dp"
+            android:paddingBottom="16dp"
+            android:src="@{WorkoutData.isGarminConnected ? @drawable/btn_garmin_c : @drawable/icon_garmin2}"
+            app:layoutMarginEnd="@{comm.setGarminIconDimen(AppStatusViewModel.currentStatus, deviceSetting.time_unit)}"
+            app:layout_constraintBottom_toBottomOf="@+id/ibWifi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ibWifi"
+            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE ? View.VISIBLE : View.GONE) : WorkoutData.isWorkoutGarmin ? View.VISIBLE : View.GONE}"
+            tools:layout_marginEnd="310dp"
+            tools:src="@drawable/icon_garmin"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvStress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{String.valueOf(WorkoutData.garminStress)}"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvStressUnit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />
+        <!--            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_PAUSE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />-->
+
+        <TextView
+            android:id="@+id/tvStressUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Stress"
+            android:textColor="@color/color8192a2"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivGarmin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />
+        <!--            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_PAUSE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />-->
+
+
+        <TextView
+            android:id="@+id/tvSpo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{WorkoutData.garminSpo2 + '%'}"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvSpo2Unit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />
+        <!--            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_PAUSE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />-->
+
+
+        <TextView
+            android:id="@+id/tvSpo2Unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="88dp"
+            android:fontFamily="@font/inter_bold"
+            android:paddingStart="18dp"
+            android:paddingEnd="0dp"
+            android:text="@string/SPO2"
+            android:textColor="@color/color8192a2"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivGarmin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />
+        <!--            app:visibility="@{WorkoutData.isGarminConnected ? (AppStatusViewModel.currentStatus != status.STATUS_PAUSE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_LOGIN_PAGE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_MAINTENANCE &amp;&amp; AppStatusViewModel.currentStatus != status.STATUS_RUNNING ? View.VISIBLE : View.GONE) : View.GONE}" />-->
+
+        <View
+            android:id="@+id/vHdmiBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tv_scanning"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent50"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <TextureView
+            android:id="@+id/videoFullViewContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <View
+            android:id="@+id/bgE"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/half_transparent50"
+            android:clickable="true"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <com.dyaco.spirit_commercial.support.custom_view.SpiritTextView-->
+<!--            android:background="@color/color11181d"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:id="@+id/spiritView"-->
+<!--            app:loopAnimation="false"-->
+<!--            app:animationDuration="1000"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

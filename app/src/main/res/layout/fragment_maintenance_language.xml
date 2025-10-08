@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="languageEnum"
+            type="com.dyaco.spirit_commercial.support.intdef.LanguageEnum" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".maintenance_mode.MaintenanceLanguageFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1185dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel_bg_left_32_1c242a">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:layout_marginEnd="56dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Language"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/MButton_252e37"
+                android:id="@+id/btnDone"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:text="@string/Done"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_check"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+                android:id="@+id/rgSelectLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="212dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/rbLanguage1"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:checked="true"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="40dp"
+                    tools:text="@string/English"
+                    android:text="@{languageEnum.ENGLISH.languageStr}"
+                    app:iTag="@{languageEnum.ENGLISH.languageId}"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbLanguage2"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage1"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    tools:text="@string/Español"
+                    android:text="@{languageEnum.SPAIN.languageStr}"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp"
+                    app:iTag="@{languageEnum.SPAIN.languageId}" />
+
+                <RadioButton
+                    android:id="@+id/rbLanguage3"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@+id/rbLanguage6"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage8"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    tools:text="@string/Traditional_Chinese"
+                    android:text="@{languageEnum.TRADITIONAL_CHINESE.languageStr}"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp"
+                    app:iTag="@{languageEnum.TRADITIONAL_CHINESE.languageId}" />
+
+                <RadioButton
+                    android:enabled="true"
+                    android:id="@+id/rbLanguage4"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage3"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/Pyccknn"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp"
+                    app:iTag="@{languageEnum.RUSSIA.languageId}" />
+
+                <RadioButton
+                    android:id="@+id/rbLanguage5"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage1"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="40dp"
+                    app:iTag="@{languageEnum.GERMAN.languageId}"
+                    android:text="@string/deutsch"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:enabled="false"
+                    android:id="@+id/rbLanguage6"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage1"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage5"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    app:iTag="@{languageEnum.PORTUGAL.languageId}"
+                    android:text="@string/portugues"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    app:iTag="@{languageEnum.SIMPLIFIED_CHINESE.languageId}"
+                    android:id="@+id/rbLanguage7"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage3"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage9"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/simplified_chinese"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:enabled="false"
+                    app:iTag="@{languageEnum.NEDERLANDS.languageId}"
+                    android:id="@+id/rbLanguage8"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage5"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="40dp"
+                    android:text="@string/Nederlands"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbLanguage9"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage8"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/Italiano"
+                    app:iTag="@{languageEnum.ITALIAN.languageId}"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:enabled="false"
+                    app:iTag="@{languageEnum.KOREA.languageId}"
+                    android:id="@+id/rbLanguage10"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage7"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage9"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/Korea"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    app:iTag="@{languageEnum.SUOMI.languageId}"
+                    android:id="@+id/rbLanguage11"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage12"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="40dp"
+                    android:text="@string/Suomi"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    app:iTag="@{languageEnum.FRANCE.languageId}"
+                    android:id="@+id/rbLanguage12"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage9"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/fran_ais"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    app:iTag="@{languageEnum.JAPAN.languageId}"
+                    android:id="@+id/rbLanguage13"
+                    android:layout_width="341.67dp"
+                    android:layout_height="104dp"
+                    android:layout_below="@id/rbLanguage10"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/rbLanguage12"
+                    android:background="@drawable/selected_check_341"
+                    android:button="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="60dp"
+                    android:text="@string/japanese"
+                    android:textColor="@drawable/check_text_white"
+                    android:textSize="32sp" />
+
+            </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+
+            <View
+                android:id="@+id/v_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/half_transparent20"
+                android:clickable="true"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>

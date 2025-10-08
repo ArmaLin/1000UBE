@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="904dp"
+    android:background="@android:color/transparent"
+    android:id="@+id/baseView"
+    tools:context=".login.CreateAccountWelcomeFragmentBottom">
+
+    <com.google.android.material.button.MaterialButton
+        android:letterSpacing="0.01"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/panel_close"
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:text="@string/Close"
+        android:textAllCaps="false"
+        android:textColor="@color/colorADB8C2"
+        android:textSize="24sp"
+        app:backgroundTint="@color/color252e37"
+        app:backgroundTintMode="src_in"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintBottom_toTopOf="@+id/v_1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--        android:id="@+id/btn_close"-->
+<!--        android:background="@drawable/panel_close"-->
+<!--        android:layout_marginEnd="56dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/v_1"-->
+<!--        android:layout_width="182dp"-->
+<!--        android:layout_height="88dp" >-->
+
+<!--        <TextView-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:id="@+id/tv_cancel"-->
+<!--            android:textColor="@color/colorADB8C2"-->
+<!--            android:text="@string/Cancel"-->
+<!--            android:textSize="24sp"-->
+<!--            android:layout_marginStart="34dp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_width="82dp"-->
+<!--            android:layout_height="32dp" />-->
+
+<!--        <ImageView-->
+<!--            android:src="@drawable/icon_cancel"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_cancel"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tv_cancel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        android:background="@drawable/panel_bg_top_1c242a"
+        android:layout_gravity="bottom"
+        android:id="@+id/v_1"
+        android:layout_width="match_parent"
+        android:layout_height="736dp" >
+
+        <TextView
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="232dp"
+            android:layout_marginStart="262dp"
+            android:text="@string/welcome_anna"
+            android:id="@+id/tvText1"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"/>
+
+        <TextView
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="262dp"
+            android:text="@string/looks_like_you_are_a_new_user_to_calculate_calories_and_rate_your_fitness_test_results_we_need_to_know_more_about_you_would_you_mind_to_answer_a_couple_of_questions"
+            android:id="@+id/tvText2"
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvText1"
+            android:layout_width="1396dp"
+            android:layout_height="192dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:id="@+id/btnSkip"
+        android:background="@color/color252e37"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/skip_for_now"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="96dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/btnSkip"
+        android:id="@+id/btnNext"
+        android:background="@color/color1396ef"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/let_s_do_it"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="96dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

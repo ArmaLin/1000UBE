@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceDeviceTypeChooseFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/machine_type"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+            android:id="@+id/rgSelectItemTreadmill"
+            android:layout_width="1073dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="212dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioButton
+                android:id="@+id/type0"
+                android:layout_width="524.5dp"
+                android:layout_height="104dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="60dp"
+                android:tag="0"
+                android:text="@string/treadmill"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:paddingEnd="60dp"
+                android:gravity="start|center_vertical"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="32sp"
+                android:tag="1"
+                android:id="@+id/type1"
+                android:layout_width="524.5dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/type0"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:paddingStart="32dp"
+                android:text="@string/elliptical"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:paddingStart="32dp"
+                android:paddingEnd="60dp"
+                android:gravity="start|center_vertical"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="32sp"
+                android:tag="2"
+                android:id="@+id/type2"
+                android:layout_width="524.5dp"
+                android:layout_height="104dp"
+                android:layout_marginTop="32dp"
+                android:layout_below="@+id/type0"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:text="@string/upright_bike"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:paddingEnd="60dp"
+                android:gravity="start|center_vertical"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="32sp"
+                android:id="@+id/type3"
+                android:layout_width="524.5dp"
+                android:layout_height="104dp"
+                android:layout_below="@+id/type0"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/type2"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:paddingStart="32dp"
+                android:tag="3"
+                android:text="@string/recumbent_bike"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+
+        <TextView
+            android:fontFamily="@font/inter_regular"
+            android:textSize="24sp"
+            android:textColor="@color/color5a7085"
+            android:layout_marginStart="56dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="484dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/converting_machine_type_will_trigger_the_console_to_restart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnConvert"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:background="@drawable/panel_bg_bottom_left_20_1396ef"
+            android:stateListAnimator="@null"
+            android:text="@string/convert"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

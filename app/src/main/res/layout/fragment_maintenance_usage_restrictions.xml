@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="deviceSettingViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".maintenance_mode.MaintenanceUsageRestrictionsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1920dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel_bg_left_32_1c242a">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="498dp"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="56dp"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/Usage_Restrictions"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+                android:id="@+id/scLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="482dp"
+                android:layout_marginTop="330dp"
+                android:background="@color/color323f4b"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                app:draggable="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="0"
+                app:radius="20dp"
+                app:ripple="false"
+                app:selectedBackground="@color/color1396ef"
+                app:selectedButtonRadius="16dp"
+                app:selectionAnimationDuration="200"
+                tools:ignore="TouchTargetSizeCheck">
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                    style="@style/SegmentedButtonStyle"
+                    android:contentDescription="@string/Distance_Limit"
+                    app:selectedTextColor="@color/white"
+                    app:selectedTextStyle="normal"
+                    app:text="@string/Distance_Limit"
+                    app:textColor="@color/color8192a2"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                    style="@style/SegmentedButtonStyle"
+                    android:contentDescription="@string/Time_Limit"
+                    app:selectedTextColor="@color/white"
+                    app:selectedTextStyle="normal"
+                    app:text="@string/Time_Limit"
+                    app:textColor="@color/color8192a2"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <com.addisonelliott.segmentedbutton.SegmentedButton
+                    style="@style/SegmentedButtonStyle"
+                    android:contentDescription="@string/No_Limit"
+                    app:selectedTextColor="@color/white"
+                    app:selectedTextStyle="normal"
+                    app:text="@string/No_Limit"
+                    app:textColor="@color/color8192a2"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDone"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:elevation="3dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:text="@string/Close"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_cancel"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/color252e37"
+                android:id="@+id/btnApply"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:fontFamily="@font/inter_bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0.01"
+                app:shapeAppearanceOverlay="@style/roundedCornerBottomLeft"
+                android:stateListAnimator="@null"
+                android:text="@string/Save"
+                android:textAllCaps="false"
+                android:textColor="@color/btn_white_5a7085"
+                android:textSize="32sp"
+                app:backgroundTint="@color/btn_1396ef_1c242a"
+                app:iconGravity="textStart"
+                app:iconPadding="10dp"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@android:color/transparent" />
+
+
+            <View
+                android:id="@+id/text1Line"
+                android:layout_width="916dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="498dp"
+                android:layout_marginTop="514dp"
+                android:background="@color/color323f4b"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/text2Line"
+                android:layout_width="916dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="498dp"
+                android:layout_marginTop="642dp"
+                android:background="@color/color323f4b"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLine1Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:text="@string/limit_km"
+                android:textColor="@color/color5a7085"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toTopOf="@+id/text1Line"
+                app:layout_constraintStart_toStartOf="@+id/text1Line" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLine2Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:text="@string/Reset_Code"
+                android:textColor="@color/color5a7085"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toTopOf="@+id/text2Line"
+                app:layout_constraintStart_toStartOf="@+id/text2Line" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNoLimitText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="498dp"
+                android:layout_marginTop="412dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/no_usage_restrictions_applied"
+                android:textColor="@color/colorCBD2D8"
+                android:textSize="32sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupNoLimit"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="tvLine1Title,tvLine2Title,text1Line,text2Line,etLimit,etCode" />
+
+
+            <!--            android:digits="@string/number_digits"-->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLimit"
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:digits="0123456789"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="end"
+                android:imeOptions="actionDone"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color5a7085"
+                android:textCursorDrawable="@null"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toTopOf="@+id/text1Line"
+                app:layout_constraintEnd_toEndOf="@+id/text1Line"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etCode"
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:digits="0123456789"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="end"
+                android:imeOptions="actionDone"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color5a7085"
+                android:textCursorDrawable="@null"
+                android:textSize="44sp"
+                app:layout_constraintBottom_toTopOf="@+id/text2Line"
+                app:layout_constraintEnd_toEndOf="@+id/text2Line"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:id="@+id/cKeyboard"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="393dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent">-->
+
+            <!--                <View-->
+            <!--                    android:id="@+id/lineTop"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="2dp"-->
+            <!--                    android:background="@color/color5b5b5b"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <View-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="0dp"-->
+            <!--                    android:background="@color/color292e32"-->
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/bbxx"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/lineTop" />-->
+
+            <!--                <View-->
+            <!--                    android:id="@+id/bbxx"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="31.8dp"-->
+            <!--                    android:layout_marginTop="455dp"-->
+            <!--                    android:background="@color/black"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+            <!--                <View-->
+            <!--                    android:layout_width="227.88dp"-->
+            <!--                    android:layout_height="7.2dp"-->
+            <!--                    android:layout_marginTop="455dp"-->
+            <!--                    android:layout_marginBottom="11.99dp"-->
+            <!--                    android:background="@drawable/panel_bg_keyboard"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_1"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="9.59dp"-->
+            <!--                    android:layout_marginTop="7dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_1"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="1"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/lineTop"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_4"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="9.59dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_4"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="4"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_1"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_7"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="9.59dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_7"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="7"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_4"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_comma"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="9.59dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_comma"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text=","-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/bbxx"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_7"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_2"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="481.24dp"-->
+            <!--                    android:layout_marginTop="7dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_2"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="2"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/lineTop"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_5"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="481.24dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_5"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="5"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_3"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_8"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="481.24dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_8"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="8"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_6"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_0"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="481.24dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_0"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="0"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/bbxx"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_9"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_3"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="952.89dp"-->
+            <!--                    android:layout_marginTop="7dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_3"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="3"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/lineTop"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_6"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="952.89dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_6"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="6"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_3"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_9"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="952.89dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_9"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="9"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_6"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_period"-->
+            <!--                    android:layout_width="468dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="950dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_period"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="."-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/bbxx"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_9"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_hyphen"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="7dp"-->
+            <!--                    android:layout_marginEnd="9.59dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_hyphen"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text="-"-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/lineTop"-->
+            <!--                    tools:ignore="HardcodedText" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard__"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:layout_marginEnd="9.59dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_space"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    android:text=" "-->
+            <!--                    android:textColor="@android:color/transparent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_hyphen"-->
+            <!--                    tools:ignore="HardcodedText,SpeakableTextPresentCheck" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_backspace"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:layout_marginEnd="9.59dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_backspace"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard__"-->
+            <!--                    tools:ignore="SpeakableTextPresentCheck" />-->
+
+            <!--                <androidx.appcompat.widget.AppCompatButton-->
+            <!--                    android:id="@+id/keyboard_enter"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:layout_marginEnd="9.59dp"-->
+            <!--                    android:background="@drawable/btn_keyboard_enter"-->
+            <!--                    android:foreground="?attr/selectableItemBackgroundBorderless"-->
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/bbxx"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/keyboard_backspace"-->
+            <!--                    tools:ignore="SpeakableTextPresentCheck" />-->
+
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cAccessCode"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color1c242a">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTitle2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="498dp"
+                    android:layout_marginTop="216dp"
+                    android:layout_marginEnd="56dp"
+                    android:autoSizeMaxTextSize="70sp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/access_code"
+                    android:textColor="@color/white"
+                    android:textSize="70sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="916dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="498dp"
+                    android:layout_marginTop="320dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/these_settings_are_protected_with_a_pin_code_to_access_them_please_enter_below_the_6_digit_code"
+                    android:textColor="@color/colorCBD2D8"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:imeOptions="actionDone"
+                    android:id="@+id/etLimitCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:inputType="numberPassword"
+                    android:maxLength="6"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/color5a7085"
+                    android:textSize="44sp"
+                    app:layout_constraintBottom_toTopOf="@+id/lineline"
+                    app:layout_constraintEnd_toEndOf="@+id/lineline"
+                    app:layout_constraintStart_toStartOf="@+id/lineline" />
+
+                <View
+                    android:id="@+id/lineline"
+                    android:layout_width="916dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="550dp"
+                    android:layout_marginEnd="64dp"
+                    android:background="@color/color323f4b"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</layout>

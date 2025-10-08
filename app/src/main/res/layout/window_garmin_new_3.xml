@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color11151a"
+    tools:context=".garmin.GarminNew3Window">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/Add_Garmin_Device"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="152dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/Input_Verification_Code"
+        android:textColor="@color/color5a7085"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="66dp"
+        android:src="@drawable/element_pagination_garmin_3"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+        app:layout_constraintEnd_toStartOf="@+id/btn_close"
+        app:layout_constraintTop_toTopOf="@+id/btn_close" />
+
+    <com.google.android.material.button.MaterialButton
+        android:letterSpacing="0.01"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/panel_bg_all_252e37"
+        android:fontFamily="@font/inter_bold"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:stateListAnimator="@null"
+        android:text="@string/Close"
+        android:textAllCaps="false"
+        android:textColor="@color/colorADB8C2"
+        android:textSize="24sp"
+        app:backgroundTint="@color/color252e37"
+        app:backgroundTintMode="src_in"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    <androidx.appcompat.widget.AppCompatEditText-->
+    <!--        android:maxLength="3"-->
+    <!--        android:cursorVisible="false"-->
+    <!--        android:background="@null"-->
+    <!--        android:singleLine="true"-->
+    <!--        android:inputType="number"-->
+    <!--        android:id="@+id/etWeight"-->
+    <!--        android:textSize="44sp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:fontFamily="@font/inter_regular"-->
+    <!--        android:hint="Input Code"-->
+    <!--        android:textColorHint="@color/color5a7085"-->
+    <!--        android:layout_marginBottom="18dp"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/lineline"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/lineline"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/lineline"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"/>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pingCodeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="376dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="center_vertical"
+        android:imeOptions="actionDone"
+        android:textColorHint="@color/color5a7085"
+        app:endIconDrawable="@drawable/ic_clear_white_24dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@null"
+        app:errorTextAppearance="@style/text_in_layout_error_hint_Style"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/lineline"
+        app:layout_constraintEnd_toEndOf="@+id/lineline"
+        app:layout_constraintStart_toStartOf="@+id/lineline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPingCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:defaultFocusHighlightEnabled="false"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/Input_Code"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="44sp"
+            tools:ignore="TextContrastCheck"
+            tools:text="" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/lineline"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="398dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/color323f4b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@color/color252e37"
+        android:fontFamily="@font/inter_bold"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:text="@string/Back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@color/color1396ef"
+        android:fontFamily="@font/inter_bold"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:text="@string/Confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

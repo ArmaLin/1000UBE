@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:clickable="true"
+    android:id="@+id/bg"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/half_transparent50"
+    android:layout_width="match_parent"
+    tools:context=".alert_message.BackgroundWindow"
+    android:layout_height="match_parent">
+
+
+</FrameLayout>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="isTreadmill" type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        android:background="@color/color11151a"
+        tools:context=".dashboard_training.CustomProgramSpeedFragment">
+
+
+        <View
+            android:id="@+id/viewStep1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="130dp"
+            android:background="@drawable/shape_oval_1396ef"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvProgramName"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProgramName"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+        <View
+            android:id="@+id/viewStep2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="94dp"
+            android:background="@drawable/shape_oval_323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewStep1"
+            app:layout_constraintBottom_toBottomOf="@+id/viewStep1"
+            app:visibility="@{isTreadmill ? View.VISIBLE : View.INVISIBLE}" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/Cancel"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProgramName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="12dp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/Custom"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            tools:text="@string/Custom" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:drawableStart="@drawable/icon_info_16"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/connect_dots_to_map_intensity_throughout_your_program"
+            android:textColor="@color/color8192a2"
+            android:textSize="18sp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProgramName"
+            app:layout_constraintStart_toEndOf="@+id/tvProgramName"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1408dp"
+            android:layout_height="712dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="168dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+<!--            android:text="@{isTreadmill ? @string/set_speed_profile :  @string/set_level_profile}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="28dp"
+                android:id="@+id/tvDiagramTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/set_speed_profile"
+                android:textColor="@color/white"
+                android:textSize="24sp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:padding="10dp"
+                android:clickable="true"
+                android:layout_marginEnd="22dp"
+                android:drawableStart="@drawable/icon_delete_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="22dp"
+                android:id="@+id/btnClearDiagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/btn_e24b44_50"
+                android:text="@string/clear_profile"
+                android:textColor="@color/btn_e24b44_50"
+                android:textSize="24sp"/>
+
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.CircleBarView
+                app:barColor="@color/white"
+                app:backColor="@color/color5a7085_25"
+                app:lineColor="@color/color1396ef"
+                app:barSelectColor="@color/color1396ef"
+                app:barSelectSolidColor="@color/color1396ef"
+                android:id="@+id/editProfileView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="86dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barCount="20"
+                app:sideWidth="0"
+                app:pb_lineWidth="4"
+                app:barMaxLevel="10"
+                app:barCircleRadius="16"
+                app:barCircleWidth="4" />
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/tt10"
+                app:layout_constraintBottom_toTopOf="@+id/tt09"
+                android:text="MAX"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt09"
+                app:layout_constraintBottom_toTopOf="@+id/tt08"
+                android:text="90%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="29dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt08"
+                app:layout_constraintBottom_toTopOf="@+id/tt07"
+                android:text="80%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt07"
+                app:layout_constraintBottom_toTopOf="@+id/tt06"
+                android:text="70%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt06"
+                app:layout_constraintBottom_toTopOf="@+id/tt05"
+                android:text="60%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt05"
+                app:layout_constraintBottom_toTopOf="@+id/tt04"
+                android:text="50%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="29dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:id="@+id/tt04"
+                app:layout_constraintBottom_toTopOf="@+id/tt03"
+                android:text="40%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+
+            <TextView
+                android:id="@+id/tt03"
+                app:layout_constraintBottom_toTopOf="@+id/tt02"
+                android:text="30%"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+
+            <TextView
+                android:id="@+id/tt02"
+                android:gravity="center"
+                android:text="20%"
+                app:layout_constraintEnd_toEndOf="@+id/tt01"
+                app:layout_constraintBottom_toTopOf="@+id/tt01"
+                android:layout_marginBottom="28dp"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"/>
+
+
+            <TextView
+                android:id="@+id/tt01"
+                android:gravity="center"
+                android:text="10%"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="52dp"
+                android:layout_marginBottom="38dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="18sp"
+                android:textColor="@color/color8192a2"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_width="36dp"
+                android:layout_height="32dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewMirror"
+            android:layout_width="440dp"
+            android:layout_height="712dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/panel_bg_all_20_252e37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSelectTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/select_max_mph"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.RulerView
+                android:id="@+id/rulerViewMonth"
+                android:layout_width="200dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="66dp"
+                android:layout_marginBottom="56dp"
+                android:background="@color/color252e37"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivMiddleLine_SetDate"
+                app:layout_constraintStart_toStartOf="@+id/ivMiddleLine_SetDate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rulerColor="@color/colorADB8C2"
+
+                app:rulerDivideByFiveHeight="90dp"
+                app:rulerDivideByFiveWidth="3dp"
+                app:rulerDivideByTenHeight="90dp"
+                app:rulerDivideByTenWidth="3dp"
+
+                app:rulerHighlightColor="@color/white"
+                app:rulerIntervalDistance="32dp"
+                app:rulerIntervalValue="1"
+                app:rulerIsDivideByFive="true"
+                app:rulerIsDivideByTen="true"
+                app:rulerLineHeight="20dp"
+                app:rulerLineWidth="3dp"
+                app:rulerMaxValue="99"
+                app:rulerMinValue="0"
+                app:rulerOrientation2="vertical"
+                app:rulerRetainLength="1"
+                app:rulerTextBaseLineDistance="50dp"
+                app:rulerTextColor="@color/color5a7085"
+                app:rulerTextSize="18sp" />
+
+
+<!--                    <View-->
+<!--                        android:background="@color/half_transparent50"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        android:layout_width="200dp"-->
+<!--                        android:layout_height="50dp"/>-->
+
+
+            <View
+                android:id="@+id/ivMiddleLine_SetDate"
+                android:layout_width="44dp"
+                android:layout_height="4dp"
+                android:layout_marginEnd="92dp"
+                android:background="@color/colore24b44"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/rulerViewMonth"
+                app:layout_constraintTop_toTopOf="@id/rulerViewMonth" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="16dp"
+                android:id="@+id/tvTimeNum"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_252e37_323f4b"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="center_vertical|center_horizontal"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintTop_toTopOf="@+id/ivMiddleLine_SetDate"
+                app:layout_constraintBottom_toBottomOf="@+id/ivMiddleLine_SetDate"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnTimeMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_minus"
+                android:contentDescription="@string/minus"
+                android:layout_marginTop="56dp"
+                app:layout_constraintStart_toStartOf="@+id/tvTimeNum"
+                app:layout_constraintEnd_toEndOf="@+id/tvTimeNum"
+                app:layout_constraintTop_toBottomOf="@+id/tvTimeNum"
+                tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnTimePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_plus"
+                android:contentDescription="@string/plus"
+                android:layout_marginBottom="56dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvTimeNum"
+                app:layout_constraintStart_toStartOf="@+id/tvTimeNum"
+                app:layout_constraintEnd_toEndOf="@+id/tvTimeNum"
+                tools:ignore="DuplicateSpeakableTextCheck,VisualLintBounds" />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

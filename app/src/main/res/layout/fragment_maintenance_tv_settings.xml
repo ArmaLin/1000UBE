@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceTvSettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1920dp"
+        android:layout_height="match_parent"
+        android:background="@color/color1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/select_country"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="94dp"
+            app:layout_constraintStart_toEndOf="@+id/tvTitle"
+            android:id="@+id/scSignal"
+            android:layout_marginStart="53dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Imperial"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Digital_Signal"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Metric"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Analog_Signal"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="94dp"
+            app:layout_constraintStart_toEndOf="@+id/scSignal"
+            android:id="@+id/scCableAir"
+            android:layout_marginStart="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/color323f4b"
+            app:draggable="true"
+            app:radius="20dp"
+            app:ripple="false"
+            app:selectedBackground="@color/color1396ef"
+            app:selectedButtonRadius="16dp"
+            app:selectionAnimationDuration="200"
+            tools:ignore="TouchTargetSizeCheck">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Cable"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Cable"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                style="@style/SegmentedButtonStyle"
+                android:contentDescription="@string/Air"
+                app:selectedTextColor="@color/white"
+                app:selectedTextStyle="normal"
+                app:text="@string/Air"
+                app:textColor="@color/color8192a2"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:letterSpacing="0.01"-->
+<!--            android:id="@+id/btnDone"-->
+<!--            android:paddingStart="30dp"-->
+<!--            android:paddingEnd="26dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="88dp"-->
+<!--            android:layout_marginTop="56dp"-->
+<!--            android:layout_marginEnd="56dp"-->
+<!--            android:background="@drawable/panel_bg_all_252e37"-->
+<!--            android:fontFamily="@font/inter_bold"-->
+<!--            android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--            android:stateListAnimator="@null"-->
+<!--            android:text="@string/Close"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/colorADB8C2"-->
+<!--            android:textSize="24sp"-->
+<!--            app:backgroundTint="@color/color252e37"-->
+<!--            app:backgroundTintMode="src_in"-->
+<!--            app:icon="@drawable/icon_check"-->
+<!--            app:iconGravity="textEnd"-->
+<!--            app:iconPadding="12dp"-->
+<!--            app:iconTint="@color/colorADB8C2"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnSkip"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
+            android:minWidth="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/Skip"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="178dp"
+            android:layout_marginBottom="2dp"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:paddingTop="1dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/progressCirculars"
+            android:indeterminateTint="@color/colorADB8C2"
+            app:layout_constraintTop_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressBar"-->
+<!--            android:indeterminate="true"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:indeterminateDrawable="@drawable/progressbar_hr"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">SPIRIT Commercial</string>
+    <string name="number_digits" translatable="false">.0123456789</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <!--    <string name="companion_license" translatable="false">EoACKIVpZmXxslR61DFexBRfaRrpXVLi7Xcyv2WZIRS5mpOmz3XGKovPpzOIov5pD7NL95UynwfPw/lAu89HT1ybKDigqsCEGOeZlYrlh6uMSI9F5Cjq3uSavvUgTBt5yYcmneVSoWs97rNAt+TJ6h/IRMHuQnDySML2sXxGzfKz4/0Zkby1riDID3mQf4iisZsI2ErtBmibC29hucg8YMAh7TVHsT7KzqrAT1yZh56raYNdYbO4Znt/ML/kbspzla2Fac3pio8rht+BsZ5g1KClLXLMXBJm3jg3+y+V7Otyh2Zr7cdsHKfSBbEI5X/TmBVwBZB799xZ1o2SAk+EzxhsSCILAQIDBAUGBwgJCgsqCAECAwQFBwgJ</string>-->
+    <string name="companion_license" translatable="false">EoACC0Uau91gUnJEPR3hSbSUeFypWO+Yfw4qPR2D+qesYbq+nT6hRqgvdq9lMMxUwVegTDmklfikQYoIP/Tq9nIArbFTOz6gf98o8m2XRCNKx04T/EFbjbnMq0YEVdUrv7AyHcNHeqOoZGRHQNXGM/CG3uNUEUymzG1T3+iqc5uOSfMkabJtITE/qhMRPOtji3X8USiwBD+OmrKYxpGaTY7fFn2LDGZ/VfImmp5SNFqUVfTSXW71xe2SDRP9hwv88mN5175SxiqyHsHiWokL0KEI1DDbD35KXG9nE9mxz44mkDI99UgiJY0xRl6CSaEF6gn6QwlUvUuQAbNHKhexus9qmyILAQIDBAUGBwgJCgsqCAECAwQFBwgJ</string>
+    <string name="initialization_failed" translatable="false">SDK Initialization Failed</string>
+
+    <string name="green_menu_1" translatable="false">M20 0H301C312.046 0 321 8.95431 321 20V388C321 399.046 312.046 408 301 408H20C8.95431 408 0 399.046 0 388V20C0 8.95431 8.95431 0 20 0Z </string>
+    <string name="green_menu_2" translatable="false">M20 0H76C87.0457 0 96 8.95431 96 20V388C96 399.046 87.0457 408 76 408H20C8.95431 408 0 399.046 0 388V20C0 8.95431 8.95431 0 20 0Z </string>
+    <string name="arrow_right" translatable="false">M8.59,16.59L13.17,12 8.59,7.41 10,6l6,6 -6,6 -1.41,-1.41z</string>
+    <string name="arrow_left" translatable="false">M15.41,16.59L10.83,12l4.58,-4.59L14,6l-6,6 6,6 1.41,-1.41z</string>
+    <string name="qrcode_login_text2">Scannez le code situé à droite à l\'aide de l\'application mobile \nde votre salle de sport.</string>
+    <string name="nfc_login_text2">Tenez votre carte de membre à proximité du capteur NFC, \ncomme indiqué sur l\'image.</string>
+    <string name="gotoworkout_login_text2" translatable="false">Settings can only be unlocked with a staff \nmember card. Hold the card close to the \nNFC sensor, as shown in the picture.</string>
+    <string name="date_time"><![CDATA[Date et heure]]></string>
+    <string name="img" translatable="false">no_img</string>
+
+    <string name="start_waiting">Pour commencer, attendez que le planche \ntapis soit complètement arrêté.</string>
+    <string name="start_waiting_bike" translatable="false">To start, please wait\nuntil the setting to be completed.</string>
+    <string name="resume_waiting">Pour reprendre, attendez que le planche \ntapis soit complètement arrêté.</string>
+    <string name="resume_waiting_bike" translatable="false">To resume, please wait\nuntil the setting to be completed.</string>
+
+    <string name="manual">Manuel</string>
+    <string name="hill">Colline</string>
+    <string name="fatburn">Perte de Gras</string>
+    <string name="cardio">Cardio</string>
+    <string name="strength">Force</string>
+    <string name="hiit">HIIT</string>
+    <string name="k5_run">Course 5 km</string>
+    <string name="k10_run">Course 10 km</string>
+    <string name="heart_rate">Fréquence cardiaque</string>
+    <string name="air_force">Aviation</string>
+    <string name="army">Armée</string>
+    <string name="coast_guard">Garde-côte</string>
+    <string name="gerkin" translatable="false">Gerkin</string>
+    <string name="peb" translatable="false">PEB</string>
+    <string name="marine_corps">Corps des Marines</string>
+    <string name="navy">Marine</string>
+    <string name="wfi" translatable="false">WFI</string>
+    <string name="ctt_prediction">Prédiction du CTT</string>
+    <string name="ctt_performance">Performances CTT</string>
+    <string name="Watts">Watts</string>
+    <string name="watts">watts</string>
+    <string name="fitness_test">Test de mise en forme</string>
+
+    <string name="use_time_limit">Workout Time Limit</string>
+    <string name="use_limit">Use Limit</string>
+
+
+    <string name="speed">vitesse</string>
+    <string name="incline">inclinaison</string>
+    <string name="Speed">Vitesse</string>
+    <string name="Incline">Inclinaison</string>
+    <string name="Level">niveau</string>
+    <string name="Pace">Rythme</string>
+    <string name="Calories">Calories</string>
+    <string name="Heart_Rate">Heart Rate</string>
+
+    <string name="lb">lb</string>
+    <string name="kg">kg</string>
+    <string name="Avg_Power">Puissance moyenne</string>
+    <string name="Avg_Speed">Vitesse moyenne</string>
+    <string name="Avg_Level">Niveau moyen</string>
+
+    <string name="ft">pieds</string>
+    <string name="cm">pieds</string>
+    <string name="m">m</string>
+
+    <string name="METs">METs</string>
+
+
+    <string name="manual_desc">La vitesse et l\'inclinaison \nsont contrôlées par l\'utilisateur. \nLe temps cible est défini avant le départ.</string>
+    <string name="manual_desc_bike">Le niveau de résistance est contrôlé par l\'utilisateur. Le temps cible est défini avant le départ.</string>
+
+    <string name="hill_desc">Séance d\'entraînement complète commençant par un \néchauffement, un pic d\'activité et un retour au calme.</string>
+    <string name="hill_desc_bike">Séance \'entraînement complète commençant par un \néchauffement, un pic d\'activité et un retour au calme.</string>
+
+    <string name="fatburn_desc">Maximiser les bénéfices de l\'entraînement cardiovasculaire.</string>
+    <string name="fatburn_desc_bike">Maximiser les bénéfices de l\'entraînement cardiovasculaire.</string>
+
+    <string name="cardio_desc">Maximize endurance training by alternating high and low intensity.</string>
+    <string name="cardio_desc_bike">Maximize endurance training by alternating high and low intensity.</string>
+
+    <string name="strength_desc">Renforcer la force et l\'endurance musculaire du bas du corps et \ndes fessiers. </string>
+    <string name="strength_desc_bike">Renforcer la force et l\'endurance musculaire du bas du corps et \ndes fessiers. </string>
+
+    <string name="hiit_desc">Courtes rafales de sprint à haute intensité suivies de courtes périodes \nde repos.</string>
+    <string name="hiit_desc_bike">Courtes rafales de sprint à haute intensité suivies de courtes périodes \nde repos.</string>
+
+    <string name="heart_rate_desc">Suivez les \nrecommandations \nd\'inclinaison pour rester à \nmoins de 5 bpm \nde la fréquence cardiaque cible.</string>
+    <string name="heart_rate_desc_bike">Suivez les recommandations relatives au niveau de résistance afin de rester à moins de 5 bpm de la fréquence cardiaque cible.</string>
+
+    <string name="k5_run_desc">La vitesse et l\'inclinaison \nsont contrôlées par l\'utilisateur. \nLa vitesse cible est définie \navant le départ.</string>
+    <string name="k10_run_desc">La vitesse et l\'inclinaison \nsont contrôlées par l\'utilisateur. \nLa vitesse cible est définie \navant le départ.</string>
+    <string name="air_force_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="army_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="coast_guard_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="gerkin_desc">La vitesse et l\'inclinaison changent \nautomatiquement jusqu\'à \nce que vous atteigniez %1$s. \nArrêtez-vous si vous vous sentez malade ou angoissé.</string>
+    <string name="marine_corps_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="navy_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="peb_desc">Une course chronométrée de %1$s. \nContrôlez la vitesse \nmanuellement. Veillez à \nfournir vos \ndonnées physiques.</string>
+    <string name="wfi_desc">La vitesse et l\'inclinaison changent \nautomatiquement jusqu\'à \nce que vous atteigniez %1$s. \nArrêtez-vous si vous vous sentez malade ou angoissé.</string>
+    <string name="ctt_prediction_desc">La vitesse et l\'inclinaison changent \nautomatiquement jusqu\'à \nce que vous atteigniez %1$s. \nArrêtez-vous si vous vous sentez malade ou angoissé.</string>
+    <string name="ctt_performance_desc">La vitesse et l\'inclinaison augmentent \nprogressivement pendant 12 minutes. \nArrêtez-vous si vous vous \nsentez mal ou angoissé.</string>
+    <string name="for_12_minutes">pendant 12 minutes</string>
+    <string name="watt_desc">Le niveau est ajusté automatiquement en fonction de votre cadence.</string>
+    <string name="fitness_test_desc">Le niveau change automatiquement jusqu\'à ce que vous atteigniez 85 % de la fréquence \ncardiaque maximale. Arrêtez si vous vous sentez mal ou en détresse.</string>
+
+
+    <string name="interval_desc">Alternance d\'intervalles à faible vitesse et à vitesse élevée avec une inclinaison qui augmente progressivement.</string>
+    <string name="interval_bike_desc">Alternating intervals with low and high resistance levels.</string>
+    <string name="custom_desc">Créez votre propre programme personnalisé en concevant des modèles de vitesse et d\'inclinaison.</string>
+    <string name="custom_bike_desc">Créez votre propre programme personnalisé en concevant des modèles de vitesse et d\'inclinaison.</string>
+
+
+    <string name="present" translatable="false">%1$s <![CDATA[%]]></string>
+    <string name="custom" translatable="false">custom</string>
+    <string name="stop">Arrêter</string>
+    <string name="resume">Reprise</string>
+    <string name="ending_time">Se terminant par %1$s</string>
+    <string name="ios_bottom_text2" translatable="false">WIFI NAME: %1$s\n(A STRONG CONNECTION IS REQUIRED)\nDEVICE NAME: %2$s</string>
+    <string name="time_min"><font fgcolor='#ffffff'>Temps</font> <font fgcolor='#5a7085'>min</font></string>
+    <string name="max_speed_mph"><font fgcolor='#ffffff'>Vitesse maximale</font> <font fgcolor='#5a7085'>mph</font></string>
+    <string name="max_speed_kph"><font fgcolor="#ffffff">Vitesse maximale</font> <font fgcolor="#5a7085">km/h</font></string>
+    <string name="max_level"><font fgcolor='#ffffff'>Niveau max</font></string>
+    <string name="sprint_speed_mph"><font fgcolor='#ffffff'>Vitesse de sprint</font> <font fgcolor='#5a7085'>mph</font></string>
+    <string name="sprint_speed_kph"><font fgcolor="#ffffff">Vitesse de sprint</font> <font fgcolor="#5a7085">km/h</font></string>
+    <string name="sprint_level"><font fgcolor='#ffffff'>Niveau de sprint</font></string>
+    <string name="sprint_time_sec"><font fgcolor='#ffffff'>Temps de sprint</font> <font fgcolor='#5a7085'>sec</font></string>
+    <string name="rest_time_sec"><font fgcolor='#ffffff'>Temps de repos</font> <font fgcolor='#5a7085'>sec</font></string>
+    <string name="rest_speed_mph"><font fgcolor='#ffffff'>Vitesse de repos</font> <font fgcolor='#5a7085'>mph</font></string>
+    <string name="rest_speed_kph"><font fgcolor="#ffffff">Vitesse de repos</font> <font fgcolor="#5a7085">km/h</font></string>
+    <string name="rest_level"><font fgcolor='#ffffff'>Niveau de repos</font></string>
+
+    <string name="intervals"><font fgcolor='#ffffff'>Intervalles</font></string>
+    <string name="estimated_time"><font fgcolor='#ffffff'>Temps estimé</font></string>
+    <string name="constant_power_w"><font fgcolor='#ffffff'>Puissance constante </font><font fgcolor='#5a7085'>W</font></string>
+
+    <string name="target_heart_rate_bpm"><font fgcolor='#ffffff'>Fréquence cardiaque cible</font> <font fgcolor='#5a7085'>bpm</font></string>
+    <string name="target_speed_mph"><font fgcolor='#ffffff'>Vitesse cible</font> <font fgcolor='#5a7085'>mph</font></string>
+    <string name="target_speed_kph"><font fgcolor="#ffffff">Vitesse cible</font> <font fgcolor="#5a7085">km/h</font></string>
+    <string name="inbox_test" translatable="false">We would like to inform you, that during Christmas holidays our working hours will be changed.Please find our updated schedule below or go to our website: gym-gym.comMonday—Friday 10:00—18:00
+Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have any questions, please contact staff.\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff\nIf you have any questions, please contact staff</string>
+    <string name="please_replace_the_safety_key">Please replace <b>the safety key.</b></string>
+    <string name="replace_safety_key">Veuillez remplacer la \nclé de sécurité</string>
+    <string name="Wait_Speed_ZERO" translatable="false"><b>Emergency stop mode activated.</b>\nPlease wait until the machine unlocks</string>
+    <string name="physical_buttons" translatable="false">boutons physiques</string>
+    <string name="please_use_physical_buttons_to_control_speed_and_incline">Veuillez utiliser les boutons physiques \npour contrôler la vitesse et l\'inclinaison.</string>
+    <string name="please_use_physical_buttons_to_control_speed">Veuillez utiliser les <b><font fgcolor='#e24b44'>boutons physiques</font></b> pour contrôler \nla vitesse</string>
+    <string name="please_use_physical_buttons_to_control_level">Veuillez utiliser les <b><font fgcolor='#e24b44'>boutons physiques</font></b> \npour contrôler le niveau</string>
+    <string name="your_heart_rate_is_too_high_finishing_the_program">Votre fréquence cardiaque est <b><font fgcolor='#e24b44'>trop élevée.</font></b>\nFin du programme…</string>
+    <string name="no_heart_rate_device_detected_finishing_the_program"><b>No heart rate device detected.</b>\nFinishing the program…</string>
+    <string name="you_have_just_reached_target_heart_rate_starting_cool_down">You have just <b><font fgcolor='#0DAC87'>reached target</font></b> heart rate.</string>
+    <string name="selected_target_heart_rate_exceeds_your_age_predicted_maximum_heart_rate">Selected targetLa fréquence cardiaque cible sélectionnée <b><font fgcolor='#e24b44'>dépasse la fréquence cardiaque maximal</font></b> prévue pour votre âge .</string>
+    <string name="caution_speed_msg"><b><font fgcolor='#e24b44'>Caution.</font></b> The speed level is now going to return to</string>
+    <string name="your_heart_rate_is_too_high_decreasing_speed">Your heart rate is <b><font fgcolor='#e24b44'>too high.</font></b> Decreasing speed…</string>
+    <string name="your_heart_rate_is_too_high_decreasing_level">Votre fréquence cardiaque est <b><font fgcolor='#e24b44'>trop élevée.</font></b> Diminuer le niveau...</string>
+    <string name="your_heart_rate_is_too_high_decreasing_incline">Votre fréquence cardiaque est <b><font fgcolor='#e24b44'>trop élevée.</font></b> Diminuer le niveau...</string>
+    <string name="your_heart_rate_is_not_high_enough">Your heart rate is <b><font fgcolor='#e24b44'>not high enough.</font></b> Increase speed…</string>
+    <string name="your_heart_rate_is_not_high_enough_incline">Votre fréquence cardiaque est <b><font fgcolor='#e24b44'>not high enough.</font></b> Augmenter l\'inclinaison...</string>
+    <string name="your_heart_rate_is_not_high_enough_level">Votre fréquence cardiaque est <b><font fgcolor='#e24b44'>not high enough.</font></b> Augmenter le niveau...</string>
+    <string name="the_current_distance_and_time_values_will_be_lost_and_will_restart_counting_from_00_00_00">Les valeurs actuelles de distance et de temps <b><font fgcolor='#e24b44'>seront perdues</font></b>\net le décompte recommencera à partir de 00:00:00.</string>
+    <string name="back">Retour</string>
+    <string name="programs">Programmes</string>
+    <string name="default_programs">Programmes par défaut</string>
+    <string name="fitness_tests">Tests de mise en forme</string>
+    <string name="terms_conditions"><![CDATA[Conditions générales]]></string>
+    <string name="workout_finished">ENTRAÎNEMENT TERMINÉ</string>
+    <string name="test_finished">TEST TERMINÉ</string>
+    <string name="Distance">Distance</string>
+    <string name="Power">Puissance</string>
+    <string name="Elevation_Gain">Gain d\'élévation</string>
+    <string name="mi">mi</string>
+    <string name="mile">mile</string>
+    <string name="min_per_mi">"min par mi"</string>
+    <string name="min_per_km">"min par km"</string>
+    <string name="rpm">tr/min</string>
+    <string name="km">km</string>
+    <string name="km_h">km/h</string>
+    <string name="kph">km/h</string>
+    <string name="W" translatable="false">W</string>
+    <string name="mph">mph</string>
+    <string name="dash" translatable="false">-</string>
+    <string name="Time">Temp</string>
+    <string name="Time_Left">Temps restant</string>
+    <string name="Distance_Left">Distance restant</string>
+    <string name="Avg_Pace">Rythme moyen</string>
+    <string name="estimated_time_min">Temps estimé : %1$s min</string>
+    <string name="estimated_time_u">Temps estimé :</string>
+
+
+    <string name="high_risk">Risque élevé</string>
+    <string name="moderate_risk">Risque modéré</string>
+    <string name="low_risk">Risque faible</string>
+    <string name="failure">Échec</string>
+    <string name="satisfactory">Satisfaisant</string>
+    <string name="good">Bon</string>
+    <string name="excellent">Excellent</string>
+    <string name="outstanding">Remarquable</string>
+    <string name="perfect">Parfait</string>
+    <string name="very_poor">Très faible</string>
+    <string name="poor">Mauvais</string>
+    <string name="fair">Juste</string>
+    <string name="superior">Supérieure</string>
+    <string name="Your_VO2_Score">Votre score VO2</string>
+    <string name="Your_Score">Votre score</string>
+    <string name="Warm_up">Échauffement</string>
+    <string name="Skip_Warm_up">Passer l\'échauffement</string>
+    <string name="Cool_Down">Récupérer</string>
+    <string name="Skip_and_Finish">Sauter et terminer</string>
+    <string name="workout_paused">Entraînement en pause</string>
+    <string name="VIP" translatable="false">VIP</string>
+    <string name="TEST_INVALID">TEST INVALID</string>
+    <string name="_12_min">12 min</string>
+    <string name="_85_max_hr">85 % de la FC maximale</string>
+    <string name="_80_max_hr">80 % de la FC maximale</string>
+    <string name="update_weight">Mise à jour du poids</string>
+    <string name="input_your_weight">Entrez votre poids</string>
+    <string name="Cancel">Annuler</string>
+    <string name="in">en</string>
+    <string name="NO_DATA">No Data</string>
+    <string name="NO_MESSAGE">NO MESSAGE</string>
+    <string name="Program_Info">Programme Info</string>
+    <string name="prepare_your_device_make_sure_that_your_garmin_device_is_not_connected_to_your_smartphone_and_is_in_pairing_mode">%1$s assurez-vous que votre appareil \nGarmin n\'est pas connecté à votre\n smartphone et qu\'il est en mode d\'appairage.</string>
+    <string name="Prepare_your_device__">Préparez votre appareil :</string>
+    <string name="Pause_Workout">Pause entraînement</string>
+    <string name="Resume_Workout">Reprendre l\'entraînement</string>
+    <string name="Show_Panels">Show Panels</string>
+    <string name="Hide_Panels">Cacher des panneaux</string>
+    <string name="Show_Channel">Afficher les chaînes</string>
+    <string name="TV_Controller">Contrôleur TV</string>
+    <string name="Go_Back">Retour</string>
+    <string name="Try_changing_resistance" translatable="false">Try changing resistance.</string>
+    <string name="Set_Manually">Réglage manuel</string>
+    <string name="_65_of_Max">65% de la valeur max.</string>
+    <string name="_85_of_Max">80 % de la valeur max.</string>
+    <string name="Close">Fermer</string>
+    <string name="Member_Since">Membre depuis</string>
+    <string name="Membership_Expiration_Date">Date d\'expiration de l\'adhésion</string>
+    <string name="Weight">Poids</string>
+    <string name="Height">Hauteur</string>
+    <string name="add_today_s_weight">Ajouter le poids du jour</string>
+    <string name="Start_This_Program">Démarrer ce programme</string>
+    <string name="Start_This_Test">Commencer ce test</string>
+    <string name="Next">Suivant</string>
+    <string name="GO_">ALLEZ-Y !</string>
+    <string name="English" translatable="false">English</string>
+    <string name="Imperial">Imperial</string>
+    <string name="Metric">Metric</string>
+    <string name="Settings">Settings</string>
+    <string name="Español" translatable="false">Español</string>
+    <string name="Suomi" translatable="false">Suomi</string>
+    <string name="Intervals">Intervalles</string>
+    <string name="HIIT">HIIT</string>
+    <string name="how_old_are_you">Quel âge avez-vous ?</string>
+    <string name="Ranking">Classement</string>
+    <string name="Member">Membre</string>
+    <string name="hours">heures</string>
+    <string name="nHours">%1$s hours</string>
+    <string name="cal" translatable="false">cal</string>
+    <string name="Select_This_Program">Select This Program</string>
+    <string name="yo">ans</string>
+    <string name="you_are_not_a_participant_yet_would_you_like_to_join_the_leaderboard_to_compete_in_training_results_with_other_gym_members">Vous n\'êtes pas encore un participant. Souhaitez-vous \nrejoindre le leaderboard pour vous mesurer à d\'autres \nmembres de la salle de sport en termes de résultats d\'entraînement ?</string>
+    <string name="join_rankings">Rejoindre les classements</string>
+    <string name="all_programs">Tous les programmes</string>
+    <string name="gym_rankings">Classement des salles de sport</string>
+    <string name="hello_guest">Bonjour Invité</string>
+    <string name="providing_your_age_and_weight_will_help_calculate_more_accurate_results">En indiquant votre âge et votre poids, vous obtiendrez des résultats plus précis.</string>
+    <string name="all_rankings">Tous les classements</string>
+    <string name="total_hours">Total des heures</string>
+    <string name="Set_Time">Temps de réglage</string>
+    <string name="Start">Commencer</string>
+    <string name="close_and_log_out">Fermer et se déconnecter</string>
+    <string name="Done">Fait</string>
+    <string name="updating">Mise à jour...</string>
+    <string name="NBC_Sports" translatable="false">NBC Sports</string>
+    <string name="snl_the_early_years" translatable="false">SNL: The Early Years</string>
+    <string name="Volume">Volume</string>
+    <string name="Channel">Chaîne</string>
+    <string name="Testing">Test...</string>
+    <string name="Belt_Speed">Vitesse de la bande, %1$s</string>
+    <string name="test_invalid_not_enough_data">Test invalide. Pas assez de données.</string>
+    <string name="error_e1_no_motor_output_signal">Erreur E1. Pas de signal de sortie du moteur.</string>
+    <string name="contact_support">Support de contact</string>
+    <string name="resuming_in">Reprise en ...</string>
+    <string name="Finish">Terminer</string>
+    <string name="Elevation">Élévation</string>
+    <string name="Total_Time">Durée totale</string>
+    <string name="Changing_Speed_to">Changement de vitesse à</string>
+    <string name="Confirm">Confirmer</string>
+    <string name="Got_it">Je l\'ai</string>
+    <string name="Ignore">Ignorer</string>
+    <string name="Set_Maximum">Régler le maximum</string>
+    <string name="Save">Sauvegarder</string>
+    <string name="Member_Profile">Profil du membre</string>
+    <string name="Age">Âge</string>
+    <string name="Clear_All">Effacer tout</string>
+    <string name="Heart_Rate_Device">Appareil de mesure de la fréquence cardiaque</string>
+    <string name="heart_rate_devices_scanning_function_is_now_off_turn_it_back_on_to_search_for_devices">La fonction de recherche des appareils de fréquence cardiaque est maintenant désactivée. Réactivez-la pour rechercher des appareils.</string>
+    <string name="how_to_mirror">Comment mettre en miroir</string>
+    <string name="on_android">Sur Android</string>
+    <string name="on_ios">Sur iOS</string>
+    <string name="connect_your_device_to_the_wifi_network_a_strong_connection_is_required_scan_the_qr_code_or_search_for_spirit_mirroring_app_in_google_play_on_your_device_and_download_it_in_the_app_select_spirit_device_then_press_start_mirroring"><![CDATA[Connectez votre appareil au réseau WiFi (une connexion forte est nécessaire). Scannez le code QR ou recherchez l\'application "SPIRIT Mirroring" dans Google Play sur votre appareil et téléchargez-la. Dans l\'application, sélectionnez l\'appareil SPIRIT, puis appuyez sur "Start Mirroring".]]></string>
+    <string name="connect_your_device_to_the_wifi_network_a_strong_connection_is_required_press_the_screen_mirroring_button_then_select_spirit_device"><![CDATA[Connectez votre appareil au réseau WiFi (une connexion forte est nécessaire). Appuyez sur le bouton "Screen Mirroring", puis sélectionnez l\'appareil SPIRIT.]]></string>
+    <string name="Add_Garmin_Device">Ajouter un appareil Garmin</string>
+    <string name="Input_Verification_Code">Saisir le code de vérification</string>
+    <string name="Input_Code">Code d\'entrée</string>
+    <string name="Back">Retour</string>
+    <string name="Select_Your_Device">Sélectionnez votre appareil</string>
+    <string name="No_Devices_Found">Aucun dispositif n\'a été trouvé.</string>
+    <string name="Try_Again">Réessayer</string>
+    <string name="Prepare_Your_Device">Prepare Your Device</string>
+    <string name="Garmin_Devices">Appareils \nGarmin</string>
+    <string name="you_haven_t_connected_any_garmin_devices_yet">Vous n\'avez pas encore connecté d\'appareils Garmin.</string>
+    <string name="Training">Formation</string>
+    <string name="Media">Les médias</string>
+    <string name="am_pm">matin/après-midi</string>
+    <string name="_12_hours">12 heures</string>
+    <string name="Bluetooth_Device">Appareil Bluetooth</string>
+    <string name="bluetooth_devices_scanning_function_is_now_off_turn_it_back_on_to_search_for_devices">La fonction de recherche d\'appareils Bluetooth est maintenant désactivée. Réactivez-la pour rechercher des appareils.</string>
+    <string name="Units_Of_Measurement">Unités de mesure</string>
+    <string name="Language">Langue</string>
+    <string name="Pyccknn" translatable="false">Русский</string>
+    <string name="deutsch" translatable="false">Deutsch</string>
+    <string name="portugues" translatable="false">Português</string>
+    <string name="simplified_chinese" translatable="false">简体中文</string>
+    <string name="Italiano" translatable="false">Italiano</string>
+    <string name="Traditional_Chinese" translatable="false">繁體中文</string>
+    <string name="norsk" translatable="false">Norsk</string>
+    <string name="fran_ais" translatable="false">Français</string>
+    <string name="japanese" translatable="false">日本語</string>
+    <string name="Nederlands" translatable="false">Nederlands</string>
+    <string name="Korea" translatable="false">한국어</string>
+    <string name="starting_in">À partir de…</string>
+    <string name="Qr_Code">Code QR</string>
+    <string name="scan_the_code_with_the_mobile_app_to_connect_to_this_machine_via_bluetooth">Scannez le code avec l\'application mobile pour vous connecter à cette machine via Bluetooth.</string>
+    <string name="Maintenance_Mode">Mode maintenance</string>
+    <string name="to_android">Vers Android</string>
+    <string name="about_this_machine">À propos de cette machine</string>
+    <string name="type">Type</string>
+    <string name="Model">Modèle</string>
+    <string name="ant_device_id">ID du dispositif ANT+</string>
+    <string name="Total_Distance">Distance totale</string>
+    <string name="reset_odometer">Odometer reset</string>
+    <string name="Preferences">Préférences</string>
+    <string name="Units">Unités</string>
+    <string name="Video">Vidéo</string>
+    <string name="NFC" translatable="false">NFC</string>
+    <string name="TV">TV</string>
+    <string name="Protocol">Protocole</string>
+    <string name="Beep">Bip</string>
+    <string name="pause_mode">Mode Pause</string>
+    <string name="sleep_mode">Mode veille</string>
+    <string name="sleep_after">Mode veille après</string>
+    <string name="machine_setup">Configuration de la machine</string>
+    <string name="club_information">Informations sur le club</string>
+    <string name="Wifi" translatable="false">WiFi</string>
+    <string name="Software">Logiciel</string>
+    <string name="Firmware">Micrologiciel</string>
+    <string name="app_manager">Gestionnaire d\'applications</string>
+    <string name="Advertisement" translatable="false">Advertisement</string>
+    <string name="Service">Service</string>
+    <string name="key_test">Test clé</string>
+    <string name="nfc_test">Test NFC</string>
+    <string name="touch_panel_test">Test de l\'écran tactile</string>
+    <string name="communication_test">Test de communication</string>
+    <string name="brake_test">Test de freinage</string>
+    <string name="sensor_tests">Tests des capteurs</string>
+    <string name="watt_calibration">Test Watt</string>
+    <string name="drive_motor_test">Test du moteur d\'entraînement</string>
+    <string name="incline_motor">Moteur d\'inclinaison</string>
+    <string name="error_code_log">Journal des codes d\'erreur</string>
+    <string name="Display_Brightness">Luminosité de l\'écran</string>
+    <string name="Exit">Sortie</string>
+    <string name="Inbox">Boîte de réception</string>
+    <string name="default_user_settings">Paramètres utilisateur par défaut</string>
+    <string name="Loading">Loading…</string>
+    <string name="Read">Lire</string>
+    <string name="Select">Sélectionner</string>
+    <string name="Connect_Device">Connecter le dispositif</string>
+    <string name="Connected">Connecté</string>
+    <string name="Connect">Connecter</string>
+    <string name="Stats">Statistiques</string>
+    <string name="Charts">Graphiques</string>
+    <string name="Track">Suivez</string>
+    <string name="Garmin" translatable="false">Garmin</string>
+    <string name="Laps">Tours</string>
+    <string name="Target_Heart_Rate">Fréquence cardiaque cible</string>
+    <string name="THR" translatable="false">FC cible</string>
+    <string name="Current_Heart_Rate">Fréquence cardiaque actuelle</string>
+    <string name="Just_Right">Parfaitement</string>
+    <string name="Too_High">Trop élevée!</string>
+    <string name="Recommendedspeed">Vitesse recommandée</string>
+    <string name="Stage">Étape</string>
+    <string name="Maximum">Maximum</string>
+    <string name="Hard">Difficile</string>
+    <string name="Medium">Moyenne</string>
+    <string name="Light">Facile</string>
+    <string name="Very_Light">Très Facile</string>
+    <string name="Respiration_Rate">Taux de respiration</string>
+    <string name="Body_Battery">Corps Batterie</string>
+    <string name="Sign_in">Se connecter</string>
+    <string name="Email">Courriel</string>
+    <string name="Password">Mot de passe</string>
+    <string name="log_in_via_qr_code">Connexion par code QR</string>
+    <string name="product_registration">Enregistrement du produit</string>
+    <string name="serialnumber">Numéro de série</string>
+    <string name="log_in_via_nfc">Connexion par NFC</string>
+    <string name="Watt_Callibration">Test Watt</string>
+    <string name="Calibration">Calibrage</string>
+    <string name="use_limits" translatable="false">Use Time Limit</string>
+    <string name="auto_pause">Pause automatique</string>
+    <string name="pause_after">Pause automatique</string>
+    <string name="max_speed___mph">Vitesse maximale, mph</string>
+    <string name="max_speed___kph">Vitesse maximale, km/h</string>
+    <string name="Max_Incline">Inclinaison maximale</string>
+    <string name="tap_on_the_area_where_the_dot_appears_to_check_the_panel_s_response">Tapez sur la zone où le point apparaît pour vérifier la réponse du panneau.</string>
+    <string name="tft_os" translatable="false">TFT OS</string>
+    <string name="up_to_date">À jour</string>
+    <string name="lwr" translatable="false">LWR</string>
+    <string name="Update">Mise à jour</string>
+    <string name="All">Tous</string>
+    <string name="News">Nouvelles</string>
+    <string name="Movies" translatable="false">Movies</string>
+    <string name="Music">Musique</string>
+    <string name="Sports" translatable="false">Sports</string>
+    <string name="Comedy" translatable="false">Comedy</string>
+    <string name="Social">Social</string>
+    <string name="music">Music</string>
+    <string name="Other">Other</string>
+    <string name="Input_Number">Numéro d\'entrée</string>
+    <string name="what_is_your_biological_gender">Quel est votre genre biologique?</string>
+    <string name="Female">Femme</string>
+    <string name="Male">Homme</string>
+    <string name="what_is_your_height">Quelle est votre taille ?</string>
+    <string name="what_is_your_weight">Quel est votre poids ?</string>
+    <string name="looks_like_you_are_a_new_user_to_calculate_calories_and_rate_your_fitness_test_results_we_need_to_know_more_about_you_would_you_mind_to_answer_a_couple_of_questions">Il semble que vous soyez un nouvel utilisateur. Pour calculer les calories et évaluer les résultats de vos tests de fitness, nous avons besoin d\'en savoir plus sur vous. Pourriez-vous répondre à quelques questions ?</string>
+    <string name="let_s_do_it">v</string>
+    <string name="skip_for_now">Ignorer pour l\'instant</string>
+    <string name="Apps">Appli</string>
+    <string name="video_content">Contenu vidéo</string>
+    <string name="Games">Jeux</string>
+    <string name="fox_sports" translatable="false">Fox Sports</string>
+    <string name="nbc" translatable="false">NBC</string>
+    <string name="Hulu" translatable="false">Hulu</string>
+    <string name="Instagram" translatable="false">Instagram</string>
+    <string name="FaceBook" translatable="false">Facebook</string>
+    <string name="Twitter" translatable="false">X</string>
+    <string name="Spotify" translatable="false">Spotify</string>
+    <string name="iHeart" translatable="false">iHeart</string>
+    <string name="Weather" translatable="false">Weather</string>
+    <string name="studio" translatable="false">Studio</string>
+    <string name="BitGym" translatable="false">BitGym</string>
+    <string name="Kinomap" translatable="false">Kinomap</string>
+    <string name="cnn" translatable="false">CNN</string>
+    <string name="ESPN" translatable="false">ESPN</string>
+    <string name="BBC" translatable="false">BBC News</string>
+    <string name="abc" translatable="false">ABC News</string>
+    <string name="cbs" translatable="false">CBS News</string>
+    <string name="All_Channels">Toutes les chaînes</string>
+    <string name="Mirroring">Miroir</string>
+    <string name="mirror_your_smartphone_screen_on_the_machine_console_to_enjoy_your_favorite_content_on_the_run">Mettre l\'écran de votre smartphone en miroir sur la console de l\'appareil pour profiter de vos contenus préférés pendant tout en vous entraînant.</string>
+    <string name="Device">Dispositif</string>
+    <string name="manager_settings">Paramètres du gestionnaire</string>
+    <string name="WELCOME">BIENVENUE</string>
+    <string name="login_with_qr">Connexion avec QR</string>
+    <string name="login_with_nfc">Connexion avec NFC</string>
+    <string name="go_to_workouts">Aller aux séances d\'entraînement</string>
+    <string name="Previous_Step">Étape précédente</string>
+    <string name="Stop">Arrêter</string>
+    <string name="OFF">ARRÊT</string>
+    <string name="ON">MARCHE</string>
+    <string name="try_turning_brake_on_and_off_to_check_its_response">Essayez d\'activer et de désactiver le frein pour vérifier sa réaction.</string>
+    <string name="run_test">Test d\'exécution</string>
+    <string name="test_all">Tester tout</string>
+    <string name="hours_24">Jour</string>
+    <string name="Membership">Membre</string>
+    <string name="HDMI" translatable="false">HDMI</string>
+    <string name="STB" translatable="false">STB</string>
+    <string name="CAST" translatable="false">CAST</string>
+    <string name="IPTV" translatable="false">IPTV</string>
+    <string name="DCI_OSD" translatable="false">DCI OSD</string>
+    <string name="CAB" translatable="false">CAB</string>
+    <string name="Csafe" translatable="false">Csafe</string>
+    <string name="Gymkit" translatable="false">Gymkit</string>
+    <string name="device_id">ID de l\'appareil</string>
+    <string name="Date">Date</string>
+    <string name="Code">Code</string>
+    <string name="Message">Message</string>
+    <string name="Firmware_Test">Test du micrologiciel</string>
+    <string name="LWR" translatable="false">LWR</string>
+    <string name="incline_motor_test">Test du moteur d\'inclinaison</string>
+    <string name="press_physical_key_to_check_its_response">Appuyez sur une touche physique pour vérifier sa réponse.</string>
+    <string name="NFC_Test">Test NFC</string>
+    <string name="Number_Detected">Nombre signalé</string>
+    <string name="Again">Encore</string>
+    <string name="hold_your_phone_tag_close_to_the_nfc_sensor_to_check_the_nfc_reader_s_response"><![CDATA[Tenez votre téléphone/étiquette près du capteur NFC pour vérifier la réponse du lecteur NFC.]]></string>
+    <string name="Club_Name">Nom du club</string>
+    <string name="Club_Information">Informations sur le club</string>
+    <string name="Organization_Id">ID de l\'organisation</string>
+    <string name="Contact_email">Courriel de contact</string>
+    <string name="Address">Adresse</string>
+    <string name="Telephone">Téléphone</string>
+    <string name="remove_from_club">Retirer du club</string>
+    <string name="don_t_reset">Ne pas réinitialiser</string>
+    <string name="Reset">Réinitialiser</string>
+    <string name="Sensor_Test">Test du capteur</string>
+    <string name="this_machine_is_not_assigned_to_any_club_yet_please_use_name_tbd_mobile_app_to_create_or_join_a_club">Cette machine n\'est pas encore assignée à un club. Veuillez utiliser l\'application mobile Spirit+ Connect pour créer ou rejoindre un club.</string>
+    <string name="Try_turning_brake_on_and_off_to_check_its_response">Essayez d\'activer et de désactiver le frein pour vérifier sa réaction.</string>
+    <string name="__" translatable="false">__</string>
+    <string name="plus">plus</string>
+    <string name="minus">moins</string>
+    <string name="welcome_anna">Welcome, %1$s!</string>
+    <string name="Stress">Stress</string>
+    <string name="SPO2">SPO2</string>
+    <string name="You_Passed">Vous avez réussi!</string>
+    <string name="You_Did_Not_Pass">Vous n\'avez pas réussi</string>
+    <string name="error_e1">Erreur E1</string>
+    <string name="inverter_error">Erreur de l\'onduleur, code d\'erreur-</string>
+    <string name="machine_type_mismatch">Une incompatibilité de type de machine a été détectée.</string>
+    <string name="empty_str" translatable="false"> </string>
+    <string name="restart">Redémarrer</string>
+    <string name="failed_to_init">Échec de l\'initialisation.</string>
+    <string name="rpm_error">Erreur tr/min</string>
+    <string name="uart_error_lwr">Erreur UART (côté LWR)</string>
+    <string name="uart_error">Erreur UART</string>
+    <string name="rs485_error">Erreur RS485</string>
+    <string name="mcu_error">Erreur MCU</string>
+    <string name="error_code">Error code</string>
+    <string name="err_front_grade">Erreur de fonctionnement du \nmoteur d\'inclinaison avant</string>
+    <string name="err_rear_grade">Erreur de fonctionnement du \nmoteur d\'inclinaison arrière</string>
+    <string name="step_sensor_err">Erreur du capteur de pas</string>
+    <string name="none">aucun</string>
+    <string name="Incline_Return">Retour incliné</string>
+    <string name="motor_d_a">Moteur D/A</string>
+    <string name="Apply">Appliquer</string>
+    <string name="current_d_a_value">Valeur D/A actuelle</string>
+    <string name="input_motor_d_a_2000_30_000">Input motor D/A 2,000—30,000</string>
+    <string name="machine_type">Type de machine</string>
+    <string name="convert">Convertir</string>
+    <string name="recumbent_bike">Vélo Horizontale</string>
+    <string name="upright_bike">Cycle Exerciseur</string>
+    <string name="elliptical">Elliptique</string>
+    <string name="treadmill">Tapis roulant</string>
+    <string name="converting_machine_type_will_trigger_the_console_to_restart">La conversion du type de machine déclenche le redémarrage de la console.</string>
+    <string name="Cable_TV">Télévision par câble</string>
+    <string name="Both">Les deux</string>
+    <string name="select_from_the_variety_of_tv_stations_provided_by_the_fitness_club">Choisissez parmi les \ndifférentes chaînes de télévision proposées par \nle club de remise en forme..</string>
+    <string name="watch_tv">Regarder la télévision</string>
+    <string name="netflix" translatable="false">Netflix</string>
+    <string name="youtube" translatable="false">Youtube</string>
+    <string name="INVALID_TEST">TEST INVALIDE</string>
+    <string name="INVALID_TEST_RPM_OUT_OF_RANGE">TEST INVALIDE — TR/MIN HORS PLAGE</string>
+    <string name="INVALID_TEST_HR_OUT_OF_RANGE">TEST NON VALIDE - FC HORS PLAGE</string>
+    <string name="None">Aucun</string>
+    <string name="tv_settings">Réglages TV</string>
+    <string name="select_country">Sélectionner un pays</string>
+    <string name="guest">INVITÉ</string>
+    <string name="miracast" translatable="false">Miracast</string>
+    <string name="how_it_works">Comment ça marche</string>
+    <string name="TV_is_not_available_on_this_equipment">La télévision n\'est pas disponible sur cet équipement. </string>
+    <string name="mirror_your_smartphone_screen_on_the_machine_console_via_cable_connection">Mettez l\'écran de votre smartphone en miroir sur la console de la machine via une connexion câblée.</string>
+    <string name="how_to_use_wirecast">Comment utiliser Wirecast</string>
+    <string name="use_a_lightning_to_hdmi_adapter_and_an_hdmi_cable_to_connect_your_phone_to_the_machine_console">Utilisez un adaptateur Lightning vers HDMI et un câble HDMI pour connecter votre téléphone à la console de la machine.</string>
+    <string name="the_hdmi_port_is_located_in_the_right_corner_of_the_machine_console_s_underside">Le port HDMI est situé dans le coin droit du dessous de la console de la machine.</string>
+    <string name="iphone" translatable="false">iPhone</string>
+    <string name="use_a_usb_c_to_hdmi_adapter_and_an_hdmi_cable_or_a_direct_usb_c_to_hdmi_cable_to_connect_your_phone_to_the_machine_console_make_sure_your_android_smartphone_supports_video_output_over_usb_c">Utilisez un adaptateur USB-C vers HDMI et un câble HDMI, ou un câble direct USB-C vers HDMI pour connecter votre téléphone à la console de la machine. Assurez-vous que votre smartphone Android prend en charge la sortie vidéo sur USB-C.</string>
+    <string name="android_phone">Téléphone \nAndroid</string>
+    <string name="to_maintenance_mode">En mode entretien </string>
+    <string name="scan_again">Numériser à nouveau </string>
+    <string name="hide_channels">Masquer les chaînes</string>
+    <string name="Regulations">Règlements</string>
+    <string name="Promo">Promo</string>
+    <string name="start_scan">Démarrer l\'analyse</string>
+    <string name="Menu">Menu</string>
+    <string name="search_channels">Canaux de recherche</string>
+    <string name="wire_cast" translatable="false">Wirecast</string>
+    <string name="Installing">Installer...</string>
+    <string name="am">matin</string>
+    <string name="pm">après-midi</string>
+    <string name="Connection_Failure">La connexion a échoué, veuillez réessayer.</string>
+    <string name="No_internet_connection">Pas de connexion internet</string>
+
+    <string name="Skip">Passer</string>
+    <string name="console">Console</string>
+    <string name="Version">Version</string>
+    <string name="Heart_rate_monitor_required">Moniteur de fréquence cardiaque requis !</string>
+    <string name="kcal">kcal</string>
+    <string name="GS_Mode">Mode GS</string>
+    <string name="Autopause">Pause automatique</string>
+    <string name="Sub_MCU">Sub MCU</string>
+    <string name="rotational_speed_rpm">Vitesse de rotation, tr/min</string>
+    <string name="electric_current_a">Courant électrique, A</string>
+    <string name="downloading">Téléchargement...</string>
+    <string name="software_update">Mise à jour du logiciel</string>
+    <string name="of_max_heart_rate_85">85% de la fréquence cardiaque maximale</string>
+    <string name="of_max_heart_rate_80">80% de la fréquence cardiaque maximale</string>
+    <string name="Automatic_Update">Mise à jour automatique</string>
+    <string name="LOGIN_FAILED">ÉCHEC DE LA CONNEXION</string>
+    <string name="USER_NOT_FOUND">USER NOT FOUND</string>
+    <string name="GET_MEMBER_DATA_TIMEOUT">GET MEMBER DATA TIMEOUT</string>
+    <string name="network_error">erreur réseau</string>
+    <string name="SUB_MCU_Update">Mise à jour de la sous-unité MCU</string>
+    <string name="LWR_Update">Mise à jour du LWR</string>
+    <string name="not_now">Pas maintenant</string>
+    <string name="restart_app">Pour terminer la mise à jour du logiciel, \nla console redémarre automatiquement en</string>
+    <string name="_01_00" translatable="false">01:00</string>
+    <string name="All_Media">Tous les médias</string>
+    <string name="how_to_use_miracast">Comment utiliser Miracast</string>
+    <string name="ezcast_desc">Si votre smartphone n\'a pas de fonction miroir intégrée, scannez le code QR pour télécharger l\'application EZCast.</string>
+    <string name="step2">Étape2</string>
+    <string name="step1" tools:ignore="Typos">Étape1</string>
+    <string name="miracast_desc_step1">Ouvrez les paramètres WiFi sur votre téléphone et connectez-vous à la console en sélectionnant le même identifiant de réseau que celui spécifié en haut de la page Miracast. Utilisez le mot de passe affiché sur la console.</string>
+    <string name="miracast_desc_step2">Sur votre téléphone, lancez la fonction duplication d\'écran (le nom peut varier selon le système d\'exploitation) et sélectionnez à nouveau le même identifiant pour commencer à afficher.</string>
+    <string name="Default_User_Settings">Paramètres utilisateur par défaut</string>
+    <string name="use_wireless_connection_to_mirror_your_smartphone">Utilisez une connexion sans fil pour duplication d\'écran votre smartphone.</string>
+    <string name="port_2">Port n°2</string>
+    <string name="port_3">Port n°3</string>
+    <string name="port_4">Port n°4</string>
+    <string name="submit">Soumettre</string>
+    <string name="connection_failed">Échec de la connexion</string>
+    <string name="when_no_user_detected">(when no user detected)</string>
+    <string name="please_check_if_your_garmin_device_is_disconnected_from_your_smartphone_and_try_again">Veuillez vérifier si votre appareil Garmin est déconnecté de votre smartphone et réessayez.</string>
+
+    <string name="Usage_Restrictions">Usage Restrictions</string>
+    <string name="Distance_Limit">Distance Limit</string>
+    <string name="Time_Limit">Time Limit</string>
+    <string name="No_Limit">No Limit</string>
+    <string name="Reset_Code">Reset Code</string>
+    <string name="no_usage_restrictions_applied">No usage restrictions applied.</string>
+    <string name="limit_km">Limit, km</string>
+    <string name="limit_mi">Limit, mi</string>
+    <string name="limit_sec">Limit, hours</string>
+    <string name="usage_limit_reached">Usage Limit Reached</string>
+    <string name="to_continue_using_this_machine_please_enter_the_6_digit_reset_code_or_contact_your_dealer">To continue using this machine, please enter the 6-digit reset code or contact your dealer.</string>
+    <string name="these_settings_are_protected_with_a_pin_code_to_access_them_please_enter_below_the_6_digit_code">These settings are protected with a PIN-code. To access them, please enter below the 6-digit code.</string>
+    <string name="access_code">Access Code</string>
+    <string name="Digital_Signal">Digital Signal</string>
+    <string name="Analog_Signal">Analog Signal</string>
+    <string name="Cable">Cable</string>
+    <string name="Air">Air</string>
+    <string name="years">years</string>
+    <string name="Input">Input</string>
+    <string name="how_to_miracast">How to Miracast</string>
+
+    <string name="bt_notify">The console is not equipped with\na speaker. Please use Bluetooth\nheadphones for audio playback.</string>
+    <string name="Interval">Interval</string>
+    <string name="Custom">Custom</string>
+    <string name="tvtuner_try_again">TvTuner not ready yet, please try again</string>
+    <string name="connect_dots_to_map_intensity_throughout_your_program">Connect dots to map intensity throughout your program.</string>
+    <string name="set_speed_profile">Set Speed Profile</string>
+    <string name="set_level_profile">Set Level Profile</string>
+
+    <string name="select_max_mph"><font fgcolor='#ffffff'>Select Max</font> <font fgcolor='#5a7085'>mph</font></string>
+    <string name="select_max_kph"><font fgcolor="#ffffff">Select Max</font> <font fgcolor="#5a7085">km/h</font></string>
+    <string name="total_time_min"><font fgcolor="#ffffff">Total Time</font> <font fgcolor="#5a7085">Min</font></string>
+    <string name="clear_profile">Clear Profile</string>
+    <string name="set_incline_profile_optional">Set Incline Profile (Optional)</string>
+    <string name="back_to_editing">Back to Editing</string>
+    <string name="exit_custom_mode">Exit Custom Mode?</string>
+    <string name="the_profiles_you_created_and_properties_you_set_for_this_program_will_be_lost">The profiles you created and properties you set for this program will be lost.</string>
+    <string name="customization">Customization</string>
+    <string name="splash_screen_image">Splash Screen Image</string>
+    <string name="retail_mode_video">Retail Mode Video</string>
+    <string name="change_retail_video">Change Retail Video</string>
+    <string name="change_splash_screen">Change Splash Screen</string>
+    <string name="update_image">Update Image</string>
+    <string name="update_video">Update Video</string>
+    <string name="change_video_desc">Save the prepared file onto a USB device. Upload the file to the console via the USB port. The system will automatically select a file that meets all the requirements.</string>
+    <string name="file_requirements">File Requirements</string>
+    <string name="mp4_format">MP4 format</string>
+    <string name="_1920_1080_px">1920 × 1080 px</string>
+    <string name="must_not_exceed_100_mb">Must not exceed 100 MB</string>
+    <string name="named_retail_mp4">Named <i>retail.mp4</i></string>
+    <string name="no_usb_device_detected">No USB device detected.</string>
+    <string name="must_not_exceed_kb">Must not exceed 12 MB</string>
+    <string name="named_welcome_png_or_welcome_jpg">Named <i>welcome.png</i> or <i>welcome.jpg</i></string>
+    <string name="no_suitable_files_found">No suitable files found.</string>
+    <string name="shading">Shading</string>
+    <string name="png_or_jpg_format">PNG or JPG format</string>
+    <string name="Retail">Retail</string>
+    <string name="On">On</string>
+    <string name="Off">Off</string>
+    <string name="retail_video_not_found">RETAIL VIDEO NOT FOUND</string>
+    <string name="minimal_speed">Minimal Speed</string>
+    <string name="Moderate">Moderate</string>
+    <string name="File">File</string>
+    <string name="not_yet_been_installed">App installation not detected.</string>
+    <string name="paired">paired</string>
+    <string name="auto_pause_amp_logout"><![CDATA[Auto Pause & Logout]]></string>
+    <string name="auto_logout">Auto Logout</string>
+    <string name="machine_territory">Machine Territory</string>
+    <string name="Disney">Disney+</string>
+    <string name="youtube_tv">Youtube TV</string>
+    <string name="prime_video">Prime Video</string>
+    <string name="hbo_max">Max</string>
+    <string name="peacock_tv">Peacock TV</string>
+    <string name="pluto_tv">Pluto TV</string>
+    <string name="tubi">Tubi</string>
+    <string name="Wired_Mirroring">Wired \nMirroring</string>
+    <string name="us_app_desc">Enjoy your favorite news and video content on the run.\nRemember to log out from your accounts before leaving the equipment.</string>
+    <string name="log_out_all">Log Out All</string>
+    <string name="how_to_use_wired_mirroring">How to Use Wired Mirroring</string>
+    <string name="how_to_use_mirroring">How to Screen Mirror</string>
+    <string name="incline_nnot_available">Incline \nnot available</string>
+    <string name="speed_nnot_available">Speed \nnot available</string>
+    <string name="views_nnot_available">Views \nnot available</string>
+    <string name="level_nnot_available">Level \nnot available</string>
+    <string name="direct_speed">Direct Speed</string>
+    <string name="direct_incline">Direct Incline</string>
+    <string name="direct_level">Direct Level</string>
+    <string name="direct_watts">Direct Watts</string>
+    <string name="Log_Out_Apps_and_Close">Log Out Apps and Close</string>
+    <string name="canada">Canada</string>
+    <string name="Midnight_Pulp">Midnight Pulp</string>
+    <string name="IMDb_TV">IMDb TV</string>
+    <string name="Crackle">Crackle</string>
+    <string name="Install">Install</string>
+    <string name="apple_watch_works"><![CDATA[Hold your Apple Watch near the reader below the screen and confirm the connection on your Apple Watch to automatically connect to this machine. You can also open the Workout app on your Apple Watch then hold near the reader to get started.]]></string>
+    <string name="pause">Pause</string>
+    <string name="controls">Controls</string>
+    <string name="Paramount">Paramount+</string>
+    <string name="welcome__">Welcome,</string>
+    <string name="you_have_3_planned_treadmill_activities">You have %1$s planned %2$s activities:</string>
+    <string name="browse_programs">Browse Programs</string>
+    <string name="you_don_t_have_any_planned_treadmill_activities">You don\'t have any planned %1$s activities.</string>
+    <string name="Power_Output">Power Output</string>
+    <string name="Login_to_Egym">Log in to\u00A0\u00A0<font fgcolor='#d15b05'>E</font>\u00A0\u00A0G\u00A0\u00A0Y\u00A0\u00A0M</string>
+    <string name="Egym_text"><font fgcolor='#d15b05'>E</font>\u00A0\u00A0G\u00A0\u00A0Y\u00A0\u00A0M</string>
+    <string name="hold_your_rfid_tag_near_the_reader_below_the_screen_to_login_as_an_egym_member"><![CDATA[Hold your RFID tag near the reader below the screen to login as an EGYM member.]]></string>
+    <string name="coach">Coach</string>
+    <string name="total_sets">Total Sets</string>
+    <string name="total_duration">Total Duration</string>
+    <string name="sets">sets</string>
+    <string name="set">set</string>
+    <string name="no_chart_available">No chart available</string>
+    <string name="BPM">BPM</string>
+
+    <string name="workout_finished_egym">Entraînement terminé</string>
+    <string name="syncing_workout_history">Syncing workout history…</string>
+    <string name="total_ascent">Total Ascent</string>
+    <string name="avg_heart_rate">Avg Heart Rate</string>
+    <string name="avg_incline">Avg Incline</string>
+    <string name="active_calories">Active Calories</string>
+    <string name="avg_mets">Avg METs</string>
+    <string name="avg_output">Avg Output</string>
+    <string name="log_out">Log Out</string>
+    <string name="home">Home</string>
+    <string name="synced_successfully">Synced successfully.</string>
+    <string name="synced_failed">Sync failed.</string>
+    <string name="auto_logout_in">Auto logout in</string>
+    <string name="queued_to_sync_when_back_online">Queued to sync when back online.</string>
+    <string name="Free_Workout">Free Workout</string>
+    <string name="per_km">per km</string>
+    <string name="per_mi">per mi</string>
+    <string name="Activity">Activity</string>
+    <string name="egym_system">EGYM System</string>
+    <string name="Target">Target</string>
+    <string name="speed_chart">Speed Chart,</string>
+    <string name="incline_chart">Incline Chart</string>
+    <string name="Outcome">Outcome</string>
+    <string name="heart_rate_chart">Heart Rate Chart,</string>
+    <string name="bpm">bpm</string>
+    <string name="from">from</string>
+    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <font fgcolor='#1396ef'><b>Log In</b></font></string>
+    <string name="interval_time">Interval Time</string>
+    <string name="interval_distance">Interval Distance</string>
+    <string name="Resistance">Resistance</string>
+    <string name="Cadence">Cadence</string>
+    <string name="SPM">SPM</string>
+    <string name="RPM">RPM</string>
+    <string name="resistance_chart">Resistance Chart</string>
+    <string name="Candence_Chart">Cadence Chart</string>
+    <string name="Avg_Resistance">Avg Resistance</string>
+    <string name="Active_Calories">Active Calories</string>
+    <string name="Avg_Cadence">Avg Cadence</string>
+    <string name="hash"> #</string>
+    <string name="not_installed">app not installed.</string>
+    <string name="ACCEPT">ACCEPT</string>
+    <string name="DENY">DENY</string>
+    <string name="Minimal">Minimal</string>
+    <string name="Agree_and_Continue">Agree and Continue</string>
+    <string name="terms_agreement_text">Please confirm that \nyou<font color="#E24b43"> have read and agree to</font> our \nTerms &amp; Conditions</string>
+    <string name="galaxy_watch_connected">Galaxy Watch Connected</string>
+    <string name="hold_your_samsung_galaxy_watch_near_the_nfc_reader_below_the_screen_your_watch_will_automatically_connect_to_the_machine_you_can_also_check_the_connection_status_on_your_watch">Hold your Samsung Galaxy Watch near the NFC reader below the screen. Your watch will automatically connect to the machine. You can also check the connection status on your watch.</string>
+    <string name="the_nfc_setting_on_the_watch_must_be_turned_on">The NFC setting on the watch must be turned on.</string>
+
+    <string name="Galaxy_Watch_disconnected">Galaxy Watch disconnected</string>
+
+    <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
+</resources>

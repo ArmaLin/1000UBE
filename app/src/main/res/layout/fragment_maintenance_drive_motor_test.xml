@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="deviceSettingViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".maintenance_mode.MaintenanceDriveMotorTestFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1185dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel_bg_left_32_1c242a">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:layout_marginEnd="56dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/drive_motor_test"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/MButton_252e37"
+                android:id="@+id/btnDone"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:text="@string/Done"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_check"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="129.5dp"
+                android:layout_marginBottom="616dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/rotational_speed_rpm"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText1Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                android:text="@{String.valueOf(deviceSettingViewModel.rotationalSpeedValue)}"
+                app:layout_constraintBottom_toTopOf="@+id/tvText1"
+                app:layout_constraintEnd_toEndOf="@+id/tvText1"
+                app:layout_constraintStart_toStartOf="@+id/tvText1"
+                tools:text="268" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="158dp"
+                android:layout_marginBottom="616dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/electric_current_a"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText3Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                android:text="@{String.valueOf(deviceSettingViewModel.electricCurrentValue)}"
+                app:layout_constraintBottom_toTopOf="@+id/tvText3"
+                app:layout_constraintEnd_toEndOf="@+id/tvText3"
+                app:layout_constraintStart_toStartOf="@+id/tvText3"
+                tools:text="8" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="288dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Belt Speed, km/h" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvText2Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/inter_extrabold"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvText2"
+                app:layout_constraintEnd_toEndOf="@+id/tvText2"
+                app:layout_constraintStart_toStartOf="@+id/tvText2"
+                tools:text="8" />
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/ibMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="338dp"
+                android:layout_marginBottom="344dp"
+                android:background="@drawable/btn_minus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/ibPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="338dp"
+                android:layout_marginBottom="344dp"
+                android:background="@drawable/btn_plus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <!--        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toTopOf="parent"-->
+            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            android:id="@+id/pickDriveMotorTest"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"/>-->
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:visibility="invisible"
+                android:id="@+id/btnCallibration"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:background="@drawable/panel_bg_bottom_left_20_1396ef"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:stateListAnimator="@null"
+                android:text="@string/Calibration"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/egym_svg_2">
+
+    <!-- 第一張圖：先 fade out，接著 fade in -->
+    <target
+        android:name="draw_path1"
+        android:animation="@animator/fade_out_animator" />
+    <target
+        android:name="draw_path1"
+        android:animation="@animator/fade_in_path1" />
+
+    <!-- 第二張圖 -->
+    <target
+        android:name="draw_path2"
+        android:animation="@animator/fade_out_animator" />
+    <target
+        android:name="draw_path2"
+        android:animation="@animator/fade_in_path2" />
+
+    <!-- 第三張圖 -->
+    <target
+        android:name="draw_path3"
+        android:animation="@animator/fade_out_animator" />
+    <target
+        android:name="draw_path3"
+        android:animation="@animator/fade_in_path3" />
+
+    <!-- 第四張圖 -->
+    <target
+        android:name="draw_path4"
+        android:animation="@animator/fade_out_animator" />
+    <target
+        android:name="draw_path4"
+        android:animation="@animator/fade_in_path4" />
+
+</animated-vector>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="together">
+    <objectAnimator
+        android:duration="600"
+        android:interpolator="@android:interpolator/linear"
+        android:propertyName="pathData"
+        android:valueFrom="@string/green_menu_1"
+        android:valueTo="@string/green_menu_2"
+        android:valueType="pathType" />
+    <!--顏色變化-->
+    <objectAnimator
+        android:duration="600"
+        android:propertyName="fillColor"
+        android:valueFrom="#274fe1"
+        android:valueTo="#333333"
+        android:valueType="colorType" />
+</set>

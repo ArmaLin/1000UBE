@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color11151a"
+    android:layout_width="match_parent"
+    tools:context=".garmin.GarminConnectFailedWindow"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="56dp"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/Add_Garmin_Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintTop_toTopOf="@+id/btn_close"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+        app:layout_constraintEnd_toStartOf="@+id/btn_close"
+        android:layout_marginEnd="66dp"
+        android:src="@drawable/element_pagination_garmin_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="152dp"
+        android:layout_marginStart="56dp"
+        android:textColor="@color/color5a7085"
+        android:textSize="24sp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/Prepare_Your_Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/btn_close"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+        app:layout_constraintEnd_toStartOf="@+id/btn_close"
+        android:layout_marginEnd="66dp"
+        android:src="@drawable/element_pagination_garmin_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_attention"
+        android:layout_marginStart="219dp"
+        android:layout_marginTop="504dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/icon_attention"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        app:layout_constraintBottom_toTopOf="@+id/tvEstr1"
+        app:layout_constraintStart_toStartOf="@+id/tvEstr1"
+        android:textColor="@color/white"
+        android:textSize="54sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/connection_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvEstr1"
+        android:gravity="start"
+        android:layout_marginStart="363dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="444dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/please_check_if_your_garmin_device_is_disconnected_from_your_smartphone_and_try_again"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="54sp"
+        android:layout_width="1320dp"
+        android:layout_height="wrap_content" />
+
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:letterSpacing="0.01"-->
+<!--        android:fontFamily="@font/inter_bold"-->
+<!--        android:id="@+id/btnTryAgain"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="96dp"-->
+<!--        android:stateListAnimator="@null"-->
+<!--        android:text="@string/Try_Again"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="32sp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:rippleColor="@android:color/transparent"-->
+<!--        app:backgroundTint="@color/btn_click_1396ef"-->
+<!--        app:iconGravity="textStart"-->
+<!--        app:iconPadding="10dp"-->
+<!--        app:iconTint="@color/white"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:id="@+id/btnBack"
+        android:background="@color/btn_click_252e37_323f4b"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnTryAgain"
+        android:layout_width="0dp"
+        android:layout_height="96dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        android:id="@+id/btnTryAgain"
+        android:background="@color/btn_click_1396ef"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/Try_Again"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="96dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

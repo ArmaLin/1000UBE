@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color11151a"
+    android:layout_width="match_parent"
+    tools:context=".garmin.GarminPairWindow"
+    android:layout_height="match_parent">
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="56dp"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/Add_Garmin_Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="152dp"
+        android:layout_marginStart="56dp"
+        android:textColor="@color/color5a7085"
+        android:textSize="24sp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/Select_Your_Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintTop_toTopOf="@+id/btn_close"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_close"
+        app:layout_constraintEnd_toStartOf="@+id/btn_close"
+        android:layout_marginEnd="66dp"
+        android:src="@drawable/element_pagination_garmin_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:background="@color/color252e37"
+        android:id="@+id/vLine"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="248dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fadeScrollbars="false"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:paddingTop="1dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/vLine"
+        app:layout_constraintStart_toStartOf="@+id/vLine"
+        app:layout_constraintTop_toBottomOf="@+id/vLine" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_attention"
+        android:layout_marginStart="686dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/icon_attention"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvNoDevice"
+        android:layout_marginStart="24.94dp"
+        app:layout_constraintStart_toEndOf="@+id/icon_attention"
+        app:layout_constraintTop_toTopOf="@+id/icon_attention"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_attention"
+        android:text="@string/No_Devices_Found"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="54sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@color/btn_click_252e37_323f4b"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:text="@string/Back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnTryAgain"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTryAgain"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@color/btn_click_1396ef"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:text="@string/Try_Again"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBack" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_no_device"
+        android:visibility="gone"
+        app:constraint_referenced_ids="btnTryAgain,btnBack,icon_attention,tvNoDevice"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <View
+        android:clickable="true"
+        android:visibility="gone"
+        android:id="@+id/pairBG"
+        android:background="@color/half_transparent10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        app:rippleColor="@android:color/transparent"
+        android:insetBottom="0dp"
+        android:insetTop="0dp"
+        android:visibility="gone"
+        android:letterSpacing="0.01"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btnPairClose"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/panel_bg_all_252e37"
+        android:fontFamily="@font/inter_bold"
+        android:stateListAnimator="@null"
+        android:text="@string/Close"
+        android:textAllCaps="false"
+        android:textColor="@color/colorADB8C2"
+        android:textSize="24sp"
+        app:backgroundTint="@color/color252e37"
+        app:backgroundTintMode="src_in"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pairProgress"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:indeterminateDrawable="@drawable/progressbar_hr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

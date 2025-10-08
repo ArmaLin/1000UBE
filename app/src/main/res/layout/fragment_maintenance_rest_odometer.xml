@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceRestOdometerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1920dp"
+        android:layout_height="576dp"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <TextView
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="1524dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="176dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/the_current_distance_and_time_values_will_be_lost_and_will_restart_counting_from_00_00_00"
+            android:textColor="@color/white"
+            android:textSize="54sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClose"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="@color/btn_click_252e37_323f4b"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@string/don_t_reset"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnReset"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="@color/btn_click_1396ef"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@string/Reset"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnClose" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

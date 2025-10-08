@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SpiritTextView">
+        <!-- 控制動畫是否循環播放，預設為 true -->
+        <attr name="loopAnimation" format="boolean" />
+        <!-- 控制動畫持續時間，單位為毫秒 -->
+        <attr name="animationDuration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="StackedBarChartView">
+        <attr name="xLabelMarginBottom" format="dimension" />
+        <attr name="yLabelMarginRight" format="dimension" />
+        <attr name="chartTopMargin" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Banner">
+        <attr name="banner_loop_time" format="integer" />
+        <attr name="banner_auto_loop" format="boolean" />
+        <attr name="banner_infinite_loop" format="boolean" />
+
+        <!--RoundLinesIndicator、RectangleIndicator-->
+        <attr name="banner_indicator_height" format="dimension" />
+        <attr name="banner_indicator_radius" format="dimension" />
+
+        <!-- 以下为公用属性 -->
+        <attr name="banner_indicator_selected_width" format="dimension" />
+        <!--CircleIndicator-->
+        <attr name="banner_indicator_normal_width" format="dimension" />
+        <attr name="banner_indicator_space" format="dimension" />
+
+        <attr name="banner_indicator_normal_color" format="reference|color" />
+        <attr name="banner_indicator_selected_color" format="reference|color" />
+        <attr name="banner_indicator_margin" format="dimension" />
+        <attr name="banner_indicator_marginLeft" format="dimension" />
+        <attr name="banner_indicator_marginTop" format="dimension" />
+        <attr name="banner_indicator_marginRight" format="dimension" />
+        <attr name="banner_indicator_marginBottom" format="dimension" />
+
+        <attr name="banner_indicator_gravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+
+        <attr name="banner_orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="banner_radius" format="dimension" />
+
+    </declare-styleable>
+
+    <declare-styleable name="RulerView2">
+
+        <attr name="rulerOrientation2" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+
+        <attr name="rulerHighlightColor" format="color|reference" />
+        <attr name="rulerColor" format="color|reference" />
+        <attr name="rulerTextColor" format="color|reference" />
+
+        <attr name="rulerIntervalDistance" format="dimension" />
+        <attr name="rulerLineWidth" format="dimension" />
+        <attr name="rulerLineHeight" format="dimension" />
+        <attr name="rulerTextSize" format="dimension" />
+        <attr name="rulerTextBaseLineDistance" format="dimension" />
+
+        <attr name="rulerIsDivideByTen" format="boolean" />
+        <attr name="rulerDivideByTenHeight" format="dimension" />
+        <attr name="rulerDivideByTenWidth" format="dimension" />
+
+        <attr name="rulerIsDivideByFive" format="boolean" />
+        <attr name="rulerDivideByFiveHeight" format="dimension" />
+        <attr name="rulerDivideByFiveWidth" format="dimension" />
+
+        <!--        <attr name="rulerOrientation" format="enum">-->
+        <!--            <enum name="horizontal" value="0" />-->
+        <!--            <enum name="vertical" value="1" />-->
+        <!--        </attr>-->
+
+        <attr name="rulerIntervalValue" format="float" />
+        <attr name="rulerMaxValue" format="float" />
+        <attr name="rulerMinValue" format="float" />
+
+        <attr name="rulerRetainLength" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="YearWheelView">
+        <attr name="wv_startYear" format="integer" />
+        <attr name="wv_endYear" format="integer" />
+        <attr name="wv_selectedYear" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MonthWheelView">
+        <attr name="wv_selectedMonth" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="DayWheelView">
+        <attr name="wv_year" format="integer" />
+        <attr name="wv_month" format="integer" />
+        <attr name="wv_selectedDay" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="WheelView">
+        <!--文字大小-->
+        <attr name="wv_textSize" format="dimension" />
+        <!--是否自适应文字大小以完全显示过长的文字-->
+        <attr name="wv_autoFitTextSize" format="boolean" />
+        <!--文字对齐方式-->
+        <attr name="wv_textAlign" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <!--文字距离边界的外边距-->
+        <attr name="wv_textBoundaryMargin" format="dimension" />
+        <!--未选中文字颜色-->
+        <attr name="wv_normalItemTextColor" format="color" />
+        <!--被选中的文字颜色-->
+        <attr name="wv_selectedItemTextColor" format="color" />
+        <!--行间距-->
+        <attr name="wv_lineSpacing" format="dimension" />
+        <!--数据为Integer类型时是否需要转换-->
+        <attr name="wv_integerNeedFormat" format="boolean" />
+        <!--Integer类型转换格式-->
+        <attr name="wv_integerFormat" format="string" />
+
+        <!--可见item数-->
+        <attr name="wv_visibleItems" format="integer" />
+        <!--当前选中下标-->
+        <attr name="wv_selectedItemPosition" format="integer" />
+        <!--是否循环滚动-->
+        <attr name="wv_cyclic" format="boolean" />
+
+        <!--是否显示分割线-->
+        <attr name="wv_showDivider" format="boolean" />
+        <!--分割线类型-->
+        <attr name="wv_dividerType" format="enum">
+            <enum name="fill" value="0" />
+            <enum name="wrap" value="1" />
+        </attr>
+        <!--分割线颜色-->
+        <attr name="wv_dividerColor" format="color" />
+        <!--分割线高度-->
+        <attr name="wv_dividerHeight" format="dimension" />
+        <!--wrap类型下分割线内边距-->
+        <attr name="wv_dividerPaddingForWrap" format="dimension" />
+
+
+        <!--是否是弯曲（3D）效果-->
+        <attr name="wv_curved" format="boolean" />
+        <!--弯曲（3D）效果左右圆弧偏移效果方向 可向指定方向偏移-->
+        <attr name="wv_curvedArcDirection" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <!--弯曲（3D）效果左右圆弧偏移效果方向系数 偏移系数-->
+        <attr name="wv_curvedArcDirectionFactor" format="float" />
+        <!--选中后折射的偏移(弯曲（3D）效果和普通效果都适用) 与字体大小的比值，1为不偏移 越小偏移越明显-->
+        <attr name="wv_refractRatio" format="float" />
+        <!-- Deprecated 已过时 请使用 wv_refractRatio -->
+        <attr name="wv_curvedRefractRatio" format="float" />
+
+        <!--是否绘制选中区域-->
+        <attr name="wv_drawSelectedRect" format="boolean" />
+        <!--选中区域颜色-->
+        <attr name="wv_selectedRectColor" format="color" />
+        <!--选中区域/分割线上下偏移，通过移动分割线上下限制的位置来实现扩大/缩小显示区域-->
+        <attr name="wv_dividerOffset" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DiagramBarsView">
+        <attr name="styleS" format="integer" />
+        <attr name="bar_loop_timeS" format="integer" />
+        <attr name="paintFingerPathS" format="boolean" />
+        <attr name="touchableS" format="boolean" />
+        <attr name="fingerPaintColorS" format="integer" />
+        <attr name="barCountS" format="integer" />
+        <attr name="barMaxLevelS" format="integer" />
+        <attr name="barMinLevel2S" format="float" />
+        <attr name="barWidthS" format="float" />
+        <attr name="sideWidthS" format="float" />
+        <attr name="barColorS" format="reference|color" />
+        <attr name="backLineColorS" format="reference|color" />
+        <attr name="barSpaceS" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="EgymDiagramBarsView">
+        <attr name="styleS_E" format="integer" />
+        <attr name="bar_loop_timeS_E" format="integer" />
+        <attr name="paintFingerPathS_E" format="boolean" />
+        <attr name="touchableS_E" format="boolean" />
+        <attr name="fingerPaintColorS_E" format="integer" />
+        <attr name="barCountS_E" format="integer" />
+        <attr name="barMaxLevelS_E" format="integer" />
+        <attr name="barMinLevel2S_E" format="float" />
+        <attr name="barWidthS_E" format="float" />
+        <attr name="sideWidthS_E" format="float" />
+        <attr name="barColorS_E" format="reference|color" />
+        <attr name="backLineColorS_E" format="reference|color" />
+        <attr name="barSpaceS_E" format="float" />
+    </declare-styleable>
+
+
+    <declare-styleable name="GaugeSeekBar">
+        <attr name="startAngleDegrees" format="float" />
+        <attr name="thumbRadius" format="dimension" />
+        <attr name="thumbDrawable" format="reference" />
+        <attr name="showThumb" format="boolean" />
+        <attr name="thumbColor" format="color" />
+        <attr name="trackGradient" format="color" />
+        <attr name="viewType" format="integer" />
+        <attr name="showProgress" format="boolean" />
+        <attr name="trackGradientPositions" format="reference" />
+        <attr name="progress" format="float" />
+        <attr name="interactive" format="boolean" />
+        <attr name="trackWidth" format="dimension" />
+        <attr name="progressWidth" format="dimension" />
+        <attr name="progressGradient" format="reference" />
+        <attr name="progressGradientPositions" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="MockPlaceHolder">
+        <attr name="repeat" format="integer" />
+        <attr name="layoutRes" format="integer" />
+    </declare-styleable>
+
+
+    <!-- 新版RulerView   -->
+    <attr name="min_value" format="integer" />
+    <attr name="max_value" format="integer" />
+
+    <attr name="long_height_height_ratio" format="fraction" />
+    <attr name="short_height_height_ratio" format="fraction" />
+
+    <attr name="ruler_text_color" format="color" />
+    <attr name="ruler_text_size" format="dimension" />
+    <attr name="ruler_text_margin_top" format="dimension" />
+    <attr name="ruler_start_text_margin_left" format="integer" />
+    <attr name="ruler_end_text_margin_right" format="integer" />
+
+    <attr name="indicator_interval" format="dimension" />
+    <attr name="indicator_color" format="color" />
+    <attr name="indicator_width" format="dimension" />
+
+    <attr name="notch_color" format="color" />
+
+    <attr name="ruler_text_is_all_show" format="boolean" />
+    <attr name="ruler_draw_view_type" format="integer" />
+
+    <declare-styleable name="RulerView">
+        <attr name="min_value" />
+        <attr name="max_value" />
+
+        <attr name="long_height_height_ratio" />
+        <attr name="short_height_height_ratio" />
+
+        <attr name="ruler_text_color" />
+        <attr name="ruler_text_size" />
+        <attr name="ruler_text_margin_top" />
+
+
+        <attr name="ruler_start_text_margin_left" />
+        <attr name="ruler_end_text_margin_right" />
+
+
+        <attr name="indicator_interval" />
+        <attr name="indicator_color" />
+        <attr name="indicator_width" />
+
+        <attr name="ruler_text_is_all_show" />
+        <attr name="ruler_draw_view_type" />
+    </declare-styleable>
+
+    <declare-styleable name="RulerValuePicker">
+
+        <attr name="min_value" />
+        <attr name="max_value" />
+
+        <attr name="long_height_height_ratio" />
+        <attr name="short_height_height_ratio" />
+
+        <attr name="ruler_text_color" />
+        <attr name="ruler_text_size" />
+        <attr name="ruler_text_margin_top" />
+
+        <attr name="ruler_start_text_margin_left" />
+        <attr name="ruler_end_text_margin_right" />
+
+        <attr name="indicator_interval" />
+        <attr name="indicator_color" />
+        <attr name="indicator_width" />
+
+        <!-- Color of the top notch -->
+        <attr name="notch_color" />
+
+        <attr name="ruler_text_is_all_show" />
+        <attr name="ruler_draw_view_type" />
+    </declare-styleable>
+
+
+    <declare-styleable name="NumberSelect">
+        <attr name="default_value" format="integer" />
+        <attr name="min_value_xxx" format="integer" />
+        <attr name="max_value_xxx" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ProfileChartView">
+        <!-- 欄位寬度、間距、最大值 -->
+        <attr name="barWidthCustom" format="dimension" />
+        <attr name="barSpacingCustom" format="dimension" />
+        <attr name="maxValueCustom" format="integer" />
+
+        <!-- 顏色 -->
+        <attr name="levelColorCustom" format="color" />
+        <attr name="inclineColorCustom" format="color" />
+        <attr name="overlapColorCustom" format="color" />
+    </declare-styleable>
+
+</resources>

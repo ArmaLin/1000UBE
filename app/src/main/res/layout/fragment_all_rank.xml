@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        tools:context=".dashboard_training.AllRankFragment">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnBack"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/back"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_back"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rankTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="@string/Ranking"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_marginBottom="6dp"
+            android:id="@+id/tvRankTileDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/inter_regular"
+            tools:text="06/2021"
+            android:textColor="@color/color8192a2"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rankTitle"
+            app:layout_constraintStart_toEndOf="@+id/rankTitle" />
+
+        <RadioGroup
+            android:id="@+id/rgFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:tag="0"
+                android:id="@+id/rbTime"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="@string/Time"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:tag="1"
+                android:id="@+id/rbSpeed"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="@string/Speed"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:tag="2"
+                android:text="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? @string/Distance : @string/Power}"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:tag="3"
+                android:id="@+id/rbCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_nine_select"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="@string/Calories"
+                android:textColor="@drawable/check_text_5a7085"
+                android:textSize="32sp" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="21dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="48dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="#"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="261dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Member"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/btnHours"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/hours"
+            android:textColor="@color/color1396ef"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="759dp" />
+
+        <TextView
+            android:id="@+id/btnSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mph : @string/kph}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="524dp" />
+
+        <TextView
+            android:id="@+id/btnDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            android:fontFamily="@font/inter_bold"
+            android:text="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? (deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/mi : @string/km) : @string/watts}"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="285dp"/>
+
+        <TextView
+            android:id="@+id/btnCal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/topLine"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/kcal"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="48dp" />
+
+        <View
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="248dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        android:scrollbarStyle="outsideOverlay"-->
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/items_rank_all_list"
+            style="@style/ZoomItemRecyclerViewStyle"
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/color1c242a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/topLine"
+            app:layout_constraintStart_toStartOf="@+id/topLine"
+            app:layout_constraintTop_toBottomOf="@+id/topLine" />
+
+<!--        <View-->
+<!--            android:translationZ="8dp"-->
+<!--            android:elevation="8dp"-->
+<!--            android:id="@+id/bv"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:background="@color/color1c242a2_80"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="10dp"/>-->
+
+        <ProgressBar
+            android:id="@+id/progress_circulars"
+            android:indeterminateTint="@color/colorADB8C2"
+            app:layout_constraintTop_toTopOf="@+id/recycler_view"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

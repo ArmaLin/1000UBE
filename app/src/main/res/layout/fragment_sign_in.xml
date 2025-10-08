@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color11151a"
+    tools:context=".maintenance_mode.SignInFragment">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCallibration"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="@color/color1396ef"
+        android:stateListAnimator="@null"
+        android:text="@string/Sign_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="312dp"
+        android:layout_marginStart="498dp"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        android:fontFamily="@font/inter_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Sign_in" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:includeFontPadding="false"
+        android:id="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="@+id/vLine1"
+        app:layout_constraintStart_toStartOf="@+id/vLine1"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/vLine1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        app:endIconMode="clear_text"
+        app:endIconTint="@null"
+        app:endIconDrawable="@drawable/icon_cancel"
+        android:gravity="center_vertical"
+        android:layout_marginTop="232dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:maxLength="12"
+            android:cursorVisible="false"
+            android:background="@null"
+            android:id="@+id/etEmailEditText"
+            android:inputType="textPersonName|text"
+            android:defaultFocusHighlightEnabled="false"
+            android:layout_width="match_parent"
+            android:textSize="44sp"
+            android:layout_height="match_parent"
+            android:textColorHint="@color/color5a7085"
+            android:textColor="@color/color5a7085"
+            android:hint="@string/Email"
+            android:fontFamily="@font/inter_regular"
+            android:singleLine="true"
+            tools:text="" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/vLine1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="550dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/color323f4b"
+        android:layout_width="916dp"
+        android:layout_height="2dp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:includeFontPadding="false"
+        android:id="@+id/etPassword"
+        app:layout_constraintEnd_toEndOf="@+id/vLine2"
+        app:layout_constraintStart_toStartOf="@+id/vLine2"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/vLine2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        app:endIconMode="clear_text"
+        app:endIconTint="@null"
+        app:endIconDrawable="@drawable/icon_cancel"
+        android:gravity="center_vertical"
+        android:layout_marginTop="232dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:maxLength="12"
+            android:cursorVisible="false"
+            android:background="@null"
+            android:id="@+id/etPasswordEditText"
+            android:inputType="textPersonName|text"
+            android:defaultFocusHighlightEnabled="false"
+            android:layout_width="match_parent"
+            android:textSize="44sp"
+            android:layout_height="match_parent"
+            android:textColorHint="@color/color5a7085"
+            android:textColor="@color/color5a7085"
+            android:hint="@string/Password"
+            android:fontFamily="@font/inter_regular"
+            android:singleLine="true"
+            tools:text="" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <View
+        android:id="@+id/vLine2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="686dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/color323f4b"
+        android:layout_width="916dp"
+        android:layout_height="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

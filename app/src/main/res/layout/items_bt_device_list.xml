@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_base"
+    android:layout_width="711dp"
+    android:layout_height="102dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBtIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/icon_bluetooth_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBtTitle"
+        android:maxWidth="460dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:ellipsize="middle"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="AirPods Anna12" />
+
+
+    <TextView
+        android:id="@+id/tvBtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/color5a7085"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/tvBtTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBtTitle"
+        tools:text="(paired)" />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressbar_hr"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/vConnectedUnderline"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/color1396ef"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

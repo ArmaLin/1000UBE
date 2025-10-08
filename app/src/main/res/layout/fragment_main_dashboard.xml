@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainDashboardFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="workoutViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color11151a">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/dashboardFragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/mb_training"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_top_background" />
+
+<!--        控制上方bar的長度-->
+        <View
+            android:id="@+id/v_top_background"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/color1c242a"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <androidx.appcompat.widget.AppCompatImageButton-->
+<!--            android:id="@+id/btnSound"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_header_sound_default"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageButton-->
+<!--            android:id="@+id/btnFan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_header_fan_default"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnSound"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageButton-->
+<!--            app:visibility="@{AppStatusViewModel.running ? View.INVISIBLE : View.VISIBLE}"-->
+<!--            android:id="@+id/btnHR"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_header_hr_default"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnFan"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageButton-->
+<!--            app:visibility="@{AppStatusViewModel.running ? View.INVISIBLE : View.VISIBLE}"-->
+<!--            android:id="@+id/btnBT"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_header_bluetooth_default"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnHR"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageButton-->
+<!--            app:visibility="@{AppStatusViewModel.running ? View.INVISIBLE : View.VISIBLE}"-->
+<!--            android:id="@+id/btnLogout"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_header_exit_default"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btnBT"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/btnMemberProfile"-->
+<!--            app:visibility="@{AppStatusViewModel.running ? View.INVISIBLE : View.VISIBLE}"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_marginStart="504dp"-->
+<!--            android:layout_width="322dp"-->
+<!--            android:layout_height="64dp">-->
+
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:id="@+id/ivMemberIcon"-->
+<!--                android:src="@drawable/avatar_female_1_default"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"/>-->
+<!--            -->
+<!--            <TextView-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:text="ABCDE FG"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="24sp"-->
+<!--                android:id="@+id/tvMemberName"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/ivMemberIcon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:text="VIP"-->
+<!--                android:textColor="@color/color5a7085"-->
+<!--                android:textSize="24sp"-->
+<!--                android:id="@+id/tvMemberType"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tvMemberName"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+        <!--    backgroundTintMode-->
+        <!--    1、add——两层绘制叠加融合-->
+        <!--    2、screen——上下层都显示（就像是多了块tint色的玻璃）-->
+        <!--    3、src_over——tint色覆盖住图片，都显示-->
+        <!--    4、src_in——默认取交集，显示上层-->
+        <!--    5、multiply——取两层绘制的交集-->
+        <!--    6、src_atop——取下层非交集部分与上层交集部分-->
+
+<!--        <View-->
+<!--            android:id="@+id/bbg"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:background="@drawable/bg_tab"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="96dp" />-->
+
+        <!--        app:imageResource="@{AppStatusViewModel.currentStatus == status.STATUS_RUNNING ? R.drawable.btn_tile_finish_disable : R.drawable.btn_workout_finish}"-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bbgg"
+            android:background="@drawable/bg_bottom_navigation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="136dp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:rippleColor="@android:color/transparent"
+            android:letterSpacing="0.01"
+            android:id="@+id/mb_training"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:fontFamily="@font/inter_bold"
+            android:stateListAnimator="@null"
+            android:text="@string/Training"
+            android:textAllCaps="false"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? @drawable/icon_training : deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_ELLIPTICAL ? @drawable/icon_training_elliptical : @drawable/icon_ride }"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            app:iconTint="@color/color1396ef"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mb_media"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            app:rippleColor="@android:color/transparent"
+            android:letterSpacing="0.01"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/mb_media"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:text="@string/Media"
+            android:textAllCaps="false"
+            android:textColor="@color/colorADB8C2"
+            android:textSize="24sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/icon_media"
+            app:iconGravity="textStart"
+            app:iconPadding="16dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/mb_training" />
+
+        <View
+            android:id="@+id/viewIndicator"
+            android:layout_width="486dp"
+            android:layout_height="6dp"
+            android:background="@drawable/panel_bg_all_4_1396ef"
+            app:layout_constraintEnd_toEndOf="@+id/mb_training"
+            app:layout_constraintStart_toStartOf="@+id/mb_training"
+            app:layout_constraintTop_toTopOf="@+id/mb_training" />
+
+
+<!--        <View-->
+<!--            android:id="@+id/v_background"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/half_transparent"-->
+<!--            android:clickable="true"-->
+<!--            android:visibility="invisible" />-->
+
+<!--        <androidx.constraintlayout.widget.Group-->
+<!--            android:id="@+id/top_start_group"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:constraint_referenced_ids="btnLogout,btnHR,btnBT" />-->
+
+        <com.google.android.material.button.MaterialButton
+            android:letterSpacing="0.01"
+            app:rippleColor="@android:color/transparent"
+            android:alpha="@{workoutViewModel.isWorkoutReadyStart ? 1f : 0.4f}"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/btnStart1_2_3"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:text="@string/Start_This_Test"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:backgroundTint="@color/color0dac87"
+            app:icon="@drawable/icon_start"
+            app:iconGravity="textStart"
+            app:backgroundTintMode="@null"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:letterSpacing="0.01"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:rippleColor="@android:color/transparent"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/btn45_One"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:text="@string/Previous_Step"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_click_252e37_323f4b"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn45_Two"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.01"
+            android:alpha="@{(workoutViewModel.isWorkoutReadyStart ? 1f : 0.4f)}"
+            app:rippleColor="@android:color/transparent"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/btn45_Two"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:text="@string/Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_click_1396ef"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn45_One" />
+<!--        app:icon="@drawable/icon_workouts_default"-->
+        <androidx.constraintlayout.widget.Group
+            android:visibility="visible"
+            android:id="@+id/groupMain"
+            app:constraint_referenced_ids="mb_media,mb_training,viewIndicator"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:visibility="gone"
+            android:id="@+id/group123"
+            app:constraint_referenced_ids="btnStart1_2_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:visibility="gone"
+            android:id="@+id/group45"
+            app:constraint_referenced_ids="btn45_One,btn45_Two"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.01"
+            android:visibility="gone"
+            app:rippleColor="@android:color/transparent"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/btnWorkoutStop"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:text="@string/Stop"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:backgroundTint="@color/btn_click_e24b44"
+            app:icon="@drawable/ic_baseline_stop_48"
+            app:iconGravity="textStart"
+            app:backgroundTintMode="@null"
+            app:iconPadding="8dp"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+<!--        app:backgroundTint="@color/color11151a"-->
+        <com.google.android.material.button.MaterialButton
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0.01"
+            android:visibility="gone"
+            app:rippleColor="@android:color/transparent"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/btnNoView"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/color1c242a"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

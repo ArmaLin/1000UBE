@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下狀態 -->
+    <item android:state_pressed="true">
+        <shape>
+            <gradient android:angle="0" android:endColor="#E6Ac5e52" android:startColor="#E6ED7965" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+
+    <!-- 默認狀態 -->
+    <item>
+        <shape>
+            <gradient android:angle="0" android:endColor="#FFac5e52" android:startColor="#FFED7965" />
+            <corners android:radius="32dp" />
+        </shape>
+    </item>
+</selector>
+
+
+    <!--<ripple xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:color="#1A000000"> &lt;!&ndash; Ripple 顏色&ndash;&gt;-->
+
+    <!--    <item>-->
+    <!--        <shape>-->
+    <!--            <gradient-->
+    <!--                android:angle="0"-->
+    <!--                android:endColor="#627b2a"-->
+    <!--                android:startColor="#86A73a" />-->
+    <!--            <corners android:radius="32dp" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!--</ripple>-->

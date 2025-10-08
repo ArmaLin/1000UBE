@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="languageEnum"
+            type="com.dyaco.spirit_commercial.support.intdef.LanguageEnum" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fl_root"
+        android:layout_width="1303dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_overlay_settings"
+        tools:context=".settings.SettingPopupWindow">
+        <!--+94-->
+
+        <TextView
+            android:id="@+id/settingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="159dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Settings"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btn_close"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Close"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/unitsSettingTitle"
+            android:layout_width="260dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="200dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Units_Of_Measurement"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/settingTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+            android:id="@+id/rgSelectUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="@+id/unitsSettingTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitsSettingTitle">
+
+            <RadioButton
+                android:id="@+id/rbImperial"
+                android:layout_width="250.25dp"
+                android:layout_height="104dp"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="40dp"
+                android:text="@string/Imperial"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbMetric"
+                android:layout_width="250.25dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="32dp"
+                android:layout_toEndOf="@+id/rbImperial"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/Metric"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+        <TextView
+            android:id="@+id/unitsLanguageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="432dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Language"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/settingTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+            android:id="@+id/rgSelectLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="@+id/unitsLanguageTitle"
+            app:layout_constraintTop_toBottomOf="@id/unitsLanguageTitle">
+
+            <RadioButton
+                android:id="@+id/rbLanguage1"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="40dp"
+                android:text="@{languageEnum.ENGLISH.languageStr}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.ENGLISH.languageId}"
+                tools:text="@string/English" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage2"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="32dp"
+                android:layout_toEndOf="@+id/rbLanguage1"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                tools:text="@string/Español"
+                android:text="@{languageEnum.SPAIN.languageStr}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.SPAIN.languageId}" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage3"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="32dp"
+                android:layout_toEndOf="@+id/rbLanguage2"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                tools:text="@string/Traditional_Chinese"
+                android:text="@{languageEnum.TRADITIONAL_CHINESE.languageStr}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.TRADITIONAL_CHINESE.languageId}" />
+
+
+
+            <RadioButton
+                android:id="@+id/rbLanguage5"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage1"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="40dp"
+                android:text="@string/deutsch"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.GERMAN.languageId}" />
+
+            <RadioButton
+                android:enabled="true"
+                app:iTag="@{languageEnum.ITALIAN.languageId}"
+                android:id="@+id/rbLanguage6"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage1"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/rbLanguage5"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/Italiano"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage7"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage1"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/rbLanguage6"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/simplified_chinese"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.SIMPLIFIED_CHINESE.languageId}" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage8"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage5"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="40dp"
+                android:text="@string/Suomi"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.SUOMI.languageId}" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage9"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage5"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/rbLanguage8"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/Pyccknn"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.RUSSIA.languageId}" />
+
+            <RadioButton
+                app:iTag="@{languageEnum.JAPAN.languageId}"
+                android:id="@+id/rbLanguage10"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage5"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/rbLanguage9"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/japanese"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbLanguage12"
+                android:layout_width="341.67dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbLanguage9"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/selected_check"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:paddingEnd="60dp"
+                android:text="@string/fran_ais"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{languageEnum.FRANCE.languageId}" />
+
+
+        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+<!--        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup-->
+<!--            android:id="@+id/rgSelectLanguage"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/unitsLanguageTitle"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/unitsLanguageTitle">-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage1"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:checked="false"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="40dp"-->
+<!--                android:text="@{languageEnum.ENGLISH.languageStr}"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.ENGLISH.languageId}"-->
+<!--                tools:text="@string/English" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage2"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage1"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                tools:text="@string/Español"-->
+<!--                android:text="@{languageEnum.SPAIN.languageStr}"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.SPAIN.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage3"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage2"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                tools:text="@string/Traditional_Chinese"-->
+<!--                android:text="@{languageEnum.TRADITIONAL_CHINESE.languageStr}"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.TRADITIONAL_CHINESE.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:enabled="true"-->
+<!--                android:id="@+id/rbLanguage4"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage3"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/Pyccknn"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.RUSSIA.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage5"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage1"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="40dp"-->
+<!--                android:text="@string/deutsch"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.GERMAN.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:enabled="false"-->
+<!--                app:iTag="@{languageEnum.PORTUGAL.languageId}"-->
+<!--                android:id="@+id/rbLanguage6"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage1"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage5"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/portugues"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage7"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage1"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage6"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/simplified_chinese"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.SIMPLIFIED_CHINESE.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:enabled="false"-->
+<!--                android:id="@+id/rbLanguage8"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage5"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="40dp"-->
+<!--                android:text="@string/Nederlands"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.NEDERLANDS.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLanguage9"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage5"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage8"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/Italiano"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp"-->
+<!--                app:iTag="@{languageEnum.ITALIAN.languageId}" />-->
+
+<!--            <RadioButton-->
+<!--                android:enabled="false"-->
+<!--                app:iTag="@{languageEnum.KOREA.languageId}"-->
+<!--                android:id="@+id/rbLanguage10"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage5"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage9"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/Korea"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                app:iTag="@{languageEnum.SUOMI.languageId}"-->
+<!--                android:id="@+id/rbLanguage11"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage9"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="40dp"-->
+<!--                android:text="@string/Suomi"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                app:iTag="@{languageEnum.JAPAN.languageId}"-->
+<!--                android:id="@+id/rbLanguage13"-->
+<!--                android:layout_width="250.25dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbLanguage9"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_toEndOf="@+id/rbLanguage12"-->
+<!--                android:background="@drawable/selected_check"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingEnd="60dp"-->
+<!--                android:text="@string/japanese"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

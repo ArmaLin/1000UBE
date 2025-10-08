@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="deviceSettingViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".maintenance_mode.MaintenanceUseLimitsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1185dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel_bg_left_32_1c242a">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:layout_marginEnd="56dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/use_limits"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/MButton_252e37"
+                android:id="@+id/btnDone"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:text="@string/Done"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_check"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/lineSS1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="342dp"
+                android:background="@color/color252e37"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/lineSS2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="518dp"
+                android:background="@color/color252e37"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="694dp"
+                android:background="@color/color252e37"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="870dp"
+                android:background="@color/color252e37"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="292dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/auto_pause"
+                android:textColor="@color/color8192a2"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/cbAutoPause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="286dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/btn_checkbox_m"
+                android:button="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="364dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/pause_after"
+                android:textColor="@color/color8192a2"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="540dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/use_time_limit"
+                android:textColor="@color/color8192a2"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSpeedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="716dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/max_speed___mph"
+                android:textColor="@color/color8192a2"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="892dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/Max_Incline"
+                android:textColor="@color/color8192a2"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickPauseAfterHour"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="424dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterHour"
+                app:layout_constraintStart_toEndOf="@+id/pickPauseAfterHour"
+                app:layout_constraintTop_toTopOf="@+id/pickPauseAfterHour"
+                tools:ignore="HardcodedText" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickPauseAfterMin"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="26dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterHour"
+                app:layout_constraintStart_toEndOf="@+id/pickPauseAfterHour"
+                app:layout_constraintTop_toTopOf="@+id/pickPauseAfterHour" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterMin"
+                app:layout_constraintStart_toEndOf="@+id/pickPauseAfterMin"
+                app:layout_constraintTop_toTopOf="@+id/pickPauseAfterMin"
+                tools:ignore="HardcodedText" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickPauseAfterSec"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="26dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/pickPauseAfterHour"
+                app:layout_constraintStart_toEndOf="@+id/pickPauseAfterMin"
+                app:layout_constraintTop_toTopOf="@+id/pickPauseAfterHour" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickUseTimeLimitHour"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="600dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+                app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitHour"
+                app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour"
+                tools:ignore="HardcodedText" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/picUseTimeLimitMin"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="26dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+                app:layout_constraintStart_toEndOf="@+id/pickUseTimeLimitHour"
+                app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/picUseTimeLimitMin"
+                app:layout_constraintStart_toEndOf="@+id/picUseTimeLimitMin"
+                app:layout_constraintTop_toTopOf="@+id/picUseTimeLimitMin"
+                tools:ignore="HardcodedText" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickUseTimeLimitSec"
+                android:layout_width="340.33dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="26dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/pickUseTimeLimitHour"
+                app:layout_constraintStart_toEndOf="@+id/picUseTimeLimitMin"
+                app:layout_constraintTop_toTopOf="@+id/pickUseTimeLimitHour" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickSpeedMph1"
+                android:layout_width="523.5dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="776dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:includeFontPadding="false"
+                android:text="."
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pickSpeedMph1"
+                app:layout_constraintStart_toEndOf="@+id/pickSpeedMph1"
+                app:layout_constraintTop_toTopOf="@+id/pickSpeedMph1"
+                tools:ignore="HardcodedText" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickSpeedMph2"
+                android:layout_width="523.5dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="26dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/pickSpeedMph1"
+                app:layout_constraintStart_toEndOf="@+id/pickSpeedMph1"
+                app:layout_constraintTop_toTopOf="@+id/pickSpeedMph1" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/pickMaxIncline"
+                android:layout_width="1073dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="952dp"
+                android:background="@drawable/panel_bg_all_16_252e37"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/hidePauseAfter"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.8"
+                android:background="@color/color1c242a"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/lineSS2"
+                app:layout_constraintEnd_toEndOf="@+id/lineSS1"
+                app:layout_constraintStart_toStartOf="@+id/lineSS1"
+                app:layout_constraintTop_toTopOf="@+id/lineSS1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>

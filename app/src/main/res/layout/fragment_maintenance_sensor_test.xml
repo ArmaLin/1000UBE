@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="workoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".maintenance_mode.MaintenanceSensorTestFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1185dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel_bg_left_32_1c242a">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:autoSizeMaxTextSize="70sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/Sensor_Test"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnDone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDone"
+                style="@style/MButton_252e37"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="56dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:text="@string/Done"
+                android:textSize="24sp"
+                app:icon="@drawable/icon_check"
+                app:iconGravity="textEnd"
+                app:iconPadding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{String.valueOf(workoutData.currentRpm) + ' ' +@string/rpm}"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                android:id="@+id/tvValue"
+                android:fontFamily="@font/inter_extrabold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>

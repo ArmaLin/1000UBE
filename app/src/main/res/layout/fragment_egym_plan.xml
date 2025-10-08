@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isTreadmill"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="904dp"
+        android:background="@drawable/bg_egym_plan"
+        tools:context=".egym.EgymPlanFragment">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/MButton_252e37"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:text="@string/Back"
+            android:textSize="24sp"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrevious"
+            style="@style/MButton_252e37"
+            android:layout_width="92dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            app:icon="@drawable/arror_left"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:shapeAppearanceOverlay="@style/roundedCornerLeft" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            style="@style/MButton_252e37"
+            android:layout_width="92dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="-3dp"
+            app:icon="@drawable/arror_right"
+            app:iconGravity="textStart"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintStart_toEndOf="@+id/btnPrevious"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:shapeAppearanceOverlay="@style/roundedCornerRight" />
+
+        <View
+            android:id="@+id/lineS"
+            android:layout_width="2dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="-3dp"
+            android:background="@color/color33ADB8C2"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPrevious"
+            app:layout_constraintEnd_toEndOf="@+id/btnNext"
+            app:layout_constraintStart_toStartOf="@+id/btnPrevious"
+            app:layout_constraintTop_toTopOf="@+id/btnPrevious" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@drawable/egym_svg_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="184dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="72dp"-->
+<!--            android:layout_marginTop="184dp"-->
+<!--            android:fontFamily="@font/inter_semibold"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:text="@string/Egym_text"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="30sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/ccc"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginStart="72dp"-->
+        <!--            android:layout_marginTop="243dp"-->
+        <!--            android:layout_marginEnd="20dp"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/recycler_view"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--            &lt;!&ndash; tvExerciseName &ndash;&gt;-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvExerciseName"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:maxWidth="350dp"-->
+        <!--                android:autoSizeMaxTextSize="32sp"-->
+        <!--                android:autoSizeTextType="uniform"-->
+        <!--                android:fontFamily="@font/inter_bold"-->
+        <!--                android:gravity="center_vertical"-->
+        <!--                android:includeFontPadding="false"-->
+        <!--                android:maxLines="1"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="32sp"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintEnd_toStartOf="@id/tvFrom"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                tools:text="ExerciseName" />-->
+
+        <!--            &lt;!&ndash; tvFrom &ndash;&gt;-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvFrom"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="5dp"-->
+        <!--                android:autoSizeMaxTextSize="32sp"-->
+        <!--                android:autoSizeTextType="uniform"-->
+        <!--                android:fontFamily="@font/inter_bold"-->
+        <!--                android:gravity="center_vertical"-->
+        <!--                android:includeFontPadding="false"-->
+        <!--                android:maxLines="1"-->
+        <!--                android:text="@string/from"-->
+        <!--                android:textColor="@color/color8192a2"-->
+        <!--                android:textSize="32sp"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/tvExerciseName"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                tools:text="from" />-->
+
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+        <TextView
+            android:maxWidth="350dp"
+            android:id="@+id/tvExerciseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="243dp"
+            android:autoSizeMinTextSize="14sp"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvFrom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Recumbent Bike Activity" />
+
+        <TextView
+            android:id="@+id/tvFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="12dp"
+            android:autoSizeMinTextSize="14sp"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/from"
+            android:textColor="@color/color8192a2"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvExerciseName"
+            app:layout_constraintEnd_toStartOf="@id/recycler_view"
+            app:layout_constraintStart_toEndOf="@+id/tvExerciseName"
+            app:layout_constraintTop_toTopOf="@+id/tvExerciseName"
+            tools:text="from" />
+
+        <TextView
+            android:ellipsize="end"
+            app:layout_constraintBottom_toTopOf="@+id/line1"
+            android:id="@+id/tvSessionName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="8dp"
+            android:autoSizeMaxTextSize="32sp"
+            android:autoSizeMinTextSize="16sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical|top"
+            android:includeFontPadding="false"
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExerciseName"
+            tools:text="HHHHHHHHHHHHHHHHH123123123123123123123123123123123123HHHHHAHAHAHSHSHHSSHHSSHSHSJDJJDJDJDJDDJDJDJDJDJDJDJJDJDJDJDJDJDJDJDJDJDJDJDJDJDJJDJDJDJFJFJDJDJFJFJFJFJFKgggfff快快快快快快快快快快快快快快快快快快快快快快KFKFKFKFKFKFKFKFKFKFKFFFKFKFKFKFKFKFKFKF" />
+
+
+        <TextView
+            android:id="@+id/tvCoachTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="39dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/coach"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+        <TextView
+            android:id="@+id/tvCoachText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="266dp"
+            android:layout_marginEnd="8dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/inter_regular"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCoachTitle"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCoachTitle"
+            tools:text="CoachName" />
+
+        <TextView
+            android:id="@+id/tvTotalSetsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/total_sets"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCoachTitle" />
+
+        <TextView
+            android:id="@+id/tvTotalSetsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="266dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTotalSetsTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalSetsTitle"
+            tools:text="4 sets" />
+
+        <TextView
+            android:id="@+id/tvTotalDurationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/total_duration"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalSetsTitle" />
+
+        <TextView
+            android:id="@+id/tvTotalDurationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="266dp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTotalDurationTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalDurationTitle"
+            tools:text="6:00" />
+
+        <com.dyaco.spirit_commercial.egym.EgymBarChartView
+            android:id="@+id/customBarChartView"
+            android:layout_width="372dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginBottom="104dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSpeedQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawableStart="@drawable/square_speed"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Speed"
+            android:textColor="@color/color8192a2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/customBarChartView"
+            app:layout_constraintTop_toBottomOf="@+id/customBarChartView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvInclineQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:drawableStart="@drawable/square_incline"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Incline"
+            android:textColor="@color/color8192a2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tvSpeedQ"
+            app:layout_constraintTop_toBottomOf="@+id/customBarChartView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHeartRateQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:drawableStart="@drawable/square_heartrate"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Heart_Rate"
+            android:textColor="@color/color8192a2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tvInclineQ"
+            app:layout_constraintTop_toBottomOf="@+id/customBarChartView" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="1356dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="48dp"
+            android:cacheColorHint="@color/color0DAC87"
+            android:clipToPadding="false"
+            android:fadeScrollbars="true"
+            android:fadingEdge="vertical"
+            android:overScrollMode="never"
+            android:paddingTop="48dp"
+            android:paddingBottom="80dp"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="12"
+            tools:listitem="@layout/egym_steps_list" />
+
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="372dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="363dp"
+            android:background="@color/color33ADB8C2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:visibility="invisible"-->
+        <!--            android:id="@+id/tvNoChart"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="24dp"-->
+        <!--            android:fontFamily="@font/inter_regular"-->
+        <!--            android:text="@string/no_chart_available"-->
+        <!--            android:textColor="@color/color5a7085"-->
+        <!--            android:textSize="18sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/customBarChartView"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/customBarChartView"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/customBarChartView"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/customBarChartView" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

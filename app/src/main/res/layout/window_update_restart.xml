@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/half_transparent40"
+    tools:context=".alert_message.UpdateRestartWindow">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/panel_bg_top_1c242a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="688dp">
+
+    <TextView
+        android:includeFontPadding="false"
+        android:id="@+id/tvWarring"
+        android:gravity="center"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="54sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="176dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/restart_app"
+        android:layout_width="995dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="48dp"
+        android:text="@string/_01_00"
+        android:textColor="@color/white"
+        android:textSize="96sp"
+        android:fontFamily="@font/inter_extrabold"
+        app:layout_constraintTop_toBottomOf="@+id/tvWarring"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tvCountDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/inter_bold"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            android:id="@+id/btnNotNow"
+            android:background="@color/color252e37"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:text="@string/not_now"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRestart"
+            android:layout_width="0dp"
+            android:layout_height="96dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/inter_bold"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@+id/btnNotNow"
+            android:id="@+id/btnRestart"
+            android:background="@color/color1396ef"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:text="@string/restart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="96dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:layout_marginStart="68dp"
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressbar_hr"
+        android:visibility="invisible"
+        android:layout_marginBottom="378dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

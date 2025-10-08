@@ -1,0 +1,664 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "5e0ef45643a871d3f7d082dbb4718d48",
+    "entities": [
+      {
+        "tableName": "TableAirForce",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `age_min` INTEGER NOT NULL, `age_max` INTEGER NOT NULL, `time_min` INTEGER NOT NULL, `time_max` INTEGER NOT NULL, `points` INTEGER NOT NULL, `category` INTEGER NOT NULL, PRIMARY KEY(`gender`, `age_min`, `age_max`, `time_min`, `time_max`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_min",
+            "columnName": "age_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_max",
+            "columnName": "age_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_min",
+            "columnName": "time_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_max",
+            "columnName": "time_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "age_min",
+            "age_max",
+            "time_min",
+            "time_max"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableArmy",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `age_min` INTEGER NOT NULL, `age_max` INTEGER NOT NULL, `time_le` INTEGER NOT NULL, `points` INTEGER NOT NULL, PRIMARY KEY(`gender`, `age_min`, `age_max`, `time_le`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_min",
+            "columnName": "age_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_max",
+            "columnName": "age_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_le",
+            "columnName": "time_le",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "age_min",
+            "age_max",
+            "time_le"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableCoastGuard",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `age_min` INTEGER NOT NULL, `age_max` INTEGER NOT NULL, `time_min` INTEGER NOT NULL, `time_max` INTEGER NOT NULL, `category` INTEGER NOT NULL, PRIMARY KEY(`gender`, `age_min`, `age_max`, `time_min`, `time_max`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_min",
+            "columnName": "age_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_max",
+            "columnName": "age_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_min",
+            "columnName": "time_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_max",
+            "columnName": "time_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "age_min",
+            "age_max",
+            "time_min",
+            "time_max"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableMarines",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `time_le` INTEGER NOT NULL, `points` INTEGER NOT NULL, PRIMARY KEY(`gender`, `time_le`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_le",
+            "columnName": "time_le",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "time_le"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableMets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mets` INTEGER NOT NULL, `speed` INTEGER NOT NULL, `grade` INTEGER NOT NULL, PRIMARY KEY(`mets`))",
+        "fields": [
+          {
+            "fieldPath": "mets",
+            "columnName": "mets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mets"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableNavy",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `age_min` INTEGER NOT NULL, `age_max` INTEGER NOT NULL, `time_le` INTEGER NOT NULL, `points` INTEGER NOT NULL, `category` INTEGER NOT NULL, PRIMARY KEY(`gender`, `age_min`, `age_max`, `time_le`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_min",
+            "columnName": "age_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_max",
+            "columnName": "age_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_le",
+            "columnName": "time_le",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "age_min",
+            "age_max",
+            "time_le"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TablePeb",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gender` INTEGER NOT NULL, `age_min` INTEGER NOT NULL, `age_max` INTEGER NOT NULL, `time_le` INTEGER NOT NULL, `percentiles` INTEGER NOT NULL, PRIMARY KEY(`gender`, `age_min`, `age_max`, `time_le`))",
+        "fields": [
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_min",
+            "columnName": "age_min",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age_max",
+            "columnName": "age_max",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_le",
+            "columnName": "time_le",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentiles",
+            "columnName": "percentiles",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gender",
+            "age_min",
+            "age_max",
+            "time_le"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableSettings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `machine_type` INTEGER NOT NULL, `serial_no` TEXT NOT NULL, `email` TEXT NOT NULL, `language` INTEGER NOT NULL, `time_format` INTEGER NOT NULL, `wifi_sw` INTEGER NOT NULL, `wifi_ssid` TEXT NOT NULL, `wifi_lock` INTEGER NOT NULL, `wifi_pwd` TEXT NOT NULL, `handrails_height` INTEGER NOT NULL, `deck_lift` INTEGER NOT NULL, `highlights` INTEGER NOT NULL, `standby` INTEGER NOT NULL, `pause_mode` INTEGER NOT NULL, `unit_sys` INTEGER NOT NULL, `bt_sw` INTEGER NOT NULL, `bt_name` TEXT NOT NULL, `hrm_sw` INTEGER NOT NULL, `hrm_name` TEXT NOT NULL, `highlights_sw` INTEGER NOT NULL, `odo_distance` INTEGER NOT NULL, `odo_time` INTEGER NOT NULL, `brake_sw` INTEGER NOT NULL, `lock_facility` INTEGER NOT NULL, `incline_return` INTEGER NOT NULL, `machine_uuid` TEXT NOT NULL, `height` INTEGER NOT NULL, `weight` INTEGER NOT NULL, `age` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "machine_type",
+            "columnName": "machine_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serial_no",
+            "columnName": "serial_no",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time_format",
+            "columnName": "time_format",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wifi_sw",
+            "columnName": "wifi_sw",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wifi_ssid",
+            "columnName": "wifi_ssid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wifi_lock",
+            "columnName": "wifi_lock",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wifi_pwd",
+            "columnName": "wifi_pwd",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "handrails_height",
+            "columnName": "handrails_height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deck_lift",
+            "columnName": "deck_lift",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "highlights",
+            "columnName": "highlights",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "standby",
+            "columnName": "standby",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pause_mode",
+            "columnName": "pause_mode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit_sys",
+            "columnName": "unit_sys",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bt_sw",
+            "columnName": "bt_sw",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bt_name",
+            "columnName": "bt_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hrm_sw",
+            "columnName": "hrm_sw",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hrm_name",
+            "columnName": "hrm_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "highlights_sw",
+            "columnName": "highlights_sw",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odo_distance",
+            "columnName": "odo_distance",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odo_time",
+            "columnName": "odo_time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "brake_sw",
+            "columnName": "brake_sw",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lock_facility",
+            "columnName": "lock_facility",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "incline_return",
+            "columnName": "incline_return",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "machine_uuid",
+            "columnName": "machine_uuid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableFacility",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`profile_id` INTEGER NOT NULL, `profile_type` INTEGER NOT NULL, `profile_index` INTEGER NOT NULL, `profile_value` INTEGER NOT NULL, PRIMARY KEY(`profile_id`, `profile_type`, `profile_index`))",
+        "fields": [
+          {
+            "fieldPath": "profile_id",
+            "columnName": "profile_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profile_type",
+            "columnName": "profile_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profile_index",
+            "columnName": "profile_index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profile_value",
+            "columnName": "profile_value",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "profile_id",
+            "profile_type",
+            "profile_index"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableFrontGradeAd",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`grade` INTEGER NOT NULL, `ad` INTEGER NOT NULL, PRIMARY KEY(`grade`))",
+        "fields": [
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ad",
+            "columnName": "ad",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "grade"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableRearGradeAd",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`grade` INTEGER NOT NULL, `ad` INTEGER NOT NULL, PRIMARY KEY(`grade`))",
+        "fields": [
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ad",
+            "columnName": "ad",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "grade"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "TableFacilityIndex",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`profile_id` INTEGER NOT NULL, `profile_alias` TEXT NOT NULL, `profile_remove` INTEGER NOT NULL, `speed_unit` INTEGER NOT NULL, PRIMARY KEY(`profile_id`))",
+        "fields": [
+          {
+            "fieldPath": "profile_id",
+            "columnName": "profile_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profile_alias",
+            "columnName": "profile_alias",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profile_remove",
+            "columnName": "profile_remove",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed_unit",
+            "columnName": "speed_unit",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "profile_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e0ef45643a871d3f7d082dbb4718d48')"
+    ]
+  }
+}

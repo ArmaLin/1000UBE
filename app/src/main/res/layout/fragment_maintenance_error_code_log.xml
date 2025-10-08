@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceErrorCodeLogFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/error_code_log"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="238dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="192dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Date"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="248dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="224dp"
+            android:layout_marginTop="192dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Time"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="504dp"
+            android:layout_marginTop="192dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Code"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="656dp"
+            android:layout_marginTop="192dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Message"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="56dp"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:paddingTop="32dp"
+            android:scrollbarStyle="outsideOverlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/topLine"
+            app:layout_constraintStart_toStartOf="@+id/topLine"
+            app:layout_constraintTop_toBottomOf="@+id/topLine" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

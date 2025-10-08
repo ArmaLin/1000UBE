@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+        <variable name="isGGG" type="Boolean" />
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+        <variable
+            name="workoutViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="formulaUtil"
+            type="com.dyaco.spirit_commercial.support.FormulaUtil" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/color11151a"
+        app:layout_height="@{isUs &amp;&amp; !isGGG ? 584 : 856 }"
+        app:layout_width="@{isUs &amp;&amp; !isGGG ? 1296 : 1398 }"
+        tools:context=".workout.WorkoutGarminFragment"
+        tools:layout_height="584dp"
+        tools:layout_width="1296dp">
+
+<!--        <androidx.constraintlayout.widget.Group-->
+<!--            android:id="@+id/groupStatsss"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:constraint_referenced_ids="view,btn_stats,btn_charts,btn_Track,btn_Garmin"-->
+<!--            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />-->
+
+        <View
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/viewB"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/element_frame_garmin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_stats"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="43.68dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Stats"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_charts"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Charts"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_stats"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_Track"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Track"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Garmin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"
+            android:id="@+id/btn_Garmin"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="43.68dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Garmin"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:rotation="-37"
+            android:text="@string/Maximum"
+            android:textColor="@color/colore24b44"
+            android:textSize="18sp"
+            app:layout_constraintCircle="@id/gs_HeartRate"
+            app:layout_constraintCircleAngle="324"
+            app:setCircleRadius="@{isUs &amp;&amp; !isGGG ? 260:340}"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:rotation="69"
+            android:text="@string/Hard"
+            android:textColor="@color/colorFF8862"
+            android:textSize="18sp"
+            app:layout_constraintCircle="@id/gs_HeartRate"
+            app:layout_constraintCircleAngle="252"
+            app:setCircleRadius="@{isUs &amp;&amp; !isGGG ? 260:340}"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:rotation="0"
+            android:text="@string/Medium"
+            android:textColor="@color/colorC0F280"
+            android:textSize="18sp"
+            app:layout_constraintCircle="@id/gs_HeartRate"
+            app:layout_constraintCircleAngle="180"
+            app:setCircleRadius="@{isUs &amp;&amp; !isGGG ? 260:340}"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:rotation="-70"
+            android:text="@string/Light"
+            android:textColor="@color/color0DAC87"
+            android:textSize="18sp"
+            app:layout_constraintCircle="@id/gs_HeartRate"
+            app:layout_constraintCircleAngle="108"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate"
+            app:setCircleRadius="@{isUs &amp;&amp; !isGGG ? 260:340}" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:rotation="37"
+            android:text="@string/Very_Light"
+            android:textColor="@color/color445565"
+            android:textSize="18sp"
+            app:layout_constraintCircle="@id/gs_HeartRate"
+            app:layout_constraintCircleAngle="36"
+            app:setCircleRadius="@{isUs &amp;&amp; !isGGG ? 260:340}"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate" />
+
+        <!--        app:progress="@{(float)workoutViewModel.currentHeartRate * 0.005f}"-->
+        <com.dyaco.spirit_commercial.support.custom_view.gaugeseekbar.GaugeSeekBar
+            android:id="@+id/gs_HeartRate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="180"
+            app:interactive="false"
+            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 20 : 60}"
+            app:layoutMarginStart="@{isUs &amp;&amp; !isGGG ? 110 : 80}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_height="@{isUs &amp;&amp; !isGGG ? 540 : 700}"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 540 : 700}"
+            app:progress="@{formulaUtil.setHrProgress(workoutViewModel.currentHeartRate)}"
+            app:progressGradient="@array/progressColorR"
+            app:progressWidth="30dp"
+            app:showProgress="@{formulaUtil.isShowProgress(workoutViewModel.currentHeartRate)}"
+
+            app:startAngleDegrees="0"
+            app:thumbRadius="46dp"
+            app:trackGradient="@array/progressColorR"
+            app:trackWidth="32dp"
+            app:viewType="2"
+            tools:layout_height="540dp"
+            tools:layout_marginBottom="20dp"
+            tools:layout_marginStart="100dp"
+            tools:layout_width="540dp" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivGarminHr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_hr_chart"
+            app:layout_constraintBottom_toTopOf="@+id/tvGarminHeartRateNum"
+            app:layout_constraintEnd_toEndOf="@+id/tvGarminHeartRateNum"
+            app:layout_constraintStart_toStartOf="@+id/tvGarminHeartRateNum" />
+
+        <TextView
+            android:id="@+id/tvGarminHeartRateNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:includeFontPadding="false"
+            android:text="@{formulaUtil.setGarminHR(workoutViewModel.currentHeartRate)}"
+            android:textColor="@color/white"
+            android:textSize="96sp"
+            app:layout_constraintBottom_toBottomOf="@+id/gs_HeartRate"
+            app:layout_constraintEnd_toEndOf="@+id/gs_HeartRate"
+            app:layout_constraintStart_toStartOf="@+id/gs_HeartRate"
+            app:layout_constraintTop_toTopOf="@+id/gs_HeartRate"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/textGarminHeartRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Heart_Rate"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGarminHeartRateNum"
+            app:layout_constraintStart_toStartOf="@+id/tvGarminHeartRateNum"
+            app:layout_constraintTop_toBottomOf="@+id/tvGarminHeartRateNum" />
+
+        <!--                <ImageView-->
+        <!--                    android:visibility="visible"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    android:layout_marginStart="110dp"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                    android:layout_marginBottom="90dp"-->
+        <!--                    android:background="@drawable/element_chart_hr"-->
+        <!--                    android:layout_width="640dp"-->
+        <!--                    android:layout_height="640dp"/>-->
+
+
+        <!--        app:trackGradient="@array/progressColorR"-->
+        <!--        android:background="@drawable/element_chart_respiration"-->
+        <com.dyaco.spirit_commercial.support.custom_view.gaugeseekbar.GaugeSeekBar
+            android:id="@+id/gs_respiration"
+            android:layout_width="284dp"
+            android:layout_height="284dp"
+            tools:layout_marginTop="180dp"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 10 : 180}"
+            android:layout_marginEnd="304dp"
+            android:rotation="180"
+            app:interactive="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:progress="@{formulaUtil.setGarminRespirationProgress(workoutViewModel.garminRespirationRate)}"
+            app:progressGradient="@array/progressColorR"
+            app:progressWidth="30dp"
+            app:showProgress="@{workoutViewModel.garminRespirationRate > 0}"
+            app:startAngleDegrees="0"
+            app:thumbRadius="46dp"
+            app:trackGradient="@array/progressColorR"
+            app:trackWidth="32dp"
+            app:viewType="1" />
+
+
+        <!--        <ImageView-->
+        <!--            android:visibility="visible"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            android:layout_marginEnd="334dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            android:layout_marginBottom="128dp"-->
+        <!--            android:background="@drawable/element_chart_respiration"-->
+        <!--            android:layout_width="224dp"-->
+        <!--            android:layout_height="224dp"/>-->
+
+        <!--        android:background="@drawable/element_chart_respiration"-->
+        <com.dyaco.spirit_commercial.support.custom_view.gaugeseekbar.GaugeSeekBar
+            android:id="@+id/gs_body"
+            android:layout_width="284dp"
+            android:layout_height="284dp"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 0 : 30}"
+            app:layout_constraintStart_toStartOf="@+id/gs_respiration"
+            app:layout_constraintTop_toBottomOf="@+id/gs_respiration"
+            android:rotation="180"
+            app:interactive="false"
+            app:layout_constraintEnd_toEndOf="@id/gs_respiration"
+            app:progress="@{formulaUtil.setGarminBodyBatteryProgress(workoutViewModel.garminBodyBatteryLevel)}"
+            app:progressGradient="@array/progressColor"
+            app:progressWidth="30dp"
+            app:showProgress="@{workoutViewModel.garminBodyBatteryLevel > 0}"
+            app:showThumb="true"
+            app:startAngleDegrees="0"
+            app:thumbRadius="46dp"
+            app:trackGradient="@array/progressColor1"
+            app:trackWidth="32dp"
+            app:viewType="0" />
+        <!--        app:thumbDrawable="@drawable/linnn"-->
+
+
+        <TextView
+            android:includeFontPadding="false"
+            android:id="@+id/tvRespirationRateNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@{formulaUtil.setGarminHR(workoutViewModel.garminRespirationRate)}"
+            android:textColor="@color/white"
+            android:textSize="56sp"
+            app:layout_constraintBottom_toTopOf="@+id/textRespirationRate"
+            app:layout_constraintStart_toStartOf="@+id/textRespirationRate"
+            tools:text="40" />
+
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_marginTop="40dp"
+            android:id="@+id/textRespirationRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/gs_respiration"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Respiration_Rate"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@+id/gs_respiration"
+            app:layout_constraintBottom_toBottomOf="@id/gs_respiration"
+            app:layout_constraintStart_toStartOf="@+id/textBodyBattery" />
+
+
+        <TextView
+            android:includeFontPadding="false"
+            android:id="@+id/tvBodyBatteryNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@{formulaUtil.setGarminHR(workoutViewModel.garminBodyBatteryLevel)}"
+            android:textColor="@color/white"
+            android:textSize="56sp"
+            app:layout_constraintBottom_toTopOf="@+id/textBodyBattery"
+            app:layout_constraintStart_toStartOf="@+id/textBodyBattery"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_marginTop="40dp"
+            android:id="@+id/textBodyBattery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toEndOf="@+id/gs_body"
+            app:layout_constraintTop_toTopOf="@+id/gs_body"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Body_Battery"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/gs_body" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

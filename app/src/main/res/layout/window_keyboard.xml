@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="936dp"
+    tools:context=".settings.KeyboardWindow">
+    <!-- +88-->
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        app:shapeAppearanceOverlay="@style/roundedCornerTop"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/Cancel"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bgbg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/panel_bg_top_1c242a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_close">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:textColorHint="@color/color5a7085"
+            android:hint="@string/Input"
+            android:id="@+id/etNum"
+            android:layout_width="800dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:fontFamily="@font/inter_regular"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            android:textSize="44sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineline"
+            app:layout_constraintStart_toStartOf="@+id/lineline"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginBottom="34dp"
+            android:clickable="true"
+            android:fontFamily="@font/inter_bold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text="@string/Clear_All"
+            android:textColor="@color/color5a7085"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/lineline"
+            app:layout_constraintEnd_toEndOf="@+id/lineline"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <View
+            android:id="@+id/lineline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="166dp"
+            android:layout_marginEnd="64dp"
+            android:background="@color/color323f4b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bgbg" />
+
+
+        <View
+            android:id="@+id/lineline2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="455dp"
+            android:background="@color/color5b5b5b"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bgbg" />
+
+
+
+        <View
+            app:layout_constraintTop_toBottomOf="@+id/lineline2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/color292e32"
+            app:layout_constraintBottom_toTopOf="@+id/bbxx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <View
+            android:id="@+id/bbxx"
+            android:layout_width="match_parent"
+            android:layout_height="31.8dp"
+            android:layout_marginTop="455dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:layout_marginBottom="11.99dp"
+            android:layout_width="227.88dp"
+            android:layout_height="7.2dp"
+            android:layout_marginTop="455dp"
+            android:background="@drawable/panel_bg_keyboard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="1"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_1"
+            app:layout_constraintTop_toBottomOf="@+id/lineline2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="9.59dp"
+            android:layout_marginTop="7dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="4"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_4"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="9.59dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="7"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_7"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_4"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="9.59dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            app:layout_constraintBottom_toTopOf="@+id/bbxx"
+            android:text=","
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_comma"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_7"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="9.59dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_comma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="2"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_2"
+            app:layout_constraintTop_toBottomOf="@+id/lineline2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="481.24dp"
+            android:layout_marginTop="7dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="5"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_5"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="481.24dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="8"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_8"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="481.24dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            app:layout_constraintBottom_toTopOf="@+id/bbxx"
+            android:text="0"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_0"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_9"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="481.24dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:id="@+id/keyboard_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="952.89dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/btn_keyboard_3"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text="3"
+            android:textColor="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineline2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            android:text="6"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_6"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="952.89dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="9"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_9"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="952.89dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            app:layout_constraintBottom_toTopOf="@+id/bbxx"
+            android:text="."
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_period"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_9"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="950dp"
+            android:layout_marginTop="4dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_keyboard_period"
+            android:layout_width="468dp"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            tools:ignore="HardcodedText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="9.59dp"
+            android:text="-"
+            android:textColor="@android:color/transparent"
+            android:id="@+id/keyboard_hyphen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/btn_keyboard_hyphen"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toBottomOf="@+id/lineline2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyboard__"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="9.59dp"
+            android:background="@drawable/btn_keyboard_space"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text=" "
+            android:textColor="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_hyphen"
+            tools:ignore="HardcodedText,SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyboard_backspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="9.59dp"
+            android:background="@drawable/btn_keyboard_backspace"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard__"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyboard_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="9.59dp"
+            android:background="@drawable/btn_keyboard_enter"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toTopOf="@+id/bbxx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/keyboard_backspace"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

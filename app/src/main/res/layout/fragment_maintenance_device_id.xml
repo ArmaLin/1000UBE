@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceDeviceIdFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/device_id"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginEnd="37dp"
+            app:layout_constraintEnd_toStartOf="@+id/pickDeviceId"
+            app:layout_constraintBottom_toBottomOf="@+id/pickDeviceId"
+            app:layout_constraintTop_toTopOf="@+id/pickDeviceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="#"
+            android:textColor="@color/white"
+            android:textSize="54sp"
+            tools:ignore="HardcodedText" />
+
+
+        <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/pickDeviceId"
+            android:fontFamily="@font/inter_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_marginTop="500dp"
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_marginBottom="500dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/bottomLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color252e37" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

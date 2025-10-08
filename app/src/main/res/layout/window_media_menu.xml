@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="636dp"
+    android:id="@+id/clBase"
+    android:keepScreenOn="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".dashboard_media.MediaMenuWindow2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    android:animateLayoutChanges="true"-->
+    <View
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/menuView"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/panel_bg_all_20_e24b44"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_marginTop="36dp"
+        android:id="@+id/btnExpand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_menu_drawer_pause"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menuView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <View
+        android:id="@+id/viewExpand"
+        android:layout_marginTop="36dp"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_menu_arrow"
+        android:background="@drawable/icon_fold"
+        app:layout_constraintTop_toTopOf="@+id/btnExpand"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExpand"
+        app:layout_constraintStart_toStartOf="@+id/btnExpand"
+        app:layout_constraintEnd_toEndOf="@+id/btnExpand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_marginTop="36dp"
+        android:id="@+id/btnDragMenu"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:background="@drawable/panel_bg_top_menu"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_marginTop="38dp"
+        android:id="@+id/btnDragMenu2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41.82dp"
+        android:background="@drawable/icon_menu"
+        app:layout_constraintBottom_toTopOf="@+id/mLine0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+<!--    android:layout_height="44dp"-->
+    <View
+        android:id="@+id/btnDragMenuA"
+        android:layout_width="0dp"
+        android:layout_height="59dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnAllMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableStart="@drawable/icon_home"
+        android:drawablePadding="-8dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical|start"
+        android:paddingStart="0dp"
+        android:paddingEnd="32dp"
+        android:text="@string/All_Media"
+        android:textColor="@color/btn_white_press"
+        android:textSize="24dp"
+        app:drawableTint="@color/btn_white_press"
+        app:layout_constraintBottom_toTopOf="@+id/mLine1"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintTop_toBottomOf="@+id/mLine0"
+        tools:ignore="SpUsage,TextSizeCheck" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnGoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableStart="@drawable/icon_back_32"
+        android:drawablePadding="25.6dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:paddingStart="33.6dp"
+        android:paddingEnd="32dp"
+        android:text="@string/Go_Back"
+        android:textColor="@color/btn_white_press"
+        android:textSize="24dp"
+        app:drawableTint="@color/btn_white_press"
+        app:layout_constraintBottom_toTopOf="@+id/mLine2"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpUsage,TextSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:paddingEnd="32dp"
+        android:paddingStart="0dp"
+        android:drawablePadding="-8dp"
+        app:drawableTint="@color/btn_white_press"
+        android:textColor="@color/btn_white_press"
+        android:id="@+id/btnShowPanels"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableStart="@drawable/icon_screen_on"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:text="@string/Hide_Panels"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/mLine3"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpUsage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnShowTvController"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:drawableStart="@drawable/icon_controller"
+        android:drawablePadding="-8dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:paddingStart="0dp"
+        android:paddingEnd="32dp"
+        android:text="@string/TV_Controller"
+        android:textColor="@color/btn_white_press"
+        android:textSize="24dp"
+        app:drawableTint="@color/btn_white_press"
+        app:layout_constraintBottom_toTopOf="@+id/mLine4"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpUsage,TextSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnHowToMiracast"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:drawableStart="@drawable/icon_how_to_miracast"
+        android:drawablePadding="25.6dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:paddingStart="33.6dp"
+        android:paddingEnd="32dp"
+        android:text="@string/how_to_miracast"
+        android:textColor="@color/btn_white_press"
+        android:textSize="24dp"
+        app:drawableTint="@color/btn_white_press"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine4"
+        tools:ignore="SpUsage,TextSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnPause"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:drawableStart="@drawable/icon_controls_32"
+        android:drawablePadding="25.6dp"
+        android:paddingStart="33.6dp"
+        android:paddingEnd="32dp"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:text="@string/controls"
+        android:textColor="@color/btn_white_press"
+        android:textSize="24dp"
+        app:drawableTint="@color/btn_white_press"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine5"
+        app:layout_optimizationLevel="none"
+        tools:ignore="SpUsage,TextSizeCheck" />
+
+    <View
+        android:id="@+id/mLine1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="154dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="58dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine2"
+        app:layout_constraintTop_toBottomOf="@+id/mLine1"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine3"
+        app:layout_constraintTop_toBottomOf="@+id/mLine2"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine4"
+        app:layout_constraintTop_toBottomOf="@+id/mLine3"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine5"
+        app:layout_constraintTop_toBottomOf="@+id/mLine4"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

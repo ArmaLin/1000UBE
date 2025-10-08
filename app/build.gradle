@@ -1,0 +1,595 @@
+import java.util.regex.Pattern
+
+plugins {
+    id 'com.android.application'
+    id 'androidx.navigation.safeargs' //getApplicationIdTextResource()
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdk 35
+    ext {
+        HardWareVersion = "V1.0"
+        //A.x.x.1正式 , A.x.x.0測試
+//        SoftWareVersion = "A.1.16.1"  //A.x.x.1正式     V1.0.A.1.7.1.0529A
+          SoftWareVersion = "A.1.17.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
+        sVersion = "A"
+        SerialNumber = getFormattedDate('MMdd') + sVersion
+//        SerialNumber = "0901" + sVersion
+        FirmWareVersion = "37"
+    }
+
+    defaultConfig {
+        applicationId "com.dyaco.spirit_commercial"
+        minSdkVersion 29
+        targetSdkVersion 34
+        versionCode 163
+        versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //  ndkVersion "21.0.6113669"
+        ndk {
+//            abiFilters 'armeabi-v7a', 'armeabi', 'x86'
+            abiFilters 'armeabi-v7a', 'x86', 'x86_64'
+            //    abiFilters 'armeabi-v7a', 'x86'
+        }
+
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+
+//        packagingOptions {
+////            jniLibs {
+////                useLegacyPackaging = true
+////            }
+////            exclude "lib/arm64-v8a/libsqlcipher.so"
+////            exclude "lib/armeabi-v7a/libsqlcipher.so"
+////            exclude "lib/x86/libsqlcipher.so"
+////            exclude "lib/x86_64/libsqlcipher.so"
+//
+//            pickFirst "lib/arm64-v8a/libsqlcipher.so"
+//            pickFirst "lib/armeabi-v7a/libsqlcipher.so"
+//            pickFirst "lib/x86/libsqlcipher.so"
+//            pickFirst "lib/x86_64/libsqlcipher.so"
+//        }
+
+//        packagingOptions {
+//            jniLibs {
+//                useLegacyPackaging = true
+//            }
+
+//            pickFirst 'lib/arm64-v8a/liberrno-lib.so'
+//            pickFirst 'lib/arm64-v8a/libusb-lib.so'
+//            pickFirst 'lib/armeabi-v7a/liberrno-lib.so'
+//            pickFirst 'lib/armeabi-v7a/libusb-lib.so'
+//            pickFirst 'lib/x86/liberrno-lib.so'
+//            pickFirst 'lib/x86/libusb-lib.so'
+//            pickFirst 'lib/x86_64/liberrno-lib.so'
+//            pickFirst 'lib/x86_64/libusb-lib.so'
+        //    }
+
+        //指定room.schemaLocation生成的文件路徑
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        debug {
+//            storeFile file(RELEASE_STORE_FILE)
+//            storePassword RELEASE_STORE_PASSWORD
+//            keyAlias RELEASE_KEY_ALIAS
+//            keyPassword RELEASE_KEY_PASSWORD
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+        }
+    }
+
+    //debuggable true > App Inspection
+    //signingConfig要在buildTypes前面
+    buildTypes {
+        debug {
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
+            debuggable true
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [appSuffix: " Debug", appIcon: "icon_time_32"]
+        }
+
+        release {
+            resValue "string", "app_nameS", "SPIRIT Commercial-release"
+            debuggable false
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [appSuffix: " Release", appIcon: "icon_ride"]
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            buildConfigField "boolean", "TEST_MODE", "true" // true 測試, false 正式
+            //  applicationIdSuffix ".dev"
+            buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
+            buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.14:8080/"'
+            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
+            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
+            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
+            buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
+//                buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.35:8080/"'
+       //     buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/"'
+
+       //     buildConfigField "String", "EGYM_URL", '"https://partner-api.ext-1.test.co.egym.coffee/api/v1/"' // EGYM TEST
+            buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
+
+//            buildConfigField "String", "UPDATE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/SpiritCommercial2022/"'
+
+            //      buildConfigField "String", "UPDATE_URL_US", '"http://192.168.70.28:8080/"'
+
+        }
+
+        production {
+            buildConfigField "boolean", "TEST_MODE", "false" // true 測試, false 正式
+            buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
+            buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
+
+            //production
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
+            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
+            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
+            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
+            buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
+            //       buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.28:8080/"'
+     //      buildConfigField "String", "EGYM_URL", '"https://partner-api.ext-1.test.co.egym.coffee/api/v1/"' // EGYM TEST
+            buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
+
+            //debug
+            //    buildConfigField "String", "UPDATE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/SpiritCommercial2022/"'
+
+        }
+    }
+
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+        //noinspection DataBindingWithoutKapt
+        dataBinding true
+
+        buildConfig true
+    }
+
+    def updateFileName = "update.json"
+    def brandName = "SpiritCommercial"
+    def Model = "TREADMILL"
+    def Model_Name = "CT1000ENT"
+    def OS_Version = "V30"
+    def releaseDateTime = getFormattedDate('MM/dd/yyyy HH:mm:ss')
+    def Force_Updates = "NO"
+    def Territory = "International"
+    def MD5 = "cda88afbd2352bd04f6ae97cb5f00225"
+    def Modifications = "[\"1. Description A\", \"2. Description B\", \"3. Description C\"]"
+    def path
+    def url_GLOBAL
+    def url_JP
+    def url_US
+    def url_CA
+    def downloadUrl_GLOBAL
+    def downloadUrl_JP
+    def downloadUrl_US
+    def downloadUrl_CA
+    def sub_mcu = "CS31004_V10A05_20221116.bin" //V10A1 > V10A3  ,662
+    def lwr = "CS56011_FW0107_20221114.bin" //V1A7
+    def projectPath = getProjectDir().toString() + "/build/outputs/apk/production/release"
+    def GLOBAL_EditionFolder = "GLOBAL_Edition"
+    def JP_EditionFolder = "JP_Edition"
+    def US_EditionFolder = "US_Edition"
+    def CA_EditionFolder = "CA_Edition"
+    def UpdateFolderName
+
+    android.applicationVariants.configureEach { variant ->
+
+        variant.productFlavors.each { flavor ->
+            if (flavor.name == getCurrentFlavor()) {
+                flavor.buildConfigFields.each { key, value ->
+                    if (key == "UPDATE_URL_GLOBAL") {
+                        url_GLOBAL = value.value.replaceAll(/"/, '')
+                    }
+
+                    if (key == "UPDATE_URL_JP") {
+                        url_JP = value.value.replaceAll(/"/, '')
+                    }
+
+                    if (key == "UPDATE_URL_US") {
+                        url_US = value.value.replaceAll(/"/, '')
+                    }
+
+                    if (key == "UPDATE_URL_CA") {
+                        url_CA = value.value.replaceAll(/"/, '')
+                    }
+                }
+            }
+        }
+
+        variant.outputs.configureEach {
+
+            outputFileName = brandName + defaultConfig.versionName + "_[" + getCurrentFlavor() + "].apk"
+            UpdateFolderName = "updateApp/" + brandName + defaultConfig.versionName + "[" + getCurrentFlavor() + "]"
+            path = outputFileName
+            downloadUrl_GLOBAL = url_GLOBAL + path
+            downloadUrl_JP = url_JP + path
+            downloadUrl_US = url_US + path
+            downloadUrl_CA = url_CA + path
+            variant.getAssembleProvider().configure() {
+                it.doLast {
+                    delete {
+                        delete "build/outputs/apk/output.json"
+                    }
+                }
+            }
+        }
+    }
+
+    //執行
+    afterEvaluate {
+        // 1️⃣ 建立 update.json 和 updateApp 資料夾
+        android.applicationVariants.configureEach { variant ->
+            variant.packageApplicationProvider.get().dependsOn versionTxt
+            variant.packageApplicationProvider.get().dependsOn createFolders
+        }
+
+        // 2️⃣ 把apk copy到  updateApp
+        android.applicationVariants.configureEach { variant ->
+            def flavor      = variant.flavorName                       // e.g. "dev" 或 "production"
+            def buildType   = variant.buildType.name                   // e.g. "release" 或 "debug"
+            def versionName = defaultConfig.versionName
+            def apkName     = "SpiritCommercial${versionName}_[${flavor}].apk"
+            def destDir     = file("$projectDir/updateApp/SpiritCommercial${versionName}[${flavor}]")
+
+            // 2.1 用 layout API 取得 APK Provider
+            def apkFileProvider = project.layout
+                    .buildDirectory
+                    .file("outputs/apk/${flavor}/${buildType}/${apkName}")
+
+            // 2.2 Copy APK 任務
+            def copyTask = tasks.register("copy${variant.name.capitalize()}Apk", Copy) {
+                group       = "distribution"
+                description = "Copy ${variant.name} APK to updateApp folder"
+                dependsOn   variant.assembleProvider
+                from        apkFileProvider
+                into        destDir
+            }
+
+            // 2.3 開啟資料夾任務（macOS 用 Finder）
+//            def openTask = tasks.register("open${variant.name.capitalize()}Folder", Exec) {
+//                group       = "distribution"
+//                description = "Open updateApp folder in Finder"
+//                dependsOn   copyTask
+//                commandLine "open", destDir.absolutePath
+//            }
+
+            def openTask = tasks.register("open${variant.name.capitalize()}AppFolder", Exec) {
+                group       = "distribution"
+                description = "Open app module folder in Finder"
+                dependsOn   copyTask
+                // macOS：直接打開 app 專案模組的資料夾
+                commandLine "open", projectDir.absolutePath
+
+                // 如果你在 Windows，可改成：
+                // commandLine "cmd", "/c", "start", projectDir.absolutePath
+            }
+
+            // 3️⃣ 開啟APP資料夾
+            variant.assembleProvider.configure {
+                finalizedBy openTask
+            }
+        }
+    }
+
+
+
+    //建立資料夾
+    tasks.register('createFolders') {
+        doLast {
+
+            def folderName1 = UpdateFolderName
+            file("$projectDir/$folderName1").mkdirs()
+
+            file("$projectDir/$folderName1/$JP_EditionFolder").mkdirs()
+
+            file("$projectDir/$folderName1/$US_EditionFolder").mkdirs()
+
+            file("$projectDir/$folderName1/$CA_EditionFolder").mkdirs()
+
+            file("$projectDir/$folderName1/$GLOBAL_EditionFolder").mkdirs()
+        }
+    }
+
+
+    tasks.register('versionTxt') {
+        doLast {
+            def baseFolder = new File(projectDir, UpdateFolderName)
+            def caFolder = new File(baseFolder, CA_EditionFolder)
+            def usFolder = new File(baseFolder, US_EditionFolder)
+            def globalFolder = new File(baseFolder, GLOBAL_EditionFolder)
+            def jpFolder = new File(baseFolder, JP_EditionFolder)
+
+            def updateContent = { folder, urlM ->
+                new File(folder, updateFileName).text = """{
+                "Version": "${defaultConfig.versionName}",
+                "Version Code": ${defaultConfig.versionCode},
+                "Force updates": "${Force_Updates}",
+                "OS_Version": "${OS_Version}",
+                "ReleaseDateTime": "${releaseDateTime}",
+                "Territory": "${Territory}",
+                "Brand": "${brandName}",
+                "Model": "${Model}",
+                "Model Name": "${Model_Name}",
+                "MD5": "${MD5}",
+                "Download URL": "${urlM}",
+                "Modifications": ${Modifications},
+                "PATH": "${path}",
+                "Sub_Mcu": "${sub_mcu}",
+                "lwr": "${lwr}"
+            }"""
+            }
+
+            updateContent(jpFolder, downloadUrl_JP)
+            updateContent(usFolder, downloadUrl_US)
+            updateContent(globalFolder, downloadUrl_GLOBAL)
+            updateContent(caFolder, downloadUrl_CA)
+        }
+    }
+
+    namespace 'com.dyaco.spirit_commercial'
+
+    lintOptions {
+        disable 'TextContrastCheck', 'ImageContrastCheck'
+    }
+
+}
+
+def getCurrentFlavor() {
+    String taskRequest = getGradle().startParameter.taskRequests.toString()
+    String keyword = ['assemble', 'bundle', 'generate'].find { taskRequest.contains(it) }
+    if (!keyword) return ""
+    def pattern = Pattern.compile("${keyword}(\\w+)(Release|Debug)")
+    def matcher = pattern.matcher(taskRequest)
+    return matcher.find() ? matcher.group(1).toLowerCase() : ""
+}
+
+
+
+static def getFormattedDate(String pattern) {
+    def date = new Date()
+    return date.format(pattern)
+}
+
+dependencies {
+    implementation fileTree(includes: ['*.?ar'], dir: 'libs')
+    // Garmin, 3版的資料庫無法降級為2版，要刪掉重裝app
+//    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+//    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+//    implementation files('libs/garmin-health-companion-sdk-367-nousb.aar')
+    implementation files('libs/garmin-health-companion-sdk.aar')
+
+    //implementation files('libs/RemoteService-release.aar')
+    implementation files('libs/RemoteService-release_20240320A.aar')
+
+//    implementation files('libs/garmin-health-companion-sdk.aar')
+    //   implementation files('libs/garmin-health-sdk.aar')
+//    implementation "com.google.guava:guava:28.0-android"
+//    implementation "org.slf4j:slf4j-api:1.7.25"
+//    implementation "com.github.tony19:logback-android:1.1.1-12"
+    implementation "net.danlew:android.joda:2.9.9.2"
+//    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+    implementation "com.google.protobuf:protobuf-java:3.21.12"
+    implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0"
+//    implementation "androidx.core:core-ktx:1.6.0"
+
+    implementation "androidx.room:room-runtime:2.4.1"
+    implementation "androidx.room:room-guava:2.4.1"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2"
+
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'org.jetbrains:annotations:17.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+//    implementation "android.arch.persistence.room:runtime:1.1.1"
+    //implementation 'androidx.room:room-runtime:2.3.0'
+    //implementation "androidx.room:room-rxjava3:2.3.0"
+    annotationProcessor 'androidx.room:room-compiler:2.4.1'
+
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.1'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
+
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.1.0'
+//    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:2.0.2'
+    // implementation 'com.dylanc:viewbinding-base-ktx:1.1.2'
+
+//    implementation 'com.tencent:mmkv:1.0.23'
+//    implementation 'com.tencent:mmkv-static:1.2.10'
+    implementation 'com.tencent:mmkv:1.2.13'
+    // replace "1.2.10" with any available version
+
+
+    def work_version = "2.7.1"
+
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+//
+//    // optional - RxJava2 support
+//    implementation "androidx.work:work-rxjava2:$work_version"
+
+//    // Kotlin + coroutines
+//    implementation "androidx.work:work-runtime-ktx:$work_version"
+//
+//
+//    // optional - GCMNetworkManager support
+//    implementation "androidx.work:work-gcm:$work_version"
+//
+//    // optional - Test helpers
+//    androidTestImplementation "androidx.work:work-testing:$work_version"
+//
+//    // optional - Multiprocess support
+//    implementation "androidx.work:work-multiprocess:$work_version"
+
+    //implementation files('libs/libusb-release.aar')
+    implementation files('libs/LibraryCalculation-v0.1.0-0819a-release.aar')
+//    implementation files('libs/corestarlib-v0.1.0-20241122a-release.aar')
+//    implementation files('libs/corestarlib-v0.1.0-20250422a-release.aar')
+    implementation files('libs/corestarlib-v0.1.0-20250910a-release.aar')
+    implementation files('libs/HdmiIn.aar')
+
+    implementation 'com.github.addisonelliott:SegmentedButton:3.1.9'
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
+
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+   // implementation 'com.github.tbruyelle:rxpermissions:0.12'
+
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
+//    implementation 'com.allenliu.badgeview:library:1.1.1'
+
+    // implementation 'com.facebook.stetho:stetho:1.6.0' //chrome://inspect
+
+    //implementation("io.github.thanosfisherman.wifiutils:wifiutils:1.6.6")
+
+    //USB
+    implementation 'me.jahnen:libaums:0.8.0'
+    //   implementation 'me.jahnen.libaums:core:0.10.0'
+
+    implementation 'com.ixuea:android-downloader:3.0.0'
+
+//    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+
+    implementation 'org.zeroturnaround:zt-zip:1.13'
+
+
+    //重新啟動App
+    //  implementation 'com.jakewharton:process-phoenix:3.0.0'
+
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation("com.google.guava:guava:32.1.3-android")
+    implementation "net.zetetic:sqlcipher-android:4.6.0"
+    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.room:room-ktx:2.4.1"
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
+
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.20"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.4"
+    implementation "com.jcraft:jzlib:1.1.3"
+
+    implementation "org.slf4j:slf4j-api:1.7.32"
+    implementation "com.github.tony19:logback-android:2.0.0"
+    implementation "com.squareup.retrofit2:converter-protobuf:2.4.0"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+
+
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.4.1"
+
+    //ROOT功能管理
+//    implementation 'com.github.topjohnwu.libsu:core:5.0.3'
+
+
+    implementation 'androidx.profileinstaller:profileinstaller:1.4.1'
+    implementation "androidx.startup:startup-runtime:1.2.0"
+}

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable name="isDefaultProgram" type="Boolean" />
+
+        <variable
+            name="WorkoutData"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="AppStatusViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
+
+        <variable
+            name="status"
+            type="com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vBG"
+            android:layout_width="1872dp"
+            android:layout_height="712dp">
+
+            <TextView
+                tools:text="@string/fatburn"
+                android:id="@+id/tvProgramName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="237dp"
+                android:layout_marginTop="136dp"
+                android:fontFamily="@font/inter_bold"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+<!--            android:autoSizeMaxTextSize="@{isDefaultProgram ? 54 : 44}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:maxHeight="480dp"
+                tools:text="@string/wfi_desc"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnChoose"
+                android:id="@+id/tvProgramDesc"
+                android:layout_width="599dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="237dp"
+                android:layout_marginTop="224dp"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="@color/white"
+                app:c_textSize="@{isDefaultProgram ? 54 : 44}"
+                tools:textSize="54sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--            android:visibility="@{isDefaultProgram ? View.VISIBLE : View.GONE}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="invisible"
+                android:id="@+id/btnChoose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="237dp"
+                android:layout_marginTop="40dp"
+                android:drawableEnd="@drawable/icon_next"
+                android:drawablePadding="13dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/Select_This_Program"
+                android:textColor="@color/btn_blue_50white"
+                android:textSize="24sp"
+                app:drawableTint="@color/btn_blue_50white"
+                app:layout_constraintTop_toBottomOf="@+id/tvProgramDesc"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/ivDiagram"
+                android:layout_width="687dp"
+                android:layout_height="656dp"
+                android:layout_marginEnd="237dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <!--        SELECT-->
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/fitnessPickAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="106dp"
+                android:layout_marginEnd="794dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fitnessAgeUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/yo"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toEndOf="@id/fitnessPickAge"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/fitnessPickWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="280dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toStartOf="@id/ivDiagram"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+            <TextView
+                android:id="@+id/fitnessWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toEndOf="@id/fitnessPickWeight"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/fitnessPickGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toEndOf="@id/fitnessWeightUnit"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+            <TextView
+                android:id="@+id/fitnessHeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/in : @string/cm}"
+                android:textColor="@color/white"
+                android:textSize="54sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toEndOf="@id/fitnessPickHeight"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+
+            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                android:id="@+id/fitnessPickHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35.67dp"
+                android:fontFamily="@font/inter_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
+                app:layout_constraintStart_toEndOf="@id/fitnessWeightUnit"
+                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+
+
+            <!--SELECT END-->
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginEnd="12dp"
+                android:autoSizeMaxTextSize="24sp"
+                android:maxLines="2"
+                android:autoSizeTextType="uniform"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/ovalSpeed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="73dp"
+                android:layout_marginTop="576dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/Speed"
+                android:textColor="@color/color5a7085"
+                android:textSize="24sp"
+                app:drawableStartCompat="@drawable/shape_oval_1396ef"
+                app:layout_constraintStart_toEndOf="@+id/ivDiagram"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/ovalIncline"
+                android:autoSizeMaxTextSize="24sp"
+                android:maxLines="2"
+                android:autoSizeTextType="uniform"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="73dp"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/Incline"
+                android:textColor="@color/color5a7085"
+                android:textSize="24sp"
+                app:drawableStartCompat="@drawable/shape_oval_cd5bff"
+                app:layout_constraintTop_toBottomOf="@+id/ovalSpeed"
+                app:layout_constraintStart_toEndOf="@+id/ivDiagram" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_banner_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_banner_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_banner_forward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_banner_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</layout>

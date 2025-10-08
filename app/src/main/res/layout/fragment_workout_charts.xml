@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isUs"
+            type="Boolean" />
+
+        <variable
+            name="isGGG"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceSetting"
+            type="com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel" />
+
+        <variable
+            name="deviceSettingIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.DeviceIntDef" />
+
+        <variable
+            name="workoutIntDef"
+            type="com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef" />
+
+        <variable
+            name="workoutViewModel"
+            type="com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel" />
+
+        <variable
+            name="programsEnum"
+            type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+    </data>
+
+
+    <!--
+        android:layout_width="1398dp"
+        android:layout_height="856dp"
+        -->
+
+    <!--
+    android:layout_width="1296dp"
+    android:layout_height="504dp"
+    -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1398dp"
+        android:layout_height="856dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/color11151a"
+        app:layout_height="@{isUs &amp;&amp; !isGGG ? 584 : 856 }"
+        app:layout_width="@{isUs &amp;&amp; !isGGG ? 1296 : 1398 }"
+        tools:context=".workout.WorkoutChartsFragment"
+        tools:layout_height="584dp"
+        tools:layout_width="1296dp">
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            app:visibility="@{isUs ? View.GONE : View.VISIBLE }"-->
+        <!--            app:constraint_referenced_ids="view,btn_stats,btn_charts,btn_Track,btn_Garmin"-->
+        <!--            android:id="@+id/groupStatsss"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"/>-->
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{workoutViewModel.isGarminConnected ? @drawable/element_frame_garmin_charts : @drawable/element_frame_charts}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />
+
+        <TextView
+            android:id="@+id/btn_stats"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Stats"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />
+
+        <TextView
+            android:id="@+id/btn_charts"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Charts"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_stats"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />
+
+        <!--        android:enabled="@{workoutViewModel.selProgram != programsEnum.GERKIN}"-->
+        <!--        android:visibility="@{workoutViewModel.selProgram == programsEnum.GERKIN ? View.INVISIBLE : View.VISIBLE}"-->
+        <TextView
+            android:id="@+id/btn_Track"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Track"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layoutMarginEnd="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y_end : @dimen/garmin_n_end}"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Garmin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_width="@{workoutViewModel.isGarminConnected ? @dimen/garmin_y : @dimen/garmin_n}"
+            app:visibility="@{isUs ? View.GONE : View.VISIBLE }" />
+
+        <TextView
+            android:id="@+id/btn_Garmin"
+            android:layout_width="327dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="44dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/Garmin"
+            android:textColor="@color/btn_adb872_50"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{isUs ? View.GONE : workoutViewModel.isGarminConnected ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone" />
+
+
+        <!--        android:layout_marginTop="150dp"-->
+        <com.dyaco.spirit_commercial.support.custom_view.DiagramBarsView
+            android:id="@+id/touch_bar_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginEnd="2.5dp"
+            android:background="@color/color1396ef22"
+            app:backLineColorS="#1c242a"
+            app:barCountS="44"
+            app:barMaxLevelS="20"
+            app:barWidthS="24"
+            app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 40 : 150}"
+            app:layout_constraintBottom_toTopOf="@+id/bbbbbb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginTop="150dp" />
+
+        <View
+            android:id="@+id/bbbbbb"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_height="@{isUs &amp;&amp; !isGGG ? 20 : 2 }" />
+
+
+        <com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet
+            tools:visibility="visible"
+            android:id="@+id/egymDiagramBarsView"
+            android:layout_width="1344dp"
+            android:layout_height="720dp"
+            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 72 : 28}"
+            android:visibility="gone"
+            app:backLineColorS_E="#1c242a"
+            app:barCountS_E="20"
+            app:barMaxLevelS_E="20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 1240 : 1344 }"
+            app:layout_height="@{isUs &amp;&amp; !isGGG ? 448 : 720 }" />
+        <!--        GLOBAL-->
+        <!--        android:layout_width="1344dp"-->
+        <!--        android:layout_height="720dp"-->
+
+
+        <!--    app:barWidth="24" 61.55-->
+        <!--    app:barCount="44"  20-->
+
+        <View
+            android:id="@+id/eBG"
+            android:background="@color/color11151a"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_base"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:layout_width="480dp"
+    android:layout_height="104dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/white"
+        android:id="@+id/tvChannelNo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        tools:text="001"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:gravity="center_horizontal|center_vertical"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        tools:text="NBC News Now"
+        android:layout_marginStart="168dp"
+        android:id="@+id/tvChannelName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,377 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a2f21cbbbcdc2606e8c3eb7e588039f0",
+    "entities": [
+      {
+        "tableName": "user_profile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userName` TEXT, `userId` INTEGER NOT NULL, `userImage` INTEGER NOT NULL, `userType` INTEGER NOT NULL, `weight_metric` INTEGER NOT NULL, `height_metric` INTEGER NOT NULL, `weight_imperial` INTEGER NOT NULL, `height_imperial` INTEGER NOT NULL, `birthday` TEXT, `age` INTEGER NOT NULL, `gender` INTEGER NOT NULL, `unit` INTEGER NOT NULL, `customLevelNum` TEXT, `customInclineNum` TEXT, `totalDistance_metric` REAL NOT NULL, `totalDistance_imperial` REAL NOT NULL, `totalRun` REAL NOT NULL, `avgPaceInMonth` REAL NOT NULL, `sleepMode` INTEGER NOT NULL, `levelDiagram` BLOB, `inclineDiagram` BLOB, `soleAccountNo` TEXT, `soleAccount` TEXT, `solePassword` TEXT, `soleEmail` TEXT, `soleSyncPassword` TEXT, `soleRegistType` TEXT, `soleHeaderImgUrl` TEXT, `wattAccumulate` REAL NOT NULL, `wattFrequency` INTEGER NOT NULL, `workoutMonth` INTEGER NOT NULL, `avatarTag` INTEGER NOT NULL, `memberSince` INTEGER, `membershipExpirationDate` INTEGER, `isVip` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userImage",
+            "columnName": "userImage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userType",
+            "columnName": "userType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight_metric",
+            "columnName": "weight_metric",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height_metric",
+            "columnName": "height_metric",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight_imperial",
+            "columnName": "weight_imperial",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height_imperial",
+            "columnName": "height_imperial",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "customLevelNum",
+            "columnName": "customLevelNum",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "customInclineNum",
+            "columnName": "customInclineNum",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalDistance_metric",
+            "columnName": "totalDistance_metric",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalDistance_imperial",
+            "columnName": "totalDistance_imperial",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalRun",
+            "columnName": "totalRun",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgPaceInMonth",
+            "columnName": "avgPaceInMonth",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sleepMode",
+            "columnName": "sleepMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelDiagram",
+            "columnName": "levelDiagram",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "inclineDiagram",
+            "columnName": "inclineDiagram",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleAccountNo",
+            "columnName": "soleAccountNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleAccount",
+            "columnName": "soleAccount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "solePassword",
+            "columnName": "solePassword",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleEmail",
+            "columnName": "soleEmail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleSyncPassword",
+            "columnName": "soleSyncPassword",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleRegistType",
+            "columnName": "soleRegistType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "soleHeaderImgUrl",
+            "columnName": "soleHeaderImgUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wattAccumulate",
+            "columnName": "wattAccumulate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wattFrequency",
+            "columnName": "wattFrequency",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "workoutMonth",
+            "columnName": "workoutMonth",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avatarTag",
+            "columnName": "avatarTag",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberSince",
+            "columnName": "memberSince",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "membershipExpirationDate",
+            "columnName": "membershipExpirationDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isVip",
+            "columnName": "isVip",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_user_profile_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_profile_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "error_msg",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `errorCode` TEXT, `errorMessage` TEXT, `errorDate` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "errorCode",
+            "columnName": "errorCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorMessage",
+            "columnName": "errorMessage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorDate",
+            "columnName": "errorDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_error_msg_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_error_msg_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ranks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `memberName` TEXT, `memberNo` INTEGER NOT NULL, `memberHours` INTEGER NOT NULL, `memberSpeed` REAL NOT NULL, `memberCal` REAL NOT NULL, `memberDistance` REAL NOT NULL, `memberAvatar` BLOB, `isMe` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberName",
+            "columnName": "memberName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "memberNo",
+            "columnName": "memberNo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberHours",
+            "columnName": "memberHours",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberSpeed",
+            "columnName": "memberSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberCal",
+            "columnName": "memberCal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberDistance",
+            "columnName": "memberDistance",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberAvatar",
+            "columnName": "memberAvatar",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isMe",
+            "columnName": "isMe",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ranks_uid",
+            "unique": false,
+            "columnNames": [
+              "uid"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ranks_uid` ON `${TABLE_NAME}` (`uid`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a2f21cbbbcdc2606e8c3eb7e588039f0')"
+    ]
+  }
+}

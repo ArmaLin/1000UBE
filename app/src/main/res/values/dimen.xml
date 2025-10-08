@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="garmin_1">470dp</dimen>
+    <dimen name="garmin_2">190dp</dimen>
+<!--    <dimen name="garmin_2">260dp</dimen>-->
+    <dimen name="garmin_1_2">530dp</dimen>
+    <dimen name="garmin_2_2">320dp</dimen>
+
+    <dimen name="garmin_icon_1">202dp</dimen>
+    <dimen name="garmin_icon_2">240dp</dimen>
+
+    <dimen name="garmin_connected_icon_running">202dp</dimen>
+    <dimen name="garmin_connected_icon_idle">490dp</dimen>
+    <dimen name="garmin_connected_icon_pause">298dp</dimen>
+
+    <dimen name="garmin_y">327dp</dimen>
+    <dimen name="garmin_n">437dp</dimen>
+
+    <dimen name="garmin_y_end">0dp</dimen>
+    <dimen name="garmin_n_end">44dp</dimen>
+
+    <dimen name="T_MaintenanceErrorLog">526dp</dimen>
+    <dimen name="MaintenanceErrorLog">598dp</dimen>
+
+    <dimen name="time_12">121dp</dimen>
+    <dimen name="time_24">75dp</dimen>
+</resources>

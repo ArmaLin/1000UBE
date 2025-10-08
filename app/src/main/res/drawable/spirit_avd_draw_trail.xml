@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/spirit_svg_anim">
+
+    <!-- 第一條圖形 -->
+    <target
+        android:name="draw_path1"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path1"
+        android:animation="@animator/fill_animator" />
+
+    <!-- 第二條圖形 -->
+    <target
+        android:name="draw_path2"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path2"
+        android:animation="@animator/fill_animator" />
+
+    <!-- 第三條圖形 -->
+    <target
+        android:name="draw_path3"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path3"
+        android:animation="@animator/fill_animator" />
+
+    <!-- 第四條圖形 -->
+    <target
+        android:name="draw_path4"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path4"
+        android:animation="@animator/fill_animator" />
+
+    <!-- 第五條圖形 -->
+    <target
+        android:name="draw_path5"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path5"
+        android:animation="@animator/fill_animator" />
+
+    <!-- 第六條圖形 -->
+    <target
+        android:name="draw_path6"
+        android:animation="@animator/draw_trail_animator" />
+    <target
+        android:name="draw_path6"
+        android:animation="@animator/fill_animator" />
+
+</animated-vector>

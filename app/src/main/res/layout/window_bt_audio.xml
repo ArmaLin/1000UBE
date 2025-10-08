@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_root"
+    android:layout_width="795dp"
+    android:layout_height="match_parent"
+    tools:context=".settings.BtAudioWindow"
+    android:background="@drawable/bg_overlay_settings">
+    <!--+94-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hrTitle"
+        android:fontFamily="@font/inter_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="70sp"
+        android:textColor="@color/white"
+        android:text="@string/Bluetooth_Device"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="124dp"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MButton_252e37"
+        android:id="@+id/btn_close"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/Close"
+        android:textSize="24sp"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/colorADB8C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:layout_marginStart="-12dp"
+        android:id="@+id/cbHR"
+        android:checked="true"
+        android:button="@null"
+        android:layout_marginTop="270dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/btn_checkbox_m"
+        app:layout_constraintStart_toStartOf="@+id/hrTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/reScan"-->
+<!--        android:visibility="gone"-->
+<!--        android:src="@drawable/btn_round_icon_re"-->
+<!--        android:layout_marginBottom="18dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/cbHR"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/btn_close"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"/>-->
+
+    <View
+        android:id="@+id/vLine"
+        android:background="@color/color252e37"
+        android:layout_marginTop="358dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="735dp"
+        android:layout_height="2dp"/>
+
+
+    <View
+        android:id="@+id/no_hr_icon"
+        android:layout_marginEnd="283dp"
+        android:background="@drawable/icon_bluetooth_none"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="584dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="168dp"
+        android:layout_height="155.41dp" />
+    <TextView
+        android:id="@+id/no_hr_text"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="56dp"
+        android:fontFamily="@font/inter_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"
+        android:textColor="@color/color5a7085"
+        android:textAllCaps="false"
+        android:text="@string/bluetooth_devices_scanning_function_is_now_off_turn_it_back_on_to_search_for_devices"
+        android:layout_width="599dp"
+        android:layout_height="64dp" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/items_bt_device_list"
+        style="@style/ZoomItemRecyclerViewStyle"
+        tools:itemCount="10"
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fadeScrollbars="true"
+        android:paddingTop="1dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/vLine"
+        app:layout_constraintStart_toStartOf="@+id/vLine"
+        app:layout_constraintTop_toBottomOf="@+id/vLine" />
+
+    <ProgressBar
+        android:layout_marginStart="68dp"
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressbar_hr"
+        android:visibility="invisible"
+        android:layout_marginBottom="378dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        tools:visibility="visible"
+        android:textSize="42sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/No_Devices_Found"
+        android:id="@+id/tvNoDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="378dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <View
+        android:layout_marginStart="56dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:id="@+id/hideView"
+        android:background="@color/half_transparent30"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/hrTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"/>
+
+
+    <View
+        android:layout_marginStart="58dp"
+        android:background="@color/half_transparent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:id="@+id/hideView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:indeterminate="true"-->
+<!--        android:indeterminateDrawable="@drawable/progressbar_hr"-->
+<!--        android:visibility="visible"-->
+<!--        android:layout_marginBottom="378dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

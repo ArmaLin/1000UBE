@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="421dp"
+    android:layout_height="408dp"
+    android:elevation="10dp"
+    android:translationZ="10dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".maintenance_mode.MaintenanceTvMenuWindow"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/menuView"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/panel_bg_all_20_menu_1396ef"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+<!--    android:background="@drawable/element_drawer_workout"-->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnExpand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_menu_drawer_rest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menuView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_menu_arrow"
+        android:background="@drawable/icon_fold"
+        app:layout_constraintTop_toTopOf="@+id/btnExpand"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExpand"
+        app:layout_constraintStart_toStartOf="@+id/btnExpand"
+        app:layout_constraintEnd_toEndOf="@+id/btnExpand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--    <ImageView-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:id="@+id/anim_image"-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/animated_bg_green" />-->
+
+    <View
+        android:id="@+id/btnDragMenu"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:background="@drawable/panel_bg_top_menu"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnDragMenu2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41.82dp"
+        android:background="@drawable/icon_menu"
+        app:layout_constraintBottom_toTopOf="@+id/mLine0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+
+<!--    <androidx.appcompat.widget.AppCompatImageButton-->
+<!--        android:id="@+id/btnShowPanels"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/mLine1"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/mLine2"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:background="@drawable/icon_screen_off"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:drawablePadding="-8dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/btnScanAgain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:drawableStart="@drawable/icon_scan_again"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center_vertical"
+        android:text="@string/scan_again"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/mLine2"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:drawablePadding="-8dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:drawableStart="@drawable/icon_screen_off"
+        android:gravity="center_vertical"
+        android:id="@+id/btnHideChannels"
+        android:fontFamily="@font/inter_bold"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintTop_toBottomOf="@+id/mLine2"
+        app:layout_constraintBottom_toTopOf="@+id/mLine3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/hide_channels"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:drawablePadding="-8dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:drawableStart="@drawable/icon_controller"
+        android:gravity="center_vertical"
+        android:id="@+id/btnTvController"
+        android:fontFamily="@font/inter_bold"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mLine3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/TV_Controller"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:drawablePadding="-8dp"
+        android:drawableStart="@drawable/icon_maintenance_mode"
+        android:gravity="center_vertical"
+        android:id="@+id/btnMaintenanceMode"
+        android:fontFamily="@font/inter_bold"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintBottom_toTopOf="@+id/mLine1"
+        app:layout_constraintTop_toBottomOf="@+id/mLine0"
+        android:text="@string/to_maintenance_mode"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <View
+        android:id="@+id/mLine1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="118dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="22dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine2"
+        app:layout_constraintTop_toBottomOf="@+id/mLine1"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+    <View
+        android:id="@+id/mLine3"
+        app:layout_constraintTop_toBottomOf="@+id/mLine2"
+        android:layout_marginTop="94dp"
+        android:background="@color/half_transparent15"
+        app:layout_constraintStart_toStartOf="@+id/menuView"
+        app:layout_constraintEnd_toEndOf="@+id/menuView"
+        android:layout_width="0dp"
+        android:layout_height="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

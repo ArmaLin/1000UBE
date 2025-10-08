@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="20dp"
+        android:top="20dp">
+
+        <shape>
+            <corners android:radius="4dp" />
+            <solid android:color="@color/color151c242a"/>
+        </shape>
+    </item>
+</layer-list>
+
+
+<!--scroll bar 滑塊 背景圖-->

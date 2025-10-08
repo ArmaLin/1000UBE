@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/c_home_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color11151a" />
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="100dp"
+        android:autoSizeMaxTextSize="160sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/inter_extrabold"
+        android:maxLines="1"
+        android:text="@string/WELCOME"
+        android:textColor="@color/white"
+        android:textSize="160sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/gboarddddxxxxxx"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:background="@drawable/panel_bg_stats_normal"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:includeFontPadding="false"
+        android:visibility="visible"
+        app:boxBackgroundMode="none"
+        app:errorTextAppearance="@style/text_in_layout_error_hint_Style"
+        app:hintEnabled="false"
+        app:layout_constraintStart_toStartOf="@+id/btnqqq"
+        app:layout_constraintTop_toBottomOf="@+id/btnqqq">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/gboardddd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:defaultFocusHighlightEnabled="false"
+            android:gravity="center"
+            android:inputType="textNoSuggestions"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            android:visibility="visible"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <View
+        android:id="@+id/btnqqq"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="300dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:maxLines="1"-->
+    <!--        android:paddingStart="0dp"-->
+    <!--        android:paddingEnd="30dp"-->
+    <!--        android:autoSizeMaxTextSize="32sp"-->
+    <!--        android:autoSizeTextType="uniform"-->
+    <!--        android:letterSpacing="0.01"-->
+    <!--        android:stateListAnimator="@null"-->
+    <!--        android:clickable="false"-->
+    <!--        android:fontFamily="@font/inter_bold"-->
+    <!--        app:icon="@drawable/icon_qrcode_default"-->
+    <!--        app:iconTint="@color/white"-->
+    <!--        app:iconGravity="textStart"-->
+    <!--        app:iconPadding="32dp"-->
+    <!--        app:backgroundTintMode="add"-->
+    <!--        android:background="@drawable/btn_login_qrcode"-->
+    <!--        app:backgroundTint="@null"-->
+    <!--        android:layout_marginBottom="24dp"-->
+    <!--        android:layout_marginStart="24dp"-->
+    <!--        android:id="@+id/btnQrcodeLogin"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        android:layout_width="608dp"-->
+    <!--        android:layout_height="272dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="32sp"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:text="@string/login_with_qr" />-->
+
+
+    <com.google.android.material.button.MaterialButton
+        android:visibility="visible"
+        android:id="@+id/btnQrcodeLogin"
+        style="@style/button_login_style"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="false"
+        android:text="@string/login_with_qr"
+        app:icon="@drawable/icon_qrcode_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:visibility="visible"
+        android:id="@+id/btnNfcLogin"
+        style="@style/button_login_style"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/login_with_nfc"
+        app:icon="@drawable/icon_nfc_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnQrcodeLogin" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:visibility="visible"
+        android:id="@+id/btnGotoWorkout"
+        style="@style/button_login_style"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/go_to_workouts"
+        app:icon="@drawable/icon_workouts_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnNfcLogin"
+        tools:ignore="TextContrastCheck" />
+
+
+    <View
+        android:id="@+id/v_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/half_transparent50"
+        android:clickable="true"
+        android:visibility="gone" />
+
+
+    <View
+        android:id="@+id/goAdRom"
+        android:layout_width="640dp"
+        android:layout_height="340dp"
+        android:layout_marginBottom="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <Button-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/vvNFC"-->
+    <!--        android:layout_marginTop="300dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:text="NFC"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+
+    <!--    <Button-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/vvIdel"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:text="IDLE"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <Button-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/vvInUSE"-->
+    <!--        android:layout_marginTop="150dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:text="in USE"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <Button-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/vvFinish"-->
+    <!--        android:layout_marginTop="200dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:text="Finish"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <com.dyaco.spirit_commercial.support.test_custom_view.McDonaldsLogoView-->
+    <!--        android:id="@+id/cccc"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--    <com.dyaco.spirit_commercial.support.custom_view.NumberSelect-->
+    <!--        android:id="@+id/nsSS"-->
+    <!--        app:default_value="3"-->
+    <!--        app:min_value="0"-->
+    <!--        app:max_value="20"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        android:layout_marginBottom="500dp"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"/>-->
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGotoWorkoutE"
+        style="@style/button_login_style"
+        android:text="@string/go_to_workouts"
+        app:icon="@drawable/icon_workouts_default"
+        android:layout_width="924dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"
+        android:foregroundGravity="center"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:visibility="visible" />
+
+    <View
+        android:clickable="true"
+        android:layout_marginTop="80dp"
+        android:id="@+id/bEgymBG"
+        android:visibility="gone"
+        android:background="@color/half_transparent50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEgymLogin"
+        style="@style/button_login_style"
+        android:layout_width="924dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="false"
+        android:foregroundGravity="center"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    android:id="@+id/btnGotoWorkout"-->
+    <!--    style="@style/button_login_style"-->
+    <!--    android:layout_marginStart="24dp"-->
+    <!--    android:layout_marginBottom="24dp"-->
+    <!--    android:text="@string/go_to_workouts"-->
+    <!--    app:icon="@drawable/icon_workouts_default"-->
+
+    <TextView
+        app:layout_constraintEnd_toEndOf="@+id/btnEgymLogin"
+        android:id="@+id/tvLoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/Login_to_Egym"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/ivEgymIcon"
+        app:layout_constraintStart_toEndOf="@+id/ivEgymIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivEgymIcon"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivEgymIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/icon_footer_rfid_104"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/btnEgymLogin"
+        app:layout_constraintEnd_toStartOf="@+id/tvLoginText"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/btnEgymLogin"
+        app:layout_constraintTop_toTopOf="@+id/btnEgymLogin"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/MButton_252e37"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/btn_egym_select"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="@string/Close"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:icon="@drawable/icon_cancel"
+        app:iconGravity="textEnd"
+        app:iconPadding="12dp"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/btnEgymLogin"
+        app:layout_constraintTop_toTopOf="@+id/btnEgymLogin" />
+
+    <TextView
+        android:alpha="0"
+        android:id="@+id/tvEgymDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="64dp"
+        android:gravity="center_horizontal"
+        android:text="@string/hold_your_rfid_tag_near_the_reader_below_the_screen_to_login_as_an_egym_member"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnEgymLogin"
+        app:layout_constraintEnd_toEndOf="@+id/btnEgymLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnEgymLogin" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:visibility="gone"
+        app:constraint_referenced_ids="btnEgymLogin,tvLoginText,ivEgymIcon,btnGotoWorkoutE"
+        android:id="@+id/gEgym"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+
+<!--    <com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet-->
+<!--        tools:visibility="visible"-->
+<!--        android:id="@+id/egymDiagramBarsView"-->
+<!--        android:layout_width="1344dp"-->
+<!--        android:layout_height="720dp"-->
+<!--       android:layout_marginBottom="28dp"-->
+<!--        android:visibility="visible"-->
+<!--        app:backLineColorS_E="#1c242a"-->
+<!--        app:barCountS_E="20"-->
+<!--        app:barMaxLevelS_E="20"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:textSize="32sp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="I -"-->
+<!--        android:id="@+id/iM"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"/>-->
+
+<!--    <Button-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:textSize="32sp"-->
+<!--        android:layout_marginEnd="140dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="I +"-->
+<!--        android:id="@+id/iP"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"/>-->
+
+
+<!--    <Button-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:textSize="32sp"-->
+<!--        android:layout_marginEnd="260dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="S -"-->
+<!--        android:id="@+id/sM"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"/>-->
+
+<!--    <Button-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:textSize="32sp"-->
+<!--        android:layout_marginEnd="380dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="S +"-->
+<!--        android:id="@+id/sP"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"/>-->
+
+
+<!--    <com.dyaco.spirit_commercial.egym.EgymIntervalViewBySet-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_marginTop="300dp"-->
+<!--        android:layout_marginEnd="100dp"-->
+<!--        android:id="@+id/egymIntervalView"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:layout_width="440dp"-->
+<!--        android:layout_height="12dp" />-->
+
+<!--    <com.dyaco.spirit_commercial.support.custom_view.BouncingBallView-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginEnd="100dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+<!--    <com.dyaco.spirit_commercial.support.custom_view.SpiritTextView-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:id="@+id/spiritView"-->
+<!--        app:loopAnimation="true"-->
+<!--        app:animationDuration="1000"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+
+
+
+
+
+    <!--    xml 依照文字軌跡繪製-->
+<!--    android:scaleType="center" 固定圖片大小-->
+<!--    <com.dyaco.spirit_commercial.support.base_component.AutoStartImageView-->
+<!--        android:background="@color/color11181d"-->
+<!--        android:scaleType="center"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:src="@drawable/spirit_avd_draw_trail" />-->
+<!-- xml 依照文字軌跡繪製      android:src="@drawable/egym_avd_draw_trail" />-->
+
+
+
+<!--    xml 依照文字軌跡繪製-->
+<!--        <com.dyaco.spirit_commercial.support.base_component.AutoStartImageView-->
+<!--            android:scaleType="center"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:id="@+id/imageView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:src="@drawable/egym_avd_fade_anim" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

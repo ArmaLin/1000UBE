@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceSoftwareTestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Software"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vv1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="198dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAutomaticUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/Automatic_Update"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/vv2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vv1" />
+
+        <CheckBox
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAutomaticUpdate"
+            app:layout_constraintTop_toTopOf="@+id/tvAutomaticUpdate"
+            android:id="@+id/cbAutomaticUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"/>
+
+
+
+        <TextView
+            android:id="@+id/tvTftOs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/tft_os"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/vv3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vv2" />
+
+        <TextView
+            android:id="@+id/tvTftOsVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            android:layout_marginEnd="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTftOs"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTftOs"
+            app:layout_constraintTop_toTopOf="@+id/tvTftOs"
+            tools:text="Version 1.4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/tvTftOsUpToDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:drawableEnd="@drawable/icon_check"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color445565"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/up_to_date"
+            android:textColor="@color/color445565"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTftOs"
+            app:layout_constraintTop_toTopOf="@+id/tvTftOs"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/tvTftOsUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:drawableEnd="@drawable/icon_update"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color1396ef"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Update"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTftOs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTftOs" />
+
+
+        <View
+            android:id="@+id/vv2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="302dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvConsole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/console"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@+id/vv4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vv3" />
+
+        <TextView
+            android:id="@+id/tvConsoleVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/color8192a2"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvConsole"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvConsole"
+            tools:text="Version 3.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:id="@+id/tvConsoleUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="46dp"
+            android:drawableEnd="@drawable/icon_update"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color1396ef"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Update"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvConsole"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvConsole" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvConsoleUpToDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:drawableEnd="@drawable/icon_check"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color445565"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/up_to_date"
+            android:textColor="@color/color445565"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvConsole"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvConsole" />
+
+        <View
+            android:id="@+id/vv3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="406dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/vv4"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="510dp"
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:padding="10dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginTop="30dp"
+            android:id="@+id/tvConsoleUSBUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="46dp"
+            android:drawableEnd="@drawable/icon_update"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color1396ef"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/Update"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vv4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvConsoleUSBUpToDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:drawableEnd="@drawable/icon_check"
+            android:drawablePadding="11dp"
+            android:drawableTint="@color/color445565"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/up_to_date"
+            android:textColor="@color/color445565"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvConsoleUSBUpdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvConsoleUSBUpdate" />
+
+
+        <View
+            android:id="@+id/vv5"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintTop_toBottomOf="@+id/vv4"
+            android:layout_marginTop="104dp"
+            android:background="@color/color252e37" />
+
+        <TextView
+            android:id="@+id/tvUpdateVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vv5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vv4"
+            tools:text="Version 3.0" />
+
+
+        <ProgressBar
+            android:visibility="visible"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progressbar_hr"
+            android:id="@+id/progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/tvURL"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

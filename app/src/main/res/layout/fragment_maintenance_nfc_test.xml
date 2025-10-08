@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".maintenance_mode.MaintenanceNfcTestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1185dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/panel_bg_left_32_1c242a">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeTextType="uniform"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/NFC_Test"
+            android:textColor="@color/white"
+            android:textSize="70sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            android:id="@+id/btnDone"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="56dp"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_check"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:background="@color/color252e37"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="198dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivScanNfc"
+            android:background="@drawable/icon_nfc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="480dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/nfcHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="488dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:text="@string/Number_Detected"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNfcNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="552dp"
+            android:fontFamily="@font/inter_extrabold"
+            tools:text="1378901389012"
+            android:textColor="@color/white"
+            android:textSize="56sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:padding="20dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/btnAgain"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="684dp"
+            android:fontFamily="@font/inter_bold"
+            android:includeFontPadding="false"
+            android:drawablePadding="12.09dp"
+            android:drawableTint="@color/color1396ef"
+            android:drawableStart="@drawable/icon_update"
+            android:text="@string/Again"
+            android:textColor="@color/color1396ef"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:visibility="invisible"
+            app:constraint_referenced_ids="btnAgain,tvNfcNumber,nfcHint"
+            android:id="@+id/groupNfc"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:visibility="visible"
+            app:constraint_referenced_ids="nfcText,ivScanNfc"
+            android:id="@+id/groupReadyNfc"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/nfcText"
+            android:layout_marginBottom="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/inter_regular"
+            android:textSize="24sp"
+            android:textColor="@color/color8192a2"
+            android:text="@string/hold_your_phone_tag_close_to_the_nfc_sensor_to_check_the_nfc_reader_s_response"
+            android:layout_width="575dp"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

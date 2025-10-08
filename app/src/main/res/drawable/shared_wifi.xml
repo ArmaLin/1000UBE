@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- 掃描框 -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="3"
+        android:fillColor="#00000000"
+        android:pathData="M10,30 h15 v-10 h-15 z
+                         M75,30 h15 v-10 h-15 z
+                         M10,80 h15 v10 h-15 z
+                         M75,80 h15 v10 h-15 z" />
+
+    <!-- WiFi 圖示 -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M50,40 c10,-10 25,-10 35,0 l-5,5 c-7,-7 -18,-7 -25,0 z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M55,50 c5,-5 15,-5 20,0 l-5,5 c-3,-3 -8,-3 -10,0 z" />
+
+    <!-- WiFi 訊號圓點 (用 path 畫圓) -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M63,60 a2,2 0 1,1 4,0 a2,2 0 1,1 -4,0" />
+
+    <!-- QR Code 模擬（由小黑色方塊組成） -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M15,50 h5 v5 h-5 z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M25,50 h5 v5 h-5 z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M15,60 h5 v5 h-5 z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M25,60 h5 v5 h-5 z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M20,55 h5 v5 h-5 z" />
+
+</vector>

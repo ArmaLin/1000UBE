@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="isE" type="Boolean" />
+        <variable name="isUs" type="Boolean" />
+        <variable name="isGGG" type="Boolean" />
+        <import type="com.dyaco.spirit_commercial.support.intdef.GENERAL" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fl_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".workout.WorkoutSettingWindow">
+        <!-- +24-->
+
+        <View
+            android:id="@+id/vBG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent50" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            tools:layout_width="1398dp"
+            tools:layout_height="856dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_width="@{isUs &amp;&amp; !isGGG ? 1296 : 1398 }"
+            app:layout_height="@{isUs &amp;&amp; !isGGG ? 584 : 856 }"
+            android:layout_marginBottom="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statsNormal1"
+                android:layout_width="400dp"
+                android:layout_height="248dp"
+                android:layout_marginTop="360dp"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 164 : 360}"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/statsNormal2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_State_show_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="104dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:textSize="96sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_Select_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_1" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_1_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statsNormal2"
+                android:layout_width="400dp"
+                android:layout_height="248dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/statsNormal1"
+                app:layout_constraintEnd_toStartOf="@+id/statsNormal3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/statsNormal1"
+                app:layout_constraintTop_toTopOf="@+id/statsNormal1">
+
+                <TextView
+                    android:id="@+id/tv_State_show_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="104dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="96sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_Select_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_2" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_2_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_State_show_Select_2"
+                    app:layout_constraintStart_toStartOf="@+id/tv_State_show_Select_2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statsNormal3"
+                android:layout_width="400dp"
+                android:layout_height="248dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/statsNormal1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/statsNormal2"
+                app:layout_constraintTop_toTopOf="@+id/statsNormal1">
+
+                <TextView
+                    android:id="@+id/tv_State_show_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="104dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="96sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_Select_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_32"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_3" />
+
+                <TextView
+                    android:id="@+id/tv_State_show_3_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="32sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_State_show_Select_3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--            //EGYM ,not us-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym1"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 90 : 228}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="228dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow1_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow1_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:10" />
+
+                <TextView
+                    android:id="@+id/tvShow1_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow1_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow1_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow1_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow1_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow1_egym"
+                    tools:text="Time" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow1_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow1_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow1_egym"
+                    tools:text="" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym2"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 32 : 80}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statsEgym1"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="80dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow2_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:10" />
+
+                <TextView
+                    android:id="@+id/tvShow2_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow2_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow2_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow2_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow2_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow2_egym"
+                    tools:text="Calories" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow2_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow2_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow2_egym"
+                    tools:text="kcal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym3"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="480dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 80 : 112}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="112dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow3_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow3_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:10" />
+
+                <TextView
+                    android:id="@+id/tvShow3_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow3_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow3_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow3_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow3_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow3_egym"
+                    tools:text="Calories" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow3_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow3_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow3_egym"
+                    tools:text="kcal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym4"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="941dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 90 : 228}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="228dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow4_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow4_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:10" />
+
+                <TextView
+                    android:id="@+id/tvShow4_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow4_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow4_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow4_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow4_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow4_egym"
+                    tools:text="Calories" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow4_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow4_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow4_egym"
+                    tools:text="kcal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym5"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="941dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 32 : 80}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statsEgym4"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="80dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow5_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow5_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10.6" />
+
+                <TextView
+                    android:id="@+id/tvShow5_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow5_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow5_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow5_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow5_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow5_egym"
+                    tools:text="Calories" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow5_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow5_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow5_egym"
+                    tools:text="kcal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="invisible"
+                android:id="@+id/statsEgym6"
+                android:layout_width="440dp"
+                android:layout_height="196dp"
+                android:layout_marginStart="480dp"
+                android:background="@drawable/btn_stats"
+                app:layoutMarginTop="@{isUs &amp;&amp; !isGGG ? 80 : 628}"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_width="@{isUs &amp;&amp; !isGGG ? 360 : 440}"
+                tools:layout_marginTop="628dp"
+                tools:layout_width="440dp">
+
+                <TextView
+                    android:id="@+id/tvShow6_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="76sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow6_2_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:10" />
+
+                <TextView
+                    android:id="@+id/tvShow6_2_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="bottom"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="37sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvShow6_egym"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow6_egym"
+                    tools:text="/4" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow6_Select_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableEndCompat="@drawable/btn_adjustment_button_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvShow6_unit_egym"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow6_egym"
+                    tools:text="Calories" />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tvShow6_unit_egym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/color80FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvShow6_Select_egym"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShow6_egym"
+                    tools:text="kcal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MButton_252e37"
+            app:shapeAppearanceOverlay="@style/roundedCornerTop"
+            android:id="@+id/btn_close"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginBottom="408dp"
+            android:gravity="center"
+            android:text="@string/Done"
+            android:textSize="24sp"
+            app:icon="@drawable/icon_cancel"
+            app:iconGravity="textEnd"
+            app:iconPadding="12dp"
+            app:iconTint="@color/colorADB8C2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+            android:id="@+id/rgSelectItemTreadmill"
+            android:layout_width="match_parent"
+            android:layout_height="408dp"
+            tools:visibility="gone"
+            android:background="@drawable/panel_bg_top_1c242a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioButton
+                android:id="@+id/rbSpeed"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                android:text="@string/Speed"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp"
+                app:iTag="@{GENERAL.STATS_SPEED}" />
+
+            <RadioButton
+                android:id="@+id/rbIncline"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbSpeed"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_INCLINE}"
+                android:text="@string/Incline"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbTime"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbIncline"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_ELAPSED_TIME}"
+                android:text="@string/Time"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbDistance"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbTime"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_CURRENT_DISTANCE}"
+                android:text="@string/Distance"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbPace"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbSpeed"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_PACE}"
+                android:text="@string/Pace"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbElevationGain"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbSpeed"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbPace"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_ELEVATION_GAIN}"
+                android:text="@string/Elevation_Gain"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbTimeLeft"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbSpeed"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbElevationGain"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_REMAINING_TIME}"
+                android:text="@string/Time_Left"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbDistanceLeft"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbSpeed"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbTimeLeft"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_DISTANCE_LEFT}"
+                android:text="@string/Distance_Left"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbAvgPace"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPace"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_POWER}"
+                android:text="@string/Power"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+<!--            app:iTag="@{GENERAL.STATS_AVG_PACE}"-->
+
+            <RadioButton
+                android:id="@+id/rbCalories"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPace"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbAvgPace"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_CALORIES}"
+                android:text="@string/Calories"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbHeartRate"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPace"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbCalories"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_HEART_RATE}"
+                android:text="@string/Heart_Rate"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbMETs"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPace"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbHeartRate"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_METS}"
+                android:text="@string/METs"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup
+            android:id="@+id/rgSelectItemBike"
+            android:layout_width="match_parent"
+            android:layout_height="408dp"
+            android:background="@drawable/panel_bg_top_1c242a"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioButton
+                android:id="@+id/rbPowerBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_LEVEL : GENERAL.STATS_POWER}"
+                android:text="@{isE ? @string/Resistance : @string/Power}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbTimeBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbPowerBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_CADENCE : GENERAL.STATS_ELAPSED_TIME}"
+                android:text="@{isE ? @string/Cadence : @string/Time}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbSpeedBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbTimeBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{GENERAL.STATS_SPEED}"
+                android:text="@string/Speed"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbLevelBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbSpeedBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_ELAPSED_TIME : GENERAL.STATS_LEVEL}"
+                android:text="@{isE ? @string/Total_Time : @string/Level}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbAvgPowerBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_CURRENT_DISTANCE : GENERAL.STATS_AVG_POWER}"
+                android:text="@{isE ? @string/Total_Distance : @string/Avg_Power}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbTimeLeftBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbAvgPowerBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_INTERVAL_DISTANCE : GENERAL.STATS_REMAINING_TIME}"
+                android:text="@{isE ? @string/interval_distance : @string/Time_Left}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+
+<!--            android:text='@{isE ? @string/Interval + ` #` : @string/Avg_Speed}'-->
+<!--            android:text='@{isE ? String.format("%s #", @string/Interval) : @string/Avg_Speed}'-->
+            <RadioButton
+                android:id="@+id/rbAvgSpeedBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbTimeLeftBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_INTERVAL : GENERAL.STATS_AVG_SPEED}"
+                android:text='@{isE ? String.format("%s #", @string/Interval) : @string/Avg_Speed}'
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbAvgLevelBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbAvgSpeedBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_CALORIES : GENERAL.STATS_AVG_LEVEL}"
+                android:text="@{isE ? @string/Calories : @string/Avg_Level}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbDistanceBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbAvgPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_POWER : GENERAL.STATS_CURRENT_DISTANCE}"
+                android:text="@{isE ? @string/Power : @string/Distance}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbCaloriesBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbAvgPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbDistanceBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_HEART_RATE : GENERAL.STATS_CALORIES}"
+                android:text="@{isE ? @string/Heart_Rate : @string/Calories}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbHeartRateBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbAvgPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbCaloriesBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_METS : GENERAL.STATS_HEART_RATE}"
+                android:text="@{isE ? @string/METs : @string/Heart_Rate}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+
+            <RadioButton
+                android:id="@+id/rbMETsBike"
+                android:layout_width="450dp"
+                android:layout_height="104dp"
+                android:layout_below="@id/rbAvgPowerBike"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/rbHeartRateBike"
+                android:background="@drawable/selected_check2"
+                android:button="@null"
+                android:enabled="@{!isE}"
+                android:fontFamily="@font/inter_bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center_vertical"
+                android:paddingStart="32dp"
+                android:paddingEnd="0dp"
+                app:iTag="@{isE ? GENERAL.STATS_METS : GENERAL.STATS_METS}"
+                android:text="@{isE ? `` : @string/METs}"
+                android:textColor="@drawable/check_text_white"
+                android:textSize="32sp" />
+        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>
+
+
+
+
+<!--        <com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup-->
+<!--            android:id="@+id/rgSelectItemBikeE"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="408dp"-->
+<!--            android:background="@drawable/panel_bg_top_1c242a"-->
+<!--            android:visibility="gone"-->
+<!--            tools:visibility="visible"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent">-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbPowerBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:checked="true"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_POWER}"-->
+<!--                android:text="@string/Power"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbTimeBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbPowerBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_ELAPSED_TIME}"-->
+<!--                android:text="@string/Time"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbSpeedBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbTimeBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_SPEED}"-->
+<!--                android:text="@string/Speed"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbLevelBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbSpeedBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_LEVEL}"-->
+<!--                android:text="@string/Level"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbAvgPowerBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_AVG_POWER}"-->
+<!--                android:text="@string/Avg_Power"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbTimeLeftBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbAvgPowerBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_REMAINING_TIME}"-->
+<!--                android:text="@string/Time_Left"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbAvgSpeedBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbTimeLeftBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_AVG_SPEED}"-->
+<!--                android:text="@string/Avg_Speed"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbAvgLevelBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbAvgSpeedBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_AVG_LEVEL}"-->
+<!--                android:text="@string/Avg_Level"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbDistanceBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbAvgPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_CURRENT_DISTANCE}"-->
+<!--                android:text="@string/Distance"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbCaloriesBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbAvgPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbDistanceBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_CALORIES}"-->
+<!--                android:text="@string/Calories"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbHeartRateBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbAvgPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbCaloriesBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_HEART_RATE}"-->
+<!--                android:text="@string/Heart_Rate"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rbMETsBikeE"-->
+<!--                android:layout_width="450dp"-->
+<!--                android:layout_height="104dp"-->
+<!--                android:layout_below="@id/rbAvgPowerBikeE"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/rbHeartRateBikeE"-->
+<!--                android:background="@drawable/selected_check2"-->
+<!--                android:button="@null"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:foreground="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:iTag="@{GENERAL.STATS_METS}"-->
+<!--                android:text="@string/METs"-->
+<!--                android:textColor="@drawable/check_text_white"-->
+<!--                android:textSize="32sp" />-->
+<!--        </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>-->
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
