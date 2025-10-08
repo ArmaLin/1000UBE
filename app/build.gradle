@@ -91,6 +91,7 @@ android {
         }
 
         release {
+            getIsDefault().set(true)
             resValue "string", "app_nameS", "SPIRIT Commercial-release"
             debuggable false
             signingConfig signingConfigs.release
@@ -127,6 +128,7 @@ android {
         }
 
         production {
+            getIsDefault().set(true)
             buildConfigField "boolean", "TEST_MODE", "false" // true 測試, false 正式
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'

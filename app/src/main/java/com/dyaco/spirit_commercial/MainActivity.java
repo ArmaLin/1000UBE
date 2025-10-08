@@ -3617,16 +3617,12 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             // 如果 pauseAfterSeconds 是 0，則自然會使用上面的預設值，無需額外處理
             //4624633867356078080
 
-            Log.d("QQWWEERR", "⭐️⭐⭐⭐⭐⭐pauseAfter: " + deviceSettingViewModel.pauseAfter.get());
-
 
         } catch (Exception e) {
             showException(e);
         }
 
         CHILD_LOCK_TIME = logoutDelayMillis;
-
-        Log.d("QQWWEERR", "⭕️⭕️⭕️⭕️⭕AUTO_LOGOUT時間: " + CHILD_LOCK_TIME);
 
 
         if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, CHILD_LOCK_TIME);
