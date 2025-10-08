@@ -98,7 +98,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -121,6 +120,7 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.work.WorkInfo;
 
+import com.bumptech.glide.Glide;
 import com.corestar.calculation_libs.Calculation;
 import com.corestar.libs.audio.AudioDeviceWatcher;
 import com.corestar.libs.device.DeviceCab;
@@ -183,7 +183,6 @@ import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.ConnectionStateMonitor;
 import com.dyaco.spirit_commercial.support.FloatingWidget;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
-import com.dyaco.spirit_commercial.support.GlideApp;
 import com.dyaco.spirit_commercial.support.LoadingWindowAllB;
 import com.dyaco.spirit_commercial.support.LoadingWindowEx;
 import com.dyaco.spirit_commercial.support.MsgEvent;
@@ -203,8 +202,6 @@ import com.dyaco.spirit_commercial.support.intdef.EventKey;
 import com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS;
 import com.dyaco.spirit_commercial.support.interaction.DebounceClick;
 import com.dyaco.spirit_commercial.support.mediaapp.MediaAppUtils;
-import com.dyaco.spirit_commercial.support.room.fitness_test.FitnessTestDbManager;
-import com.dyaco.spirit_commercial.support.room.spirit.SpiritDbManager;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.ErrorMsgEntity;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.MediaAppsEntity;
 import com.dyaco.spirit_commercial.support.utils.CheckDoubleClick;
@@ -330,28 +327,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         closePackage(this);
         deleteCache(this);
 
-//        TouchIdleWatcher watcher;
-//        watcher = new TouchIdleWatcher();
-//        watcher.setIdleTimeoutMs(10000);
-//        watcher.setCallback(new TouchIdleWatcher.Callback() {
-//            @Override
-//            public void onScreenTouched() {
-//                Log.v("TouchIdleWatcher", "被碰了: ");
-//            }
-//
-//            @Override
-//            public void onIdleTimeout() {
-//                Log.v("TouchIdleWatcher", "時間到了: ");
-//            }
-//        }).start();
-
-
-//        //todo app語言
-//        if (getApp().getDeviceSettingBean().getDefaultLanguage() == null) {
-//            DeviceSettingBean deviceSettingBean = getApp().getDeviceSettingBean();
-//            deviceSettingBean.setDefaultLanguage(LanguageEnum.ENGLISH.getLocale());
-//            getApp().setDeviceSettingBean(deviceSettingBean);
-//        }
 
 
         mRetailVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CoreStar/Dyaco/Spirit/retail.mp4";
@@ -382,11 +357,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         new DeviceSettingCheck2().checkError();
 
 
-//        new RxTimer().timer(2000, number ->
-//                getBinding().spiritView.setVisibility(View.GONE));
 
-
-        Looper.myQueue().addIdleHandler(() -> {
+     //   Looper.myQueue().addIdleHandler(() -> {
 
             //   installExFatBinary();
 
@@ -398,9 +370,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             //外部控制(FTMS、實體按鍵)
             initExControl();
 
-//            if (isTreadmill) {
-//                getDeviceSpiritC().setEchoMode(DeviceSpiritC.ECHO_MODE.AA);
-//            }
+
 
             //關閉狀態列
             new CommonUtils().hideStatusBar(1);
@@ -411,13 +381,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
             getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
 
-            //   requestPermission();
 
-            initHdmi();
 
-//            if (!NetworkHelper.isNetworkAvailable(getApplication())) {
-//                internetNotifyWarringWindow(true);
-//            }
+       //     initHdmi();
+
 
             if (!isNetworkAvailable(getApplication())) {
                 internetNotifyWarringWindow(true);
@@ -439,25 +406,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             new CallWebApi(this).apiUploadErrorLog();
 
 
-            //   DeviceSettingBean d = getApp().getDeviceSettingBean();
-            //   Log.d("UPLOAD_ERROR_LOG", "onCreate: " + FormulaUtil.mi2km(d.getODO_distance()) + ","+ d.getODO_time());
+
             new WorkManagerUtil().checkUploadErrorLog();
-            //    new WorkManagerUtil().checkWorkStateFromTag(WORK_UPLOAD_ERROR_LOG_TAG);
 
-
-            //    Log.d("FONT_SIZE", "onCreate: " + CommonUtils.getSystemFontSize(this));
-//            new RxTimer().timer( 2000,number -> {
-//                CommonUtils.changeSystemFontSize(this,0.85f);
-//                new RxTimer().timer(1000,number1 -> {
-//                    Log.d("FONT_SIZE", "onCreate: " + CommonUtils.getSystemFontSize(this));
-//                });
-//            });
-
-
-            //   ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, 100);
-            //   Log.d("VVVVVVVVV", "onCreate: " + getMacAddress());
-
-            //  Log.d("OOOOOOEEEE", "onCreate: " + getSystemFontSize(this));
             if (getSystemFontSize(this) < 1.3f) {
                 //    Log.d("OOOOOOEEEE", "onCreate: 改變大小");
                 changeSystemFontSize(this, 1.3f);
@@ -506,7 +457,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 }
             };
 
-
             MediaAppUtils.checkConsoleMediaApp();
 
 
@@ -518,22 +468,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             //    }
 
 
-//            // APK 文件的路径
-//            Log.d("OOOOOOOEEEEEE", "onCreate: " + UPDATE_FILE_PATH);
-//            PackageManager pm = getPackageManager();
-//            PackageInfo packageInfo = pm.getPackageArchiveInfo(UPDATE_FILE_PATH, 0);
-//
-//            if (packageInfo != null) {
-//                String versionName = packageInfo.versionName;
-//                long versionCode = packageInfo.getLongVersionCode();
-//                Log.d("OOOOOOOEEEEEE", "APK Version Name: " + versionName);
-//                Log.d("OOOOOOOEEEEEE", "APK Version Code: " + versionCode);
-//            } else {
-//                Log.d("OOOOOOOEEEEEE", "无法读取 APK 文件信息");
-//            }
-
-            return false;
-        });
+//            return false;
+//        });
 
     }
 
@@ -2261,8 +2197,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
         try {
-            SpiritDbManager.getInstance(getApplicationContext()).close();
-            FitnessTestDbManager.getInstance(getApplicationContext()).close();
+          //  SpiritDbManager.getInstance(getApplicationContext()).close();
+        //    FitnessTestDbManager.getInstance(getApplicationContext()).close();
 
             if (GarminHealth.isInitialized()) {
                 // Stop the Health SDK to pause or close resource currently running in the application space.
@@ -3022,7 +2958,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public void setAvatar(boolean isSetting) {
         if (userProfileViewModel.getAvatarId() != null) {
             int avatarRes = CommonUtils.getAvatarSelectedFromTag(userProfileViewModel.getAvatarId(), false);
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(avatarRes)
 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .skipMemoryCache(true)
@@ -3043,7 +2979,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         //有上傳圖片
         if (userProfileViewModel.getAvatarId() == null) {
             try {
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(userProfileViewModel.getPhotoFileUrl())
 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .skipMemoryCache(true)

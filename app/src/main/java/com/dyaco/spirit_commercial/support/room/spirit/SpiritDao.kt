@@ -1,136 +1,107 @@
-package com.dyaco.spirit_commercial.support.room.spirit;
+package com.dyaco.spirit_commercial.support.room.spirit
 
-
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
-
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.DeviceEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.EgymEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.ErrorMsgEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.MediaAppsEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.RankEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.UploadWorkoutDataEntity;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.UserProfileEntity;
-
-import java.util.List;
-
-import io.reactivex.Maybe;
+import androidx.room.*
+import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.*
+import io.reactivex.Maybe
 
 @Dao
-public interface SpiritDao {
+interface SpiritDao {
     @Query("select * from " + UserProfileEntity.USER_PROFILE + " where userType = 1")
-    Maybe<List<UserProfileEntity>> getUserProfiles();
+    fun getUserProfiles(): Maybe<List<UserProfileEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertUserProfile(UserProfileEntity userProfileEntity);
-
+    fun insertUserProfile(userProfileEntity: UserProfileEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertUploadWorkoutData(UploadWorkoutDataEntity uploadWorkoutDataEntity);
+    fun insertUploadWorkoutData(uploadWorkoutDataEntity: UploadWorkoutDataEntity): Long
 
     @Delete
-    void deleteUploadWorkoutData(UploadWorkoutDataEntity uploadWorkoutDataEntity);
+    fun deleteUploadWorkoutData(uploadWorkoutDataEntity: UploadWorkoutDataEntity)
 
     @Transaction
     @Query("SELECT * FROM " + UploadWorkoutDataEntity.UPLOAD_WORKOUT_DATA)
-    Maybe<List<UploadWorkoutDataEntity>> getUploadWorkoutDataList();
-
+    fun getUploadWorkoutDataList(): Maybe<List<UploadWorkoutDataEntity>>
 
     @Update
-    void updateUserProfile(UserProfileEntity userProfileEntity);
+    fun updateUserProfile(userProfileEntity: UserProfileEntity)
 
     @Query("select * from " + UserProfileEntity.USER_PROFILE + " where userType = 0")
-    Maybe<List<UserProfileEntity>> getUserProfilesGuest();
+    fun getUserProfilesGuest(): Maybe<List<UserProfileEntity>>
 
     @Delete
-    void deleteUserProfile(UserProfileEntity userProfileEntity);
-
+    fun deleteUserProfile(userProfileEntity: UserProfileEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertErrorMsg(ErrorMsgEntity errorMsgEntity);
+    fun insertErrorMsg(errorMsgEntity: ErrorMsgEntity): Long
 
     @Transaction
     @Query("SELECT * FROM " + ErrorMsgEntity.ERROR_MSG + " ORDER BY errorDate DESC")
-    Maybe<List<ErrorMsgEntity>> getErrorMsgList();
+    fun getErrorMsgList(): Maybe<List<ErrorMsgEntity>>
 
     @Query("SELECT * FROM " + ErrorMsgEntity.ERROR_MSG + " where errorCode = :errorCode ORDER BY errorDate DESC")
-    Maybe<ErrorMsgEntity> getErrorMsgByErrorCode(String errorCode);
-
+    fun getErrorMsgByErrorCode(errorCode: String): Maybe<ErrorMsgEntity>
 
     @Delete
-    void deleteErrorMsg(ErrorMsgEntity errorMsgEntity);
+    fun deleteErrorMsg(errorMsgEntity: ErrorMsgEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertRankData(RankEntity rankEntity);
+    fun insertRankData(rankEntity: RankEntity): Long
 
     @Transaction
     @Query("SELECT * FROM " + RankEntity.RANKS + " ORDER BY memberNo DESC")
-    Maybe<List<RankEntity>> getRankList();
-
+    fun getRankList(): Maybe<List<RankEntity>>
 
     @Update
-    void updateDeviceDate(DeviceEntity deviceEntity);
+    fun updateDeviceDate(deviceEntity: DeviceEntity)
 
     @Query("SELECT deviceId FROM " + DeviceEntity.DEVICE + " where deviceId = 0")
-    Maybe<Integer> checkDevice();
+    fun checkDevice(): Maybe<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertDeviceDate(DeviceEntity deviceEntity);
+    fun insertDeviceDate(deviceEntity: DeviceEntity): Long
 
     @Query("select * from " + DeviceEntity.DEVICE + " where deviceId = 0")
-    Maybe<DeviceEntity> getDeviceData();
+    fun getDeviceData(): Maybe<DeviceEntity>
 
     @Delete
-    void deleteDeviceData(DeviceEntity deviceEntity);
-
-
-
+    fun deleteDeviceData(deviceEntity: DeviceEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertMediasEntity(MediaAppsEntity mediaAppsEntity);
+    fun insertMediasEntity(mediaAppsEntity: MediaAppsEntity): Long
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertMediaAppList(List<MediaAppsEntity> mediaAppsEntityList);
+    fun insertMediaAppList(mediaAppsEntityList: List<MediaAppsEntity>)
 
     @Transaction
     @Query("SELECT * FROM " + MediaAppsEntity.MEDIA_APPS + " where packageName = :packageName ORDER BY sort DESC")
-    Maybe<MediaAppsEntity> getMediasAppByPackageName(String packageName);
+    fun getMediasAppByPackageName(packageName: String): Maybe<MediaAppsEntity>
 
     @Transaction
     @Query("SELECT * FROM " + MediaAppsEntity.MEDIA_APPS + " ORDER BY sort DESC")
-    Maybe<List<MediaAppsEntity>> getAllMediasAppList();
+    fun getAllMediasAppList(): Maybe<List<MediaAppsEntity>>
 
     @Delete
-    void deleteMediaApp(MediaAppsEntity mediaAppsEntity);
+    fun deleteMediaApp(mediaAppsEntity: MediaAppsEntity)
 
     @Query("DELETE FROM media_apps_entity")
-    void deleteAllMediaApp();
+    fun deleteAllMediaApp()
 
     @Update
-    void updateMediaApp(MediaAppsEntity mediaAppsEntity);
-
+    fun updateMediaApp(mediaAppsEntity: MediaAppsEntity)
 
     @Query("UPDATE media_apps_entity set sort = :sort where packageName = :packageName")
-    void updateMediaAppSort(String packageName,int sort);
-
-
-
+    fun updateMediaAppSort(packageName: String, sort: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertEgymData(EgymEntity egymEntity);
+    fun insertEgymData(egymEntity: EgymEntity): Long
 
     @Transaction
     @Query("SELECT * FROM " + EgymEntity.EGYM_TABLE + " ORDER BY updateTime DESC")
-    Maybe<List<EgymEntity>> getEgymDataList();
+    fun getEgymDataList(): Maybe<List<EgymEntity>>
 
     @Query("SELECT * FROM " + EgymEntity.EGYM_TABLE + " where uid = :uid ORDER BY uid DESC")
-    Maybe<EgymEntity> getEgymDataByUid(long uid);
-
+    fun getEgymDataByUid(uid: Long): Maybe<EgymEntity>
 
     @Delete
-    void deleteEgymData(EgymEntity egymEntity);
+    fun deleteEgymData(egymEntity: EgymEntity)
 }

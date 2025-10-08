@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.databinding.ItemsMediassListBinding;
-import com.dyaco.spirit_commercial.support.GlideApp;
 import com.dyaco.spirit_commercial.support.ProgressPayload;
 import com.dyaco.spirit_commercial.support.interaction.TouchClickUtil;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.MediaAppsEntity;
@@ -97,7 +97,7 @@ public class MediaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         final MediaAppsEntity appsEntity = mediaAppEnumList.get(position);
 
         //  Log.d("MMEEEEDDDIIAAA", "@@@@@@########onBindViewHolder: ");
-        GlideApp.with(getApp()).
+        Glide.with(getApp()).
                 load(appsEntity.getAppIconM()).
                 into(viewHolder.binding.btnMediaApp);
 

@@ -19,7 +19,7 @@ import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.ActivityMainBinding;
 import com.dyaco.spirit_commercial.databinding.WindowFloatingTopDashboardBinding;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.base_component.BaseWindow;
 import com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef;
 import com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel;
@@ -55,23 +55,7 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
         getBinding().tvTime.setText(updateTime());
 
         setAvatar();
-//        if (userProfileViewModel.getAvatarId() != null) {
-//            int avatarRes = CommonUtils.getAvatarSelectedFromTag(userProfileViewModel.getAvatarId(), false);
-//            GlideApp.with(getApp())
-//                    .load(avatarRes)
-////                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-////                    .skipMemoryCache(true)
-//                    .into(getBinding().ivMemberIcon);
-//        }
-//
-//        if (userProfileViewModel.getPhotoFileUrl() != null) {
-//            GlideApp.with(getApp())
-//                    .load(userProfileViewModel.getPhotoFileUrl())
-//                 //   .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                  //  .skipMemoryCache(true)
-//                    .circleCrop()
-//                    .into(getBinding().ivMemberIcon);
-//        }
+
 
         if (isEnabled) {
             initEvent();
@@ -83,7 +67,7 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
     public void setAvatar() {
         if (userProfileViewModel.getAvatarId() != null) {
             int avatarRes = CommonUtils.getAvatarSelectedFromTag(userProfileViewModel.getAvatarId(), false);
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(avatarRes)
 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .skipMemoryCache(true)
@@ -92,7 +76,7 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
 
         } else {
             try {
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(userProfileViewModel.getPhotoFileUrl())
                         //   .diskCacheStrategy(DiskCacheStrategy.NONE)
                         //  .skipMemoryCache(true)
@@ -106,7 +90,7 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
 
 
         if (userProfileViewModel.userType.get() == USER_TYPE_EGYM) {
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(egymDataViewModel.userImg.get())
                     .circleCrop()
                     .placeholder(R.color.color252e37)
@@ -115,14 +99,7 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
         }
 
 
-//        if (userProfileViewModel.getPhotoFileUrl() != null) {
-//            GlideApp.with(getApp())
-//                    .load(userProfileViewModel.getPhotoFileUrl())
-//                    //   .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                    //  .skipMemoryCache(true)
-//                    .circleCrop()
-//                    .into(getBinding().ivMemberIcon);
-//        }
+
     }
 
     public void enableView() {

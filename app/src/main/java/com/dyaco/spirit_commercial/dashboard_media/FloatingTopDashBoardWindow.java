@@ -11,7 +11,7 @@ import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.databinding.ActivityMainBinding;
 import com.dyaco.spirit_commercial.databinding.WindowFloatingTopDashboardBinding;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
 import com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel;
@@ -48,7 +48,7 @@ public class FloatingTopDashBoardWindow extends BasePopupWindow<WindowFloatingTo
 
         if (userProfileViewModel.getAvatarId() != null) {
             int avatarRes = CommonUtils.getAvatarSelectedFromTag(userProfileViewModel.getAvatarId(), false);
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(avatarRes)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
@@ -56,7 +56,7 @@ public class FloatingTopDashBoardWindow extends BasePopupWindow<WindowFloatingTo
         }
 
         if (userProfileViewModel.getPhotoFileUrl() != null) {
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(userProfileViewModel.getPhotoFileUrl())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)

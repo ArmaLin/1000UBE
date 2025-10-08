@@ -1760,7 +1760,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SpiritDbManager.getInstance(getApp()).cancel();
+//        SpiritDbManager.getInstance(getApp()).cancel();
     }
 
     /**

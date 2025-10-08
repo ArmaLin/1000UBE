@@ -11,7 +11,7 @@ import com.dyaco.spirit_commercial.databinding.PopupWifiQrcodeBinding;
 import com.dyaco.spirit_commercial.model.repository.WifiXmlData;
 import com.dyaco.spirit_commercial.support.CommandUtil;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
 
@@ -76,7 +76,7 @@ public class WifiQrCodePopupWindow extends BasePopupWindow<PopupWifiQrcodeBindin
 
                 getBinding().tvPWD.setText(sharedWifiQrcode);
 
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(new CommonUtils().createQRCode(sharedWifiQrcode, 384, 8))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(getBinding().actionImage);

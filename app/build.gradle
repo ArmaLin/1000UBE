@@ -3,29 +3,32 @@ import java.util.regex.Pattern
 plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs' //getApplicationIdTextResource()
-    id 'kotlin-android'
-    id 'com.google.gms.google-services'
+    id "org.jetbrains.kotlin.android"
+    id 'org.jetbrains.kotlin.kapt'
     id 'com.google.firebase.crashlytics'
+    id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
+    id("androidx.room")
+    id 'org.jetbrains.kotlin.plugin.parcelize'
+
 }
 
 android {
-    compileSdk 35
+    namespace 'com.dyaco.spirit_commercial'
+    compileSdk = 36
     ext {
         HardWareVersion = "V1.0"
-        //A.x.x.1正式 , A.x.x.0測試
-//        SoftWareVersion = "A.1.16.1"  //A.x.x.1正式     V1.0.A.1.7.1.0529A
-          SoftWareVersion = "A.1.1.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
+        SoftWareVersion = "A.1.1.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
         sVersion = "A"
         SerialNumber = getFormattedDate('MMdd') + sVersion
-//        SerialNumber = "0901" + sVersion
         FirmWareVersion = "37"
     }
 
     defaultConfig {
         applicationId "com.dyaco.spirit_commercial"
-        minSdkVersion 29
-        targetSdkVersion 34
-        versionCode 163
+        minSdk 34
+        targetSdk 36
+        versionCode 1
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,24 +40,13 @@ android {
 
         packagingOptions {
             jniLibs {
-                useLegacyPackaging = true
+//            useLegacyPackaging true
+                //根据自己实际的工程目录来设置, lebo use
+                keepDebugSymbols += ['*/*/*.so']
             }
         }
 
 
-        //指定room.schemaLocation生成的文件路徑
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
-
-        sourceSets {
-            main {
-                jniLibs.srcDirs = ['libs']
-            }
-            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-        }
     }
 
     signingConfigs {
@@ -68,12 +60,12 @@ android {
         }
 
         debug {
-//            storeFile file(RELEASE_STORE_FILE)
-//            storePassword RELEASE_STORE_PASSWORD
-//            keyAlias RELEASE_KEY_ALIAS
-//            keyPassword RELEASE_KEY_PASSWORD
-//            v1SigningEnabled true
-//            v2SigningEnabled true
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
 
@@ -83,16 +75,13 @@ android {
         debug {
             buildConfigField "Boolean", "DEBUG_MODE", "true"
             debuggable true
-            signingConfig signingConfigs.debug
             minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [appSuffix: " Debug", appIcon: "icon_time_32"]
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         release {
             getIsDefault().set(true)
-            resValue "string", "app_nameS", "SPIRIT Commercial-release"
             debuggable false
             signingConfig signingConfigs.release
             minifyEnabled false
@@ -109,11 +98,11 @@ android {
             //  applicationIdSuffix ".dev"
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/xxxxx/"'
 //            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.14:8080/"'
-            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
-            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
-            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
+            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/xxxxxx/"'
+            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/xxxxx/"'
+            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/xxxxx/"'
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
 //                buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.35:8080/"'
        //     buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/"'
@@ -149,12 +138,6 @@ android {
         }
     }
 
-//    buildTypes {
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//        }
-//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -162,8 +145,8 @@ android {
         coreLibraryDesugaringEnabled true
     }
 
-    kotlinOptions {
-        jvmTarget = '17'
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildFeatures {
@@ -172,6 +155,10 @@ android {
         dataBinding true
 
         buildConfig true
+    }
+
+    room {
+        schemaDirectory "$projectDir/schemas"
     }
 
     def updateFileName = "update.json"
@@ -286,18 +273,18 @@ android {
             def openTask = tasks.register("open${variant.name.capitalize()}AppFolder", Exec) {
                 group       = "distribution"
                 description = "Open app module folder in Finder"
-                dependsOn   copyTask
+             //   dependsOn   copyTask
                 // macOS：直接打開 app 專案模組的資料夾
-                commandLine "open", projectDir.absolutePath
+           //     commandLine "open", projectDir.absolutePath
 
                 // 如果你在 Windows，可改成：
                 // commandLine "cmd", "/c", "start", projectDir.absolutePath
             }
 
             // 3️⃣ 開啟APP資料夾
-            variant.assembleProvider.configure {
-                finalizedBy openTask
-            }
+//            variant.assembleProvider.configure {
+//                finalizedBy openTask
+//            }
         }
     }
 
@@ -356,7 +343,6 @@ android {
         }
     }
 
-    namespace 'com.dyaco.spirit_commercial'
 
     lintOptions {
         disable 'TextContrastCheck', 'ImageContrastCheck'
@@ -401,10 +387,8 @@ dependencies {
 //    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
     implementation "com.google.protobuf:protobuf-java:3.21.12"
     implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0"
-//    implementation "androidx.core:core-ktx:1.6.0"
 
-    implementation "androidx.room:room-runtime:2.4.1"
-    implementation "androidx.room:room-guava:2.4.1"
+
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
@@ -418,24 +402,22 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.13.2'
     implementation 'org.jetbrains:annotations:17.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.fragment:fragment-ktx:1.8.9'
+    implementation 'androidx.activity:activity-ktx:1.11.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
 
     implementation 'android.arch.persistence.room:rxjava2:1.1.1'
-//    implementation "android.arch.persistence.room:runtime:1.1.1"
-    //implementation 'androidx.room:room-runtime:2.3.0'
-    //implementation "androidx.room:room-rxjava3:2.3.0"
-    annotationProcessor 'androidx.room:room-compiler:2.4.1'
+
+    ksp 'androidx.room:room-compiler:2.7.2'
 
     implementation 'io.reactivex.rxjava3:rxjava:3.1.1'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
@@ -489,8 +471,8 @@ dependencies {
     implementation 'com.github.addisonelliott:SegmentedButton:3.1.9'
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation 'com.google.zxing:core:3.4.1'
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:5.0.5'
+    ksp 'com.github.bumptech.glide:ksp:5.0.5'
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
@@ -499,7 +481,7 @@ dependencies {
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 
     implementation 'com.github.GrenderG:Toasty:1.5.2'
-   // implementation 'com.github.tbruyelle:rxpermissions:0.12'
+    // implementation 'com.github.tbruyelle:rxpermissions:0.12'
 
     implementation 'androidx.preference:preference-ktx:1.2.0'
 
@@ -533,17 +515,19 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation("com.google.guava:guava:32.1.3-android")
     implementation "net.zetetic:sqlcipher-android:4.6.0"
-    implementation "androidx.core:core-ktx:1.9.0"
-    implementation "androidx.room:room-ktx:2.4.1"
-    implementation "androidx.work:work-runtime-ktx:2.7.1"
-
+    implementation "androidx.core:core-ktx:1.16.0"
+    implementation "androidx.room:room-ktx:2.7.2"
+    implementation "androidx.room:room-runtime:2.7.2"
+    implementation "androidx.room:room-guava:2.7.2"
+    implementation "androidx.work:work-runtime-ktx:2.10.5"
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.20"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.20"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"    // Garmin 要求
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.10.2"      // Garmin 要求
     implementation "com.jcraft:jzlib:1.1.3"
 
     implementation "org.slf4j:slf4j-api:1.7.32"
@@ -564,4 +548,7 @@ dependencies {
 
     implementation 'androidx.profileinstaller:profileinstaller:1.4.1'
     implementation "androidx.startup:startup-runtime:1.2.0"
+
+
+    implementation 'com.jakewharton.timber:timber:4.7.1' //‼️固定 4.7.1
 }

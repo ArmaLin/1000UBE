@@ -95,12 +95,7 @@ public class InboxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     onItemClickListener.onItemClick(viewHolder.binding.tvInboxTitle, inboxBean, position)
             );
 
-//            GlideApp.with(mContext)
-//                    .load(inboxBean.get())
-//                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                    .skipMemoryCache(true)
-//                    //  .placeholder(R.drawable.insert_custom_diagram)
-//                    .into(viewHolder.binding.ivInboxIcon);
+
 
         } else {
             final ViewHolderEmpty viewHolder = (ViewHolderEmpty) holder;

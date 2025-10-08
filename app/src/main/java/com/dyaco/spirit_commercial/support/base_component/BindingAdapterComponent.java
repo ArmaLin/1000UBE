@@ -25,7 +25,7 @@ import com.addisonelliott.segmentedbutton.SegmentedButtonGroup;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.google.android.material.button.MaterialButton;
 
@@ -121,7 +121,7 @@ public class BindingAdapterComponent {
 
     @BindingAdapter("imageUrl")
     public static void loadImage(AppCompatImageView view, Drawable url) {
-        GlideApp.with(view.getContext())
+        Glide.with(view.getContext())
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)

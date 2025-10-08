@@ -2,7 +2,6 @@ package com.dyaco.spirit_commercial.dashboard_training;
 
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
-import static com.dyaco.spirit_commercial.support.CommonUtils.drawableToByteArray;
 import static com.dyaco.spirit_commercial.support.CommonUtils.getJson;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.EVENT_SET_UNIT;
 
@@ -28,8 +27,6 @@ import com.dyaco.spirit_commercial.model.webapi.IServiceApi;
 import com.dyaco.spirit_commercial.model.webapi.bean.GetGymMonthlyAllRankingBean;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.custom_view.DividerItemDecorator;
-import com.dyaco.spirit_commercial.support.room.spirit.SpiritDbManager;
-import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.RankEntity;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -161,20 +158,20 @@ public class AllRankFragment extends BaseBindingFragment<FragmentAllRankBinding>
 
     }
 
-    int j = 0;
+  //  int j = 0;
 
-    private List<RankEntity> getRankingData(boolean ii) {
-        List<RankEntity> list = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            //  list.add(new RankingBean("Member" + j, j, 10 + i, 10 + i, 10 + i,R.drawable.avatar_female_1_default));
-            list.add(new RankEntity("Member" + j, j, 10 + i, 10 + i, 10 + i, 10 + i, drawableToByteArray(R.drawable.avatar_female_1_default),
-                    ii && (i == 2)));
-            j++;
-        }
-        // endless.loadMoreComplete();
-        return list;
-    }
+//    private List<RankEntity> getRankingData(boolean ii) {
+//        List<RankEntity> list = new ArrayList<>();
+//
+//        for (int i = 0; i < 20; i++) {
+//            //  list.add(new RankingBean("Member" + j, j, 10 + i, 10 + i, 10 + i,R.drawable.avatar_female_1_default));
+//            list.add(new RankEntity("Member" + j, j, 10 + i, 10 + i, 10 + i, 10 + i, drawableToByteArray(R.drawable.avatar_female_1_default),
+//                    ii && (i == 2)));
+//            j++;
+//        }
+//        // endless.loadMoreComplete();
+//        return list;
+//    }
 
 
     private void initView() {
@@ -234,7 +231,7 @@ public class AllRankFragment extends BaseBindingFragment<FragmentAllRankBinding>
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        SpiritDbManager.getInstance(requireActivity()).clear();
+//        SpiritDbManager.getInstance(requireActivity()).clear();
     }
 
 

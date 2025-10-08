@@ -1,17 +1,15 @@
-package com.dyaco.spirit_commercial.support.room;
+package com.dyaco.spirit_commercial.support.room
 
-import androidx.room.TypeConverter;
-
-import java.util.Date;
-
-public class Converters {
-    @TypeConverter
-    public static Date fromTimestamp(Long value) {
-        return value == null ? null : new Date(value);
+object Converters {
+    @androidx.room.TypeConverter
+    @JvmStatic
+    fun fromTimestamp(value: Long?): java.util.Date? {
+        return value?.let { _root_ide_package_.java.util.Date(it) }
     }
 
-    @TypeConverter
-    public static Long dateToTimestamp(Date date) {
-        return date == null ? null : date.getTime();
+    @androidx.room.TypeConverter
+    @JvmStatic
+    fun dateToTimestamp(date: java.util.Date?): Long? {
+        return date?.time
     }
 }

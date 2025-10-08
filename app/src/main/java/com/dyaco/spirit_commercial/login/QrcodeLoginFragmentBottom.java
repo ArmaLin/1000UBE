@@ -21,7 +21,7 @@ import com.dyaco.spirit_commercial.model.webapi.BaseApi;
 import com.dyaco.spirit_commercial.model.webapi.IServiceApi;
 import com.dyaco.spirit_commercial.model.webapi.bean.MemberCheckinMachineByQRCodeBean;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingBottomDialogFragment;
 import com.jeremyliao.liveeventbus.LiveEventBus;
@@ -93,7 +93,7 @@ public class QrcodeLoginFragmentBottom extends BaseBindingBottomDialogFragment<F
             qrTimer.interval3(1000, number -> {
                 if (getApp().getDeviceSettingBean().getMachine_mac() != null &&
                         !"".equals(getApp().getDeviceSettingBean().getMachine_mac())) {
-                    GlideApp.with(getApp())
+                    Glide.with(getApp())
                             .load(new CommonUtils().createQRCode(getApp().getDeviceSettingBean().getMachine_mac(), 384, 8))
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .into(getBinding().actionImage);

@@ -1,114 +1,58 @@
-package com.dyaco.spirit_commercial.support.room.spirit.spirit_entity;
+package com.dyaco.spirit_commercial.support.room.spirit.spirit_entity
 
-
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
 @Entity(
-        tableName = RankEntity.RANKS,
-        indices = {@Index("uid")}
+    tableName = RankEntity.RANKS,
+    indices = [Index("uid")]
 )
-
-public class RankEntity {
-    public static final String RANKS = "ranks";
-
+data class RankEntity(
     @PrimaryKey(autoGenerate = true)
-    private long uid;
-    private String memberName;
-    private int memberNo;
-    private int memberHours;
-    private float memberSpeed;
-    private float memberCal;
-    private float memberDistance;
-    private byte[] memberAvatar;
-    private boolean isMe;
-
-    public RankEntity(String memberName, int memberNo, int memberHours, float memberSpeed, float memberCal, float memberDistance, byte[] memberAvatar, boolean isMe) {
-        this.memberName = memberName;
-        this.memberNo = memberNo;
-        this.memberHours = memberHours;
-        this.memberSpeed = memberSpeed;
-        this.memberCal = memberCal;
-        this.memberDistance = memberDistance;
-        this.memberAvatar = memberAvatar;
-        this.isMe = isMe;
+    var uid: Long = 0,
+    var memberName: String? = null,
+    var memberNo: Int = 0,
+    var memberHours: Int = 0,
+    var memberSpeed: Float = 0.0f,
+    var memberCal: Float = 0.0f,
+    var memberDistance: Float = 0.0f,
+    var memberAvatar: ByteArray? = null,
+    var isMe: Boolean = false
+) {
+    companion object {
+        const val RANKS = "ranks"
     }
 
-    @Ignore
-    public RankEntity() {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as RankEntity
+
+        if (uid != other.uid) return false
+        if (memberNo != other.memberNo) return false
+        if (memberHours != other.memberHours) return false
+        if (memberSpeed != other.memberSpeed) return false
+        if (memberCal != other.memberCal) return false
+        if (memberDistance != other.memberDistance) return false
+        if (isMe != other.isMe) return false
+        if (memberName != other.memberName) return false
+        if (!memberAvatar.contentEquals(other.memberAvatar)) return false
+
+        return true
     }
 
-    public long getUid() {
-        return uid;
-    }
-
-    public void setUid(long uid) {
-        this.uid = uid;
-    }
-
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-
-    public int getMemberNo() {
-        return memberNo;
-    }
-
-    public void setMemberNo(int memberNo) {
-        this.memberNo = memberNo;
-    }
-
-    public int getMemberHours() {
-        return memberHours;
-    }
-
-    public void setMemberHours(int memberHours) {
-        this.memberHours = memberHours;
-    }
-
-    public float getMemberSpeed() {
-        return memberSpeed;
-    }
-
-    public void setMemberSpeed(float memberSpeed) {
-        this.memberSpeed = memberSpeed;
-    }
-
-    public float getMemberCal() {
-        return memberCal;
-    }
-
-    public void setMemberCal(float memberCal) {
-        this.memberCal = memberCal;
-    }
-
-    public float getMemberDistance() {
-        return memberDistance;
-    }
-
-    public void setMemberDistance(float memberDistance) {
-        this.memberDistance = memberDistance;
-    }
-
-    public byte[] getMemberAvatar() {
-        return memberAvatar;
-    }
-
-    public void setMemberAvatar(byte[] memberAvatar) {
-        this.memberAvatar = memberAvatar;
-    }
-
-    public boolean isMe() {
-        return isMe;
-    }
-
-    public void setMe(boolean me) {
-        isMe = me;
+    override fun hashCode(): Int {
+        var result = uid.hashCode()
+        result = 31 * result + memberNo
+        result = 31 * result + memberHours
+        result = 31 * result + memberSpeed.hashCode()
+        result = 31 * result + memberCal.hashCode()
+        result = 31 * result + memberDistance.hashCode()
+        result = 31 * result + isMe.hashCode()
+        result = 31 * result + (memberName?.hashCode() ?: 0)
+        result = 31 * result + (memberAvatar?.contentHashCode() ?: 0)
+        return result
     }
 }

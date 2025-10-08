@@ -24,7 +24,7 @@ import com.dyaco.spirit_commercial.model.webapi.CallWebApi;
 import com.dyaco.spirit_commercial.model.webapi.IServiceApi;
 import com.dyaco.spirit_commercial.model.webapi.bean.GetMyWeightTrendBean;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.LineChartData;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RxTimer;
@@ -207,7 +207,7 @@ public class MemberProfileWindow extends BasePopupWindow<WindowMemberProfileBind
         if (userProfileViewModel.getAvatarId() == null) {
             getBinding().btnAvatar.setVisibility(View.GONE);
             getBinding().btnAvatarWeb.setVisibility(View.VISIBLE);
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(userProfileViewModel.getPhotoFileUrl())
 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .skipMemoryCache(true)
@@ -461,7 +461,7 @@ public class MemberProfileWindow extends BasePopupWindow<WindowMemberProfileBind
             getBinding().btnAvatar.setVisibility(View.VISIBLE);
 
             int avatarRes = CommonUtils.getAvatarSelectedFromTag(userProfileViewModel.getAvatarId(), false);
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(avatarRes)
                     .centerInside()
 //                    .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.ItemsAppManagerListBinding;
 import com.dyaco.spirit_commercial.databinding.ItemsNoDataBinding;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 
 import java.util.Collections;
 import java.util.List;
@@ -156,7 +156,7 @@ public class AppManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //            viewHolder.binding.tvAppName.setText(appStoreBean.getAppName() + ", " + appStoreBean.getSort());
 
             if (!appStoreBean.getIcon().isEmpty()) {
-                GlideApp.with(getApp()).
+                Glide.with(getApp()).
                         load(appStoreBean.getIcon().get(0).getAppIconMediumUrl()).
                         placeholder(R.drawable.panel_bg_all_12_323f4b).
                         error(R.drawable.panel_bg_all_12_323f4b).

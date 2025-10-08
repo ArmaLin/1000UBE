@@ -8,7 +8,7 @@ import android.os.Looper;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dyaco.spirit_commercial.databinding.PopupQrcodeBinding;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
 
@@ -34,7 +34,7 @@ public class QrCodePopupWindow extends BasePopupWindow<PopupQrcodeBinding> {
 //            });
 
 
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(new CommonUtils().createQRCode(getApp().getDeviceSettingBean().getMachine_mac(), 384, 8))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(getBinding().actionImage);

@@ -74,7 +74,7 @@ import com.dyaco.spirit_commercial.databinding.FragmentLoginBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.model.webapi.EgymWebListener;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.custom_view.CustomToast;
@@ -1074,10 +1074,10 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             // 先拿到 RequestBuilder<Drawable>
             RequestBuilder<Drawable> builder;
             if (!TextUtils.isEmpty(imagePath) && new File(imagePath).exists()) {
-                builder = GlideApp.with(requireContext())
+                builder = Glide.with(requireContext())
                         .load(imagePath);
             } else {
-                builder = GlideApp.with(requireContext())
+                builder = Glide.with(requireContext())
                         .load(R.drawable.background_new);
             }
 

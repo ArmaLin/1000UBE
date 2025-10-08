@@ -30,12 +30,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.WindowWifiBinding;
 import com.dyaco.spirit_commercial.support.CommandUtil;
-import com.dyaco.spirit_commercial.support.GlideApp;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.QRCodeUtil;
 import com.dyaco.spirit_commercial.support.RxTimer;
@@ -185,7 +185,7 @@ public class WifiWindow extends BasePopupWindow<WindowWifiBinding> {
             try {
                 //      Bitmap qrCodeBitmap = QRCodeUtil.generateQRCodeWithLogo(m, wifiControlUtils.getSharedWifi(), R.drawable.icon_maintenance_wifi_linked);
                 Bitmap qrCodeBitmap = QRCodeUtil.generateQRCodeWithText(m, wifiControlUtils.getSharedWifi(), wifiControlUtils.getCurrentSSID());
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         //    .load(new CommonUtils().createQRCode(wifiControlUtils.getSharedWifi(), 184, 8))
                         .load(qrCodeBitmap)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)

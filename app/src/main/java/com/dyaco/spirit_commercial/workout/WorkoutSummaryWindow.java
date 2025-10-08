@@ -1,6 +1,5 @@
 package com.dyaco.spirit_commercial.workout;
 
-
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
@@ -66,6 +65,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.corestar.libs.device.DeviceGEM;
 import com.dyaco.spirit_commercial.MainActivity;
@@ -82,7 +82,6 @@ import com.dyaco.spirit_commercial.model.webapi.bean.EgymTrainingPlans;
 import com.dyaco.spirit_commercial.model.webapi.bean.UploadWorkoutFromMachineBean;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.SafeClickListener;
 import com.dyaco.spirit_commercial.support.WorkoutUtil;
@@ -91,12 +90,6 @@ import com.dyaco.spirit_commercial.support.intdef.GENERAL;
 import com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef;
 import com.dyaco.spirit_commercial.support.room.DatabaseCallback;
 import com.dyaco.spirit_commercial.support.room.fitness_test.FitnessTestDbManager;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TableAirForce;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TableArmy;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TableCoastGuard;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TableMarines;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TableNavy;
-import com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test.TablePeb;
 import com.dyaco.spirit_commercial.support.room.spirit.SpiritDbManager;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.UploadWorkoutDataEntity;
 import com.dyaco.spirit_commercial.support.utils.CheckDoubleClick;
@@ -600,7 +593,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         //避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
         if (!isEgymNfc) return;
 
-        if (isLogin){
+        if (isLogin) {
             getBinding().btnCloseEE.callOnClick();
             return;
         }
@@ -761,41 +754,32 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 getBinding().viewScoreTextNum.setText(String.format("%s/100", 0));
                 testResult(false);
 
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
-                        getArmy(w.selGender.get(), age, w.elapsedTime.get(),
-                                new DatabaseCallback<TableArmy>() {
-                                    @Override
-                                    public void onDataLoadedBean(TableArmy entity) {
-                                        super.onDataLoadedBean(entity);
-                                        int point = w.isWorkoutDone() ? entity.getPoints() : 0;
-                                        getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
-                                        getBinding().tvResult.setText("");
-                                        getBinding().viewScoreText1.setText(R.string.Your_Score);
-                                        Log.d("ARMY_TEST", "onDataLoadedBean: " + entity.toString());
-                                        Log.d("ARMY_TEST", "getScore: " + age + "," + w.selGender.get() + "," + w.elapsedTime.get());
+                FitnessTestDbManager.getArmy(w.selGender.get(), age, w.elapsedTime.get(),
+                        entity -> {
+                            int point = w.isWorkoutDone() ? entity.getPoints() : 0;
+                            getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
+                            getBinding().tvResult.setText("");
+                            getBinding().viewScoreText1.setText(R.string.Your_Score);
+                            Log.d("ARMY_TEST", "onDataLoadedBean: " + entity.toString());
+                            Log.d("ARMY_TEST", "getScore: " + age + "," + w.selGender.get() + "," + w.elapsedTime.get());
 
-                                        testResult(point >= 50);
-                                    }
-                                });
+                            testResult(point >= 50);
+                        });
                 break;
             case MARINE_CORPS:
 
                 getBinding().viewScoreTextNum.setText(String.format("%s/100", 0));
                 testResult(false);
 
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
+                FitnessTestDbManager.
                         getMarine(w.selGender.get(), w.elapsedTime.get(),
-                                new DatabaseCallback<TableMarines>() {
-                                    @Override
-                                    public void onDataLoadedBean(TableMarines entity) {
-                                        super.onDataLoadedBean(entity);
-                                        int point = w.isWorkoutDone() ? entity.getPoints() : 0;
-                                        getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
-                                        getBinding().tvResult.setText("");
-                                        getBinding().viewScoreText1.setText(R.string.Your_Score);
-                                        Log.d("MARINE_CORPS_TEST", "onDataLoadedBean: " + entity.toString());
-                                        testResult(point > 60);
-                                    }
+                                entity -> {
+                                    int point = w.isWorkoutDone() ? entity.getPoints() : 0;
+                                    getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
+                                    getBinding().tvResult.setText("");
+                                    getBinding().viewScoreText1.setText(R.string.Your_Score);
+                                    Log.d("MARINE_CORPS_TEST", "onDataLoadedBean: " + entity.toString());
+                                    testResult(point > 60);
                                 });
                 break;
             case AIR_FORCE:
@@ -804,20 +788,15 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 getBinding().tvResult.setText(context.getString(airForceRisk[0]));
                 testResult(false);
 
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
-                        getAirForce(w.selGender.get(), age, w.elapsedTime.get(),
-                                new DatabaseCallback<TableAirForce>() {
-                                    @Override
-                                    public void onDataLoadedBean(TableAirForce entity) {
-                                        super.onDataLoadedBean(entity);
-                                        int point = w.isWorkoutDone() ? entity.getPoints() : 0;
-                                        getBinding().viewScoreTextNum.setText(String.format("%s/60", getShowString(GENERAL.DO_VO2_1D1, point)));
-                                        getBinding().tvResult.setText(context.getString(airForceRisk[entity.getCategory() - 1]));
-                                        testResult(point >= 60);
+                FitnessTestDbManager.getAirForce(w.selGender.get(), age, w.elapsedTime.get(),
+                        entity -> {
+                            int point = w.isWorkoutDone() ? entity.getPoints() : 0;
+                            getBinding().viewScoreTextNum.setText(String.format("%s/60", getShowString(GENERAL.DO_VO2_1D1, point)));
+                            getBinding().tvResult.setText(context.getString(airForceRisk[entity.getCategory() - 1]));
+                            testResult(point >= 60);
 
-                                        Log.d("AIR_FORCE_TEST", "onDataLoadedBean: " + entity.toString());
-                                    }
-                                });
+                            Log.d("AIR_FORCE_TEST", "onDataLoadedBean: " + entity.toString());
+                        });
                 break;
             case NAVY:
 
@@ -833,25 +812,20 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 //                w.setWorkoutDone(true);
                 Log.d("NAVY_TEST", "getScore: " + w.selGender.get() + "," + age + "," + w.elapsedTime.get());
 
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
-                        getNavy(w.selGender.get(), age, w.elapsedTime.get(),
-                                new DatabaseCallback<TableNavy>() {
-                                    @Override
-                                    public void onDataLoadedBean(TableNavy entity) {
-                                        super.onDataLoadedBean(entity);
-                                        try {
-                                            int point = w.isWorkoutDone() ? entity.getPoints() : 0;
-                                            int category = w.isWorkoutDone() ? entity.getCategory() : 1;
-                                            getBinding().tvResult.setText(context.getString(navyCategory[category - 1]));
-                                            getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
-                                            Log.d("NAVY_TEST", "onDataLoadedBean: " + entity.toString());
-                                            Log.d("NAVY_TEST", "onDataLoadedBean: " + navyCategory[category - 1]);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                        //    testResult(point >= 60);
-                                    }
-                                });
+                FitnessTestDbManager.getNavy(w.selGender.get(), age, w.elapsedTime.get(),
+                        entity -> {
+                            try {
+                                int point = w.isWorkoutDone() ? entity.getPoints() : 0;
+                                int category = w.isWorkoutDone() ? entity.getCategory() : 1;
+                                getBinding().tvResult.setText(context.getString(navyCategory[category - 1]));
+                                getBinding().viewScoreTextNum.setText(String.format("%s/100", getShowString(GENERAL.DO_VO2_1D, point)));
+                                Log.d("NAVY_TEST", "onDataLoadedBean: " + entity.toString());
+                                Log.d("NAVY_TEST", "onDataLoadedBean: " + navyCategory[category - 1]);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            //    testResult(point >= 60);
+                        });
                 break;
             case PEB:
 
@@ -861,19 +835,14 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 testResult(false);
 
                 //Percentiles 75%以上 pass
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
-                        getPeb(w.selGender.get(), age, w.elapsedTime.get(),
-                                new DatabaseCallback<TablePeb>() {
-                                    @Override
-                                    public void onDataLoadedBean(TablePeb entity) {
-                                        super.onDataLoadedBean(entity);
+                FitnessTestDbManager.getPeb(w.selGender.get(), age, w.elapsedTime.get(),
+                        entity -> {
                                         int point = w.isWorkoutDone() ? entity.getPercentiles() : 0;
                                         getBinding().viewScoreTextNum.setText(String.format("%s/99", getShowString(GENERAL.DO_VO2_1D, point)));
                                         getBinding().tvResult.setText("");
                                         getBinding().viewScoreText1.setText(R.string.Your_Score);
                                         Log.d("SUMMARY", "onDataLoadedBean: " + entity.toString());
                                         testResult(point >= 75);
-                                    }
                                 });
                 break;
             case COAST_GUARD:
@@ -888,19 +857,14 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 //預設
                 testResult(false);
 
-                FitnessTestDbManager.getInstance(getApp().getApplicationContext()).
-                        getCoastGuard(w.selGender.get(), age, w.elapsedTime.get(),
-                                new DatabaseCallback<TableCoastGuard>() {
-                                    @Override
-                                    public void onDataLoadedBean(TableCoastGuard entity) {
-                                        super.onDataLoadedBean(entity);
+                FitnessTestDbManager.getCoastGuard(w.selGender.get(), age, w.elapsedTime.get(),
+                        entity -> {
                                         int category = w.isWorkoutDone() ? entity.getCategory() - 1 : 0;
                                         String result = context.getString(coastGuardCategory[category]);
                                         getBinding().viewScoreTextNum.setText(result);
                                         getBinding().tvResult.setText("");
                                         Log.d("COAST_GUARD_TEST", "onDataLoadedBean: " + entity.toString());
                                         testResult(category >= 3);
-                                    }
                                 });
                 break;
             case CTT_PERFORMANCE:
@@ -1529,13 +1493,13 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             getBinding().baseScrollViewEgym.setVisibility(View.GONE);
 
             if (isTreadmill) {
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(new CommonUtils().getDiagramBitmap(getApp(), w.inclineChartNum, 0))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(getBinding().ivDiagramIncline);
             }
 
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(new CommonUtils().getDiagramBitmap(getApp(), w.speedAndLevelChartNum, 1))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(getBinding().ivDiagramSpeedAndLevel);
@@ -1553,7 +1517,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 getBinding().ivDiagramHeartRate.setVisibility(View.VISIBLE);
                 getBinding().ivNoHr.setVisibility(View.INVISIBLE);
 
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(new CommonUtils().getDiagramBitmap(context.getApplicationContext(), w.heartRateChartNum, 2))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(getBinding().ivDiagramHeartRate);
@@ -1611,9 +1575,6 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
         //  workoutViewModel.summaryMaxSpeedAndLevel.set(123);
         w = null;
-
-        FitnessTestDbManager.getInstance(getApp()).clear();
-        SpiritDbManager.getInstance(getApp()).clear();
 
         if (m.popupWindow != null) {
             m.popupWindow.dismiss();
@@ -1713,7 +1674,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         }
 
         //    Log.d("RPM_CHECK", "countDownTime: " + countDownTime);
-    //    countDownTime = 12000;
+        //    countDownTime = 12000;
         countDownTimer = new CountDownTimer(countDownTime, 1000) {
             public void onTick(long millisUntilFinished) {
                 if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {

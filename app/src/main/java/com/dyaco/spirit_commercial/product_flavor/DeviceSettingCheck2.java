@@ -20,6 +20,8 @@ import com.dyaco.spirit_commercial.support.room.spirit.SpiritDbManager;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.ErrorMsgEntity;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingBean;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -432,9 +434,9 @@ public class DeviceSettingCheck2 {
 
     public static void sendError() {
 
-        SpiritDbManager.getInstance(getApp()).getErrorMsgLit(new DatabaseCallback<ErrorMsgEntity>() {
+        SpiritDbManager.getInstance(getApp()).getErrorMsgList(new DatabaseCallback<ErrorMsgEntity>() {
             @Override
-            public void onDataLoadedList(List<ErrorMsgEntity> errorMsgEntityList) {
+            public void onDataLoadedList(@NotNull List<? extends ErrorMsgEntity> errorMsgEntityList) {
                 super.onDataLoadedList(errorMsgEntityList);
 
                 try {

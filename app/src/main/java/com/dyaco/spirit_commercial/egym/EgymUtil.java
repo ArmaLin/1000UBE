@@ -47,6 +47,7 @@ import android.view.Gravity;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.listener.IUartConsole;
@@ -64,7 +65,6 @@ import com.dyaco.spirit_commercial.model.webapi.bean.EgymUserDetailsBean;
 import com.dyaco.spirit_commercial.model.webapi.bean.GetGymInfo2Bean;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
-import com.dyaco.spirit_commercial.support.GlideApp;
 import com.dyaco.spirit_commercial.support.HmacUtil;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RxTimer;
@@ -84,6 +84,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -878,7 +879,7 @@ public class EgymUtil {
 //
 //            Log.d("EGYMMMMM", "圖片 onSuccess: Data saved to file.");
 //
-//            GlideApp.with(getApp())
+//            Glide.with(getApp())
 //                    .load(file)
 //                    .circleCrop()
 //                    .placeholder(R.color.color252e37)
@@ -895,7 +896,7 @@ public class EgymUtil {
             egymDataViewModel.userImg.set(imageData); // 存到 ViewModel
         }
 
-        GlideApp.with(getApp())
+        Glide.with(getApp())
                 .load(egymDataViewModel.userImg.get())
                 .circleCrop()
                 .placeholder(R.color.color252e37)
@@ -932,6 +933,7 @@ public class EgymUtil {
     }
 
     public void getEgymDataList() {
+
         SpiritDbManager.getInstance(getApp()).getEgymList(new DatabaseCallback<EgymEntity>() {
             @Override
             public void onError(String err) {
@@ -940,7 +942,7 @@ public class EgymUtil {
             }
 
             @Override
-            public void onDataLoadedList(List<EgymEntity> egymEntityList) {
+            public void onDataLoadedList(@NotNull List<? extends EgymEntity>  egymEntityList) {
                 super.onDataLoadedList(egymEntityList);
                 Log.d(TAG, "Egym待上傳資料: " + egymEntityList.size());
                 for (EgymEntity egymEntity : egymEntityList) {

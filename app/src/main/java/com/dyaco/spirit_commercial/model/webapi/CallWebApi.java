@@ -32,6 +32,7 @@ import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.ErrorMsgEnt
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.UploadWorkoutDataEntity;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingBean;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -283,7 +284,7 @@ public class CallWebApi {
 
         SpiritDbManager.getInstance(getApp()).getUploadWorkoutDataList(new DatabaseCallback<UploadWorkoutDataEntity>() {
             @Override
-            public void onDataLoadedList(List<UploadWorkoutDataEntity> uploadWorkoutDataEntityList) {
+            public void onDataLoadedList(@NotNull List<? extends UploadWorkoutDataEntity> uploadWorkoutDataEntityList) {
                 super.onDataLoadedList(uploadWorkoutDataEntityList);
                 for (UploadWorkoutDataEntity uploadWorkoutDataEntity : uploadWorkoutDataEntityList) {
 
@@ -365,9 +366,9 @@ public class CallWebApi {
      */
     public void apiUploadErrorLog() {
 
-        SpiritDbManager.getInstance(getApp()).getErrorMsgLit(new DatabaseCallback<ErrorMsgEntity>() {
+        SpiritDbManager.getInstance(getApp()).getErrorMsgList(new DatabaseCallback<ErrorMsgEntity>() {
             @Override
-            public void onDataLoadedList(List<ErrorMsgEntity> errorMsgEntityList) {
+            public void onDataLoadedList(@NotNull List<? extends ErrorMsgEntity> errorMsgEntityList) {
                 super.onDataLoadedList(errorMsgEntityList);
 
                 JSONArray jsArray = new JSONArray();

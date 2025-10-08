@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.ItemsChannelListBinding;
 import com.dyaco.spirit_commercial.databinding.ItemsNoDataBinding;
 import com.dyaco.spirit_commercial.settings.AvatarEntity;
-import com.dyaco.spirit_commercial.support.GlideApp;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.binding.tvChannelTitle.setText(String.valueOf(channelBean.getChannelName()));
             viewHolder.binding.tvChannelTime.setText(String.valueOf(channelBean.getChannelTime()));
             viewHolder.binding.tvChannelContent.setText(String.valueOf(channelBean.getChannelContent()));
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(channelBean.getChannelIcon())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)

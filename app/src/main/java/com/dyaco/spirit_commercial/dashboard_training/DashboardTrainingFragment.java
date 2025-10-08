@@ -57,7 +57,7 @@ import com.dyaco.spirit_commercial.model.webapi.bean.GetGymMonthlyRankingFromMac
 import com.dyaco.spirit_commercial.model.webapi.bean.GymSort;
 import com.dyaco.spirit_commercial.model.webapi.bean.JoinGymRankingBean;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.SafeClickListener;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
@@ -185,7 +185,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 bg = R.drawable.pt_gym_rankings_egym;
             }
 
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(bg)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(R.color.black)

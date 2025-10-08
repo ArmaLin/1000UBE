@@ -17,6 +17,8 @@ import com.dyaco.spirit_commercial.support.room.DatabaseCallback;
 import com.dyaco.spirit_commercial.support.room.spirit.SpiritDbManager;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.ErrorMsgEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
@@ -79,11 +81,11 @@ public class MaintenanceErrorCodeLogFragment extends BaseBindingDialogFragment<F
     }
 
     private void getErrorLogData() {
-        SpiritDbManager.getInstance(getApp()).getErrorMsgLit(new DatabaseCallback<ErrorMsgEntity>() {
+        SpiritDbManager.getInstance(getApp()).getErrorMsgList(new DatabaseCallback<ErrorMsgEntity>() {
                     @Override
-                    public void onDataLoadedList(List<ErrorMsgEntity> errorMsgEntityList) {
+                    public void onDataLoadedList(@NotNull List<? extends ErrorMsgEntity> errorMsgEntityList) {
                         super.onDataLoadedList(errorMsgEntityList);
-                        errorLogAdapter.setData2View(errorMsgEntityList);
+                        errorLogAdapter.setData2View((List<ErrorMsgEntity>) errorMsgEntityList);
                     }
                 });
     }
@@ -108,6 +110,6 @@ public class MaintenanceErrorCodeLogFragment extends BaseBindingDialogFragment<F
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SpiritDbManager.getInstance(getApp()).clear();
+//        SpiritDbManager.getInstance(getApp()).clear();
     }
 }

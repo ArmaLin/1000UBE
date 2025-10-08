@@ -19,7 +19,7 @@ import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.EgymDetailsItemBinding;
 import com.dyaco.spirit_commercial.model.webapi.bean.EgymTrainingPlans;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.custom_view.banner.adapter.BannerAdapter;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.EgymDataViewModel;
@@ -87,7 +87,7 @@ public class EgymBannerAdapter extends BannerAdapter<EgymTrainingPlans.TrainerDT
         // **監聽 `coachImages` 變更，更新 `ivCoach`**
         egymDataViewModel.coachImages.observe((LifecycleOwner) context, images -> {
             if (images != null && CommonUtils.hasValueAt(images, position)) {
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(images.get(position))
                         .circleCrop()
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

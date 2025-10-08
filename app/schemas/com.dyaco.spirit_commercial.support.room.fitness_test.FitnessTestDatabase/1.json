@@ -52,17 +52,15 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "age_min",
             "age_max",
             "time_min",
             "time_max"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableArmy",
@@ -75,19 +73,19 @@
             "notNull": true
           },
           {
-            "fieldPath": "age_min",
+            "fieldPath": "ageMin",
             "columnName": "age_min",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "age_max",
+            "fieldPath": "ageMax",
             "columnName": "age_max",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "time_le",
+            "fieldPath": "timeLe",
             "columnName": "time_le",
             "affinity": "INTEGER",
             "notNull": true
@@ -100,16 +98,14 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "age_min",
             "age_max",
             "time_le"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableCoastGuard",
@@ -122,25 +118,25 @@
             "notNull": true
           },
           {
-            "fieldPath": "age_min",
+            "fieldPath": "ageMin",
             "columnName": "age_min",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "age_max",
+            "fieldPath": "ageMax",
             "columnName": "age_max",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "time_min",
+            "fieldPath": "timeMin",
             "columnName": "time_min",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "time_max",
+            "fieldPath": "timeMax",
             "columnName": "time_max",
             "affinity": "INTEGER",
             "notNull": true
@@ -153,17 +149,15 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "age_min",
             "age_max",
             "time_min",
             "time_max"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableMarines",
@@ -176,7 +170,7 @@
             "notNull": true
           },
           {
-            "fieldPath": "time_le",
+            "fieldPath": "timeLe",
             "columnName": "time_le",
             "affinity": "INTEGER",
             "notNull": true
@@ -189,14 +183,12 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "time_le"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableMets",
@@ -222,13 +214,11 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "mets"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableNavy",
@@ -241,19 +231,19 @@
             "notNull": true
           },
           {
-            "fieldPath": "age_min",
+            "fieldPath": "ageMin",
             "columnName": "age_min",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "age_max",
+            "fieldPath": "ageMax",
             "columnName": "age_max",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "time_le",
+            "fieldPath": "timeLe",
             "columnName": "time_le",
             "affinity": "INTEGER",
             "notNull": true
@@ -272,16 +262,14 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "age_min",
             "age_max",
             "time_le"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TablePeb",
@@ -294,19 +282,19 @@
             "notNull": true
           },
           {
-            "fieldPath": "age_min",
+            "fieldPath": "ageMin",
             "columnName": "age_min",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "age_max",
+            "fieldPath": "ageMax",
             "columnName": "age_max",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "time_le",
+            "fieldPath": "timeLe",
             "columnName": "time_le",
             "affinity": "INTEGER",
             "notNull": true
@@ -319,16 +307,14 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "gender",
             "age_min",
             "age_max",
             "time_le"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableSettings",
@@ -341,13 +327,13 @@
             "notNull": true
           },
           {
-            "fieldPath": "machine_type",
+            "fieldPath": "machineType",
             "columnName": "machine_type",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "serial_no",
+            "fieldPath": "serialNo",
             "columnName": "serial_no",
             "affinity": "TEXT",
             "notNull": true
@@ -365,43 +351,43 @@
             "notNull": true
           },
           {
-            "fieldPath": "time_format",
+            "fieldPath": "timeFormat",
             "columnName": "time_format",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "wifi_sw",
+            "fieldPath": "wifiSw",
             "columnName": "wifi_sw",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "wifi_ssid",
+            "fieldPath": "wifiSsid",
             "columnName": "wifi_ssid",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "wifi_lock",
+            "fieldPath": "wifiLock",
             "columnName": "wifi_lock",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "wifi_pwd",
+            "fieldPath": "wifiPwd",
             "columnName": "wifi_pwd",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "handrails_height",
+            "fieldPath": "handrailsHeight",
             "columnName": "handrails_height",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "deck_lift",
+            "fieldPath": "deckLift",
             "columnName": "deck_lift",
             "affinity": "INTEGER",
             "notNull": true
@@ -419,79 +405,79 @@
             "notNull": true
           },
           {
-            "fieldPath": "pause_mode",
+            "fieldPath": "pauseMode",
             "columnName": "pause_mode",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "unit_sys",
+            "fieldPath": "unitSys",
             "columnName": "unit_sys",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "bt_sw",
+            "fieldPath": "btSw",
             "columnName": "bt_sw",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "bt_name",
+            "fieldPath": "btName",
             "columnName": "bt_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "hrm_sw",
+            "fieldPath": "hrmSw",
             "columnName": "hrm_sw",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "hrm_name",
+            "fieldPath": "hrmName",
             "columnName": "hrm_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "highlights_sw",
+            "fieldPath": "highlightsSw",
             "columnName": "highlights_sw",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "odo_distance",
+            "fieldPath": "odoDistance",
             "columnName": "odo_distance",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "odo_time",
+            "fieldPath": "odoTime",
             "columnName": "odo_time",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "brake_sw",
+            "fieldPath": "brakeSw",
             "columnName": "brake_sw",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "lock_facility",
+            "fieldPath": "lockFacility",
             "columnName": "lock_facility",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "incline_return",
+            "fieldPath": "inclineReturn",
             "columnName": "incline_return",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "machine_uuid",
+            "fieldPath": "machineUuid",
             "columnName": "machine_uuid",
             "affinity": "TEXT",
             "notNull": true
@@ -516,53 +502,49 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableFacility",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`profile_id` INTEGER NOT NULL, `profile_type` INTEGER NOT NULL, `profile_index` INTEGER NOT NULL, `profile_value` INTEGER NOT NULL, PRIMARY KEY(`profile_id`, `profile_type`, `profile_index`))",
         "fields": [
           {
-            "fieldPath": "profile_id",
+            "fieldPath": "profileId",
             "columnName": "profile_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "profile_type",
+            "fieldPath": "profileType",
             "columnName": "profile_type",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "profile_index",
+            "fieldPath": "profileIndex",
             "columnName": "profile_index",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "profile_value",
+            "fieldPath": "profileValue",
             "columnName": "profile_value",
             "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "profile_id",
             "profile_type",
             "profile_index"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableFrontGradeAd",
@@ -582,13 +564,11 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "grade"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableRearGradeAd",
@@ -608,54 +588,49 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "grade"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       },
       {
         "tableName": "TableFacilityIndex",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`profile_id` INTEGER NOT NULL, `profile_alias` TEXT NOT NULL, `profile_remove` INTEGER NOT NULL, `speed_unit` INTEGER NOT NULL, PRIMARY KEY(`profile_id`))",
         "fields": [
           {
-            "fieldPath": "profile_id",
+            "fieldPath": "profileId",
             "columnName": "profile_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "profile_alias",
+            "fieldPath": "profileAlias",
             "columnName": "profile_alias",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "profile_remove",
+            "fieldPath": "profileRemove",
             "columnName": "profile_remove",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "speed_unit",
+            "fieldPath": "speedUnit",
             "columnName": "speed_unit",
             "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "profile_id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
+          ]
+        }
       }
     ],
-    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
       "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e0ef45643a871d3f7d082dbb4718d48')"

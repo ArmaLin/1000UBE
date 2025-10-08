@@ -35,6 +35,8 @@ import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.MediaAppsEn
 import com.dyaco.spirit_commercial.work_task.InstallCallback;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -47,9 +49,9 @@ public class MediaAppUtils {
     public static int MAX_MEDIA_APP_COUNT = 12;
 
     public static void checkConsoleMediaApp() {
-        SpiritDbManagerR.getInstance(getApp()).getMediaAppList(new DatabaseCallback<MediaAppsEntity>() {
+        SpiritDbManagerR.getInstance(getApp()).getMediaAppList(new DatabaseCallback<>() {
             @Override
-            public void onDataLoadedList(List<MediaAppsEntity> mediaAppsEntityList) {
+            public void onDataLoadedList(@NotNull List<? extends MediaAppsEntity> mediaAppsEntityList) {
                 super.onDataLoadedList(mediaAppsEntityList);
                 CONSOLE_MEDIA_APP_LIST.clear();
                 CONSOLE_MEDIA_APP_LIST.addAll(mediaAppsEntityList);
@@ -61,34 +63,14 @@ public class MediaAppUtils {
                 }
                 CONSOLE_MEDIA_APP_LIST.sort(new MediaAppEntitySort());
             }
+
+            @Override
+            public void onError(@NotNull String err) {
+                super.onError(err);
+                Log.d("AAAAAAAA", "onError: " + err);
+            }
         });
 
-
-//        SpiritDbManager.getInstance(getApp()).getMediaAppList(new DatabaseCallback<MediaAppsEntity>() {
-//            @Override
-//            public void onDataLoadedList(List<MediaAppsEntity> mediaAppsEntityList) {
-//                super.onDataLoadedList(mediaAppsEntityList);
-//                CONSOLE_MEDIA_APP_LIST.clear();
-//                CONSOLE_MEDIA_APP_LIST.addAll(mediaAppsEntityList);
-//
-//
-//                //無資料，新增預設
-//                Log.d("MMMMEEEEDDDD", "checkConsoleMediaApp: " + mediaAppsEntityList.size());
-//                if (mediaAppsEntityList.isEmpty()) {
-//           //         Log.d("MMMMEEEEDDDD", "checkConsoleMediaApp: 無資料，新增預設 " );
-//                    initDefaultMediaApp();
-//                }
-//
-//
-//                CONSOLE_MEDIA_APP_LIST.sort(new MediaAppEntitySort());
-//
-//         //       Log.d("MMMMEEEEDDDD", "checkConsoleMediaApp: 檢查media app 完畢: " + CONSOLE_MEDIA_APP_LIST.size());
-//
-////                for (MediaAppsEntity mediaAppsEntity : mediaAppsEntityList) {
-////                }
-//
-//            }
-//        });
     }
 
     public static List<MediaAppsEntity> CONSOLE_MEDIA_APP_LIST = new ArrayList<>();

@@ -248,7 +248,7 @@ import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.model.webapi.bean.CreateWorkoutParam;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RpmUtil;
 import com.dyaco.spirit_commercial.support.RxTimer;
@@ -423,7 +423,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         OPT_SETTINGS.viewY = isUs && !isGGG ? 280 : 254;
 
 
-        GlideApp.with(getApp())
+        Glide.with(getApp())
                 .load(drawableRs[n])
                 .transition(DrawableTransitionOptions.withCrossFade(1500))
                 .skipMemoryCache(true)
@@ -2248,7 +2248,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
     public void setBackground(int res) {
         try {
-            GlideApp.with(getApp())
+            Glide.with(getApp())
                     .load(res)
                     .centerCrop()
                     // .transition(DrawableTransitionOptions.withCrossFade(1000))
@@ -3729,7 +3729,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 n++;
                 if (n >= drawableRs.length) n = 0;
                 if (!workoutStatsFragment.isStatsPageShow) return;
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(drawableRs[n])
                         .transition(DrawableTransitionOptions.withCrossFade(1000))
                         .skipMemoryCache(true)

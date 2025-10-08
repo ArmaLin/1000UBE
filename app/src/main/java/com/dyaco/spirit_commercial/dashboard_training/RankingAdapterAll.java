@@ -28,7 +28,7 @@ import com.dyaco.spirit_commercial.databinding.ItemsNoDataBinding;
 import com.dyaco.spirit_commercial.databinding.ItemsRankAllListBinding;
 import com.dyaco.spirit_commercial.model.webapi.bean.GetGymMonthlyAllRankingBean;
 import com.dyaco.spirit_commercial.settings.AvatarEntity;
-import com.dyaco.spirit_commercial.support.GlideApp;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -178,21 +178,12 @@ public class RankingAdapterAll extends RecyclerView.Adapter<RecyclerView.ViewHol
 //            viewHolder.binding.tvCal.setText(String.format("%sK", rankingBean.getPerformanceCalories()));
             viewHolder.binding.tvCal.setText(String.valueOf(rankingBean.getPerformanceCalories()));
 
-//            if (rankingBean.getPhotoFileUrl() != null) {
-//                viewHolder.binding.ivMemberAvatarPhoto.setVisibility(View.VISIBLE);
-//                viewHolder.binding.ivMemberAvatar.setVisibility(View.INVISIBLE);
-//                GlideApp.with(getApp())
-//                        .load(rankingBean.getPhotoFileUrl())
-//                        .circleCrop()
-//                        .placeholder(R.drawable.shape_oval_grey)
-//                        .into(viewHolder.binding.ivMemberAvatarPhoto);
-//                return;
-//            }
+
 
             if (rankingBean.getAvatarId() != null) {
                 viewHolder.binding.ivMemberAvatarPhoto.setVisibility(View.INVISIBLE);
                 viewHolder.binding.ivMemberAvatar.setVisibility(View.VISIBLE);
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(getAvatarSelectedFromTag(rankingBean.getAvatarId(), false))
 //                        .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                        .skipMemoryCache(true)
@@ -205,7 +196,7 @@ public class RankingAdapterAll extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (rankingBean.getPhotoFileUrl() != null) {
                 viewHolder.binding.ivMemberAvatarPhoto.setVisibility(View.VISIBLE);
                 viewHolder.binding.ivMemberAvatar.setVisibility(View.INVISIBLE);
-                GlideApp.with(getApp())
+                Glide.with(getApp())
                         .load(rankingBean.getPhotoFileUrl())
                         .circleCrop()
                         .placeholder(R.drawable.shape_oval_grey)

@@ -1,43 +1,13 @@
-package com.dyaco.spirit_commercial.support.room;
+package com.dyaco.spirit_commercial.support.room
 
-import java.util.List;
-
-public abstract class DatabaseCallback<T> {
-
-    public void onDataLoadedList(List<T> lists) {
-
-     }
-
-    public void onDataLoadedBean(T entity) {
-
-    }
-
-    public void onAdded(long rowId) {
-
-    }
-
-    public void onQueryAll() {
-
-    }
-
-    public void onDeleted() {
-
-    }
-
-    public void onUpdated() {
-
-    }
-
-    public void onError(String err) {
-
-    }
-
-    public void onCount(Integer id) {
-
-    }
-
-    public void onNoData() {
-
-    }
-
+abstract class DatabaseCallback<T> {
+    open fun onDataLoadedList(lists: List<T>) {}
+    open fun onDataLoadedBean(entity: T) {}
+    open fun onAdded(rowId: Long) {}
+    open fun onQueryAll() {}
+    open fun onDeleted() {}
+    open fun onUpdated() {}
+    open fun onError(err: String) {}
+    open fun onCount(id: Int?) {}
+    open fun onNoData() {}
 }

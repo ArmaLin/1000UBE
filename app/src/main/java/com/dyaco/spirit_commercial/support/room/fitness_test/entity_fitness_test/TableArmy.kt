@@ -1,79 +1,20 @@
-package com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test;
+package com.dyaco.spirit_commercial.support.room.fitness_test.entity_fitness_test
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
+import androidx.room.ColumnInfo
+import androidx.room.Entity
 
-@Entity(tableName = "TableArmy", primaryKeys = { "gender", "age_min", "age_max", "time_le"})
-public class TableArmy {
+@Entity(tableName = "TableArmy", primaryKeys = ["gender", "age_min", "age_max", "time_le"])
+data class TableArmy(
+    var gender: Int = 0,
 
-    private int gender;
-    private int age_min;
-    private int age_max;
-    private int time_le;
-    private int points;
+    @ColumnInfo(name = "age_min")
+    var ageMin: Int = 0,
 
-    public TableArmy() {
-    }
+    @ColumnInfo(name = "age_max")
+    var ageMax: Int = 0,
 
-    @Ignore
-    public TableArmy(int gender, int age_min, int age_max, int time_le, int points) {
-        this.gender = gender;
-        this.age_min = age_min;
-        this.age_max = age_max;
-        this.time_le = time_le;
-        this.points = points;
-    }
+    @ColumnInfo(name = "time_le")
+    var timeLe: Int = 0,
 
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
-    public int getAge_min() {
-        return age_min;
-    }
-
-    public void setAge_min(int age_min) {
-        this.age_min = age_min;
-    }
-
-    public int getAge_max() {
-        return age_max;
-    }
-
-    public void setAge_max(int age_max) {
-        this.age_max = age_max;
-    }
-
-    public int getTime_le() {
-        return time_le;
-    }
-
-    public void setTime_le(int time_le) {
-        this.time_le = time_le;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "TableArmy{" +
-                "gender=" + gender +
-                ", age_min=" + age_min +
-                ", age_max=" + age_max +
-                ", time_le=" + time_le +
-                ", points=" + points +
-                '}';
-    }
-}
+    var points: Int = 0
+)
