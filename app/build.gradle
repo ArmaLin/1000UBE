@@ -14,7 +14,7 @@ android {
         HardWareVersion = "V1.0"
         //A.x.x.1正式 , A.x.x.0測試
 //        SoftWareVersion = "A.1.16.1"  //A.x.x.1正式     V1.0.A.1.7.1.0529A
-          SoftWareVersion = "A.1.17.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
+          SoftWareVersion = "A.1.1.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
         sVersion = "A"
         SerialNumber = getFormattedDate('MMdd') + sVersion
 //        SerialNumber = "0901" + sVersion
@@ -31,9 +31,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //  ndkVersion "21.0.6113669"
         ndk {
-//            abiFilters 'armeabi-v7a', 'armeabi', 'x86'
-            abiFilters 'armeabi-v7a', 'x86', 'x86_64'
-            //    abiFilters 'armeabi-v7a', 'x86'
+            //noinspection ChromeOsAbiSupport
+            abiFilters 'arm64-v8a'
         }
 
         packagingOptions {
@@ -42,35 +41,6 @@ android {
             }
         }
 
-//        packagingOptions {
-////            jniLibs {
-////                useLegacyPackaging = true
-////            }
-////            exclude "lib/arm64-v8a/libsqlcipher.so"
-////            exclude "lib/armeabi-v7a/libsqlcipher.so"
-////            exclude "lib/x86/libsqlcipher.so"
-////            exclude "lib/x86_64/libsqlcipher.so"
-//
-//            pickFirst "lib/arm64-v8a/libsqlcipher.so"
-//            pickFirst "lib/armeabi-v7a/libsqlcipher.so"
-//            pickFirst "lib/x86/libsqlcipher.so"
-//            pickFirst "lib/x86_64/libsqlcipher.so"
-//        }
-
-//        packagingOptions {
-//            jniLibs {
-//                useLegacyPackaging = true
-//            }
-
-//            pickFirst 'lib/arm64-v8a/liberrno-lib.so'
-//            pickFirst 'lib/arm64-v8a/libusb-lib.so'
-//            pickFirst 'lib/armeabi-v7a/liberrno-lib.so'
-//            pickFirst 'lib/armeabi-v7a/libusb-lib.so'
-//            pickFirst 'lib/x86/liberrno-lib.so'
-//            pickFirst 'lib/x86/libusb-lib.so'
-//            pickFirst 'lib/x86_64/liberrno-lib.so'
-//            pickFirst 'lib/x86_64/libusb-lib.so'
-        //    }
 
         //指定room.schemaLocation生成的文件路徑
         javaCompileOptions {
