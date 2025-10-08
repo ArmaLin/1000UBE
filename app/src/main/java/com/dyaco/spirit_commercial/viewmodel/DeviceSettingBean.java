@@ -1,5 +1,7 @@
 package com.dyaco.spirit_commercial.viewmodel;
 
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -96,7 +98,7 @@ public class DeviceSettingBean implements Parcelable {
     //TvTuner 類比類別
     private int tvTunerAnalogType; //0 cable, 1 air
 
-    private int territoryCode;
+    private int territoryCode = TERRITORY_US;
 
     public int getTerritoryCode() {
         return territoryCode;

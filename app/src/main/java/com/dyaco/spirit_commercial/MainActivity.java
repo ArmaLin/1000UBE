@@ -14,7 +14,7 @@ import static com.dyaco.spirit_commercial.dashboard_media.YouTubeWindow.isWebVie
 import static com.dyaco.spirit_commercial.garmin.GarminDevicesWindow.GARMIN_TAG;
 import static com.dyaco.spirit_commercial.garmin.GarminDevicesWindow.isGarminWindowOn;
 import static com.dyaco.spirit_commercial.login.LoginFragment.isGuestQuickStart;
-import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CT1000ENT;
+import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CU1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.getMode;
 import static com.dyaco.spirit_commercial.support.CommonUtils.changeSystemFontSize;
 import static com.dyaco.spirit_commercial.support.CommonUtils.clearAppData;
@@ -48,7 +48,6 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.OFF;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.ON;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.PROTOCOL_CSAFE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_GLOBAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_JAPAN;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.VIDEO_NONE;
@@ -2855,7 +2854,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         if (modelCode != -1 && dd.getDeviceFirstLaunchTime() != null) {
             MODE = getMode(dd.getModel_code());
         } else {
-            new InitProduct(getApplicationContext()).setProductDefault(CT1000ENT, TERRITORY_GLOBAL);
+            //初始值
+            new InitProduct(getApplicationContext()).setProductDefault(CU1000ENT, TERRITORY_US);
         }
 
 
@@ -2883,19 +2883,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         isUs = deviceSettingViewModel.territoryCode.get() == TERRITORY_US ||
                 deviceSettingViewModel.territoryCode.get() == DeviceIntDef.TERRITORY_CANADA;
 
-        //todo APPLE WATCH
-//        workoutViewModel.isGarminConnected.set(true);
-//          workoutViewModel.isAppleWatchEnabled.set(true);
-//       workoutViewModel.isAppleWatchConnected.set(true);
 
-//        workoutViewModel.isHrConnected.setValue(true);
-
-
-        //   isUs = false;
-
-        //時鐘 Broadcast
-//        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
-//        registerReceiver(new TimeTickReceiver(deviceSettingViewModel), filter);
         TimeUpdateManager.register(this);
         TimeUpdateManager.getTimeText().observeForever(time ->
                 deviceSettingViewModel.timeText.set(time));
