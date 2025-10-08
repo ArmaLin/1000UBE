@@ -52,11 +52,11 @@ import androidx.transition.TransitionManager;
 import com.dyaco.spirit_commercial.dashboard_media.DashboardMainMediaFragment;
 import com.dyaco.spirit_commercial.dashboard_training.MainDashboardTrainingFragment;
 import com.dyaco.spirit_commercial.databinding.FragmentMainDashboardBinding;
+import com.dyaco.spirit_commercial.support.CoTimer;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
 import com.dyaco.spirit_commercial.support.IdleRunner;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RxTimer;
-import com.dyaco.spirit_commercial.support.CoTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef;
@@ -115,6 +115,15 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 
         workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
         getBinding().setWorkoutViewModel(workoutViewModel);
+
+
+//        DeviceSettingBean a = getApp().getDeviceSettingBean();
+//        a.setBrand_name("NNNNNNNNNN");
+//
+//        getApp().setDeviceSettingBean(a);
+
+        //Log.d("XXXXXXXXXX", "onViewCreated: " + getApp().getDeviceSettingBean().getBrand_name());
+
 
 
 //        workoutViewModel.isAppleWatchEnabled.set(true);
