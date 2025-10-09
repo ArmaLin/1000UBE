@@ -73,6 +73,7 @@ public class BindingAdapterComponent {
     public static void setLayoutMarginBottom(View view, float dimen) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         layoutParams.setMargins(0, 0, 0, (int) dimen);
+  //      layoutParams.bottomMargin = (int) dimen;
         view.setLayoutParams(layoutParams);
     }
 

@@ -78,6 +78,7 @@ import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.DelayedExecutor;
 import com.dyaco.spirit_commercial.support.FloatingWidget;
 import com.dyaco.spirit_commercial.support.MsgEvent;
+import com.dyaco.spirit_commercial.support.RootTools;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.UsbFileCopierKt;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
@@ -1510,7 +1511,10 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
             getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
 
             new FloatingWidget(requireActivity()).callSetting(2, MainActivity.class, 0);
-            new CommonUtils().hideStatusBar(0);
+//            new CommonUtils().hideStatusBar(0);
+            RootTools.showNavigationBar();
+            RootTools.showStatusBar();
+
         });
 
 
@@ -1692,7 +1696,10 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         LiveEventBus.get(EventKey.MAINTENANCE_UPDATE_LANGUAGE_1, Locale.class).observe(getViewLifecycleOwner(), locale -> {
             if (getBinding() != null) {
                 try {
-                    new CommonUtils().hideStatusBar(1);
+//                    new CommonUtils().hideStatusBar(1);
+                    RootTools.hideStatusBar();
+                    RootTools.hideNavigationBar();
+
                     if (mainActivity != null && mainActivity.hdmiIn != null) {
                         MainActivity.isReAssignView = true;
                         mainActivity.hdmiIn.AssignView(mainActivity.getBinding().videoFullViewContainer);
@@ -1735,7 +1742,10 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 //                View.SYSTEM_UI_FLAG_VISIBLE);
 
         //1關閉狀態列
-        new CommonUtils().hideStatusBar(1);
+//        new CommonUtils().hideStatusBar(1);
+
+        RootTools.hideStatusBar();
+        RootTools.hideNavigationBar();
 
         getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
     }
@@ -1754,7 +1764,10 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
         //  isShowMediaMenuOnStop = true;
         //1關閉狀態列
-        new CommonUtils().hideStatusBar(1);
+//        new CommonUtils().hideStatusBar(1);
+
+        RootTools.hideStatusBar();
+        RootTools.hideNavigationBar();
     }
 
     @Override

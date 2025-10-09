@@ -184,6 +184,7 @@ import com.dyaco.spirit_commercial.support.FormulaUtil;
 import com.dyaco.spirit_commercial.support.LoadingWindowAllB;
 import com.dyaco.spirit_commercial.support.LoadingWindowEx;
 import com.dyaco.spirit_commercial.support.MsgEvent;
+import com.dyaco.spirit_commercial.support.RootTools;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.ScreenReceiver;
 import com.dyaco.spirit_commercial.support.SystemProperty;
@@ -373,7 +374,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
         //關閉狀態列
-        new CommonUtils().hideStatusBar(1);
+//        new CommonUtils().hideStatusBar(1);
+        RootTools.hideStatusBar();
+        RootTools.hideNavigationBar();
 
 
         closePackage(this);
