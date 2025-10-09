@@ -61,6 +61,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -73,8 +74,6 @@ import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.FragmentLoginBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.model.webapi.EgymWebListener;
-import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.custom_view.CustomToast;
@@ -91,10 +90,20 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import java.io.File;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
+    private AnimatorSet expandAnimatorSet;
+    private AnimatorSet collapseAnimatorSet;
+    private ValueAnimator expandHeightAnimator;
+    private ValueAnimator expandCornerAnimator;
+    private ValueAnimator collapseHeightAnimator;
+    private ValueAnimator collapseCornerAnimator;
+    private ObjectAnimator textFadeOutAnimator;
+    private ObjectAnimator textFadeInAnimator;
+    private ObjectAnimator descFadeInAnimator;
 
-    //    private static final Logger log = LoggerFactory.getLogger(LoginFragment.class);
+
     AppStatusViewModel appStatusViewModel;
     DeviceSettingViewModel deviceSettingViewModel;
     EgymDataViewModel egymDataViewModel;
@@ -109,142 +118,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         super.onCreate(savedInstanceState);
     }
 
-//    public EgymDiagramBarsViewBySet egymDiagramBarsView;
-
-    private void sss() {
-
-//        GeoLocationResolver.newRequest()
-//                .add("http://www.geoplugin.net/json.gp", "geoplugin_timezone")
-//                .add("https://ipapi.co/json/", "timezone")
-//                .add("https://ipwho.is/", "timezone.id")//巢狀欄位
-//                .add("https://api.ipbase.com/v1/json/", "time_zone")
-//                .add("http://worldtimeapi.org/api/ip", "timezone")
-//                .add("https://ipinfo.io/json", "timezone")
-//                .execute(new GeoLocationCallback() {
-//                    @Override
-//                    public void onSuccess(@NonNull String value) {
-//                        Log.d("GeoLocation", "✅ 成功取得Timezone: " + value);
-//                        //使用取得的時區更新時間和時區
-//                    }
-//
-//                    @Override
-//                    public void onFailure(@NonNull String error) {
-//                        Log.e("GeoLocation", "❌ 全部失敗: " + error);
-//                        //使用當前的時區更新時間
-//                    }
-//                });
-
-
-//        ImageView imageView =getBinding().imageView;
-////        imageView.setImageResource(R.drawable.egym_avd_draw_trail);
-//        imageView.setImageResource(R.drawable.egym_avd_fade_anim);
-//        Drawable drawable = imageView.getDrawable();
-//        if (drawable instanceof AnimatedVectorDrawable) {
-//            AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
-//            avd.start();
-//        }
-
-        //    String json = "{ \"genius\": [], \"smart\": [], \"trainer\": [{ \"author\": { \"firstName\": \"Spiritfitness\", \"image\": { \"imageId\": \"qj5FmWYhi8SMo8oUw8dA5A\", \"imageType\": \"AVATAR\" }, \"lastName\": \"Trainer\", \"userId\": \"1ichsmhai7bjz\" }, \"endTimestamp\": 1745884800000, \"exerciseName\": \"Treadmill\", \"frequency\": 2, \"intervals\": [ { \"duration\": 60000, \"incline\": 1, \"speed\": 240.0000024 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 100.0000008 }, { \"duration\": 60000, \"incline\": 1, \"speed\": 3.0000024 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 1.0000008 }, { \"duration\": 60000, \"incline\": 1, \"speed\": 100.0000032 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 110.0000008 }, { \"duration\": 60000, \"incline\": 1, \"speed\": 40.0000032 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 1.0000008 }, { \"duration\": 60000, \"incline\": 1, \"speed\": 5.000004000000001 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 1.0000008 }, { \"duration\": 60000, \"incline\": 1, \"speed\": 5.000004000000001 }, { \"duration\": 120000, \"incline\": 1, \"speed\": 120.0000008 } ], \"orderNumber\": 0, \"sessionName\": \"Session 1\", \"startTimestamp\": 1742256000000, \"timezone\": \"America/Chicago\", \"trainingPlanExerciseId\": 5979275685789696, \"trainingPlanId\": 4946801719508992 }] }";
-//        String json = "{\"trainer\":[{\"author\":{\"userId\":\"1ichsmhai7bjz\",\"firstName\":\"Spiritfitness\",\"lastName\":\"Trainer\",\"image\":{\"imageType\":\"AVATAR\",\"imageId\":\"qj5FmWYhi8SMo8oUw8dA5A\"}},\"exerciseName\":\"Treadmill\",\"sessionName\":\"QQQQQ\",\"startTimestamp\":1742342400000,\"endTimestamp\":1745971200000,\"frequency\":2,\"timezone\":\"America/Chicago\",\"trainingPlanId\":4734618255491072,\"trainingPlanExerciseId\":6253907168985088,\"orderNumber\":0,\"intervals\":[{\"speed\":6.111116000000001,\"duration\":1800000,\"distance\":80000.0,\"heartRate\":90,\"incline\":1.0},{\"speed\":6.3888940000000005,\"duration\":9600000,\"distance\":80000.0,\"heartRate\":80,\"incline\":8.0},{\"speed\":8.055562,\"duration\":14000,\"distance\":8000.0,\"incline\":1.0}]}],\"smart\":[],\"genius\":[]}";
-//        Gson gson = new Gson();
-//        EgymTrainingPlans egymTrainingPlans = gson.fromJson(json, EgymTrainingPlans.class);
-//
-//        Log.d("EGYM_W", "sss: " + gson.toJson(egymTrainingPlans));
-//
-//        List<Integer> durationTimesList = new ArrayList<>();
-//        List<Integer> setsSpeedList = new ArrayList<>();
-//        for (EgymTrainingPlans.TrainerDTO trainer : egymTrainingPlans.getTrainer()) {
-//            for (EgymTrainingPlans.TrainerDTO.IntervalsDTO interval : trainer.getIntervals()) {
-//                durationTimesList.add(interval.getDuration() / 1000); // 轉換 duration -> 秒
-//                setsSpeedList.add((int) Math.round(interval.getSpeed())); // 轉換 speed -> 整數
-//            }
-//        }
-
-
-//        EgymIntervalViewBySet progressBar = getBinding().egymIntervalView;
-//        final int[] x = {0};
-//        progressBar.setDurationTimesList(durationTimesList);
-//        progressBar.setProgress(0);
-//        progressBar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                x[0]++;
-//                progressBar.setProgress(x[0]);
-//            }
-//        });
-
-//        egymDiagramBarsView = getBinding().egymDiagramBarsView;
-//
-//
-//        egymDiagramBarsView.isTreadmill(isTreadmill);
-//
-//        int barMaxLevel = (int) (getFloat(getMaxSpeedValue(ProgramsEnum.EGYM)) > 0 ? getMaxSpeedValue(ProgramsEnum.EGYM) + 1 : getMaxSpeedValue(ProgramsEnum.EGYM));
-//        //    int barMaxLevel = 24;
-//        //bar 長度
-//        egymDiagramBarsView.setBarMaxLevel(barMaxLevel);
-//
-//        int totalTime = durationTimesList.stream().mapToInt(Integer::intValue).sum();
-//        Log.d("EGYM_W", "total 時間秒數: " + totalTime);
-//        Log.d("EGYM_W", "sets所佔的秒數: " + durationTimesList);
-//        Log.d("EGYM_W", "sets SPEED: " + setsSpeedList);
-//        Log.d("EGYM_W", "sets數量: " + durationTimesList.size());
-//
-//        List<Integer> setsTimePosition = convertToPositionList(durationTimesList);
-//        Log.d("EGYM_W", "sets,所佔的Index: " + setsTimePosition);
-//
-//
-//        egymDiagramBarsView.setDurationTimesList(durationTimesList);
-//
-//        Log.d("EGYM_W", "Bar數量: " + egymDiagramBarsView.getBarCount());
-//
-//        // INCLINE 0.5 > 1階
-//        // SPEED 0.1 > 1階
-//        //公制 24階 > incline 最大 30, speed 最大 240
-//
-////        //紫色incline在前面, 蓋住 Speed, 藍色speed 在後面
-//
-//
-//        int[] currentIndex = {0};
-//        AtomicInteger targetValue = new AtomicInteger();
-////        new RxTimer().interval(1000, x -> {
-////            egymDiagramBarsView.setWhiteLinePosition(currentIndex[0]);
-////            currentIndex[0] += 1;
-//            targetValue.set(setsTimePosition.stream().filter(num -> num >= currentIndex[0]).findFirst().orElse(currentIndex[0]));
-////        });
-//
-//        isChartHidden = false;
-//        final int[] speedValue = {120};
-//
-//
-//
-//        LongClickUtil.attach(getBinding().iM).observe(getViewLifecycleOwner(), unit -> {
-//            speedValue[0] -= 1;
-//            for (int i = currentIndex[0]; i <= targetValue.get(); i++) {
-//                egymDiagramBarsView.setBarLevel(BAR_TYPE_LEVEL_SPEED, i, speedValue[0], currentIndex[0], false);
-//            }
-//        });
-//
-//        LongClickUtil.attach(getBinding().iP).observe(getViewLifecycleOwner(), unit -> {
-//            speedValue[0] += 1;
-//            for (int i = currentIndex[0]; i <= targetValue.get(); i++) {
-//                egymDiagramBarsView.setBarLevel(BAR_TYPE_LEVEL_SPEED, i, speedValue[0], currentIndex[0], false);
-//            }
-//        });
-//
-//        egymDiagramBarsView.setWhiteLinePosition(currentIndex[0]);
-//
-//        LongClickUtil.attach(getBinding().sM).observe(getViewLifecycleOwner(), unit -> {
-//            currentIndex[0] += 1;
-//
-//            egymDiagramBarsView.setWhiteLinePosition(currentIndex[0]);
-//
-//
-//            targetValue.set(setsTimePosition.stream().filter(num -> num >= currentIndex[0]).findFirst().orElse(currentIndex[0]));
-//
-//            Log.d("EGYM_W", "目標index: " + targetValue);
-//        });
-
-    }
 
 
     private void expandAnimation() {
@@ -252,215 +125,144 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         ImageView iv = getBinding().ivEgymIcon;
 
         // 計算目標位置
-        float targetX = btn.getX() + btn.getWidth() / 2f - iv.getWidth() / 2f; // 按鈕的水平中心
-        float targetY = btn.getY() - iv.getHeight() / 2f; // 按鈕的上方邊緣 負值表示向上移動
-        targetY += 24; // 不要往上移動太多 扣掉 24
-        // 放大動畫
+        float targetX = btn.getX() + btn.getWidth() / 2f - iv.getWidth() / 2f;
+        float targetY = btn.getY() - iv.getHeight() / 2f + 24; // 調整 y 軸位置
+
+        // 放大與移動動畫
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(iv, "scaleX", 1.857f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(iv, "scaleY", 1.857f);
-
-        // 移動動畫
         ObjectAnimator moveX = ObjectAnimator.ofFloat(iv, "x", targetX);
         ObjectAnimator moveY = ObjectAnimator.ofFloat(iv, "y", targetY);
 
         // 動畫組合
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(scaleX, scaleY, moveX, moveY);
-        animatorSet.setDuration(300);
-        animatorSet.start();
+        expandAnimatorSet = new AnimatorSet();
+        expandAnimatorSet.playTogether(scaleX, scaleY, moveX, moveY);
+        expandAnimatorSet.setDuration(300);
+        expandAnimatorSet.start();
 
-        ////////////////////
-
-
+        // 關閉按鈕淡入
         getBinding().btnClose.setAlpha(0f);
         getBinding().btnClose.setVisibility(View.VISIBLE);
-        getBinding().btnClose.animate()
-                .alpha(1f)
-                .setDuration(300)
-                .setListener(null);
+        getBinding().btnClose.animate().alpha(1f).setDuration(300).setListener(null);
 
-//        float translationY2 = CommonUtils.dpToPx(requireActivity(), -50); // 负值表示向上移动
-//        ObjectAnimator moveY2 = ObjectAnimator.ofFloat(getBinding().btnClose, "translationY", 0, translationY2);
-//        AnimatorSet animatorSet2 = new AnimatorSet();
-//        animatorSet2.playTogether(moveY2);
-//        animatorSet2.setDuration(300);
-//        animatorSet2.start();
+        // 登入文字淡出
+        textFadeOutAnimator = ObjectAnimator.ofFloat(getBinding().tvLoginText, "alpha", 1f, 0f);
+        textFadeOutAnimator.setDuration(200);
+        textFadeOutAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (getBinding() != null) {
+                    getBinding().tvLoginText.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        textFadeOutAnimator.start();
 
-
-        ///////////////////////
-
-
-        //     String text = getBinding().btnQQQQQ.getText().toString();
-        //   SpannableString spannable = new SpannableString(text);
-//        //按鈕中間文字消失
-//        getBinding().btnQQQQQ.animate()
-//                .setDuration(500)
-//                .setUpdateListener(animation -> {
-//                    float alpha = 1f - animation.getAnimatedFraction();
-//                    int color = CommonUtils.adjustAlpha(alpha);
-//                    spannable.setSpan(new ForegroundColorSpan(color), 0, text.length(), 0);
-//                    getBinding().btnQQQQQ.setText(spannable);
-//                })
-//                .start();
-
-        getBinding().tvLoginText.animate()
-                .alpha(0f)
-                .setDuration(200)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        getBinding().tvLoginText.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-
-        // 高度動畫
-        ValueAnimator heightAnimator = ValueAnimator.ofInt(272, 368);
-        heightAnimator.addUpdateListener(animation -> {
-            int animatedHeight = (int) animation.getAnimatedValue();
-            ViewGroup.LayoutParams layoutParams = btn.getLayoutParams();
-            layoutParams.height = animatedHeight;
-            btn.setLayoutParams(layoutParams);
-
-            // 動態調整按鈕的 translationY
-//            float translation = (272 - animatedHeight) / 2f; // 平均移動
-//            btn.setTranslationY(translation);
+        // 按鈕高度動畫
+        expandHeightAnimator = ValueAnimator.ofInt(btn.getHeight(), 368);
+        expandHeightAnimator.addUpdateListener(animation -> {
+            if (getBinding() != null) {
+                int animatedHeight = (int) animation.getAnimatedValue();
+                ViewGroup.LayoutParams layoutParams = btn.getLayoutParams();
+                layoutParams.height = animatedHeight;
+                btn.setLayoutParams(layoutParams);
+            }
         });
 
-
-        //radius 24 > 40
-        // 圓角動畫
-        ValueAnimator cornerAnimator = ValueAnimator.ofFloat(24, 40);
-        cornerAnimator.addUpdateListener(animation -> {
-            float animatedCorner = (float) animation.getAnimatedValue();
-            btn.setCornerRadius((int) animatedCorner);
+        // 按鈕圓角動畫
+        expandCornerAnimator = ValueAnimator.ofFloat(24, 40);
+        expandCornerAnimator.addUpdateListener(animation -> {
+            if (getBinding() != null) {
+                float animatedCorner = (float) animation.getAnimatedValue();
+                btn.setCornerRadius((int) animatedCorner);
+            }
         });
 
         // 同步運行動畫
-        heightAnimator.setDuration(300);
-        cornerAnimator.setDuration(300);
-        heightAnimator.start();
-        cornerAnimator.start();
+        expandHeightAnimator.setDuration(300);
+        expandCornerAnimator.setDuration(300);
+        expandHeightAnimator.start();
+        expandCornerAnimator.start();
 
-
-        ///
+        // 描述文字淡入
         getBinding().tvEgymDesc.setAlpha(0f);
-        getBinding().tvEgymDesc.setVisibility(View.VISIBLE); // 先設置為可見
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(getBinding().tvEgymDesc, "alpha", 0f, 1f);
-        fadeIn.setDuration(500); // 設置動畫時長
-        fadeIn.start();
-
-        //   getBinding().tvEgymDesc.setVisibility(View.VISIBLE);
+        getBinding().tvEgymDesc.setVisibility(View.VISIBLE);
+        descFadeInAnimator = ObjectAnimator.ofFloat(getBinding().tvEgymDesc, "alpha", 0f, 1f);
+        descFadeInAnimator.setDuration(500);
+        descFadeInAnimator.start();
     }
+
+
+
 
     //還原
     private void collapseAnimation() {
         View view = getBinding().ivEgymIcon;
-        // 創建平移動畫
-        ObjectAnimator moveX = ObjectAnimator.ofFloat(view, "translationX", view.getTranslationX(), 0);
-        ObjectAnimator moveY = ObjectAnimator.ofFloat(view, "translationY", view.getTranslationY(), 0);
+        MaterialButton btn = getBinding().btnEgymLogin;
 
-        // 創建縮放動畫
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", view.getScaleX(), 1f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", view.getScaleY(), 1f);
+        // 創建平移與縮放動畫
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(view, "translationX", 0);
+        ObjectAnimator moveY = ObjectAnimator.ofFloat(view, "translationY", 0);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1f);
 
         // 組合動畫
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(moveX, moveY, scaleX, scaleY);
-        animatorSet.setDuration(300);
-        animatorSet.start();
+        collapseAnimatorSet = new AnimatorSet();
+        collapseAnimatorSet.playTogether(moveX, moveY, scaleX, scaleY);
+        collapseAnimatorSet.setDuration(300);
+        collapseAnimatorSet.start();
 
-        // 按鈕淡出
+        // 關閉按鈕淡出
         getBinding().btnClose.animate()
                 .alpha(0f)
                 .setDuration(300)
-                .setListener(new Animator.AnimatorListener() {
+                .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        getBinding().btnClose.setVisibility(View.GONE); // 動畫結束後隱藏按鈕
-                    }
-
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
+                        if (getBinding() != null) {
+                            getBinding().btnClose.setVisibility(View.GONE);
+                        }
                     }
                 });
 
-
-        //按鈕中間文字還原
-//        String text = getBinding().btnQQQQQ.getText().toString();
-//        SpannableString spannable = new SpannableString(text);
-//        // 動畫過程中逐漸增加文字透明度
-//        getBinding().btnQQQQQ.animate()
-//                .setDuration(500)
-//                .setUpdateListener(animation -> {
-//                    float alpha = animation.getAnimatedFraction();
-//                    int color = CommonUtils.adjustAlpha(alpha); // 動態調整文字顏色透明度
-//                    spannable.setSpan(new ForegroundColorSpan(color), 0, text.length(), 0);
-//                    getBinding().btnQQQQQ.setText(spannable); // 更新按鈕文字
-//                })
-//                .start();
-
+        // 登入文字淡入
         getBinding().tvLoginText.setAlpha(0f);
         getBinding().tvLoginText.setVisibility(View.VISIBLE);
-        getBinding().tvLoginText.animate()
-                .alpha(1f)
-                .setDuration(300)
-                .setListener(null);
+        textFadeInAnimator = ObjectAnimator.ofFloat(getBinding().tvLoginText, "alpha", 0f, 1f);
+        textFadeInAnimator.setDuration(300);
+        textFadeInAnimator.start();
 
-        // 高度動畫
-        ValueAnimator heightAnimator = ValueAnimator.ofInt(368, 272); // (272,原始高度)
-        heightAnimator.addUpdateListener(animation -> {
-            int animatedHeight = (int) animation.getAnimatedValue();
-            ViewGroup.LayoutParams layoutParams = getBinding().btnEgymLogin.getLayoutParams();
-            layoutParams.height = animatedHeight;
-            getBinding().btnEgymLogin.setLayoutParams(layoutParams);
-
-            // 動態調整按鈕的 translationY
-//            float translation = (272 - animatedHeight) / 2f; // 平均移動
-//            getBinding().btnEgymLogin.setTranslationY(translation);
+        // 按鈕高度動畫
+        collapseHeightAnimator = ValueAnimator.ofInt(btn.getHeight(), 272);
+        collapseHeightAnimator.addUpdateListener(animation -> {
+            if (getBinding() != null) {
+                int animatedHeight = (int) animation.getAnimatedValue();
+                ViewGroup.LayoutParams layoutParams = btn.getLayoutParams();
+                layoutParams.height = animatedHeight;
+                btn.setLayoutParams(layoutParams);
+            }
         });
 
-        float translationY2 = CommonUtils.dpToPx(requireActivity(), 0); // 负值表示向上移动
-        ObjectAnimator moveY2 = ObjectAnimator.ofFloat(getBinding().btnClose, "translationY", 0, translationY2);
-        AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(moveY2);
-        animatorSet2.setDuration(300);
-        animatorSet2.start();
-
-        // 圓角動畫
-        ValueAnimator cornerAnimator = ValueAnimator.ofFloat(40, 24);
-        cornerAnimator.addUpdateListener(animation -> {
-            float animatedCorner = (float) animation.getAnimatedValue();
-            getBinding().btnEgymLogin.setCornerRadius((int) animatedCorner);
+        // 按鈕圓角動畫
+        collapseCornerAnimator = ValueAnimator.ofFloat(40, 24);
+        collapseCornerAnimator.addUpdateListener(animation -> {
+            if (getBinding() != null) {
+                float animatedCorner = (float) animation.getAnimatedValue();
+                btn.setCornerRadius((int) animatedCorner);
+            }
         });
 
         // 同步運行動畫
-        heightAnimator.setDuration(300);
-        cornerAnimator.setDuration(300);
-        heightAnimator.start();
-        cornerAnimator.start();
+        collapseHeightAnimator.setDuration(300);
+        collapseCornerAnimator.setDuration(300);
+        collapseHeightAnimator.start();
+        collapseCornerAnimator.start();
 
-
+        // 隱藏描述文字並重置背景
         getBinding().tvEgymDesc.setVisibility(View.INVISIBLE);
-//        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(getBinding().tvEgymDesc, "alpha", 1f, 0f);
-//        fadeOut.setDuration(500); // 設置動畫時長
-//        fadeOut.start();
-//        fadeOut.addListener(new android.animation.AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(android.animation.Animator animation) {
-//                getBinding().tvEgymDesc.setVisibility(View.INVISIBLE); // 動畫結束後設置為不可見
-//            }
-//        });
-
-        mainActivity.getBinding().bgE.setVisibility(View.GONE);
+        if (mainActivity != null) {
+            mainActivity.getBinding().bgE.setVisibility(View.GONE);
+        }
         getBinding().bEgymBG.setVisibility(View.GONE);
     }
 
@@ -479,16 +281,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         getBinding().tvLoginText.setVisibility(View.VISIBLE);
         getBinding().btnEgymLogin.setVisibility(View.VISIBLE);
         getBinding().tvEgymDesc.setVisibility(View.INVISIBLE);
-//        getBinding().btnQQQQQ.post(() -> {
-//            int textLength = getString(R.string.Login_to_Egym).length();
-//            Log.d("CCCCOOOOO", "onViewCreated: " + textLength);
-//            int paddingStartInDp = 40 + textLength;
-//            int paddingTop = getBinding().btnQQQQQ.getPaddingTop();
-//            int paddingEnd = getBinding().btnQQQQQ.getPaddingEnd();
-//            int paddingBottom = getBinding().btnQQQQQ.getPaddingBottom();
-//            getBinding().btnQQQQQ.setPaddingRelative(paddingStartInDp, paddingTop, paddingEnd, paddingBottom);
-//        });
-
 
         getBinding().btnGotoWorkoutE.setOnClickListener(v -> {
 
@@ -518,7 +310,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             //避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
         //    Log.d(EgymUtil.TAG, "isEgymNfc: " + isEgymNfc);
             if (!isEgymNfc) return;
-            Log.d(EgymUtil.TAG, "isLogin: " + isNfcLogin);
+            Timber.tag(EgymUtil.TAG).d("isLogin: " + isNfcLogin);
             if (isNfcLogin) return;
 
             isNfcLogin = true;
@@ -531,8 +323,8 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             RFID_CODE = reverseUidHex(rfidCode);
 
 
-            Log.d(EgymUtil.TAG, "uid: " + rfidCode);
-            Log.d(EgymUtil.TAG, "轉HEX: " + RFID_CODE);
+            Timber.tag(EgymUtil.TAG).d("uid: " + rfidCode);
+            Timber.tag(EgymUtil.TAG).d("轉HEX: " + RFID_CODE);
 
          //   Log.d(EgymUtil.TAG, "NFC登入中: ");
 
@@ -633,31 +425,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
     }
 
 
-//    TermsAndConditionsWindow termsAndConditionsWindow;
-//    public void showTermsAndConditionsWindow(String text) {
-//
-//        if (termsAndConditionsWindow != null) {
-//            termsAndConditionsWindow.dismiss();
-//            termsAndConditionsWindow = null;
-//        }
-//
-//        termsAndConditionsWindow = new TermsAndConditionsWindow(requireActivity(),text);
-//        termsAndConditionsWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
-//        termsAndConditionsWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//            @Override
-//            public void onStartDismiss(MsgEvent value) {
-//                if (value != null) {
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onDismiss() {
-//                //   hrUpdateWindow = null; 不能加
-//            }
-//        });
-//    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -667,12 +434,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         egymDataViewModel = new ViewModelProvider(requireActivity()).get(EgymDataViewModel.class);
         mainActivity = (MainActivity) requireActivity();
 
-//        WorkoutViewModel workoutViewModel =  new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
-//
-////        workoutViewModel.isSamsungWatchEnabled.set(true);
-////        workoutViewModel.isSamsungWatchConnected.set(true);
-//        workoutViewModel.isGarminConnected.set(true);
-        sss();
 
         isHomeScreen = false;
 
@@ -686,27 +447,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         }
 
 
-//        // 設定數據
-//        getBinding().stackedBarChartView.setData(
-//                new String[]{"0:00", "8:00", "16:00", "24:00", ""},
-//                new String[]{"0.0", "4.0", "8.0", "12.0", "16.0", "20.0"},
-//                new float[]{8, 10, 8, 4, 10, 6, 8, 19, 4},
-//                new float[]{8, 10, 12, 8, 16, 10, 12, 19, 6}
-//        );
-//
-//// 設定柱狀圖顏色 color_level_speed_bar_run
-////        getBinding().stackedBarChartView.setBarColors(
-////                "#E61396EF", // Outcome 顶部颜色
-////                "#331396EF", // Outcome 底部颜色
-////                "#1A1396EF"  // Target 颜色
-////        );
-//        getBinding().stackedBarChartView.setBarColors(
-//                ContextCompat.getColor(requireActivity(), R.color.color_level_speed_bar_run), // Outcome 顶部颜色
-//                ContextCompat.getColor(requireActivity(), R.color.color_level_speed_bar_run), // Outcome 底部颜色
-//                ContextCompat.getColor(requireActivity(), R.color.color1A1396ef)  // Target 颜色
-//        );
-
-        //    InputMethodSwitcher.switchInputMethod(getApp());
         testGboard();
 
 
@@ -777,17 +517,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             return false;
         });
 
-
-//        getBinding().btnQrcodeLogin.
-//                setOnClickListener(
-//                        new OnMultiClickListener() {
-//                            @Override
-//                            public void onMultiClick(View v) {
-//                                Navigation.findNavController(v).navigate(LoginFragmentDirections.actionLoginFragmentToQrcodeLoginFragment());
-//                              //  parent.navController.navigate(LoginFragmentDirections.actionLoginFragmentToQrcodeLoginFragment());
-//                            }
-//                        }
-//                );
 
 
         getBinding().btnQrcodeLogin.setOnClickListener(v -> {
@@ -896,31 +625,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
 
         });
 
-
-//        Map<DeviceGEM.EQUIPMENT_CONTROL_PARAMETER, Integer> parameters = new HashMap<>();
-//        getDeviceGEM().gymConnectMessageSetFitnessEquipmentState(DeviceGEM.FITNESS_EQUIPMENT_STATE.IDLE, parameters);
-
-//        getBinding().vvNFC.setVisibility(View.VISIBLE);
-//        getBinding().vvIdel.setVisibility(View.VISIBLE);
-//        getBinding().vvInUSE.setVisibility(View.VISIBLE);
-//        getBinding().vvFinish.setVisibility(View.VISIBLE);
-
-//        getBinding().vvNFC.setOnClickListener(view13 -> {
-//
-//        });
-//
-//
-//        getBinding().vvIdel.setOnClickListener(view13 -> {
-//            getDeviceGEM().gymConnectMessageSetFitnessEquipmentState(DeviceGEM.FITNESS_EQUIPMENT_STATE.IDLE, parameters);
-//        });
-//
-//        getBinding().vvInUSE.setOnClickListener(view12 -> {
-//            getDeviceGEM().gymConnectMessageSetFitnessEquipmentState(DeviceGEM.FITNESS_EQUIPMENT_STATE.IN_USE, parameters);
-//        });
-//
-//        getBinding().vvFinish.setOnClickListener(view1 -> {
-//            getDeviceGEM().gymConnectMessageSetFitnessEquipmentState(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters);
-//        });
     }
 
     public static boolean isGuestQuickStart = false;
@@ -1088,7 +792,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                     .into(getBinding().cHomeBg);
 
         } catch (Exception e) {
-            Log.e("SplashLoad", "Error loading splash image", e);
+            Timber.tag("SplashLoad").e(e, "Error loading splash image");
         }
     }
 
@@ -1108,10 +812,46 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
+        Animator[] animators = {
+                expandAnimatorSet, collapseAnimatorSet,
+                expandHeightAnimator, expandCornerAnimator,
+                collapseHeightAnimator, collapseCornerAnimator,
+                textFadeOutAnimator, textFadeInAnimator, descFadeInAnimator
+        };
+
+        for (Animator anim : animators) {
+            if (anim != null) {
+                // 如果動畫正在運行，先取消它
+                if (anim.isRunning()) {
+                    anim.cancel();
+                }
+                // 移除所有監聽器，避免洩漏
+                anim.removeAllListeners();
+            }
+        }
+
+        // 清除 ViewPropertyAnimator 可能的監聽器
+        if (getBinding() != null) {
+            getBinding().btnClose.animate().setListener(null);
+        }
+
+
+        expandAnimatorSet = null;
+        collapseAnimatorSet = null;
+        expandHeightAnimator = null;
+        expandCornerAnimator = null;
+        collapseHeightAnimator = null;
+        collapseCornerAnimator = null;
+        textFadeOutAnimator = null;
+        textFadeInAnimator = null;
+        descFadeInAnimator = null;
+
+
         mainActivity.showWebApiAlert(false, "");
         //    SpiritDbManager.getInstance(getApp()).clear(); 會讓下一頁取資料庫資料時被清掉而取不到
-
+        mainActivity = null;
+//        Timber.tag("LeakCanary").d("⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️onDestroyView: ");
+        super.onDestroyView();
     }
 
     private boolean cLimit() {
@@ -1144,17 +884,17 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         String oldDefaultKeyboard = Settings.Secure.getString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
 //        Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, "com.google.android.inputmethod.latin/.full.path");
 //        Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, "com.google.android.inputmethod.latin/.full.path");
-        Log.d("GboardManager", "目前的輸入法" + oldDefaultKeyboard);
+        Timber.tag("GboardManager").d("目前的輸入法%s", oldDefaultKeyboard);
         if (!GboardPackage.equals(oldDefaultKeyboard)) {
             //目前輸入法不是 Gboard
             //先檢查是否安裝 Gboard
-            Log.d("GboardManager", "目前輸入法不是Gboard 先檢查是否安裝Gboard");
+            Timber.tag("GboardManager").d("目前輸入法不是Gboard 先檢查是否安裝Gboard");
             if (checkAppInstalled(requireActivity(), "com.google.android.inputmethod.latin")) {
                 Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, GboardPackage);
                 Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, GboardPackage);
-                Log.d("GboardManager", "已安裝，開啟 Gboard");
+                Timber.tag("GboardManager").d("已安裝，開啟 Gboard");
             } else {
-                Log.d("GboardManager", "沒安裝 Gboard，無事");
+                Timber.tag("GboardManager").d("沒安裝 Gboard，無事");
             }
 
             //選擇輸入法，可不執行
@@ -1162,7 +902,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
 //            InputMethodManager imeManager = (InputMethodManager) requireActivity().getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
 //            imeManager.showInputMethodPicker();
         } else {
-            Log.d("GboardManager", "已安裝 Gboard，無事");
+            Timber.tag("GboardManager").d("已安裝 Gboard，無事");
         }
     }
 

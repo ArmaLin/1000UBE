@@ -2,8 +2,6 @@ package com.dyaco.spirit_commercial;
 
 import android.app.Application;
 
-
-import leakcanary.LeakCanary;
 import timber.log.Timber;
 
 /**
@@ -18,10 +16,10 @@ public class DebugInitializer {
 
 
     // 初始化 LeakCanary
-    LeakCanary.Config config = LeakCanary.getConfig().newBuilder()
-            .retainedVisibleThreshold(1)
-            .build();
-    LeakCanary.setConfig(config);
+//    LeakCanary.Config config = LeakCanary.getConfig().newBuilder()
+//            .retainedVisibleThreshold(1)
+//            .build();
+//    LeakCanary.setConfig(config);
 
   }
 }

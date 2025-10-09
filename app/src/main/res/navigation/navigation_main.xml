@@ -48,7 +48,7 @@
             app:destination="@id/mainBlankFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/navigation_login"
             app:popUpToInclusive="true" />
         <!--app:popUpTo="@id/loginFragment" 才會觸發 LoginFragment onDestroy
             沒onDestroy，Event會持續監聽-->

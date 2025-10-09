@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import timber.log.Timber;
 
 public class App extends Application {
     public static String IMAGE_KEY = "IMAGE_KEY";
@@ -80,11 +79,10 @@ public class App extends Application {
         initEvent();
 
         ///data/user/0/com.dyaco.spirit_commercial/files/mmkv
-        try {
-            MMKV.initialize(this);
-        } catch (Exception e) {
-            Timber.e(e);
-        }
+
+        MMKV.initialize(this);
+
+        DebugInitializer.init(this);
 
         LiveEventBus.config().enableLogger(false);
 

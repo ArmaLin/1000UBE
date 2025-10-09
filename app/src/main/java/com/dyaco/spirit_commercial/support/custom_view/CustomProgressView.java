@@ -64,7 +64,7 @@ public class CustomProgressView extends View {
             mAnimationProgress = (float) animation.getAnimatedValue();
             invalidate(); // 更新畫面
         });
-        mAnimator.start();
+       // mAnimator.start();
     }
 
     @Override
@@ -91,6 +91,29 @@ public class CustomProgressView extends View {
             float cy = baseY - offsetY;
             // 繪製圈圈，陰影效果會自動套用
             canvas.drawCircle(cx, cy, mCircleRadius, mPaint);
+        }
+    }
+
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        // 確保動畫在 View 可見時運行
+        if (mAnimator != null && !mAnimator.isRunning()) {
+            mAnimator.start();
+        }
+    }
+
+    // 當 View 從視窗分離時會被呼叫 (這是最關鍵的修改)
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        // 如果動畫存在，則停止並清理它
+        if (mAnimator != null) {
+            // 停止動畫
+            mAnimator.cancel();
+            // 移除所有更新監聽器，徹底斷開引用鏈
+            mAnimator.removeAllUpdateListeners();
         }
     }
 }

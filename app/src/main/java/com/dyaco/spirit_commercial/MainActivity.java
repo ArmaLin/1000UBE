@@ -1882,6 +1882,12 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     protected void onDestroy() {
         super.onDestroy();
 
+
+        if (mAudioDeviceWatcher != null) {
+            mAudioDeviceWatcher.removeListener();
+            mAudioDeviceWatcher = null;
+        }
+
         if (internetNotifyWarringWindow != null) {
             internetNotifyWarringWindow.dismiss();
             internetNotifyWarringWindow = null;
@@ -2269,6 +2275,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
      */
     public void checkUpdate() {
 
+        if (1 == 1) return;
+
         String uuRl;
         if (deviceSettingViewModel.territoryCode.get() == TERRITORY_US) {
             uuRl = BuildConfig.UPDATE_URL_US;
@@ -2285,7 +2293,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         Timber.tag(DownloadManagerCustom.TAG).d("checkUpdate: 呼叫 apiCheckUpdate()");
         BaseApi.request(BaseApi.createApi2(IServiceApi.class, uuRl).apiCheckUpdate(),
-                new BaseApi.IResponseListener<UpdateBean>() {
+                new BaseApi.IResponseListener<>() {
                     @Override
                     public void onSuccess(UpdateBean data) {
 
@@ -2550,9 +2558,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         if (hdmiIn != null) {
             //切port3 > 拔掉port3 > 重啟app > hdmi 抓上一個port > port3沒東西  > anr
             hdmiIn.SwitchHdmiSource(PORT_EZ_CAST);
+            mAudioDeviceWatcher = null;
         }
 
-
+        if (pingGemTimer != null) {
+            pingGemTimer.cancel();
+            pingGemTimer = null;
+        }
 
         //斷開藍芽音訊
         unBondAudio();

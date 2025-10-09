@@ -98,11 +98,11 @@ android {
             //  applicationIdSuffix ".dev"
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/xxxxx/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
 //            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.14:8080/"'
-            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/xxxxxx/"'
-            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/xxxxx/"'
-            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/xxxxx/"'
+            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
+            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
+            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
 //                buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.35:8080/"'
        //     buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/"'
@@ -506,9 +506,6 @@ dependencies {
     implementation 'org.zeroturnaround:zt-zip:1.13'
 
 
-    //重新啟動App
-    //  implementation 'com.jakewharton:process-phoenix:3.0.0'
-
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
@@ -554,4 +551,8 @@ dependencies {
 
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
+
+
+
+    implementation 'com.jakewharton:process-phoenix:3.0.0'
 }

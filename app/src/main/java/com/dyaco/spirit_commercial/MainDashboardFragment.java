@@ -706,16 +706,30 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 
     @Override
     public void onDestroyView() {
+
+
+        mbTraining = null;
+        mbMedia = null;
+        fragmentTransaction = null;
+        selectedItem1 = null;
+        selectedItem2 = null;
+        transition = null;
+        mainDashboardTrainingFragment = null;
+        dashboardMainMediaFragment = null;
+        mainWorkoutTrainingFragment = null;
+        workoutPauseFragment = null;
+        m_currentFragment = null;
+
+
+
         super.onDestroyView();
 
-        Log.d("DESSSSS", "onDestroyView: ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         fragmentTransaction = null;
-        Log.d("DESSSSS", "Mian_onDestroy: ");
     }
 
     private void goToWorkout() {
