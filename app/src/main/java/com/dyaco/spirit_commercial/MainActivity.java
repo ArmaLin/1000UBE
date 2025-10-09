@@ -93,14 +93,12 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -158,7 +156,6 @@ import com.dyaco.spirit_commercial.login.LoginFragment;
 import com.dyaco.spirit_commercial.maintenance_mode.MaintenanceUsageRestrictionsWindow;
 import com.dyaco.spirit_commercial.maintenance_mode.RetailVideoWindow;
 import com.dyaco.spirit_commercial.maintenance_mode.UsageLimitReachedWindow;
-import com.dyaco.spirit_commercial.maintenance_mode.usbx.BinaryInstaller;
 import com.dyaco.spirit_commercial.model.webapi.BaseApi;
 import com.dyaco.spirit_commercial.model.webapi.CallWebApi;
 import com.dyaco.spirit_commercial.model.webapi.IServiceApi;
@@ -247,6 +244,7 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public boolean isEgymNoData = false;
@@ -439,7 +437,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     return;
                 }
 
-                Log.d("RPM_CHECK", "準備登出: ");
+                Timber.tag("RPM_CHECK").d("準備登出: ");
 
                 if (isUs) {
                     if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {
@@ -451,7 +449,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                         deleteCache(this);
                         stopHandler();
                     }
-                    Log.d("RPM_CHECK", "US >>>> AUTO LOGOUT: ");
+                    Timber.tag("RPM_CHECK").d("US >>>> AUTO LOGOUT: ");
                 } else {
                     webApiLogout();
                 }
@@ -462,41 +460,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
             MediaAppUtils.checkForceUpdate();
 
-            //  if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {
-
             EgymUtil.init(this, deviceSettingViewModel, egymDataViewModel);
-            //    }
 
-
-//            return false;
-//        });
 
     }
 
-
-//    private void aaa() {
-//        //    Log.d("PPPPPPPPPP", Arrays.toString(ModeEnum.getBikeWattTable2()).);
-//        int[][] wattArray = ModeEnum.getEllWattTable2();
-//        String[] rpmArray = {"20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100", "105", "110", "115", "120"};
-//
-//        JSONArray jsonArray = new JSONArray();
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            for (int i = 0; i < wattArray.length; i++) {
-//                for (int j = 0; j < rpmArray.length; j++) {
-//                    jsonObject.put((rpmArray[j]), String.valueOf(Math.round(wattArray[i][j])));
-//                }
-//                jsonArray.put(i, jsonObject);
-//                Log.d("PPPPPPPPEE@@@@@@", jsonObject.toString() + ",");
-//            }
-//
-//            //  longLog(jsonArray.toString());
-//            //  Log.d("PPPPPPPPEE@@@@@@", jsonArray.toString());
-//        } catch (JSONException | AssertionError e) {
-//            Log.d("PPPPPPPPEE@@@@@@", "exception: " + e.getLocalizedMessage());
-//        }
-//
-//    }
 
     private void checkUploadWebApi() {
 
@@ -523,7 +491,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
 
-        Log.d("LIMIT_SHOW", "LIMIT種類: " + deviceSettingBean.getUsageRestrictionsType() + ",\n" +
+        Timber.tag("LIMIT_SHOW").d("LIMIT種類: " + deviceSettingBean.getUsageRestrictionsType() + ",\n" +
                 "(2 = 時間)設定的時間:" + deviceSettingBean.getUsageRestrictionsTimeLimit() + " 秒, 當前時間:" + deviceSettingBean.getCurrentUsageRestrictionsTime() + " 秒\n" +
                 "(1 = 距離)設定的距離:" + deviceSettingBean.getUsageRestrictionsDistanceLimit() + " km, 當前距離:" + deviceSettingBean.getCurrentUsageRestrictionsDistance());
 
@@ -574,12 +542,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     appStatusViewModel.isBtOn.set(false);
                     Toasty.error(this, "Bluetooth ERROR !", Toasty.LENGTH_LONG).show();
                 }
-//                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//                    //22:22:18:C6:0C:00
-//                    App.MACHINE_MAC = "7E:C1:46:61:62:AE";
-//                    Log.d("EEEEEEE", "getBluetoothMacAddress: " + android.provider.Settings.Secure.getString(getContentResolver(), "bluetooth_address"));
-//                        }
-//                ).launch(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
+
             } else {
                 initBtDevice();
 
@@ -616,7 +579,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 if (profile == BluetoothProfile.A2DP) {
                     BluetoothA2dp btA2dp = (BluetoothA2dp) proxy;
                     List<BluetoothDevice> a2dpConnectedDevices = btA2dp.getConnectedDevices();
-                    if (a2dpConnectedDevices.size() != 0) {
+                    if (!a2dpConnectedDevices.isEmpty()) {
                         for (BluetoothDevice device : a2dpConnectedDevices) {
 
                             if (appStatusViewModel != null)
@@ -642,15 +605,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
     private void initAppUpdate() {
-//        //未知來源安裝
-//        new RxTimer().timer(1000, number -> {
-//            if (getPackageManager().canRequestPackageInstalls()) {
-//                checkUpdate();
-//            } else {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
-//                someActivityResultLauncher.launch(intent);
-//            }
-//        });
+
 
         //未知來源安裝檢查
         if (getPackageManager().canRequestPackageInstalls()) {
@@ -675,30 +630,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     private void initialize() {
 
-        //  initBluetooth();
 
-        ///storage/emulated/0/Android/data/com.dyaco.spirit_commercial/cache
         UPDATE_FILE_PATH = getExternalCacheDir().getAbsolutePath();
 
 
-        //ADB /mnt/sdcard/Android/data/com.dyaco.spirit_commercial/files
-        //插線 >Android > data > com.dyaco.spirit_commercial
-        //Android /storage/emulated/0/Android/data/com.dyaco.spirit_commercial/files
-        //   SETTING_FILE_PATH = getExternalFilesDir(null).getAbsolutePath();
         SETTING_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CoreStar/Dyaco/Spirit/default_settings.json";
-        ///storage/emulated/0/CoreStar/Dyaco/Spirit/default_settings.json
 
-        ///data/user/0/com.dyaco.spirit_commercial/files
-        //SETTING_FILE_PATH = getFilesDir().getAbsolutePath();
-
-        //   Log.d("SETTING_FILE", "設定檔路徑: " + SETTING_FILE_PATH);
-
-
-//        checkUpdate();
 
         initEvent();
 
-        //   initDelay();
 
         App.UNIT_E = getApp().getDeviceSettingBean().getUnit_code();
 
@@ -752,35 +692,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
 
-//        //懸浮視窗權限
-//        if (!Settings.canDrawOverlays(this)) {
-//            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result ->
-//                    Log.d("@@@@@@@", "onActivityResult: " + result)
-//            ).launch(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())));
-//        }
-
-        //安裝未知來源權限
-//        if (!getPackageManager().canRequestPackageInstalls()) {
-//            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//                        Log.d("安裝未知", "1111安裝未知來源權限: " + result);
-//                    }
-//            ).launch(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName())));
-//        }
-
-
-        //  Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME, checked);
-//        android.provider.Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 0);
-        //    android.provider.Settings.Secure.getString(this.getContentResolver(), "bluetooth_address");
-//        android.provider.Settings.Secure.getString(this.getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS);
-        //   android.provider.Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS,1);
-        // Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 1);
-
-
         initBluetooth();
         initReceiver(); // BITGYM, KINOMAP
 
-//        initAudioDeviceWatcher();
-//        unBondAudio();
 
     }
 
@@ -809,29 +723,29 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     // There are no request codes
                     //  Intent data = result.getData();
                     checkUpdate();
-                    Log.d("安裝未知", "OK安裝未知來源權限: " + result);
+                    Timber.tag("安裝未知").d("OK安裝未知來源權限: %s", result);
                 }
             });
 
     //    public static boolean isGen3PingDone;
     public void initGem3() {
 
-        Log.d("GEM3", "initGem3: ");
+        Timber.tag("GEM3").d("initGem3: ");
 
         DeviceGEM.GEMEventListener gemEventListener = new DeviceGemEventListener(this, workoutViewModel, appStatusViewModel);
         getDeviceGEM().setEventListener(gemEventListener);
         getDeviceGEM().ping(state -> {
-            Log.d("GEM3", "onPing: " + state);
+            Timber.tag("GEM3").d("onPing: %s", state);
             //全部斷線
             //同時呼叫 可能造成 bluetoothConfigurationMessageGetDeviceAddress 沒成功, 可試試延遲呼叫 << 沒用
             //   getDeviceGEM().customMessageDisconnectHeartRateDevice();
 
-            Log.d("GEM3", "取MAC bluetoothConfigurationMessageGetDeviceAddress: ");
+            Timber.tag("GEM3").d("取MAC bluetoothConfigurationMessageGetDeviceAddress: ");
             getDeviceGEM().bluetoothConfigurationMessageGetDeviceAddress();  // >>> onBluetoothConfigurationMessageGetDeviceAddress
             // TODO: 有機會  bluetoothConfigurationMessageGetDeviceAddress 沒回應
 
             if (state != DeviceGEM.STATE.SUCCESS) {
-                Log.e("GEM3", "ping:" + state);
+                Timber.tag("GEM3").e("ping:%s", state);
             }
         });
 
@@ -867,7 +781,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         uartConsole = new SpiritCommercialUart(workoutViewModel, this, deviceSettingViewModel, appStatusViewModel);
         uartConsole.initialize();
-        Log.d("GEM3", "initialize: ");
+        Timber.tag("GEM3").d("initialize: ");
     }
 
 
@@ -900,7 +814,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         } catch (Exception e) {
             deviceTvTuner = null;
-            e.printStackTrace();
+            Timber.e(e);
             Toasty.warning(this, "TV Tuner init Failed", Toasty.LENGTH_LONG).show();
         }
     }
@@ -945,7 +859,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             if (deviceCab == null) return;
             deviceCab.sendCabCommand(command);
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -956,7 +870,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
      */
     public void initCab() {
         if (isEmulator) return;
-        Log.d("CSAFE", "initCab: ");
+        Timber.tag("CSAFE").d("initCab: ");
         try {
             deviceCab = new DeviceCab(getApp());
             // deviceCab = new DeviceCab(getApp(), UartConnection.PORT.PORT_3);//跟TV TUNER 不同PORT
@@ -971,14 +885,14 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             deviceCab.sendCabCommand(command);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
     public void removeCab() {
         if (deviceCab != null) {
 
-            Log.d("CSAFE", "removeCab: ");
+            Timber.tag("CSAFE").d("removeCab: ");
             // 斷線
             deviceCab.disconnect();
 
@@ -1004,7 +918,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -1021,7 +935,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 deviceCsafe = null;
             }
         } catch (Exception e) {
-            Log.d("CSAFE", "removeCSAFE: " + e.getLocalizedMessage());
+            Timber.e(e);
         }
     }
 
@@ -1060,7 +974,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             getApp().setDeviceSettingBean(deviceSettingBean);
         }
 
-        Log.d("GEM3", "ftms名稱: " + ftmsName);
+        Timber.tag("GEM3").d("ftms名稱: %s", ftmsName);
         // getDeviceGEM().bluetoothConfigurationMessageGetDeviceName(); //onBluetoothConfigurationMessageGetDeviceName
 
         //設定名稱 onBluetoothConfigurationMessageSetDeviceName
@@ -1072,21 +986,21 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         settings.setDeviceName(ftmsName);
         settings.setManufacturerName("Dyaco International Inc.");
 
-        Log.d("GEM3", "Start init");
+        Timber.tag("GEM3").d("Start init");
         getDeviceGEM().init(settings, state -> {
             //gem3啟動
-            Log.d("GEM3", "onInit state: " + state);
+            Timber.tag("GEM3").d("onInit state: %s", state);
             if (state == DeviceGEM.STATE.SUCCESS) {
                 //開啟廣播
                 getDeviceGEM().bluetoothControlMessageStartAdvertising();
                 appStatusViewModel.isGem3On.set(true);
                 LiveEventBus.get(GYM3_ON_EVENT).post(true);
 
-                Log.d("GEM3", "onInit:GEM3開啟成功 ");
+                Timber.tag("GEM3").d("onInit:GEM3開啟成功 ");
             } else {
                 //  Toasty.error()
                 // TODO: 有機會開啟失敗  state > TIMEOUT  > 但還是可以執行 > TIMEOUT 時間加長一些
-                Log.e("GEM3", "onInit:GEM3開啟失敗 ");
+                Timber.tag("GEM3").e("onInit:GEM3開啟失敗 ");
 
                 getDeviceGEM().bluetoothControlMessageStartAdvertising();
                 appStatusViewModel.isGem3On.set(true);
@@ -1101,134 +1015,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     public HdmiIn hdmiIn;
 
-    public void initHdmi() {
-        try {
 
-
-            hdmiIn = new HdmiIn(this);
-            //videoFullViewContainer如果一開始為 INVISIBLE  會壞掉
-            hdmiIn.AssignView(getBinding().videoFullViewContainer);
-
-            //   checkHdmiPort();
-
-            //  hdmiIn.ScanHdmiSource();
-
-            hdmiIn.SetDefaultHdmiPort(PORT_EZ_CAST);
-
-            hdmiIn.setListener(new HdmiIn.HdmiInListener() {
-
-                @Override
-                public void onScanHdmiSource(boolean b, boolean b1, boolean b2, boolean b3) {
-                    deviceSettingViewModel.isEnablePort1.set(b);
-                    deviceSettingViewModel.isEnablePort2.set(b1);
-                    deviceSettingViewModel.isEnablePort3.set(b2);
-                    deviceSettingViewModel.isEnablePort4.set(b3);
-
-                    Log.d("SSSSSTTTTTTT", "onScanHdmiSource: " + b + "," + b1 + "," + b2 + "," + b3);
-                }
-
-                @Override
-                public void onPortSwitching(int i) {
-                }
-
-                @Override
-                public void onReady() {
-                    //HDMI 被拔掉 ，下 PauseAudio ，不會觸發onReady
-                }
-
-                @Override
-                public void onActive() {
-
-
-                    if (appStatusViewModel.currentStatus.get() != STATUS_MAINTENANCE) {
-                        //非工程模式使用
-
-                        //switchHdmi時開啟loading onActive 關閉loading
-                        showLoading(false);
-
-                        if (isReAssignView) {
-                            isReAssignView = false;
-                            hdmiIn.pauseVideo();
-                            return;
-                        }
-
-                        //    if (appStatusViewModel.currentPage.get() != CURRENT_PAGE_MEDIA) {
-                        if (!isTvSUC) {
-                            //非點選hdmi按鈕啟動
-                            getBinding().videoFullViewContainer.setVisibility(View.INVISIBLE);
-                            hdmiIn.pauseVideo();
-                            return;
-                        }
-
-                        getBinding().videoFullViewContainer.setVisibility(View.VISIBLE);
-                        hdmiIn.resumeAudio();
-                    } else {
-                        //工程模式使用
-
-                        //AssignView 時觸發
-                        if (isReAssignView) {
-                            isReAssignView = false;
-                            hdmiIn.pauseVideo();
-                            return;
-                        }
-//
-//                      //  hdmiIn.AssignView(getBinding().videoFullViewContainer2);
-                        hdmiIn.resumeAudio();
-                    }
-                }
-
-                @Override
-                public void onPortSwitched(int i) {
-                    isReAssignView = false;
-                }
-
-                @Override
-                public void onPauseVideo() {
-                    hdmiIn.pauseAudio();
-                    getBinding().videoFullViewContainer.setVisibility(View.INVISIBLE);
-                    showLoadingEx(false, 500);
-                }
-
-                @Override
-                public void onResumeVideo() {
-                }
-
-                @Override
-                public void onPauseAudio() {
-                }
-
-                @Override
-                public void onResumeAudio() {
-                }
-            });
-
-
-            new RxTimer().timer(1000, q -> {
-                hdmiIn.Open(); // > onReady
-                getBinding().videoFullViewContainer.setVisibility(View.INVISIBLE);
-            });
-
-            //hdmiIn.Open() 之後 ，才顯示TextureView，無效
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-//    public void checkHdmiPort() {
-//        if (hdmiIn == null) {
-//            Toasty.warning(this, "HDMI ERROR", Toasty.LENGTH_LONG).show();
-//            return;
-//        }
-//        hdmiIn.ScanHdmiSource();
-//
-//        deviceSettingViewModel.isEnablePort1.set(hdmiIn.CheckHdmiSource(PORT_TV_TUNER));
-//        deviceSettingViewModel.isEnablePort2.set(hdmiIn.CheckHdmiSource(PORT_EZ_CAST));
-//        deviceSettingViewModel.isEnablePort3.set(hdmiIn.CheckHdmiSource(PORT_WIRE_CAST));
-//        deviceSettingViewModel.isEnablePort4.set(hdmiIn.CheckHdmiSource(PORT_MIRA_CAST));
-//    }
 
     public void closeHdmi() {
 
@@ -1242,7 +1029,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             try {
                 hdmiIn.pauseVideo(); // onPauseVideo > pauseAudio > onPauseAudio
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
 
             //  Fatal Exception: java.lang.IllegalStateException: Session has been closed; further changes are illegal.
@@ -1307,7 +1094,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 //                        }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             });
 
@@ -1318,16 +1105,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             closeHdmi();
         }
 
-        //    showLoading(false);
-//        getBinding().videoFullViewContainer.setVisibility(View.VISIBLE);
 
     }
 
-
-    private boolean verifyLocationServices() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        return locationManager != null && (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
-    }
 
 
     public DeviceManager mGarminDeviceManager;
@@ -1343,10 +1123,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (GarminHealth.isInitialized()) {
             GarminHealth.restart(getApp());
-            Log.d(GARMIN_TAG, "garmin restart.");
+            Timber.tag(GARMIN_TAG).d("garmin restart.");
             deviceSettingViewModel.isGarminEnabled.set(true);
         } else {
-            Log.d(GARMIN_TAG, "init garmin sdk.");
+            Timber.tag(GARMIN_TAG).d("init garmin sdk.");
             try {
                 Futures.addCallback(HealthSDKManager.initializeHealthSDK(this), new FutureCallback<Boolean>() {
                     @Override
@@ -1365,13 +1145,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
                             mGarminDeviceManager.addRealTimeDataListener(new GarminRealTimeDataListener(workoutViewModel), EnumSet.allOf(RealTimeDataType.class));
 
-                            Log.d(GARMIN_TAG, "init garmin service success.." + result);
+                            Timber.tag(GARMIN_TAG).d("init garmin service success..%s", result);
 
                             deviceSettingViewModel.isGarminEnabled.set(true);
 
                             garminUnPair();
                         } else {
-                            Log.d(GARMIN_TAG, "init garmin service error.." + result);
+                            Timber.tag(GARMIN_TAG).d("init garmin service error..%s", result);
                         }
                     }
 
@@ -1382,14 +1162,14 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                         if (gRetry < 46) {
                             initGarmin();
                         }
-                        Log.d(GARMIN_TAG, "init garmin service failed." + t.getMessage());
+                        Timber.tag(GARMIN_TAG).d("init garmin service failed.%s", t.getMessage());
                         gRetry += 1;
-                        Log.d(GARMIN_TAG, "onFailure:  RETRY:" + gRetry);
+                        Timber.tag(GARMIN_TAG).d("onFailure:  RETRY:%s", gRetry);
                     }
                 }, Executors.newSingleThreadExecutor());
             } catch (GarminHealthInitializationException e) {
                 deviceSettingViewModel.isGarminEnabled.set(false);
-                Log.e(GARMIN_TAG, "Garmin Health initialization failed.", e);
+                Timber.tag(GARMIN_TAG).e(e, "Garmin Health initialization failed.");
             }
         }
     }
@@ -1408,17 +1188,17 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             new RxTimer().timer(200, number -> {
                 DeviceManager.getDeviceManager().enableRealTimeData(device.address(), EnumSet.allOf(RealTimeDataType.class));
                 currentGarminAddress = device.address(); //目前RealTimeData的Garmin裝置
-                Log.d(GARMIN_TAG, "切換 開啟RealTimeData:" + device.address() + "," + currentGarminAddress);
+                Timber.tag(GARMIN_TAG).d("切換 開啟RealTimeData:" + device.address() + "," + currentGarminAddress);
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
     public void stopListening() {
         if (DeviceManager.getDeviceManager().getPairedDevices() == null) return;
         for (com.garmin.health.Device device : DeviceManager.getDeviceManager().getPairedDevices()) {
-            Log.d("GARMINNN", "關閉: " + device.address());
+            Timber.tag("GARMINNN").d("關閉: %s", device.address());
             DeviceManager.getDeviceManager().disableRealTimeData(device.address(), EnumSet.allOf(RealTimeDataType.class));
         }
     }
@@ -1498,7 +1278,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             time = d.getUseTimeLimit() == 0 ? DEFAULT_USE_TIME_LIMIT : (int) d.getUseTimeLimit();
         }
 
-        Log.d("PPEPPEPEPEPF", "quickStart: " + time);
+        Timber.tag("PPEPPEPEPEPF").d("quickStart: %s", time);
 
         workoutViewModel.selWorkoutTime.set(time);
 
@@ -1514,13 +1294,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         //不是快速啟動
         if (isTreadmill) {
-            Log.d("UART_CONSOLE", "Treadmill startWorkout: " + uartConsole.getDevStep() + "," + isEmulator);
+            Timber.tag("UART_CONSOLE").d("Treadmill startWorkout: " + uartConsole.getDevStep() + "," + isEmulator);
             if (uartConsole.getDevStep() != DS_IDLE_STANDBY && !isEmulator) {
                 CustomToast.showToast(this, getString(R.string.start_waiting));
                 return;
             }
         } else {
-            Log.d("UART_CONSOLE", "startWorkout: " + uartConsole.getDevStep());
+            Timber.tag("UART_CONSOLE").d("startWorkout: %s", uartConsole.getDevStep());
             if (uartConsole.getDevStep() != DS_EMS_IDLE_STANDBY && !isEmulator) {
                 CustomToast.showToast(this, getString(R.string.start_waiting_bike));
                 return;
@@ -1627,7 +1407,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 //                    new RxTimer().timer(t, x -> LanguageUtils.updateLanguage(locale));
                     new RxTimer().timer(t, x -> LanguageUtils.changeLanguageSetting(locale));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             }
         });
@@ -1675,9 +1455,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         });
 
         getBinding().ibQrCode.setOnClickListener(v -> {
-//            isEmulator = true;
-//            isTreadmill = !isTreadmill;
-//            Toasty.success(getApp(),"電跑：" + isTreadmill,Toasty.LENGTH_SHORT).show();
+
 
             if (CheckDoubleClick.isFastClick()) return;
             alphaFloatingBack(true);
@@ -1815,12 +1593,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             });
         });
 
-//        getBinding().btnFan.setOnClickListener(view -> {
-//
-//            currentFan = currentFan == STOP ? STRONG : STOP;
-//
-//            setFan(currentFan);
-//        });
 
         getBinding().btnMemberProfile.setOnClickListener(v -> {
             if (CheckDoubleClick.isFastClick()) return;
@@ -1836,10 +1608,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
                     alphaFloatingBack(false);
 
-//                    getWindow().getDecorView().setSystemUiVisibility(
-//                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-//                                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-//                                    View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                 }
 
                 @Override
@@ -1888,9 +1656,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public void showAppleWatch() {
         if (CheckDoubleClick.isFastClick()) return;
 
-//        workoutViewModel.isAppleWatchEnabled.set(true);
-//        workoutViewModel.isAppleWatchConnected.set(true);
-
 
         alphaFloatingBack(true);
         popupWindow = new AppleWatchWindow(MainActivity.this);
@@ -1936,10 +1701,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         MainActivity.isStopLogin = true;
 
-//        if (uartConsole.getDevStep() != DS_IDLE_STANDBY && !isEmulator) {
-//            Toasty.warning(this, "NOT READY PLEASE TRY AGAIN", Toasty.LENGTH_LONG).show();
-//            return;
-//        }
 
         NavOptions navOptions = new NavOptions.Builder()
                 .setEnterAnim(android.R.anim.fade_in)
@@ -1949,7 +1710,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         try {
             navController.navigate(R.id.navigation_maintenance, null, navOptions);
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -1958,8 +1719,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (CheckDoubleClick.isFastClick()) return;
 
-//        workoutViewModel.isAppleWatchEnabled.set(false);
-//        workoutViewModel.isAppleWatchConnected.set(false);
 
         if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_SUMMARY || isSummary) {
             LiveEventBus.get(EventKey.EVENT_CLOSE_SUMMARY).post(true);
@@ -1973,11 +1732,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             public void onStartDismiss(MsgEvent value) {
                 alphaFloatingBack(false);
 
-//                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-//                getWindow().getDecorView().setSystemUiVisibility(
-//                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-//                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-//                                View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
             }
 
             @Override
@@ -2040,10 +1794,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -2054,16 +1809,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        //  Log.d("RPM_CHECK", "dispatchTouchEvent: ");
+
         if (popupWindow != null && popupWindow.isShowing()) return false;
 
         return super.dispatchTouchEvent(ev);
     }
 
     private void alphaFloatingBack(Boolean isShow) {
-//        if ((floatingBottomMenuWindow != null && floatingBottomMenuWindow.isShowing()) && (floatingTopDashBoardWindow != null && floatingTopDashBoardWindow.isShowing())) {
-//            LiveEventBus.get(ALPHA_FLOATING_MEDIA_BACKGROUND, Boolean.class).post(isShow);
-//        }
 
         showMediaAlphaBackground(isShow);
     }
@@ -2080,18 +1832,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             if (mediaMenuWindow != null) return;
             mediaMenuWindow = new MediaMenuWindow2(this, appStatusViewModel);
             mediaMenuWindow.setOnCustomDismissListener(value -> mediaMenuWindow = null);
-            //  PopNoRecordProxy.instance().noScreenRecord(mediaMenuWindow);
-//            mediaMenuWindow.showAtLocation(getWindow().getDecorView(), Gravity.START | Gravity.TOP, 50, 80);
-//            mediaMenuWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//                @Override
-//                public void onStartDismiss(MsgEvent value) {
-//                }
-//
-//                @Override
-//                public void onDismiss() {
-//                    mediaMenuWindow = null;
-//                }
-//            });
+
 
         } else {
             if (mediaMenuWindow != null) {
@@ -2118,37 +1859,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         } else {
             floatingTopDashBoardWindow = new FloatingTopDashBoardWindow2(this, appStatusViewModel, workoutViewModel, deviceSettingViewModel, userProfileViewModel, egymDataViewModel, isEnabled);
         }
-
-//        if (isShow) {
-//
-//
-//            if (floatingTopDashBoardWindow != null) {
-//                floatingTopDashBoardWindow.dismiss();
-//                floatingTopDashBoardWindow = null;
-//            }
-
-//            floatingTopDashBoardWindow = new FloatingTopDashBoardWindow(this, appStatusViewModel, workoutViewModel, deviceSettingViewModel, userProfileViewModel, isEnabled);
-//            floatingTopDashBoardWindow.showAtLocation(getWindow().getDecorView(), Gravity.START | Gravity.TOP, 0, 0);
-//            floatingTopDashBoardWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//                @Override
-//                public void onStartDismiss(MsgEvent value) {
-//                }
-//
-//                @Override
-//                public void onDismiss() {
-//                    //      floatingTopDashBoardWindow = null;
-//                    //   LiveEventBus.get(MEDIA_GO_TO_TRAINING).post("");
-//                }
-//            });
-
-
-        //   }
-//        } else {
-//            if (floatingTopDashBoardWindow != null) {
-//                floatingTopDashBoardWindow.dismiss();
-//                floatingTopDashBoardWindow = null;
-//            }
-//        }
     }
 
     public YouTubeWindow youTubeWindow;
@@ -2168,25 +1878,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     }
 
 
-//    private void a() {
-//        registerForActivityResult(new ActivityResultContracts.RequestPermission(),
-//                new ActivityResultCallback<Boolean>() {
-//            @Override
-//            public void onActivityResult(Boolean result) {
-//
-//            }
-//        }).launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//    }
-//
-//    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-//            new ActivityResultCallback<Uri>() {
-//                @Override
-//                public void onActivityResult(Uri uri) {
-//                    // Handle the returned Uri
-//                }
-//            });
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -2197,21 +1888,19 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
         try {
-          //  SpiritDbManager.getInstance(getApplicationContext()).close();
-        //    FitnessTestDbManager.getInstance(getApplicationContext()).close();
 
             if (GarminHealth.isInitialized()) {
                 // Stop the Health SDK to pause or close resource currently running in the application space.
                 GarminHealth.stop(getApp());
 
-                Log.d("GARMIN", "onDestroy: GarminHealth.stop()");
+                Timber.tag("GARMIN").d("onDestroy: GarminHealth.stop()");
             }
 
             showMediaMenu(false);
 
             //>>> BITGYM, KINOMAP
             if (mDyacoDataReceiver != null) {
-                Log.d("GYM_APP", "stopReceiveCtrl & stopReceiveInfo");
+                Timber.tag("GYM_APP").d("stopReceiveCtrl & stopReceiveInfo");
 
                 mDyacoDataReceiver.stopReceiveCtrl(getApp());
                 mDyacoDataReceiver.stopReceiveInfo(getApp());
@@ -2219,7 +1908,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             //<<<
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -2229,10 +1918,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (isShow) {
             if (errorMsgWindow != null) return;
-
-//            if(uartConsole.checkErrorShowed(errorInfo.getUartErrorType())) return;
-//
-//            uartConsole.updateErrorMapValue(errorInfo.getUartErrorType());
 
 
             errorMsgWindow = new SystemErrorWindow(this, errorInfo);
@@ -2270,33 +1955,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         if (isShow) {
             if (safetyKeyWindow != null && safetyKeyWindow.isShowing()) return;
 
-            //   getBinding().vBackground.setVisibility(View.VISIBLE);
-            //  clearPopupWindow();
-
             safetyKeyWindow = new SafetyKeyWindow(this);
             safetyKeyWindow.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
 
-
-//            safetyKeyWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//                @Override
-//                public void onStartDismiss(MsgEvent value) {
-////                    Intent launchIntent = new Intent(MainActivity.this, MainActivity.class);
-////                    launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////                    startActivity(launchIntent);
-//                    Log.d("UART_CONSOLE", "onStartDismiss: ");
-//
-////                    //回到首頁
-////                    SSEB = false;
-////                    finishAffinity();
-////                    Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage(getApplication().getPackageName());
-////                    LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                    startActivity(LaunchIntent);
-//                }
-//
-//                @Override
-//                public void onDismiss() {
-//                }
-            //           });
         } else {
             if (safetyKeyWindow != null) {
                 safetyKeyWindow.dismiss();
@@ -2332,7 +1993,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
             PopupWindowCompat.showAsDropDown(notifyNumWindow, view, offsetX, offsetY, gravity);
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
 
     }
@@ -2467,39 +2128,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
     }
 
-//    // Activity被回收前，會呼叫這個方法，儲存資料
-//    String mState = "KKK";
-//
-//    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putString("state", mState);
-//        Log.d("savedInstanceState", "onSaveInstanceState: " + mState);
-//    }
-//
-//    // 也可以在這個方法裡恢復資料
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        mState = savedInstanceState.getString("state");
-//        Log.d("savedInstanceState", "onRestoreInstanceState: " + mState);
-//    }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        //開啟多媒體APP Media > App進入背景，顯示Media選單
-        // if (isShowMediaMenuOnStop && CommonUtils.isScreenOn()) {
-
         btNotifyWindow(false);
 
         if (isShowMediaMenuOnStop && isScreenOn()) {
             try {
-//                Log.d("OOOIIIIEEE", "onStop: " + MainActivity.isOnStopBackToMainTraining);
-//                if (MainActivity.isOnStopBackToMainTraining) {
-//                    LiveEventBus.get(ON_STOP_BACK_TO_MAIN_TRAINING).post(true);
-//                }
 
 
                 showMediaMenu(true);
@@ -2524,7 +2161,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 //跳去media頁籤
                 LiveEventBus.get(MEDIA_MENU_GO_TO_MEDIA).post(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
 
@@ -2534,7 +2171,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             showMediaAlphaBackground(false);
             showErrorMsg(null, false);
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -2542,14 +2179,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     protected void onResume() {
         super.onResume();
 
-        //   isForeground = true;
 
-        //  overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         if (SETTING_SHOW) {
             overridePendingTransition(0, R.anim.fade_out_3);
         } else {
-//            overridePendingTransition(R.anim.fade_in_3s, 0);
-//            overridePendingTransition(R.anim.fade_in_2s, 0);
+
             overridePendingTransition(R.anim.fade_in_2s, 0);
 
 //            Log.d("OOOIIIIEEE", "onResume: " + MainActivity.isOnStopBackToMainTraining);
@@ -2557,9 +2191,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 LiveEventBus.get(ON_STOP_BACK_TO_MAIN_TRAINING).post(true);
             }
         }
-        //    if (!App.SETTING_SHOW) {//設定頁面
-        //   showMediaFloatingDashboard(false);
-
 
         //WebView開啟時，點Gboard鍵盤設定會觸發Resume，導致menu被關閉
         if (!isWebViewOn) {
@@ -2568,16 +2199,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
         getBinding().vBackground.setVisibility(View.GONE);
-        //   } else {
-//            if(appStatusViewModel.isMediaPlaying.get()){
-//                Log.d("EEEFEFEFE", "onResume: ");
-//                showMediaFloatingDashboard(true, true);
-//                showMediaMenu(true);
-//            }
-        //     }
-        SETTING_SHOW = false;
 
-        //   Log.d("亮度", "當前亮度: " + getScreenBrightness(getApp()) + ", 百分比" + getBrightnessPresent(getScreenBrightness(getApp())));
+        SETTING_SHOW = false;
 
     }
 
@@ -2660,7 +2283,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         //    Log.d("##UpdateProcess##", "#######網址: " + uuRl + "update.json");
 
 
-        Log.d(DownloadManagerCustom.TAG, "checkUpdate: 呼叫 apiCheckUpdate()");
+        Timber.tag(DownloadManagerCustom.TAG).d("checkUpdate: 呼叫 apiCheckUpdate()");
         BaseApi.request(BaseApi.createApi2(IServiceApi.class, uuRl).apiCheckUpdate(),
                 new BaseApi.IResponseListener<UpdateBean>() {
                     @Override
@@ -2671,12 +2294,12 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                         DeviceSettingBean d = getApp().getDeviceSettingBean();
                         try {
                             if (data.getVersionCode() > new CommonUtils().getLocalVersionCode()) {
-                                Log.d(DownloadManagerCustom.TAG, "######有新版本########");
+                                Timber.tag(DownloadManagerCustom.TAG).d("######有新版本########");
                                 //有新版本都要通知
                                 new CallWebApi(MainActivity.this).apiNotifyNewestConsoleVersion(data);
 
                                 if (d.isAutoUpdate()) {//自動更新有開啟，下載檔案
-                                    Log.d(DownloadManagerCustom.TAG, "<AUTO_UPDATE> ON，下載檔案");
+                                    Timber.tag(DownloadManagerCustom.TAG).d("<AUTO_UPDATE> ON，下載檔案");
                                     if (downloadManagerCustom != null) {
                                         downloadManagerCustom.cancelDownload();
                                         if (downloadManagerCustom.downloadManager != null) {
@@ -2688,100 +2311,32 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                                     downloadManagerCustom.initDownload(data);
                                 } else {
                                     //通知Dyaco Cloud有新的Console版本
-                                    Log.d(DownloadManagerCustom.TAG, "<AUTO_UPDATE> OFF，不需要下載，通知Dyaco Cloud有新的Console版本 ");
+                                    Timber.tag(DownloadManagerCustom.TAG).d("<AUTO_UPDATE> OFF，不需要下載，通知Dyaco Cloud有新的Console版本 ");
 //                                    new CallWebApi(MainActivity.this).apiNotifyNewestConsoleVersion(data);
                                     new WorkManagerUtil().cancelWorkByTag(WORK_NOTIFY_UPDATE_MSG_TAG);
                                 }
                             } else {
                                 new WorkManagerUtil().cancelWorkByTag(WORK_NOTIFY_UPDATE_MSG_TAG);
-                                Log.d(DownloadManagerCustom.TAG, "沒有新版本，不需要更新， update.json版本：" + data.getVersionCode() + ", 目前版本：" + new CommonUtils().getLocalVersionCode());
+                                Timber.tag(DownloadManagerCustom.TAG).d("沒有新版本，不需要更新， update.json版本：" + data.getVersionCode() + ", 目前版本：" + new CommonUtils().getLocalVersionCode());
                             }
                         } catch (Exception e) {
-                            Log.d(DownloadManagerCustom.TAG, "不需要更新:" + e.getLocalizedMessage());
-                            e.printStackTrace();
+                            Timber.tag(DownloadManagerCustom.TAG).d("不需要更新:%s", e.getLocalizedMessage());
+                            Timber.e(e);
                         }
                     }
 
                     @Override
                     public void onFail() {
-                        Log.d(DownloadManagerCustom.TAG, "連線失敗");
+                        Timber.tag(DownloadManagerCustom.TAG).d("連線失敗");
                     }
                 });
     }
-
-
-    //  UpdateBean updateBean;
-//    private final ActivityResultLauncher<String> mPermissionResult = registerForActivityResult(
-//            new ActivityResultContracts.RequestPermission(),
-//            result -> {
-//                if (result) {
-//                    Log.d("UPDATE@@@", "onActivityResult: PERMISSION GRANTED");
-//                    UpdateAppWindow updateAppWindow = new UpdateAppWindow(MainActivity.this, updateBean);
-//                    updateAppWindow.showAtLocation(getWindow().getDecorView(), Gravity.START | Gravity.BOTTOM, 0, 0);
-//                    updateAppWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//                        @Override
-//                        public void onStartDismiss(MsgEvent value) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onDismiss() {
-//
-//                        }
-//                    });
-//                } else {
-//                    Log.d("UPDATE@@@", "onActivityResult: PERMISSION DENIED");
-//                }
-//            });
 
 
     /**
      * 取得 default_settings.json 的資料，存入 DeviceSettingBean(mmkv)
      */
     private void initDeviceModel() {
-
-//        if (!getApp().getDeviceSettingBean().isMachineEdit()) { //工程模式改過機型就不抓設定檔
-//            //  MMKV.defaultMMKV().remove("DeviceSettingBean");
-//            int modelCode = getApp().getDeviceSettingBean().getModel_code();//設備裡面存的
-//            //Model Code 有改變，才會抓default_settings.json的設定
-//            String settingFile = new CommonUtils().getSettingFile(SETTING_FILE_PATH); //若無設定檔 > 取預設值產生設定檔
-//            if (null != settingFile) {//設定檔有資料
-//                //設定檔的內容
-//                //     DeviceSettingBean deviceSettingBean = new Gson().fromJson(settingFile, DeviceSettingBean.class);
-//
-//                Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy HH:mm:ss").create();
-//                DeviceSettingBean deviceSettingBean = gson.fromJson(settingFile, DeviceSettingBean.class);
-//
-//                Log.d("SETTING_FILE", "default_settings.json 裡面的內容: ");
-//                LogS.printJson("SETTING_FILE", settingFile, "");
-//
-//                Log.d("SETTING_FILE", "讀取設定檔資料成功" + ",裝置內存放的ModelCode:" + modelCode + ",設定檔的ModelCode:" + deviceSettingBean.getModel_code());
-//
-//                //首次安裝 mmkv的mode_code 是 -1
-//                if (modelCode == deviceSettingBean.getModel_code() && getApp().getDeviceSettingBean().getDeviceFirstLaunchTime() != null) {
-//                    //  if (modelCode == deviceSettingBean.getModel_code()) {
-//                    //只是檢查 設定檔 的 ModelName 不需要覆蓋 DeviceSettingBean
-//                    //首次安裝， DeviceSettingBean 沒東西，不該跑這裡
-//                    MODE = getMode(deviceSettingBean.getModel_code());
-//                    Log.d("SETTING_FILE", "設定檔的機型(VersionName&VersionCode)與裝置內存放的機型(VersionName&VersionCode)相同");
-//                } else {
-//                    //將新設定檔的值重新存入 DeviceSettingBean(mmkv)
-//                    //or首次安裝
-//                    new InitProduct(getApplicationContext()).setProductDefault(settingFile);
-//                    Log.d("SETTING_FILE", "設定檔的機型(VersionName&VersionCode)與裝置內存放的不同，取設定檔資料 重新寫入裝置資料庫:" + MODE);
-//                }
-//                Log.d("SETTING_FILE", "當前機型為：" + MODE + " 開機完成 ");
-//
-//            } else {
-//                //設定檔無資料或讀取失敗
-//                Log.d("SETTING_FILE", "讀取設定檔資料或建立設定檔失敗，直接取程式內機型預設值");
-//                new InitProduct(getApplicationContext()).setProductDefault(CT1000ENT); //產生設定檔失敗，直接取程式內預設值 存入 DeviceSettingBean
-//            }
-//        } else {
-//            //Console設定檔已被修改過
-//            MODE = getMode(getApp().getDeviceSettingBean().getModel_code());
-//            Log.d("SETTING_FILE", "Console的設定檔已被修改過，不重抓設定檔 ");
-//        }
 
 
         DeviceSettingBean dd = getApp().getDeviceSettingBean();
@@ -2795,26 +2350,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
 
-        //把設定檔存入ViewModel
-        //   deviceSettingViewModel = new ViewModelProvider(this).get(DeviceSettingViewModel.class);
-        //DeviceSettingBean mmkv的設定資料存入 ViewModel
         new CommonUtils().mmkvDeviceSettingToViewModel(deviceSettingViewModel, getApp().getDeviceSettingBean());
 
-//        getBinding().setDeviceSetting(deviceSettingViewModel);
-
-
-        //getIdentity()沒值的話就產生新的GUID
-//        if (TextUtils.isEmpty(getApp().getIdentity())) {
-//            MMKV.defaultMMKV().encode("GUID", UUID.randomUUID().toString() + "#" + deviceSettingViewModel.modelName);
-//        }
 
 
         isTreadmill = deviceSettingViewModel.typeCode.get() == DeviceIntDef.DEVICE_TYPE_TREADMILL;
 
-        //      isUs = deviceSettingViewModel.territoryCode.get() == DeviceIntDef.TERRITORY_US;
 
-        Log.d("AppSetting", "Model_code: " + getApp().getDeviceSettingBean().getModel_code());
-        Log.d("AppSetting", "TerritoryCode: " + getApp().getDeviceSettingBean().getTerritoryCode());
+        Timber.tag("AppSetting").d("Model_code: %s", getApp().getDeviceSettingBean().getModel_code());
+        Timber.tag("AppSetting").d("TerritoryCode: %s", getApp().getDeviceSettingBean().getTerritoryCode());
 
         isUs = deviceSettingViewModel.territoryCode.get() == TERRITORY_US ||
                 deviceSettingViewModel.territoryCode.get() == DeviceIntDef.TERRITORY_CANADA;
@@ -2906,13 +2450,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     }
 
 
-//    public void showDashboard(boolean s) {
-//        if (isTreadmill) {
-//            getBinding().workoutTopViewTreadmill.setVisibility(s ? View.VISIBLE : View.GONE);
-//        } else {
-//            getBinding().workoutTopViewBike.setVisibility(s ? View.VISIBLE : View.GONE);
-//        }
-//    }
 
     LoadingWindow2 loadingWindow2;
 
@@ -2943,12 +2480,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
     }
 
-//    private void clearPopupWindow() {
-//        if (popupWindow != null) {
-//            popupWindow.dismiss();
-//            popupWindow = null;
-//        }
-//    }
 
     /**
      * 更新上面頭像
@@ -2970,7 +2501,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             try {
                 floatingTopDashBoardWindow.setAvatar();
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
 
@@ -2987,7 +2518,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                         .circleCrop()
                         .into(getBinding().ivMemberIcon);
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }
@@ -3001,41 +2532,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         if (pairedDevices == null) return;
         List<Device> pairedDevicesList = new ArrayList<>(pairedDevices);
         for (Device d : pairedDevicesList) {
-            Log.d(GARMIN_TAG, "取得已配對裝置: " + d.address() + "," + d.connectionState() + "," + d.friendlyName());
+            Timber.tag(GARMIN_TAG).d("取得已配對裝置: " + d.address() + "," + d.connectionState() + "," + d.friendlyName());
             mGarminDeviceManager.forget(d.address());
         }
     }
 
-
-//    private void garminUnPair2() {
-//        if (mGarminDeviceManager == null) return;
-//
-//        GarminUtil garminUtil = new GarminUtil();
-//
-//        Set<Device> pairedDevices = mGarminDeviceManager.getPairedDevices();
-//        if (pairedDevices == null) return;
-//        List<Device> pairedDevicesList = new ArrayList<>(pairedDevices);
-//        for (Device d : pairedDevicesList) {
-//            Log.d(GARMIN_TAG, "取得已配對裝置: " + d.address() + "," + d.connectionState() + "," + d.friendlyName());
-//            mGarminDeviceManager.forget(d.address());
-//
-//            systemGarminUnPair(garminUtil, d);
-//        }
-//    }
-
-//    private void systemGarminUnPair(GarminUtil garminUtil,com.garmin.health.Device device) {
-//        garminUtil.removeBondedDevice(this, device.address(), new GarminUtil.BondStateListener() {
-//            @Override
-//            public void onCheckDeviceBondState(String s, GarminUtil.BOND_STATE bond_state) {
-//                    Log.d("GARMINNN", "onCheckDeviceBondState " + s +","+ bond_state);
-//            }
-//
-//            @Override
-//            public void onBondDevice(String s, GarminUtil.BOND_STATE bond_state) {
-//                Log.d("GARMINNN", "onBondDevice " + s +","+ bond_state);
-//            }
-//        });
-//    }
 
     public void showVBG(boolean isShow) {
         getBinding().vBackground.setVisibility(isShow ? View.VISIBLE : View.GONE);
@@ -3052,13 +2553,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
 
 
-        //斷開音訊
-//        if (mBluetoothDevice != null && mAudioDeviceWatcher != null) {
-//         //   mAudioDeviceWatcher.disconnectAudioDevice(mBluetoothDevice);
-//            mAudioDeviceWatcher.removeBondDevice(mBluetoothDevice);
-//
-//            mAudioDeviceWatcher.removeListener();
-//        }
 
         //斷開藍芽音訊
         unBondAudio();
@@ -3074,20 +2568,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         garminUnPair();
 
 
-        //  new CommonUtils().consolePairedDevices(bluetoothAdapter);
 
-
-//        clearAppData();
-//        clearCookies();
-//        closePackage(this);
-
-
-        //  getDeviceGEM().systemMessageRestart();
-
-
-//        if (hdmiIn != null) {
-//            hdmiIn.SwitchHdmiSource(PORT_EZ_CAST);
-//        }
 
         // TODO: garmin解綁可能很慢，要晚一點關閉藍芽
         if (bluetoothAdapter != null) {
@@ -3111,7 +2592,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                         public void onSuccess(MemberCheckoutMachineBean data) {
 
 
-                            Log.d("WEB_API", "MemberCheckoutMachineBean: " + data.toString());
+                            Timber.tag("WEB_API").d("MemberCheckoutMachineBean: %s", data.toString());
                             if (data.getSuccess()) {
                                 COOKIE = "";
                                 //  } else {
@@ -3122,12 +2603,12 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
                         @Override
                         public void onFail() {
-                            Log.d("EWWWWWWWWW", "失敗");
+                            Timber.tag("EWWWWWWWWW").d("失敗");
                         }
                     });
         }
 
-        Log.d("VVVVVEEEE", "webApiLogout: ");
+        Timber.tag("VVVVVEEEE").d("webApiLogout: ");
         //登出就重啟APP
         new RxTimer().timer(1000, number -> {
             try {
@@ -3135,7 +2616,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 // restartApp(this);
                 //   navController.navigate(MainDashboardFragmentDirections.actionMainBlankFragmentToNavigationLogin());
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         });
     }
@@ -3148,10 +2629,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 //        getApp().setDeviceSettingBean(d);
 
         if (isEmulator || !isTreadmill) {
-            Log.d("UART_CONSOLE", "BIKE OR Emulator mRestartApp: APP重啟 ");
+            Timber.tag("UART_CONSOLE").d("BIKE OR Emulator mRestartApp: APP重啟 ");
             restartApp(this);
         } else {
-            Log.d("UART_CONSOLE", "電跑: mRestartApp: APP重啟  ");
+            Timber.tag("UART_CONSOLE").d("電跑: mRestartApp: APP重啟  ");
             uartConsole.setDevMainMode(RESET);
             //  restartApp(this);
         }
@@ -3160,7 +2641,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     public void setUserData(MemberCheckinMachineByQRCodeBean.DataMapDTO.DataDTO data) {
 
-        Log.d("OOODDDODODO", "登入資料: " + data.toString());
+        Timber.tag("OOODDDODODO").d("登入資料: %s", data.toString());
         int gender = data.getGender().equals("M") ? MALE : FEMALE;
         int unit = data.getMeasurementUnit() == 1 ? IMPERIAL : METRIC; //webapi 公制0,英制1
 
@@ -3224,13 +2705,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
                         try {
                             if (data.getSuccess()) {
-                                Log.d("WEB_API", "GetUnreadMessageCountFromMachineBean: " + data.getDataMap().getData());
+                             //   Timber.tag("WEB_API").d("GetUnreadMessageCountFromMachineBean: %s", data.getDataMap().getData());
                                 deviceSettingViewModel.alertNotifyCount.set(data.getDataMap().getData().getUnreadCount());
                             } else {
                                 Toasty.warning(getApp(), "# " + data.getErrorMessage(), Toasty.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Timber.e(e);
                         }
                     }
 
@@ -3318,42 +2799,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     }
 
 
-//    public static String getMacAddress() {
-//        //android 11非系統APP 無法讀取  android 11系統APP 待測試
-//        String macAddress = "";
-//        try {
-//            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
-//            while (interfaces.hasMoreElements()) {
-//                NetworkInterface iF = interfaces.nextElement();
-//
-//                byte[] address = iF.getHardwareAddress();
-//                if (address == null || address.length == 0) {
-//                    continue;
-//                }
-//
-//                StringBuilder buf = new StringBuilder();
-//                for (byte b : address) {
-//                    buf.append(String.format("%02X:", b));
-//                }
-//                if (buf.length() > 0) {
-//                    buf.deleteCharAt(buf.length() - 1);
-//                }
-//                String mac = buf.toString();
-//                //  Log.d("mac", "interfaceName="+iF.getName()+", mac="+mac);
-//
-//                if (TextUtils.equals(iF.getName(), "wlan0")) {
-//                    return mac;
-//                }
-//            }
-//        } catch (SocketException e) {
-//            e.printStackTrace();
-//            return macAddress;
-//        }
-//
-//        return macAddress;
-//    }
-
-
     public static boolean isGymApp = false;
 
     AnplusBean anplusBean = new AnplusBean();
@@ -3362,7 +2807,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     DyacoDataReceiver mDyacoDataReceiver;               // BITGYM, KINOMAP
 
     public void initReceiver() {  // BITGYM, KINOMAP
-        Log.d("GYM_APP", "setListener, startReceiveInfo & startReceiveCtrl");
+        Timber.tag("GYM_APP").d("setListener, startReceiveInfo & startReceiveCtrl");
 
         mDyacoDataReceiver = DyacoDataReceiver.getInstance();
         mDyacoDataReceiver.setListener(dyacoDataListener);
@@ -3374,14 +2819,14 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     DyacoDataReceiver.DyacoDataListener dyacoDataListener = new DyacoDataReceiver.DyacoDataListener() {
         @Override
         public void onInfoDataReceived(AnplusBean anplusBean) {
-            Log.d("GYM_APP", "onInfoDataReceived" + new Gson().toJson(anplusBean));
+//            Timber.tag("GYM_APP").d("onInfoDataReceived%s", new Gson().toJson(anplusBean));
         }
 
         @Override
         public void onCtrlDataReceived(AnplusCtrlBean anplusCtrlBean) {
-            Log.d("GYM_APP", "onCtrlDataReceived" + new Gson().toJson(anplusCtrlBean));
+//            Timber.tag("GYM_APP").d("onCtrlDataReceived%s", new Gson().toJson(anplusCtrlBean));
 
-            Log.d("GYM_APP", "設定速度 = " + anplusCtrlBean.getTg_speed() +
+            Timber.tag("GYM_APP").d("設定速度 = " + anplusCtrlBean.getTg_speed() +
                     " = " + anplusCtrlBean.getTg_speed() +
                     "設定揚升 = " + anplusCtrlBean.getTg_incline() +
                     "設定阻力 = " + anplusCtrlBean.getTg_level());
@@ -3391,15 +2836,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         public void onModelReceived() {
 
             // BitGym, Kinomap 要求取得Machine Info
-            Log.d("GYM_APP", "onModelReceived: 要求傳送Machine Info");
+            Timber.tag("GYM_APP").d("onModelReceived: 要求傳送Machine Info");
 
             runOnUiThread(() -> {
                 try {
                     getMachineInfo();
-                    Log.d("GYM_APP", "傳送Machine Info: " + new Gson().toJson(anplusMachine));
+                //    Timber.tag("GYM_APP").d("傳送Machine Info: %s", new Gson().toJson(anplusMachine));
                     mDyacoEmitter.emit(getApp(), anplusMachine);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             });
         }
@@ -3407,7 +2852,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         @Override
         public void onModelDataReceived(AnplusMachine anplusMachine) {
 
-            Log.d("GYM_APP", "onModelDataReceived" + new Gson().toJson(anplusMachine));
+         //   Timber.tag("GYM_APP").d("onModelDataReceived%s", new Gson().toJson(anplusMachine));
 
         }
     };
@@ -3548,7 +2993,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             } else if (pauseAfterSeconds != 0) {
                 // 如果值是無效的（例如負數、超大數），但不是我們允許的 0，就印出日誌
                 // 這樣可以幫助我們追蹤到潛在的資料錯誤
-                Log.w("AutoLogout", "偵測到無效或已損壞的 pauseAfter 值：" + pauseAfterSeconds + "，將使用預設值。");
+                Timber.tag("AutoLogout").w("偵測到無效或已損壞的 pauseAfter 值：" + pauseAfterSeconds + "，將使用預設值。");
             }
             // 如果 pauseAfterSeconds 是 0，則自然會使用上面的預設值，無需額外處理
             //4624633867356078080
@@ -3563,30 +3008,15 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, CHILD_LOCK_TIME);
 //        if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, 1 * 1000 * 10);
-        Log.d("RPM_CHECK", "startHandler: 開始childlock 計時 ");
+        Timber.tag("RPM_CHECK").d("startHandler: 開始childlock 計時 ");
     }
 
 
-    //APP在前景
-    public static boolean isForeground;
-    //    public static int CHILD_LOCK_TIME = 5 * 1000 * 60;
     public static long CHILD_LOCK_TIME = 8000;
 
 
-    private void installExFatBinary() {
-        BinaryInstaller.installBinaryIfNeeded(this, success -> {
-            if (success) {
-                Log.d("USB_UPDATE", "Binary 安裝成功，可執行掛載流程");
-            } else {
-                Log.e("USB_UPDATE", "Binary 安裝失敗，請確認是否已 root 並允許權限");
-            }
-        });
-
-    }
-
-    // errorText > <API name> - <API error code> - <API response message>
     public void insertEgymError(String errorText) {
-        Log.d("UPLOAD_ERROR_LOG", "insertEgymError: " + errorText);
+        Timber.tag("UPLOAD_ERROR_LOG").d("insertEgymError: %s", errorText);
         List<ErrorMsgEntity> errorMsgEntityList = new ArrayList<>();
         Date date = Calendar.getInstance().getTime();
         ErrorMsgEntity errorMsgEntity = new ErrorMsgEntity();
