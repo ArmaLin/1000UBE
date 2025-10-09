@@ -64,6 +64,9 @@ public abstract class BaseWindow<VB extends ViewBinding> {
                 | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 
+        //😱Android 14以上 避免Window亂跳
+        layoutParams.setCanPlayMoveAnimation(false);
+
         fullScreenImmersive(binding.getRoot());
 
         int w = width;
@@ -85,6 +88,7 @@ public abstract class BaseWindow<VB extends ViewBinding> {
 //        }
 
         mWindowManager.addView(binding.getRoot(), layoutParams);
+
 
     }
 

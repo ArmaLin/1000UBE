@@ -8,14 +8,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.zeroturnaround.zip.ZipUtil
+import timber.log.Timber
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
@@ -38,7 +37,7 @@ import java.util.Locale
  * 可降版安裝
  */
 object SilentAppInstaller {
-    private const val TAG = "UPDATE_APP"
+    private const val TAG = "UpdateViewModel"
     // INSTALL_ACTION 與硬碼參數
     private val INSTALL_ACTION = SilentAppInstaller::class.java.name + ".InstallAction"
     private const val WAIT_TIMEOUT_MS = 5000L
@@ -120,16 +119,16 @@ object SilentAppInstaller {
             runOnUiThread { listener.onError("No APK files found after unzip") }
             return
         }
-        Log.d(TAG, "找到 ${apkFiles.size} 個 APK 檔案")
+        Timber.tag(TAG).d("找到 ${apkFiles.size} 個 APK 檔案")
         // 選取檔案大小最大的 APK 作為主要 APK
         val mainApk = apkFiles.maxByOrNull { it.length() } ?: apkFiles[0]
-        Log.d(TAG, "選取主要 APK: ${mainApk.name}")
+        Timber.tag(TAG).d("選取主要 APK: ${mainApk.name}")
 
         // 從主要 APK 取得預期的 package name
         val expectedPackageName = getPackageNameFromApk(context, mainApk)
-        Log.d(TAG, "擷取的 package name: $expectedPackageName")
+        Timber.tag(TAG).d("擷取的 package name: $expectedPackageName")
         if (expectedPackageName.isNullOrEmpty()) {
-            Log.w(TAG, "無法擷取 package name，假定安裝成功")
+            Timber.tag(TAG).w("無法擷取 package name，假定安裝成功")
             runOnUiThread { listener.onSuccess() }
             return
         }
@@ -148,7 +147,7 @@ object SilentAppInstaller {
             runOnUiThread { listener.onError("Failed to extract package name from APK") }
             return
         }
-        Log.d(TAG, "擷取的 package name: $expectedPackageName")
+        Timber.tag(TAG).d("擷取的 package name: $expectedPackageName")
         performInstallation(context, listOf(apkFile), expectedPackageName, listener)
     }
 
@@ -186,14 +185,14 @@ object SilentAppInstaller {
             runOnUiThread { listener.onError("No APK files found in APKM after unzip") }
             return
         }
-        Log.d(TAG, "在 APKM 中找到 ${apkFiles.size} 個 APK 檔案")
+        Timber.tag(TAG).d("在 APKM 中找到 ${apkFiles.size} 個 APK 檔案")
         // 選取檔案大小最大的 APK 作為主要 APK
         val mainApk = apkFiles.maxByOrNull { it.length() } ?: apkFiles[0]
-        Log.d(TAG, "在 APKM 中選取主要 APK: ${mainApk.name}")
+        Timber.tag(TAG).d("在 APKM 中選取主要 APK: ${mainApk.name}")
 
         // 從主要 APK 取得預期的 package name
         val expectedPackageName = getPackageNameFromApk(context, mainApk)
-        Log.d(TAG, "從 APKM 擷取的 package name: $expectedPackageName")
+        Timber.tag(TAG).d("從 APKM 擷取的 package name: $expectedPackageName")
         if (expectedPackageName.isNullOrEmpty()) {
             runOnUiThread { listener.onError("Failed to extract package name from APKM") }
             return
@@ -207,7 +206,7 @@ object SilentAppInstaller {
      * 2. 將所有 APK 檔寫入 Session
      * 3. 註冊廣播接收器，等待安裝結果並用 waitForPackage 檢查更新
      */
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    @SuppressLint("UnspecifiedRegisterReceiverFlag", "RequestInstallPackagesPolicy")
     private fun performInstallation(
         context: Context,
         apkFiles: List<File>,
@@ -224,9 +223,9 @@ object SilentAppInstaller {
                     )
                     method.isAccessible = true
                     method.invoke(this, true)
-                    Log.d(TAG, "允許降版已啟用")
+                    Timber.tag(TAG).d("允許降版已啟用")
                 } catch (e: Exception) {
-                    Log.d(TAG, "setAllowDowngrade 不支援: ${e.message}")
+                    Timber.tag(TAG).d("setAllowDowngrade 不支援: ${e.message}")
                 }
                 setAppPackageName(expectedPackageName)
             }
@@ -241,11 +240,11 @@ object SilentAppInstaller {
             // 註冊廣播接收器以取得安裝結果
             val receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    Log.d(TAG, "收到安裝廣播: $intent")
+                    Timber.tag(TAG).d("收到安裝廣播: $intent")
                     val extras = intent.extras
                     val status = extras?.getInt(PackageInstaller.EXTRA_STATUS) ?: -1
                     val message = extras?.getString(PackageInstaller.EXTRA_STATUS_MESSAGE) ?: "No message"
-                    Log.d(TAG, "安裝狀態: $status, 訊息: $message")
+                    Timber.tag(TAG).d("安裝狀態: $status, 訊息: $message")
                     context.unregisterReceiver(this)
                     // 剛安裝完，系統可能尚未立即更新 package 資訊
                     if (status == PackageInstaller.STATUS_SUCCESS || status == -1) {
@@ -264,11 +263,7 @@ object SilentAppInstaller {
                 }
             }
             val filter = IntentFilter(INSTALL_ACTION)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                context.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
-            } else {
-                context.registerReceiver(receiver, filter)
-            }
+            context.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
 
             val pendingIntent = PendingIntent.getBroadcast(
                 context,
@@ -276,7 +271,7 @@ object SilentAppInstaller {
                 Intent(INSTALL_ACTION),
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
-            Log.d(TAG, "提交安裝 Session (commit)")
+            Timber.tag(TAG).d("提交安裝 Session (commit)")
             session.commit(pendingIntent.intentSender)
             session.close()
         } catch (e: Exception) {
@@ -299,7 +294,7 @@ object SilentAppInstaller {
             }
             session.fsync(outStream)
         }
-        Log.d(TAG, "APK 寫入並同步完成: ${apkFile.name}")
+        Timber.tag(TAG).d("APK 寫入並同步完成: ${apkFile.name}")
     }
 
     /**
@@ -313,18 +308,18 @@ object SilentAppInstaller {
     ) {
         val handler = Handler(Looper.getMainLooper())
         val startTime = System.currentTimeMillis()
-        Log.d(TAG, "等待 PackageManager 更新，目標 package: $packageName")
+        Timber.tag(TAG).d("等待 PackageManager 更新，目標 package: $packageName")
         fun check() {
             try {
                 context.packageManager.getPackageInfo(packageName, 0)
-                Log.d(TAG, "確認 package 已安裝: $packageName")
+                Timber.tag(TAG).d("確認 package 已安裝: $packageName")
                 onDone(true)
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
                 if (System.currentTimeMillis() - startTime >= WAIT_TIMEOUT_MS) {
-                    Log.d(TAG, "等待逾時：$packageName 未安裝")
+                    Timber.tag(TAG).d("等待逾時：$packageName 未安裝")
                     onDone(false)
                 } else {
-                    Log.d(TAG, "等待中... $packageName")
+                    Timber.tag(TAG).d("等待中... $packageName")
                     handler.postDelayed({ check() }, CHECK_INTERVAL_MS)
                 }
             }
@@ -370,10 +365,10 @@ object SilentAppInstaller {
                 appInfo.publicSourceDir = apkFile.absolutePath
             }
             val pkg = info?.packageName
-            Log.d(TAG, "從 APK 擷取的 package name: $pkg")
+            Timber.tag(TAG).d("從 APK 擷取的 package name: $pkg")
             pkg
         } catch (e: Exception) {
-            Log.e(TAG, "擷取 package name 失敗: ${e.message}")
+            Timber.tag(TAG).e("擷取 package name 失敗: ${e.message}")
             null
         }
     }

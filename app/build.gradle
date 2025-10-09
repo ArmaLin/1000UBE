@@ -69,8 +69,7 @@ android {
         }
     }
 
-    //debuggable true > App Inspection
-    //signingConfig要在buildTypes前面
+
     buildTypes {
         debug {
             buildConfigField "Boolean", "DEBUG_MODE", "true"

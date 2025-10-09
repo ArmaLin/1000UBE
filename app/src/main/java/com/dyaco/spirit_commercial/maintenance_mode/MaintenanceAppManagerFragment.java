@@ -57,6 +57,7 @@ import java.util.List;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 /**
  * 第三方APP更新的路徑：
@@ -441,7 +442,7 @@ public class MaintenanceAppManagerFragment extends BaseBindingDialogFragment<Fra
         updateAppWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
             @Override
             public void onStartDismiss(MsgEvent value) {
-                Log.d("UPDATE_APP", "刷新選單: ");
+                Timber.tag("UPDATE_APP").d("刷新選單: ");
                 if (value != null) {
                     mainProgress(true);
                     insertAndRefresh(beansDTO, bytesM);
@@ -453,7 +454,7 @@ public class MaintenanceAppManagerFragment extends BaseBindingDialogFragment<Fra
 
             @Override
             public void onDismiss() {
-                Log.d("UPDATE_APP", "onDismiss: ");
+                Timber.tag("UPDATE_APP").d("onDismiss: ");
             }
         });
     }
@@ -514,7 +515,7 @@ public class MaintenanceAppManagerFragment extends BaseBindingDialogFragment<Fra
 
                         } catch (Exception e) {
                             showException(e);
-                            Log.d("UPDATE_APP", "@@#########checkAppUpdate Exception:" + e.toString());
+                            Timber.tag("UPDATE_APP").d("@@#########checkAppUpdate Exception:" + e.toString());
                         }
 
                         hideProgress();
@@ -531,7 +532,7 @@ public class MaintenanceAppManagerFragment extends BaseBindingDialogFragment<Fra
                             Toasty.error(requireActivity(), "APP STORE DATA ERROR", Toasty.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             showException(e);
-                            Log.d("UPDATE_APP", "@@#########checkAppUpdate Exception:" + e.toString());
+                            Timber.tag("UPDATE_APP").d("@@#########checkAppUpdate Exception:" + e.toString());
                         }
                     }
                 });
@@ -630,7 +631,7 @@ public class MaintenanceAppManagerFragment extends BaseBindingDialogFragment<Fra
     public void onResume() {
         super.onResume();
         // requireActivity().overridePendingTransition(R.anim.fade_in_2s, R.anim.fade_in_2s);
-        Log.d("WEB_VIEW", "onResume: ");
+        Timber.tag("WEB_VIEW").d("onResume: ");
     }
 
     @Override
