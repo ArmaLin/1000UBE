@@ -29,7 +29,6 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMinWeig
 
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -41,6 +40,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.corestar.libs.device.DeviceGEM;
 import com.corestar.libs.ota.LwrMcuUpdateManager;
@@ -57,11 +57,9 @@ import com.dyaco.spirit_commercial.model.webapi.bean.GetGymMonthlyRankingFromMac
 import com.dyaco.spirit_commercial.model.webapi.bean.GymSort;
 import com.dyaco.spirit_commercial.model.webapi.bean.JoinGymRankingBean;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.SafeClickListener;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
-import com.dyaco.spirit_commercial.support.interaction.TenTapClick;
 import com.dyaco.spirit_commercial.support.custom_view.DividerItemDecorator;
 import com.dyaco.spirit_commercial.support.custom_view.WavyTextView;
 import com.dyaco.spirit_commercial.support.custom_view.banner.Banner;
@@ -71,6 +69,7 @@ import com.dyaco.spirit_commercial.support.custom_view.banner.util.BannerUtils;
 import com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
 import com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef;
+import com.dyaco.spirit_commercial.support.interaction.TenTapClick;
 import com.dyaco.spirit_commercial.support.utils.CheckDoubleClick;
 import com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
@@ -87,6 +86,7 @@ import java.util.List;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 
 public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashboardTrainingBinding> implements View.OnClickListener {
@@ -125,23 +125,24 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             ((MainActivity) requireActivity()).startHandler();
         }
 
-
+        // TODO:
+       // workoutViewModel.isWorkoutReadyStart.set(true);
 
         LiveEventBus.get(LOG_IN_EVENT).observe(getViewLifecycleOwner(), s -> {
             ((MainActivity) requireActivity()).getBinding().bgE.setVisibility(View.GONE);
-            Log.d(EgymUtil.TAG, "已登入，開始上傳資料: ");
+            Timber.tag(EgymUtil.TAG).d("已登入，開始上傳資料: ");
             final String requestBody = new Gson().toJson(egymDataViewModel.createWorkoutParam);
 
             EgymUtil.getInstance().apiCreateWorkouts(requestBody, new EgymWebListener() {
                 @Override
                 public void onSuccess(String result) {
-                    Log.d(EgymUtil.TAG, "上傳成功: ");
+                    Timber.tag(EgymUtil.TAG).d("上傳成功: ");
                 }
 
                 @Override
                 public void onFail() {
                     //上傳失敗,存到資料庫
-                    Log.d(EgymUtil.TAG, "上傳失敗,存到資料庫: ");
+                    Timber.tag(EgymUtil.TAG).d("上傳失敗,存到資料庫: ");
                     EgymUtil.getInstance().insertEgym(requestBody);
                 }
             });
@@ -164,11 +165,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 
 
         initEvent();
-        //    try {
-//            Runtime.getRuntime().exec("input tap 1200 200"); //fatburn
-        //      Runtime.getRuntime().exec("input tap 1200 400"); // cardio
-        //    } catch (IOException e) {
-        //    }
+
 
         if (userProfileViewModel == null) {
             userProfileViewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
@@ -209,9 +206,6 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
         }
 
 
-        //     CommonUtils.getSleepTime();
-
-        //   testGboard();
 
     }
 
@@ -344,51 +338,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 });
     }
 
-//    private void webApiGetUserData() {
-//        BaseApi.request(BaseApi.createApi(IServiceApi.class).apiGetMyUserInfoFromMachine(""),
-//                new BaseApi.IResponseListener<GetMyUserInfoFromMachineBean>() {
-//                    @Override
-//                    public void onSuccess(GetMyUserInfoFromMachineBean data) {
-//                        if (data.getSuccess()) {
-//                            if (data.getDataMap() == null) return;
-//                            GetMyUserInfoFromMachineBean.DataMapDTO.DataDTO dataDTO = data.getDataMap().getData();
-//                            int gender = dataDTO.getGender().equals("M") ? MALE : FEMALE;
-//                            String name = dataDTO.getFirstName() + " " + dataDTO.getLastName();
-//                            int age = dataDTO.getAge();
-//                            int unit = dataDTO.getMeasurementUnit(); //公制0,英制1
-//                            UNIT_E = unit == 0 ? METRIC : IMPERIAL;
-//
-//                            int weight = Integer.parseInt(dataDTO.getWeight());
-//                            int height = Integer.parseInt(dataDTO.getHeight());
-//
-//                            int weightImperial = unit == DeviceIntDef.IMPERIAL ? weight : kg2lb(weight);
-//                            int weightMetric = unit == METRIC ? weight : FormulaUtil.lb2kg(weight);
-//                            int heightImperial = unit == DeviceIntDef.IMPERIAL ? height : FormulaUtil.in2cm(height);
-//                            int heightMetric = unit == METRIC ? height : FormulaUtil.cm2in(height);
-//
-////                            userProfileEntity.setUnit(unit);
-////                            userProfileEntity.setGender(gender);
-////                            userProfileEntity.setUserName(name);
-////                            userProfileEntity.setAge(age);
-////                            userProfileEntity.setWeight_imperial(weightImperial);
-////                            userProfileEntity.setWeight_metric(weightMetric);
-////                            userProfileEntity.setHeight_imperial(heightImperial);
-////                            userProfileEntity.setHeight_metric(heightMetric);
-////
-////                            App.getApp().setUserProfile(userProfileEntity);
-//                            //     new CommonUtils().mmkvUserProfileToViewModel(userProfileViewModel, userProfileEntity);
-//
-//                        } else {
-//                            Toasty.warning(requireActivity(), data.getErrorMessage(), Toasty.LENGTH_LONG).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFail() {
-//                        //    BaseApi.clearDispose();
-//                    }
-//                });
-//    }
+
 
     private void initGuestView() {
 
@@ -513,7 +463,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             try {
                 Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToProgramsFragment(WorkoutIntDef.DEFAULT_PROGRAM));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         });
 
@@ -523,7 +473,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             try {
                 Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToAllRankFragment());
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         });
 
@@ -533,7 +483,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             try {
                 Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToSetTimeFragment(ProgramsEnum.MANUAL));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
 //            SetTimeWindow setTimeWindow = new SetTimeWindow(requireActivity());
 //            setTimeWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
@@ -578,7 +528,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 egymDataViewModel.egymTrainingPlansData.observe(getViewLifecycleOwner(), egymTrainingPlans -> {
                     //      LogS.printJson("EGYMMMMM", new Gson().toJson(egymTrainingPlans), "GetTrainingPlans");
 
-             //       Log.d("EgymUtil", "⭐️⭐️⭐️⭐️initView: ");
+
                     initEgymView(egymTrainingPlans);
 
                     getBinding().egymProgress.setVisibility(View.GONE);
@@ -586,24 +536,11 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 });
 
 
-                //放到MainDashboardTrainingFragment ,以免離開此頁就無法監聽
-//                LiveEventBus.get(WIFI_WORK, Boolean.class).observe(getViewLifecycleOwner(), s -> {
-//                    if (isNetworkAvailable(getApp())) {
-//                        Log.d("###EGYMMMMM", "有網路,判斷egym: ");
-//                        new EgymUtil().getEgymDataList();
-//
-//                        if (isNoData) {
-//                            Log.d("###EGYMMMMM", "重新取得 Plan資料: ");
-//                            new EgymUtil((MainActivity) requireActivity(), deviceSettingViewModel, egymDataViewModel).apiGetTrainingPlans();
-//                        }
-//                    }
-//                });
-
 
                 break;
             case USER_TYPE_GUEST:
 
-           //     Log.d("EgymUtil", "⭐️⭐️⭐️⭐️GUEST: ");
+
                 getBinding().viewEgymNoPlan.setVisibility(View.GONE);
                 getBinding().viewEgym.setVisibility(View.GONE);
                 getBinding().viewNormal.setVisibility(View.GONE);
@@ -639,7 +576,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             NavDirections navDirections = DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToProgramsBannerFragment(v.getId(), programType);
             Navigation.findNavController(v).navigate(navDirections);
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
 
 
@@ -729,25 +666,4 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 
     }
 
-
-//    private void testGboard() {
-//
-//        //設定Gboard為預設輸入法
-//        String oldDefaultKeyboard = Settings.Secure.getString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
-////        Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, "com.google.android.inputmethod.latin/.full.path");
-////        Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, "com.google.android.inputmethod.latin/.full.path");
-//        if (!oldDefaultKeyboard.equals("com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME")) {
-//            Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, "com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME");
-//            Settings.Secure.putString(requireActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, "com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME");
-//            Log.d("OOOOOOOOEEEEE", "22222onViewCreated: " + oldDefaultKeyboard);
-//
-//            //# ime set com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME
-////            InputMethodManager imeManager = (InputMethodManager) requireActivity().getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
-////            imeManager.showInputMethodPicker();
-//        }
-//
-//
-//    //    GboardLanguageAdder.addKeyboardLanguage(requireActivity(),"zh-CN");
-//
-//    }
 }

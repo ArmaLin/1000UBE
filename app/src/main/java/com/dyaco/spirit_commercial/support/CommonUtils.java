@@ -68,7 +68,6 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -142,6 +141,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -2338,41 +2338,8 @@ public class CommonUtils {
 
     public static void restartApp(MainActivity mainActivity) {
         closePackage(getApp());
-//        try {
-//            // 1️⃣ 清除應用記憶體（確保它在 shell 環境中運行）
-//            Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "sync; echo 3 > /proc/sys/vm/drop_caches"});
-//            // 2️⃣ 強制關閉 APP
-//            Runtime.getRuntime().exec("am force-stop " + BuildConfig.APPLICATION_ID);
-//            // 3️⃣ 等待 1 秒，確保 APP 完全關閉
-//            Thread.sleep(1000);
-//            // 4️⃣ 重新啟動 APP
-//            Runtime.getRuntime().exec("am start -n " + BuildConfig.APPLICATION_ID + "/.MainActivity");
-//            // 5️⃣ 退出當前進程，確保不殘留
-//            System.exit(0);
-//
-//        } catch (IOException | InterruptedException e) {
-//            showException(e);
-//        }
 
-
-        PackageManager pm = mainActivity.getPackageManager();
-        Intent launch = pm.getLaunchIntentForPackage(mainActivity.getPackageName());
-        ComponentName comp = launch.getComponent();
-        Intent restartIntent = Intent.makeRestartActivityTask(comp);
-        mainActivity.startActivity(restartIntent);
-        Runtime.getRuntime().exit(0);
-
-
-//        PackageManager packageManager = mainActivity.getPackageManager();
-//        Intent intent = packageManager.getLaunchIntentForPackage(mainActivity.getPackageName());
-//        ComponentName componentName = intent.getComponent();
-//        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
-//        mainActivity.startActivity(mainIntent);
-//     //   mainActivity.overridePendingTransition(R.anim.fade_in_2, R.anim.fade_out_2);
-//        Runtime.getRuntime().exit(0);
-
-//        mainActivity.overridePendingTransition(R.anim.fade_in_2, R.anim.fade_out_2);
-//        ProcessPhoenix.triggerRebirth(getApp());
+        ProcessPhoenix.triggerRebirth(getApp());
     }
 
 

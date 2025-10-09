@@ -310,7 +310,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             //避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
         //    Log.d(EgymUtil.TAG, "isEgymNfc: " + isEgymNfc);
             if (!isEgymNfc) return;
-            Timber.tag(EgymUtil.TAG).d("isLogin: " + isNfcLogin);
+            Timber.tag(EgymUtil.TAG).d("isLogin: %s", isNfcLogin);
             if (isNfcLogin) return;
 
             isNfcLogin = true;
@@ -323,8 +323,8 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             RFID_CODE = reverseUidHex(rfidCode);
 
 
-            Timber.tag(EgymUtil.TAG).d("uid: " + rfidCode);
-            Timber.tag(EgymUtil.TAG).d("轉HEX: " + RFID_CODE);
+            Timber.tag(EgymUtil.TAG).d("uid: %s", rfidCode);
+            Timber.tag(EgymUtil.TAG).d("轉HEX: %s", RFID_CODE);
 
          //   Log.d(EgymUtil.TAG, "NFC登入中: ");
 
@@ -532,7 +532,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             try {
                 Navigation.findNavController(v).navigate(LoginFragmentDirections.actionLoginFragmentToQrcodeLoginFragment());
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 //重複點擊
             }
 
@@ -554,7 +554,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                 Navigation.findNavController(v).navigate(LoginFragmentDirections.actionLoginFragmentToNfcLoginFragment());
                 //   Navigation.findNavController(v).navigate(NavigationLoginDirections.actionGlobalMainBlankFragment());
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         });
         getBinding().btnGotoWorkout.setOnClickListener(v -> {

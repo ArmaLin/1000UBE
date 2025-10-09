@@ -122,7 +122,7 @@
         android:largeHeap="true"
         android:screenOrientation="landscape"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.App.Starting"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label">
 
@@ -134,8 +134,7 @@
             android:configChanges="orientation"
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTask"
-            android:theme="@style/LauncherTheme">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />

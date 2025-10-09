@@ -122,7 +122,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 //
 //        getApp().setDeviceSettingBean(a);
 
-        //Log.d("XXXXXXXXXX", "onViewCreated: " + getApp().getDeviceSettingBean().getBrand_name());
+     //   Timber.tag("XXXXXXXXXX").d("onViewCreated: " + getApp().getDeviceSettingBean().getBrand_name());
 
 
 

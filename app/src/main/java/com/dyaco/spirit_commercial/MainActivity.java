@@ -63,7 +63,6 @@ import static com.dyaco.spirit_commercial.support.intdef.EventKey.SHOW_SAMSUNG_D
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.START_WORKOUT;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.WIFI_WORK;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.DISTANCE_LIMIT;
-import static com.dyaco.spirit_commercial.support.intdef.GENERAL.DS_EMS_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.DS_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.FEMALE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.MALE;
@@ -111,6 +110,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.core.widget.PopupWindowCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -316,6 +316,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SplashScreen.installSplashScreen(this);
+
+
         super.onCreate(savedInstanceState);
         //   MMKV.defaultMMKV().encode(IMAGE_KEY, 0);
 
@@ -1301,10 +1305,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             }
         } else {
             Timber.tag("UART_CONSOLE").d("startWorkout: %s", uartConsole.getDevStep());
-            if (uartConsole.getDevStep() != DS_EMS_IDLE_STANDBY && !isEmulator) {
-                CustomToast.showToast(this, getString(R.string.start_waiting_bike));
-                return;
-            }
+            // TODO:
+//            if (uartConsole.getDevStep() != DS_EMS_IDLE_STANDBY && !isEmulator) {
+//                CustomToast.showToast(this, getString(R.string.start_waiting_bike));
+//                return;
+//            }
         }
 
         CHECK_START = true;
