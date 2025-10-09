@@ -156,6 +156,7 @@ import com.dyaco.spirit_commercial.login.LoginFragment;
 import com.dyaco.spirit_commercial.maintenance_mode.MaintenanceUsageRestrictionsWindow;
 import com.dyaco.spirit_commercial.maintenance_mode.RetailVideoWindow;
 import com.dyaco.spirit_commercial.maintenance_mode.UsageLimitReachedWindow;
+import com.dyaco.spirit_commercial.maintenance_mode.usbx.BinaryInstaller;
 import com.dyaco.spirit_commercial.model.webapi.BaseApi;
 import com.dyaco.spirit_commercial.model.webapi.CallWebApi;
 import com.dyaco.spirit_commercial.model.webapi.IServiceApi;
@@ -330,7 +331,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         deleteCache(this);
 
 
-
         mRetailVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CoreStar/Dyaco/Spirit/retail.mp4";
 
         //splashImagePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CoreStar/Dyaco/Spirit/";
@@ -359,113 +359,121 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         new DeviceSettingCheck2().checkError();
 
 
+        //   Looper.myQueue().addIdleHandler(() -> {
 
-     //   Looper.myQueue().addIdleHandler(() -> {
+        //  installExFatBinary();
 
-            //   installExFatBinary();
+        controlParameterMap = new HashMap<>();
 
-            controlParameterMap = new HashMap<>();
+        //UART初始化
+        initUartConsole();
 
-            //UART初始化
-            initUartConsole();
-
-            //外部控制(FTMS、實體按鍵)
-            initExControl();
-
+        //外部控制(FTMS、實體按鍵)
+        initExControl();
 
 
-            //關閉狀態列
-            new CommonUtils().hideStatusBar(1);
+        //關閉狀態列
+        new CommonUtils().hideStatusBar(1);
 
 
-            closePackage(this);
+        closePackage(this);
 
 
-            getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
 
 
+        //     initHdmi();
 
-       //     initHdmi();
+
+        if (!isNetworkAvailable(getApplication())) {
+            internetNotifyWarringWindow(true);
+        }
 
 
-            if (!isNetworkAvailable(getApplication())) {
-                internetNotifyWarringWindow(true);
+        checkLimit();
+
+
+        checkUploadWebApi();
+
+
+        holdScreen();
+
+        getBinding().setIsUs(isUs);
+
+
+        //檢查Error Log 上傳
+        new CallWebApi(this).apiUploadErrorLog();
+
+
+        new WorkManagerUtil().checkUploadErrorLog();
+
+        if (getSystemFontSize(this) < 1.3f) {
+            //    Log.d("OOOOOOEEEE", "onCreate: 改變大小");
+            changeSystemFontSize(this, 1.3f);
+            //    Log.d("OOOOOOEEEE", "get: " + getSystemFontSize(this));
+        }
+
+        /**
+         * 讓app的字體不要變大， 不知為何FloatingTopDashBoardWindow的字變大了
+         *     protected void attachBaseContext(Context newBase) {
+         *         super.attachBaseContext(updateResourceFontSize(newBase));
+         *     }
+         */
+
+        //    workoutViewModel.isGarminConnected.set(true);
+
+
+        //######## AUTO LOGOUT
+        userInteractionHandler = new Handler();
+        r = () -> {
+
+            if (deviceSettingViewModel.autoPause.getValue() == OFF) return;
+
+            if (appStatusViewModel.currentStatus.get() == STATUS_RUNNING) return;
+            if (appStatusViewModel.currentStatus.get() == STATUS_PAUSE) return;
+
+            if (!isHomeScreen) {
+                stopHandler();
+                return;
             }
 
+            Timber.tag("RPM_CHECK").d("準備登出: ");
 
-            checkLimit();
-
-
-            checkUploadWebApi();
-
-
-            holdScreen();
-
-            getBinding().setIsUs(isUs);
-
-
-            //檢查Error Log 上傳
-            new CallWebApi(this).apiUploadErrorLog();
-
-
-
-            new WorkManagerUtil().checkUploadErrorLog();
-
-            if (getSystemFontSize(this) < 1.3f) {
-                //    Log.d("OOOOOOEEEE", "onCreate: 改變大小");
-                changeSystemFontSize(this, 1.3f);
-                //    Log.d("OOOOOOEEEE", "get: " + getSystemFontSize(this));
-            }
-
-            /**
-             * 讓app的字體不要變大， 不知為何FloatingTopDashBoardWindow的字變大了
-             *     protected void attachBaseContext(Context newBase) {
-             *         super.attachBaseContext(updateResourceFontSize(newBase));
-             *     }
-             */
-
-            //    workoutViewModel.isGarminConnected.set(true);
-
-
-            //######## AUTO LOGOUT
-            userInteractionHandler = new Handler();
-            r = () -> {
-
-                if (deviceSettingViewModel.autoPause.getValue() == OFF) return;
-
-                if (appStatusViewModel.currentStatus.get() == STATUS_RUNNING) return;
-                if (appStatusViewModel.currentStatus.get() == STATUS_PAUSE) return;
-
-                if (!isHomeScreen) {
-                    stopHandler();
-                    return;
-                }
-
-                Timber.tag("RPM_CHECK").d("準備登出: ");
-
-                if (isUs) {
-                    if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {
-                        webApiLogout();
-                    } else {
-                        clearAppData();
-                        clearCookies();
-                        closePackage(this);
-                        deleteCache(this);
-                        stopHandler();
-                    }
-                    Timber.tag("RPM_CHECK").d("US >>>> AUTO LOGOUT: ");
-                } else {
+            if (isUs) {
+                if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {
                     webApiLogout();
+                } else {
+                    clearAppData();
+                    clearCookies();
+                    closePackage(this);
+                    deleteCache(this);
+                    stopHandler();
                 }
-            };
+                Timber.tag("RPM_CHECK").d("US >>>> AUTO LOGOUT: ");
+            } else {
+                webApiLogout();
+            }
+        };
 
-            MediaAppUtils.checkConsoleMediaApp();
+        MediaAppUtils.checkConsoleMediaApp();
 
 
-            MediaAppUtils.checkForceUpdate();
+        MediaAppUtils.checkForceUpdate();
 
-            EgymUtil.init(this, deviceSettingViewModel, egymDataViewModel);
+        EgymUtil.init(this, deviceSettingViewModel, egymDataViewModel);
 
+
+    }
+
+
+    private void installExFatBinary() {
+        BinaryInstaller.installBinaryIfNeeded(this, success -> {
+            if (success) {
+                Timber.tag("USB_UPDATE").d("Binary 安裝成功，可執行掛載流程");
+            } else {
+                Timber.tag("USB_UPDATE").e("Binary 安裝失敗，請確認是否已 root 並允許權限");
+            }
+        });
 
     }
 
@@ -1020,7 +1028,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public HdmiIn hdmiIn;
 
 
-
     public void closeHdmi() {
 
 
@@ -1111,7 +1118,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
     }
-
 
 
     public DeviceManager mGarminDeviceManager;
@@ -2366,7 +2372,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         new CommonUtils().mmkvDeviceSettingToViewModel(deviceSettingViewModel, getApp().getDeviceSettingBean());
 
 
-
         isTreadmill = deviceSettingViewModel.typeCode.get() == DeviceIntDef.DEVICE_TYPE_TREADMILL;
 
 
@@ -2461,7 +2466,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             loadingWindowAllB.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
         }
     }
-
 
 
     LoadingWindow2 loadingWindow2;
@@ -2583,8 +2587,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         //   garminUnPair2();
         garminUnPair();
-
-
 
 
         // TODO: garmin解綁可能很慢，要晚一點關閉藍芽
@@ -2722,7 +2724,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
                         try {
                             if (data.getSuccess()) {
-                             //   Timber.tag("WEB_API").d("GetUnreadMessageCountFromMachineBean: %s", data.getDataMap().getData());
+                                //   Timber.tag("WEB_API").d("GetUnreadMessageCountFromMachineBean: %s", data.getDataMap().getData());
                                 deviceSettingViewModel.alertNotifyCount.set(data.getDataMap().getData().getUnreadCount());
                             } else {
                                 Toasty.warning(getApp(), "# " + data.getErrorMessage(), Toasty.LENGTH_LONG).show();
@@ -2858,7 +2860,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             runOnUiThread(() -> {
                 try {
                     getMachineInfo();
-                //    Timber.tag("GYM_APP").d("傳送Machine Info: %s", new Gson().toJson(anplusMachine));
+                    //    Timber.tag("GYM_APP").d("傳送Machine Info: %s", new Gson().toJson(anplusMachine));
                     mDyacoEmitter.emit(getApp(), anplusMachine);
                 } catch (Exception e) {
                     Timber.e(e);
@@ -2869,7 +2871,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         @Override
         public void onModelDataReceived(AnplusMachine anplusMachine) {
 
-         //   Timber.tag("GYM_APP").d("onModelDataReceived%s", new Gson().toJson(anplusMachine));
+            //   Timber.tag("GYM_APP").d("onModelDataReceived%s", new Gson().toJson(anplusMachine));
 
         }
     };

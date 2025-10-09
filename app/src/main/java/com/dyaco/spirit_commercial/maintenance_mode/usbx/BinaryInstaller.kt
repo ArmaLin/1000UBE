@@ -3,6 +3,7 @@ package com.dyaco.spirit_commercial.maintenance_mode.usbx
 import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 
@@ -24,14 +25,14 @@ object BinaryInstaller {
             try {
                 val targetFile = File(TARGET_PATH)
                 if (targetFile.exists()) {
-                    Log.d(TAG, "Binary 已存在，跳過複製")
+                    Timber.tag(TAG).d("Binary 已存在，跳過複製")
                     withContext(Dispatchers.Main) {
                         callback.onInstallResult(true)
                     }
                     return@launch
                 }
 
-                Log.d(TAG, "Binary 不存在，開始複製")
+                Timber.tag(TAG).d("Binary 不存在，開始複製")
                 val tempFile = File.createTempFile("tmp_", null, context.cacheDir)
 
                 context.assets.open(ASSET_NAME).use { input ->
@@ -46,13 +47,13 @@ object BinaryInstaller {
                 Runtime.getRuntime().exec(arrayOf("su", "-c", copyCmd)).waitFor()
                 Runtime.getRuntime().exec(arrayOf("su", "-c", chmodCmd)).waitFor()
 
-                Log.d(TAG, "Binary 安裝完成")
+                Timber.tag(TAG).d("Binary 安裝完成")
                 withContext(Dispatchers.Main) {
                     callback.onInstallResult(true)
                 }
 
             } catch (e: Exception) {
-                Log.e(TAG, "Binary 安裝失敗：${e.message}", e)
+                Timber.tag(TAG).e(e, "Binary 安裝失敗：${e.message}")
                 withContext(Dispatchers.Main) {
                     callback.onInstallResult(false)
                 }
