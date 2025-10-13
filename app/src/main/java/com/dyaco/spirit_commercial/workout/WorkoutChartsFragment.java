@@ -776,7 +776,13 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
         int newCurrentSpeedLevel = currentSpeedLevel + (updateSpeedLevel);
 
-        if (newCurrentSpeedLevel <= 0) return false;
+        Log.d("CCXXVVV", "1111updateSpeedNum: " + newCurrentSpeedLevel);
+        // TODO: PF    <= 0
+        if (newCurrentSpeedLevel < 0) return false;
+
+
+        Log.d("CCXXVVV", "22222updateSpeedNum: " + newCurrentSpeedLevel);
+
 
         //ftms 同階 回成功
         if (currentSpeedLevel == newCurrentSpeedLevel) {
@@ -803,9 +809,11 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
             case RUN_5K:
             case RUN_10K:
             case HIIT:
+            case CALORIES:
                 //調整 SPEED 的 CHART (將還未跑到的Chart全部調整成同樣數值)
                 return updateSpeedChart(newCurrentSpeedLevel, updateSpeedLevel);
             case HILL:
+            case PLATEAU:
             case FATBURN:
             case CARDIO:
             case STRENGTH:

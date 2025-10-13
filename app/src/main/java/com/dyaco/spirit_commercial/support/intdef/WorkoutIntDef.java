@@ -31,26 +31,26 @@ public class WorkoutIntDef {
     public static String TREADMILL_SPEED_METRIC_US_NUM_12 = "20";
 
 
-    public static final String BIKE_LEVEL_US_NUM_1 = "2";
-    public static final String BIKE_LEVEL_US_NUM_2 = "4";
-    public static final String BIKE_LEVEL_US_NUM_3 = "6";
-    public static final String BIKE_LEVEL_US_NUM_4 = "8";
-    public static final String BIKE_LEVEL_US_NUM_5 = "10";
-    public static final String BIKE_LEVEL_US_NUM_6 = "12";
-    public static final String BIKE_LEVEL_US_NUM_7 = "14";
-    public static final String BIKE_LEVEL_US_NUM_8 = "16";
-    public static final String BIKE_LEVEL_US_NUM_9 = "18";
-    public static final String BIKE_LEVEL_US_NUM_10 = "20";
-    public static final String BIKE_LEVEL_US_NUM_11 = "22";
-    public static final String BIKE_LEVEL_US_NUM_12 = "24";
-    public static final String BIKE_LEVEL_US_NUM_13 = "26";
-    public static final String BIKE_LEVEL_US_NUM_14 = "28";
+    public static final String BIKE_LEVEL_US_NUM_1 = "0";
+    public static final String BIKE_LEVEL_US_NUM_2 = "2";
+    public static final String BIKE_LEVEL_US_NUM_3 = "4";
+    public static final String BIKE_LEVEL_US_NUM_4 = "6";
+    public static final String BIKE_LEVEL_US_NUM_5 = "8";
+    public static final String BIKE_LEVEL_US_NUM_6 = "10";
+    public static final String BIKE_LEVEL_US_NUM_7 = "12";
+    public static final String BIKE_LEVEL_US_NUM_8 = "14";
+    public static final String BIKE_LEVEL_US_NUM_9 = "16";
+    public static final String BIKE_LEVEL_US_NUM_10 = "18";
+    public static final String BIKE_LEVEL_US_NUM_11 = "20";
+    public static final String BIKE_LEVEL_US_NUM_12 = "22";
+    public static final String BIKE_LEVEL_US_NUM_13 = "24";
+    public static final String BIKE_LEVEL_US_NUM_14 = "26";
     public static final String BIKE_LEVEL_US_NUM_15 = "30";
-    public static final String BIKE_LEVEL_US_NUM_16 = "32";
-    public static final String BIKE_LEVEL_US_NUM_17 = "34";
-    public static final String BIKE_LEVEL_US_NUM_18 = "36";
-    public static final String BIKE_LEVEL_US_NUM_19 = "38";
-    public static final String BIKE_LEVEL_US_NUM_20 = "40";
+    public static final String BIKE_LEVEL_US_NUM_16 = "34";
+    public static final String BIKE_LEVEL_US_NUM_17 = "38";
+    public static final String BIKE_LEVEL_US_NUM_18 = "42";
+    public static final String BIKE_LEVEL_US_NUM_19 = "46";
+    public static final String BIKE_LEVEL_US_NUM_20 = "50";
 
 
 

@@ -7,6 +7,7 @@ import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.km2mi;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.mi2km;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.FITNESS_TEST;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
@@ -489,7 +490,8 @@ public class WorkoutUtil {
             //  min = 1;
         } else {
           //  min = (currentProgram != WATTS && currentProgram != FITNESS_TEST) ? 1 : POWER_MIN;
-            min = 1;
+            // TODO: PF
+            min = MAX_LEVEL_MIN;
         }
         return min;
     }

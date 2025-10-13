@@ -3020,7 +3020,10 @@ public class SpiritCommercialUart implements IUartConsole {
 
         level = Math.max(level, MAX_LEVEL_MIN);
         level = Math.min(level, MAX_LEVEL_MAX);
-        w.pwmLevelDA.set(MODE.getLevelAD()[level - 1]); // == 查表
+
+        // TODO: PF
+//        w.pwmLevelDA.set(MODE.getLevelAD()[level - 1]); // == 查表
+        w.pwmLevelDA.set(MODE.getLevelAD()[level]); // == 查表
 
 
         LogUtil.d(TAG, "setPwmLevel_LEVEL = " + w.pwmLevelDA.get() + ", level = " + level);

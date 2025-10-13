@@ -746,7 +746,7 @@
             android:layout_height="0dp"
             app:constraint_referenced_ids="treadmillControllerInclineViewBackground,view_inclineTitle,view_inclineLine1,btn_workout_incline_plus,view_inclineLine2,view_inclineLine3,view_inclineLine4,view_inclineLine5,view_inclineLine6,view_inclineLine7,btn_workout_incline_minus,btn_workout_0,btn_workout_2,btn_workout_5,btn_workout_10,btn_workout_15"
             app:visibility="@{isTreadmill ? isUs ? View.GONE : (!WorkoutData.disabledInclineUpdate ? View.VISIBLE : View.GONE) : View.GONE}"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/groupTreadmillViewInclineNoView"
@@ -762,7 +762,7 @@
             android:layout_height="0dp"
             app:constraint_referenced_ids="treadmillControllerSpeedViewBackground,view_SpeedTitle,view_speedLine1,btn_workout_speed_plus,view_speedLine2,view_speedLine3,view_speedLine4,view_speedLine5,view_speedLine6,view_speedLine7,btn_workout_speed_minus,btn_workout_1,btn_workout_3,btn_workout_6,btn_workout_9,btn_workout_12"
             app:visibility="@{isUs ? View.GONE : isTreadmill ? (!WorkoutData.disabledSpeedUpdate ? View.VISIBLE : View.GONE): View.GONE}"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/groupTreadmillViewSpeedNoView"
@@ -779,7 +779,7 @@
             android:visibility="gone"
             app:constraint_referenced_ids="bikeControllerLevelViewBackground,view_bike_level_Title,btnBikeLevelNum8,btnBikeLevelNum16,btnBikeLevelNum24,btnBikeLevelNum32,btnBikeLevelNum40,view_bike_level_Line1,view_bike_level_Line2,view_bike_level_Line3,view_bike_level_Line4,view_bike_level_Line5"
             app:visibility="@{isUs ? View.GONE : isTreadmill ? View.GONE : (WorkoutData.disabledLevelUpdate || WorkoutData.selProgram == programsEnum.HEART_RATE || WorkoutData.selProgram == programsEnum.FITNESS_TEST ? View.INVISIBLE : View.VISIBLE)}"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <!--        app:visibility   == 比 !=  ! 快執行-->
         <androidx.constraintlayout.widget.Group
@@ -1196,7 +1196,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visibility="@{isTreadmill ? !isUs ? View.GONE : (!WorkoutData.disabledInclineUpdate ? View.VISIBLE : View.GONE) : View.GONE}"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1841,7 +1841,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedCorner24"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
 
         <!--        US 隱藏 SPEED-->
@@ -1866,7 +1866,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedCorner24"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
 
         <!--        US 隱藏MENU-->

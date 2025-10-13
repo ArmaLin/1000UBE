@@ -111,8 +111,10 @@ public class OPT_SETTINGS {
 
     // for Hill, Plateau, Facility (Bikes, Stepper, UBE)
     public static final int MAX_LEVEL_DEF = 5;
-    public static final int MAX_LEVEL_MIN = 1;
-    public static final int MAX_LEVEL_MAX = 40;
+
+    // TODO: PF
+    public static final int MAX_LEVEL_MIN = 0;
+    public static final int MAX_LEVEL_MAX = 50;
 
 
     public static final int MAX_RPM = 120;

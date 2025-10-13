@@ -736,9 +736,9 @@
 <!--        app:marginTop="@{isUs ? 366 : 240}"-->
 <!--        app:marginBottom="@{isUs ? 100 : 50}"-->
         <androidx.recyclerview.widget.RecyclerView
-            tools:itemCount="2"
-            android:layout_marginEnd="128dp"
-            android:layout_marginStart="128dp"
+            tools:itemCount="11"
+            android:layout_marginEnd="38dp"
+            android:layout_marginStart="38dp"
             tools:listitem="@layout/items_mediass_list"
             app:marginTop="@{isUs ? (deviceSettingViewModel.video == deviceSettingIntDef.VIDEO_STB ? 240 :  366 ) : 240}"
             app:marginBottom="@{isUs ? (deviceSettingViewModel.video == deviceSettingIntDef.VIDEO_STB ? 50 :  100 ) : 50}"

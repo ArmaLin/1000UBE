@@ -148,7 +148,7 @@ public class DashboardMediaFragment extends BaseBindingFragment<FragmentDashboar
     private void initMediaApp() {
 
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity(), isUs ? 6 : 4) {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity(), isUs ? (deviceSettingViewModel.video.getValue() == VIDEO_STB ? 4 : 6) : 4) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireActivity(), 11) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -158,7 +158,7 @@ public class DashboardMediaFragment extends BaseBindingFragment<FragmentDashboar
         RecyclerView recyclerView = getBinding().recyclerview;
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new GridViewSpaceItemDecoration(70, 0, requireActivity()));
+        recyclerView.addItemDecoration(new GridViewSpaceItemDecoration(40, 0, requireActivity()));
 
         recyclerView.setItemAnimator(null);//不要動畫
 

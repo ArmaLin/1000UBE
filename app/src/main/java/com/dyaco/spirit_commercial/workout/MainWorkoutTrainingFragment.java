@@ -1520,7 +1520,6 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
         }
-
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
         //電跑的 HeartRateProgram 最大速度不同

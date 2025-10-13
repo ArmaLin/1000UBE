@@ -419,7 +419,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tv1616.setText("15");
                 break;
             case STATS_LEVEL:
-                getBinding().tv161.setText("1");
+                getBinding().tv161.setText("0");
                 getBinding().tv162.setText("2");
                 getBinding().tv163.setText("4");
                 getBinding().tv164.setText("6");
@@ -428,13 +428,13 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tv167.setText("12");
                 getBinding().tv168.setText("14");
                 getBinding().tv169.setText("16");
-                getBinding().tv1610.setText("18");
-                getBinding().tv1611.setText("20");
-                getBinding().tv1612.setText("24");
-                getBinding().tv1613.setText("28");
-                getBinding().tv1614.setText("32");
-                getBinding().tv1615.setText("36");
-                getBinding().tv1616.setText("40");
+                getBinding().tv1610.setText("20");
+                getBinding().tv1611.setText("25");
+                getBinding().tv1612.setText("30");
+                getBinding().tv1613.setText("35");
+                getBinding().tv1614.setText("40");
+                getBinding().tv1615.setText("45");
+                getBinding().tv1616.setText("50");
                 break;
             case STATS_POWER:
                 getBinding().tv161.setText("30");
