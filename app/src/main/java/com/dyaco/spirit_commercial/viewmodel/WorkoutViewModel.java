@@ -1,6 +1,7 @@
 package com.dyaco.spirit_commercial.viewmodel;
 
 import static com.dyaco.spirit_commercial.support.FormulaUtil.E_BLANK;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
 
 import androidx.databinding.ObservableBoolean;
@@ -134,7 +135,7 @@ public class WorkoutViewModel extends ViewModel implements Serializable {
     public final ObservableFloat currentMaxSpeed = new ObservableFloat();
     public final ObservableInt currentMaxSpeedLevel = new ObservableInt(); // 目前最大階數
 
-    public final ObservableInt currentLevel = new ObservableInt(1);
+    public final ObservableInt currentLevel = new ObservableInt(MAX_LEVEL_MIN);
     public final ObservableFloat currentMaxLevel = new ObservableFloat();
 
     private int hpHr;

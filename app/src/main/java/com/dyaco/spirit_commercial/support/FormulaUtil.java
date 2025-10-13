@@ -9,6 +9,7 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
 import static com.dyaco.spirit_commercial.support.intdef.HrStatus.IDLE_MODE;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_INC_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_RPM;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_IU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_MU_MAX;
@@ -603,7 +604,7 @@ public class FormulaUtil {
         w.currentInclineValue.set(0);
         w.currentInclineLevel.set(0);
         w.currentSpeedLevel.set(0);
-        w.currentLevel.set(1);
+        w.currentLevel.set(MAX_LEVEL_MIN);
 
         w.inclineDiagramBarList.clear();
         w.speedDiagramBarList.clear();
