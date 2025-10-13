@@ -84,14 +84,8 @@ public class ProgramsFragment extends BaseBindingFragment<FragmentProgramsBindin
 
         getBinding().btnManual.setOnClickListener(this);
         getBinding().btnHill.setOnClickListener(this);
-        getBinding().btnFatburn.setOnClickListener(this);
-        getBinding().btnCardio.setOnClickListener(this);
-        getBinding().btnStrength.setOnClickListener(this);
-        getBinding().btnHIIT.setOnClickListener(this);
         getBinding().btn5KRun.setOnClickListener(this);
-        getBinding().btn10KRun.setOnClickListener(this);
         getBinding().btnHeartRate.setOnClickListener(this);
-        getBinding().btnInterval.setOnClickListener(this);
         getBinding().btnCustom.setOnClickListener(this);
 
 //        getBinding().btnInterval.setOnClickListener(new View.OnClickListener() {
@@ -102,9 +96,7 @@ public class ProgramsFragment extends BaseBindingFragment<FragmentProgramsBindin
 //            }
 //        });
 
-        getBinding().btnHeartRateBIKE.setOnClickListener(this);
         getBinding().btnWatts.setOnClickListener(this);
-        getBinding().btnFitnessTest.setOnClickListener(this);
 
         getBinding().btnAirForce.setOnClickListener(this);
         getBinding().btnArmy.setOnClickListener(this);

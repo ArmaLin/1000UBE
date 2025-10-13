@@ -154,45 +154,42 @@
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_Fatburn"
+                android:id="@+id/btn_Plateau"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="948dp"
-                android:drawableBottom="@drawable/diagram_fatburn_default"
+                android:drawableBottom="@drawable/diagram_plateau_default"
                 android:tag="0"
-                android:text="@string/fatburn"
+                android:text="@string/Plateau"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_Cardio"
+                android:id="@+id/btn_Custom"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="1422dp"
-                android:drawableBottom="@drawable/diagram_cardio_default"
                 android:tag="0"
-                android:text="@string/cardio"
+                android:text="@string/Custom"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_Strength"
+                android:id="@+id/btn_Calories"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginTop="224dp"
-                android:drawableBottom="@drawable/diagram_strength_default"
-                android:text="@string/strength"
+                android:text="@string/Calories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_HIIT"
+                android:id="@+id/btn_HeartRate"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="474dp"
                 android:layout_marginTop="224dp"
-                android:drawableBottom="@drawable/diagram_hiit_default"
-                android:text="@string/hiit"
+                android:text="@string/heart_rate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintBounds,VisualLintButtonSize" />
@@ -208,82 +205,83 @@
                 app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
                 tools:ignore="DuplicateClickableBoundsCheck,VisualLintOverlap,VisualLintBounds,VisualLintButtonSize" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_10KRun"
-                style="@style/ProgramsButtonStyle"
-                android:layout_marginStart="1422dp"
-                android:layout_marginTop="224dp"
-                android:text="@string/k10_run"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
-                tools:ignore="DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_10KRun"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:layout_marginStart="1422dp"-->
+<!--                android:layout_marginTop="224dp"-->
+<!--                android:text="@string/k10_run"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"-->
+<!--                tools:ignore="DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_HeartRate"
-                style="@style/ProgramsButtonStyle"
-                android:layout_marginTop="448dp"
-                android:text="@string/heart_rate"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_HeartRate"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:layout_marginTop="448dp"-->
+<!--                android:text="@string/heart_rate"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:visibility="@{isTreadmill ? View.VISIBLE : View.GONE}"-->
+<!--                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />-->
 
-            <com.google.android.material.button.MaterialButton
-                android:visibility="visible"
-                android:id="@+id/btn_Interval"
-                style="@style/ProgramsButtonStyle"
-                android:text="@string/Interval"
-                android:drawableBottom="@drawable/diagram_interval_default"
-                app:layout_constraintStart_toStartOf="@+id/btn_HIIT"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="448dp"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:visibility="visible"-->
+<!--                android:id="@+id/btn_Interval"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:text="@string/Interval"-->
+<!--                android:drawableBottom="@drawable/diagram_interval_default"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/btn_HIIT"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:layout_marginTop="448dp"-->
+<!--                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />-->
 
-            <com.google.android.material.button.MaterialButton
-                android:visibility="visible"
-                android:id="@+id/btn_Custom"
-                style="@style/ProgramsButtonStyle"
-                android:text="@string/Custom"
-                android:layout_marginStart="948dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_Interval"
-                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:visibility="visible"-->
+<!--                android:id="@+id/btn_Custom"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:text="@string/Custom"-->
+<!--                android:layout_marginStart="948dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/btn_Interval"-->
+<!--                tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />-->
+
+<!--            -->
 
 
             <!--            BIKE-->
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_HeartRate_BIKE"
-                style="@style/ProgramsButtonStyle"
-                android:layout_marginStart="948dp"
-                android:layout_marginTop="224dp"
-                android:text="@string/heart_rate"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
-                tools:ignore="VisualLintBounds,VisualLintButtonSize" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_Watts"
                 style="@style/ProgramsButtonStyle"
-                android:layout_marginStart="1422dp"
+                android:layout_marginStart="948dp"
                 android:layout_marginTop="224dp"
                 android:text="@string/Watts"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
                 tools:ignore="VisualLintBounds,VisualLintButtonSize" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_FitnessTest"
-                style="@style/ProgramsButtonStyle"
-                android:layout_marginTop="448dp"
-                android:text="@string/fitness_test"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"
-                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_Watts"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:layout_marginStart="1422dp"-->
+<!--                android:layout_marginTop="224dp"-->
+<!--                android:text="@string/Watts"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"-->
+<!--                tools:ignore="VisualLintBounds,VisualLintButtonSize" />-->
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_FitnessTest"-->
+<!--                style="@style/ProgramsButtonStyle"-->
+<!--                android:layout_marginTop="448dp"-->
+<!--                android:text="@string/fitness_test"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"-->
+<!--                tools:ignore="VisualLintButtonSize,VisualLintBounds" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

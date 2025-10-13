@@ -102,28 +102,6 @@
         <!--        app:locale="@{deviceSetting.locale}"-->
         <!--        android:text="@string/fatburn"-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Fatburn"
-            style="@style/ProgramsButtonStyle"
-            android:layout_height="196dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            android:drawableBottom="@drawable/diagram_fatburn_default"
-            android:text="@string/fatburn"
-            app:layout_constraintEnd_toStartOf="@+id/btnStart"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Cardio"
-            style="@style/ProgramsButtonStyle"
-            android:layout_height="196dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            android:drawableBottom="@drawable/diagram_cardio_default"
-            android:text="@string/cardio"
-            app:layout_constraintEnd_toStartOf="@+id/btnStart"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Fatburn" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_Hill"
             style="@style/ProgramsButtonStyle"
             android:layout_height="196dp"
@@ -132,18 +110,38 @@
             android:drawableBottom="@drawable/diagram_hill_default"
             android:text="@string/hill"
             app:layout_constraintEnd_toStartOf="@+id/btnStart"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Cardio" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_HIIT"
+            android:id="@+id/btn_Plateau"
             style="@style/ProgramsButtonStyle"
             android:layout_height="196dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            android:drawableBottom="@drawable/diagram_hiit_default"
-            android:text="@string/hiit"
+            android:drawableBottom="@drawable/diagram_plateau_default"
+            android:text="@string/Plateau"
             app:layout_constraintEnd_toStartOf="@+id/btnStart"
             app:layout_constraintTop_toBottomOf="@+id/btn_Hill" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Custom"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/Custom"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Plateau" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Calories"
+            style="@style/ProgramsButtonStyle"
+            android:layout_height="196dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/Calories"
+            app:layout_constraintEnd_toStartOf="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Custom" />
 
 
 <!--        android:src="@drawable/pt_gym_rankings_egym"-->
@@ -158,7 +156,7 @@
             android:contentDescription="@string/img"
             android:src="@{userProfileViewModel.userType == general.USER_TYPE_EGYM ? @drawable/pt_gym_rankings_egym : @drawable/pt_gym_rankings}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_Fatburn"
+            app:layout_constraintEnd_toStartOf="@+id/btn_Hill"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

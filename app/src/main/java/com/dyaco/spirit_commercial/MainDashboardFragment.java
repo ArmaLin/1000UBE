@@ -132,9 +132,12 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 //        workoutViewModel.isSamsungWatchEnabled.set(true);
 //        workoutViewModel.isSamsungWatchConnected.set(true);
 
+
+        // TODO:
         workoutViewModel.isGarminConnected.set(true);
         workoutViewModel.garminRespirationRate.set(50);
         workoutViewModel.garminBodyBatteryLevel.set(50);
+        workoutViewModel.isWorkoutReadyStart.set(true);
 
         iExc(() -> {
             if (parent.updateRestartWindow != null) {

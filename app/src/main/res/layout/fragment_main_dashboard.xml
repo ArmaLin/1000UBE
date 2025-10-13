@@ -182,7 +182,7 @@
             android:textColor="@color/color1396ef"
             android:textSize="24sp"
             app:backgroundTint="@android:color/transparent"
-            app:icon="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? @drawable/icon_training : deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_ELLIPTICAL ? @drawable/icon_training_elliptical : @drawable/icon_ride }"
+            app:icon="@{deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_TREADMILL ? @drawable/icon_training : deviceSetting.typeCode == deviceSettingIntDef.DEVICE_TYPE_ELLIPTICAL ? @drawable/icon_training : @drawable/icon_training }"
             app:iconGravity="textStart"
             app:iconPadding="16dp"
             app:iconTint="@color/color1396ef"

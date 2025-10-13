@@ -13,8 +13,10 @@
 <!--    </style>-->
 
 
+<!--    <item name="android:windowBackground">@drawable/bg_launcher_logo</item>-->
+
     <style name="LauncherTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <item name="android:windowBackground">@drawable/bg_launcher_logo</item>
+        <item name="android:windowBackground">@color/color1c242a</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowAnimationStyle">@null</item>

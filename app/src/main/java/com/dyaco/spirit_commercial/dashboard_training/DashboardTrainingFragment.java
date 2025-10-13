@@ -455,6 +455,8 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             if (!isAdded()) return;
             if (appStatusViewModel.currentPage.get() == CURRENT_PAGE_MEDIA) return;
             ((MainActivity) requireActivity()).quickStart(false);
+
+            //((MainActivity)requireActivity()).showSplashWindow(true);
         });
 
         getBinding().btnAllProgram.setOnClickListener(v -> {
@@ -489,10 +491,10 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 //            setTimeWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
         });
 
-        getBinding().btnFatburn.setOnClickListener(this);
-        getBinding().btnCardio.setOnClickListener(this);
         getBinding().btnHill.setOnClickListener(this);
-        getBinding().btnHIIT.setOnClickListener(this);
+        getBinding().btnPlateau.setOnClickListener(this);
+        getBinding().btnCustom.setOnClickListener(this);
+        getBinding().btnCalories.setOnClickListener(this);
     }
 
 

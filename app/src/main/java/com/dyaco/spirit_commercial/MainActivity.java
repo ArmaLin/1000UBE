@@ -131,6 +131,7 @@ import com.corestar.libs.utils.GemSettingsFactory;
 import com.dyaco.spirit_commercial.alert_message.BackgroundWindow;
 import com.dyaco.spirit_commercial.alert_message.NotifyWarringWindow;
 import com.dyaco.spirit_commercial.alert_message.SafetyKeyWindow;
+import com.dyaco.spirit_commercial.alert_message.SplashWindow;
 import com.dyaco.spirit_commercial.alert_message.SystemErrorWindow;
 import com.dyaco.spirit_commercial.alert_message.UpdateRestartWindow;
 import com.dyaco.spirit_commercial.alert_message.WebApiAlertWindow;
@@ -309,6 +310,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public IUartConsole uartConsole;
     public Calculation calculation;
 
+    private SplashWindow splashWindow;
+
     public DownloadManagerCustom downloadManagerCustom;
 
     @Override
@@ -324,6 +327,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         super.onCreate(savedInstanceState);
         //   MMKV.defaultMMKV().encode(IMAGE_KEY, 0);
+
 
         //garminUnPair();
         clearAppData();
@@ -466,7 +470,27 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         EgymUtil.init(this, deviceSettingViewModel, egymDataViewModel);
 
 
+
+
+
+
+        splashWindow = new SplashWindow(this);
+        splashWindow.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
+
+        new RxTimer().timer(1000, number -> {
+            splashWindow.dismiss();
+            splashWindow = null;
+        });
+
+//        showSplashWindow(true);
+
     }
+
+//    public void showSplashWindow(boolean isShow) {
+//        splashWindow = new SplashWindow(this);
+//        splashWindow.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
+//
+//    }
 
 
     private void installExFatBinary() {

@@ -73,7 +73,8 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
 //        if (programId == R.id.btn_Watts) {
 //            appStatusViewModel.changeMainButtonType(DISAPPEAR);
 //        } else {
-        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) || (programId == R.id.btn_FitnessTest) ? START_THIS_TEST : CHOOSE);
+//        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) || (programId == R.id.btn_FitnessTest) ? START_THIS_TEST : CHOOSE);
+        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
         //     }
 
 
@@ -163,24 +164,24 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
             position = 1;
         } else if (programId == R.id.btn_Hill || programId == R.id.btn_Army) {
             position = 2;
-        } else if (programId == R.id.btn_Fatburn || programId == R.id.btn_CoastGuard) {
+        } else if (programId == R.id.btn_Plateau || programId == R.id.btn_CoastGuard) {
             position = 3;
-        } else if (programId == R.id.btn_Cardio || programId == R.id.btn_Gerkin) {
+        } else if (programId == R.id.btn_Custom || programId == R.id.btn_Gerkin) {
             position = 4;
-        } else if (programId == R.id.btn_Strength || programId == R.id.btn_PEB) {
+        } else if (programId == R.id.btn_Calories || programId == R.id.btn_PEB) {
             position = 5;
-        } else if (programId == R.id.btn_HIIT || programId == R.id.btn_MarineCorps) {
+        } else if (programId == R.id.btn_HeartRate || programId == R.id.btn_MarineCorps) {
             position = 6;
-        } else if (programId == R.id.btn_5KRun || programId == R.id.btn_Navy || programId == R.id.btn_HeartRate_BIKE) {
+        } else if (programId == R.id.btn_5KRun || programId == R.id.btn_Navy) {
             position = 7;
-        } else if (programId == R.id.btn_10KRun || programId == R.id.btn_WFI || programId == R.id.btn_Watts) {
+        } else if (programId == R.id.btn_Watts || programId == R.id.btn_WFI) {
             position = 8;
-        } else if (programId == R.id.btn_HeartRate || programId == R.id.btn_CTTPrediction || programId == R.id.btn_FitnessTest) {
+        } else if (programId == R.id.btn_CTTPrediction) {
             position = 9;
-        } else if (programId == R.id.btn_CTTPerformance || programId == R.id.btn_Interval) {
+        } else if (programId == R.id.btn_CTTPerformance) {
             position = 10;
-        } else if (programId == R.id.btn_Custom) {
-            position = 11;
+//        } else if (programId == R.id.btn_Custom) {
+//            position = 11;
         } else {
             position = 0;
         }
@@ -313,16 +314,11 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
         } else {
             programInfoList.add(ProgramsEnum.MANUAL);
             programInfoList.add(ProgramsEnum.HILL);
-            programInfoList.add(ProgramsEnum.FATBURN);
-            programInfoList.add(ProgramsEnum.CARDIO);
-            programInfoList.add(ProgramsEnum.STRENGTH);
-            programInfoList.add(ProgramsEnum.HIIT);
+            programInfoList.add(ProgramsEnum.PLATEAU);
+            programInfoList.add(ProgramsEnum.CUSTOM);
+            programInfoList.add(ProgramsEnum.CALORIES);
             programInfoList.add(ProgramsEnum.HEART_RATE);
             programInfoList.add(ProgramsEnum.WATTS);
-            programInfoList.add(ProgramsEnum.FITNESS_TEST);
-            // TODO:
-            programInfoList.add(ProgramsEnum.INTERVAL);
-            programInfoList.add(ProgramsEnum.CUSTOM);
         }
         return programInfoList;
     }

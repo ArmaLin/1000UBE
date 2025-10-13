@@ -789,6 +789,9 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
 
     <string name="Galaxy_Watch_disconnected">Galaxy Watch disconnected</string>
     <string name="Timer">Timer</string>
+    <string name="Plateau">Plateau</string>
+    <string name="plateau_desc">Quick rise to maximum intensity, sustained for most of the workout.</string>
+    <string name="calories_desc">Set target calories, adjust resistance manually.</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>
