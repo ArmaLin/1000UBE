@@ -318,7 +318,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
 
 
     int charType = 0;
-    int xValue = 4;
+    int xValue = 5;
 
     private void changeChart(int chartType) {
         if (getBinding() == null) return;
@@ -334,18 +334,18 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
             getBinding().groupHard.setVisibility(View.VISIBLE);
             getBinding().groupLight.setVisibility(View.GONE);
 
-            getBinding().tt01.setText(chartType == 0 ? "4" : "3");
-            getBinding().tt02.setText(chartType == 0 ? "8" : "6");
-            getBinding().tt03.setText(chartType == 0 ? "12" : "9");
-            getBinding().tt04.setText(chartType == 0 ? "16" : "12");
-            getBinding().tt05.setText(chartType == 0 ? "20" : "15");
-            getBinding().tt06.setText(chartType == 0 ? "24" : "18");
-            getBinding().tt07.setText(chartType == 0 ? "28" : "21");
-            getBinding().tt08.setText(chartType == 0 ? "32" : "24");
-            getBinding().tt09.setText(chartType == 0 ? "36" : "27");
-            getBinding().tt10.setText(chartType == 0 ? "40" : "30");
+            getBinding().tt01.setText(chartType == 0 ? "5" : "3");
+            getBinding().tt02.setText(chartType == 0 ? "10" : "6");
+            getBinding().tt03.setText(chartType == 0 ? "15" : "9");
+            getBinding().tt04.setText(chartType == 0 ? "20" : "12");
+            getBinding().tt05.setText(chartType == 0 ? "25" : "15");
+            getBinding().tt06.setText(chartType == 0 ? "30" : "18");
+            getBinding().tt07.setText(chartType == 0 ? "35" : "21");
+            getBinding().tt08.setText(chartType == 0 ? "40" : "24");
+            getBinding().tt09.setText(chartType == 0 ? "45" : "27");
+            getBinding().tt10.setText(chartType == 0 ? "50" : "30");
 
-            xValue = chartType == 0 ? 4 : 3;
+            xValue = chartType == 0 ? 5 : 3;
         } else {
             getBinding().groupHard.setVisibility(View.GONE);
             getBinding().groupLight.setVisibility(View.VISIBLE);

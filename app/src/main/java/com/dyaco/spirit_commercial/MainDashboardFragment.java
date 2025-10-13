@@ -457,7 +457,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                         getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
 //                        getBinding().btnStart123.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.color1396ef));
                     } else {
-                        getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_0dac87));
+                        getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
 //                        getBinding().btnStart123.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.color0dac87));
                     }
                 } else {
@@ -477,7 +477,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                 case DISAPPEAR:
                     new RxTimer().timer(100, number -> {
                         getBinding().btnStart123.setTextColor(ContextCompat.getColorStateList(requireActivity(), R.color.white));
-                        getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_0dac87));
+                        getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
                         getBinding().btnStart123.setOnClickListener(null);
                         getBinding().groupMain.setVisibility(View.VISIBLE);
                         getBinding().group123.setVisibility(View.GONE);
@@ -495,7 +495,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                     getBinding().btnStart123.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
                     getBinding().btnStart123.setIconTint(ContextCompat.getColorStateList(requireActivity(), R.color.white));
                     getBinding().btnStart123.setTextColor(ContextCompat.getColorStateList(requireActivity(), R.color.white));
-                    getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_0dac87));
+                    getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
                     getBinding().btnStart123.setIcon(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_start));
                     getBinding().btnStart123.setOnClickListener(v -> goToWorkout());
                     break;
@@ -509,7 +509,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                     getBinding().btnStart123.setText(R.string.Start_This_Test);
                     getBinding().btnStart123.setIconTint(ContextCompat.getColorStateList(requireActivity(), R.color.white));
                     getBinding().btnStart123.setTextColor(ContextCompat.getColorStateList(requireActivity(), R.color.white));
-                    getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_0dac87));
+                    getBinding().btnStart123.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
                     getBinding().btnStart123.setIcon(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_start));
                     getBinding().btnStart123.setOnClickListener(v -> goToWorkout());
                     break;
