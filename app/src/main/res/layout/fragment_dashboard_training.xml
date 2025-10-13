@@ -85,7 +85,7 @@
             android:autoSizeMaxTextSize="44sp"
             android:autoSizeTextType="uniform"
             android:maxLines="1"
-            android:text="@string/Set_Time"
+            android:text="@string/Timer"
             android:textColor="@color/white"
             android:textSize="44sp"
             app:backgroundTint="@color/btn_323f4b_445565_d"

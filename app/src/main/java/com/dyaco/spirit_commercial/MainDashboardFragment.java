@@ -132,7 +132,9 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 //        workoutViewModel.isSamsungWatchEnabled.set(true);
 //        workoutViewModel.isSamsungWatchConnected.set(true);
 
-      //  workoutViewModel.isGarminConnected.set(true);
+        workoutViewModel.isGarminConnected.set(true);
+        workoutViewModel.garminRespirationRate.set(50);
+        workoutViewModel.garminBodyBatteryLevel.set(50);
 
         iExc(() -> {
             if (parent.updateRestartWindow != null) {
@@ -544,7 +546,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                     getBinding().btn45Two.setText(R.string.Start_This_Program);
                     getBinding().btn45Two.setIconPadding(-12);
                     getBinding().btn45Two.setIcon(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_start));
-                    getBinding().btn45Two.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_0dac87));
+                    getBinding().btn45Two.setBackgroundTintList(ContextCompat.getColorStateList(requireActivity(), R.color.btn_click_1396ef));
                     getBinding().btn45One.setOnClickListener(v -> {
                         appStatusViewModel.selectSetTimeFragmentNavigate(STEP3_TO_STEP_2);
                     });

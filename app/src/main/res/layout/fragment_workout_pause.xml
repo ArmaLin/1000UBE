@@ -131,6 +131,7 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
             android:id="@+id/btnCoolDown"
             style="@style/MButton_252e37"
             android:layout_width="0dp"

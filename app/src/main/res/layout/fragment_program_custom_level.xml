@@ -191,9 +191,9 @@
             <com.dyaco.spirit_commercial.support.custom_view.CircleBarView
                 app:barColor="@color/white"
                 app:backColor="@color/color5a7085_25"
-                app:lineColor="@color/color1396ef"
-                app:barSelectColor="@color/color1396ef"
-                app:barSelectSolidColor="@color/color1396ef"
+                app:lineColor="@color/white"
+                app:barSelectColor="@color/white"
+                app:barSelectSolidColor="@color/white"
                 android:id="@+id/editProfileView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -690,14 +690,14 @@
 
         <androidx.constraintlayout.widget.Group
             android:visibility="gone"
-            app:constraint_referenced_ids="tvNewTitle,tvTitle3,vLine2,vLine3,vLine4,btnESPN,btnCNN,btnBBC,btnSpotify,btnIheart,tvTitle5,tvTitle2,btnNetflix,btnYoutube,tvTitle4,btnWeather,btnBitGym,btnFB,btnIG,btnTwitter"
+            app:constraint_referenced_ids="viewMirror,viewWireCast,tvNewTitle,tvTitle3,vLine2,vLine3,vLine4,btnESPN,btnCNN,btnBBC,btnSpotify,btnIheart,tvTitle5,tvTitle2,btnNetflix,btnYoutube,tvTitle4,btnWeather,btnBitGym,btnFB,btnIG,btnTwitter"
             android:id="@+id/group_globalx"
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 
 <!--        android:visibility="@{isUs ? View.GONE : View.VISIBLE}"-->
         <androidx.constraintlayout.widget.Group
-            tools:visibility="visible"
+            tools:visibility="gone"
             android:visibility="@{isUs ? (deviceSettingViewModel.video == deviceSettingIntDef.VIDEO_STB ? View.VISIBLE :  View.GONE ) : View.VISIBLE}"
             app:constraint_referenced_ids="viewChannel,vLine1"
             android:id="@+id/group_global"

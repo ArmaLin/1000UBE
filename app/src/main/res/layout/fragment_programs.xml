@@ -136,7 +136,7 @@
                 android:id="@+id/btn_manual"
                 style="@style/ProgramsButtonStyle"
                 android:tag="0"
-                android:text="@string/manual"
+                android:text="@string/Timer"
                 android:transitionName="sharedView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

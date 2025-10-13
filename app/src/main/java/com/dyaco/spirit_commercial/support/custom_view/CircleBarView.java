@@ -200,6 +200,7 @@ public class CircleBarView extends View {
         }
     }
 
+    // 方便您複製貼上的完整方法
     private void initPaints() {
         mFingerPaint = new Paint();
         mFingerPaint.setAntiAlias(true);
@@ -213,7 +214,7 @@ public class CircleBarView extends View {
 
         mFingerPath = new Path();
 
-      //  mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        //  mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
         // background paint setting
         mBackRectanglePaint = new Paint();
@@ -246,8 +247,8 @@ public class CircleBarView extends View {
         mCirclePaint.setAntiAlias(true);
         mCirclePaint.setDither(true);
 //        mCirclePaint.setStrokeWidth(mBarCircleWidth);
-//        mCirclePaint.setColor(mBarSelectColor);
-        mCirclePaint.setColor(Color.parseColor("#445565"));
+        // 【*** 修改點 ***】將點選後大圓的背景顏色改為 #11181D
+        mCirclePaint.setColor(Color.parseColor("#11181D"));
 
 
         //點選後的大圓 外圍的線

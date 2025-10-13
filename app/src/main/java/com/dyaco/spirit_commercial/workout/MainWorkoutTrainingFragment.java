@@ -784,20 +784,20 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         changeFragment(workoutTrackFragment);
 
-        changeFragment(workoutChartsFragment);
+
+        new RxTimer().timer(50, b ->
+                changeFragment(workoutChartsFragment));
+
 
         if (w.selProgram == EGYM) {
             getBinding().warmUpAndCoolDownTitle.setVisibility(View.GONE);
             getBinding().tvWarmUpAndCoolDownTime.setVisibility(View.GONE);
             getBinding().btnSkip.setVisibility(View.GONE);
-
-
-            new RxTimer().timer(100, number -> {
-                changeFragment(workoutStatsFragment);
-            });
-        } else {
-            changeFragment(workoutStatsFragment);
         }
+
+        new RxTimer().timer(100, number -> {
+            changeFragment(workoutStatsFragment);
+        });
     }
 
     private void initGarmin() {
@@ -810,7 +810,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         if (!w.isGarminConnected.get()) return;
 
         workoutGarminFragment = new WorkoutGarminFragment();
-        changeFragment(workoutGarminFragment);
+//        changeFragment(workoutGarminFragment);
+
+        new RxTimer().timer(30, b ->
+                changeFragment(workoutGarminFragment));
+
         w.isWorkoutGarmin.set(w.isGarminConnected.get());
 
         //  parent.enableRealTimeData(currentGarminAddress);

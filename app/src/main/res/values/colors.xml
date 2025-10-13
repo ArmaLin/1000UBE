@@ -54,16 +54,16 @@
     <color name="color1c242a2_80">#CC111417</color>
     <color name="color234565">#234565</color>
     <color name="color151c242a">#1A1C242A</color>
-    <color name="color1396ef">#1396ef</color>
-    <color name="color1396ef_90">#E61396EF</color>
-    <color name="color1396ef_20">#331396EF</color>
-    <color name="color1396ef_60">#991396EF</color>
-    <color name="color1396ef_30">#4D1396EF</color>
-    <color name="color1396ef_80">#CC1396EF</color>
-    <color name="color1396ef_50">#801396EF</color>
-    <color name="color50_1396ef">#801396EF</color>
+    <color name="color1396ef">#9600FA</color>
+    <color name="color1396ef_90">#E69600FA</color>
+    <color name="color1396ef_20">#339600FA</color>
+    <color name="color1396ef_60">#999600FA</color>
+    <color name="color1396ef_30">#4D9600FA</color>
+    <color name="color1396ef_80">#CC9600FA</color>
+    <color name="color1396ef_50">#809600FA</color>
+    <color name="color50_1396ef">#809600FA</color>
     <color name="color1396ef22">#80141515</color>
-    <color name="color1396ef22_2">#CC1396EF</color>
+    <color name="color1396ef22_2">#CC9600FA</color>
     <color name="color445565">#445565</color>
     <color name="color445565_50">#80445565</color>
     <color name="colorCd5bff">#cd5bff</color>
@@ -73,14 +73,12 @@
     <color name="colorCd5bff_80">#CCCD5BFF</color>
     <color name="colorCd5bff_90">#E6CD5BFF</color>
     <color name="color5b5b5b">#5b5b5b</color>
-    <color name="color201396ef">#331396EF</color>
-    <color name="color80201396ef">#801396EF</color>
+    <color name="color201396ef">#339600FA</color>
+    <color name="color80201396ef">#809600FA</color>
 
     <color name="color8673ED">#8673ED</color>
     <color name="color3E357A">#3E357A</color>
 
-
-<!--    <color name="color80201396ef">#E6CD5BFF</color>-->
 
     <color name="color323f4b">#323f4b</color>
     <color name="color80323f4b">#80323F4B</color>
@@ -117,9 +115,9 @@
     <color name="color50FFFFFF">#80FFFFFF</color>
     <color name="color03FFFFFF">#08FFFFFF</color>
     <color name="colorwhite80">#CCFFFFFF</color>
-    <color name="color_level_speed_bar_end">#4D1396EF</color>
+    <color name="color_level_speed_bar_end">#4D9600FA</color>
     <color name="color_incline_bar_end">#4DCD5BfF</color>
-    <color name="color_level_speed_bar_run">#991396EF</color>
+    <color name="color_level_speed_bar_run">#999600FA</color>
     <color name="color_incline_bar_run">#99CD5BFF</color>
     <color name="color_bar_blank">#26FFFFFF</color>
     <color name="colorFF715e_60">#99FF715e</color>
@@ -129,7 +127,7 @@
     <color name="colorFF715e_90">#E6FF715E</color>
     <color name="color_FDF6E4">#FDF6E4</color>
     <color name="color363636">#363636</color>
-    <color name="color1A1396ef">#4D1396EF</color>
+    <color name="color1A1396ef">#4D9600FA</color>
     <color name="color8673ed">#8673ed</color>
     <color name="colorDisText">#757A7F</color>
     <color name="color11181d">#11181d</color>
