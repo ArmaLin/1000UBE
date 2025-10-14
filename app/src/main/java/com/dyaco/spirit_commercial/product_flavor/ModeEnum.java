@@ -5,9 +5,13 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MOD
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CR1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CT1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CU1000ENT;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_STEPPER;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_ELLIPTICAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_STEPPER;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_TREADMILL;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UPRIGHT_BIKE;
 
 import com.corestar.libs.device.DeviceSpiritC;
@@ -19,7 +23,9 @@ public enum ModeEnum {
     CT1000ENT(DEVICE_TYPE_TREADMILL, DEVICE_MODEL_CT1000ENT, DeviceSpiritC.MODEL.TREADMILL_SC.getType(), getTreadmillWattTable(), getBikeLevelAD(), "CT1000", "TREADMILL"),
     CE1000ENT(DEVICE_TYPE_ELLIPTICAL, DEVICE_MODEL_CE1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getEllipticalWattTable(), getEllipticalLevelAD(), "CE1000", "ELLIPTICAL"),
     CU1000ENT(DEVICE_TYPE_UPRIGHT_BIKE, DEVICE_MODEL_CU1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getUpBikeWattTable(), getBikeLevelAD(), "CU1000", "UPRIGHT BIKE"),
-    CR1000ENT(DEVICE_TYPE_RECUMBENT_BIKE, DEVICE_MODEL_CR1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getReBikeWattTable(), getBikeLevelAD(), "CR1000", "RECUMBENT BIKE");
+    CR1000ENT(DEVICE_TYPE_RECUMBENT_BIKE, DEVICE_MODEL_CR1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getReBikeWattTable(), getBikeLevelAD(), "CR1000", "RECUMBENT BIKE"),
+    UBE(DEVICE_TYPE_UBE, DEVICE_MODEL_UBE, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getReBikeWattTable(), getBikeLevelAD(), "UBE", "UBE"),
+    STEPPER(DEVICE_TYPE_STEPPER, DEVICE_MODEL_STEPPER, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getReBikeWattTable(), getBikeLevelAD(), "STEPPER", "STEPPER");
 
     ModeEnum(int typeCode, int modeCode, int categoryCode, String wattTable, int[] levelAD, String modelName, String typeName) {
         this.typeCode = typeCode;

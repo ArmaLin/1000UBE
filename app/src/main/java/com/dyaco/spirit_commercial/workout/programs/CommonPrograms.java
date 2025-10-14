@@ -180,7 +180,7 @@ public class CommonPrograms implements IPrograms {
                     // 檢查 speed 和 incline 是否為 null
                     Integer level = interval.getResistance();
                     Integer incline;
-                    if (MODE == ModeEnum.CE1000ENT) {
+                    if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
                         //SPM
                         incline = interval.getStepsPerMinute();
                     } else {

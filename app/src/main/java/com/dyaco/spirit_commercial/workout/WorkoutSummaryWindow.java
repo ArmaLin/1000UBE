@@ -1380,7 +1380,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 List<StackedBarBean> rpmOutcomeDataList;
                 List<StackedBarBean> rpmTartgetDataList;
 
-                if (MODE == ModeEnum.CE1000ENT) {
+                if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
 
                     //SPM = RPM * 2
 

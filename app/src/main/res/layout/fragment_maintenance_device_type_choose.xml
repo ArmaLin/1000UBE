@@ -69,8 +69,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="60dp"
-                android:tag="0"
-                android:text="@string/treadmill"
+                android:tag="4"
+                android:text="@string/UBE"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -80,7 +80,7 @@
                 android:autoSizeTextType="uniform"
                 android:maxLines="1"
                 android:autoSizeMaxTextSize="32sp"
-                android:tag="1"
+                android:tag="5"
                 android:id="@+id/type1"
                 android:layout_width="524.5dp"
                 android:layout_height="104dp"
@@ -91,11 +91,12 @@
                 android:fontFamily="@font/inter_bold"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:paddingStart="32dp"
-                android:text="@string/elliptical"
+                android:text="@string/Stepper"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
             <RadioButton
+                android:visibility="gone"
                 android:paddingStart="32dp"
                 android:paddingEnd="60dp"
                 android:gravity="start|center_vertical"
@@ -117,6 +118,7 @@
                 android:textSize="32sp" />
 
             <RadioButton
+                android:visibility="gone"
                 android:paddingEnd="60dp"
                 android:gravity="start|center_vertical"
                 android:autoSizeTextType="uniform"

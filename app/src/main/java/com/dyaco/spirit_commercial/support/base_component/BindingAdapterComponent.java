@@ -199,7 +199,7 @@ public class BindingAdapterComponent {
 
         int rpm = rpmField.get();
 
-        if ((MODE == ModeEnum.CE1000ENT)) {
+        if ((MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER)) {
             rpm *= 2;
         }
 
@@ -207,7 +207,7 @@ public class BindingAdapterComponent {
 
         String unit;
 
-        unit = (MODE == ModeEnum.CE1000ENT) ?
+        unit = (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) ?
                 context.getString(R.string.SPM).toLowerCase(Locale.ROOT) : // Elliptical
                 context.getString(R.string.rpm); //BIKE
 
@@ -217,7 +217,8 @@ public class BindingAdapterComponent {
 
         int iconResId;
         if (d.consoleSystem.get() == CONSOLE_SYSTEM_SPIRIT) {
-            iconResId = R.drawable.icon_speed_32;
+//            iconResId = R.drawable.icon_speed_32;
+            iconResId = R.drawable.icon_ube_rpm;
         } else {
 //            iconResId = (MODE == ModeEnum.CE1000ENT) ? R.drawable.icon_speed_32 : R.drawable.icon_activity_48;
             iconResId = R.drawable.icon_egym_rpm_36;

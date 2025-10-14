@@ -196,6 +196,8 @@ public class InitProduct {
             case CE1000ENT:
             case CR1000ENT:
             case CU1000ENT:
+            case UBE:
+            case STEPPER:
                 deviceSettingBean.setAutoPause(ON);//auto logout
                 deviceSettingBean.setPauseAfter(DEFAULT_AUTO_PAUSE_TIME);
                 break;

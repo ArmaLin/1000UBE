@@ -48,11 +48,15 @@ public class DeviceIntDef {
     public static final int DEVICE_TYPE_ELLIPTICAL = 1; //橢圓機
     public static final int DEVICE_TYPE_UPRIGHT_BIKE = 2;//直立式腳踏車
     public static final int DEVICE_TYPE_RECUMBENT_BIKE = 3; //臥式腳踏車
+    public static final int DEVICE_TYPE_UBE = 4; //臥式腳踏車
+    public static final int DEVICE_TYPE_STEPPER = 5; //臥式腳踏車
 
     public static final int DEVICE_MODEL_CT1000ENT = 0;
     public static final int DEVICE_MODEL_CE1000ENT = 1;
     public static final int DEVICE_MODEL_CU1000ENT = 2;
     public static final int DEVICE_MODEL_CR1000ENT = 3;
+    public static final int DEVICE_MODEL_UBE = 4;
+    public static final int DEVICE_MODEL_STEPPER = 5;
 
     public static final int TERRITORY_US = 1;
     public static final int TERRITORY_GLOBAL = 0;

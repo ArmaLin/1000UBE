@@ -167,7 +167,7 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="default_programs">Default Programs</string>
     <string name="fitness_tests">Fitness Tests</string>
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
-    <string name="workout_finished">WORKOUT FINISHED</string>
+    <string name="workout_finished">Workout Finished</string>
     <string name="test_finished">TEST FINISHED</string>
     <string name="Distance">Distance</string>
     <string name="Power">Power</string>
@@ -792,6 +792,8 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="Plateau">Plateau</string>
     <string name="plateau_desc">Quick rise to maximum intensity, sustained for most of the workout.</string>
     <string name="calories_desc">Set target calories, adjust resistance manually.</string>
+    <string name="UBE">UBE</string>
+    <string name="Stepper">Stepper</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>

@@ -70,6 +70,11 @@ public class GENERAL {
 
     public static final int STATS_CADENCE = 19;
 
+    public static final int STATS_REMAINING_CALORIES = 20; //calories left
+
+    public static final int STATS_RESISTANCE = 21;
+    public static final int STATS_TOTAL_REVOLUTIONS = 22;
+
 
     //DIAGRAM
     public static final int BAR_STATUS_SEGMENT_PENDING = 0; //還沒跑到

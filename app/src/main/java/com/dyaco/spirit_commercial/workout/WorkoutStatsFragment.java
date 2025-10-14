@@ -58,6 +58,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.FragmentWorkoutStatsBinding;
+import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
@@ -258,7 +259,7 @@ public class WorkoutStatsFragment extends BaseBindingFragment<FragmentWorkoutSta
         if (MODE == CT1000ENT) {
             workoutViewModel.egymTargetSpeed.set(getEgymUnitS(evm.unitSystem.get(), evm.selTrainer.getIntervals().get((realInterval)).getSpeed()));
             workoutViewModel.egymTargetIncline.set(formatS(evm.selTrainer.getIntervals().get((realInterval)).getIncline()));
-        } else if (MODE == CE1000ENT) {
+        } else if (MODE == CE1000ENT || MODE == ModeEnum.STEPPER) {
             workoutViewModel.egymTargetSpeed.set(String.valueOf(evm.selTrainer.getIntervals().get(realInterval).getResistance()));
             workoutViewModel.egymTargetIncline.set(formatS(Double.valueOf(evm.selTrainer.getIntervals().get(realInterval).getStepsPerMinute())));
         } else {

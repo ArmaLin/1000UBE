@@ -19,7 +19,9 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SY
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_SPIRIT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_ELLIPTICAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_STEPPER;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_TREADMILL;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UPRIGHT_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.NET_WORK_TYPE_NONE;
@@ -2052,7 +2054,8 @@ public class CommonUtils {
 
                 case STATS_CADENCE:
                     if (!isTarget) {
-                        if (MODE == ModeEnum.CE1000ENT) {
+                        if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
+                            // TODO: PF  SPM
                             value = String.valueOf((workoutViewModel.currentRpm.get() * 2));
                         } else {
                             value = String.valueOf(workoutViewModel.currentRpm.get());
@@ -2288,7 +2291,7 @@ public class CommonUtils {
                 case STATS_CADENCE:
 //                    view1Text = String.valueOf(workoutViewModel.currentRpm.get());
                     view2Text = context.getString(R.string.Cadence);
-                    if (MODE == ModeEnum.CE1000ENT) {
+                    if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
                         view1Text = String.valueOf(workoutViewModel.currentRpm.get() * 2);
                         view3Text = context.getString(R.string.SPM);
                     } else {
@@ -3055,6 +3058,12 @@ public class CommonUtils {
                 break;
             case DEVICE_TYPE_RECUMBENT_BIKE:
                 s = R.string.recumbent_bike;
+                break;
+            case DEVICE_TYPE_UBE:
+                s = R.string.UBE;
+                break;
+            case DEVICE_TYPE_STEPPER:
+                s = R.string.Stepper;
                 break;
             default: // TODO: 找不到會crash
                 s = R.string.none;

@@ -9,6 +9,8 @@ import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CE1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CR1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CT1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CU1000ENT;
+import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.STEPPER;
+import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
@@ -111,6 +113,14 @@ public class MaintenanceDeviceTypeChooseFragment extends BaseBindingDialogFragme
                 case 3:
                     type = DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
                     modeEnum = CR1000ENT;
+                    break;
+                case 4:
+                    type = DeviceIntDef.DEVICE_TYPE_UBE;
+                    modeEnum = UBE;
+                    break;
+                case 5:
+                    type = DeviceIntDef.DEVICE_TYPE_STEPPER;
+                    modeEnum = STEPPER;
                     break;
             }
 
