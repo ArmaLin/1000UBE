@@ -115,6 +115,7 @@
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:extractNativeLibs="true"
         android:fullBackupContent="@xml/my_backup_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:hardwareAccelerated="true"
         android:icon="@drawable/logoooo"
         android:roundIcon="@drawable/logoooo"
