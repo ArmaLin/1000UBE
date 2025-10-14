@@ -474,13 +474,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
 
-        splashWindow = new SplashWindow(this);
-        splashWindow.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
-
-        new RxTimer().timer(1000, number -> {
-            splashWindow.dismiss();
-            splashWindow = null;
-        });
+//        splashWindow = new SplashWindow(this);
+//        splashWindow.showAtLocation(getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
+//
+//        new RxTimer().timer(1000, number -> {
+//            splashWindow.dismiss();
+//            splashWindow = null;
+//        });
 
 //        showSplashWindow(true);
 
