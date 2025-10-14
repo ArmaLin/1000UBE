@@ -1,7 +1,6 @@
 package com.dyaco.spirit_commercial.product_flavor;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
-import static com.corestar.libs.device.DeviceSpiritC.MAIN_MODE.RESET;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
 import static com.dyaco.spirit_commercial.MainActivity.isEmulator;
@@ -20,7 +19,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.WindowUpdateAppBinding;
@@ -127,7 +126,7 @@ public class UpdateAppWindow extends BasePopupWindow<WindowUpdateAppBinding> {
 
                     if (!isEmulator && isTreadmill) {
                       //  ((MainActivity) mContext).uartConsole.setDevMainMode(RESET);
-                          getDeviceSpiritC().setMainModeTreadmill(RESET); //停止LWR計數, 以免發time out錯誤
+                          getDeviceSpiritC().setMainModeTreadmill(DeviceDyacoMedical.MAIN_MODE.RESET); //停止LWR計數, 以免發time out錯誤
                     }
 
                     new WorkManagerUtil().cancelWorkByTag(WORK_NOTIFY_UPDATE_MSG_TAG);
@@ -203,7 +202,7 @@ public class UpdateAppWindow extends BasePopupWindow<WindowUpdateAppBinding> {
 
     private void updateFailed() {
         if (!isEmulator && isTreadmill) {
-            ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.ENG);
+            ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.ENG);
         }
     }
 }

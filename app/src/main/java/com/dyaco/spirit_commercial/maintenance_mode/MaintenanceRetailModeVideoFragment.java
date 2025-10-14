@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
@@ -65,7 +66,7 @@ public class MaintenanceRetailModeVideoFragment extends BaseBindingDialogFragmen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
         getBinding().setDeviceSettingViewModel(deviceSettingViewModel);
@@ -306,7 +307,7 @@ public class MaintenanceRetailModeVideoFragment extends BaseBindingDialogFragmen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
     }
 
     private void checkVideo(String path) {

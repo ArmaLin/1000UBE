@@ -1,6 +1,5 @@
 package com.dyaco.spirit_commercial.alert_message;
 
-import static com.corestar.libs.device.DeviceSpiritC.MAIN_MODE.RESET;
 import static com.dyaco.spirit_commercial.App.APK_MD5;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
@@ -13,7 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.databinding.WindowUpdateRestartBinding;
 import com.dyaco.spirit_commercial.product_flavor.DownloadManagerCustom;
@@ -134,7 +133,7 @@ public class UpdateRestartWindow extends BasePopupWindow<WindowUpdateRestartBind
 
                 if (!isEmulator && isTreadmill) {
                     //  ((MainActivity) mContext).uartConsole.setDevMainMode(RESET);
-                    getDeviceSpiritC().setMainModeTreadmill(RESET); //停止LWR計數, 以免發time out錯誤
+                    getDeviceSpiritC().setMainModeTreadmill(DeviceDyacoMedical.MAIN_MODE.RESET); //停止LWR計數, 以免發time out錯誤
                 }
 
                 new CommonUtils().install2(mContext, d.getTmpApkPath(), new InstallCallback() {
@@ -192,7 +191,7 @@ public class UpdateRestartWindow extends BasePopupWindow<WindowUpdateRestartBind
 
     private void updateFailed() {
         if (!isEmulator && isTreadmill) {
-            ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.IDLE);
+            ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.IDLE);
         }
         ((MainActivity) mContext).showLoading(false);
     }

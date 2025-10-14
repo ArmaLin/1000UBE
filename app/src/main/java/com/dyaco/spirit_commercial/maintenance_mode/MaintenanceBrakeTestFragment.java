@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceBrakeTestBinding;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingDialogFragment;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.WheelView;
@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class MaintenanceBrakeTestFragment extends BaseBindingDialogFragment<FragmentMaintenanceBrakeTestBinding> {
-    public IUartConsole uartConsole;
+    public UartConsoleManagerPF uartConsole;
     private DeviceSettingViewModel dsViewModel;
 
     @Override

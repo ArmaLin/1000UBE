@@ -16,9 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
-import com.dyaco.spirit_commercial.SpiritCommercialUart;
+
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceDriveMotorTestBinding;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingDialogFragment;
 import com.dyaco.spirit_commercial.support.interaction.LongClickUtil;
@@ -29,7 +29,7 @@ import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 
 public class MaintenanceDriveMotorTestFragment extends BaseBindingDialogFragment<FragmentMaintenanceDriveMotorTestBinding> {
 
-    public IUartConsole uartConsole;
+    public UartConsoleManagerPF uartConsole;
     public WorkoutViewModel w;
     private DeviceSettingViewModel deviceSettingViewModel;
     private MainActivity m;
@@ -114,11 +114,11 @@ public class MaintenanceDriveMotorTestFragment extends BaseBindingDialogFragment
             w.currentSpeedLevel.set(getSpeedLevel(w.currentSpeed.get()));
         } catch (Exception e) {
 
-            Log.d(SpiritCommercialUart.TAG, "Exception:" + e.getLocalizedMessage());
+            Log.d("SpiritCommercialUart.TAG", "Exception:" + e.getLocalizedMessage());
             w.currentSpeed.set(0);
             w.currentSpeedLevel.set(0);
         }
-        uartConsole.setDevDriveMotorTreadmill();
+        uartConsole.setDevDriveMotorTreadmill(0);
 
     }
 

@@ -18,7 +18,7 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
 import android.util.Log;
 import android.view.View;
 
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.model.webapi.bean.EgymTrainingPlans;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
@@ -37,9 +37,9 @@ public class CommonPrograms implements IPrograms {
     EgymDataViewModel e;
     MainWorkoutTrainingFragment m;
     WorkoutChartsFragment c;
-    IUartConsole u;
+    UartConsoleManagerPF u;
 
-    public CommonPrograms(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, WorkoutChartsFragment c, IUartConsole u, EgymDataViewModel e) {
+    public CommonPrograms(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, WorkoutChartsFragment c, UartConsoleManagerPF u, EgymDataViewModel e) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.c = c;

@@ -1,6 +1,5 @@
 package com.dyaco.spirit_commercial.maintenance_mode;
 
-import static com.corestar.libs.device.DeviceSpiritC.MAIN_MODE.RESET;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
 import static com.dyaco.spirit_commercial.MainActivity.isEmulator;
@@ -28,6 +27,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.BuildConfig;
 import com.dyaco.spirit_commercial.MainActivity;
@@ -72,7 +72,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
 
         initEvent();
@@ -167,7 +167,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
     }
 
     @Override
@@ -335,7 +335,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
 
                             if (!isEmulator && isTreadmill) {
                                 //  ((MainActivity) requireActivity()).uartConsole.setDevMainMode(RESET);
-                                getDeviceSpiritC().setMainModeTreadmill(RESET); //停止LWR計數, 以免發time out錯誤
+                                getDeviceSpiritC().setMainModeTreadmill(DeviceDyacoMedical.MAIN_MODE.RESET); //停止LWR計數, 以免發time out錯誤
                             }
 
                             new WorkManagerUtil().cancelWorkByTag(WORK_NOTIFY_UPDATE_MSG_TAG);
@@ -513,7 +513,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
     private void updateFailed() {
         try {
             if (!isEmulator && isTreadmill) {
-                ((MainActivity) requireActivity()).uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.ENG);
+                ((MainActivity) requireActivity()).uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.ENG);
             }
         } catch (Exception e) {
             showException(e);

@@ -5,8 +5,8 @@ import static com.dyaco.spirit_commercial.support.CommonUtils.showException;
 import android.app.Application;
 import android.database.CursorWindow;
 
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceGEM;
-import com.corestar.libs.device.DeviceSpiritC;
 import com.corestar.libs.uart.UartConnection;
 import com.dyaco.spirit_commercial.model.webapi.CustomDns;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class App extends Application {
+    public static boolean isFirmwareUpdating = false;
     public static String IMAGE_KEY = "IMAGE_KEY";
     public static String APK_MD5 = "cda88afbd2352bd04f6ae97cb5f00225";
     public static boolean isShowMediaMenuOnStop = true; //onStop時，是否要顯示MediaMenu
@@ -46,7 +47,7 @@ public class App extends Application {
     public static String EGYM_BEARER_AUTHORIZATION = "";
     //public static String MACHINE_MAC = "";
 
-    private static DeviceSpiritC deviceSpiritC;
+    private static DeviceDyacoMedical deviceSpiritC;
 
     //deviceSpiritC = new DeviceSpiritC(INSTANCE, port);
     //SpiritCommercialUart > DeviceSpiritC.TIMEOUT_CONTROL
@@ -97,7 +98,7 @@ public class App extends Application {
         return deviceGEM;
     }
 
-    public static DeviceSpiritC getDeviceSpiritC() {
+    public static DeviceDyacoMedical getDeviceSpiritC() {
         if (deviceSpiritC == null) {
             //      deviceSpiritC = new DeviceSpiritC(INSTANCE, UartConnection.PORT.PORT_0);
             //   deviceSpiritC = new DeviceSpiritC(INSTANCE);
@@ -110,7 +111,7 @@ public class App extends Application {
             port = UartConnection.PORT.PORT_1;
             //      }
 
-            deviceSpiritC = new DeviceSpiritC(INSTANCE, port);
+            deviceSpiritC = new DeviceDyacoMedical(INSTANCE);
         }
 
         return deviceSpiritC;

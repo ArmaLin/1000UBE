@@ -1328,7 +1328,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                             return;
                         }
 
-                        parentFragment.u.setDevWorkload(w.currentLevel.get(), parentFragment.resistance);
+                        parentFragment.u.setDevWorkload(w.currentLevel.get());
                     }
                 }
                 //只更新一筆

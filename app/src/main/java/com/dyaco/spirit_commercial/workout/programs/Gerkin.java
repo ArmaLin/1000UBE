@@ -13,7 +13,7 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_PERCEN
 import android.util.Log;
 import android.view.View;
 
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.WorkoutUtil;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
@@ -31,11 +31,11 @@ public class Gerkin implements IPrograms {
     int gerkinInclineUpdateNum = 2;
     WorkoutViewModel w;
     MainWorkoutTrainingFragment m;
-    IUartConsole u;
+    UartConsoleManagerPF u;
     private int noHrTime;
     int hr85Time;
 
-    public Gerkin(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment,IUartConsole u) {
+    public Gerkin(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, UartConsoleManagerPF u) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.u = u;

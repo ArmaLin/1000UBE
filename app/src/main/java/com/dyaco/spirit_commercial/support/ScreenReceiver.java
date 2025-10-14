@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.support.intdef.EventKey;
 import com.jeremyliao.liveeventbus.LiveEventBus;
@@ -34,7 +33,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                 //休眠
                 if (isTreadmill) {
                     Log.d("UART_CONSOLE", "休眠 ACTION_SCREEN_OFF: ");
-                    App.getDeviceSpiritC().setMainModeTreadmill(DeviceSpiritC.MAIN_MODE.EUP);//等call back 再下 setEUP
+               //     App.getDeviceSpiritC().setMainModeTreadmill(DeviceDyacoMedical.MAIN_MODE.EUP);//等call back 再下 setEUP
 //                App.getDeviceSpiritC().setEUP(2);
                 } else {
                     App.getDeviceSpiritC().setEUP(1);

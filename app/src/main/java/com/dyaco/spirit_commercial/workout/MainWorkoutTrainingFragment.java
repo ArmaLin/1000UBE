@@ -142,11 +142,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.corestar.calculation_libs.Calculation;
 import com.corestar.libs.device.DeviceCsafe;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceGEM;
-import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.alert_message.CautionSpeedWindow;
 import com.dyaco.spirit_commercial.alert_message.ModalHrMaxWindow;
 import com.dyaco.spirit_commercial.alert_message.ModalHrUpdateWindow;
@@ -157,7 +158,6 @@ import com.dyaco.spirit_commercial.alert_message.WarringNoHrCountDownWindow;
 import com.dyaco.spirit_commercial.dashboard_media.NewUpdateData;
 import com.dyaco.spirit_commercial.databinding.FragmentMainWorkoutTrainingBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.model.webapi.bean.CreateWorkoutParam;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
@@ -246,7 +246,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     private WorkoutViewModel w;
     private DeviceSettingViewModel deviceSettingViewModel;
     private EgymDataViewModel egymDataViewModel;
-    public IUartConsole u;
+    public UartConsoleManagerPF u;
 
     private RxTimer rxWorkOutTimer;
     public boolean isWorkoutTimerRunning = false; //workout是否可計時
@@ -1410,7 +1410,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
      //   Log.d("OOOOOOOOOO", "updateInclineNum: " + num + "," + isSpecify);
         if (workoutChartsFragment.updateInclineNum(num)) {
-            u.setDevSpeedAndIncline();
+       //     u.setDevSpeedAndIncline();
             return true;
         } else {
             return false;
@@ -1455,7 +1455,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         if (workoutChartsFragment.updateSpeedNum(num)) {
             if (isTreadmill) {
-                u.setDevSpeedAndIncline();
+              //  u.setDevSpeedAndIncline();
             } else {
                 if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
                     int level;
@@ -1463,15 +1463,15 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                         level = calc.getLevel(w.constantPowerW.get(), w.currentRpm.get());
                         //       Log.d("EEEEEEFFFF", "updateSpeedOrLevelNum: " + level);
                     } else {
-                        level = calc.getLevel(w.constantPowerW.get(), 50);
+                        level = calc.getWattLevel(w.constantPowerW.get(), 50);
                     }
-                    u.setDevWorkload(level, resistance);
+                    u.setDevWorkload(level);
                     w.currentLevel.set(level);
 
                     Log.d("FITNESS_TEST_PROGRAM", "11111setPwmLevel_POWER: " + w.currentLevel.get());
                 } else {
                     Log.d("CCXXVVV", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
-                    u.setDevWorkload(w.currentLevel.get(), resistance);
+                    u.setDevWorkload(w.currentLevel.get());
                 }
                 //    u.setDevWorkload(w.currentLevel.get(), resistance);
             }
@@ -1490,12 +1490,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
-        Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
+        Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
 
         if (workoutChartsFragment == null) return false;
 
         if (workoutChartsFragment.updateSpeedNum(num)) {
-            u.setDevWorkload(w.currentLevel.get(), resistance);
+            u.setDevWorkload(w.currentLevel.get());
             return true;
         }
         return false;
@@ -1838,7 +1838,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_RUNNING) {
                 if ("COOL_DOWN".equals(s)) {
 
-                    u.setDevMainMode(DeviceSpiritC.MAIN_MODE.RUNNING);
+                    u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);
 
                     initCoolDown();
                 } else {
@@ -1957,9 +1957,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //PAUSE 暫停
             if (isTreadmill) {
                 // > resetSpeedAndIncline() 停止
-                u.setDevMainMode(isGsMode ? DeviceSpiritC.MAIN_MODE.GS : DeviceSpiritC.MAIN_MODE.PAUSE);
+                u.setDevMainMode(isGsMode ? DeviceDyacoMedical.MAIN_MODE.GS : DeviceDyacoMedical.MAIN_MODE.PAUSE);
             } else {
-                u.emsWorkoutPause(resistance);
+                u.emsWorkoutPause();
             }
 
             if (coolDownAndWarmUpTimer != null) coolDownAndWarmUpTimer.cancel();
@@ -2059,7 +2059,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         }
 
         //從DS_PAUSE_STANDBY 回到 RUNNING ，會自動恢復之前的速度，
-        u.setDevMainMode(DeviceSpiritC.MAIN_MODE.RUNNING);
+        u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);
     }
 
 
@@ -2230,7 +2230,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 //   Log.d("UART_CONSOLE", "initTimer 第一次啟動: setDevSpeedAndIncline" );
                 u.setDevSpeedAndIncline();
             } else {
-                u.setDevWorkload(w.currentLevel.get(), resistance);
+                u.setDevWorkload(w.currentLevel.get());
             }
 
             if (rxWorkOutTimer != null) {
@@ -2273,7 +2273,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             if (!isTreadmill) {
                 //回復之前的Level
-                u.setDevWorkload(w.currentLevel.get(), resistance);
+                u.setDevWorkload(w.currentLevel.get());
             }
         }
     }
@@ -2302,8 +2302,8 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //POWER要每秒送
             if (w.selProgram == WATTS) {
                 //   if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
-                //  w.currentLevel.set(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
-                updateSpeedOrLevelNumWATT(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
+                //  w.currentLevel.set(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+                updateSpeedOrLevelNumWATT(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
             }
 
 

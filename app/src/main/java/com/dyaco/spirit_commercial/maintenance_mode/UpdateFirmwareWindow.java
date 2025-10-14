@@ -2,7 +2,6 @@ package com.dyaco.spirit_commercial.maintenance_mode;
 
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
-import static com.dyaco.spirit_commercial.SpiritCommercialUart.isFirmwareUpdating;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,9 +9,10 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.ota.LwrMcuUpdateManager;
 import com.corestar.libs.ota.SubMcuUpdateManager;
+import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.WindowUpdateFirmwareBinding;
@@ -43,9 +43,9 @@ public class UpdateFirmwareWindow extends BasePopupWindow<WindowUpdateFirmwareBi
         getBinding().binName.setText(binName);
 
         if (isTreadmill) {
-            isFirmwareUpdating = true;
+            App.isFirmwareUpdating = true;
         } else {
-            getDeviceSpiritC().setEchoMode(DeviceSpiritC.ECHO_MODE.AA);
+            getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.AA);
         }
 
         if (type == GENERAL.SUB_MCU) {

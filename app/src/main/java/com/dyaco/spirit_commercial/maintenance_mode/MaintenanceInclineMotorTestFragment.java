@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceInclineMotorTestBinding;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingDialogFragment;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
@@ -29,7 +29,7 @@ import java.util.List;
 
 
 public class MaintenanceInclineMotorTestFragment extends BaseBindingDialogFragment<FragmentMaintenanceInclineMotorTestBinding> {
-    public IUartConsole uartConsole;
+    public UartConsoleManagerPF uartConsole;
     public WorkoutViewModel workoutViewModel;
     private List<Integer> frontInclineAdList;
     private MainActivity m;
@@ -141,7 +141,7 @@ public class MaintenanceInclineMotorTestFragment extends BaseBindingDialogFragme
 
         int ad = frontInclineAdList.get(level);
 
-        getDeviceSpiritC().setTargetSpeedAndInclineTreadmill(DeviceSpiritC.MOTOR_DIRECTION.FORWARD, 0, ad, 0);
+        getDeviceSpiritC().setTargetSpeedAndInclineTreadmill(DeviceDyacoMedical.MOTOR_DIRECTION.FORWARD, 0, ad, 0);
     }
 
 
@@ -184,7 +184,7 @@ public class MaintenanceInclineMotorTestFragment extends BaseBindingDialogFragme
          //   showLoading(true);
 
             m.showLoading2(true);
-            uartConsole.startDevCalibration(DeviceSpiritC.TREADMILL_CALI_MODE.FRONT);
+            uartConsole.startDevCalibration(DeviceDyacoMedical.TREADMILL_CALI_MODE.FRONT);
         });
 
 
@@ -199,14 +199,14 @@ public class MaintenanceInclineMotorTestFragment extends BaseBindingDialogFragme
                 getBinding().etDA.setText(String.valueOf(da));
             }
 
-            getDeviceSpiritC().setTargetSpeedAndInclineTreadmill(DeviceSpiritC.MOTOR_DIRECTION.FORWARD, 0, da, 0);
+            getDeviceSpiritC().setTargetSpeedAndInclineTreadmill(DeviceDyacoMedical.MOTOR_DIRECTION.FORWARD, 0, da, 0);
         });
 
 
         getBinding().btnDone.setOnClickListener(v -> {
 //            uartConsole.setDevStep(DS_BB_CALIBRATION_STOP_RSP);
 //            getDeviceSpiritC().setInclineCaliModeTreadmill(DeviceSpiritC.TREADMILL_CALI_MODE.STOP);
-            uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.ENG);
+            uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.ENG);
             dismiss();
         });
     }

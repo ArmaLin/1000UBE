@@ -2,7 +2,6 @@ package com.dyaco.spirit_commercial.maintenance_mode;
 
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
-import static com.dyaco.spirit_commercial.SpiritCommercialUart.isFirmwareUpdating;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.ON_USB_MODE_SET;
 
@@ -15,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceSpiritC;
+import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceFirmwareTestBinding;
 import com.dyaco.spirit_commercial.model.webapi.bean.UpdateBean;
@@ -58,7 +59,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
 
         initEvent();
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
 
         LiveEventBus.get(ON_USB_MODE_SET, DeviceSpiritC.MCU_SET.class)
@@ -111,7 +112,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
     }
 
 
@@ -382,9 +383,9 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                             //失敗
                             Toasty.error(requireActivity(), "", Toasty.LENGTH_LONG).show();
                             if (isTreadmill) {
-                                isFirmwareUpdating = false;
+                                App.isFirmwareUpdating = false;
                             } else {
-                                getDeviceSpiritC().setEchoMode(DeviceSpiritC.ECHO_MODE.SECOND);
+                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
                             }
                             if (getBinding() != null) {
                                 getBinding().btnUpdateSubMcu.setVisibility(View.INVISIBLE);
@@ -410,9 +411,9 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                         if (!(boolean) value.getObj()) {
                             Toasty.error(requireActivity(), "LWR Install Failed", Toasty.LENGTH_LONG).show();
                             if (isTreadmill) {
-                                isFirmwareUpdating = false;
+                                App.isFirmwareUpdating = false;
                             } else {
-                                getDeviceSpiritC().setEchoMode(DeviceSpiritC.ECHO_MODE.SECOND);
+                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
                             }
                             if (getBinding() != null) {
                                 getBinding().btnUpdateSubMcu.setVisibility(View.INVISIBLE);

@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
@@ -77,7 +78,7 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
         super.onViewCreated(view, savedInstanceState);
 
         //開啟 USB DATA 模試
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
         getBinding().setDeviceSettingViewModel(deviceSettingViewModel);
@@ -410,7 +411,7 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
     }
 
 

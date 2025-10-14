@@ -9,7 +9,7 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.WARRING_HR_REAC
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_CONSTANT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_PERCENTAGE_85;
 
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -34,9 +34,9 @@ public class Wfi implements IPrograms {
     MainWorkoutTrainingFragment m;
     private int noHrTime;
     private int hr85Time;
-    IUartConsole u;
+    UartConsoleManagerPF u;
 
-    public Wfi(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment,IUartConsole u) {
+    public Wfi(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, UartConsoleManagerPF u) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.u = u;

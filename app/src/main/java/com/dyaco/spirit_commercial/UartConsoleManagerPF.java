@@ -206,8 +206,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     public void setDevSpeedAndInclineMT(int speedValue, int gradeValue, boolean gradeDC) {
     }
 
-    public void setDevDriveMotorTreadmill(int beltSpeed) {
-    }
 
     public void setDevAutoBrakeNonMT(DeviceDyacoMedical.BRAKE_MODE brakeMode) {
     }
@@ -564,9 +562,9 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         Timber.d("setUsbMode, usbMode = " + usbMode);
     }
 
-    public void setBuzzer(DeviceDyacoMedical.BEEP beep, int second) {
+    public void setBuzzer() {
 //        if (dsVM.isBeep.get() && !woVM.isLongClicking.get()) {
-//            consoleUart.setBuzzer(beep, second);
+            consoleUart.setBuzzer(DeviceDyacoMedical.BEEP.SHORT, 1);
 //        }
     }
 
@@ -966,7 +964,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             }
         }
 
-        Timber.d("onDeviceInfo: ");
+        Timber.tag("GEM3").d("onDeviceInfo: ");
         // 確定取得device info之後, 再初始化GEM3
 
         m.initGem3();
@@ -1701,11 +1699,11 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     }
 
-    public @UartConst.DeviceStep int getDevStep() {
+    public int getDevStep() {
         return uartVM.devStep.get();
     }
 
-    public void setDevStep(@UartConst.DeviceStep int devStep) {
+    public void setDevStep(int devStep) {
         uartVM.devStep.set(devStep);
 
         // 可按[Quick Start], [Start this Program]的時機
@@ -1720,5 +1718,33 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         uartVM.isResumeWorkoutReady.set(
                 devStep == DS_A0_PAUSE_STANDBY ||
                         devStep == DS_ECB_PAUSE_STANDBY);
+    }
+
+
+
+    public void setDevSpeedAndIncline() {
+
+    }
+
+
+    public void emsWorkoutPause() {
+
+    }
+
+    public void emsWorkoutStart() {
+
+    }
+
+
+    public void setDevWorkoutFinish() {
+
+    }
+
+    public void emsWorkoutFinish() {
+
+    }
+
+
+    public void setDevDriveMotorTreadmill(int beltSpeed) {
     }
 }

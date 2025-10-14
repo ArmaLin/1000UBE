@@ -1,6 +1,5 @@
 package com.dyaco.spirit_commercial;
 
-import static com.corestar.libs.device.DeviceSpiritC.MAIN_MODE.RESET;
 import static com.dyaco.spirit_commercial.App.COOKIE;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.SETTING_SHOW;
@@ -123,8 +122,8 @@ import com.corestar.calculation_libs.Calculation;
 import com.corestar.libs.audio.AudioDeviceWatcher;
 import com.corestar.libs.device.DeviceCab;
 import com.corestar.libs.device.DeviceCsafe;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceGEM;
-import com.corestar.libs.device.DeviceSpiritC;
 import com.corestar.libs.device.DeviceTvTuner;
 import com.corestar.libs.device.GemSettings;
 import com.corestar.libs.utils.GemSettingsFactory;
@@ -151,7 +150,6 @@ import com.dyaco.spirit_commercial.listener.AudioDeviceWatcherListener;
 import com.dyaco.spirit_commercial.listener.CabDeviceEventListener;
 import com.dyaco.spirit_commercial.listener.CsafeDeviceEventListener;
 import com.dyaco.spirit_commercial.listener.DeviceGemEventListener;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.listener.TvTunerDeviceEventListener;
 import com.dyaco.spirit_commercial.login.LoginFragment;
 import com.dyaco.spirit_commercial.maintenance_mode.MaintenanceUsageRestrictionsWindow;
@@ -250,6 +248,7 @@ import es.dmoral.toasty.Toasty;
 import timber.log.Timber;
 
 public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
+
     public boolean isEgymNoData = false;
     public static String forcePkName;
     public static int forcePkNameSort;
@@ -295,6 +294,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     // /storage/emulated/0/Android/data/com.dyaco.spirit_commercial/files
     public static String SETTING_FILE_PATH;
     public WorkoutViewModel workoutViewModel;
+    public UartVM uartVM;
     public AppStatusViewModel appStatusViewModel;
     public DeviceSettingViewModel deviceSettingViewModel;
     public static UserProfileViewModel userProfileViewModel;
@@ -307,7 +307,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public static boolean isUs = false;
     public static boolean isEmulator;
 
-    public IUartConsole uartConsole;
+//    public IUartConsole uartConsole;
     public Calculation calculation;
 
     private SplashWindow splashWindow;
@@ -386,7 +386,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         closePackage(this);
 
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
 
 
         //     initHdmi();
@@ -683,6 +683,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         egymDataViewModel = new ViewModelProvider(this).get(EgymDataViewModel.class);
 
+        uartVM = new ViewModelProvider(this).get(UartVM.class);
         workoutViewModel = new ViewModelProvider(this).get(WorkoutViewModel.class);
         getBinding().setWorkoutData(workoutViewModel);
 
@@ -788,39 +789,24 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             }
         });
 
-//        isGen3PingDone = false;
-//        //ping GYM3
-//        if (pingGemTimer != null) {
-//            pingGemTimer.cancel();
-//            pingGemTimer = null;
-//        }
-//        pingGemTimer = new RxTimer();
-//        pingGemTimer.intervalComplete(1000, 1000, 60, new RxTimer.RxActionComplete() {
-//            @Override
-//            public void action(long number) {
-//                Log.d("GEM3", "systemMessagePing: ");
-//                getDeviceGEM().systemMessagePing(); //> onSystemMessagePing
-//            }
-//
-//            @Override
-//            public void complete() {
-//                if (pingGemTimer != null) {
-//                    pingGemTimer.cancel();
-//                    pingGemTimer = null;
-//                }
-//            }
-//        });
     }
 
 
+    public UartConsoleManagerPF uartConsole;
     /**
      * UART
      */
     private void initUartConsole() {
 
-        uartConsole = new SpiritCommercialUart(workoutViewModel, this, deviceSettingViewModel, appStatusViewModel);
+//        uartConsole = new SpiritCommercialUart(workoutViewModel, this, deviceSettingViewModel, appStatusViewModel);
+        uartConsole = new UartConsoleManagerPF(workoutViewModel, this, deviceSettingViewModel,uartVM, appStatusViewModel);
         uartConsole.initialize();
         Timber.tag("GEM3").d("initialize: ");
+
+
+
+
+
     }
 
 
@@ -2679,7 +2665,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             restartApp(this);
         } else {
             Timber.tag("UART_CONSOLE").d("電跑: mRestartApp: APP重啟  ");
-            uartConsole.setDevMainMode(RESET);
+            uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RESET);
             //  restartApp(this);
         }
     }

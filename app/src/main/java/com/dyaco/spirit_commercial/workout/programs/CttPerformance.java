@@ -8,7 +8,7 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.setTreadmillInclin
 
 import android.view.View;
 
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -28,11 +28,11 @@ import com.dyaco.spirit_commercial.workout.WorkoutStatsFragment;
  *  當USER無法承受,按下STOP時,依時間查表,以取得VO2的分數
  */
 public class CttPerformance implements IPrograms {
-    IUartConsole u;
+    UartConsoleManagerPF u;
     WorkoutViewModel w;
     MainWorkoutTrainingFragment m;
 
-    public CttPerformance(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment,IUartConsole u) {
+    public CttPerformance(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment,UartConsoleManagerPF u) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.u = u;

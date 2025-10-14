@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.PopupReadystartBinding;
@@ -53,7 +53,7 @@ public class ReadyStartPopupWindow extends BasePopupWindow<PopupReadystartBindin
 
     public void start() {
 
-        ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.RUNNING);
+        ((MainActivity) mContext).uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);
 
 
         ValueAnimator valueAnimator = ValueAnimator.ofInt(25, 100);

@@ -5,7 +5,7 @@ import static com.dyaco.spirit_commercial.MainActivity.isUs;
 
 import android.view.View;
 
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment;
 import com.dyaco.spirit_commercial.workout.WorkoutChartsFragment;
@@ -18,11 +18,11 @@ import java.util.Arrays;
  */
 public class Hiit implements IPrograms {
 
-    IUartConsole u;
+    UartConsoleManagerPF u;
     WorkoutViewModel w;
     MainWorkoutTrainingFragment m;
 
-    public Hiit(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment,IUartConsole u) {
+    public Hiit(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, UartConsoleManagerPF u) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.u = u;

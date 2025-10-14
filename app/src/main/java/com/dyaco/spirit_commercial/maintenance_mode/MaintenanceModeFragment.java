@@ -66,12 +66,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import com.corestar.libs.device.DeviceSpiritC;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.dashboard_media.DashboardMediaFragment;
 import com.dyaco.spirit_commercial.databinding.PopupMaintenanceBinding;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.product_flavor.DownloadManagerCustom;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
@@ -119,7 +119,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
     private MainActivity mainActivity;
 
-    public IUartConsole uartConsole;
+    public UartConsoleManagerPF uartConsole;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -146,7 +146,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
         if (isTreadmill) {
             try {
-                uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.ENG);
+                uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.ENG);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1508,7 +1508,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         //點10次
         TenTapClick.setTenClickListener(getBinding().btnToAndroid, true, () -> {
             // TODO: 開啟USB讀取
-            getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+            getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
             new FloatingWidget(requireActivity()).callSetting(2, MainActivity.class, 0);
 //            new CommonUtils().hideStatusBar(0);
@@ -1520,7 +1520,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
         TenTapClick.setTenClickListener(getBinding().tvTitleTTT, true, () -> {
 
-            getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.DATA);
+            getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
             mainActivity.showLoading(true);
 
@@ -1535,7 +1535,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
                         @Override
                         public void onCompleted(int successCount, int failCount, long durationMs) {
-                            getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+                            getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
                             mainActivity.showLoading(false);
                             Toasty.success(getApp(), "Copy completed! Success: " + successCount + ", Failed: " + failCount + ", Duration: " + durationMs + "ms", Toasty.LENGTH_LONG).show();
                             Log.i("UsbFileCopier", "✅ 複製完成！成功: " + successCount + " 失敗: " + failCount + " 耗時: " + durationMs + "ms");
@@ -1543,7 +1543,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
                         @Override
                         public void onError(@NonNull String errorMessage) {
-                            getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+                            getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
                             mainActivity.showLoading(false);
                             Toasty.error(getApp(), "❌ Error occurred: " + errorMessage, Toasty.LENGTH_LONG).show();
                             Log.e("UsbFileCopier", "❌ 發生錯誤: " + errorMessage);
@@ -1704,8 +1704,8 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
                         MainActivity.isReAssignView = true;
                         mainActivity.hdmiIn.AssignView(mainActivity.getBinding().videoFullViewContainer);
                     }
-                    getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
-                    uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.IDLE);
+                    getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
+                    uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.IDLE);
                     parent.navController.navigate(MaintenanceModeFragmentDirections.actionGlobalNavigationLogin());
 
                     new RxTimer().timer(500, number ->
@@ -1747,7 +1747,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         RootTools.hideStatusBar();
         RootTools.hideNavigationBar();
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
     }
 
 
@@ -1838,7 +1838,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         //SAVE
         //  new CommonUtils().deviceSettingViewModelToMMKV(deviceSettingViewModel);
 
-        getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+        getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.CHARGER);
 
 //            uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.IDLE);
 
@@ -1848,7 +1848,7 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         //   }
 
         try {
-            uartConsole.setDevMainMode(DeviceSpiritC.MAIN_MODE.IDLE);
+            uartConsole.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.IDLE);
 
             mainActivity.checkUpdate();
 

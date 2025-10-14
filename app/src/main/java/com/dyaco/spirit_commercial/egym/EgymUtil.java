@@ -37,7 +37,6 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_IU
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_MU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_MAX;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.RT_LEVEL;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;
@@ -50,7 +49,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
-import com.dyaco.spirit_commercial.listener.IUartConsole;
+import com.dyaco.spirit_commercial.UartConsoleManagerPF;
 import com.dyaco.spirit_commercial.login.LoginFragment;
 import com.dyaco.spirit_commercial.model.kotlin.ApiResponseListener;
 import com.dyaco.spirit_commercial.model.kotlin.EgymApiManager;
@@ -1214,7 +1213,7 @@ public class EgymUtil {
         Log.d("VVVCCXAAA", "####: " + w.currentLevel.get());
     }
 
-    public void updateFlowData(MainWorkoutTrainingFragment m, WorkoutViewModel w, IUartConsole u) {
+    public void updateFlowData(MainWorkoutTrainingFragment m, WorkoutViewModel w, UartConsoleManagerPF u) {
 
         int i = w.egymCurrentSet.get();
 
@@ -1224,7 +1223,7 @@ public class EgymUtil {
             u.setDevSpeedAndIncline();
         } else {
             w.currentLevel.set(w.newArraySpeedAndLevelE[i]);
-            u.setDevWorkload(w.currentLevel.get(), RT_LEVEL);
+            u.setDevWorkload(w.currentLevel.get());
         }
 
         //                   w.totalLevel.set(w.totalLevel.get() + w.currentLevel.get());
