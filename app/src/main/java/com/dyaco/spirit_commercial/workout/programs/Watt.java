@@ -26,8 +26,8 @@ public class Watt implements IPrograms {
         this.m = mainWorkoutTrainingFragment;
         this.calc = calc;
         w.constantPowerW.set(w.selConstantPowerW.get());
-        w.currentLevel.set(calc.getWattLevel(w.selConstantPowerW.get(), w.currentRpm.get()));
-        Log.d("##########", "1111111updateSpeedOrLevelNum: " +w.selConstantPowerW.get() + "," + w.currentRpm.get() +","+ calc.getWattLevel(w.constantPowerW.get(),w.currentRpm.get()));
+        w.currentLevel.set(calc.getLevel(w.selConstantPowerW.get(), w.currentRpm.get()));
+        Log.d("##########", "1111111updateSpeedOrLevelNum: " +w.selConstantPowerW.get() + "," + w.currentRpm.get() +","+ calc.getLevel(w.constantPowerW.get(),w.currentRpm.get()));
 
     }
 
@@ -82,7 +82,7 @@ public class Watt implements IPrograms {
         if (w.elapsedTime.get() == 1) {
             //   m.updateSpeedOrLevelNum(UNIT_E == IMPERIAL ? getSpeedLevel(0.5f) : getSpeedLevel(0.8f), true);
             //   m.updateSpeedOrLevelNum(w.selConstantPowerW.get(), true);
-            //   m.updateSpeedOrLevelNum(calc.getWattLevel(w.selConstantPowerW.get(),w.currentRpm.get()), true);
+            //   m.updateSpeedOrLevelNum(calc.getLevel(w.selConstantPowerW.get(),w.currentRpm.get()), true);
             m.updateSpeedOrLevelNum(w.selConstantPowerW.get(), true);
         }
     }

@@ -108,96 +108,7 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_CONSTANT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_DEF;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_10;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_11;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_12;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_13;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_14;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_15;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_16;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_17;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_18;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_19;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_20;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_6;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_7;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_8;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_LEVEL_US_NUM_9;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_10;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_11;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_12;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_13;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_14;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_15;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_16;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_17;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_18;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_6;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_7;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_8;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.BIKE_WATT_US_NUM_9;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.RT_LEVEL;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.RT_POWER;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_INCLINE_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_INCLINE_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_INCLINE_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_INCLINE_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_INCLINE_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_10;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_11;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_12;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_6;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_7;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_8;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_9;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_1;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_10;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_11;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_12;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_2;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_3;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_4;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_5;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_6;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_7;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_8;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_9;
-import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
+import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.*;
 import static com.dyaco.spirit_commercial.support.utils.MyAnimationUtils.crossFade;
 import static com.dyaco.spirit_commercial.workout.WorkoutPauseFragment.isResuming;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.CTT_PERFORMANCE;
@@ -227,6 +138,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.transition.TransitionManager;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.corestar.calculation_libs.Calculation;
 import com.corestar.libs.device.DeviceCsafe;
@@ -247,8 +159,8 @@ import com.dyaco.spirit_commercial.databinding.FragmentMainWorkoutTrainingBindin
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.listener.IUartConsole;
 import com.dyaco.spirit_commercial.model.webapi.bean.CreateWorkoutParam;
+import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RpmUtil;
 import com.dyaco.spirit_commercial.support.RxTimer;
@@ -310,7 +222,7 @@ import java.util.concurrent.TimeUnit;
  * new RxTimer().timer(1000, number -> m.uartConsole.setDevWorkoutFinish());
  */
 public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMainWorkoutTrainingBinding> {
-
+    boolean isUBE = MODE == ModeEnum.UBE;
     private CautionSpeedWindow cautionSpeedWindow;
     private DeviceCsafe deviceCsafe;
     private int ftmsType;
@@ -362,6 +274,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        OPT_SETTINGS.MAX_LEVEL_MAX = isUBE ? 30: 50;
 
         u = parent.uartConsole;
         appStatusViewModel = new ViewModelProvider(requireActivity()).get(AppStatusViewModel.class);
@@ -527,7 +442,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 //        Log.d("VVVBBBNNN", "XXXXXXXinit: " +deviceSettingViewModel.typeCode.get());
 //        Log.d("VVVBBBNNN", "XXXXXXXinit: " + parent.calculation);
 //        Log.d("VVVBBBNNN", "XXXXXXXinit: " + MODE.getWattTable());
-        parent.calculation.changeWattTable(MODE.getWattTable());
+        parent.calculation.setWattTable(MODE.getWattTable());
 
 
         Log.d("OOODDDODODO", "init CALC-  AGE: " + age + ", weight:" + weight + ", height:" + height + "," + userProfileViewModel.getHeight_metric() + "," + userProfileViewModel.getHeight_imperial());
@@ -1518,7 +1433,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             w.constantPowerW.set(w.constantPowerW.get() + x);
 
-            Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+            Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
         }
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
@@ -1545,10 +1460,10 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
                     int level;
                     if (w.selProgram == WATTS) {
-                        level = calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get());
+                        level = calc.getLevel(w.constantPowerW.get(), w.currentRpm.get());
                         //       Log.d("EEEEEEFFFF", "updateSpeedOrLevelNum: " + level);
                     } else {
-                        level = calc.getWattLevel(w.constantPowerW.get(), 50);
+                        level = calc.getLevel(w.constantPowerW.get(), 50);
                     }
                     u.setDevWorkload(level, resistance);
                     w.currentLevel.set(level);
@@ -1575,7 +1490,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
-        Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+        Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
 
         if (workoutChartsFragment == null) return false;
 
@@ -2387,8 +2302,8 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //POWER要每秒送
             if (w.selProgram == WATTS) {
                 //   if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
-                //  w.currentLevel.set(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
-                updateSpeedOrLevelNumWATT(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
+                //  w.currentLevel.set(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
+                updateSpeedOrLevelNumWATT(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
             }
 
 
@@ -3364,27 +3279,27 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 }
 
 
-                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : BIKE_LEVEL_US_NUM_1);
-                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 : BIKE_LEVEL_US_NUM_2);
-                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : BIKE_LEVEL_US_NUM_3);
-                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : BIKE_LEVEL_US_NUM_4);
-                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : BIKE_LEVEL_US_NUM_5);
-                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : BIKE_LEVEL_US_NUM_6);
-                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : BIKE_LEVEL_US_NUM_7);
-                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : BIKE_LEVEL_US_NUM_8);
-                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : BIKE_LEVEL_US_NUM_9);
-                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : BIKE_LEVEL_US_NUM_10);
+                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : (isUBE ?  UBE_LEVEL_US_NUM_1 : STEPPER_LEVEL_US_NUM_1));
+                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 :(isUBE ?  UBE_LEVEL_US_NUM_2 : STEPPER_LEVEL_US_NUM_2));
+                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : (isUBE ?  UBE_LEVEL_US_NUM_3 : STEPPER_LEVEL_US_NUM_3));
+                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : (isUBE ?  UBE_LEVEL_US_NUM_4 : STEPPER_LEVEL_US_NUM_4));
+                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : (isUBE ?  UBE_LEVEL_US_NUM_5 : STEPPER_LEVEL_US_NUM_5));
+                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : (isUBE ?  UBE_LEVEL_US_NUM_6 : STEPPER_LEVEL_US_NUM_6));
+                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : (isUBE ?  UBE_LEVEL_US_NUM_7 : STEPPER_LEVEL_US_NUM_7));
+                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : (isUBE ?  UBE_LEVEL_US_NUM_8 : STEPPER_LEVEL_US_NUM_8));
+                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : (isUBE ?  UBE_LEVEL_US_NUM_9 : STEPPER_LEVEL_US_NUM_9));
+                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (isUBE ?  UBE_LEVEL_US_NUM_10 : STEPPER_LEVEL_US_NUM_10));
 
-                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : BIKE_LEVEL_US_NUM_11);
-                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : BIKE_LEVEL_US_NUM_12);
-                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : BIKE_LEVEL_US_NUM_13);
-                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : BIKE_LEVEL_US_NUM_14);
-                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : BIKE_LEVEL_US_NUM_15);
-                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : BIKE_LEVEL_US_NUM_16);
-                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : BIKE_LEVEL_US_NUM_17);
-                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : BIKE_LEVEL_US_NUM_18);
-                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : BIKE_LEVEL_US_NUM_19);
-                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : BIKE_LEVEL_US_NUM_20);
+                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (isUBE ?  UBE_LEVEL_US_NUM_11 : STEPPER_LEVEL_US_NUM_11));
+                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : (isUBE ?  UBE_LEVEL_US_NUM_12 : STEPPER_LEVEL_US_NUM_12));
+                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : (isUBE ?  UBE_LEVEL_US_NUM_13 : STEPPER_LEVEL_US_NUM_13));
+                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : (isUBE ?  UBE_LEVEL_US_NUM_14 : STEPPER_LEVEL_US_NUM_14));
+                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : (isUBE ?  UBE_LEVEL_US_NUM_15 : STEPPER_LEVEL_US_NUM_15));
+                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : (isUBE ?  UBE_LEVEL_US_NUM_16 : STEPPER_LEVEL_US_NUM_16));
+                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : (isUBE ?  UBE_LEVEL_US_NUM_17 : STEPPER_LEVEL_US_NUM_17));
+                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : (isUBE ?  UBE_LEVEL_US_NUM_18 : STEPPER_LEVEL_US_NUM_18));
+                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (isUBE ?  UBE_LEVEL_US_NUM_19 : STEPPER_LEVEL_US_NUM_19));
+                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (isUBE ?  UBE_LEVEL_US_NUM_20 : STEPPER_LEVEL_US_NUM_20));
 
 
                 getBinding().tvTopTextUs.setText((w.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);

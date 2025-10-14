@@ -2019,10 +2019,22 @@ public class SpiritCommercialUart implements IUartConsole {
     }
 
     @Override
-    public void onMcuControl(DeviceSpiritC.MODEL model, List<DeviceSpiritC.MCU_ERROR> mcuErrors, int hpHr, int wpHr,
-                             DeviceSpiritC.ACTION_STATUS inclineStatus, int inclineAd, DeviceSpiritC.SAFE_KEY safeKey,
-                             int speed, int stepCount, DeviceSpiritC.DIRECTION direction, int rpm,
-                             DeviceSpiritC.ACTION_STATUS res, int resValue, int reedSwitchRpm1, int angleSensorRpm2, int rpmCounter) {
+    public void onMcuControl(DeviceSpiritC.MODEL model,
+                             List<DeviceSpiritC.MCU_ERROR> mcuErrors,
+                             int hpHr,
+                             int wpHr,
+                             DeviceSpiritC.ACTION_STATUS inclineStatus,
+                             int inclineAd,
+                             DeviceSpiritC.SAFE_KEY safeKey,
+                             int speed,
+                             int stepCount,
+                             DeviceSpiritC.DIRECTION direction,
+                             int rpm,
+                             DeviceSpiritC.ACTION_STATUS res,
+                             int resValue,
+                             int reedSwitchRpm1,
+                             int angleSensorRpm2,
+                             int rpmCounter) {
 
         w.currentRpm.set(rpm);
       //  LogUtil.d("AAAAAAAAA", "onMcuControl: " + w.currentRpm.get());

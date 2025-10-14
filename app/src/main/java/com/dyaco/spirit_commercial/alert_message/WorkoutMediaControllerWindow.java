@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.alert_message;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.MainActivity.isEmulator;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
@@ -62,12 +63,13 @@ import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.dashboard_media.NewUpdateData;
 import com.dyaco.spirit_commercial.databinding.WindowWorkoutMediaControllerBinding;
+import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
-import com.dyaco.spirit_commercial.support.interaction.LongClickUtil;
 import com.dyaco.spirit_commercial.support.custom_view.CustomToast;
 import com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
+import com.dyaco.spirit_commercial.support.interaction.LongClickUtil;
 import com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -83,6 +85,9 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
     private boolean isPause = false;
     private int valueType = STATS_SPEED;
+
+
+    boolean isUBE = MODE == ModeEnum.UBE;
 
     public WorkoutMediaControllerWindow(Context context) {
         super(context, 300, 472, 0, GENERAL.TRANSLATION_Y, false, true, true, true);
@@ -419,22 +424,22 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tv1616.setText("15");
                 break;
             case STATS_LEVEL:
-                getBinding().tv161.setText("0");
-                getBinding().tv162.setText("2");
-                getBinding().tv163.setText("4");
-                getBinding().tv164.setText("6");
-                getBinding().tv165.setText("8");
-                getBinding().tv166.setText("10");
-                getBinding().tv167.setText("12");
-                getBinding().tv168.setText("14");
-                getBinding().tv169.setText("16");
-                getBinding().tv1610.setText("20");
-                getBinding().tv1611.setText("25");
-                getBinding().tv1612.setText("30");
-                getBinding().tv1613.setText("35");
-                getBinding().tv1614.setText("40");
-                getBinding().tv1615.setText("45");
-                getBinding().tv1616.setText("50");
+                getBinding().tv161.setText((isUBE ?  "1" : "1"));
+                getBinding().tv162.setText((isUBE ?  "3" : "2"));
+                getBinding().tv163.setText((isUBE ?  "5" : "4"));
+                getBinding().tv164.setText((isUBE ?  "7" : "6"));
+                getBinding().tv165.setText((isUBE ?  "9" : "8"));
+                getBinding().tv166.setText((isUBE ?  "11" : "10"));
+                getBinding().tv167.setText((isUBE ?  "13" : "12"));
+                getBinding().tv168.setText((isUBE ?  "15" : "14"));
+                getBinding().tv169.setText((isUBE ?  "17" : "16"));
+                getBinding().tv1610.setText((isUBE ?  "19" : "20"));
+                getBinding().tv1611.setText((isUBE ?  "21" : "25"));
+                getBinding().tv1612.setText((isUBE ?  "23" : "30"));
+                getBinding().tv1613.setText((isUBE ?  "27" : "35"));
+                getBinding().tv1614.setText((isUBE ?  "28" : "40"));
+                getBinding().tv1615.setText((isUBE ?  "29" : "45"));
+                getBinding().tv1616.setText((isUBE ?  "30" : "50"));
                 break;
             case STATS_POWER:
                 getBinding().tv161.setText("30");

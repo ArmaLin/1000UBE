@@ -325,9 +325,9 @@ public class HeartRate implements IPrograms {
         if (watt <= 0) {
             watt = 3;
         }
-        m.updateSpeedOrLevelNum(m.calc.getWattLevel(watt, rpm) - 1, false);
+        m.updateSpeedOrLevelNum(m.calc.getLevel(watt, rpm) - 1, false);
 
-        Log.d(TAG, "取得Watt: " + watt + ", level:" + m.calc.getWattLevel(watt, rpm) + ",設定第一次LEVEL");
+        Log.d(TAG, "取得Watt: " + watt + ", level:" + m.calc.getLevel(watt, rpm) + ",設定第一次LEVEL");
         //取得Watt
         w.setHrWattDone(true);
     }

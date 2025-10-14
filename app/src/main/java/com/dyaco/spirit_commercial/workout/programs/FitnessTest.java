@@ -320,8 +320,8 @@ public class FitnessTest implements IPrograms {
 
     private void updateLevel() {
         w.constantPowerW.set(wattNum);
-      //  w.currentLevel.set(calc.getWattLevel(wattNum, w.currentRpm.get()));
-     //   w.currentLevel.set(calc.getWattLevel(wattNum, 50));
+      //  w.currentLevel.set(calc.getLevel(wattNum, w.currentRpm.get()));
+     //   w.currentLevel.set(calc.getLevel(wattNum, 50));
         //    if (w.currentLevel.get() == wattNum) return;
         Log.d(TAG, "<Stage" + (int)w.currentStage.get() + ", 調整Watt> >>>>> POWER:<" + wattNum + ">W, RPM:" + w.currentRpm.get() + ", LEVEL:" + w.currentLevel.get() + ", STAGE:" + w.currentStage.get());
 

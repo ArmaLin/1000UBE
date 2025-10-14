@@ -113,8 +113,8 @@ public class OPT_SETTINGS {
     public static final int MAX_LEVEL_DEF = 5;
 
     // TODO: PF
-    public static final int MAX_LEVEL_MIN = 0;
-    public static final int MAX_LEVEL_MAX = 50;
+    public static final int MAX_LEVEL_MIN = 1;
+    public static int MAX_LEVEL_MAX = 50;
 
 
     public static final int MAX_RPM = 120;

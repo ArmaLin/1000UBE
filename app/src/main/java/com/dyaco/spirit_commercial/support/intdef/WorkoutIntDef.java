@@ -54,6 +54,52 @@ public class WorkoutIntDef {
 
 
 
+    public static final String UBE_LEVEL_US_NUM_1 = "1";
+    public static final String UBE_LEVEL_US_NUM_2 = "2";
+    public static final String UBE_LEVEL_US_NUM_3 = "3";
+    public static final String UBE_LEVEL_US_NUM_4 = "4";
+    public static final String UBE_LEVEL_US_NUM_5 = "5";
+    public static final String UBE_LEVEL_US_NUM_6 = "6";
+    public static final String UBE_LEVEL_US_NUM_7 = "7";
+    public static final String UBE_LEVEL_US_NUM_8 = "8";
+    public static final String UBE_LEVEL_US_NUM_9 = "9";
+    public static final String UBE_LEVEL_US_NUM_10 = "10";
+    public static final String UBE_LEVEL_US_NUM_11 = "12";
+    public static final String UBE_LEVEL_US_NUM_12 = "14";
+    public static final String UBE_LEVEL_US_NUM_13 = "16";
+    public static final String UBE_LEVEL_US_NUM_14 = "18";
+    public static final String UBE_LEVEL_US_NUM_15 = "20";
+    public static final String UBE_LEVEL_US_NUM_16 = "22";
+    public static final String UBE_LEVEL_US_NUM_17 = "24";
+    public static final String UBE_LEVEL_US_NUM_18 = "26";
+    public static final String UBE_LEVEL_US_NUM_19 = "28";
+    public static final String UBE_LEVEL_US_NUM_20 = "30";
+
+
+
+    public static final String STEPPER_LEVEL_US_NUM_1 = "1";
+    public static final String STEPPER_LEVEL_US_NUM_2 = "2";
+    public static final String STEPPER_LEVEL_US_NUM_3 = "4";
+    public static final String STEPPER_LEVEL_US_NUM_4 = "6";
+    public static final String STEPPER_LEVEL_US_NUM_5 = "8";
+    public static final String STEPPER_LEVEL_US_NUM_6 = "10";
+    public static final String STEPPER_LEVEL_US_NUM_7 = "12";
+    public static final String STEPPER_LEVEL_US_NUM_8 = "14";
+    public static final String STEPPER_LEVEL_US_NUM_9 = "16";
+    public static final String STEPPER_LEVEL_US_NUM_10 = "18";
+    public static final String STEPPER_LEVEL_US_NUM_11 = "20";
+    public static final String STEPPER_LEVEL_US_NUM_12 = "22";
+    public static final String STEPPER_LEVEL_US_NUM_13 = "24";
+    public static final String STEPPER_LEVEL_US_NUM_14 = "26";
+    public static final String STEPPER_LEVEL_US_NUM_15 = "30";
+    public static final String STEPPER_LEVEL_US_NUM_16 = "34";
+    public static final String STEPPER_LEVEL_US_NUM_17 = "38";
+    public static final String STEPPER_LEVEL_US_NUM_18 = "42";
+    public static final String STEPPER_LEVEL_US_NUM_19 = "46";
+    public static final String STEPPER_LEVEL_US_NUM_20 = "50";
+
+
+
     public static final String BIKE_WATT_US_NUM_1 = "30";
     public static final String BIKE_WATT_US_NUM_2 = "40";
     public static final String BIKE_WATT_US_NUM_3 = "50";

@@ -461,9 +461,7 @@ dependencies {
 //    implementation "androidx.work:work-multiprocess:$work_version"
 
     //implementation files('libs/libusb-release.aar')
-    implementation files('libs/LibraryCalculation-v0.1.0-0819a-release.aar')
-//    implementation files('libs/corestarlib-v0.1.0-20241122a-release.aar')
-//    implementation files('libs/corestarlib-v0.1.0-20250422a-release.aar')
+    implementation files('libs/LibraryCalculation-v0.1.0-0916b-release.aar')
     implementation files('libs/corestarlib-v0.1.0-20250910a-release.aar')
     implementation files('libs/HdmiIn.aar')
 

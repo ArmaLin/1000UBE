@@ -415,7 +415,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     } else {
 //                        if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
 //                            w.constantPowerW.set(diagramBarSpeedBean.getBarNum());
-//                            w.currentLevel.set(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+//                            w.currentLevel.set(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
 //                        } else {
                         if (w.selProgram == WATTS && isFirst) {
 
@@ -776,12 +776,9 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
         int newCurrentSpeedLevel = currentSpeedLevel + (updateSpeedLevel);
 
-        Log.d("CCXXVVV", "1111updateSpeedNum: " + newCurrentSpeedLevel);
         // TODO: PF    <= 0
-        if (newCurrentSpeedLevel < 0) return false;
+        if (newCurrentSpeedLevel <= 0) return false;
 
-
-        Log.d("CCXXVVV", "22222updateSpeedNum: " + newCurrentSpeedLevel);
 
 
         //ftms 同階 回成功
@@ -956,7 +953,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     int newNum = diagramBean.getBarNum() + updateSpeedLevel;
                     if (currentProgram != HIIT) {
                         if (currentProgram == WATTS || currentProgram == FITNESS_TEST) {
-                            diagramBean.setBarNum(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+                            diagramBean.setBarNum(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
                         } else {
                             diagramBean.setBarNum(newNum);
                         }
