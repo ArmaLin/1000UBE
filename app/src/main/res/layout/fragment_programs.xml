@@ -6,6 +6,10 @@
 
     <data>
 
+        <variable
+            name="modeEnum"
+            type="com.dyaco.spirit_commercial.product_flavor.ModeEnum" />
+
         <import type="android.view.View" />
 
         <variable
@@ -257,31 +261,44 @@
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="948dp"
                 android:layout_marginTop="224dp"
-                android:text="@string/Watts"
+                android:text="@{modeEnum.isUbeType ? @string/Watts : @string/Steps}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintBounds,VisualLintButtonSize" />
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btn_Watts"-->
-<!--                style="@style/ProgramsButtonStyle"-->
-<!--                android:layout_marginStart="1422dp"-->
-<!--                android:layout_marginTop="224dp"-->
-<!--                android:text="@string/Watts"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"-->
-<!--                tools:ignore="VisualLintBounds,VisualLintButtonSize" />-->
+            <com.google.android.material.button.MaterialButton
+                tools:visibility="visible"
+                android:id="@+id/btn_program8"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginStart="1422dp"
+                android:layout_marginTop="224dp"
+                android:text="@string/heart_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{modeEnum.isUbeType ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintBounds,VisualLintButtonSize" />
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btn_FitnessTest"-->
-<!--                style="@style/ProgramsButtonStyle"-->
-<!--                android:layout_marginTop="448dp"-->
-<!--                android:text="@string/fitness_test"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:visibility="@{isTreadmill ? View.GONE : View.VISIBLE}"-->
-<!--                tools:ignore="VisualLintButtonSize,VisualLintBounds" />-->
+            <com.google.android.material.button.MaterialButton
+                tools:visibility="visible"
+                android:id="@+id/btn_program9"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginTop="448dp"
+                android:text="@string/Watts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{modeEnum.isUbeType ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
+
+            <com.google.android.material.button.MaterialButton
+                tools:visibility="visible"
+                android:id="@+id/btn_program10"
+                style="@style/ProgramsButtonStyle"
+                android:layout_marginTop="448dp"
+                android:text="@string/Wingate_Test"
+                app:layout_constraintStart_toStartOf="@+id/btn_HeartRate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{modeEnum.isUbeType ? View.GONE : View.VISIBLE}"
+                tools:ignore="VisualLintButtonSize,VisualLintBounds" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

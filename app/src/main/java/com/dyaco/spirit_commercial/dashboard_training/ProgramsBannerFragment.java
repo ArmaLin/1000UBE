@@ -160,25 +160,25 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
         banner = getBinding().programsBanner;
 
         int position;
-        if (programId == R.id.btn_manual || programId == R.id.btn_AirForce) {
+        if (programId == R.id.btn_manual) {
             position = 1;
-        } else if (programId == R.id.btn_Hill || programId == R.id.btn_Army) {
+        } else if (programId == R.id.btn_Hill) {
             position = 2;
-        } else if (programId == R.id.btn_Plateau || programId == R.id.btn_CoastGuard) {
+        } else if (programId == R.id.btn_Plateau) {
             position = 3;
-        } else if (programId == R.id.btn_Custom || programId == R.id.btn_Gerkin) {
+        } else if (programId == R.id.btn_Custom) {
             position = 4;
-        } else if (programId == R.id.btn_Calories || programId == R.id.btn_PEB) {
+        } else if (programId == R.id.btn_Calories) {
             position = 5;
-        } else if (programId == R.id.btn_HeartRate || programId == R.id.btn_MarineCorps) {
+        } else if (programId == R.id.btn_HeartRate) {
             position = 6;
-        } else if (programId == R.id.btn_5KRun || programId == R.id.btn_Navy) {
+        } else if (programId == R.id.btn_Watts) {
             position = 7;
-        } else if (programId == R.id.btn_Watts || programId == R.id.btn_WFI) {
+        } else if (programId == R.id.btn_program8) {
             position = 8;
-        } else if (programId == R.id.btn_CTTPrediction) {
+        } else if (programId == R.id.btn_program9) {
             position = 9;
-        } else if (programId == R.id.btn_CTTPerformance) {
+        } else if (programId == R.id.btn_program10) {
             position = 10;
 //        } else if (programId == R.id.btn_Custom) {
 //            position = 11;

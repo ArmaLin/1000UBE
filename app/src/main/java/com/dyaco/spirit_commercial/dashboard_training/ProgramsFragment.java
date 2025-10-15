@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getArmyTarget;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMarinesTarget;
@@ -63,6 +64,8 @@ public class ProgramsFragment extends BaseBindingFragment<FragmentProgramsBindin
 
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
         getBinding().setDeviceSetting(deviceSettingViewModel);
+
+        getBinding().setModeEnum(MODE);
 
         programType = ProgramsFragmentArgs.fromBundle(getArguments()).getProgramType();
 

@@ -74,8 +74,8 @@
 <!--    <string name="manual_desc_bike">Resistance level is controlled by the user. Target time is set before start.</string>-->
     <string name="manual_desc_bike">Set target workout time, adjust resistance manually.</string>
 
-    <string name="hill_desc">Complete workout starting with a warm-up, peak activity and cool down.</string>
-    <string name="hill_desc_bike">Complete workout starting with a warm-up, peak activity and cool down.</string>
+    <string name="hill_desc">Triangular progression with maximum effort in the middle of the workout. </string>
+    <string name="hill_desc_bike">Triangular progression with maximum effort in the middle of the workout. </string>
 
     <string name="fatburn_desc">Maximize the benefits of cardiovascular training.</string>
     <string name="fatburn_desc_bike">Maximize the benefits of cardiovascular training.</string>
@@ -86,7 +86,7 @@
     <string name="strength_desc">Build strength and muscular endurance in the lower body \nand glutes. </string>
     <string name="strength_desc_bike">Build strength and muscular endurance in the lower body \nand glutes. </string>
 
-    <string name="hiit_desc">Short bursts of high intensity sprinting followed by short \nrest periods.</string>
+    <string name="hiit_desc">Short bursts of high-intensity sprinting followed by brief rest periods.</string>
     <string name="hiit_desc_bike">Short bursts of high intensity sprinting followed by short \nrest periods.</string>
 
     <string name="heart_rate_desc">Follow incline \nrecommendations \nto keep within 5 bpm \nof target heart rate.</string>
@@ -801,6 +801,11 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="Total_Steps">Total Steps</string>
     <string name="Cadence_RPM">Cadence(RPM)</string>
     <string name="Cadence_SPM">Cadence(SPM)</string>
+    <string name="Steps">Steps</string>
+    <string name="Wingate_Test">Wingate Test</string>
+    <string name="Wingate_Test_desc">Test your fatigue by working as hard as possible for a short period of time.</string>
+    <string name="Steps_desc">Set target steps, adjust resistance manually.</string>
+    <string name="Mets_desc">Set target steps, adjust resistance manually.</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>
