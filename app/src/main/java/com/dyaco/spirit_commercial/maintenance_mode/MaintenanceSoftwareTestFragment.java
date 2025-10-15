@@ -6,9 +6,6 @@ import static com.dyaco.spirit_commercial.MainActivity.isEmulator;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.support.CommonUtils.checkSwVersion;
 import static com.dyaco.spirit_commercial.support.CommonUtils.showException;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_JAPAN;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.ON_USB_MODE_SET;
 import static com.dyaco.spirit_commercial.work_task.WorkManagerUtil.WORK_NOTIFY_UPDATE_MSG_TAG;
 
@@ -187,15 +184,8 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
         int territoryCode = getApp().getDeviceSettingBean().getTerritoryCode();
 
         String uuRl;
-        if (territoryCode == TERRITORY_US) {
-            uuRl = BuildConfig.UPDATE_URL_US;
-        } else if (territoryCode == TERRITORY_JAPAN) {
-            uuRl = BuildConfig.UPDATE_URL_JP;
-        } else if (territoryCode == TERRITORY_CANADA) {
-            uuRl = BuildConfig.UPDATE_URL_CA;
-        } else {
+
             uuRl = BuildConfig.UPDATE_URL_GLOBAL;
-        }
 
         //   getBinding().tvURL.setText(uuRl);
 

@@ -100,6 +100,7 @@ public class ProgramsFragment extends BaseBindingFragment<FragmentProgramsBindin
 //        });
 
         getBinding().btnWatts.setOnClickListener(this);
+        getBinding().btnPlateau.setOnClickListener(this);
         getBinding().btnProgram8.setOnClickListener(this);
         getBinding().btnProgram9.setOnClickListener(this);
         getBinding().btnProgram10.setOnClickListener(this);

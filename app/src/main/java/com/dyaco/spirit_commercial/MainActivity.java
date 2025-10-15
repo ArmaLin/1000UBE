@@ -46,8 +46,6 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.OFF;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.ON;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.PROTOCOL_CSAFE;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_JAPAN;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.VIDEO_NONE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.VIDEO_TV;
@@ -2302,18 +2300,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
      */
     public void checkUpdate() {
 
-        if (1 == 1) return;
-
         String uuRl;
-        if (deviceSettingViewModel.territoryCode.get() == TERRITORY_US) {
-            uuRl = BuildConfig.UPDATE_URL_US;
-        } else if (deviceSettingViewModel.territoryCode.get() == TERRITORY_JAPAN) {
-            uuRl = BuildConfig.UPDATE_URL_JP;
-        } else if (deviceSettingViewModel.territoryCode.get() == TERRITORY_CANADA) {
-            uuRl = BuildConfig.UPDATE_URL_CA;
-        } else {
-            uuRl = BuildConfig.UPDATE_URL_GLOBAL;
-        }
+
+        uuRl = BuildConfig.UPDATE_URL_GLOBAL;
+
 
         //    Log.d("##UpdateProcess##", "#######網址: " + uuRl + "update.json");
 

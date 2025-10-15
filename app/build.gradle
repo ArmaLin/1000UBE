@@ -18,7 +18,7 @@ android {
     compileSdk = 36
     ext {
         HardWareVersion = "V1.0"
-        SoftWareVersion = "A.1.1.1"  //A.x.x.0測試   V1.0.A.1.3.1.0315A SpiritCommercialV1.0.A.1.3.1.0316A
+        SoftWareVersion = "A.1.1.1"  //A.x.x.0測試
         sVersion = "A"
         SerialNumber = getFormattedDate('MMdd') + sVersion
         FirmWareVersion = "37"
@@ -94,24 +94,12 @@ android {
     productFlavors {
         dev {
             buildConfigField "boolean", "TEST_MODE", "true" // true 測試, false 正式
-            //  applicationIdSuffix ".dev"
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
 //            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.14:8080/"'
-            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
-            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
-            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
-//                buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.35:8080/"'
-       //     buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/"'
-
-       //     buildConfigField "String", "EGYM_URL", '"https://partner-api.ext-1.test.co.egym.coffee/api/v1/"' // EGYM TEST
             buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
-
-//            buildConfigField "String", "UPDATE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/SpiritCommercial2022/"'
-
-            //      buildConfigField "String", "UPDATE_URL_US", '"http://192.168.70.28:8080/"'
 
         }
 
@@ -122,17 +110,10 @@ android {
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
 
             //production
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022/"'
-            buildConfigField "String", "UPDATE_URL_JP", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_JP/"'
-            buildConfigField "String", "UPDATE_URL_US", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_US/"'
-            buildConfigField "String", "UPDATE_URL_CA", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/SpiritCommercial2022_CA/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
-            //       buildConfigField "String", "APP_STORE_URL", '"http://192.168.70.28:8080/"'
-     //      buildConfigField "String", "EGYM_URL", '"https://partner-api.ext-1.test.co.egym.coffee/api/v1/"' // EGYM TEST
             buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
 
-            //debug
-            //    buildConfigField "String", "UPDATE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/debug/SpiritCommercial2022/"'
 
         }
     }
@@ -161,7 +142,7 @@ android {
     }
 
     def updateFileName = "update.json"
-    def brandName = "SpiritCommercial"
+    def brandName = "PlanetFitness"
     def Model = "TREADMILL"
     def Model_Name = "CT1000ENT"
     def OS_Version = "V30"
@@ -172,20 +153,10 @@ android {
     def Modifications = "[\"1. Description A\", \"2. Description B\", \"3. Description C\"]"
     def path
     def url_GLOBAL
-    def url_JP
-    def url_US
-    def url_CA
     def downloadUrl_GLOBAL
-    def downloadUrl_JP
-    def downloadUrl_US
-    def downloadUrl_CA
     def sub_mcu = "CS31004_V10A05_20221116.bin" //V10A1 > V10A3  ,662
     def lwr = "CS56011_FW0107_20221114.bin" //V1A7
-    def projectPath = getProjectDir().toString() + "/build/outputs/apk/production/release"
-    def GLOBAL_EditionFolder = "GLOBAL_Edition"
-    def JP_EditionFolder = "JP_Edition"
-    def US_EditionFolder = "US_Edition"
-    def CA_EditionFolder = "CA_Edition"
+    def GLOBAL_EditionFolder = "PlanetFitness_Edition"
     def UpdateFolderName
 
     android.applicationVariants.configureEach { variant ->
@@ -197,17 +168,17 @@ android {
                         url_GLOBAL = value.value.replaceAll(/"/, '')
                     }
 
-                    if (key == "UPDATE_URL_JP") {
-                        url_JP = value.value.replaceAll(/"/, '')
-                    }
-
-                    if (key == "UPDATE_URL_US") {
-                        url_US = value.value.replaceAll(/"/, '')
-                    }
-
-                    if (key == "UPDATE_URL_CA") {
-                        url_CA = value.value.replaceAll(/"/, '')
-                    }
+//                    if (key == "UPDATE_URL_JP") {
+//                        url_JP = value.value.replaceAll(/"/, '')
+//                    }
+//
+//                    if (key == "UPDATE_URL_US") {
+//                        url_US = value.value.replaceAll(/"/, '')
+//                    }
+//
+//                    if (key == "UPDATE_URL_CA") {
+//                        url_CA = value.value.replaceAll(/"/, '')
+//                    }
                 }
             }
         }
@@ -218,9 +189,6 @@ android {
             UpdateFolderName = "updateApp/" + brandName + defaultConfig.versionName + "[" + getCurrentFlavor() + "]"
             path = outputFileName
             downloadUrl_GLOBAL = url_GLOBAL + path
-            downloadUrl_JP = url_JP + path
-            downloadUrl_US = url_US + path
-            downloadUrl_CA = url_CA + path
             variant.getAssembleProvider().configure() {
                 it.doLast {
                     delete {
@@ -244,8 +212,8 @@ android {
             def flavor      = variant.flavorName                       // e.g. "dev" 或 "production"
             def buildType   = variant.buildType.name                   // e.g. "release" 或 "debug"
             def versionName = defaultConfig.versionName
-            def apkName     = "SpiritCommercial${versionName}_[${flavor}].apk"
-            def destDir     = file("$projectDir/updateApp/SpiritCommercial${versionName}[${flavor}]")
+            def apkName     = "PlanetFitness${versionName}_[${flavor}].apk"
+            def destDir     = file("$projectDir/updateApp/PlanetFitness${versionName}[${flavor}]")
 
             // 2.1 用 layout API 取得 APK Provider
             def apkFileProvider = project.layout
@@ -266,24 +234,24 @@ android {
 //                group       = "distribution"
 //                description = "Open updateApp folder in Finder"
 //                dependsOn   copyTask
-//                commandLine "open", destDir.absolutePath
+//          //      commandLine "open", destDir.absolutePath
 //            }
 
-            def openTask = tasks.register("open${variant.name.capitalize()}AppFolder", Exec) {
-                group       = "distribution"
-                description = "Open app module folder in Finder"
-             //   dependsOn   copyTask
-                // macOS：直接打開 app 專案模組的資料夾
-           //     commandLine "open", projectDir.absolutePath
-
-                // 如果你在 Windows，可改成：
-                // commandLine "cmd", "/c", "start", projectDir.absolutePath
-            }
+//            def openTask = tasks.register("open${variant.name.capitalize()}AppFolder", Exec) {
+//                group       = "distribution"
+//                description = "Open app module folder in Finder"
+//             //   dependsOn   copyTask
+//                // macOS：直接打開 app 專案模組的資料夾
+//           //     commandLine "open", projectDir.absolutePath
+//
+//                // 如果你在 Windows，可改成：
+//                // commandLine "cmd", "/c", "start", projectDir.absolutePath
+//            }
 
             // 3️⃣ 開啟APP資料夾
-//            variant.assembleProvider.configure {
-//                finalizedBy openTask
-//            }
+            variant.assembleProvider.configure {
+                finalizedBy copyTask
+            }
         }
     }
 
@@ -296,12 +264,6 @@ android {
             def folderName1 = UpdateFolderName
             file("$projectDir/$folderName1").mkdirs()
 
-            file("$projectDir/$folderName1/$JP_EditionFolder").mkdirs()
-
-            file("$projectDir/$folderName1/$US_EditionFolder").mkdirs()
-
-            file("$projectDir/$folderName1/$CA_EditionFolder").mkdirs()
-
             file("$projectDir/$folderName1/$GLOBAL_EditionFolder").mkdirs()
         }
     }
@@ -310,10 +272,8 @@ android {
     tasks.register('versionTxt') {
         doLast {
             def baseFolder = new File(projectDir, UpdateFolderName)
-            def caFolder = new File(baseFolder, CA_EditionFolder)
-            def usFolder = new File(baseFolder, US_EditionFolder)
             def globalFolder = new File(baseFolder, GLOBAL_EditionFolder)
-            def jpFolder = new File(baseFolder, JP_EditionFolder)
+
 
             def updateContent = { folder, urlM ->
                 new File(folder, updateFileName).text = """{
@@ -335,10 +295,7 @@ android {
             }"""
             }
 
-            updateContent(jpFolder, downloadUrl_JP)
-            updateContent(usFolder, downloadUrl_US)
             updateContent(globalFolder, downloadUrl_GLOBAL)
-            updateContent(caFolder, downloadUrl_CA)
         }
     }
 
