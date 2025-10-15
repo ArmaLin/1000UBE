@@ -174,7 +174,9 @@
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="1422dp"
                 android:tag="0"
-                android:text="@string/Custom"
+                android:text="@{modeEnum.isUbeType ? @string/Custom : @string/HIIT}"
+                app:condition="@{modeEnum.isUbeType}"
+                app:conditionalDrawableBottom="@{@drawable/diagram_plateau_default}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
@@ -183,7 +185,7 @@
                 android:id="@+id/btn_Calories"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginTop="224dp"
-                android:text="@string/Calories"
+                android:text="@{modeEnum.isUbeType ? @string/Calories : @string/Custom}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintButtonSize,VisualLintBounds" />
@@ -193,7 +195,7 @@
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginStart="474dp"
                 android:layout_marginTop="224dp"
-                android:text="@string/heart_rate"
+                android:text="@{modeEnum.isUbeType ? @string/heart_rate : @string/Calories}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="VisualLintBounds,VisualLintButtonSize" />

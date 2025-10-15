@@ -236,4 +236,15 @@ public class BindingAdapterComponent {
         view.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
     }
 
+
+
+
+    @BindingAdapter(value = {"conditionalDrawableBottom", "condition"}, requireAll = true)
+    public static void setConditionalDrawableBottom(MaterialButton button, Drawable drawableIfFalse, boolean condition) {
+        Drawable bottomDrawable = condition ? null : drawableIfFalse;
+
+        Drawable[] drawables = button.getCompoundDrawables();
+        button.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], bottomDrawable);
+    }
+
 }

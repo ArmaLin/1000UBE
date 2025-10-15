@@ -3043,7 +3043,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, CHILD_LOCK_TIME);
 //        if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, 1 * 1000 * 10);
-        Timber.tag("RPM_CHECK").d("startHandler: 開始childlock 計時 ");
+      //  Timber.tag("RPM_CHECK").d("startHandler: 開始childlock 計時 ");
     }
 
 

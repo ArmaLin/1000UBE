@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.MainActivity.userProfileViewModel;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.EVENT_SET_UNIT;
@@ -296,7 +297,6 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                 programInfoList.add(ProgramsEnum.RUN_5K);
                 programInfoList.add(ProgramsEnum.RUN_10K);
                 programInfoList.add(ProgramsEnum.HEART_RATE);
-                //TODO:
                 programInfoList.add(ProgramsEnum.INTERVAL);
                 programInfoList.add(ProgramsEnum.CUSTOM);
             } else {
@@ -312,13 +312,26 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                 programInfoList.add(ProgramsEnum.CTT_PERFORMANCE);
             }
         } else {
-            programInfoList.add(ProgramsEnum.MANUAL);
-            programInfoList.add(ProgramsEnum.HILL);
-            programInfoList.add(ProgramsEnum.PLATEAU);
-            programInfoList.add(ProgramsEnum.CUSTOM);
-            programInfoList.add(ProgramsEnum.CALORIES);
-            programInfoList.add(ProgramsEnum.HEART_RATE);
-            programInfoList.add(ProgramsEnum.WATTS);
+            if (MODE.isUbeType()) {
+                programInfoList.add(ProgramsEnum.MANUAL);
+                programInfoList.add(ProgramsEnum.HILL);
+                programInfoList.add(ProgramsEnum.PLATEAU);
+                programInfoList.add(ProgramsEnum.CUSTOM);
+                programInfoList.add(ProgramsEnum.CALORIES);
+                programInfoList.add(ProgramsEnum.HEART_RATE);
+                programInfoList.add(ProgramsEnum.WATTS);
+            } else {
+                programInfoList.add(ProgramsEnum.MANUAL);
+                programInfoList.add(ProgramsEnum.HILL);
+                programInfoList.add(ProgramsEnum.PLATEAU);
+                programInfoList.add(ProgramsEnum.HIIT);
+                programInfoList.add(ProgramsEnum.CUSTOM);
+                programInfoList.add(ProgramsEnum.CALORIES);
+                programInfoList.add(ProgramsEnum.STEPS);
+                programInfoList.add(ProgramsEnum.HEART_RATE);
+                programInfoList.add(ProgramsEnum.WATTS);
+                programInfoList.add(ProgramsEnum.WINGATE_TEST);
+            }
         }
         return programInfoList;
     }
