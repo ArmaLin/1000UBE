@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.MainActivity.isSummary;
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.MainActivity.lastMedia;
@@ -85,6 +86,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
     private WorkoutViewModel workoutViewModel;
     private WorkoutSummaryWindow workoutSummaryWindow;
     private EgymDataViewModel egymDataViewModel;
+    private UartVM uartVM;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,7 +94,8 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 
         appStatusViewModel = new ViewModelProvider(requireActivity()).get(AppStatusViewModel.class);
         egymDataViewModel = new ViewModelProvider(requireActivity()).get(EgymDataViewModel.class);
-
+        uartVM = new ViewModelProvider(requireActivity()).get(UartVM.class);
+        getBinding().setUartVM(uartVM);
         getBinding().setAppStatusViewModel(appStatusViewModel);
 
         //Fatal Exception: java.lang.IllegalStateException: Fragment already added: DashboardMainMediaFragment
@@ -138,7 +141,11 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
         workoutViewModel.garminRespirationRate.set(50);
         workoutViewModel.garminBodyBatteryLevel.set(50);
         workoutViewModel.isWorkoutReadyStart.set(true);
+      //  uartVM.isStartWorkoutReady.set(true);
 
+
+        Log.d("GEM3", "isUbeType: " + MODE.isUbeType());
+        Log.d("GEM3", "isStepperType: " + MODE.isStepperType());
         iExc(() -> {
             if (parent.updateRestartWindow != null) {
                 parent.updateRestartWindow.dismiss();

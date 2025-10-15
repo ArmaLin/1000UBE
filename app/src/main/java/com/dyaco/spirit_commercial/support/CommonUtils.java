@@ -2290,15 +2290,14 @@ public class CommonUtils {
                     break;
                 case STATS_CADENCE:
 //                    view1Text = String.valueOf(workoutViewModel.currentRpm.get());
-                    view2Text = context.getString(R.string.Cadence);
-                    if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
+                    if (MODE.isStepperType()) {
                         view1Text = String.valueOf(workoutViewModel.currentRpm.get() * 2);
-                        view3Text = context.getString(R.string.SPM);
+                        view2Text = context.getString(R.string.Cadence_SPM);
                     } else {
                         view1Text = String.valueOf(workoutViewModel.currentRpm.get());
-                        view3Text = context.getString(R.string.RPM);
+                        view2Text = context.getString(R.string.Cadence_RPM);
                     }
-
+                   // view3Text 單位
                     view4Text = " / " + workoutViewModel.egymTargetIncline.get();
                     break;
 

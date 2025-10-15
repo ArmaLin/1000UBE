@@ -6,6 +6,11 @@
 
     <data>
 
+
+        <variable
+            name="modeEnum"
+            type="com.dyaco.spirit_commercial.product_flavor.ModeEnum" />
+
         <import type="android.view.View" />
 
         <import type="com.dyaco.spirit_commercial.R" />

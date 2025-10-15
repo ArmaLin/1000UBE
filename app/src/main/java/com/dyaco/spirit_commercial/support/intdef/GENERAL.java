@@ -75,6 +75,9 @@ public class GENERAL {
     public static final int STATS_RESISTANCE = 21;
     public static final int STATS_TOTAL_REVOLUTIONS = 22;
 
+    public static final int STATS_TOTAL_STEPS = 23;
+    public static final int STATS_REMAINING_STEPS = 24;
+
 
     //DIAGRAM
     public static final int BAR_STATUS_SEGMENT_PENDING = 0; //還沒跑到

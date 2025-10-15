@@ -125,8 +125,6 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             ((MainActivity) requireActivity()).startHandler();
         }
 
-        // TODO:
-       // workoutViewModel.isWorkoutReadyStart.set(true);
 
         LiveEventBus.get(LOG_IN_EVENT).observe(getViewLifecycleOwner(), s -> {
             ((MainActivity) requireActivity()).getBinding().bgE.setVisibility(View.GONE);

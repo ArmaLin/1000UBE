@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
@@ -91,6 +92,7 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
         comm = new CommonUtils();
         getBinding().setIsUs(isUs);
         getBinding().setIsGGG(isGGG);
+        getBinding().setModeEnum(MODE);
         getBinding().setIsE(workoutViewModel.selProgram == EGYM);
 
         isSettingShow = true;

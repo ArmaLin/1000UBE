@@ -13,6 +13,11 @@
 
 
         <variable
+            name="uartVM"
+            type="com.dyaco.spirit_commercial.UartVM" />
+
+
+        <variable
             name="AppStatusViewModel"
             type="com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel" />
 

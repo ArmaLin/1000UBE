@@ -45,7 +45,7 @@ public class UartVM extends AndroidViewModel {
     public final ObservableBoolean isEnterMaintenanceReady = new ObservableBoolean(false);
 
     // 進入RUNNING是否準備就緒: 是否可按[Quick Start]. [Start this Program]
-    public final ObservableBoolean isStartWorkoutReady = new ObservableBoolean(false);
+//    public final ObservableBoolean isStartWorkoutReady = new ObservableBoolean(false);
 
     // 於Paused頁面, 是否可按 [Resume]: 電跑需等待跑帶停止才可以再按Resume
     public final ObservableBoolean isResumeWorkoutReady = new ObservableBoolean(false);

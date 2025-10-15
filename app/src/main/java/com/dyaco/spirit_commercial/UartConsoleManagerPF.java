@@ -1707,7 +1707,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         uartVM.devStep.set(devStep);
 
         // 可按[Quick Start], [Start this Program]的時機
-        uartVM.isStartWorkoutReady.set(
+        woVM.isWorkoutReadyStart.set(
                 devStep == DS_ECB_IDLE_STANDBY ||
                         devStep == DS_EMS_IDLE_STANDBY);
 

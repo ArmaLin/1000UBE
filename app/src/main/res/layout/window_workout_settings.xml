@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="modeEnum"
+            type="com.dyaco.spirit_commercial.product_flavor.ModeEnum" />
         <import type="android.view.View" />
         <variable name="isE" type="Boolean" />
         <variable name="isUs" type="Boolean" />
@@ -1017,8 +1020,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_LEVEL : GENERAL.STATS_POWER}"
-                android:text="@{isE ? @string/Resistance : @string/Power}"
+                app:iTag="@{isE ? GENERAL.STATS_LEVEL : (modeEnum.isUbeType() ? GENERAL.STATS_ELAPSED_TIME : GENERAL.STATS_ELAPSED_TIME)}"
+                android:text="@{isE ? @string/Resistance : (modeEnum.isUbeType() ? @string/Total_Time : @string/Total_Time)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1036,8 +1039,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_CADENCE : GENERAL.STATS_ELAPSED_TIME}"
-                android:text="@{isE ? @string/Cadence : @string/Time}"
+                app:iTag="@{isE ? GENERAL.STATS_CADENCE : (modeEnum.isUbeType() ? GENERAL.STATS_REMAINING_TIME : GENERAL.STATS_REMAINING_TIME)}"
+                android:text="@{isE ? @string/Cadence : (modeEnum.isUbeType() ? @string/Remaining_Time : @string/Remaining_Time)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1113,8 +1116,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_INTERVAL_DISTANCE : GENERAL.STATS_REMAINING_TIME}"
-                android:text="@{isE ? @string/interval_distance : @string/Time_Left}"
+                app:iTag="@{isE ? GENERAL.STATS_INTERVAL_DISTANCE : (modeEnum.isUbeType() ? GENERAL.STATS_CADENCE : GENERAL.STATS_CADENCE)}"
+                android:text="@{isE ? @string/interval_distance : (modeEnum.isUbeType() ? @string/Cadence_RPM : @string/Cadence_SPM)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 

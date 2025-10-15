@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_media;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.getApp;
 
 import static com.dyaco.spirit_commercial.MainActivity.isSummary;
@@ -45,6 +46,8 @@ public class FloatingTopDashBoardWindow2 extends BaseWindow<WindowFloatingTopDas
         getBinding().setDeviceSetting(deviceSettingViewModel);
         getBinding().setUserProfileViewModel(userProfileViewModel);
         getBinding().setComm(new CommonUtils());
+
+        getBinding().setModeEnum(MODE);
 
         getBinding().setIsUs(isUs);
 

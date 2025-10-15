@@ -794,6 +794,9 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="calories_desc">Set target calories, adjust resistance manually.</string>
     <string name="UBE">UBE</string>
     <string name="Stepper">Stepper</string>
+    <string name="Remaining_Time">Remaining Time</string>
+    <string name="Cadence_RPM">Cadence(RPM)</string>
+    <string name="Cadence_SPM">Cadence(SPM)</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>

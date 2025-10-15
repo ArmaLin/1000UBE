@@ -674,4 +674,15 @@ public enum ModeEnum {
         return 0;
     }
 
+
+    public boolean isUbeType() {
+        return (modelCode == DEVICE_MODEL_UBE);
+
+    }
+
+    public boolean isStepperType() {
+        return (modelCode == DEVICE_MODEL_STEPPER);
+
+    }
+
 }

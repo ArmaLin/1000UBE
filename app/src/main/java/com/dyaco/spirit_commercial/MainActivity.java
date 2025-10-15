@@ -681,6 +681,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         App.UNIT_E = getApp().getDeviceSettingBean().getUnit_code();
 
+
+        getBinding().setModeEnum(MODE);
+
         egymDataViewModel = new ViewModelProvider(this).get(EgymDataViewModel.class);
 
         uartVM = new ViewModelProvider(this).get(UartVM.class);
