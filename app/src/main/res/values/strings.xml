@@ -795,6 +795,10 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="UBE">UBE</string>
     <string name="Stepper">Stepper</string>
     <string name="Remaining_Time">Remaining Time</string>
+    <string name="Remaining_Calories">Remaining Calories</string>
+    <string name="Remaining_Steps">Remaining Steps</string>
+    <string name="Total_Revolutions">Total Revolutions</string>
+    <string name="Total_Steps">Total Steps</string>
     <string name="Cadence_RPM">Cadence(RPM)</string>
     <string name="Cadence_SPM">Cadence(SPM)</string>
 

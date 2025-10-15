@@ -1058,8 +1058,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{GENERAL.STATS_SPEED}"
-                android:text="@string/Speed"
+                app:iTag="@{isE ? GENERAL.STATS_SPEED : (modeEnum.isUbeType() ? GENERAL.STATS_CALORIES : GENERAL.STATS_CALORIES)}"
+                android:text="@{isE ? @string/Speed : (modeEnum.isUbeType() ? @string/Calories : @string/Calories)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1077,8 +1077,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_ELAPSED_TIME : GENERAL.STATS_LEVEL}"
-                android:text="@{isE ? @string/Total_Time : @string/Level}"
+                app:iTag="@{isE ? GENERAL.STATS_ELAPSED_TIME : (modeEnum.isUbeType() ? GENERAL.STATS_REMAINING_CALORIES : GENERAL.STATS_REMAINING_CALORIES)}"
+                android:text="@{isE ? @string/Total_Time : (modeEnum.isUbeType() ? @string/Remaining_Calories : @string/Remaining_Calories)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1096,8 +1096,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_CURRENT_DISTANCE : GENERAL.STATS_AVG_POWER}"
-                android:text="@{isE ? @string/Total_Distance : @string/Avg_Power}"
+                app:iTag="@{isE ? GENERAL.STATS_CURRENT_DISTANCE : (modeEnum.isUbeType() ? GENERAL.STATS_RESISTANCE : GENERAL.STATS_RESISTANCE)}"
+                android:text="@{isE ? @string/Total_Distance : (modeEnum.isUbeType() ? @string/Resistance : @string/Resistance)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1139,8 +1139,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_INTERVAL : GENERAL.STATS_AVG_SPEED}"
-                android:text='@{isE ? String.format("%s #", @string/Interval) : @string/Avg_Speed}'
+                app:iTag="@{isE ? GENERAL.STATS_INTERVAL : (modeEnum.isUbeType() ? GENERAL.STATS_POWER : GENERAL.STATS_POWER)}"
+                android:text='@{isE ? String.format("%s #", @string/Interval): (modeEnum.isUbeType() ? @string/Power : @string/Power)}'
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1159,8 +1159,9 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_CALORIES : GENERAL.STATS_AVG_LEVEL}"
-                android:text="@{isE ? @string/Calories : @string/Avg_Level}"
+
+                app:iTag="@{isE ? GENERAL.STATS_CALORIES : (modeEnum.isUbeType() ? GENERAL.STATS_HEART_RATE : GENERAL.STATS_HEART_RATE)}"
+                android:text="@{isE ? @string/Calories : (modeEnum.isUbeType() ? @string/Heart_Rate : @string/Heart_Rate)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1178,8 +1179,9 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_POWER : GENERAL.STATS_CURRENT_DISTANCE}"
-                android:text="@{isE ? @string/Power : @string/Distance}"
+
+                app:iTag="@{isE ? GENERAL.STATS_POWER : (modeEnum.isUbeType() ? GENERAL.STATS_TOTAL_REVOLUTIONS : GENERAL.STATS_TOTAL_STEPS)}"
+                android:text="@{isE ? @string/Power : (modeEnum.isUbeType() ? @string/Total_Revolutions : @string/Total_Steps)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1198,8 +1200,9 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_HEART_RATE : GENERAL.STATS_CALORIES}"
-                android:text="@{isE ? @string/Heart_Rate : @string/Calories}"
+                app:iTag="@{isE ? GENERAL.STATS_HEART_RATE : (modeEnum.isUbeType() ? GENERAL.STATS_METS : GENERAL.STATS_REMAINING_STEPS)}"
+                android:text="@{isE ? @string/Heart_Rate : (modeEnum.isUbeType() ? @string/METs : @string/Remaining_Steps)}"
+
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1218,8 +1221,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
-                app:iTag="@{isE ? GENERAL.STATS_METS : GENERAL.STATS_HEART_RATE}"
-                android:text="@{isE ? @string/METs : @string/Heart_Rate}"
+                app:iTag="@{isE ? GENERAL.STATS_METS : (modeEnum.isUbeType() ? GENERAL.STATS_METS : GENERAL.STATS_METS)}"
+                android:text="@{isE ? @string/METs : (modeEnum.isUbeType() ? `` : @string/METs)}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
 
@@ -1240,7 +1243,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="0dp"
                 app:iTag="@{isE ? GENERAL.STATS_METS : GENERAL.STATS_METS}"
-                android:text="@{isE ? `` : @string/METs}"
+                android:text="@{isE ? `` : ``}"
                 android:textColor="@drawable/check_text_white"
                 android:textSize="32sp" />
         </com.dyaco.spirit_commercial.support.custom_view.RelativeRadioGroup>

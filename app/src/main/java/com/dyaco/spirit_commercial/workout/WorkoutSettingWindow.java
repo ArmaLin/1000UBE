@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static android.view.View.GONE;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
@@ -132,7 +133,7 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
         getBinding().statsEgym6.setVisibility(View.INVISIBLE);
 
 
-        getBinding().vBG.setVisibility(View.GONE);
+        getBinding().vBG.setVisibility(GONE);
         getBinding().rgSelectItemTreadmill.animate().translationY(getHeight()).setDuration(duration).start();
         getBinding().rgSelectItemBike.animate().translationY(getHeight()).setDuration(duration).start();
         getBinding().btnClose.animate().translationY(getHeight()).setListener(new AnimatorListenerAdapter() {
@@ -205,7 +206,7 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
             }
 
             getBinding().rgSelectItemTreadmill.setVisibility(View.VISIBLE);
-            getBinding().rgSelectItemBike.setVisibility(View.GONE);
+            getBinding().rgSelectItemBike.setVisibility(GONE);
 
             getBinding().rgSelectItemTreadmill.setOnCheckedChangeListener((group, checkedId) -> {
                 getBinding().statsNormal1.setVisibility(View.INVISIBLE);
@@ -265,7 +266,7 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
                 }
             }
 
-            getBinding().rgSelectItemTreadmill.setVisibility(View.GONE);
+            getBinding().rgSelectItemTreadmill.setVisibility(GONE);
             getBinding().rgSelectItemBike.setVisibility(View.VISIBLE);
 
             getBinding().rgSelectItemBike.setOnCheckedChangeListener((group, checkedId) -> {
@@ -393,6 +394,15 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
     }
 
     private void initView() {
+
+        if (MODE.isUbeType()) {
+            getBinding().rbHeartRateBike.setVisibility(GONE);
+            getBinding().rbMETsBike.setVisibility(GONE);
+        } else if (MODE.isStepperType()){
+            getBinding().rbMETsBike.setVisibility(GONE);
+        }
+
+
         getBinding().btnClose.setOnClickListener(v -> dismiss());
 
 
@@ -415,12 +425,12 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
             changeState(no);
 
 
-            getBinding().statsEgym1.setVisibility(View.GONE);
-            getBinding().statsEgym2.setVisibility(View.GONE);
-            getBinding().statsEgym3.setVisibility(View.GONE);
-            getBinding().statsEgym4.setVisibility(View.GONE);
-            getBinding().statsEgym5.setVisibility(View.GONE);
-            getBinding().statsEgym6.setVisibility(View.GONE);
+            getBinding().statsEgym1.setVisibility(GONE);
+            getBinding().statsEgym2.setVisibility(GONE);
+            getBinding().statsEgym3.setVisibility(GONE);
+            getBinding().statsEgym4.setVisibility(GONE);
+            getBinding().statsEgym5.setVisibility(GONE);
+            getBinding().statsEgym6.setVisibility(GONE);
 
 
         } else {
@@ -452,15 +462,15 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
             changeStateEgym(no);
 
 
-            getBinding().statsNormal1.setVisibility(View.GONE);
-            getBinding().statsNormal2.setVisibility(View.GONE);
-            getBinding().statsNormal3.setVisibility(View.GONE);
+            getBinding().statsNormal1.setVisibility(GONE);
+            getBinding().statsNormal2.setVisibility(GONE);
+            getBinding().statsNormal3.setVisibility(GONE);
 
 
 
             if (isUs && !isGGG) {
-                getBinding().statsEgym3.setVisibility(View.GONE);
-                getBinding().statsEgym6.setVisibility(View.GONE);
+                getBinding().statsEgym3.setVisibility(GONE);
+                getBinding().statsEgym6.setVisibility(GONE);
             }
 
             if (isTreadmill) {

@@ -46,8 +46,13 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_LEVEL;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_METS;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_PACE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_POWER;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_REMAINING_CALORIES;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_REMAINING_STEPS;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_REMAINING_TIME;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_RESISTANCE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_SPEED;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_TOTAL_REVOLUTIONS;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_TOTAL_STEPS;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_IU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_MU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MIN_SPD_IU;
@@ -2054,7 +2059,7 @@ public class CommonUtils {
 
                 case STATS_CADENCE:
                     if (!isTarget) {
-                        if (MODE == ModeEnum.CE1000ENT || MODE == ModeEnum.STEPPER) {
+                        if (MODE.isStepperType()) {
                             // TODO: PF  SPM
                             value = String.valueOf((workoutViewModel.currentRpm.get() * 2));
                         } else {
@@ -2065,6 +2070,28 @@ public class CommonUtils {
                         value = " / " + workoutViewModel.egymTargetIncline.get();
                     }
                     break;
+                // TODO: PF
+                case STATS_RESISTANCE:
+                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    break;
+
+                case STATS_REMAINING_CALORIES:
+                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    break;
+
+                case STATS_TOTAL_REVOLUTIONS:
+                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    break;
+
+                case STATS_TOTAL_STEPS:
+                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    break;
+
+                case STATS_REMAINING_STEPS:
+                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    break;
+
+
                 default:
                     value = "";
             }
@@ -2235,7 +2262,7 @@ public class CommonUtils {
                     break;
                 case STATS_REMAINING_TIME: //time left
                     view1Text = formatSecToM(workoutViewModel.remainingTimeShow.get());
-                    view2Text = context.getString(R.string.Time_Left);
+                    view2Text = context.getString(R.string.Remaining_Time);
                     view3Text = "";
                     gravity = Gravity.CENTER_VERTICAL;
                     width = 301;
@@ -2299,6 +2326,36 @@ public class CommonUtils {
                     }
                    // view3Text 單位
                     view4Text = " / " + workoutViewModel.egymTargetIncline.get();
+                    break;
+                // TODO: PF
+                case STATS_RESISTANCE:
+                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view2Text = context.getString(R.string.Resistance);
+                    view3Text = "";
+                    break;
+
+                case STATS_REMAINING_CALORIES:
+                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view2Text = context.getString(R.string.Remaining_Calories);
+                    view3Text = "";
+                    break;
+
+                case STATS_TOTAL_REVOLUTIONS:
+                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view2Text = context.getString(R.string.Total_Revolutions);
+                    view3Text = "";
+                    break;
+
+                case STATS_TOTAL_STEPS:
+                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view2Text = context.getString(R.string.Total_Steps);
+                    view3Text = "";
+                    break;
+
+                case STATS_REMAINING_STEPS:
+                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view2Text = context.getString(R.string.Remaining_Steps);
+                    view3Text = "";
                     break;
 
             }
