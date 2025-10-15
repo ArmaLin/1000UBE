@@ -123,6 +123,8 @@ public class UpdateRestartWindow extends BasePopupWindow<WindowUpdateRestartBind
 
         DeviceSettingBean d = getApp().getDeviceSettingBean();
         if (d.getTmpApkPath() != null && !"".equals(d.getTmpApkPath())) {
+
+            Log.d(DownloadManagerCustom.TAG, "MD5" + new GetApkSign().getApkMd5(d.getTmpApkPath()));
             if (APK_MD5.equalsIgnoreCase(new GetApkSign().getApkMd5(d.getTmpApkPath()))) {
 
                 //更新時間

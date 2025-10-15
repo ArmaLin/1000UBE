@@ -60,6 +60,7 @@ public class DownloadManagerCustom {
         String tempApkPath = getApp().getDeviceSettingBean().getTmpApkPath();
         boolean checkApkPath = apkPath.equals(tempApkPath);
         boolean checkMd5 = updateBean.getMD5().equalsIgnoreCase(new GetApkSign().getApkMd5(tempApkPath));
+        Log.d(TAG, "MD5" + new GetApkSign().getApkMd5(tempApkPath));
         if (isExist && checkApkPath && checkMd5) {
             Log.d(TAG, "APK檔案已存在，且Console暫存的檔案路徑 與 實際要存的路徑相同(apkPath == TmpApkPath)，且APK無毀損 >> 不下載: ");
 

@@ -97,7 +97,7 @@ android {
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
             buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.14:8080/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
             buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
 
@@ -111,6 +111,9 @@ android {
 
             //production
             buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
+
+
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
             buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
 
@@ -149,7 +152,7 @@ android {
     def releaseDateTime = getFormattedDate('MM/dd/yyyy HH:mm:ss')
     def Force_Updates = "NO"
     def Territory = "International"
-    def MD5 = "cda88afbd2352bd04f6ae97cb5f00225"
+    def MD5 = "0eba50a45c15b35d977d04d84379b355"
     def Modifications = "[\"1. Description A\", \"2. Description B\", \"3. Description C\"]"
     def path
     def url_GLOBAL

@@ -12,6 +12,7 @@ import com.dyaco.spirit_commercial.model.webapi.CustomDns;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.ProcessUtils;
+import com.dyaco.spirit_commercial.support.RootTools;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
 import com.dyaco.spirit_commercial.support.room.spirit.spirit_entity.UserProfileEntity;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingBean;
@@ -28,7 +29,7 @@ import okhttp3.Request;
 public class App extends Application {
     public static boolean isFirmwareUpdating = false;
     public static String IMAGE_KEY = "IMAGE_KEY";
-    public static String APK_MD5 = "cda88afbd2352bd04f6ae97cb5f00225";
+    public static String APK_MD5 = "0eba50a45c15b35d977d04d84379b355";
     public static boolean isShowMediaMenuOnStop = true; //onStop時，是否要顯示MediaMenu
     public static boolean SETTING_SHOW = false;
     public static ModeEnum MODE;
@@ -86,7 +87,7 @@ public class App extends Application {
         DebugInitializer.init(this);
 
         LiveEventBus.config().enableLogger(false);
-
+        RootTools.setDefaultHomeLauncher(getPackageName(), MainActivity.class);
         // LiveEventBus.config().lifecycleObserverAlwaysActive(true);
 
     }

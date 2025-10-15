@@ -106,8 +106,7 @@ public class UpdateAppWindow extends BasePopupWindow<WindowUpdateAppBinding> {
                     e.printStackTrace();
                 }
 
-                //   Log.i("UPDATE@@@", "onFinish: urlMd5: " + md5 + ", fileMd5:" + new GetApkSign().getApkMd5(localPath));
-                Log.d("更新", "下載完成" + updateBean.getMD5() + "," + new GetApkSign().getApkMd5(localPath));
+
                 if (updateBean.getMD5().equalsIgnoreCase(new GetApkSign().getApkMd5(localPath))) {
                     Log.d("更新", "APK驗證成功，安裝APK: ");
 
