@@ -752,7 +752,7 @@
             android:id="@+id/rgSelectItemTreadmill"
             android:layout_width="match_parent"
             android:layout_height="408dp"
-            tools:visibility="gone"
+            android:visibility="gone"
             android:background="@drawable/panel_bg_top_1c242a"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

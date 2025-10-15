@@ -236,6 +236,9 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
             });
         } else {
 
+            getBinding().rgSelectItemTreadmill.setVisibility(GONE);
+            getBinding().rgSelectItemBike.setVisibility(View.VISIBLE);
+
             //BIKE
             for (int i = 0; i < getBinding().rgSelectItemBike.getChildCount(); i++) {
                 View o = getBinding().rgSelectItemBike.getChildAt(i);
@@ -265,9 +268,6 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
                     }
                 }
             }
-
-            getBinding().rgSelectItemTreadmill.setVisibility(GONE);
-            getBinding().rgSelectItemBike.setVisibility(View.VISIBLE);
 
             getBinding().rgSelectItemBike.setOnCheckedChangeListener((group, checkedId) -> {
                 getBinding().statsNormal1.setVisibility(View.INVISIBLE);
