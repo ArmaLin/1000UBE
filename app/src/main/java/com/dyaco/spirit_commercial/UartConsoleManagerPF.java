@@ -181,7 +181,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         int modelCode = dsVM.modelCode.get();
 
-        Timber.d("MachineCode= %s", modelCode);
+     //   Timber.d("MachineCode= %s", modelCode);
 
         if (!uartVM.isUartConnected.get()) {
 
@@ -358,7 +358,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 setDevStep(UartConst.DS_A5_RUNNING_RPM_RSP);
                 setDevTargetRpm(workload);
 
-                Timber.d("setDevWorkload: setTargetRpm, workload = %s", workload);
+                Timber.d("setDevWorkload:UpdateLevel setTargetRpm, workload = %s", workload);
 
                 break;
 
@@ -370,7 +370,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                         UartConst.DS_80_RUNNING_RES_RSP :   // ube
                         UartConst.DS_80_RUNNING_PWM_RSP);   // stepper
                 setPwmViaLevel(workload);
-                Timber.d("setDevWorkload: setDevPwmLevel, getValueAD = %s", uartVM.at_valueAd.get());
+                Timber.d("🔥🔥🔥 setDevWorkload: setDevPwmLevel, getValueAD = %s", uartVM.at_valuePwm.get());
                 break;
 
             case UartConst.CT_POWER:
@@ -448,7 +448,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 (devStep == UartConst.DS_80_RUNNING_RES_RSP) ||
                 (devStep == UartConst.DS_80_MOTOR_TEST_STANDBY) ||
                 (devStep == UartConst.DS_80_MOTOR_TEST_RES_RSP)) {
-            resAd = uartVM.at_valueAd.get();
+            resAd = uartVM.at_valuePwm.get();
         }
 
         // 限定pwm level D/A值在範圍內 0~1023
@@ -459,7 +459,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // ACTION_MODE： NORMAL作動, STOP不作動
         // 後面下達的AD值, 需配合ACTION_MODE為NORMAL, 否則即使異動, 也不會作動
 
-        Timber.d("ECB setControl, resAd = %s", resAd);
+     //   Timber.d("ECB setControl, resAd = %s", resAd);
         consoleUart.setControl(0,
                 (devStep == UartConst.DS_ECB_ERR_OCCURRED) ?
                         DeviceDyacoMedical.ACTION_MODE.STOP :   // 拉線器發生錯誤時, 則直接設定為停止
@@ -497,7 +497,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         int pwmLevelDA = MODE.getPwmViaLevel(level);
         uartVM.at_valuePwm.set(pwmLevelDA);
 
-        Timber.d("依LEVEL constant, 取得D/A Level: level = " + level + ", m_pwmLevelDA = " + pwmLevelDA);
+   //     Timber.d("依LEVEL constant, 取得D/A Level: level = " + level + ", m_pwmLevelDA = " + pwmLevelDA);
 
     }
 
@@ -536,14 +536,14 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     }
 
     public void setEcbRunning() {
-        Timber.d("設定恢復RPM COUNTER計數 (DS_82_RESUME_RPM_COUNTER_RSP)");
+        Timber.d("⭕️setEcbRunning 設定恢復RPM COUNTER計數 (DS_82_RESUME_RPM_COUNTER_RSP)");
         setDevStep(UartConst.DS_82_RESUME_RPM_COUNTER_RSP);
         setDevRpmCounterModeEcb(DeviceDyacoMedical.RPM_COUNTER_MODE.RESUME);
     }
 
     public void setEcbPause() {
 
-        Timber.d("設定暫停RPM COUNTER計數 (DS_82_PAUSE_RPM_COUNTER_RSP)");
+        Timber.d("⭕️setEcbPause 設定暫停RPM COUNTER計數 (DS_82_PAUSE_RPM_COUNTER_RSP)");
         setDevStep(UartConst.DS_82_PAUSE_RPM_COUNTER_RSP);
         setDevRpmCounterModeEcb(DeviceDyacoMedical.RPM_COUNTER_MODE.PAUSE);
     }
@@ -552,7 +552,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         setPwmViaLevel(WORKLOAD_MIN);
 
         // 清除RPM counter
-        Timber.d("設定清除RPM COUNTER(DS_82_CLEAR_RPM_COUNTER_RSP)");
+        Timber.d("⭕️setEcbIdle 設定清除RPM COUNTER(DS_82_CLEAR_RPM_COUNTER_RSP)");
         setDevStep(UartConst.DS_82_CLEAR_RPM_COUNTER_RSP);
         setDevRpmCounterModeEcb(DeviceDyacoMedical.RPM_COUNTER_MODE.CLEAR);
     }
@@ -657,6 +657,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     }
 
     public void setDevPauseWorkout() {
+     //   Timber.d("執行setDevPauseWorkout: " + MODE);
         // 這裡裡依機型做設定
         if (MODE == UBE) {
             // for UBE
@@ -761,12 +762,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onDataSend(String dataSendInHex) {
-        Timber.d(">>>%s", dataSendInHex);
+     //   Timber.d(">>>%s", dataSendInHex);
     }
 
     @Override
     public void onDataReceive(String dataReceiveInHex) {
-        Timber.d("🔥 <<<%s", dataReceiveInHex);
+    //    Timber.d("🔥 <<<%s", dataReceiveInHex);
         uartVM.lwrTimeoutCounter.set(0);
         uartVM.isLcbNotResponding.set(false);
     }
@@ -1057,21 +1058,21 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 //            wpHr = 0;
 //        }
 
-        Timber.d(
-                "\n[0x80] model = " + model +
-                        "\n, mcuErrors = " + mcuErrors.toString() +
-                        "\n, hpHr = " + hpHr +
-                        "\n, wpHr = " + wpHr +
-                        "\n, safeKey  = " + safeKey.toString() +
-                        "\n, speed  = " + speed +
-                        "\n, stepCount  = " + stepCount +
-                        "\n, direction  = " + direction.toString() +
-                        "\n, rpm_ECB  = " + rpm_ECB +
-                        "\n, resStatus  = " + resStatus +
-                        "\n, resCode (resAd)  = " + resCode +
-                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
-                        "\n, rpm2_unused = " + rpm2_unused +
-                        "\n, pwmLevel = " + pwmLevel);
+//        Timber.d(
+//                "\n[0x80] model = " + model +
+//                        "\n, mcuErrors = " + mcuErrors.toString() +
+//                        "\n, hpHr = " + hpHr +
+//                        "\n, wpHr = " + wpHr +
+//                        "\n, safeKey  = " + safeKey.toString() +
+//                        "\n, speed  = " + speed +
+//                        "\n, stepCount  = " + stepCount +
+//                        "\n, direction  = " + direction.toString() +
+//                        "\n, rpm_ECB  = " + rpm_ECB +
+//                        "\n, resStatus  = " + resStatus +
+//                        "\n, resCode (resAd)  = " + resCode +
+//                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
+//                        "\n, rpm2_unused = " + rpm2_unused +
+//                        "\n, pwmLevel = " + pwmLevel);
 
         woVM.setHpHr(hpHr);
         woVM.setWpHr(wpHr);
@@ -1195,7 +1196,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         //  檢查下達的ECB指令是否已回傳, 否則重送指令
 //        Timber.d("checkEcbSteps, dev_step = " + uartVM.getStepString());
         @UartConst.DeviceStep int devStep = getDevStep();
-        int valueAD = uartVM.at_valueAd.get();
+        int valueAD = uartVM.at_valuePwm.get();
         switch (devStep) {
 
             case UartConst.DS_80_MOTOR_TEST_RES_RSP:
@@ -1746,9 +1747,13 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 devStep == DS_ECB_IDLE_STANDBY ||
                         devStep == DS_EMS_IDLE_STANDBY);
 
+     //   Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
+
+        //workout 可以開始下指令
         uartVM.isEnterRunningReady.set(
                 devStep == UartConst.DS_ECB_RUNNING ||
                         devStep == UartConst.DS_EMS_RUNNING_STANDBY);
+
 
         uartVM.isResumeWorkoutReady.set(
                 devStep == DS_A0_PAUSE_STANDBY ||

@@ -312,19 +312,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         ((MainActivity) requireActivity()).rawDataListDTOList.clear();
 
 
-        //中間頁籤
-        //        <!--        US 1296 * 504
-//        android:layout_marginStart="312dp"
-//        android:layout_marginTop="200dp"
-//        android:layout_marginEnd="312dp"
-//        android:layout_marginBottom="200dp"-->
-//
-//<!--        global   1398 * 856          -->
-//<!--        android:layout_marginStart="261dp"-->
-//<!--        android:layout_marginTop="24dp"-->
-//<!--        android:layout_marginEnd="261dp"-->
-//<!--        android:layout_marginBottom="24dp"-->
-//        workoutFragmentContainerView xml中預設的 margin 要拿掉
+        parent.getUartConsoleManager().setDevStartWorkout();
+
+
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) getBinding().workoutFragmentContainerView.getLayoutParams();
         //  params.setMargins(isUs ? 312 : 261, isUs ? 160 : 24, isUs ? 312 : 261, isUs ? 160 : 24);
         params.setMargins(isUs && !isGGG ? 312 : 261, isUs && !isGGG ? 160 : 24, isUs && !isGGG ? 312 : 261, isUs && !isGGG ? 160 : 24);
@@ -1470,7 +1460,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
                     Log.d("FITNESS_TEST_PROGRAM", "11111setPwmLevel_POWER: " + w.currentLevel.get());
                 } else {
-                    Log.d("CCXXVVV", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
+               //     Log.d("UartConsoleManagerPF", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
                     u.setDevWorkload(w.currentLevel.get());
                 }
                 //    u.setDevWorkload(w.currentLevel.get(), resistance);
@@ -1838,7 +1828,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_RUNNING) {
                 if ("COOL_DOWN".equals(s)) {
 
-                    u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);
+                    parent.getUartConsoleManager().setDevStartWorkout();
+
+                    u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);//電跑
 
                     initCoolDown();
                 } else {
@@ -1872,7 +1864,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
 
                     } else {
-
+                        parent.getUartConsoleManager().setDevStartWorkout();
                         resumeManual();
                         //RESUME 還原暫停前的狀態
                         initTimer(true);
@@ -2059,7 +2051,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         }
 
         //從DS_PAUSE_STANDBY 回到 RUNNING ，會自動恢復之前的速度，
-        u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING);
+        u.setDevMainMode(DeviceDyacoMedical.MAIN_MODE.RUNNING); //電跑的
     }
 
 

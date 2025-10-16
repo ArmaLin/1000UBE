@@ -331,6 +331,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 //        if (MainActivity.limitLoutOut) {
 //            getBinding().btnCloseAndLogout.callOnClick();
 //        }
+
+        m.getUartConsoleManager().setDevEndWorkout(true);
     }
 
     private void initSummaryEgymBottom() {

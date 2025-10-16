@@ -648,7 +648,7 @@ public enum ModeEnum {
             level = Math.min(level, levelAD.length);
             return levelAD[level - 1];
         } catch (Exception e) {
-            Timber.d( "exception = " + e.getMessage());
+            Timber.d( "exception = %s", e.getMessage());
             return 0;
         }
     }

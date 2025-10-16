@@ -98,6 +98,7 @@ public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPau
             pauseTimer();
         });
 
+
     }
 
     private void initExControl() {
@@ -414,6 +415,9 @@ public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPau
 
             //若已被設定為STATUS_SUMMARY，跳過Pause 直接到Summary
 
+
+            parent.getUartConsoleManager().setDevPauseWorkout();
+
             if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_SUMMARY) {
                 getBinding().btnFinish.callOnClick();
 //            } else {
@@ -422,6 +426,8 @@ public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPau
 
             isCompleteResume = false;
             isResuming = false;
+
+
         }
     }
 

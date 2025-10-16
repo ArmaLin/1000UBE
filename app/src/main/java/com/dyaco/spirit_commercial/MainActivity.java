@@ -806,6 +806,13 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
     }
 
+    public UartConsoleManagerPF getUartConsoleManager() {
+        if (uartConsole == null) {
+            initUartConsole();
+        }
+        return uartConsole;
+    }
+
 
     public DeviceTvTuner deviceTvTuner;
 

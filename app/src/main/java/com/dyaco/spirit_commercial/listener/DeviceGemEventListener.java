@@ -45,6 +45,8 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
+
 /**
  * GemKit Gym3
  * <p>
@@ -118,6 +120,8 @@ public class DeviceGemEventListener implements DeviceGEM.GEMEventListener {
     public void onBluetoothConfigurationMessageGetDeviceAddress(int i, DeviceGEM.ADDRESS_TYPE address_type, String mac) {
         //  mac = new StringBuilder(mac).reverse().toString();
 
+        Timber.tag("GEM3").d(" ⭐MAC:%s", mac);
+
      //   Log.d("AAASSDDDDD", "⭐️MAC: " + mac);
         DeviceSettingBean deviceSettingBean = getApp().getDeviceSettingBean();
         if (!mac.equals(deviceSettingBean.getMachine_mac())) {//有新MAC，就替換
@@ -128,9 +132,9 @@ public class DeviceGemEventListener implements DeviceGEM.GEMEventListener {
             //CD:E9:A1:17:3D:D2 > CT1000ENT-3DD2 後4Bytes
             mac = mac.replace(":", "");
             deviceSettingBean.setBle_device_name(deviceSettingBean.getModel_name() + "-" + mac.substring(mac.length() - 4));
-            Log.d("GEM3", "ftms名稱 尚未被手動修改: ");
+            Timber.tag("GEM3").d("ftms名稱 尚未被手動修改: ");
         } else {
-            Log.d("GEM3", "ftms名稱 已被手動修改: ");
+            Timber.tag("GEM3").d("ftms名稱 已被手動修改: ");
         }
         //  Log.d("GEM3", "ftms名稱: " + deviceSettingBean.getBle_device_name());
 

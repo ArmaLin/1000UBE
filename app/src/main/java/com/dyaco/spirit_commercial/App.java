@@ -7,7 +7,6 @@ import android.database.CursorWindow;
 
 import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceGEM;
-import com.corestar.libs.uart.UartConnection;
 import com.dyaco.spirit_commercial.model.webapi.CustomDns;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
@@ -101,18 +100,8 @@ public class App extends Application {
 
     public static DeviceDyacoMedical getDeviceSpiritC() {
         if (deviceSpiritC == null) {
-            //      deviceSpiritC = new DeviceSpiritC(INSTANCE, UartConnection.PORT.PORT_0);
-            //   deviceSpiritC = new DeviceSpiritC(INSTANCE);
-            //   deviceSpiritC = new DeviceSpiritC(INSTANCE, UartConnection.PORT.PORT_1);//伍豐 五峰 五豐
 
-            UartConnection.PORT port ;
-//            if (TEST_MODE) {
-            //          port = UartConnection.PORT.PORT_2;
-//            } else {
-            port = UartConnection.PORT.PORT_1;
-            //      }
-
-            deviceSpiritC = new DeviceDyacoMedical(INSTANCE);
+            deviceSpiritC = UartLocator.getDeviceDyacoMedical(getApp());
         }
 
         return deviceSpiritC;
