@@ -33,7 +33,7 @@ import timber.log.Timber;
 /**
  * {@link MainActivity#initUartConsole} →
  * {@link #UartConsoleManagerPF} →
- * {@link #initialize} →
+ * {@link #initialize} → 執行 [connect()]
  * {@link #onConnected} →
  * {@link #startUartFlowCommand} → 執行 [getDeviceInfo] , [startEcho]
  * <p>
@@ -147,7 +147,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         int modelCode = dsVM.modelCode.get();
 
-        Timber.d("MachineCode= " + modelCode);
+        Timber.d("MachineCode= %s", modelCode);
 
         if (!uartVM.isUartConnected.get()) {
 
@@ -324,7 +324,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 setDevStep(UartConst.DS_A5_RUNNING_RPM_RSP);
                 setDevTargetRpm(workload);
 
-                Timber.d("setDevWorkload: setTargetRpm, workload = " + workload);
+                Timber.d("setDevWorkload: setTargetRpm, workload = %s", workload);
 
                 break;
 
@@ -336,7 +336,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                         UartConst.DS_80_RUNNING_RES_RSP :   // ube
                         UartConst.DS_80_RUNNING_PWM_RSP);   // stepper
                 setPwmViaLevel(workload);
-                Timber.d("setDevWorkload: setDevPwmLevel, getValueAD = " + uartVM.at_valueAd.get());
+                Timber.d("setDevWorkload: setDevPwmLevel, getValueAD = %s", uartVM.at_valueAd.get());
                 break;
 
             case UartConst.CT_POWER:
@@ -345,7 +345,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 // (2) setDevWorkload(power);
                 setDevStep(UartConst.DS_80_RUNNING_PWM_RSP);
                 setPwmViaPower(workload);
-                Timber.d("setDevWorkload: setDevPwmLevel, getValuePWM = " + uartVM.at_valuePwm.get());
+                Timber.d("setDevWorkload: setDevPwmLevel, getValuePWM = %s", uartVM.at_valuePwm.get());
                 break;
 
             case UartConst.CT_NA:
@@ -367,12 +367,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         int pwmLevelDA = 0;
 
         // 僅在running期間(非pause), 且constant非ISO(speed)才送值, 其餘情況皆送0
-        Timber.d("setDevPwmLevel: devStep = " + devStep);
+        Timber.d("setDevPwmLevel: devStep = %s", devStep);
         if ((devStep == UartConst.DS_EMS_RUNNING_STANDBY) ||
                 (devStep == UartConst.DS_80_RUNNING_PWM_RSP)) {
             if (constantType != UartConst.CT_SPEED) {
                 pwmLevelDA = uartVM.at_valuePwm.get();
-                Timber.d("setDevPwmLevel: pwmLevelDA = " + pwmLevelDA);
+                Timber.d("setDevPwmLevel: pwmLevelDA = %s", pwmLevelDA);
             }
         }
         //  工程模式如果有Brake Test, 則需enable 此段
@@ -425,7 +425,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // ACTION_MODE： NORMAL作動, STOP不作動
         // 後面下達的AD值, 需配合ACTION_MODE為NORMAL, 否則即使異動, 也不會作動
 
-        Timber.d("ECB setControl, resAd = " + resAd);
+        Timber.d("ECB setControl, resAd = %s", resAd);
         consoleUart.setControl(0,
                 (devStep == UartConst.DS_ECB_ERR_OCCURRED) ?
                         DeviceDyacoMedical.ACTION_MODE.STOP :   // 拉線器發生錯誤時, 則直接設定為停止
@@ -566,7 +566,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // 東庚案無需執行此動作, 因sub板已原lwr已整合在一起
 
         if (!uartVM.isUartConnected.get()) return;
-        Timber.d("SCB Timer = " + subTimer);
+        Timber.d("SCB Timer = %s", subTimer);
         consoleUart.setSubTimer(subTimer, 5);
     }
 
@@ -580,7 +580,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         consoleUart.setUsbMode(usbMode);
         uartVM.usbMode.set(usbMode);
 
-        Timber.d("setUsbMode, usbMode = " + usbMode);
+        Timber.d("setUsbMode, usbMode = %s", usbMode);
     }
 
     public void setBuzzer() {
@@ -645,26 +645,26 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 //            getApp().getGem3Manager().ftmsNotifyWorkoutFinish();
 //        }
 
-        Timber.d("setDevWorkoutFinish: breakWorkout = " + stoppedByUser);
+        Timber.d("setDevWorkoutFinish: breakWorkout = %s", stoppedByUser);
 
         //  設定結束訓練
         if (!uartVM.isUartConnected.get()) return;
         int devStep = getDevStep();
 
-        Timber.d("devStep: " + devStep);
+        Timber.d("devStep: %s", devStep);
 
         // 這裡依機型處理
         if (MODE == UBE) {
             if (devStep >= UartConst.DS_82_RESUME_RPM_COUNTER_RSP && devStep <= UartConst.DS_80_RUNNING_RES_RSP) {
                 setEcbIdle();
             } else {
-                Timber.d("UBE: OUT of devStep = " + devStep);
+                Timber.d("UBE: OUT of devStep = %s", devStep);
             }
         } else {
             if (devStep >= UartConst.DS_A0_RUNNING_RSP && devStep <= DS_A0_PAUSE_STANDBY) {
                 setDevConsoleMode(DeviceDyacoMedical.CONSOLE_MODE.IDLE);
             } else {
-                Timber.d("Stepper: OUT of devStep = " + devStep);
+                Timber.d("Stepper: OUT of devStep = %s", devStep);
             }
         }
     }
@@ -750,31 +750,31 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onDataSend(String dataSendInHex) {
-        Timber.d(">>>" + dataSendInHex);
+        Timber.d(">>>%s", dataSendInHex);
     }
 
     @Override
     public void onDataReceive(String dataReceiveInHex) {
-        Timber.d("<<<" + dataReceiveInHex);
+        Timber.d("<<<%s", dataReceiveInHex);
         uartVM.lwrTimeoutCounter.set(0);
         uartVM.isLcbNotResponding.set(false);
     }
 
     @Override
     public void onErrorMessage(String errMsg) {
-        Timber.d("errorMsg = " + errMsg);
+        Timber.d("errorMsg = %s", errMsg);
     }
 
     @Override
     public void onCommandError(DeviceDyacoMedical.COMMAND cmd, DeviceDyacoMedical.COMMAND_ERROR cmdError) {
 
-        Timber.d("cmdError = " + cmdError);
+        Timber.d("cmdError = %s", cmdError);
     }
 
     @Override
     public void onKeyTrigger(DeviceDyacoMedical.KEY key) {
 
-        Timber.d("key = " + key.name());
+        Timber.d("key = %s", key.name());
         // 若長按後放掉, 會收到KEY_UNKNOWN 0xFF屬正常
         // 若長按後放掉, 會收到KEY_UNKNOWN 0xFF屬正常
 
@@ -806,7 +806,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         if (list == null) return;
 
         for (DeviceDyacoMedical.KEY key : list) {
-            Timber.d("multi-key = " + key.name());
+            Timber.d("multi-key = %s", key.name());
         }
 
         // 長按
@@ -852,7 +852,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onEupNotify(DeviceDyacoMedical.EUP eup) {
-        Timber.d("@@@@@@@@@@@ eup = " + eup);
+        Timber.d("@@@@@@@@@@@ eup = %s", eup);
     }
 
     @Override
@@ -932,7 +932,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         @UartConst.DeviceStep int devStep = getDevStep();
         int modelCode = dsVM.modelCode.get();
 
-        Timber.d("modelCode = " + modelCode);
+        Timber.d("modelCode = %s", modelCode);
 
         if (devStep == UartConst.DS_99_UPDATE_DEV_INFO_RSP) {
 
@@ -949,6 +949,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             if (model != DeviceDyacoMedical.MODEL.ECB) {
                 Timber.d("LWR MODEL不符, 僅彈出錯誤訊息");
                 if (model == DeviceDyacoMedical.MODEL.UNKNOWN) {
+                    Timber.tag(TAG).d("onDeviceInfo:  DeviceDyacoMedical.MODEL.UNKNOWN");
 //                    postUartError(GENERAL.UE_UNKNOWN_MACHINE_TYPE, "", GENERAL.LC_MT_UNKNOWN);
                 } else {
 //                    postUartError(GENERAL.UE_MACHINE_TYPE, "", GENERAL.LC_MT_MISMATCH);
@@ -985,6 +986,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             }
         }
 
+        Timber.d("onDeviceInfo: ");
         Timber.tag("GEM3").d("onDeviceInfo: ");
         // 確定取得device info之後, 再初始化GEM3
 
@@ -1000,7 +1002,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 DeviceDyacoMedical.MACHINE_TYPE.REHAB_UBE :
                 DeviceDyacoMedical.MACHINE_TYPE.RECUMBENT_STEPPER);
 
-        Timber.d("emsMachineType = " + devMachineType);
+        Timber.d("emsMachineType = %s", devMachineType);
     }
 
     private void setUartTimeoutControl() {
@@ -1185,7 +1187,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
             case UartConst.DS_80_MOTOR_TEST_RES_RSP:
                 if (Math.abs(resAd - valueAD) <= 10) {  // 設定誤差在10以內, 表示到達設定值
-                    Timber.d("設定Resistance AD符合(誤差值在10以內), m_resAd = " + resAd);
+                    Timber.d("設定Resistance AD符合(誤差值在10以內), m_resAd = %s", resAd);
                     setDevStep(UartConst.DS_80_MOTOR_TEST_STANDBY);
                 }
 //                else {
@@ -1197,7 +1199,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
             case UartConst.DS_80_RUNNING_RES_RSP:
                 if (Math.abs(resAd - valueAD) <= 10) {  // 設定誤差在10以內, 表示到達設定值
-                    Timber.d("設定Resistance AD符合(誤差值在10以內), m_resAd = " + resAd);
+                    Timber.d("設定Resistance AD符合(誤差值在10以內), m_resAd = %s", resAd);
                     setDevStep(UartConst.DS_ECB_RUNNING);
                     LiveEventBus.get(UartConst.EVT_RES_DONE).post(true);
                 }
@@ -1233,7 +1235,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     @SuppressLint("SwitchIntDef")
     private void checkEmsSteps(int pwmLevel) {
 
-        Timber.d("checkEmsSteps, m_devStep = " + uartVM.getStepString());
+        Timber.d("checkEmsSteps, m_devStep = %s", uartVM.getStepString());
 
         DeviceDyacoMedical.MACHINE_TYPE devMachineType = uartVM.a0_machineType.get();
         @UartConst.DeviceStep int devStep = getDevStep();
@@ -1244,7 +1246,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
             case UartConst.DS_80_RUNNING_PWM_RSP:
                 if (pwmLevel == valuePWM) {
-                    Timber.d("設定PWM LEVEL DA符合, valuePWM = " + valuePWM);
+                    Timber.d("設定PWM LEVEL DA符合, valuePWM = %s", valuePWM);
                     setDevStep(UartConst.DS_EMS_RUNNING_STANDBY);
                 } else {
                     Timber.d("設定PWM LEVEL DA不符, valuePWM = " + valuePWM + ", 重送指令");
@@ -1288,7 +1290,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
             case UartConst.DS_A8_BRAKE_MODE_RSP:
                 DeviceDyacoMedical.BRAKE_MODE brakeMode = uartVM.a8_brakeMode.get();
-                Timber.d("設定BRAKE MODE (DS_A8_BRAKE_MODE_RSP)未回應, 重送指令, brakeMode =" + brakeMode);
+                Timber.d("設定BRAKE MODE (DS_A8_BRAKE_MODE_RSP)未回應, 重送指令, brakeMode =%s", brakeMode);
                 consoleUart.setBrakeMode(brakeMode);
                 break;
 
@@ -1308,25 +1310,25 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onEchoMode(DeviceDyacoMedical.ECHO_MODE echoMode) {
-        Timber.d("echoMode = " + echoMode);
+        Timber.d("echoMode = %s", echoMode);
     }
 
     @Override
     public void onEEPRomWrite(DeviceDyacoMedical.MCU_SET mcuSet) {
-        Timber.d("mcuSet = " + mcuSet);
+        Timber.d("mcuSet = %s", mcuSet);
     }
 
     @Override
     public void onEEPRomRead(DeviceDyacoMedical.MCU_GET mcuGet, byte[] bytes, byte[] bytes1) {
-        Timber.d("mcuGet = " + mcuGet);
+        Timber.d("mcuGet = %s", mcuGet);
         if (bytes != null) {
             for (byte b : bytes) {
-                Timber.d("byte = " + b);
+                Timber.d("byte = %s", b);
             }
         }
         if (bytes1 != null) {
             for (byte b1 : bytes1) {
-                Timber.d("byte1 = " + b1);
+                Timber.d("byte1 = %s", b1);
             }
         }
     }
@@ -1347,18 +1349,18 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             Toast.makeText(getApp(), "USB_MODE_ERROR", Toast.LENGTH_LONG).show();
         }
 
-        Timber.d("mcuSet = " + mcuSet);
+        Timber.d("mcuSet = %s", mcuSet);
     }
 
     @Override
     public void onHeartRateMode(DeviceDyacoMedical.HEART_RATE_MODE heartRateMode) {
-        Timber.d("heartRateMode = " + heartRateMode);
+        Timber.d("heartRateMode = %s", heartRateMode);
     }
 
     @SuppressLint("SwitchIntDef")
     @Override
     public void onRpmCounterMode(DeviceDyacoMedical.RPM_COUNTER_MODE rpmCounterMode) {
-        Timber.d("rpmCounterMode = " + rpmCounterMode);  // clear / resume / pause
+        Timber.d("rpmCounterMode = %s", rpmCounterMode);  // clear / resume / pause
         @UartConst.DeviceStep int devStep = getDevStep();
 
         switch (devStep) {
@@ -1395,7 +1397,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         cmdWorkload = modeDps ? UnitConv.dpsToRpm(workload) : workload;
 
-        Timber.d("cmdWorkload = " + cmdWorkload);
+        Timber.d("cmdWorkload = %s", cmdWorkload);
 
         return cmdWorkload;
     }
@@ -1484,13 +1486,13 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     @Override
     public void onTargetRpm(int targetRpm) {
         int targetRpmValue = uartVM.a5_targetRpm.get();
-        Timber.d("[0xA5] m_targetRpm = " + targetRpmValue);
+        Timber.d("[0xA5] m_targetRpm = %s", targetRpmValue);
 
         @UartConst.DeviceStep int devStep = getDevStep();
 
         if ((devStep >= UartConst.DS_A0_RUNNING_RSP) && (devStep <= UartConst.DS_A0_PAUSE_RSP)) {
             if (targetRpm == targetRpmValue) {
-                Timber.d("target RPM符合, targetRpm = " + targetRpm);
+                Timber.d("target RPM符合, targetRpm = %s", targetRpm);
                 setDevStep(UartConst.DS_EMS_RUNNING_STANDBY);
             } else {
                 Timber.d("target RPM不符, targetRpm = " + targetRpm + ", 重送指令");
@@ -1654,7 +1656,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     public void onResetToBootloaderTreadmill(DeviceDyacoMedical.RESET_STATUS resetStatus) {
         // 這個需下達2個指令
         // 此回應不表示已經切換至LDROM, 需connect有回應, 才能表示切到LDROM
-        Timber.d("已接收LWR重置後停在LDROM, resetStatus = " + resetStatus);
+        Timber.d("已接收LWR重置後停在LDROM, resetStatus = %s", resetStatus);
     }
 
     @Override
