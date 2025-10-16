@@ -13,7 +13,7 @@ import static com.dyaco.spirit_commercial.dashboard_media.YouTubeWindow.isWebVie
 import static com.dyaco.spirit_commercial.garmin.GarminDevicesWindow.GARMIN_TAG;
 import static com.dyaco.spirit_commercial.garmin.GarminDevicesWindow.isGarminWindowOn;
 import static com.dyaco.spirit_commercial.login.LoginFragment.isGuestQuickStart;
-import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CU1000ENT;
+import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.getMode;
 import static com.dyaco.spirit_commercial.support.CommonUtils.changeSystemFontSize;
 import static com.dyaco.spirit_commercial.support.CommonUtils.clearAppData;
@@ -2367,7 +2367,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             MODE = getMode(dd.getModel_code());
         } else {
             //初始值
-            new InitProduct(getApplicationContext()).setProductDefault(CU1000ENT, TERRITORY_US);
+            new InitProduct(getApplicationContext()).setProductDefault(UBE, TERRITORY_US);
         }
 
 

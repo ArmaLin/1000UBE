@@ -35,13 +35,13 @@ import timber.log.Timber;
  * {@link #UartConsoleManagerPF} →
  * {@link #initialize} → 執行 [connect()]
  * {@link #onConnected} →
- * {@link #startUartFlowCommand} → 執行 [getDeviceInfo] , [startEcho]
+ * {@link #startUartFlowCommand} → 執行 [getDeviceInfo] & [startEcho]
  * <p>
  * {@link #getDeviceInfo} → {@link #onDeviceInfo} → {@link MainActivity#initGem3}
  * <p>
  * {@link #startEcho} → 每秒執行{@link #doEchoTask} →
- * #<UBE> {@link #setDevResLevel} →  [setControl} → {@link #onMcuControl}
- * #<Stepper> {@link #setDevPwmLevel} → [setMyCareEms] → {@link #onMcuControl}
+ * #<UBE> {@link #setDevResLevel} →  執行[setControl} → {@link #onMcuControl}
+ * #<Stepper> {@link #setDevPwmLevel} → 執行[setMyCareEms] → {@link #onMcuControl}
  * 每秒收到 {@link #onMcuControl}
  */
 public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListener {
@@ -57,7 +57,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     MainActivity m;
 
     public UartConsoleManagerPF(WorkoutViewModel woVM, MainActivity m, DeviceSettingViewModel dsVM, UartVM uartVM, AppStatusViewModel appStatusViewModel) {
-        Timber.d("UartConsoleManager constructor");
+        Timber.d("1️⃣ UartConsoleManagerPF 建構子生成");
         this.m = m;
         this.woVM = woVM;
         this.dsVM = dsVM;
@@ -70,12 +70,40 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     public void initialize() {
 
+        consoleUart.registerListener(this);
+
         // 已接實體機, 開始跑uart流程 (DEVICE_PHYSICAL, DEVICE_TEST皆要執行connect)
         setDevStep(UartConst.DS_CONNECT_RSP);
 
+        Timber.d("2️⃣ UartConsoleManagerPF 執行 connect() ");
         consoleUart.connect();
+    }
 
-        Timber.d("UartConsoleManager connected");
+
+    @Override
+    public void onConnected() {
+        uartVM.isUartConnected.set(true);
+
+        Timber.d("3️⃣ uart 連線成功");
+
+//        mainActivity.initGEM3();  移到99有回覆再做
+
+
+        CoTimer.after(500, () -> {
+            // 於uart連接時, 再判斷一次是否已做完初始化
+            if (!uartVM.isUartInitialized.get()) {
+                Timber.d("onConnected startUartFlowCommand");
+                startUartFlowCommand();
+            }
+        });
+    }
+
+    @Override
+    public void onConnectFail() {
+        uartVM.isUartConnected.set(false);
+        uartVM.isUartConnected.set(false);
+
+        Timber.d("uart connected fail");
     }
 
     public void startUartFlowCommand() {
@@ -98,6 +126,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             Timber.d("取得裝置資訊 (DS_99_DEV_INFO_RSP)");
             uartVM.unknownCounter.set(0);
             getDeviceInfo();
+//            CoTimer.every(1000, new CoTimer.EveryListener() {
+//                @Override
+//                public void onTick(long elapsedMillis) {
+//                    getDeviceInfo();
+//                }
+//            });
         }
         Timber.d("啟動定時發送 (EMS, ECB heartbeat)");
 
@@ -182,7 +216,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
 
         if (uartVM.lwrTimeoutCounter.get() > 5) { // 5
-            Timber.d("doEchoTask postUartError");
+            Timber.d("‼️‼️‼️‼️doEchoTask postUartError");
 
             // 下控未回應, 有可能是APP端已經CRASH, 直接設定為緊急錯誤
             uartVM.isLcbNotResponding.set(true);
@@ -556,6 +590,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         if (!uartVM.isUartConnected.get()) return;
 
         setDevStep(UartConst.DS_99_DEV_INFO_RSP);
+
+        Timber.d("4️⃣ 執行:getDeviceInfo: ");
         consoleUart.getDeviceInfo();
     }
 
@@ -704,31 +740,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     public void enterIdleMode() {
     }
 
-    @Override
-    public void onConnectFail() {
-        uartVM.isUartConnected.set(false);
-        uartVM.isUartConnected.set(false);
-
-        Timber.d("uart connected fail");
-    }
-
-    @Override
-    public void onConnected() {
-        uartVM.isUartConnected.set(true);
-
-        Timber.d("uart connected success");
-
-//        mainActivity.initGEM3();  移到99有回覆再做
-
-
-        CoTimer.after(500, () -> {
-            // 於uart連接時, 再判斷一次是否已做完初始化
-            if (!uartVM.isUartInitialized.get()) {
-                Timber.d("onConnected startUartFlowCommand");
-                startUartFlowCommand();
-            }
-        });
-    }
 
     private void setLwrMcuOnApRom() {
         Timber.d("setLwrMcuOnApRom");
@@ -755,7 +766,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onDataReceive(String dataReceiveInHex) {
-        Timber.d("<<<%s", dataReceiveInHex);
+        Timber.d("🔥 <<<%s", dataReceiveInHex);
         uartVM.lwrTimeoutCounter.set(0);
         uartVM.isLcbNotResponding.set(false);
     }
@@ -906,6 +917,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // hrmStatus = 0,
         // subMcuHwVer = 0,
         // lwrMcuHwVer = 17
+
+        Timber.d("⭐️ onDeviceInfo 成功 ");
 
         int fwVersionInt = 0;
         if (!subMcuFwVer.isEmpty()) {
