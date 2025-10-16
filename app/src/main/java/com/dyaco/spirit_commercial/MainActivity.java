@@ -797,15 +797,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     /**
      * UART
      */
-    private void initUartConsole() {
+    public void initUartConsole() {
 
 //        uartConsole = new SpiritCommercialUart(workoutViewModel, this, deviceSettingViewModel, appStatusViewModel);
         uartConsole = new UartConsoleManagerPF(workoutViewModel, this, deviceSettingViewModel,uartVM, appStatusViewModel);
         uartConsole.initialize();
-        Timber.tag("GEM3").d("initialize: ");
-
-
-
 
 
     }

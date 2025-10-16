@@ -30,7 +30,20 @@ import java.util.List;
 import kotlinx.coroutines.Job;
 import timber.log.Timber;
 
-
+/**
+ * {@link MainActivity#initUartConsole} →
+ * {@link #UartConsoleManagerPF} →
+ * {@link #initialize} →
+ * {@link #onConnected} →
+ * {@link #startUartFlowCommand} → 執行 [getDeviceInfo] , [startEcho]
+ * <p>
+ * {@link #getDeviceInfo} → {@link #onDeviceInfo} → {@link MainActivity#initGem3}
+ * <p>
+ * {@link #startEcho} → 每秒執行{@link #doEchoTask} →
+ * #<UBE> {@link #setDevResLevel} →  [setControl} → {@link #onMcuControl}
+ * #<Stepper> {@link #setDevPwmLevel} → [setMyCareEms] → {@link #onMcuControl}
+ * 每秒收到 {@link #onMcuControl}
+ */
 public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListener {
     private static final String TAG = "UartConsoleManager";
     private boolean m_waitSpeedZero = false;
@@ -42,6 +55,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     private final DeviceSettingViewModel dsVM;
     private final UartVM uartVM;
     MainActivity m;
+
     public UartConsoleManagerPF(WorkoutViewModel woVM, MainActivity m, DeviceSettingViewModel dsVM, UartVM uartVM, AppStatusViewModel appStatusViewModel) {
         Timber.d("UartConsoleManager constructor");
         this.m = m;
@@ -339,6 +353,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
     }
 
+
+    /**
+     * Stepper
+     */
     public void setDevPwmLevel() {
 
         if (!uartVM.isUartConnected.get()) return;
@@ -374,6 +392,11 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         consoleUart.setMyCareEms(DeviceDyacoMedical.MODEL.EMS_M2, pwmLevelDA);
     }
 
+    /**
+     * UBE
+     * <p>
+     * 這裡的ube是指拉線器的, 如果不是拉線器的ube, 就會一樣用 setMyCareEms
+     */
     public void setDevResLevel() {
 
         if (!uartVM.isUartConnected.get()) return;
@@ -462,8 +485,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         Timber.d("currentRpm = " + currentRpm + ", power = " + power + ", pwmValue = " + pwmValue);
         uartVM.at_valuePwm.set(pwmValue);
     }
-
-
 
 
     public void setDevRpmCounterModeEcb(DeviceDyacoMedical.RPM_COUNTER_MODE rpmCounterMode) {
@@ -564,7 +585,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     public void setBuzzer() {
 //        if (dsVM.isBeep.get() && !woVM.isLongClicking.get()) {
-            consoleUart.setBuzzer(DeviceDyacoMedical.BEEP.SHORT, 1);
+        consoleUart.setBuzzer(DeviceDyacoMedical.BEEP.SHORT, 1);
 //        }
     }
 
@@ -968,7 +989,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // 確定取得device info之後, 再初始化GEM3
 
         m.initGem3();
-       // getApp().getGem3Manager().initialize();
+        // getApp().getGem3Manager().initialize();
     }
 
     public void setEmsMachineType() {
@@ -1057,25 +1078,24 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         setFirstHeartRate();
 
         // for UBE
-        woVM.currentRpm.set(rpm_ECB);
-        if (!mcuErrors.isEmpty()) {
-            if (mcuErrors.contains(DeviceDyacoMedical.MCU_ERROR.RES)) {
-                setDevStep(UartConst.DS_ECB_ERR_OCCURRED);
-                postUartError(ErrorInfoEnum.MCU_RES_E301);
+        if (MODE.isUbeType()) {
+            woVM.currentRpm.set(rpm_ECB);
+            if (!mcuErrors.isEmpty()) {
+                if (mcuErrors.contains(DeviceDyacoMedical.MCU_ERROR.RES)) {
+                    setDevStep(UartConst.DS_ECB_ERR_OCCURRED);
+                    postUartError(ErrorInfoEnum.MCU_RES_E301);
+                }
             }
+            // 檢查下達的EMS指令是否已回傳
+            checkEcbSteps(resCode);
+        } else {
+            // pwmLevelAD = pwmLevel
+
+            //  檢查下達的EMS指令是否已回傳, 否則重送指令
+            checkEmsSteps(pwmLevel);
+
+
         }
-        // 檢查下達的EMS指令是否已回傳
-        checkEcbSteps(resCode);
-
-
-        /*
-        // for Stepper
-        // pwmLevelAD = pwmLevel
-
-        //  檢查下達的EMS指令是否已回傳, 否則重送指令
-        checkEmsSteps(pwmLevel);
-
-         */
     }
 
 
@@ -1719,7 +1739,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 devStep == DS_A0_PAUSE_STANDBY ||
                         devStep == DS_ECB_PAUSE_STANDBY);
     }
-
 
 
     public void setDevSpeedAndIncline() {
