@@ -96,8 +96,14 @@ android {
             buildConfigField "boolean", "TEST_MODE", "true" // true 測試, false 正式
             buildConfigField "String", "API_TOKEN", '"asdfeoruf932sskldl4566646422"'
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
+
+
+
             buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
+       //     buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
+
+
+
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'
             buildConfigField "String", "EGYM_URL", '"https://partner.api.egym.com/api/v1/"'
 
@@ -111,7 +117,7 @@ android {
 
             //production
             buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
+      //      buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
 
 
             buildConfigField "String", "APP_STORE_URL", '"https://ucaremedi-ugym.s3.ap-northeast-1.amazonaws.com/CoreStar/production/"'

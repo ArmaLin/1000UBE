@@ -96,18 +96,22 @@
             app:layout_constraintTop_toBottomOf="@+id/vv2" />
 
         <TextView
+            android:maxLines="1"
+            android:layout_marginStart="32dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
             android:id="@+id/tvTftOsVersion"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_regular"
             android:textColor="@color/color8192a2"
             android:textSize="24sp"
-            android:layout_marginEnd="200dp"
+            android:layout_marginEnd="240dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvTftOs"
             app:layout_constraintBottom_toBottomOf="@+id/tvTftOs"
             app:layout_constraintTop_toTopOf="@+id/tvTftOs"
-            tools:text="Version 1.4" />
+            tools:text="ewfwwefwefwefewwfwefwwfwfwewfweefwVersion 1.4" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:foreground="?attr/selectableItemBackgroundBorderless"

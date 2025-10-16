@@ -4,8 +4,6 @@ import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.MainActivity.UPDATE_FILE_PATH;
 import static com.dyaco.spirit_commercial.work_task.WorkManagerUtil.WORK_NOTIFY_UPDATE_MSG_TAG;
 
-import android.util.Log;
-
 import androidx.work.WorkInfo;
 
 import com.dyaco.spirit_commercial.MainActivity;
@@ -21,6 +19,8 @@ import com.ixuea.android.downloader.domain.DownloadInfo;
 import com.ixuea.android.downloader.exception.DownloadException;
 
 import java.io.File;
+
+import timber.log.Timber;
 
 public class DownloadManagerCustom {
     public static final String TAG = "##UpdateProcess##";
@@ -54,22 +54,22 @@ public class DownloadManagerCustom {
 //        File targetFile = new File(UPDATE_FILE_PATH, "Spirit.apk");
         File targetFile = new File(UPDATE_FILE_PATH, updateBean.getPATH()); //要儲存的名字
         apkPath = targetFile.getAbsolutePath();
-        Log.d(TAG, "準備將APK儲存到: " + apkPath);
+        Timber.tag(TAG).d("準備將APK儲存到: %s", apkPath);
 
         getDownloadedFile(UPDATE_FILE_PATH);
         String tempApkPath = getApp().getDeviceSettingBean().getTmpApkPath();
         boolean checkApkPath = apkPath.equals(tempApkPath);
         boolean checkMd5 = updateBean.getMD5().equalsIgnoreCase(new GetApkSign().getApkMd5(tempApkPath));
-        Log.d(TAG, "MD5" + new GetApkSign().getApkMd5(tempApkPath));
+        Timber.tag(TAG).d("MD5%s", new GetApkSign().getApkMd5(tempApkPath));
         if (isExist && checkApkPath && checkMd5) {
-            Log.d(TAG, "APK檔案已存在，且Console暫存的檔案路徑 與 實際要存的路徑相同(apkPath == TmpApkPath)，且APK無毀損 >> 不下載: ");
+            Timber.tag(TAG).d("APK檔案已存在，且Console暫存的檔案路徑 與 實際要存的路徑相同(apkPath == TmpApkPath)，且APK無毀損 >> 不下載: ");
 
             WorkInfo.State workState = new WorkManagerUtil().checkWorkStateFromTag(WORK_NOTIFY_UPDATE_MSG_TAG);
-            Log.d(TAG, "目前WorkManager狀態: " + workState + ": 如果不等於 ENQUEUED(排程中) 或 RUNNING(執行中)，需要再跳出更新視窗");
+            Timber.tag(TAG).d("目前WorkManager狀態: " + workState + ": 如果不等於 ENQUEUED(排程中) 或 RUNNING(執行中)，需要再跳出更新視窗");
             //進入此程序 代表:1.有更新檔案 ,2.AutoUpdate ON,3.已經按過等12小時 WorkInfo.State為 ENQUEUED
             if (WorkInfo.State.ENQUEUED != workState && WorkInfo.State.RUNNING != workState) {
                 //如果都不符合，需要再跳出更新視窗
-                Log.d(TAG, "跳出更新視窗");
+                Timber.tag(TAG).d("跳出更新視窗");
 
                 if (mainActivity != null) {
                     mainActivity.showUpdateRestartWindow();
@@ -78,7 +78,7 @@ public class DownloadManagerCustom {
 
             return;
         } else {
-            Log.d(TAG, "檔案是否存在：" + isExist +", Console暫存的檔案路徑與實際要存的路徑相同:" + checkApkPath +", md5是否正確："+ checkMd5);
+            Timber.tag(TAG).d("檔案是否存在：" + isExist + ", Console暫存的檔案路徑與實際要存的路徑相同:" + checkApkPath + ", md5是否正確：" + checkMd5);
         }
 
 
@@ -89,28 +89,28 @@ public class DownloadManagerCustom {
                 .setPath(targetFile.getAbsolutePath())
                 .build();
 
-        Log.d(TAG, "開始下載APK: " + updateBean.getDownloadURL());
+        Timber.tag(TAG).d("開始下載APK: %s", updateBean.getDownloadURL());
         downloadInfo.setDownloadListener(new DownloadListener() {
 
             @Override
             public void onStart() {
-                Log.d(TAG, "onStart: ");
+                Timber.tag(TAG).d("onStart: ");
             }
 
             @Override
             public void onWaited() {
-                Log.d(TAG, "onWaited: ");
+                Timber.tag(TAG).d("onWaited: ");
             }
 
             @Override
             public void onPaused() {
-                Log.d(TAG, "onPaused: ");
+                Timber.tag(TAG).d("onPaused: ");
             }
 
             @Override
             public void onDownloading(long progress, long size) {
                 //  (int) (downloadInfo.getProgress() * 100.0 / downloadInfo.getSize())
-                Log.d(TAG, "onDownloading: " + progress + "," + size);
+                Timber.tag(TAG).d("onDownloading: " + progress + "," + size);
                 if (downloadWindow != null) {
                     downloadWindow.setProgress((int) (downloadInfo.getProgress() * 100.0 / downloadInfo.getSize()));
                 }
@@ -118,7 +118,7 @@ public class DownloadManagerCustom {
 
             @Override
             public void onRemoved() {
-                Log.d(TAG, "onRemoved: ");
+                Timber.tag(TAG).d("onRemoved: ");
                 downloadInfo = null;
             }
 
@@ -129,12 +129,12 @@ public class DownloadManagerCustom {
                     DeviceSettingBean d = getApp().getDeviceSettingBean();
                     d.setTmpApkPath(apkPath);
                     getApp().setDeviceSettingBean(d);
-                    Log.d(TAG, "onDownloadSuccess: APK檢查成功，儲存下載位置:" + d.getTmpApkPath());
+                    Timber.tag(TAG).d("onDownloadSuccess: APK檢查成功，儲存下載位置:%s", d.getTmpApkPath());
 
                     if (mainActivity != null)
                         mainActivity.showUpdateRestartWindow();
                 } else {
-                    Log.d(TAG, "onDownloadSuccess:APK檢查失敗 ");
+                    Timber.tag(TAG).d("onDownloadSuccess:APK檢查失敗 ");
                 }
 
                 cancelDownload();
@@ -142,7 +142,7 @@ public class DownloadManagerCustom {
 
             @Override
             public void onDownloadFailed(DownloadException e) {
-                Log.d(TAG, "onDownloadFailed: " + e.getLocalizedMessage());
+                Timber.tag(TAG).d("onDownloadFailed: %s", e.getLocalizedMessage());
 //                downloadManager.remove(downloadInfo);
 //                downloadManager.destroy();
 
@@ -175,7 +175,7 @@ public class DownloadManagerCustom {
                 downloadManager.remove(downloadInfo);
                 downloadManager.destroy();
             }
-            Log.d(TAG, "cancelDownload: ");
+            Timber.tag(TAG).d("cancelDownload: ");
         } catch (Exception ignore) {
         //    ignore.printStackTrace();
         }
@@ -187,24 +187,24 @@ public class DownloadManagerCustom {
         File directory = new File(path, "");
         File[] files = directory.listFiles();
         if (directory.canRead() && files != null) {
-            Log.d(TAG, "資料夾內檔案數量: " + files.length);
+            Timber.tag(TAG).d("資料夾內檔案數量: %s", files.length);
             for (File file : files) {
                 if (updateBean.getPATH().equals(file.getName())) {
                     if (updateBean.getMD5().equalsIgnoreCase(new GetApkSign().getApkMd5(file.getAbsolutePath()))) {
                         isExist = true;
-                        Log.d(TAG, file.getName() + ":" + "檔案已存在");
+                        Timber.tag(TAG).d(file.getName() + ":" + "檔案已存在");
                     } else {
                         isExist = false;
-                        Log.d(TAG, file.getName() + ":" + "檔案已存在，但損壞" + file.getAbsolutePath());
+                        Timber.tag(TAG).d(file.getName() + ":" + "檔案已存在，但損壞" + file.getAbsolutePath());
                     }
                 } else {
                     //刪除其他檔案
                     String result = (file.getName() + "," + (file.delete() ? "刪除成功" : "刪除失敗"));
-                    Log.d(TAG, "getDownloadedFile: " + result);
+                    Timber.tag(TAG).d("getDownloadedFile: %s", result);
                 }
             }
         } else {
-            Log.d(TAG, "it is null");
+            Timber.tag(TAG).d("it is null");
         }
     }
 

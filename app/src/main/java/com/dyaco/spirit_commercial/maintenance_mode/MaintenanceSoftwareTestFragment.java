@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
@@ -51,6 +50,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import java.util.Calendar;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 
 public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<FragmentMaintenanceSoftwareTestBinding> {
@@ -110,7 +110,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             if (CheckDoubleClick.isFastClick()) return;
 
             if (((MainActivity) requireActivity()).downloadManagerCustom != null) {
-                Log.d(DownloadManagerCustom.TAG, "取消正在下載的檔案");
+                Timber.tag(DownloadManagerCustom.TAG).d("取消正在下載的檔案");
                 ((MainActivity) requireActivity()).downloadManagerCustom.cancelDownload();
             }
 
@@ -122,12 +122,12 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             updateAppWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
                 @Override
                 public void onStartDismiss(MsgEvent value) {
-                    Log.d("更新", "onStartDismiss: ");
+                    Timber.tag(DownloadManagerCustom.TAG).d("onStartDismiss: ");
                 }
 
                 @Override
                 public void onDismiss() {
-                    Log.d("更新", "onDismiss: ");
+                    Timber.tag(DownloadManagerCustom.TAG).d("onDismiss: ");
                 }
             });
         });
@@ -146,7 +146,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
-                    Log.d("安裝未知", "OK安裝未知來源權限: " + result);
+                    Timber.tag(DownloadManagerCustom.TAG).d("OK安裝未知來源權限: " + result);
                 }
             });
 
@@ -202,13 +202,15 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
 //
 //                        }
 
-                        LogS.printJson("更新", new Gson().toJson(data), "");
+                        LogS.printJson(DownloadManagerCustom.TAG, new Gson().toJson(data), "");
                         try {
                             if (getBinding() == null) return;
                             getBinding().progress.setVisibility(View.GONE);
-                            Log.d("更新", "檢查是否需要更新 update.json版本：" + data.getVersionCode() + ", Console實際版本：" + new CommonUtils().getLocalVersionCode() + ", Console儲存的版本：" + getApp().getDeviceSettingBean().getCurrentVersionCode());
-                            if (data.getVersionCode() > new CommonUtils().getLocalVersionCode()) {
-                                Log.d("更新", "可更新");
+                            Timber.tag(DownloadManagerCustom.TAG).d("檢查是否需要更新 update.json版本：" + data.getVersionCode() + ", Console實際版本：" + new CommonUtils().getLocalVersionCode() + ", Console儲存的版本：" + getApp().getDeviceSettingBean().getCurrentVersionCode());
+
+                            // TODO: >=    ---------     >
+                            if (data.getVersionCode() >= new CommonUtils().getLocalVersionCode()) {
+                                Timber.tag(DownloadManagerCustom.TAG).d("可更新");
                                 updateBean = data;
                                 getBinding().tvConsoleUpdate.setVisibility(View.VISIBLE);
                                 getBinding().tvConsoleUpToDate.setVisibility(View.INVISIBLE);
@@ -227,7 +229,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
                     public void onFail() {
                         if (getBinding() == null) return;
                         getBinding().progress.setVisibility(View.GONE);
-                        Log.d("更新", "連線失敗");
+                        Timber.tag(DownloadManagerCustom.TAG).d("連線失敗");
                     }
                 });
     }
@@ -262,7 +264,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             if (CheckDoubleClick.isFastClick()) return;
 
             if (((MainActivity) requireActivity()).downloadManagerCustom != null) {
-                Log.d(DownloadManagerCustom.TAG, "取消正在下載的檔案");
+                Timber.tag(DownloadManagerCustom.TAG).d("取消正在下載的檔案");
                 ((MainActivity) requireActivity()).downloadManagerCustom.cancelDownload();
             }
 
@@ -278,7 +280,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             usbAppUpdateWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.START | Gravity.BOTTOM, 0, 0);
         });
 
-        Log.d(TAG, "initUsbReadManager: ");
+        Timber.tag(DownloadManagerCustom.TAG).d("initUsbReadManager: ");
         usbReader = new UsbReaderKt(requireActivity());
         usbReader.setListener(new UsbReaderKt.UsbReaderListener() {
             /*
@@ -287,7 +289,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             @Override
             public void onFindFile(@NonNull String file, @NonNull UsbReaderKt.FileStatus status, @NonNull UsbReaderKt.FileType type, String data, byte[] raw, @NonNull UsbReaderKt.FileKind kind) {
                 String log = "on find file, file name: " + file + "\n" + ", status: " + status + "\n" + ", type: " + type + "\n" + "data:" + data + "\n" + ", raw: " + (raw != null ? raw.length : null);
-                Log.d(TAG, "onFindFile: " + log);
+                Timber.tag(DownloadManagerCustom.TAG).d("onFindFile: " + log);
 
                 if (type == UsbReaderKt.FileType.JSON) {
 
@@ -313,15 +315,15 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
 
                         //this.dir = context.getCacheDir();
                         ///data/user/0/com.dyaco.spirit_commercial/cache/SpiritCommercialV1.0.A0.1.0.0505A_[production].apk
-                        Log.d(TAG, "APK取得完成 :" + data);
+                        Timber.tag(DownloadManagerCustom.TAG).d("APK取得完成 :" + data);
                         if (updateBeanUsb.getMD5().equalsIgnoreCase(new GetApkSign().getApkMd5(data))) {
-                            Log.d(TAG, "MD5正確，開始安裝");
+                            Timber.tag(DownloadManagerCustom.TAG).d("MD5正確，開始安裝");
 
                             //更新時間
                             DeviceSettingBean d2 = getApp().getDeviceSettingBean();
                             d2.setSoftwareUpdatedMillis(Calendar.getInstance().getTimeInMillis());
                             getApp().setDeviceSettingBean(d2);
-                            Log.d(DownloadManagerCustom.TAG, "Console更新時間為：" + getApp().getDeviceSettingBean().getSoftwareUpdatedMillis());
+                            Timber.tag(DownloadManagerCustom.TAG).d("Console更新時間為：" + getApp().getDeviceSettingBean().getSoftwareUpdatedMillis());
 
                             if (!isEmulator && isTreadmill) {
                                 //  ((MainActivity) requireActivity()).uartConsole.setDevMainMode(RESET);
@@ -330,24 +332,24 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
 
                             new WorkManagerUtil().cancelWorkByTag(WORK_NOTIFY_UPDATE_MSG_TAG);
 
-                            Log.d("UPDATE_APP", "準備開始安裝: ");
+                            Timber.tag("DownloadManagerCustom.TAG").d("準備開始安裝: ");
                             SilentAppInstaller.install(getApp(), data, new SilentAppInstaller.OnInstallerListener() {
                                 @Override
                                 public void onSuccess() {
-                                    Log.d("UPDATE_APP", "安裝完成: ");
+                                    Timber.tag("DownloadManagerCustom.TAG").d("安裝完成: ");
                                 }
 
                                 @Override
                                 public void onError(@NonNull String reason) {
                                     updateFailed();
-                                    Log.d("UPDATE_APP", "安裝失敗: " + reason);
+                                    Timber.tag("DownloadManagerCustom.TAG").d("安裝失敗: " + reason);
                                     closeUsbAppUpdateWindow();
                                     Toasty.error(requireActivity(), "Installation Failed:" + reason, Toasty.LENGTH_LONG).show();
                                 }
                             });
 
                         } else {
-                            Log.d(TAG, "MD5錯誤: ");
+                            Timber.tag(DownloadManagerCustom.TAG).d("MD5錯誤: ");
                             Toast.makeText(requireActivity(), "APK ERROR", Toast.LENGTH_LONG).show();
                         }
 
@@ -379,7 +381,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             @Override
             public void onDeviceAttached(@NonNull String name) {
                 //取得USB裝置
-                Log.d(TAG, "onDeviceAttached: " + "on device attached, device name: " + name);
+                Timber.tag(DownloadManagerCustom.TAG).d("onDeviceAttached: " + "on device attached, device name: " + name);
                 if (getBinding() != null) {
                     getBinding().progress.setVisibility(View.VISIBLE);
                     getBinding().tvConsoleUSBUpdate.setVisibility(View.INVISIBLE);
@@ -387,7 +389,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
                 }
 
                 if (usbReader == null) {
-                    Log.e(TAG, "usbReader is null in onDeviceAttached");
+                    Timber.tag(DownloadManagerCustom.TAG).e("usbReader is null in onDeviceAttached");
                     return;
                 }
 
@@ -402,7 +404,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
             //拔USB
             @Override
             public void onDeviceDetached(@NonNull String name) {
-                Log.d(TAG, "onDeviceDetached: " + "on device detached, device name: " + name);
+                Timber.tag(DownloadManagerCustom.TAG).d("onDeviceDetached: " + "on device detached, device name: " + name);
                 setUpToDate(false);
                 closeUsbAppUpdateWindow();
             }
@@ -415,7 +417,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
                     if (progress == tempProgress) return;
                     tempProgress = progress;
                     usbAppUpdateWindow.setProgress((int) progress);
-                    Log.d(TAG, "####: Progress:" + progress + ", CURRENT:" + current + ", TOTAL:" + total);
+                    Timber.tag(DownloadManagerCustom.TAG).d("####: Progress:" + progress + ", CURRENT:" + current + ", TOTAL:" + total);
                 }
             }
 
@@ -437,7 +439,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
                 }
 
                 Toasty.error(requireActivity(), "Error: " + error.name(), Toasty.LENGTH_SHORT).show();
-                Log.e("USB_UPDATE", "errorMsg:" + error.name());
+                Timber.tag("DownloadManagerCustom.TAG").e("errorMsg:" + error.name());
 
                 if (getBinding() != null) {
                     getBinding().progress.setVisibility(View.GONE);
@@ -461,7 +463,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
      * USB讀取Json
      */
     private void findJsonFile() {
-        Log.d(TAG, "btnFindJsonFile: ");
+        Timber.tag(DownloadManagerCustom.TAG).d("btnFindJsonFile: ");
         usbReader.autoFindFile(FILE_JSON_NAME, UsbReaderKt.FileType.JSON, UsbReaderKt.FileKind.NORMAL); // >> onFindFile
     }
 
