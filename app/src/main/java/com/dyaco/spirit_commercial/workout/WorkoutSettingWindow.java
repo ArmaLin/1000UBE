@@ -12,12 +12,14 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_HEART_RAT
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_INCLINE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_INTERVAL_DISTANCE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_LEVEL;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_REMAINING_CALORIES;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_REMAINING_TIME;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_SPEED;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
 import static com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment.isGGG;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.AIR_FORCE;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.ARMY;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.CALORIES;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.COAST_GUARD;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.EGYM;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MARINE_CORPS;
@@ -254,6 +256,12 @@ public class WorkoutSettingWindow extends BasePopupWindow<WindowWorkoutSettingsB
                     if (workoutViewModel.selWorkoutTime.get() == UNLIMITED) {
                         disabledItem(radioTag, STATS_REMAINING_TIME, radioButtonArrayList.get(i), 0);
                     }
+
+                    if (workoutViewModel.selProgram != CALORIES) {
+                        disabledItem(radioTag,STATS_REMAINING_CALORIES, radioButtonArrayList.get(i), 0);
+                    }
+
+
 
                     if (radioTag != tag) {
                         disabledItem(radioTag, stats1Tag, radioButtonArrayList.get(i), 1);

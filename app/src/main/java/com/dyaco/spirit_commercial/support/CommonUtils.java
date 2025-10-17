@@ -2072,7 +2072,7 @@ public class CommonUtils {
                     break;
                 // TODO: PF
                 case STATS_RESISTANCE:
-                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    value = String.valueOf(workoutViewModel.currentLevel.get());
                     break;
 
                 case STATS_REMAINING_CALORIES:
@@ -2080,7 +2080,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_REVOLUTIONS:
-                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    value = String.valueOf(workoutViewModel.rpmCounter.get());
                     break;
 
                 case STATS_TOTAL_STEPS:
@@ -2329,7 +2329,7 @@ public class CommonUtils {
                     break;
                 // TODO: PF
                 case STATS_RESISTANCE:
-                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view1Text = String.valueOf(workoutViewModel.currentLevel.get());
                     view2Text = context.getString(R.string.Resistance);
                     view3Text = "";
                     break;
@@ -2341,7 +2341,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_REVOLUTIONS:
-                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view1Text = String.valueOf(workoutViewModel.rpmCounter.get());
                     view2Text = context.getString(R.string.Total_Revolutions);
                     view3Text = "";
                     break;
