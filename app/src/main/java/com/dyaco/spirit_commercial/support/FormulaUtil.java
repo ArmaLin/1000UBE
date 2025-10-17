@@ -610,6 +610,8 @@ public class FormulaUtil {
         w.speedDiagramBarList.clear();
         w.blankDiagramBarList.clear();
         w.hrList.clear();
+        w.rpmList.clear();
+        w.metsList.clear();
         w.orgArrayIncline = null;
         w.orgArraySpeedAndLevel = null;
         w.orgArrayInclineE = null;

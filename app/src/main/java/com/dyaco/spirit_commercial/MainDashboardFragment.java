@@ -137,11 +137,9 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 
 
         // TODO:
-        workoutViewModel.isGarminConnected.set(true);
-        workoutViewModel.garminRespirationRate.set(50);
-        workoutViewModel.garminBodyBatteryLevel.set(50);
-        workoutViewModel.isWorkoutReadyStart.set(true);
-      //  uartVM.isStartWorkoutReady.set(true);
+//        workoutViewModel.isGarminConnected.set(true);
+//        workoutViewModel.garminRespirationRate.set(50);
+//        workoutViewModel.garminBodyBatteryLevel.set(50);
 
 
         Log.d("GEM3", "isUbeType: " + MODE.isUbeType());

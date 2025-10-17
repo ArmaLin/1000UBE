@@ -25,6 +25,7 @@ import com.addisonelliott.segmentedbutton.SegmentedButtonGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.google.android.material.button.MaterialButton;
 
@@ -246,5 +247,31 @@ public class BindingAdapterComponent {
         Drawable[] drawables = button.getCompoundDrawables();
         button.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], bottomDrawable);
     }
+
+
+
+    @BindingAdapter(value = {"ubeSrc", "srcUbe", "srcOther"}, requireAll = true)
+    public static void setUbeSrc(AppCompatImageView imageView, ModeEnum modeEnum, Drawable srcUbe, Drawable srcOther) {
+        if (modeEnum != null && modeEnum.isUbeType()) {
+            imageView.setImageDrawable(srcUbe);
+        } else {
+            imageView.setImageDrawable(srcOther);
+        }
+    }
+
+
+
+    @BindingAdapter(value = {"ubeText", "textUbe", "textOther"}, requireAll = true)
+    public static void setUbeText(AppCompatTextView textView, ModeEnum modeEnum, String textUbe, String textOther) {
+        if (modeEnum != null && modeEnum.isUbeType()) {
+            textView.setText(textUbe);
+        } else {
+            textView.setText(textOther);
+        }
+    }
+
+
+
+
 
 }

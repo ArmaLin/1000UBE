@@ -806,6 +806,12 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="Wingate_Test_desc">Test your fatigue by working as hard as possible for a short period of time.</string>
     <string name="Steps_desc">Set target steps, adjust resistance manually.</string>
     <string name="Mets_desc">Set target steps, adjust resistance manually.</string>
+    <string name="Avg_Heart_Rate">Avg Heart Rate</string>
+    <string name="Peak_Resistance">Peak Resistance</string>
+    <string name="Peak_Speed">Peak Speed</string>
+    <string name="Peak_Cadence">Peak Cadence</string>
+    <string name="Peak_Heart_Rate">Peak Heart Rate</string>
+    <string name="Peak_METs">Peak METs</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>

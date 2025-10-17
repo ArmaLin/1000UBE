@@ -46,6 +46,12 @@ public class WorkoutViewModel extends ViewModel implements Serializable {
 //    }
 
 
+public final ObservableDouble peakLevel = new ObservableDouble();
+public final ObservableDouble peakHeartRate = new ObservableDouble();
+public final ObservableDouble peakSpeed = new ObservableDouble();
+public final ObservableDouble peakMets = new ObservableDouble();
+public final ObservableDouble peakRpm = new ObservableDouble();
+
 
     public final ObservableInt egymTotalInterval = new ObservableInt(0);
 
@@ -292,6 +298,8 @@ public class WorkoutViewModel extends ViewModel implements Serializable {
     public int[] orgArraySpeedAndLevel; // 從 iProgram > initChart 產生
     public int[] orgArrayIncline;
     public List<Integer> hrList = new ArrayList<>();
+    public List<Integer> rpmList = new ArrayList<>();
+    public List<Double> metsList = new ArrayList<>();
     public List<Double> cttLevelHrList = new ArrayList<>();
 
     public List<DiagramBarBean> inclineDiagramBarList = new ArrayList<>();

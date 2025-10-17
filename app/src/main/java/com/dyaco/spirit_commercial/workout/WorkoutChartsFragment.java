@@ -262,6 +262,8 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         w.speedDiagramBarList.clear();
         w.blankDiagramBarList.clear();
         w.hrList.clear();
+        w.rpmList.clear();
+        w.metsList.clear();
         w.inclineDiagramBarList.clear();
 
         int barkCheck = NORMAL_BAR;
@@ -1256,6 +1258,9 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
                 w.hrList.set(i, w.currentHeartRate.get());
 
+                w.rpmList.add(i, w.currentRpm.get());
+                w.metsList.add(i, w.currentMets.get());
+
 
                 if (currentProgram == ProgramsEnum.EGYM && !isTreadmill) {
                     //EGYM 存RPM
@@ -1394,6 +1399,9 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                 w.blankDiagramBarList.get(i).setBarStatus(BAR_STATUS_SEGMENT_NONE);
 
                 w.hrList.set(i, w.currentHeartRate.get());
+
+                w.rpmList.add(i, w.currentRpm.get());
+                w.metsList.add(i, w.currentMets.get());
 
                 //更新下一筆Segment的狀態，除非當前是最後一筆
                 if (i != (23 - 1)) {

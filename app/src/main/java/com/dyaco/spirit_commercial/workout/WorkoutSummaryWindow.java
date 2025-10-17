@@ -123,6 +123,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import timber.log.Timber;
+
 public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBinding> {
     private static final Logger log = LoggerFactory.getLogger(WorkoutSummaryWindow.class);
     boolean isEgymNfc = false;//避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
@@ -207,12 +209,14 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         getBinding().setIsTreadmill(isTreadmill);
         getBinding().setIsUs(isUs);
 
+        getBinding().setModeEnum(MODE);
+
         getBinding().setUserProfileViewModel(userProfileViewModel);
 
         this.context = context;
         workoutViewModel.summaryMets.set(m.calculation.getMetsAverage());
         workoutViewModel.summaryPace.set((int) m.calculation.getPaceAverage());
-
+        Log.d("PPPPPOOOOOQQQQQ", "WorkoutSummaryWindow: " + m.calculation.getMetsAverage());
         if (workoutViewModel.selProgram != ProgramsEnum.EGYM) {
             saveDataToWorkOutBean();
 
@@ -730,14 +734,14 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
         } else {
-            if (isTreadmill) {
-                getBinding().tvSummaryDistanceAndPower.setText(getConvert(w.currentDistance.get(), orgUnit, 3, 2)); // mi km
-                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentElevationGain.get(), orgUnit, 0, 1)); // ft cm
-                getBinding().tvSpeedAndLevelNum.setText(getConvert(w.avgSpeed.get(), orgUnit, 2, 1));
-                getBinding().tvSummaryPaceAndSpeed.setText(CommonUtils.formatSecToM((long) Float.parseFloat(getConvert(w.summaryPace.get(), orgUnit, 3, 1))));
-            } else {
-                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentDistance.get(), orgUnit, 1, 2)); // ft cm
-            }
+//            if (isTreadmill) {
+//                getBinding().tvSummaryDistanceAndPower.setText(getConvert(w.currentDistance.get(), orgUnit, 3, 2)); // mi km
+//                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentElevationGain.get(), orgUnit, 0, 1)); // ft cm
+//                getBinding().tvSpeedAndLevelNum.setText(getConvert(w.avgSpeed.get(), orgUnit, 2, 1));
+//                getBinding().tvSummaryPaceAndSpeed.setText(CommonUtils.formatSecToM((long) Float.parseFloat(getConvert(w.summaryPace.get(), orgUnit, 3, 1))));
+//            } else {
+//                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentDistance.get(), orgUnit, 1, 2)); // ft cm
+//            }
         }
     }
 
@@ -1080,6 +1084,17 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
     private void saveDataToWorkOutBean() {
 
+        w.peakRpm.set(w.rpmList.stream()
+                .mapToInt(Integer::intValue)
+                .max()
+                .orElse(0));
+
+        w.peakMets.set(w.metsList.stream()
+                .mapToDouble(Double::doubleValue)
+                .max()
+                .orElse(0.0));
+
+
         if (w.selProgram.getProgramType() == WorkoutIntDef.PROFILE_PROGRAM & isTreadmill) {
 
             final CopyOnWriteArrayList<DiagramBarBean> copySpeedList = new CopyOnWriteArrayList<>(w.speedDiagramBarList);
@@ -1241,6 +1256,9 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 //            workoutViewModel.avgSpeed.set(0);
 //            workoutViewModel.avgIncline.set(0);
 //        }
+
+
+        Timber.tag("PPPPPOOOOOQQQQQ").d("saveDataToWorkOutBean: ");
 
     }
 
