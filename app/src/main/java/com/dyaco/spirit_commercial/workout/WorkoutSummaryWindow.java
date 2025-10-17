@@ -1382,6 +1382,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 getBinding().tvSpeedAndLevelNumE.setText(R.string.resistance_chart);
 
 
+                // TODO: PF
                 getBinding().stackedBarChartSpeedView.setMaxDataValue(MAX_LEVEL_MAX);// 24 or 15
                 getBinding().stackedBarChartSpeedView.setOutcomeData(levelOutcomeDataList);
                 getBinding().stackedBarChartSpeedView.setTargetData(levelTartgetDataList);
