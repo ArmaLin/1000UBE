@@ -159,7 +159,6 @@ import com.dyaco.spirit_commercial.dashboard_media.NewUpdateData;
 import com.dyaco.spirit_commercial.databinding.FragmentMainWorkoutTrainingBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.model.webapi.bean.CreateWorkoutParam;
-import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RpmUtil;
@@ -222,7 +221,6 @@ import java.util.concurrent.TimeUnit;
  * new RxTimer().timer(1000, number -> m.uartConsole.setDevWorkoutFinish());
  */
 public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMainWorkoutTrainingBinding> {
-    boolean isUBE = MODE == ModeEnum.UBE;
     private CautionSpeedWindow cautionSpeedWindow;
     private DeviceCsafe deviceCsafe;
     private int ftmsType;
@@ -276,7 +274,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         super.onViewCreated(view, savedInstanceState);
 
 
-        OPT_SETTINGS.MAX_LEVEL_MAX = isUBE ? 30: 50;
+        OPT_SETTINGS.MAX_LEVEL_MAX = MODE.isUbeType() ? 30: 50;
 
         u = parent.uartConsole;
         appStatusViewModel = new ViewModelProvider(requireActivity()).get(AppStatusViewModel.class);
@@ -3271,27 +3269,27 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 }
 
 
-                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : (isUBE ?  UBE_LEVEL_US_NUM_1 : STEPPER_LEVEL_US_NUM_1));
-                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 :(isUBE ?  UBE_LEVEL_US_NUM_2 : STEPPER_LEVEL_US_NUM_2));
-                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : (isUBE ?  UBE_LEVEL_US_NUM_3 : STEPPER_LEVEL_US_NUM_3));
-                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : (isUBE ?  UBE_LEVEL_US_NUM_4 : STEPPER_LEVEL_US_NUM_4));
-                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : (isUBE ?  UBE_LEVEL_US_NUM_5 : STEPPER_LEVEL_US_NUM_5));
-                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : (isUBE ?  UBE_LEVEL_US_NUM_6 : STEPPER_LEVEL_US_NUM_6));
-                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : (isUBE ?  UBE_LEVEL_US_NUM_7 : STEPPER_LEVEL_US_NUM_7));
-                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : (isUBE ?  UBE_LEVEL_US_NUM_8 : STEPPER_LEVEL_US_NUM_8));
-                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : (isUBE ?  UBE_LEVEL_US_NUM_9 : STEPPER_LEVEL_US_NUM_9));
-                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (isUBE ?  UBE_LEVEL_US_NUM_10 : STEPPER_LEVEL_US_NUM_10));
+                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_1 : STEPPER_LEVEL_US_NUM_1));
+                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 :(MODE.isUbeType() ?  UBE_LEVEL_US_NUM_2 : STEPPER_LEVEL_US_NUM_2));
+                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_3 : STEPPER_LEVEL_US_NUM_3));
+                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_4 : STEPPER_LEVEL_US_NUM_4));
+                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_5 : STEPPER_LEVEL_US_NUM_5));
+                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_6 : STEPPER_LEVEL_US_NUM_6));
+                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_7 : STEPPER_LEVEL_US_NUM_7));
+                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_8 : STEPPER_LEVEL_US_NUM_8));
+                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_9 : STEPPER_LEVEL_US_NUM_9));
+                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_10 : STEPPER_LEVEL_US_NUM_10));
 
-                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (isUBE ?  UBE_LEVEL_US_NUM_11 : STEPPER_LEVEL_US_NUM_11));
-                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : (isUBE ?  UBE_LEVEL_US_NUM_12 : STEPPER_LEVEL_US_NUM_12));
-                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : (isUBE ?  UBE_LEVEL_US_NUM_13 : STEPPER_LEVEL_US_NUM_13));
-                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : (isUBE ?  UBE_LEVEL_US_NUM_14 : STEPPER_LEVEL_US_NUM_14));
-                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : (isUBE ?  UBE_LEVEL_US_NUM_15 : STEPPER_LEVEL_US_NUM_15));
-                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : (isUBE ?  UBE_LEVEL_US_NUM_16 : STEPPER_LEVEL_US_NUM_16));
-                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : (isUBE ?  UBE_LEVEL_US_NUM_17 : STEPPER_LEVEL_US_NUM_17));
-                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : (isUBE ?  UBE_LEVEL_US_NUM_18 : STEPPER_LEVEL_US_NUM_18));
-                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (isUBE ?  UBE_LEVEL_US_NUM_19 : STEPPER_LEVEL_US_NUM_19));
-                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (isUBE ?  UBE_LEVEL_US_NUM_20 : STEPPER_LEVEL_US_NUM_20));
+                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_11 : STEPPER_LEVEL_US_NUM_11));
+                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_12 : STEPPER_LEVEL_US_NUM_12));
+                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_13 : STEPPER_LEVEL_US_NUM_13));
+                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_14 : STEPPER_LEVEL_US_NUM_14));
+                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_15 : STEPPER_LEVEL_US_NUM_15));
+                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_16 : STEPPER_LEVEL_US_NUM_16));
+                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_17 : STEPPER_LEVEL_US_NUM_17));
+                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_18 : STEPPER_LEVEL_US_NUM_18));
+                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_19 : STEPPER_LEVEL_US_NUM_19));
+                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_20 : STEPPER_LEVEL_US_NUM_20));
 
 
                 getBinding().tvTopTextUs.setText((w.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);
