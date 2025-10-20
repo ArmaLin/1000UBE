@@ -41,7 +41,7 @@ import timber.log.Timber;
  * <p>
  * {@link #startEcho} → 每秒執行{@link #doEchoTask} →
  * #<UBE> {@link #setDevResLevel} →  執行[setControl} → {@link #onMcuControl}
- * #<Stepper> {@link #setDevPwmLevel} → 執行[setMyCareEms] → {@link #onMcuControl}
+ * #<Stepper> {@link #setDevPwmLevel} → 執行[setMyCareEms] → {@link #onMcuControl}   {@link #onStepPerMin}
  * 每秒收到 {@link #onMcuControl}
  */
 public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListener {
@@ -401,7 +401,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         int pwmLevelDA = 0;
 
         // 僅在running期間(非pause), 且constant非ISO(speed)才送值, 其餘情況皆送0
-        Timber.d("setDevPwmLevel: devStep = %s", devStep);
+     //   Timber.d("setDevPwmLevel: devStep = %s", devStep);
         if ((devStep == UartConst.DS_EMS_RUNNING_STANDBY) ||
                 (devStep == UartConst.DS_80_RUNNING_PWM_RSP)) {
             if (constantType != UartConst.CT_SPEED) {
@@ -767,7 +767,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onDataReceive(String dataReceiveInHex) {
-    //    Timber.d("🔥 <<<%s", dataReceiveInHex);
+     //   Timber.d("🔥 <<<%s", dataReceiveInHex);
         uartVM.lwrTimeoutCounter.set(0);
         uartVM.isLcbNotResponding.set(false);
     }
@@ -1057,6 +1057,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 //        if (!isWirelessHRM) {
 //            wpHr = 0;
 //        }
+
+        Timber.d("onMcuControl: pwmLevel:" + pwmLevel );
 
 //        Timber.d(
 //                "\n[0x80] model = " + model +
@@ -1685,6 +1687,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
          */
     }
 
+
+    /**
+     * Stepper 每秒會有
+     */
     @Override
     public void onStepPerMin(int spm, int rpm2_D2D3) {
 
@@ -1747,7 +1753,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 devStep == DS_ECB_IDLE_STANDBY ||
                         devStep == DS_EMS_IDLE_STANDBY);
 
-     //   Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
+        Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
 
         //workout 可以開始下指令
         uartVM.isEnterRunningReady.set(
