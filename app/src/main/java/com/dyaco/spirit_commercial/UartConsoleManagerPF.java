@@ -1058,23 +1058,23 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 //            wpHr = 0;
 //        }
 
-        Timber.d("onMcuControl: pwmLevel:" + pwmLevel );
-
-        Timber.d(
-                "\n[0x80] model = " + model +
-                        "\n, mcuErrors = " + mcuErrors.toString() +
-                        "\n, hpHr = " + hpHr +
-                        "\n, wpHr = " + wpHr +
-                        "\n, safeKey  = " + safeKey.toString() +
-                        "\n, speed  = " + speed +
-                        "\n, stepCount  = " + stepCount +
-                        "\n, direction  = " + direction.toString() +
-                        "\n, rpm_ECB  = " + rpm_ECB +
-                        "\n, resStatus  = " + resStatus +
-                        "\n, resCode (resAd)  = " + resCode +
-                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
-                        "\n, rpm2_unused = " + rpm2_unused +
-                        "\n, pwmLevel = " + pwmLevel);
+//        Timber.d("onMcuControl: pwmLevel:" + pwmLevel );
+//
+//        Timber.d(
+//                "\n[0x80] model = " + model +
+//                        "\n, mcuErrors = " + mcuErrors.toString() +
+//                        "\n, hpHr = " + hpHr +
+//                        "\n, wpHr = " + wpHr +
+//                        "\n, safeKey  = " + safeKey.toString() +
+//                        "\n, speed  = " + speed +
+//                        "\n, stepCount  = " + stepCount +
+//                        "\n, direction  = " + direction.toString() +
+//                        "\n, rpm_ECB  = " + rpm_ECB +
+//                        "\n, resStatus  = " + resStatus +
+//                        "\n, resCode (resAd)  = " + resCode +
+//                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
+//                        "\n, rpm2_unused = " + rpm2_unused +
+//                        "\n, pwmLevel = " + pwmLevel);
 
         woVM.setHpHr(hpHr);
         woVM.setWpHr(wpHr);
