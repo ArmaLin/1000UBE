@@ -197,6 +197,19 @@ import okhttp3.ResponseBody;
 
 public class CommonUtils {
 
+
+
+    public static List<String> generateTimeOptions(int startMinute, int endMinute) {
+
+        List<String> options = new ArrayList<>();
+
+        for (int i = startMinute; i <= endMinute; i++) {
+            String formattedTime = String.format(Locale.US, "%02d:00", i);
+            options.add(formattedTime);
+        }
+        return options;
+    }
+
     /**
      * 取得view的位置
      * <p>

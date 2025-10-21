@@ -484,4 +484,18 @@
         <attr name="progressColorSS" format="color" />
     </declare-styleable>
 
+
+    <declare-styleable name="WheelOptionPicker">
+        <attr name="wop_itemTextColor" format="color" />
+        <attr name="wop_selectedItemTextColor" format="color" />
+        <attr name="wop_itemTextSize" format="dimension" />
+        <attr name="wop_visibleItemCount" format="integer" />
+        <attr name="wop_dividerColor" format="color" />
+        <attr name="wop_dividerHeight" format="dimension" />
+
+        <attr name="wop_selectedItemTextSize" format="dimension" />
+        <attr name="wop_itemFontFamily" format="reference" />
+        <attr name="wop_selectedItemFontFamily" format="reference" />
+    </declare-styleable>
+
 </resources>

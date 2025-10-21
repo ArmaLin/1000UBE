@@ -97,7 +97,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
             getBinding().rbHard.setEnabled(false);
             getBinding().rbModerate.setChecked(true);
 
-          //  getBinding().rgHrFilter.check(getBinding().rbModerate.getId());
+            getBinding().rgHrFilter.check(getBinding().rbModerate.getId());
         }
     }
 

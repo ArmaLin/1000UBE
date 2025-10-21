@@ -1060,21 +1060,21 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         Timber.d("onMcuControl: pwmLevel:" + pwmLevel );
 
-//        Timber.d(
-//                "\n[0x80] model = " + model +
-//                        "\n, mcuErrors = " + mcuErrors.toString() +
-//                        "\n, hpHr = " + hpHr +
-//                        "\n, wpHr = " + wpHr +
-//                        "\n, safeKey  = " + safeKey.toString() +
-//                        "\n, speed  = " + speed +
-//                        "\n, stepCount  = " + stepCount +
-//                        "\n, direction  = " + direction.toString() +
-//                        "\n, rpm_ECB  = " + rpm_ECB +
-//                        "\n, resStatus  = " + resStatus +
-//                        "\n, resCode (resAd)  = " + resCode +
-//                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
-//                        "\n, rpm2_unused = " + rpm2_unused +
-//                        "\n, pwmLevel = " + pwmLevel);
+        Timber.d(
+                "\n[0x80] model = " + model +
+                        "\n, mcuErrors = " + mcuErrors.toString() +
+                        "\n, hpHr = " + hpHr +
+                        "\n, wpHr = " + wpHr +
+                        "\n, safeKey  = " + safeKey.toString() +
+                        "\n, speed  = " + speed +
+                        "\n, stepCount  = " + stepCount +
+                        "\n, direction  = " + direction.toString() +
+                        "\n, rpm_ECB  = " + rpm_ECB +
+                        "\n, resStatus  = " + resStatus +
+                        "\n, resCode (resAd)  = " + resCode +
+                        "\n, rpm1_D5D6= " + rpm1_D5D6 +
+                        "\n, rpm2_unused = " + rpm2_unused +
+                        "\n, pwmLevel = " + pwmLevel);
 
         woVM.setHpHr(hpHr);
         woVM.setWpHr(wpHr);
@@ -1108,12 +1108,34 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             checkEcbSteps(resCode);
         } else {
             // pwmLevelAD = pwmLevel
-
+         //   woVM.currentRpm.set(rpm1_D5D6);
             //  檢查下達的EMS指令是否已回傳, 否則重送指令
             checkEmsSteps(pwmLevel);
 
 
         }
+    }
+
+
+
+
+    /**
+     * Stepper 每秒會有
+     */
+    @Override
+    public void onStepPerMin(int spm, int rpm2_D2D3) {
+
+        Timber.d("⭕️onStepPerMin: " + spm +","+ rpm2_D2D3);
+
+        // WORKOUT
+        // for stepper, SPM (step per minute) value
+        uartVM.aa_spm.set(spm);           // spm
+        uartVM.aa_rpm.set(rpm2_D2D3);     // current RP<
+        woVM.currentRpm.set(rpm2_D2D3);        // current RPM
+
+        // MAINTENANCE MODE
+        // for stepper, Sensor Test - Pulley RPM Optical Sensor的數值
+        uartVM.aa_stepPulleyRpmOpticalSensor.set(rpm2_D2D3);
     }
 
 
@@ -1687,23 +1709,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
          */
     }
 
-
-    /**
-     * Stepper 每秒會有
-     */
-    @Override
-    public void onStepPerMin(int spm, int rpm2_D2D3) {
-
-        // WORKOUT
-        // for stepper, SPM (step per minute) value
-        uartVM.aa_spm.set(spm);           // spm
-        uartVM.aa_rpm.set(rpm2_D2D3);     // current RP<
-        woVM.currentRpm.set(rpm2_D2D3);        // current RPM
-
-        // MAINTENANCE MODE
-        // for stepper, Sensor Test - Pulley RPM Optical Sensor的數值
-        uartVM.aa_stepPulleyRpmOpticalSensor.set(rpm2_D2D3);
-    }
 
     @Override
     public void onSensorState(int pulseCount, DeviceDyacoMedical.SENSOR hallSensorStatus) {

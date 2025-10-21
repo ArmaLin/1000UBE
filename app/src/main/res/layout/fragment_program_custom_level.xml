@@ -629,7 +629,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:text="@string/total_time_min"
+                android:text="@string/Select_Time"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintTop_toTopOf="parent"

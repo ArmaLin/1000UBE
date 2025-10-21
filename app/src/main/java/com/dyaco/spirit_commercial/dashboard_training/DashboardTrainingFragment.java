@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.App.getDeviceGEM;
@@ -570,10 +571,19 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
     public void onClick(View v) {
         //cannot be found from the current destination Destination
         if (CheckDoubleClick.isFastClick()) return;
-
+        int vId = v.getId();
         if (appStatusViewModel.currentPage.get() == CURRENT_PAGE_MEDIA) return;
         try {
-            NavDirections navDirections = DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToProgramsBannerFragment(v.getId(), programType);
+
+            if (MODE.isStepperType()) {
+                if (v.getId() == getBinding().btnCustom.getId()) {
+                    vId = getBinding().btnCalories.getId();
+                } else if (v.getId() == getBinding().btnCalories.getId()) {
+                    vId = R.id.btn_HeartRate;
+                }
+            }
+
+            NavDirections navDirections = DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToProgramsBannerFragment(vId, programType);
             Navigation.findNavController(v).navigate(navDirections);
         } catch (Exception e) {
             Timber.e(e);

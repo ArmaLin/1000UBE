@@ -1,4 +1,4 @@
-package com.dkcity.gym.support.common.customview
+package com.dyaco.spirit_commercial.support.custom_view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,10 +13,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.OverScroller
 import androidx.core.content.ContextCompat
-import com.dkcity.gym.R
 import kotlin.math.abs
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.withScale
+import com.dyaco.spirit_commercial.R
+import kotlin.apply
+import kotlin.collections.indices
+import kotlin.collections.isNotEmpty
+import kotlin.let
+import kotlin.ranges.coerceIn
+import kotlin.ranges.until
 
 
 class WheelOptionPicker @JvmOverloads constructor(
@@ -64,7 +70,7 @@ class WheelOptionPicker @JvmOverloads constructor(
                     getColor(R.styleable.WheelOptionPicker_wop_itemTextColor, Color.BLACK)
                 selectedItemTextColor = getColor(
                     R.styleable.WheelOptionPicker_wop_selectedItemTextColor,
-                    ContextCompat.getColor(context, R.color.purple_500)
+                    ContextCompat.getColor(context, R.color.color1396ef)
                 )
                 itemTextSize =
                     getDimension(R.styleable.WheelOptionPicker_wop_itemTextSize, itemTextSize)
