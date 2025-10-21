@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isCustomAllBarSetValue;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.NO_HR_HIDE_BUTTON;
@@ -90,6 +91,14 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
 
 
         initBar();
+
+
+        if (MODE.isUbeType()) {
+            getBinding().rbHard.setEnabled(false);
+            getBinding().rbModerate.setChecked(true);
+
+          //  getBinding().rgHrFilter.check(getBinding().rbModerate.getId());
+        }
     }
 
     private void initView() {
