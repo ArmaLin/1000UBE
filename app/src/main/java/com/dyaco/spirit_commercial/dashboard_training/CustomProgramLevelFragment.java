@@ -132,7 +132,8 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
                 54f,                      // ✅ 中心文字大小 (24sp)
                 0.9f,                     // ✅ 文字縮小
                 64f,                      // ✅ 項目高度 (72dp)
-                0.9f                      // ✅ 間距縮小 20%
+                1.2f,                     //  首層間距 120% (加大 20%)
+                0.8f                      //  之後的間距 80% 遞減
         );
 
         WheelAdapter adapter = new WheelAdapter(data);
