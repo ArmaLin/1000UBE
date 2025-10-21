@@ -3,7 +3,6 @@ package com.dyaco.spirit_commercial.dashboard_training;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
@@ -18,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cheonjaeung.powerwheelpicker.android.WheelPicker;
 import com.dyaco.spirit_commercial.R;
+
+import timber.log.Timber;
 
 public class TimeItemEffector extends WheelPicker.ItemEffector {
 
@@ -71,7 +72,7 @@ public class TimeItemEffector extends WheelPicker.ItemEffector {
             bold = ResourcesCompat.getFont(context, selectedFontRes);
             regular = ResourcesCompat.getFont(context, itemFontRes);
         } catch (Resources.NotFoundException e) {
-            Log.e("TimeItemEffector", "字型資源找不到，使用系統預設", e);
+            Timber.e(e, "字型資源找不到，使用系統預設");
             bold = Typeface.DEFAULT_BOLD;
             regular = Typeface.DEFAULT;
         }
