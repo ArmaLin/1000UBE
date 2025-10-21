@@ -11,6 +11,7 @@ import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButt
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.cheonjaeung.powerwheelpicker.android.WheelPicker;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.alert_message.AlertCustomExitWindow;
@@ -42,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import timber.log.Timber;
+
 public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProgramCustomLevelBinding> {
 
     private ProgramsEnum programsEnum;
@@ -49,6 +53,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
     private AppStatusViewModel appStatusViewModel;
     private DeviceSettingViewModel deviceSettingViewModel;
     private MainActivity mainActivity;
+    private int lastReportedPosition = WheelPicker.NO_POSITION;
 
     public CustomProgramLevelFragment() {
     }
@@ -107,8 +112,82 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
         if (mainActivity.customBean.getTotalTime() >= 0) {
             defValue = mainActivity.customBean.getTotalTime() / 60;
         }
-        getBinding().rulerViewMonth.setSelectedValue(defValue);
+
+//        getBinding().myWheelPicker.setCurrentPosition(2);
+
+
         mainActivity.customBean.setTotalTime(defValue * 60);
+
+
+        List<String> data = CommonUtils.generateTimeOptions(0, 99);
+
+
+        TimeItemEffector timeEffector = new TimeItemEffector(
+                requireActivity(),        // Context
+                getBinding().myWheelPicker, // WheelPicker 實例
+                R.color.white,            // ✅ 選中顏色
+                R.color.color5a7085,      // ✅ 未選中顏色
+                R.font.inter_bold,        // ✅ 選中字型
+                R.font.inter_regular,     // ✅ 未選中字型
+                54f,                      // ✅ 中心文字大小 (24sp)
+                0.9f,                     // ✅ 文字縮小
+                64f,                      // ✅ 項目高度 (72dp)
+                0.9f                      // ✅ 間距縮小 20%
+        );
+
+        WheelAdapter adapter = new WheelAdapter(data);
+        getBinding().myWheelPicker.setAdapter(adapter);
+        getBinding().myWheelPicker.addItemEffector(timeEffector);
+
+
+        getBinding().myWheelPicker.addOnScrollListener(new WheelPicker.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull WheelPicker wheelPicker, int newState) {
+                super.onScrollStateChanged(wheelPicker, newState);
+
+                if (newState == WheelPicker.SCROLL_STATE_IDLE) {
+
+                    int finalPosition = wheelPicker.getCurrentPosition();
+                    if (finalPosition == WheelPicker.NO_POSITION) {
+                        return;
+                    }
+
+                    if (finalPosition != lastReportedPosition) {
+
+                        workoutViewModel.selWorkoutTime.set(finalPosition * 60);
+                        mainActivity.customBean.setTotalTime(finalPosition * 60);
+
+                        Timber.tag("GGGGGDDDDDDD").d("滾輪已停止，【真正選中】: " + finalPosition);
+
+                        lastReportedPosition = finalPosition;
+
+
+                        wheelPicker.performHapticFeedback(HapticFeedbackConstants.CONFIRM);
+
+                        //    } else {
+                        // 滾輪停止了，但位置和上次一樣 (這是 SnapHelper 的第二次 IDLE)
+                        // 我們忽略它
+                        //       Timber.tag("GGGGGDDDDDDD").d("滾輪 IDLE (Snap)，位置未變: " + finalPosition + " (忽略)");
+                    }
+                } else if (newState == WheelPicker.SCROLL_STATE_DRAGGING) {
+                    // 使用者正在用手拖動
+                } else if (newState == WheelPicker.SCROLL_STATE_SETTLING) {
+                    // 使用者放手了，滾輪正在滑行
+                }
+            }
+        });
+
+
+//        getBinding().myWheelPicker.addOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(@NonNull WheelPicker wheelPicker, int position) {
+//                Timber.tag("GGGGGDDDDDDD").d("onItemSelected: " + wheelPicker.isSelected() +", "+ position);
+//            }
+//
+//
+//        });
+//
+
     }
 
 
@@ -119,29 +198,12 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
 
             if (checkedId == R.id.rbHard) {
                 changeChart(0);
-            } else if (checkedId == R.id.rbModerate){
+            } else if (checkedId == R.id.rbModerate) {
                 changeChart(1);
             } else {
                 changeChart(2);
             }
         });
-
-
-        new CommonUtils().addAutoClick(getBinding().btnTimePlus);
-        new CommonUtils().addAutoClick(getBinding().btnTimeMinus);
-
-        getBinding().rulerViewMonth.setOnValueChangeListener((view, value) -> {
-            getBinding().tvTimeNum.setText(CommonUtils.subZeroAndDot(String.valueOf(value)));
-
-            workoutViewModel.selWorkoutTime.set(Math.round(value * 60));
-            mainActivity.customBean.setTotalTime(Math.round(value * 60));
-        });
-
-        getBinding().btnTimePlus.setOnClickListener(v ->
-                getBinding().rulerViewMonth.setSelectedValue(Float.parseFloat(getBinding().tvTimeNum.getText().toString()) + 1));
-
-        getBinding().btnTimeMinus.setOnClickListener(v ->
-                getBinding().rulerViewMonth.setSelectedValue(Float.parseFloat(getBinding().tvTimeNum.getText().toString()) - 1));
 
 
         getBinding().btnClearDiagram.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +236,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
                             mainActivity.customBean.setTotalTime(-1);
                             mainActivity.customBean.setMaxSpeedKmh(0);
                             mainActivity.customBean.setMaxSpeedMph(0);
-                            
+
                             appStatusViewModel.changeMainButtonType(DISAPPEAR);
                             Navigation.findNavController(v).navigate(CustomProgramLevelFragmentDirections.actionCustomProgramLevelFragmentToProgramsFragment(WorkoutIntDef.DEFAULT_PROGRAM));
                         } catch (Exception e) {
@@ -210,7 +272,6 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
                 }
             }
         });
-
 
 
 //        getBinding().LeditProfileView.setLevelChangedListener(new CircleBarView.LevelChangedListener() {
@@ -265,7 +326,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
 
 
         //不儲存
-      //  String values = mainActivity.customBean.getDiagramLevelOrSpeed();
+        //  String values = mainActivity.customBean.getDiagramLevelOrSpeed();
         String values = "";
 
         if (values == null || "".equals(values)) {
@@ -325,7 +386,6 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
     }
 
 
-
     int charType = 0;
     int xValue = 5;
 
@@ -334,9 +394,8 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
         this.charType = chartType;
 
         getBinding().editProfileView.reset();
-     //   getBinding().LeditProfileView.reset();
+        //   getBinding().LeditProfileView.reset();
         resetSbText();
-
 
 
         if (chartType == 0 || chartType == 1) {

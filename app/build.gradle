@@ -518,4 +518,7 @@ dependencies {
 
 
     implementation 'com.jakewharton:process-phoenix:3.0.0'
+
+
+    implementation("com.cheonjaeung.powerwheelpicker.android:powerwheelpicker:1.0.0")
 }
