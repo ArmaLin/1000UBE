@@ -158,7 +158,10 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
                         workoutViewModel.selWorkoutTime.set(finalPosition * 60);
                         mainActivity.customBean.setTotalTime(finalPosition * 60);
 
-                        Timber.tag("GGGGGDDDDDDD").d("滾輪已停止，【真正選中】: " + finalPosition);
+
+                        String selectedValue = adapter.getValueAt(finalPosition);
+
+                        Timber.tag("GGGGGDDDDDDD").d("滾輪已停止，【真正選中】: " + finalPosition +","+ selectedValue);
 
                         lastReportedPosition = finalPosition;
 

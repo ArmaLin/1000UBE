@@ -12,6 +12,8 @@ import com.dyaco.spirit_commercial.R;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 
 public class WheelAdapter extends RecyclerView.Adapter<WheelAdapter.WheelViewHolder> {
 
@@ -55,5 +57,14 @@ public class WheelAdapter extends RecyclerView.Adapter<WheelAdapter.WheelViewHol
         public void bind(String number) {
             textView.setText(String.valueOf(number));
         }
+    }
+
+
+    public String getValueAt(int position) {
+        if (items == null || position < 0 || position >= items.size()) {
+            Timber.e("getValueAt: 無效的 Position: %s", position);
+            return null;
+        }
+        return items.get(position);
     }
 }
