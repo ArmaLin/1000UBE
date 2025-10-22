@@ -108,6 +108,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
     private void initView() {
 
         int defValue = OPT_SETTINGS.TARGET_TIME_DEF;
+
         if (mainActivity.customBean.getTotalTime() >= 0) {
             defValue = mainActivity.customBean.getTotalTime() / 60;
         }
@@ -120,7 +121,7 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
 
 
         //初始值
-        getBinding().myWheelPicker.setCurrentPosition(20);
+        getBinding().myWheelPicker.setCurrentPosition(defValue);
 
 
         List<String> data = CommonUtils.generateTimeOptions(0, 99);

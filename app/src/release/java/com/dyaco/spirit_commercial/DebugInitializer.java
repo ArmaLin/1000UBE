@@ -2,8 +2,6 @@ package com.dyaco.spirit_commercial;
 
 import android.app.Application;
 
-import timber.log.Timber;
-
 /**
  * 這個類別只會在 release build variant 中被編譯。
  */
@@ -13,6 +11,6 @@ public class DebugInitializer {
 
 
     // TODO: 開log
-        Timber.plant(new Timber.DebugTree());
+      //  Timber.plant(new Timber.DebugTree());
   }
 }
