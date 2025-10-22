@@ -127,9 +127,6 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label">
 
-        <!--
-        android:icon="@drawable/${appIcon}" >> manifestPlaceholders
-        android:theme="@style/AppTheme" -->
         <activity
             android:screenOrientation="landscape"
             android:configChanges="orientation"

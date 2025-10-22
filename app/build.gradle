@@ -81,7 +81,7 @@ android {
 
         release {
             getIsDefault().set(true)
-            debuggable false
+            debuggable true
             signingConfig signingConfigs.release
             minifyEnabled false
             shrinkResources false

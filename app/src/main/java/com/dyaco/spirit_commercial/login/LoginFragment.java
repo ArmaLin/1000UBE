@@ -74,6 +74,7 @@ import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.FragmentLoginBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.model.webapi.EgymWebListener;
+import com.dyaco.spirit_commercial.support.CoTimer;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.custom_view.CustomToast;
@@ -456,7 +457,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
         if (isUs && deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_SPIRIT) {
             getBinding().vBackground.setVisibility(View.VISIBLE);
             setGuestUser();
-            login();
+            CoTimer.after(200, this::login);
             return;
         } else {
             if (deviceSettingViewModel.consoleSystem.get() == CONSOLE_SYSTEM_EGYM) {

@@ -11,7 +11,6 @@ import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButt
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.cheonjaeung.powerwheelpicker.android.WheelPicker;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.alert_message.AlertCustomExitWindow;
@@ -31,6 +29,8 @@ import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.custom_view.CircleBarView;
+import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelAdapter;
+import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelItemEffector;
 import com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS;
 import com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef;
 import com.dyaco.spirit_commercial.support.utils.CheckDoubleClick;
@@ -53,7 +53,6 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
     private AppStatusViewModel appStatusViewModel;
     private DeviceSettingViewModel deviceSettingViewModel;
     private MainActivity mainActivity;
-    private int lastReportedPosition = WheelPicker.NO_POSITION;
 
     public CustomProgramLevelFragment() {
     }
@@ -113,16 +112,21 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
             defValue = mainActivity.customBean.getTotalTime() / 60;
         }
 
-//        getBinding().myWheelPicker.setCurrentPosition(2);
 
 
         mainActivity.customBean.setTotalTime(defValue * 60);
 
 
+
+
+        //初始值
+        getBinding().myWheelPicker.setCurrentPosition(20);
+
+
         List<String> data = CommonUtils.generateTimeOptions(0, 99);
 
 
-        TimeItemEffector timeEffector = new TimeItemEffector(
+        PowerWheelItemEffector timeEffector = new PowerWheelItemEffector(
                 requireActivity(),        // Context
                 getBinding().myWheelPicker, // WheelPicker 實例
                 R.color.white,            // ✅ 選中顏色
@@ -136,61 +140,18 @@ public class CustomProgramLevelFragment extends BaseBindingFragment<FragmentProg
                 0.8f                      //  之後的間距 80% 遞減
         );
 
-        WheelAdapter adapter = new WheelAdapter(data);
+        PowerWheelAdapter adapter = new PowerWheelAdapter(data);
         getBinding().myWheelPicker.setAdapter(adapter);
         getBinding().myWheelPicker.addItemEffector(timeEffector);
 
+        timeEffector.setOnSettledListener((position, value) -> {
 
-        getBinding().myWheelPicker.addOnScrollListener(new WheelPicker.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull WheelPicker wheelPicker, int newState) {
-                super.onScrollStateChanged(wheelPicker, newState);
+            workoutViewModel.selWorkoutTime.set(position * 60);
+            mainActivity.customBean.setTotalTime(position * 60);
 
-                if (newState == WheelPicker.SCROLL_STATE_IDLE) {
-
-                    int finalPosition = wheelPicker.getCurrentPosition();
-                    if (finalPosition == WheelPicker.NO_POSITION) {
-                        return;
-                    }
-
-                    if (finalPosition != lastReportedPosition) {
-
-                        workoutViewModel.selWorkoutTime.set(finalPosition * 60);
-                        mainActivity.customBean.setTotalTime(finalPosition * 60);
-
-
-                        String selectedValue = adapter.getValueAt(finalPosition);
-
-                        Timber.tag("GGGGGDDDDDDD").d("滾輪已停止，【真正選中】: " + finalPosition +","+ selectedValue);
-
-                        lastReportedPosition = finalPosition;
-
-
-                        wheelPicker.performHapticFeedback(HapticFeedbackConstants.CONFIRM);
-
-                        //    } else {
-                        // 滾輪停止了，但位置和上次一樣 (這是 SnapHelper 的第二次 IDLE)
-                        // 我們忽略它
-                        //       Timber.tag("GGGGGDDDDDDD").d("滾輪 IDLE (Snap)，位置未變: " + finalPosition + " (忽略)");
-                    }
-                } else if (newState == WheelPicker.SCROLL_STATE_DRAGGING) {
-                    // 使用者正在用手拖動
-                } else if (newState == WheelPicker.SCROLL_STATE_SETTLING) {
-                    // 使用者放手了，滾輪正在滑行
-                }
-            }
+            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
         });
 
-
-//        getBinding().myWheelPicker.addOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(@NonNull WheelPicker wheelPicker, int position) {
-//                Timber.tag("GGGGGDDDDDDD").d("onItemSelected: " + wheelPicker.isSelected() +", "+ position);
-//            }
-//
-//
-//        });
-//
 
     }
 
