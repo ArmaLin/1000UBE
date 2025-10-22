@@ -18,7 +18,7 @@ android {
     compileSdk = 36
     ext {
         HardWareVersion = "V1.0"
-        SoftWareVersion = "A.1.1.1"  //A.x.x.0測試
+        SoftWareVersion = "A.1.0.0"  //A.x.x.0測試
         sVersion = "A"
         SerialNumber = getFormattedDate('MMdd') + sVersion
         FirmWareVersion = "37"

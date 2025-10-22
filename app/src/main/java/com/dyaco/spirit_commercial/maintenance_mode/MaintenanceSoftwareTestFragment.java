@@ -209,7 +209,7 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
                             Timber.tag(DownloadManagerCustom.TAG).d("檢查是否需要更新 update.json版本：" + data.getVersionCode() + ", Console實際版本：" + new CommonUtils().getLocalVersionCode() + ", Console儲存的版本：" + getApp().getDeviceSettingBean().getCurrentVersionCode());
 
                             // TODO: >=    ---------     >
-                            if (data.getVersionCode() >= new CommonUtils().getLocalVersionCode()) {
+                            if (data.getVersionCode() > new CommonUtils().getLocalVersionCode()) {
                                 Timber.tag(DownloadManagerCustom.TAG).d("可更新");
                                 updateBean = data;
                                 getBinding().tvConsoleUpdate.setVisibility(View.VISIBLE);
