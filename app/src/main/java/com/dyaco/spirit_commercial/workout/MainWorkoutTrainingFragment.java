@@ -29,9 +29,7 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.getSpeedValue;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_EGYM;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_SPIRIT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_ELLIPTICAL;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_TREADMILL;
-import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UPRIGHT_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.FTMS_TYPE_CROSS_TRAINER;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.FTMS_TYPE_INDOOR_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.FTMS_TYPE_TREADMILL;
@@ -206,6 +204,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import timber.log.Timber;
 
 /**
  * if (isTreadmill) {
@@ -420,7 +420,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         if (height == 0) height = (UNIT_E == IMPERIAL) ? HEIGHT_IU_DEF : HEIGHT_MU_DEF;
 
         // weight or height 為0 Calculation會crash
-        parent.calculation = new Calculation(getCalculationMachineType(deviceSettingViewModel.typeCode.get()),
+        parent.calculation = new Calculation(getCalculationMachineType(),
                 (UNIT_E == IMPERIAL) ? Calculation.UNIT.IMPERIAL : Calculation.UNIT.METRIC,
                 weight, height, age);
 
@@ -433,7 +433,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         parent.calculation.setWattTable(MODE.getWattTable());
 
 
-        Log.d("OOODDDODODO", "init CALC-  AGE: " + age + ", weight:" + weight + ", height:" + height + "," + userProfileViewModel.getHeight_metric() + "," + userProfileViewModel.getHeight_imperial());
+       // Log.d("OOODDDODODO", "init CALC-  AGE: " + age + ", weight:" + weight + ", height:" + height + "," + userProfileViewModel.getHeight_metric() + "," + userProfileViewModel.getHeight_imperial());
         //   Log.d("OOODDDODODO", "init CALC-  AGE: " + w.selYO.get() +", weight:"+ w.selWeightIU.get() +", height:"+ w.selWeightMU.get() +","+w.selGender.get());
         calc = parent.calculation;
 
@@ -724,21 +724,19 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
     }
 
-    public Calculation.TYPE getCalculationMachineType(int machineType) {
+    public Calculation.TYPE getCalculationMachineType() {
+
+
 
         Calculation.TYPE calculationType = Calculation.TYPE.Treadmill;
-        switch (machineType) {
-            case DEVICE_TYPE_TREADMILL:
-                calculationType = Calculation.TYPE.Treadmill;
-                break;
-            case DEVICE_TYPE_ELLIPTICAL:
-                calculationType = Calculation.TYPE.EcbElliptical;
-                break;
-            case DEVICE_TYPE_UPRIGHT_BIKE:
-            case DEVICE_TYPE_RECUMBENT_BIKE:
-                calculationType = Calculation.TYPE.EcbBike;
-                break;
+
+
+        if (MODE.isUbeType()) {
+            calculationType = Calculation.TYPE.UBE;
+        } else if (MODE.isStepperType()){
+            calculationType = Calculation.TYPE.RecumbentStepper;
         }
+
         return calculationType;
     }
 
@@ -2699,6 +2697,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         } else {
             // calc.setData(w.currentRpm.get(), 0, 0, w.pwmLevelDA.get());
             calc.setData(w.currentRpm.get(), 0, 0, w.currentLevel.get());
+            Timber.tag("WWWWEEEERRRRR").d("setData: " + w.currentRpm.get() +","+ w.currentLevel.get());
         }
         w.currentPace.set(calc.getPace());
 
@@ -2719,11 +2718,14 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         if (w.isAppleWatchEnabled.get()) {
             w.currentCalories.set(w.getAppleWatchCalories() >= 9999 ? 9999 : w.getAppleWatchCalories());
         } else {
+
+         //   Timber.tag("WWWWEEEERRRRR").d("CALORIES: " + calc.getKcalAccumulate());
             w.currentCalories.set(calc.getKcalAccumulate() >= 9999 ? 9999 : calc.getKcalAccumulate());
         }
 
 //        w.avgPace.set(calc.getPaceAverage());
         w.currentPower.set(calc.getWatt());
+   //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
 
 
         w.currentMets.set(calc.getMets());
