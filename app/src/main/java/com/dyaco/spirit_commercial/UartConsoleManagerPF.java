@@ -10,6 +10,14 @@ import static com.dyaco.spirit_commercial.UartConst.DS_EMS_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.WORKLOAD_MIN;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_SPEED;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_START_OR_RESUME;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_START_OR_RESUME_PF;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.KEY_UNKNOWN;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.CLICK_MINUS;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.CLICK_PLUS;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.LONG_CLICK_MINUS;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.LONG_CLICK_PLUS;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -20,6 +28,7 @@ import com.corestar.libs.ota.LwrMcuUpdateManager;
 import com.dyaco.spirit_commercial.support.CoTimer;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.UnitConv;
+import com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef;
 import com.dyaco.spirit_commercial.viewmodel.AppStatusViewModel;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -54,6 +63,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     private final WorkoutViewModel woVM;
     private final DeviceSettingViewModel dsVM;
     private final UartVM uartVM;
+    private final AppStatusViewModel appStatusViewModel;
     MainActivity m;
 
     public UartConsoleManagerPF(WorkoutViewModel woVM, MainActivity m, DeviceSettingViewModel dsVM, UartVM uartVM, AppStatusViewModel appStatusViewModel) {
@@ -62,6 +72,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         this.woVM = woVM;
         this.dsVM = dsVM;
         this.uartVM = uartVM;
+        this.appStatusViewModel = appStatusViewModel;
 
         uartVM.clearKeyStatus();
 
@@ -552,7 +563,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         setPwmViaLevel(WORKLOAD_MIN);
 
         // 清除RPM counter
-        Timber.d("⭕️setEcbIdle 設定清除RPM COUNTER(DS_82_CLEAR_RPM_COUNTER_RSP)");
+     //   Timber.d("⭕️setEcbIdle 設定清除RPM COUNTER(DS_82_CLEAR_RPM_COUNTER_RSP)");
         setDevStep(UartConst.DS_82_CLEAR_RPM_COUNTER_RSP);
         setDevRpmCounterModeEcb(DeviceDyacoMedical.RPM_COUNTER_MODE.CLEAR);
     }
@@ -688,7 +699,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         if (!uartVM.isUartConnected.get()) return;
         int devStep = getDevStep();
 
-        Timber.d("devStep: %s", devStep);
+     //   Timber.d("devStep: %s", devStep);
 
         // 這裡依機型處理
         if (MODE == UBE) {
@@ -786,28 +797,34 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     @Override
     public void onKeyTrigger(DeviceDyacoMedical.KEY key) {
 
+
+        if (!woVM.isSafeKey.get()) return;
+
+        if (m.retailVideoWindow != null && m.retailVideoWindow.isShowing()) {
+            m.retailVideoWindow.dismiss();
+            m.retailVideoWindow = null;
+            m.onUserInteraction();
+            return;
+        }
+
         Timber.d("key = %s", key.name());
-        // 若長按後放掉, 會收到KEY_UNKNOWN 0xFF屬正常
-        // 若長按後放掉, 會收到KEY_UNKNOWN 0xFF屬正常
 
         switch (key) {
-            // 端子座向上, 由左至右
-            case KEY00:
-                break;    // 面板 "-"
-            case KEY01:
-                break;    // 面板 "PLAY/STOP"
-            case KEY02:
-                break;    // 面板 "ENTER"
-            case KEY03:
-                break;    // 面板 "+"
-            case KEY04:
-                break;    // 手握 "+"
-            case KEY05:
-                break;    // 手握 "PLAY/STOP"
-            case KEY06:
-                break;    // 手握 "-"
-            case KEY07:
-            default:
+            case KEY23: // -
+                LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(CLICK_MINUS);
+                break;
+            case KEY07:  // +
+                LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(CLICK_PLUS);
+                break;
+            case KEY15: //START / STOP
+                if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_RUNNING) {
+                    Timber.tag("UartConsoleManagerPF").d("⭐⭐⭐發送  FTMS_START_OR_RESUME_PF");
+                    LiveEventBus.get(FTMS_START_OR_RESUME_PF).post(true);
+                } else {
+                    Timber.tag("UartConsoleManagerPF").d("🌞🌞🌞發送  FTMS_START_OR_RESUME");
+                    LiveEventBus.get(FTMS_START_OR_RESUME).post(true);
+                }
+
                 break;
         }
     }
@@ -817,6 +834,15 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         if (list == null) return;
 
+        if (!woVM.isSafeKey.get()) return;
+
+        if (m.retailVideoWindow != null && m.retailVideoWindow.isShowing()) {
+            m.retailVideoWindow.dismiss();
+            m.retailVideoWindow = null;
+            m.onUserInteraction();
+            return;
+        }
+
         for (DeviceDyacoMedical.KEY key : list) {
             Timber.d("multi-key = %s", key.name());
         }
@@ -825,24 +851,16 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         for (DeviceDyacoMedical.KEY key : list) {
 
             switch (key) {
-                // 端子座向上, 由左至右
-                case KEY00:
-                    break;      // 面板 "-"
-                case KEY01:
-                    break;      // 面板 "PLAY/STOP"
-                case KEY02:
-                    break;      // 面板 "ENTER"
-                case KEY03:
-                    break;      // 面板 "+"
-                case KEY04:
-                    break;      // 手握 "+"
-                case KEY05:
-                    break;      // 手握 "PLAY/STOP"
-                case KEY06:
-                    break;      // 手握 "-"
-
-                case KEY07:
-                default:
+                case KEY23: // -
+                    LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(LONG_CLICK_MINUS);
+                    break;
+                case KEY07:  // +
+                    LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(LONG_CLICK_PLUS);
+                    break;
+//                case KEY15: //START / STOP
+//                    break;
+                case KEY_UNKNOWN:
+                    LiveEventBus.get(KEY_UNKNOWN).post(true);
                     break;
             }
         }
@@ -1758,7 +1776,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 devStep == DS_ECB_IDLE_STANDBY ||
                         devStep == DS_EMS_IDLE_STANDBY);
 
-        Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
+     //   Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
 
         //workout 可以開始下指令
         uartVM.isEnterRunningReady.set(

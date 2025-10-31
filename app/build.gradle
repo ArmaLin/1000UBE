@@ -28,7 +28,7 @@ android {
         applicationId "com.dyaco.spirit_commercial"
         minSdk 34
         targetSdk 36
-        versionCode 3
+        versionCode 4
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

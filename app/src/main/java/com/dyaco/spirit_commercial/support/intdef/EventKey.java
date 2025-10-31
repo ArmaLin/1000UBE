@@ -70,6 +70,7 @@ public class EventKey {
 
 //    public static final int FTMS_START_OR_RESUME = 30001;
     public static final String FTMS_START_OR_RESUME = "FTMS_START_OR_RESUME";
+    public static final String FTMS_START_OR_RESUME_PF = "FTMS_START_OR_RESUME_PF";
     public static final String FTMS_STOP_OR_PAUSE = "FTMS_STOP_OR_PAUSE";
     public static final String FTMS_SET_TARGET_SPEED = "FTMS_SET_TARGET_SPEED";
     public static final String NEW_UPDATE_VALUE = "NEW_UPDATE_VALUE";

@@ -45,6 +45,7 @@ import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGE
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_POWER;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_RESISTANCE_LEVEL;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_SPEED;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_START_OR_RESUME_PF;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_STOP_OR_PAUSE;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.GARMIN_ON_DEVICE_DISCONNECTED;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.KEY_UNKNOWN;
@@ -1086,6 +1087,45 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 u.setBuzzer();
             }
             longClickBuzzerCheck = false;
+        });
+
+
+        //PF STOP
+        LiveEventBus.get(FTMS_START_OR_RESUME_PF).observe(getViewLifecycleOwner(), s -> {
+
+            if (appStatusViewModel.currentStatus.get() != AppStatusIntDef.STATUS_RUNNING) return;
+            Timber.tag("UartConsoleManagerPF").d("⭐️STOPPPPPPPP: ");
+
+            //等狀態
+            if (isTreadmill && (u.getDevStep() != DS_RUNNING_STANDBY && u.getDevStep() != DS_B5_RUNNING_AD_CHANGE_RSP) && !isEmulator) {
+                return;
+            }
+
+            if (CheckDoubleClick.isFastClick2()) return;
+
+            //外部控制PAUSE
+            if (w.selProgram == CTT_PREDICTION || w.selProgram == CTT_PERFORMANCE || w.selProgram == GERKIN) {
+                //下方STOP按鈕 直接結束
+                LiveEventBus.get(FITNESS_TEST_STOP_WORKOUT).post(true);
+                return;
+            }
+
+            if (w.isWarmUpIng.get() || w.isCoolDowning.get()) {
+
+                getBinding().btnSkip.callOnClick();
+                u.setBuzzer();
+                return;
+            }
+
+            if (appStatusViewModel.currentStatus.get() == AppStatusIntDef.STATUS_RUNNING) {
+
+                if (isResuming) return; //WorkoutPauseFragment Resume 倒數中，不執行Stop
+
+                getBinding().btnWorkoutStop.callOnClick();
+                u.setBuzzer();
+                //MediaMenu狀態改變
+                LiveEventBus.get(MEDIA_MENU_CHANGE).post("");
+            }
         });
 
         //FTMS控制 STOP_OR_PAUSE
