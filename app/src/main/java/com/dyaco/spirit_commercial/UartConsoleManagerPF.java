@@ -798,6 +798,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     public void onKeyTrigger(DeviceDyacoMedical.KEY key) {
 
 
+     //   UserActivityUtil.pokeUserActivity(getApp());
+
         if (!woVM.isSafeKey.get()) return;
 
         if (m.retailVideoWindow != null && m.retailVideoWindow.isShowing()) {
