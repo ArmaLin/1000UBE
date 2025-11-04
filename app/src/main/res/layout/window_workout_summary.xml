@@ -612,8 +612,8 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 app:ubeText="@{modeEnum}"
-                app:textUbe="@{String.valueOf(workoutData.avgRpm)}"
-                app:textOther="@{String.valueOf(workoutData.avgRpm * 2)}"
+                app:textUbe="@{comm.formatDecimal(workoutData.avgRpm,0)}"
+                app:textOther="@{comm.formatDecimal(workoutData.avgRpm * 2,0)}"
                 android:id="@+id/tvP7Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

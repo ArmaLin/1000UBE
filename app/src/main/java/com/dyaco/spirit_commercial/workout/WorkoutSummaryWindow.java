@@ -1084,15 +1084,19 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
     private void saveDataToWorkOutBean() {
 
-        w.peakRpm.set(w.rpmList.stream()
-                .mapToInt(Integer::intValue)
-                .max()
-                .orElse(0));
+//        w.peakRpm.set(w.rpmList.stream()
+//                .mapToInt(Integer::intValue)
+//                .max()
+//                .orElse(0));
 
-        w.peakMets.set(w.metsList.stream()
-                .mapToDouble(Double::doubleValue)
-                .max()
-                .orElse(0.0));
+//        w.peakMets.set(w.metsList.stream()
+//                .mapToDouble(Double::doubleValue)
+//                .max()
+//                .orElse(0.0));
+
+        if (w.avgLevel.get() == 0) {
+            w.avgLevel.set(w.currentLevel.get());
+        }
 
 
         if (w.selProgram.getProgramType() == WorkoutIntDef.PROFILE_PROGRAM & isTreadmill) {

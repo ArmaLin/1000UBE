@@ -204,6 +204,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
@@ -2312,6 +2313,10 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      */
     private void workoutRunning() {
 
+        Random randomGenerator = new Random();
+        int randomRpm = randomGenerator.nextInt(151);
+        w.currentRpm.set(randomRpm);
+
         //安全鎖判斷
         //   if (!w.isSafeKey.get()) return;
 
@@ -2771,6 +2776,15 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w.currentMets.set(calc.getMets());
         w.currentElevationGain.set(calc.getAltitudeAccumulate());
 
+        w.peakMets.set(calc.getMetsMax());
+
+
+        w.peakRpm.set(calc.getRpmMax());
+
+
+      //  calc.getRpmMax()
+
+      //  Log.d("DDDDDDDDD", "calcWorkoutData: " +calc.getRpmMax());
 
         w.avgMet.set(calc.getMetsAverage());
         w.totalCalories.set(calc.getKcalAccumulate());
