@@ -24,8 +24,9 @@
     <!-- Permission used by Health SDK Sample, not required for SDK use -->
 <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>-->
 
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" tools:ignore="ExactAlarmPolicy" />
 
-<!--    android:sharedUserId="android.uid.system"-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED"/>
     <uses-permission android:name="android.permission.SERIAL_PORT" tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
@@ -109,6 +110,7 @@
 
 <!--    android:persistent="true"-->
     <application
+        android:resizeableActivity="false"
         android:requestLegacyExternalStorage="true"
         android:name=".App"
         android:allowBackup="true"
@@ -224,6 +226,12 @@
 <!--        <meta-data-->
 <!--            android:name="com.garmin.health.foreground_notification_title"-->
 <!--            android:value="Garmin Health Service"/>-->
+
+        <service
+            android:name=".support.KeepAliveService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="systemExempted" />
     </application>
 
 </manifest>

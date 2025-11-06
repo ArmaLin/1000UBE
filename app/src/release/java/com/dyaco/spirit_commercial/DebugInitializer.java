@@ -11,6 +11,6 @@ public class DebugInitializer {
 
 
     // TODO: 開log
-      //  Timber.plant(new Timber.DebugTree());
+    //    Timber.plant(new Timber.DebugTree());
   }
 }

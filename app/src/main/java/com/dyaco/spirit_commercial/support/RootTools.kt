@@ -306,4 +306,23 @@ object RootTools {
             Timber.e(e)
         }
     }
+
+
+    @JvmStatic
+    fun addAppToWhitelist(packageName: String): Boolean {
+        val command = "dumpsys deviceidle whitelist +$packageName"
+        val actionName = "add '$packageName' to Doze whitelist"
+        return execute(command, actionName)
+    }
+
+
+    @JvmStatic
+    fun removeAppFromWhitelist(packageName: String): Boolean {
+        val command = "dumpsys deviceidle whitelist -$packageName"
+        val actionName = "remove '$packageName' from Doze whitelist"
+        return execute(command, actionName)
+    }
+
+
+
 }
