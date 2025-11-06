@@ -28,7 +28,7 @@ android {
         applicationId "com.dyaco.spirit_commercial"
         minSdk 34
         targetSdk 36
-        versionCode 5
+        versionCode 6
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -337,7 +337,7 @@ dependencies {
 //    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 //    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
-//    implementation files('libs/garmin-health-companion-sdk-367-nousb.aar')
+//    implementation files('libs/garmin-health-companion-sdk_4.4.1.aar')
     implementation files('libs/garmin-health-companion-sdk.aar')
 
     //implementation files('libs/RemoteService-release.aar')

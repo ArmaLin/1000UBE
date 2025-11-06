@@ -204,7 +204,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
@@ -2313,9 +2312,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      */
     private void workoutRunning() {
 
-        Random randomGenerator = new Random();
-        int randomRpm = randomGenerator.nextInt(151);
-        w.currentRpm.set(randomRpm);
+//        Random randomGenerator = new Random();
+//        int randomRpm = randomGenerator.nextInt(151);
+//        w.currentRpm.set(randomRpm);
 
         //安全鎖判斷
         //   if (!w.isSafeKey.get()) return;
