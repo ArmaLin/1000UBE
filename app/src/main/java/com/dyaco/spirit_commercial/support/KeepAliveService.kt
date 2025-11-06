@@ -7,11 +7,11 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.lifecycle.LifecycleService
 import com.dyaco.spirit_commercial.R
+import timber.log.Timber
 
 /**
  * <uses-permission android:name="android.permission.USE_EXACT_ALARM" tools:ignore="ExactAlarmPolicy" />
@@ -41,7 +41,7 @@ class KeepAliveService : LifecycleService() {
             try {
                 context.startForegroundService(startIntent)
             } catch (e: Exception) {
-                Log.e(TAG, "啟動服務失敗:$e")
+                Timber.tag(TAG).e("啟動服務失敗:$e")
             }
         }
     }
@@ -49,7 +49,7 @@ class KeepAliveService : LifecycleService() {
     @SuppressLint("InlinedApi")
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "onCreate: 服務建立中...")
+        Timber.tag(TAG).d("onCreate: 服務建立中...")
 
         val notification = createLowPriorityNotification()
 
@@ -60,21 +60,22 @@ class KeepAliveService : LifecycleService() {
                 notification,
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED
             )
-            Log.d(TAG, "onCreate: startForeground 成功。")
+            Timber.tag(TAG).d("onCreate: startForeground 成功。")
         } catch (e: Exception) {
             // 如果這裡出錯，通常是 Manifest 權限沒設對，或簽章不符
-            Log.e(TAG, "onCreate: startForeground 失敗! 請檢查 'systemExempted' 權限和簽章。", e)
+            Timber.tag(TAG)
+                .e(e, "onCreate: startForeground 失敗! 請檢查 'systemExempted' 權限和簽章。")
         }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        Log.d(TAG, "onStartCommand: 服務已啟動 (startId: $startId, flags: $flags)")
+        Timber.tag(TAG).d("onStartCommand: 服務已啟動 (startId: $startId, flags: $flags)")
         return START_STICKY // 確保服務被殺掉後會重啟
     }
 
     override fun onDestroy() {
-        Log.d(TAG, "onDestroy: 服務被銷毀。")
+        Timber.tag(TAG).d("onDestroy: 服務被銷毀。")
         super.onDestroy()
     }
 
