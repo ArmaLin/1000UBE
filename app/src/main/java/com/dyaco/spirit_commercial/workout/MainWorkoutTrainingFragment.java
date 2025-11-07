@@ -1045,6 +1045,13 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      * @param isStart 開始或暫停
      */
     private void setFtmsEquipmentType(boolean isStart) {
+
+        if (parent == null || !isAdded()) {
+            Timber.tag("GEM3").w("setFtmsEquipmentType called, but parent is null or fragment is not added. Aborting.");
+            return;
+        }
+
+
         Map<DeviceGEM.EQUIPMENT_CONTROL_PARAMETER, Integer> parameters = new HashMap<>();
         Log.d("GEM3", "setFtmsEquipmentType: " + isStart);
         if (!isStart) { // false

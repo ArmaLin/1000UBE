@@ -16,6 +16,7 @@ import static com.dyaco.spirit_commercial.support.intdef.EventKey.NO_HR_HIDE_BUT
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.PAUSE_WORKOUT;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.PROGRAM_CHOOSE;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.RESUME_WORKOUT;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.SHOW_PANELS;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.START_PAUSE;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.START_WORKOUT;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.STEP1_TO_STEP_2;
@@ -370,7 +371,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
                 mbTraining.callOnClick();
             }
 
-            //   ((MainActivity) requireActivity()).showYouTube(false);
+            LiveEventBus.get(SHOW_PANELS).post(true);
 
             //開啟Summary
             workoutSummaryWindow = new WorkoutSummaryWindow(requireActivity(), workoutViewModel, deviceSettingViewModel, appStatusViewModel, egymDataViewModel);
