@@ -181,7 +181,7 @@ public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPau
 
            //     parent.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters);
 
-                safeParent(p-> p.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters));
+                withParent(p-> p.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters));
             });
 
 //            appStatusViewModel.currentStatus.set(AppStatusIntDef.STATUS_SUMMARY);

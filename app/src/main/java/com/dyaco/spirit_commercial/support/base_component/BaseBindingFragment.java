@@ -30,7 +30,7 @@ public abstract class BaseBindingFragment<VB extends ViewBinding> extends Fragme
     }
 
 
-    protected void safeParent(Consumer<MainActivity> action) {
+    protected void withParent(Consumer<MainActivity> action) {
         if (parent != null && isAdded()) {
             try {
                 action.accept(parent);
