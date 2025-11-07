@@ -47,8 +47,6 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import java.util.HashMap;
 import java.util.Map;
 
-import timber.log.Timber;
-
 
 public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPauseBinding> {
     public static boolean isResuming = false;
@@ -179,15 +177,11 @@ public class WorkoutPauseFragment extends BaseBindingFragment<FragmentWorkoutPau
                 //結束Pause 到Summary > uartConsole.setDevWorkoutFinish();
                 LiveEventBus.get(STOP_WORKOUT).post("");
 
-                if (parent == null || !isAdded()) {
-                    Timber.tag("GEM3").w("setFtmsEquipmentType called, but parent is null or fragment is not added. Aborting.");
-                    return;
-                }
-
                 Map<DeviceGEM.EQUIPMENT_CONTROL_PARAMETER, Integer> parameters = new HashMap<>();
 
-//                parent.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.PAUSE_OR_STOPPED_BY_THE_USER, parameters);
-                parent.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters);
+           //     parent.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters);
+
+                safeParent(p-> p.updateFtmsMachineStatus(DeviceGEM.FITNESS_EQUIPMENT_STATE.FINISHED, parameters));
             });
 
 //            appStatusViewModel.currentStatus.set(AppStatusIntDef.STATUS_SUMMARY);

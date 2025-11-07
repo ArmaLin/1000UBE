@@ -13,6 +13,10 @@ import androidx.viewbinding.ViewBinding;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dylanc.viewbinding.base.ViewBindingUtil;
 
+import java.util.function.Consumer;
+
+import timber.log.Timber;
+
 public abstract class BaseBindingFragment<VB extends ViewBinding> extends Fragment {
     protected MainActivity parent;
     private VB binding;
@@ -23,6 +27,19 @@ public abstract class BaseBindingFragment<VB extends ViewBinding> extends Fragme
         binding = ViewBindingUtil.inflateWithGeneric(this, getLayoutInflater(), container, false);
         parent = ((MainActivity) requireActivity());
         return binding.getRoot();
+    }
+
+
+    protected void safeParent(Consumer<MainActivity> action) {
+        if (parent != null && isAdded()) {
+            try {
+                action.accept(parent);
+            } catch (Exception e) {
+                Timber.e(e, "Error during safeParentExecute");
+            }
+        } else {
+            Timber.w("safeParentExecute skipped: Fragment not attached or parent is null.");
+        }
     }
 
     @Override
