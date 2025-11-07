@@ -108,13 +108,17 @@
  -->
 <!--    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />-->
 
+
 <!--    android:persistent="true"-->
+<!--    android:configChanges="uiMode|layoutDirection|screenSize|orientation|keyboardHidden"-->
+<!--    android:configChanges="uiMode|locale|layoutDirection|screenSize|orientation|"-->
+<!--    android:configChanges="orientation|keyboardHidden|screenSize"-->
     <application
+        android:configChanges="uiMode|layoutDirection|screenSize|orientation|keyboardHidden"
         android:resizeableActivity="false"
         android:requestLegacyExternalStorage="true"
         android:name=".App"
         android:allowBackup="true"
-        android:configChanges="orientation|keyboardHidden|screenSize"
         android:extractNativeLibs="true"
         android:fullBackupContent="@xml/my_backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"

@@ -1917,11 +1917,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         super.onDestroy();
 
 
-        if (mAudioDeviceWatcher != null) {
-            mAudioDeviceWatcher.removeListener();
-            mAudioDeviceWatcher = null;
-        }
-
         if (internetNotifyWarringWindow != null) {
             internetNotifyWarringWindow.dismiss();
             internetNotifyWarringWindow = null;
