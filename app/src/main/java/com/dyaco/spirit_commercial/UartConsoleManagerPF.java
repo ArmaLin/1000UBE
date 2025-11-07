@@ -1028,6 +1028,16 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // getApp().getGem3Manager().initialize();
     }
 
+    @Override
+    public void onDeviceInfoDK(DeviceDyacoMedical.DK_MACHINE_TYPE var1, String var2, String var3, String var4, int var5, String var6, String var7) {
+
+    }
+
+    @Override
+    public void onLedHubMode(DeviceDyacoMedical.LED_TYPE ledType, List<DeviceDyacoMedical.LED_HUB_MODE> ledHubModes) {
+
+    }
+
     public void setEmsMachineType() {
         DeviceDyacoMedical.MACHINE_TYPE devMachineType = DeviceDyacoMedical.MACHINE_TYPE.UNKNOWN;
 
@@ -1136,7 +1146,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
     }
 
+    @Override
+    public void onMcuControlDK(DeviceDyacoMedical.DK_MACHINE_TYPE var1, List<DeviceDyacoMedical.MCU_ERROR> var2, int var3, int var4, DeviceDyacoMedical.ACTION_STATUS var5, int var6, DeviceDyacoMedical.SAFE_KEY var7, int var8, int var9, DeviceDyacoMedical.DIRECTION var10, int var11, DeviceDyacoMedical.ACTION_STATUS var12, int var13, int var14, int var15, int var16, List<DeviceDyacoMedical.DK_EMS_ERROR> dkEmsErrors) {
 
+    }
 
 
     /**
@@ -1520,6 +1533,11 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onConsoleModeDK(DeviceDyacoMedical.DK_MACHINE_TYPE var1, DeviceDyacoMedical.CONSOLE_MODE var2) {
+
     }
 
     private void setEmsConsoleMode() {

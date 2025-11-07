@@ -428,7 +428,8 @@ dependencies {
 
     //implementation files('libs/libusb-release.aar')
     implementation files('libs/LibraryCalculation-v0.1.0-0916b-release.aar')
-    implementation files('libs/corestarlib-v0.1.0-20250910a-release.aar')
+//    implementation files('libs/corestarlib-v0.1.0-20250910a-release.aar')
+    implementation files('libs/corestarlib-v0.1.0-20251106a-release.aar')
     implementation files('libs/HdmiIn.aar')
 
     implementation 'com.github.addisonelliott:SegmentedButton:3.1.9'

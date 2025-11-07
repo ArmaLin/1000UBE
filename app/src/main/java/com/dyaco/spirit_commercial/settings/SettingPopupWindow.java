@@ -188,12 +188,13 @@ public class SettingPopupWindow extends BasePopupWindow<PopupSettingBinding> {
         App.isShowMediaMenuOnStop = false;
         new RxTimer().timer(200, number -> {
             dismiss();
-            ((MainActivity) mContext).webApiLogout();
-
+            LanguageUtils.changeLanguageSetting(loc);
             //todo app語言
             int t = isTreadmill ? 1000 : 500;
 //            new RxTimer().timer(t, x -> LanguageUtils.updateLanguage(loc));
-            new RxTimer().timer(t, x -> LanguageUtils.changeLanguageSetting(loc));
+            new RxTimer().timer(t, x -> {
+                ((MainActivity) mContext).webApiLogout();
+            });
         });
 
 

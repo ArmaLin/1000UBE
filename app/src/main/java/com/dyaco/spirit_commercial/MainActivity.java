@@ -87,6 +87,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
@@ -95,6 +96,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -324,9 +326,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         SplashScreen.installSplashScreen(this);
 
 
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
         //   MMKV.defaultMMKV().encode(IMAGE_KEY, 0);
-
+        Timber.tag("ZZZZCCCCCCC").d("######onCreate: ");
 
         //garminUnPair();
         clearAppData();
@@ -1917,6 +1919,11 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         super.onDestroy();
 
 
+//        if (mAudioDeviceWatcher != null) {
+//            mAudioDeviceWatcher.removeListener();
+//            mAudioDeviceWatcher = null;
+//        }
+
         if (internetNotifyWarringWindow != null) {
             internetNotifyWarringWindow.dismiss();
             internetNotifyWarringWindow = null;
@@ -2572,6 +2579,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     @SuppressLint("MissingPermission")
     public void webApiLogout() {
 
+        Log.d("ZZZZCCCCCCC", "webApiLogout: ");
+
         CommonUtils.wakeUpScreen(null);
 
         if (hdmiIn != null) {
@@ -3094,5 +3103,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         }
     }
 
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
 
+        Log.d("ZZZZCCCCCCC", "onConfigurationChanged: ");
+    }
 }
