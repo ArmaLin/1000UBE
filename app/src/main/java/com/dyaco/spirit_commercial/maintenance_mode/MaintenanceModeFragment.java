@@ -3,6 +3,7 @@ package com.dyaco.spirit_commercial.maintenance_mode;
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.SETTING_SHOW;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
@@ -15,6 +16,7 @@ import static com.dyaco.spirit_commercial.support.CommonUtils.getBrightnessPrese
 import static com.dyaco.spirit_commercial.support.CommonUtils.getMaxBrightness;
 import static com.dyaco.spirit_commercial.support.CommonUtils.getMinBrightness;
 import static com.dyaco.spirit_commercial.support.CommonUtils.getScreenBrightness;
+import static com.dyaco.spirit_commercial.support.CommonUtils.getSleepTime;
 import static com.dyaco.spirit_commercial.support.CommonUtils.saveBrightness;
 import static com.dyaco.spirit_commercial.support.CommonUtils.secToTimeHour;
 import static com.dyaco.spirit_commercial.support.CommonUtils.secToTimeMin;
@@ -101,6 +103,9 @@ import com.jaygoo.widget.OnRangeChangedListener;
 import com.jaygoo.widget.RangeSeekBar;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +117,7 @@ import es.dmoral.toasty.Toasty;
 public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanceBinding> {
 
 
+    private static final Logger log = LoggerFactory.getLogger(MaintenanceModeFragment.class);
     private AppStatusViewModel appStatusViewModel;
     private DeviceSettingViewModel deviceSettingViewModel;
 
@@ -237,37 +243,15 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
             Log.d("#####CCCCCC", "資料夾已存在 ");
         }
 
-        // Log.d("PPPEEEE", "onViewCreated: " +deviceSettingViewModel.typeName.get());
-        // Log.d("PPPEEEE", "onViewCreated: " +deviceSettingViewModel.typeCode.get());
+        if (MODE.isStepperType()) {
+            getBinding().hideSleepAfter.setVisibility(VISIBLE);
+            getBinding().hideSleepSec.setVisibility(VISIBLE);
+            getBinding().scSleepMode.setEnabled(false);
+            getBinding().scSleepMode.setVisibility(INVISIBLE);
+        }
 
-        //   getBinding().tvType.setOnClickListener(x -> {
 
-
-//            final String[] dinner = {"TREADMILL","ELLIPTICAL","UPRIGHT BIKE","RECUMBENT BIKE"};
-//            AlertDialog.Builder dialog_list = new AlertDialog.Builder(requireActivity());
-//            dialog_list.setItems(dinner, (dialog, which) -> {
-//                DeviceSettingBean d = getApp().getDeviceSettingBean();
-//                switch (which) {
-//                    case 0:
-//                        d.setType(DeviceIntDef.DEVICE_TYPE_TREADMILL);
-//                        break;
-//                    case 1:
-//                        d.setType(DeviceIntDef.DEVICE_TYPE_ELLIPTICAL);
-//                        break;
-//                    case 2:
-//                        d.setType(DeviceIntDef.DEVICE_TYPE_UPRIGHT_BIKE);
-//                        break;
-//                    case 3:
-//                        d.setType(DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE);
-//                        break;
-//                }
-//                getApp().setDeviceSettingBean(d);
-//                new CommonUtils().mmkvDeviceSettingToViewModel(deviceSettingViewModel, getApp().getDeviceSettingBean());
-//
-//
-//            });
-//            dialog_list.show();
-        //    });
+        Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
 
 
     }

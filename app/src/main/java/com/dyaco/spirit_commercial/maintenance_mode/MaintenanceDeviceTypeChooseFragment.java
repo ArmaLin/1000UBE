@@ -121,6 +121,10 @@ public class MaintenanceDeviceTypeChooseFragment extends BaseBindingDialogFragme
                 case 5:
                     type = DeviceIntDef.DEVICE_TYPE_STEPPER;
                     modeEnum = STEPPER;
+
+                  //  setSleepMode(SCREEN_TIMEOUT_NEVER);
+
+
                     break;
             }
 

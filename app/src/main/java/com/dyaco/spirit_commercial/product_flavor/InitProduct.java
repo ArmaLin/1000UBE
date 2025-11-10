@@ -6,6 +6,7 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SY
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEFAULT_AUTO_PAUSE_TIME;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEFAULT_DISPLAY_BRIGHTNESS;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEFAULT_USE_TIME_LIMIT;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.OFF;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.ON;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.PROTOCOL_CSAFE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.SCREEN_TIMEOUT_15;
@@ -197,9 +198,17 @@ public class InitProduct {
             case CR1000ENT:
             case CU1000ENT:
             case UBE:
+                deviceSettingBean.setAutoPause(ON);//auto logout
+                deviceSettingBean.setPauseAfter(DEFAULT_AUTO_PAUSE_TIME);
+
+                deviceSettingBean.setSleep_mode(ON);
+                deviceSettingBean.setSleepAfter(SCREEN_TIMEOUT_15 / 1000);
+                break;
             case STEPPER:
                 deviceSettingBean.setAutoPause(ON);//auto logout
                 deviceSettingBean.setPauseAfter(DEFAULT_AUTO_PAUSE_TIME);
+                deviceSettingBean.setSleep_mode(OFF);
+                deviceSettingBean.setSleepAfter(SCREEN_TIMEOUT_NEVER);
                 break;
             default:
         }
@@ -225,8 +234,8 @@ public class InitProduct {
         deviceSettingBean.setUnit_code(unit);
 
         //SLEEP MODE
-        deviceSettingBean.setSleep_mode(ON);
-        deviceSettingBean.setSleepAfter(SCREEN_TIMEOUT_15 / 1000);
+//        deviceSettingBean.setSleep_mode(ON);
+//        deviceSettingBean.setSleepAfter(SCREEN_TIMEOUT_15 / 1000);
 
         deviceSettingBean.setProtocol(PROTOCOL_CSAFE);
         //  deviceSettingBean.setNfc(NFC_MEMBERSHIP);
