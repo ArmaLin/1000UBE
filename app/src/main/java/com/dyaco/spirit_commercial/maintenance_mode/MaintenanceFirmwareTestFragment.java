@@ -62,9 +62,9 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
         getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
 
-        LiveEventBus.get(ON_USB_MODE_SET, DeviceSpiritC.MCU_SET.class)
+        LiveEventBus.get(ON_USB_MODE_SET, DeviceDyacoMedical.MCU_SET.class)
                 .observe(getViewLifecycleOwner(), s -> {
-                            if (s == DeviceSpiritC.MCU_SET.OK) {
+                            if (s == DeviceDyacoMedical.MCU_SET.OK) {
                                 initUsbReadManager();
                             } else {
                                 getBinding().progress.setVisibility(View.INVISIBLE);

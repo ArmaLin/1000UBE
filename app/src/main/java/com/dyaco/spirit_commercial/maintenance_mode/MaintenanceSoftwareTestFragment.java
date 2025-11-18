@@ -237,9 +237,9 @@ public class MaintenanceSoftwareTestFragment extends BaseBindingDialogFragment<F
 
     private void initUsbUpdate() {
         ///開啟 USB DATA 模試 ,接收回傳結果
-        LiveEventBus.get(ON_USB_MODE_SET, DeviceSpiritC.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
+        LiveEventBus.get(ON_USB_MODE_SET, DeviceDyacoMedical.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
 
-                    if (s == DeviceSpiritC.MCU_SET.OK) {
+                    if (s == DeviceDyacoMedical.MCU_SET.OK) {
                         initUsbReadManager();
 
                     } else {

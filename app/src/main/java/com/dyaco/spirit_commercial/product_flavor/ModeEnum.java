@@ -15,6 +15,7 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYP
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_UPRIGHT_BIKE;
 
 import com.corestar.calculation_libs.WattTable;
+import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.support.CommonUtils;
 
@@ -27,8 +28,8 @@ public enum ModeEnum {
     CE1000ENT(DEVICE_TYPE_ELLIPTICAL, DEVICE_MODEL_CE1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getEllipticalLevelAD(), "CE1000", "ELLIPTICAL"),
     CU1000ENT(DEVICE_TYPE_UPRIGHT_BIKE, DEVICE_MODEL_CU1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getBikeLevelAD(), "CU1000", "UPRIGHT BIKE"),
     CR1000ENT(DEVICE_TYPE_RECUMBENT_BIKE, DEVICE_MODEL_CR1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getBikeLevelAD(), "CR1000", "RECUMBENT BIKE"),
-    UBE(DEVICE_TYPE_UBE, DEVICE_MODEL_UBE, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getPWMs_RZ(), "UBE", "UBE"),
-    STEPPER(DEVICE_TYPE_STEPPER, DEVICE_MODEL_STEPPER, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_MS(), getPWMs_MS(), "STEPPER", "STEPPER");
+    UBE(DEVICE_TYPE_UBE, DEVICE_MODEL_UBE, DeviceDyacoMedical.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getPWMs_RZ(), "UBE", "UBE"),
+    STEPPER(DEVICE_TYPE_STEPPER, DEVICE_MODEL_STEPPER, DeviceDyacoMedical.MODEL.ECB_AND_INC.getType(), getWattTable_MS(), getPWMs_MS(), "STEPPER", "STEPPER");
 
     private WattTable wattTable = null;
 

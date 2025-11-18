@@ -85,8 +85,8 @@ public class MaintenanceRetailModeVideoFragment extends BaseBindingDialogFragmen
     }
 
     private void initUsbUpdate() {
-        LiveEventBus.get(ON_USB_MODE_SET, DeviceSpiritC.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
-                    if (s == DeviceSpiritC.MCU_SET.OK) {
+        LiveEventBus.get(ON_USB_MODE_SET, DeviceDyacoMedical.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
+                    if (s == DeviceDyacoMedical.MCU_SET.OK) {
                         initUsbReadManager();
                     } else {
                         Toasty.warning(requireActivity(), "USB_MODE ERROR", Toasty.LENGTH_SHORT).show();

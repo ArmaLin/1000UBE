@@ -20,15 +20,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.corestar.libs.device.DeviceDyacoMedical;
-import com.corestar.libs.device.DeviceSpiritC;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceSplashScreenImageBinding;
 import com.dyaco.spirit_commercial.support.CommonUtils;
-import com.bumptech.glide.Glide;
 import com.dyaco.spirit_commercial.support.SplashImageProcessor;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingDialogFragment;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
@@ -43,6 +42,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import java.io.File;
 
 import es.dmoral.toasty.Toasty;
+import timber.log.Timber;
 
 /**
  * usb讀取若有問題 > console重開看看
@@ -80,6 +80,7 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
         //開啟 USB DATA 模試
         getDeviceSpiritC().setUsbMode(DeviceDyacoMedical.USB_MODE.DATA);
 
+
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
         getBinding().setDeviceSettingViewModel(deviceSettingViewModel);
 
@@ -99,8 +100,11 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 
     private void initUsbUpdate() {
         ///開啟 USB DATA 模試 ,接收回傳結果
-        LiveEventBus.get(ON_USB_MODE_SET, DeviceSpiritC.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
-                    if (s == DeviceSpiritC.MCU_SET.OK) {
+        LiveEventBus.get(ON_USB_MODE_SET, DeviceDyacoMedical.MCU_SET.class).observe(getViewLifecycleOwner(), s -> {
+//            DeviceSpiritC
+                    Timber.tag("#UART_CONSOLE").d("11111initUsbUpdate: " + s);
+                    if (s == DeviceDyacoMedical.MCU_SET.OK) {
+                        Timber.tag("#UART_CONSOLE").d("222222initUsbUpdate: " + s);
                         //USB_MODE OK 執行USB
                         initUsbReadManager();
 
@@ -133,7 +137,6 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 //                                Log.e("ExfatMounter", "掛載失敗：" + errorMessage);
 //                            }
 //                        });
-
 
 
                     } else {
@@ -249,7 +252,7 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 
             @Override
             public void onProgress(long current, long total) {
-             //   Log.d(TAG, "onProgress: " + current +","+ total);
+                //   Log.d(TAG, "onProgress: " + current +","+ total);
             }
 
         });
@@ -286,7 +289,6 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
         });
 
 
-
 //        new Thread(() -> {
 //            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 //            Bitmap bitmap = BitmapFactory.decodeFile(new File(tempPath).getAbsolutePath(), bmOptions);
@@ -318,7 +320,8 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 //        } catch (FileNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
-////        newBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos); //png 壓不了
+
+    /// /        newBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos); //png 壓不了
 //        newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 //
 //
@@ -327,7 +330,6 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 //        }
 //
 //    }
-
     private void initEvent() {
 
         getBinding().ivPPP.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +357,7 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
 
         getBinding().btnDone.setOnClickListener(view -> {
             if (CheckDoubleClick.isFastClick()) return;
-       //     getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
+            //     getDeviceSpiritC().setUsbMode(DeviceSpiritC.USB_MODE.CHARGER);
             closeUsb();
             dismiss();
         });
