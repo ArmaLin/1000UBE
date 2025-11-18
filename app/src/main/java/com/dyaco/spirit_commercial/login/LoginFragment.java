@@ -319,9 +319,9 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             mainActivity.uartConsole.setBuzzer();
 
             //      RFID_CODE = toHex(rfidCode);
-            //      RFID_CODE = rfidCode;
+                  RFID_CODE = rfidCode;
 
-            RFID_CODE = reverseUidHex(rfidCode);
+         //   RFID_CODE = reverseUidHex(rfidCode);
 
 
             Timber.tag(EgymUtil.TAG).d("uid: %s", rfidCode);

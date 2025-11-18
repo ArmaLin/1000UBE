@@ -19,7 +19,7 @@ android {
     ext {
         HardWareVersion = "V1.0"
         SoftWareVersion = "A.1.0.0"  //A.x.x.0測試
-        sVersion = "A"
+        sVersion = "B"
         SerialNumber = getFormattedDate('MMdd') + sVersion
         FirmWareVersion = "37"
     }
@@ -28,7 +28,7 @@ android {
         applicationId "com.dyaco.spirit_commercial"
         minSdk 34
         targetSdk 36
-        versionCode 7
+        versionCode 9
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

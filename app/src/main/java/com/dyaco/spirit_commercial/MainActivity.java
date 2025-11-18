@@ -1924,6 +1924,16 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 //            mAudioDeviceWatcher = null;
 //        }
 
+
+        if (popupWindow != null && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        }
+
+        if (btNotifyWindow != null && btNotifyWindow.isShowing()) {
+            btNotifyWindow.dismiss();
+            btNotifyWindow = null;
+        }
+
         if (internetNotifyWarringWindow != null) {
             internetNotifyWarringWindow.dismiss();
             internetNotifyWarringWindow = null;

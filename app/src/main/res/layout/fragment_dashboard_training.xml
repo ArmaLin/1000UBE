@@ -389,15 +389,15 @@
 <!--            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"-->
 <!--            app:layout_constraintTop_toTopOf="@+id/iv_left_bg" />-->
 
-        <com.dyaco.spirit_commercial.support.custom_view.CustomProgressView
-            android:id="@+id/egymProgress"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_left_bg"
-            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"
-            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"
-            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"/>
+<!--        <com.dyaco.spirit_commercial.support.custom_view.CustomProgressView-->
+<!--            android:id="@+id/egymProgress"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/iv_left_bg"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/iv_left_bg"/>-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

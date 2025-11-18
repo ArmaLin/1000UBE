@@ -11,8 +11,10 @@ import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.MainActivity.userProfileViewModel;
 import static com.dyaco.spirit_commercial.egym.EgymUtil.EGYM_MACHINE_TYPE;
 import static com.dyaco.spirit_commercial.login.LoginFragment.isGuestQuickStart;
+import static com.dyaco.spirit_commercial.support.CommonUtils.getSleepTime;
 import static com.dyaco.spirit_commercial.support.CommonUtils.iExc;
 import static com.dyaco.spirit_commercial.support.CommonUtils.ignoringExc;
+import static com.dyaco.spirit_commercial.support.CommonUtils.setSleepMode;
 import static com.dyaco.spirit_commercial.support.CommonUtils.showException;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.kg2lbPure;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.lb2kgPure;
@@ -30,6 +32,7 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMinWeig
 
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -205,7 +208,13 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
         }
 
 
+        Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
 
+        if (MODE.isStepperType()) {
+            setSleepMode(28800000);
+        }
+
+        Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
     }
 
     EgymBannerAdapter egymBannerAdapter;
@@ -524,7 +533,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 getBinding().viewEgymNoPlan.setVisibility(View.GONE);
                 getBinding().viewEgym.setVisibility(View.GONE);
 
-                getBinding().egymProgress.setVisibility(View.VISIBLE);
+           //     getBinding().egymProgress.setVisibility(View.VISIBLE);
 
                 egymDataViewModel.egymTrainingPlansData.observe(getViewLifecycleOwner(), egymTrainingPlans -> {
                     //      LogS.printJson("EGYMMMMM", new Gson().toJson(egymTrainingPlans), "GetTrainingPlans");
@@ -532,7 +541,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 
                     initEgymView(egymTrainingPlans);
 
-                    getBinding().egymProgress.setVisibility(View.GONE);
+               //     getBinding().egymProgress.setVisibility(View.GONE);
 
                 });
 

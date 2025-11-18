@@ -243,12 +243,12 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
             Log.d("#####CCCCCC", "資料夾已存在 ");
         }
 
-        if (MODE.isStepperType()) {
-            getBinding().hideSleepAfter.setVisibility(VISIBLE);
-            getBinding().hideSleepSec.setVisibility(VISIBLE);
-            getBinding().scSleepMode.setEnabled(false);
-            getBinding().scSleepMode.setVisibility(INVISIBLE);
-        }
+//        if (MODE.isStepperType()) {
+//            getBinding().hideSleepAfter.setVisibility(VISIBLE);
+//            getBinding().hideSleepSec.setVisibility(VISIBLE);
+//            getBinding().scSleepMode.setEnabled(false);
+//            getBinding().scSleepMode.setVisibility(INVISIBLE);
+//        }
 
 
         Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
@@ -672,6 +672,9 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
             //  deviceSettingBean.setSleepAfter(hour + min + opt1Pos);
             deviceSettingBean.setSleepAfter(min + opt1Pos);
             getApp().setDeviceSettingBean(deviceSettingBean);
+
+            deviceSettingViewModel.sleepAfter.set(min + opt1Pos);
+
 //            if (deviceSettingBean.getSleepAfter() == 0) {
 //                getBinding().cbSleepMode.setChecked(false);
 //            }
@@ -1782,7 +1785,15 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
         }
         //  Log.d("FEFEFE", "setSleep: " + deviceSettingViewModel.sleepMode.getValue());
 
-        setSleepMode(time);
+
+        // TODO:
+      //  setSleepMode(time);
+
+        if (MODE.isStepperType()) {
+            setSleepMode(28800000);
+        } else {
+            setSleepMode(time);
+        }
     }
 
 

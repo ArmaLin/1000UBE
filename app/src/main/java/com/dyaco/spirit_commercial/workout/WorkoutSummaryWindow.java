@@ -15,7 +15,6 @@ import static com.dyaco.spirit_commercial.support.CommonUtils.findMaxInt;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isNetworkAvailable;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isValidIdI;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isValidIdL;
-import static com.dyaco.spirit_commercial.support.CommonUtils.reverseUidHex;
 import static com.dyaco.spirit_commercial.support.CommonUtils.showException;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.convertPace;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.formatDecimal;
@@ -606,8 +605,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         ((MainActivity) mContext).uartConsole.setBuzzer();
         isLogin = true;
 //        RFID_CODE = toHex(rfidCode);
-//        RFID_CODE = rfidCode;
-        RFID_CODE = reverseUidHex(rfidCode);
+        RFID_CODE = rfidCode;
+   //     RFID_CODE = reverseUidHex(rfidCode);
 
 
         //⭐️egymClientId  WEB_API , apiGetGymInfo 取得
