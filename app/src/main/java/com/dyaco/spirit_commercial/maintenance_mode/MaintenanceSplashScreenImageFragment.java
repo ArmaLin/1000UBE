@@ -108,39 +108,6 @@ public class MaintenanceSplashScreenImageFragment extends BaseBindingDialogFragm
                         //USB_MODE OK 執行USB
                         initUsbReadManager();
 
-//                        UsbReaderExfat.waitAndMountUsb("update", ".json", new UsbReaderExfat.MountCallback() {
-//                            @Override
-//                            public void onMountSuccess(@NonNull String mountPath, @NonNull List<File> matchedFiles) {
-//                                for (File file : matchedFiles) {
-//                                    Log.d("UsbReaderExfat", "找到檔案：" + file.getAbsolutePath());
-//                                    // 你可以自行處理複製、顯示、上傳等
-//
-//                                    try {
-//                                        BufferedReader reader = new BufferedReader(new FileReader(file));
-//                                        StringBuilder text = new StringBuilder();
-//                                        String line;
-//                                        while ((line = reader.readLine()) != null) {
-//                                            text.append(line).append("\n");
-//                                        }
-//                                        reader.close();
-//                                   //     UpdateBean updateBeanUsb = new Gson().fromJson(text.toString(), UpdateBean.class);
-//                                        Log.d("UsbReaderExfat", "文字內容：" + text.toString());
-//                                    } catch (IOException e) {
-//                                        Log.e("UsbReaderExfat", "讀檔失敗：" + e.getMessage());
-//                                    }
-//
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onMountFailed(@NonNull String errorMessage) {
-//                                Log.e("ExfatMounter", "掛載失敗：" + errorMessage);
-//                            }
-//                        });
-
-
-                    } else {
-                        Toasty.warning(requireActivity(), "USB_MODE ERROR", Toasty.LENGTH_SHORT).show();
                     }
                 }
         );
