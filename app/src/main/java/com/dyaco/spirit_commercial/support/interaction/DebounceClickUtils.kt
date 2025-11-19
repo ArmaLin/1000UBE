@@ -1,24 +1,18 @@
 package com.dyaco.spirit_commercial.support.interaction
 
-import android.util.Log
+import android.os.SystemClock
 import android.view.View
-import java.util.Collections
-import java.util.WeakHashMap
 
-/**
- * 防止按鈕在短時間內重複點擊的工具類 (自動管理，無需手動解除)
- */
+
 object DebounceClick {
-
-    private const val DEFAULT_DEBOUNCE_TIME = 500L // ✅ 預設 500ms 避免快速點擊
-    private val lastClickMap = Collections.synchronizedMap(WeakHashMap<View, Long>())
+    private const val DEFAULT_DEBOUNCE_TIME = 500L // 預設 500ms
 
     /**
-     * 設定防止快速點擊的監聽器
+     * 設定防止快速點擊的監聽器 (Java / Kotlin 通用)
      *
      * @param view 目標按鈕
-     * @param debounceTime 防抖時間 (預設 500ms)
-     * @param listener 點擊監聽 (Java 也可使用)
+     * @param debounceTime 防抖時間 (預設 500ms)。若 <= 0，則不做任何防抖
+     * @param listener 點擊監聽
      */
     @JvmStatic
     @JvmOverloads
@@ -27,40 +21,33 @@ object DebounceClick {
         debounceTime: Long = DEFAULT_DEBOUNCE_TIME,
         listener: ClickListener
     ) {
-        // ✅ 如果 debounceTime <= 0，直接使用普通點擊事件
         if (debounceTime <= 0) {
-            view.setOnClickListener { listener.onDebouncedClick(view) }
-            return
+            // 不做防抖，直接呼叫
+            view.setOnClickListener { listener.onDebouncedClick(it) }
+        } else {
+            // 每個 View 用一個新的 DebouncedOnClickListener，覆蓋掉舊的 listener
+            view.setOnClickListener(DebouncedOnClickListener(debounceTime, listener))
         }
+    }
 
-        val debouncedOnClickListener = View.OnClickListener { v ->
-            val currentTime = System.currentTimeMillis()
-            val lastClickTime = lastClickMap[v] ?: 0L
 
-            if (currentTime - lastClickTime >= debounceTime) {
-                lastClickMap[v] = currentTime
+    private class DebouncedOnClickListener(
+        private val debounceTime: Long,
+        private val listener: ClickListener
+    ) : View.OnClickListener {
+
+        // 紀錄上一次點擊的「開機後經過時間」
+        private var lastClickTime = 0L
+
+        override fun onClick(v: View) {
+            // 獲取系統開機後的毫秒數 (包含睡眠時間)，此時間保證只增不減
+            val now = SystemClock.elapsedRealtime()
+
+            if (now - lastClickTime >= debounceTime) {
+                lastClickTime = now
                 listener.onDebouncedClick(v)
             }
         }
-
-        // ✅ 記錄監聽器到 WeakHashMap，確保不會被 `tag` 影響
-        lastClickMap[view] = 0L
-
-        // ✅ 自動管理監聽器生命週期，避免記憶體洩漏
-        view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-            override fun onViewAttachedToWindow(v: View) {
-                v.setOnClickListener(debouncedOnClickListener) // ✅ View 重新 attach 時恢復監聽
-            }
-
-            override fun onViewDetachedFromWindow(v: View) {
-                v.setOnClickListener(null) // ✅ View 被銷毀時移除監聽
-                lastClickMap.remove(v) // ✅ 確保回收時清除記錄
-                Log.d("ClickUtils", "SAFE 自動取消: ${view.id}")
-            }
-        })
-
-        // ✅ 初始設定監聽器
-        view.setOnClickListener(debouncedOnClickListener)
     }
 }
 
@@ -69,4 +56,20 @@ object DebounceClick {
  */
 fun interface ClickListener {
     fun onDebouncedClick(v: View)
+}
+
+
+/**
+ * Kotlin Extension: 讓 View 可以直接呼叫 setOnDebouncedClickListener
+ *
+ * 用法:
+ * button.setOnDebouncedClickListener {
+ * // 點擊邏輯
+ * }
+ */
+fun View.setOnDebouncedClickListener(
+    debounceTime: Long = 500L,
+    action: (View) -> Unit
+) {
+    DebounceClick.attach(this, debounceTime) { action(it) }
 }
