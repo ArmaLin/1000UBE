@@ -15,7 +15,7 @@ import timber.log.Timber
 @Keep
 object RootTools {
 
-    private const val TAG = "RootTools"
+    private const val TAG = "RootToolsCheck"
 
     /**
      * 執行單一指令的輔助方法。
@@ -316,11 +316,71 @@ object RootTools {
     }
 
 
+
+
+
+
+
+
+
+
+    /**
+     * 將 App 加入電池優化白名單 (Android 14 完整版)。
+     * 包含 Doze (deviceidle) 和 App Standby (appops)。
+     */
     @JvmStatic
-    fun removeAppFromWhitelist(packageName: String): Boolean {
-        val command = "dumpsys deviceidle whitelist -$packageName"
-        val actionName = "remove '$packageName' from Doze whitelist"
-        return execute(command, actionName)
+    fun addAppToBatteryWhitelist(packageName: String): Boolean {
+        // 1. Doze 白名單 (防止睡眠被殺)
+        val cmdDoze = "cmd deviceidle whitelist +$packageName"
+
+        // 2. AppOps (防止在背景時被殺)
+        val cmdAppOps = "cmd appops set $packageName RUN_ANY_IN_BACKGROUND allow"
+
+        return execute(cmdDoze, cmdAppOps, actionName = "add '$packageName' to COMPLETE battery whitelist")
+    }
+
+    /**
+     * 檢查是否在
+     */
+    @JvmStatic
+    fun isAppInBatteryWhitelist(packageName: String): Boolean {
+        val (opsSuccess, opsResult) = executeGetResult(
+            "cmd appops get $packageName RUN_ANY_IN_BACKGROUND",
+            "check AppOps"
+        )
+        val isOpsAllowed = opsSuccess && opsResult.output.contains("allow")
+
+        val (idleSuccess, idleResult) = executeGetResult(
+            "cmd deviceidle whitelist",
+            "check DeviceIdle"
+        )
+        val isIdleAllowed = idleSuccess && idleResult.output.contains(packageName)
+
+        return isOpsAllowed && isIdleAllowed
+    }
+
+    /**
+     * 先檢查狀態，不在名單才執行寫入
+     */
+    @JvmStatic
+    fun autoEnsureBatteryWhitelist(packageName: String) {
+        Thread {
+            try {
+                if (isAppInBatteryWhitelist(packageName)) {
+                    Timber.tag(TAG).d("App '$packageName' 已在白名單中，無需操作。")
+                } else {
+                    Timber.tag(TAG).w("App '$packageName' 不在白名單或設定不完整，正在修復...")
+                    val success = addAppToBatteryWhitelist(packageName)
+                    if (success) {
+                        Timber.tag(TAG).i("成功將 App 加入白名單。")
+                    } else {
+                        Timber.tag(TAG).e("加入白名單失敗，請檢查 Root 權限。")
+                    }
+                }
+            } catch (e: Exception) {
+                Timber.tag(TAG).e(e, "自動檢查白名單發生錯誤")
+            }
+        }.start()
     }
 
 

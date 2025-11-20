@@ -308,7 +308,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public static boolean isUs = false;
     public static boolean isEmulator;
 
-//    public IUartConsole uartConsole;
+    //    public IUartConsole uartConsole;
     public Calculation calculation;
 
     private SplashWindow splashWindow;
@@ -386,8 +386,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         KeepAliveService.startService(this);
 
-        RootTools.addAppToWhitelist(getPackageName());
+//        RootTools.addAppToWhitelist(getPackageName());
 
+
+        RootTools.autoEnsureBatteryWhitelist(getPackageName());
 
         closePackage(this);
 
@@ -474,10 +476,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         MediaAppUtils.checkForceUpdate();
 
         EgymUtil.init(this, deviceSettingViewModel, egymDataViewModel);
-
-
-
-
 
 
 //        splashWindow = new SplashWindow(this);
@@ -802,13 +800,14 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
     public UartConsoleManagerPF uartConsole;
+
     /**
      * UART
      */
     public void initUartConsole() {
 
 //        uartConsole = new SpiritCommercialUart(workoutViewModel, this, deviceSettingViewModel, appStatusViewModel);
-        uartConsole = new UartConsoleManagerPF(workoutViewModel, this, deviceSettingViewModel,uartVM, appStatusViewModel);
+        uartConsole = new UartConsoleManagerPF(workoutViewModel, this, deviceSettingViewModel, uartVM, appStatusViewModel);
         uartConsole.initialize();
 
 
@@ -3056,7 +3055,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
         if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, CHILD_LOCK_TIME);
 //        if (userInteractionHandler != null) userInteractionHandler.postDelayed(r, 1 * 1000 * 10);
-      //  Timber.tag("RPM_CHECK").d("startHandler: 開始childlock 計時 ");
+        //  Timber.tag("RPM_CHECK").d("startHandler: 開始childlock 計時 ");
     }
 
 
