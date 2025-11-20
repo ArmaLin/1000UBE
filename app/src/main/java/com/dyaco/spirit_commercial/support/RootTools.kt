@@ -323,7 +323,7 @@ object RootTools {
         // 1. Doze 白名單 (防止睡眠被殺)
         val cmdDoze = "cmd deviceidle whitelist +$packageName"
 
-        // 2. AppOps (防止在背景時被殺 - 關鍵!)
+        // 2. AppOps (防止在背景時被殺)
         val cmdAppOps = "cmd appops set $packageName RUN_ANY_IN_BACKGROUND allow"
 
         return execute(cmdDoze, cmdAppOps, actionName = "add '$packageName' to COMPLETE battery whitelist")
