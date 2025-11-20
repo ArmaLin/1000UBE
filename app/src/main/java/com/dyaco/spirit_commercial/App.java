@@ -10,6 +10,7 @@ import com.corestar.libs.device.DeviceGEM;
 import com.dyaco.spirit_commercial.model.webapi.CustomDns;
 import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.CommonUtils;
+import com.dyaco.spirit_commercial.support.KeepAliveService;
 import com.dyaco.spirit_commercial.support.ProcessUtils;
 import com.dyaco.spirit_commercial.support.RootTools;
 import com.dyaco.spirit_commercial.support.intdef.DeviceIntDef;
@@ -88,6 +89,9 @@ public class App extends Application {
         LiveEventBus.config().enableLogger(false);
         RootTools.setDefaultHomeLauncher(getPackageName(), MainActivity.class);
         // LiveEventBus.config().lifecycleObserverAlwaysActive(true);
+
+
+        KeepAliveService.startService(getApplicationContext());
 
     }
 

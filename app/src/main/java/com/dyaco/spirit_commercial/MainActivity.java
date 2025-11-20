@@ -180,7 +180,6 @@ import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.ConnectionStateMonitor;
 import com.dyaco.spirit_commercial.support.FloatingWidget;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
-import com.dyaco.spirit_commercial.support.KeepAliveService;
 import com.dyaco.spirit_commercial.support.LoadingWindowAllB;
 import com.dyaco.spirit_commercial.support.LoadingWindowEx;
 import com.dyaco.spirit_commercial.support.MsgEvent;
@@ -384,7 +383,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         RootTools.hideNavigationBar();
 
 
-        KeepAliveService.startService(this);
+//        KeepAliveService.startService(getApplicationContext());
 
 //        RootTools.addAppToWhitelist(getPackageName());
 
