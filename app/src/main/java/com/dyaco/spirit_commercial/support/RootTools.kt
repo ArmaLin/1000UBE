@@ -5,6 +5,10 @@ package com.dyaco.spirit_commercial.support
 import androidx.annotation.Keep
 import androidx.core.text.isDigitsOnly
 import com.dyaco.spirit_commercial.App
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
@@ -308,24 +312,10 @@ object RootTools {
     }
 
 
-    @JvmStatic
-    fun addAppToWhitelist(packageName: String): Boolean {
-        val command = "dumpsys deviceidle whitelist +$packageName"
-        val actionName = "add '$packageName' to Doze whitelist"
-        return execute(command, actionName)
-    }
 
-
-
-
-
-
-
-
-
-
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     /**
-     * 將 App 加入電池優化白名單 (Android 14 完整版)。
+     * 將 App 加入電池優化白名單
      * 包含 Doze (deviceidle) 和 App Standby (appops)。
      */
     @JvmStatic
@@ -333,23 +323,25 @@ object RootTools {
         // 1. Doze 白名單 (防止睡眠被殺)
         val cmdDoze = "cmd deviceidle whitelist +$packageName"
 
-        // 2. AppOps (防止在背景時被殺)
+        // 2. AppOps (防止在背景時被殺 - 關鍵!)
         val cmdAppOps = "cmd appops set $packageName RUN_ANY_IN_BACKGROUND allow"
 
         return execute(cmdDoze, cmdAppOps, actionName = "add '$packageName' to COMPLETE battery whitelist")
     }
 
     /**
-     * 檢查是否在
+     * 檢查是否已在白名單
      */
     @JvmStatic
     fun isAppInBatteryWhitelist(packageName: String): Boolean {
+        // 檢查 AppOps
         val (opsSuccess, opsResult) = executeGetResult(
             "cmd appops get $packageName RUN_ANY_IN_BACKGROUND",
             "check AppOps"
         )
         val isOpsAllowed = opsSuccess && opsResult.output.contains("allow")
 
+        // 檢查 DeviceIdle
         val (idleSuccess, idleResult) = executeGetResult(
             "cmd deviceidle whitelist",
             "check DeviceIdle"
@@ -360,27 +352,30 @@ object RootTools {
     }
 
     /**
-     * 先檢查狀態，不在名單才執行寫入
+     * 檢查並新增
      */
     @JvmStatic
     fun autoEnsureBatteryWhitelist(packageName: String) {
-        Thread {
-            try {
+        scope.launch {
+            runCatching {
+
                 if (isAppInBatteryWhitelist(packageName)) {
-                    Timber.tag(TAG).d("App '$packageName' 已在白名單中，無需操作。")
-                } else {
-                    Timber.tag(TAG).w("App '$packageName' 不在白名單或設定不完整，正在修復...")
-                    val success = addAppToBatteryWhitelist(packageName)
-                    if (success) {
-                        Timber.tag(TAG).i("成功將 App 加入白名單。")
-                    } else {
-                        Timber.tag(TAG).e("加入白名單失敗，請檢查 Root 權限。")
-                    }
+                    Timber.tag("RootToolsXX").d("App '$packageName' 已在白名單中 (Unrestricted)，無需操作。")
+                    return@launch
                 }
-            } catch (e: Exception) {
-                Timber.tag(TAG).e(e, "自動檢查白名單發生錯誤")
+
+                Timber.tag("RootToolsXX").w("App '$packageName' 設定不完整，正在修復...")
+                val success = addAppToBatteryWhitelist(packageName)
+
+                if (success) {
+                    Timber.tag("RootToolsXX").i("✅ 成功將 App 加入白名單。")
+                } else {
+                    Timber.tag("RootToolsXX").e("❌ 加入白名單失敗，請檢查 Root 權限。")
+                }
+            }.onFailure { e ->
+                Timber.tag("RootToolsXX").e(e, "自動檢查白名單發生未預期錯誤")
             }
-        }.start()
+        }
     }
 
 
