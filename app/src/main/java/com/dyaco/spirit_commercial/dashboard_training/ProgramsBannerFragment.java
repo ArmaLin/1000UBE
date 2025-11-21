@@ -9,6 +9,7 @@ import static com.dyaco.spirit_commercial.support.intdef.EventKey.ON_STOP_BACK_T
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.PROGRAM_CHOOSE;
 import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButtonIntDef.CHOOSE;
 import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButtonIntDef.DISAPPEAR;
+import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButtonIntDef.START_THIS_PROGRAM;
 import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButtonIntDef.START_THIS_TEST;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
 
@@ -69,14 +70,12 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
 
 
         //下方按鈕
-//        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) || (programId == R.id.btn_FitnessTest) ? START_THIS_TEST : DISAPPEAR);
-
-//        if (programId == R.id.btn_Watts) {
-//            appStatusViewModel.changeMainButtonType(DISAPPEAR);
-//        } else {
-//        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) || (programId == R.id.btn_FitnessTest) ? START_THIS_TEST : CHOOSE);
-        appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
-        //     }
+        if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts) {
+            // TODO: AAAA
+            appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+        } else {
+            appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
+        }
 
 
         if (isTreadmill) {
@@ -242,9 +241,12 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                     //bike
                     if (programInfoList.get(position).getCode() == ProgramsEnum.FITNESS_TEST.getCode()) {
                         appStatusViewModel.changeMainButtonType(START_THIS_TEST);
-                        //noHrCheck(0);
-//                    } else if (programInfoList.get(position).getCode() == ProgramsEnum.WATTS.getCode()) {
-//                        appStatusViewModel.changeMainButtonType(DISAPPEAR);
+
+                        // TODO: AAAA
+                    } else if (programInfoList.get(position).getCode() == ProgramsEnum.MANUAL.getCode() ||
+                            programInfoList.get(position).getCode() == ProgramsEnum.CALORIES.getCode() ||
+                            programInfoList.get(position).getCode() == ProgramsEnum.WATTS.getCode()) {
+                        appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                     } else {
                         appStatusViewModel.changeMainButtonType(CHOOSE);
                     }

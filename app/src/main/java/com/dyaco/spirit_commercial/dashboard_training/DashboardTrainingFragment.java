@@ -80,7 +80,6 @@ import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.EgymDataViewModel;
 import com.dyaco.spirit_commercial.viewmodel.UserProfileViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
-import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 import com.google.gson.Gson;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -115,13 +114,13 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
         workoutViewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
         appStatusViewModel = new ViewModelProvider(requireActivity()).get(AppStatusViewModel.class);
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
-        if(!isSummary) appStatusViewModel.currentStatus.set(AppStatusIntDef.STATUS_IDLE);
+        if (!isSummary) appStatusViewModel.currentStatus.set(AppStatusIntDef.STATUS_IDLE);
 
         egymDataViewModel = new ViewModelProvider(requireActivity()).get(EgymDataViewModel.class);
 
         if (!isHomeScreen) {
             getBinding().tvEgymText.setWaveType(WavyTextView.WAVE_TYPE_COLOR);
-            getBinding().tvEgymText.startWaveOnce(1500,500);
+            getBinding().tvEgymText.startWaveOnce(1500, 500);
         }
 
         isHomeScreen = true;
@@ -208,13 +207,13 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
         }
 
 
-        Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
+        Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
 
         if (MODE.isStepperType()) {
             setSleepMode(28800000);
         }
 
-        Log.d("AAAAADWFWF", "onCreate: "+getSleepTime());
+        Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
     }
 
     EgymBannerAdapter egymBannerAdapter;
@@ -345,7 +344,6 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                     }
                 });
     }
-
 
 
     private void initGuestView() {
@@ -491,12 +489,13 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
             if (CheckDoubleClick.isFastClick()) return;
             if (appStatusViewModel.currentPage.get() == CURRENT_PAGE_MEDIA) return;
             try {
-                Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToSetTimeFragment(ProgramsEnum.MANUAL));
+
+                // TODO: AAAA
+//                Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToSetTimeFragment(ProgramsEnum.MANUAL));
+                Navigation.findNavController(v).navigate(DashboardTrainingFragmentDirections.actionDashboardTrainingFragmentToProgramsBannerFragment(R.id.btn_manual, programType));
             } catch (Exception e) {
                 Timber.e(e);
             }
-//            SetTimeWindow setTimeWindow = new SetTimeWindow(requireActivity());
-//            setTimeWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
         });
 
         getBinding().btnHill.setOnClickListener(this);
@@ -533,7 +532,7 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
                 getBinding().viewEgymNoPlan.setVisibility(View.GONE);
                 getBinding().viewEgym.setVisibility(View.GONE);
 
-           //     getBinding().egymProgress.setVisibility(View.VISIBLE);
+                //     getBinding().egymProgress.setVisibility(View.VISIBLE);
 
                 egymDataViewModel.egymTrainingPlansData.observe(getViewLifecycleOwner(), egymTrainingPlans -> {
                     //      LogS.printJson("EGYMMMMM", new Gson().toJson(egymTrainingPlans), "GetTrainingPlans");
@@ -541,10 +540,9 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 
                     initEgymView(egymTrainingPlans);
 
-               //     getBinding().egymProgress.setVisibility(View.GONE);
+                    //     getBinding().egymProgress.setVisibility(View.GONE);
 
                 });
-
 
 
                 break;

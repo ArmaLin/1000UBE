@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static android.view.View.VISIBLE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
@@ -39,11 +40,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.ProgramsDetailsItemBinding;
+import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.CustomTypefaceSpan;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
 import com.dyaco.spirit_commercial.support.custom_view.banner.adapter.BannerAdapter;
+import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelAdapter;
+import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelItemEffector;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.WheelView;
+import com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS;
 import com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -51,6 +56,8 @@ import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 
 public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerView.ViewHolder> {
@@ -94,13 +101,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         holder.binding.setIsDefaultProgram(isDefaultProgram);
 
-        holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessPickAge.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessPickHeight.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
-        holder.binding.fitnessHeightUnit.setVisibility(isDefaultProgram ? View.GONE : View.VISIBLE);
+        holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessPickAge.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessPickHeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        holder.binding.fitnessHeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
       //  holder.binding.btnChoose.setVisibility(isDefaultProgram ? View.VISIBLE : View.INVISIBLE);
 
         if (!isDefaultProgram) initFitnessSelected(holder.binding, programInfo);
@@ -115,8 +122,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         }
         holder.binding.vBG.setBackgroundResource(photo);
         holder.binding.ivDiagram.setBackgroundResource(isTreadmill ? programInfo.getDiagramTreadmill() : programInfo.getDiagramBike());
-        holder.binding.ovalSpeed.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : View.VISIBLE);
-        holder.binding.ovalIncline.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : View.VISIBLE);
+        holder.binding.ovalSpeed.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : VISIBLE);
+        holder.binding.ovalIncline.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : VISIBLE);
 
         String valueStr;
         switch (programInfo) {
@@ -191,6 +198,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             holder.binding.vBG.setOnClickListener(view -> onImageClickListener.onImageClick(programInfo));
         } else {
             holder.binding.vBG.setOnClickListener(null);
+        }
+
+
+        if (programInfo == ProgramsEnum.MANUAL || programInfo == ProgramsEnum.CALORIES || programInfo == ProgramsEnum.WATTS) {
+            holder.binding.myWheelPicker.setVisibility(VISIBLE);
+        } else {
+            holder.binding.myWheelPicker.setVisibility(VISIBLE);
         }
     }
 
@@ -314,7 +328,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
     }
 
     private void showGender(OptionsPickerView<String> fitnessPickGender) {
-        fitnessPickGender.setVisibility(View.VISIBLE);
+        fitnessPickGender.setVisibility(VISIBLE);
 
         fitnessPickGender.setData(list3);
         fitnessPickGender.setVisibleItems(2);
@@ -339,8 +353,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
 
     private void showHeight(OptionsPickerView<String> fitnessPickHeight, TextView tvHeightUnit) {
-        fitnessPickHeight.setVisibility(View.VISIBLE);
-        tvHeightUnit.setVisibility(View.VISIBLE);
+        fitnessPickHeight.setVisibility(VISIBLE);
+        tvHeightUnit.setVisibility(VISIBLE);
         fitnessPickHeight.setData(list4);
         fitnessPickHeight.setVisibleItems(8);
         //   opv1.setDividerPaddingForWrap(10, true);
@@ -377,6 +391,41 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         }
         return spannableString;
 
+    }
+
+
+    private void initWheelPicker(ProgramsDetailsItemBinding binding) {
+
+        //初始值
+        binding.myWheelPicker.setCurrentPosition(OPT_SETTINGS.TARGET_TIME_DEF * 60);
+
+
+        List<String> data = CommonUtils.generateTimeOptions(0, 99);
+
+
+        PowerWheelItemEffector timeEffector = new PowerWheelItemEffector(
+                context,        // Context
+                binding.myWheelPicker, // WheelPicker 實例
+                R.color.white,            // ✅ 選中顏色
+                R.color.color5a7085,      // ✅ 未選中顏色
+                R.font.inter_bold,        // ✅ 選中字型
+                R.font.inter_regular,     // ✅ 未選中字型
+                54f,                      // ✅ 中心文字大小 (24sp)
+                0.9f,                     // ✅ 文字縮小
+                64f,                      // ✅ 項目高度 (72dp)
+                1.2f,                     //  首層間距 120% (加大 20%)
+                0.8f                      //  之後的間距 80% 遞減
+        );
+
+        PowerWheelAdapter adapter = new PowerWheelAdapter(data);
+        binding.myWheelPicker.setAdapter(adapter);
+        binding.myWheelPicker.addItemEffector(timeEffector);
+
+        timeEffector.setOnSettledListener((position, value) -> {
+            workoutViewModel.selWorkoutTime.set(position * 60);
+
+            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
+        });
     }
 
 }
