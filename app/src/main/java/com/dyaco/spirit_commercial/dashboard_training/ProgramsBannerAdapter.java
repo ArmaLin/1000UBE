@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
@@ -12,8 +13,7 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MIN;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.HEIGHT_IU_MIN;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.HEIGHT_MU_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMaxHeight;
@@ -28,10 +28,10 @@ import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -44,11 +44,8 @@ import com.dyaco.spirit_commercial.support.CommonUtils;
 import com.dyaco.spirit_commercial.support.CustomTypefaceSpan;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
 import com.dyaco.spirit_commercial.support.custom_view.banner.adapter.BannerAdapter;
-import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelAdapter;
-import com.dyaco.spirit_commercial.support.custom_view.power_wheel.PowerWheelItemEffector;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView;
 import com.dyaco.spirit_commercial.support.custom_view.wheelPicker.WheelView;
-import com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS;
 import com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef;
 import com.dyaco.spirit_commercial.viewmodel.DeviceSettingViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
@@ -56,8 +53,6 @@ import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import timber.log.Timber;
 
 
 public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerView.ViewHolder> {
@@ -101,14 +96,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         holder.binding.setIsDefaultProgram(isDefaultProgram);
 
-        holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+      //  holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+//        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
         holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
         holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessPickAge.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessPickHeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessHeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-      //  holder.binding.btnChoose.setVisibility(isDefaultProgram ? View.VISIBLE : View.INVISIBLE);
+//        holder.binding.fitnessPickAge.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+//        holder.binding.fitnessPickHeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+//        holder.binding.fitnessHeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 
         if (!isDefaultProgram) initFitnessSelected(holder.binding, programInfo);
 
@@ -122,8 +116,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         }
         holder.binding.vBG.setBackgroundResource(photo);
         holder.binding.ivDiagram.setBackgroundResource(isTreadmill ? programInfo.getDiagramTreadmill() : programInfo.getDiagramBike());
-        holder.binding.ovalSpeed.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : VISIBLE);
-        holder.binding.ovalIncline.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? View.INVISIBLE : VISIBLE);
+        holder.binding.ovalSpeed.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? INVISIBLE : VISIBLE);
+        holder.binding.ovalIncline.setVisibility(programInfo.getDiagramTreadmill() == 0 || !isTreadmill ? INVISIBLE : VISIBLE);
 
         String valueStr;
         switch (programInfo) {
@@ -202,10 +196,42 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
 
         if (programInfo == ProgramsEnum.MANUAL || programInfo == ProgramsEnum.CALORIES || programInfo == ProgramsEnum.WATTS) {
-            holder.binding.myWheelPicker.setVisibility(VISIBLE);
+            holder.binding.timePicker.setVisibility(VISIBLE);
+            initTimePicker(holder.binding,programInfo);
         } else {
-            holder.binding.myWheelPicker.setVisibility(VISIBLE);
+            holder.binding.timePicker.setVisibility(INVISIBLE);
         }
+    }
+
+    private void initTimePicker(ProgramsDetailsItemBinding binding, ProgramsEnum programsEnum) {
+       list5 = CommonUtils.generateTimeOptions(0, 99);
+
+        OptionsPickerView<String> timePicker = binding.timePicker;
+
+        timePicker.setData(list5);
+        timePicker.setVisibleItems(8);
+        timePicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+        timePicker.setTextSize(54, false);
+        timePicker.setCurved(true);
+        timePicker.setCyclic(true);
+        timePicker.setTextBoundaryMargin(0, true);
+        timePicker.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+        timePicker.setCurvedArcDirectionFactor(1.0f);
+        timePicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+
+//        timePicker.setOpt1SelectedPosition(TARGET_TIME_DEF, false);
+
+        timePicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+            if (opt1Data == null) {
+                return;
+            }
+
+            Log.d("AAAAAAAAAA", "initTimePicker: " + opt1Data +","+ opt1Pos); //11 * 60
+            workoutViewModel.selWorkoutTime.set(opt1Pos * 60);
+        });
+
+        timePicker.setOpt1SelectedPosition(TARGET_TIME_DEF, false);
+
     }
 
     public interface OnItemClickListener {
@@ -232,6 +258,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
     List<String> list2;
     List<String> list3;
     List<String> list4;
+    List<String> list5;
 
     private void initFitnessData() {
 
@@ -263,26 +290,26 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         binding.tvProgramDesc.setTextSize(44);
 
-        OptionsPickerView<String> fitnessPickAge = binding.fitnessPickAge;
+//        OptionsPickerView<String> fitnessPickAge = binding.fitnessPickAge;
         OptionsPickerView<String> fitnessPickWeight = binding.fitnessPickWeight;
 
-        fitnessPickAge.setData(list1);
-        fitnessPickAge.setVisibleItems(8);
-        fitnessPickAge.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-        fitnessPickAge.setTextSize(54, false);
-        fitnessPickAge.setCurved(true);
-        fitnessPickAge.setCyclic(true);
-        fitnessPickAge.setTextBoundaryMargin(0, true);
-        fitnessPickAge.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-        fitnessPickAge.setCurvedArcDirectionFactor(1.0f);
-        fitnessPickAge.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-        // fitnessPickAge.setOpt1SelectedPosition(AGE_DEF - AGE_MIN, false);
-        fitnessPickAge.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-            if (opt1Data == null) {
-                return;
-            }
-            workoutViewModel.selYO.set(Integer.parseInt(opt1Data));
-        });
+//        fitnessPickAge.setData(list1);
+//        fitnessPickAge.setVisibleItems(8);
+//        fitnessPickAge.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+//        fitnessPickAge.setTextSize(54, false);
+//        fitnessPickAge.setCurved(true);
+//        fitnessPickAge.setCyclic(true);
+//        fitnessPickAge.setTextBoundaryMargin(0, true);
+//        fitnessPickAge.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+//        fitnessPickAge.setCurvedArcDirectionFactor(1.0f);
+//        fitnessPickAge.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+//        // fitnessPickAge.setOpt1SelectedPosition(AGE_DEF - AGE_MIN, false);
+//        fitnessPickAge.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+//            if (opt1Data == null) {
+//                return;
+//            }
+//            workoutViewModel.selYO.set(Integer.parseInt(opt1Data));
+//        });
 
         fitnessPickWeight.setData(list2);
         fitnessPickWeight.setVisibleItems(8);
@@ -305,77 +332,77 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         });
 
         fitnessPickWeight.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getWeight_imperial() - WEIGHT_IU_MIN : userProfileViewModel.getWeight_metric() - WEIGHT_MU_MIN), false);
-        fitnessPickAge.setOpt1SelectedPosition(userProfileViewModel.getUserAge() - AGE_MIN, false);
+//        fitnessPickAge.setOpt1SelectedPosition(userProfileViewModel.getUserAge() - AGE_MIN, false);
 
 
-        if (programsEnum.getProgramType() == WorkoutIntDef.FITNESS_TESTS) {
-            if (programsEnum != ProgramsEnum.GERKIN && programsEnum != ProgramsEnum.WFI) {
+//        if (programsEnum.getProgramType() == WorkoutIntDef.FITNESS_TESTS) {
+//            if (programsEnum != ProgramsEnum.GERKIN && programsEnum != ProgramsEnum.WFI) {
+//
+//                showGender(binding.fitnessPickGender);
+//            } else {
+//                binding.fitnessPickGender.setVisibility(View.GONE);
+//            }
+//        } else {
+//            binding.fitnessPickGender.setVisibility(View.GONE);
+//        }
 
-                showGender(binding.fitnessPickGender);
-            } else {
-                binding.fitnessPickGender.setVisibility(View.GONE);
-            }
-        } else {
-            binding.fitnessPickGender.setVisibility(View.GONE);
-        }
-
-        if (programsEnum == ProgramsEnum.WFI) {
-            showHeight(binding.fitnessPickHeight, binding.fitnessHeightUnit);
-        } else {
-            binding.fitnessPickHeight.setVisibility(View.GONE);
-            binding.fitnessHeightUnit.setVisibility(View.GONE);
-        }
+//        if (programsEnum == ProgramsEnum.WFI) {
+//            showHeight(binding.fitnessPickHeight, binding.fitnessHeightUnit);
+//        } else {
+//            binding.fitnessPickHeight.setVisibility(View.GONE);
+//            binding.fitnessHeightUnit.setVisibility(View.GONE);
+//        }
     }
 
-    private void showGender(OptionsPickerView<String> fitnessPickGender) {
-        fitnessPickGender.setVisibility(VISIBLE);
-
-        fitnessPickGender.setData(list3);
-        fitnessPickGender.setVisibleItems(2);
-        //   opv1.setDividerPaddingForWrap(10, true);
-        fitnessPickGender.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-        fitnessPickGender.setTextSize(54, false);
-        fitnessPickGender.setCurved(true);
-        fitnessPickGender.setCyclic(false);
-        fitnessPickGender.setTextBoundaryMargin(0, true);
-        fitnessPickGender.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-        fitnessPickGender.setCurvedArcDirectionFactor(1.0f);
-        fitnessPickGender.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-        fitnessPickGender.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-            if (opt1Data == null) {
-                return;
-            }
-            workoutViewModel.selGender.set(opt1Pos);
-        });
-
-        fitnessPickGender.setOpt1SelectedPosition(userProfileViewModel.getUserGender(), false);
-    }
-
-
-    private void showHeight(OptionsPickerView<String> fitnessPickHeight, TextView tvHeightUnit) {
-        fitnessPickHeight.setVisibility(VISIBLE);
-        tvHeightUnit.setVisibility(VISIBLE);
-        fitnessPickHeight.setData(list4);
-        fitnessPickHeight.setVisibleItems(8);
-        //   opv1.setDividerPaddingForWrap(10, true);
-        fitnessPickHeight.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-        fitnessPickHeight.setTextSize(54, false);
-        fitnessPickHeight.setCurved(true);
-        fitnessPickHeight.setCyclic(false);
-        fitnessPickHeight.setTextBoundaryMargin(0, true);
-        fitnessPickHeight.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-        fitnessPickHeight.setCurvedArcDirectionFactor(1.0f);
-        fitnessPickHeight.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-        fitnessPickHeight.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-            if (opt1Data == null) return;
-
-            int height = Integer.parseInt(opt1Data);
-            workoutViewModel.selHeightIU.set(UNIT_E == IMPERIAL ? height : FormulaUtil.kg2lb(height));
-            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? height : FormulaUtil.lb2kg(height));
-        });
-
-        fitnessPickHeight.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getHeight_imperial() - HEIGHT_IU_MIN : userProfileViewModel.getHeight_metric() - HEIGHT_MU_MIN), false);
-    }
+//    private void showGender(OptionsPickerView<String> fitnessPickGender) {
+//        fitnessPickGender.setVisibility(VISIBLE);
+//
+//        fitnessPickGender.setData(list3);
+//        fitnessPickGender.setVisibleItems(2);
+//        //   opv1.setDividerPaddingForWrap(10, true);
+//        fitnessPickGender.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+//        fitnessPickGender.setTextSize(54, false);
+//        fitnessPickGender.setCurved(true);
+//        fitnessPickGender.setCyclic(false);
+//        fitnessPickGender.setTextBoundaryMargin(0, true);
+//        fitnessPickGender.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+//        fitnessPickGender.setCurvedArcDirectionFactor(1.0f);
+//        fitnessPickGender.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+//        fitnessPickGender.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+//            if (opt1Data == null) {
+//                return;
+//            }
+//            workoutViewModel.selGender.set(opt1Pos);
+//        });
+//
+//        fitnessPickGender.setOpt1SelectedPosition(userProfileViewModel.getUserGender(), false);
+//    }
+//
+//
+//    private void showHeight(OptionsPickerView<String> fitnessPickHeight, TextView tvHeightUnit) {
+//        fitnessPickHeight.setVisibility(VISIBLE);
+//        tvHeightUnit.setVisibility(VISIBLE);
+//        fitnessPickHeight.setData(list4);
+//        fitnessPickHeight.setVisibleItems(8);
+//        //   opv1.setDividerPaddingForWrap(10, true);
+//        fitnessPickHeight.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+//        fitnessPickHeight.setTextSize(54, false);
+//        fitnessPickHeight.setCurved(true);
+//        fitnessPickHeight.setCyclic(false);
+//        fitnessPickHeight.setTextBoundaryMargin(0, true);
+//        fitnessPickHeight.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+//        fitnessPickHeight.setCurvedArcDirectionFactor(1.0f);
+//        fitnessPickHeight.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+//        fitnessPickHeight.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+//            if (opt1Data == null) return;
+//
+//            int height = Integer.parseInt(opt1Data);
+//            workoutViewModel.selHeightIU.set(UNIT_E == IMPERIAL ? height : FormulaUtil.kg2lb(height));
+//            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? height : FormulaUtil.lb2kg(height));
+//        });
+//
+//        fitnessPickHeight.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getHeight_imperial() - HEIGHT_IU_MIN : userProfileViewModel.getHeight_metric() - HEIGHT_MU_MIN), false);
+//    }
 
     private SpannableString setSpannableStr(String str1, String str2) {
 
@@ -394,38 +421,47 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
     }
 
 
-    private void initWheelPicker(ProgramsDetailsItemBinding binding) {
+//    private void initWheelPicker(ProgramsDetailsItemBinding binding) {
+//
+//
+//        if (binding.myWheelPicker.getAdapter() instanceof PowerWheelAdapter) {
+//            return;
+//        }
+//
+//        //初始值
+//        binding.myWheelPicker.setCurrentPosition(OPT_SETTINGS.TARGET_TIME_DEF);
+//
+//
+//        List<String> data = CommonUtils.generateTimeOptions(0, 99);
+//
+//
+//        PowerWheelItemEffector timeEffector = new PowerWheelItemEffector(
+//                context,        // Context
+//                binding.myWheelPicker, // WheelPicker 實例
+//                R.color.white,            // ✅ 選中顏色
+//                R.color.color5a7085,      // ✅ 未選中顏色
+//                R.font.inter_bold,        // ✅ 選中字型
+//                R.font.inter_regular,     // ✅ 未選中字型
+//                54f,                      // ✅ 中心文字大小 (24sp)
+//                0.9f,                     // ✅ 文字縮小
+//                64f,                      // ✅ 項目高度 (72dp)
+//                1.2f,                     //  首層間距 120% (加大 20%)
+//                0.8f                      //  之後的間距 80% 遞減
+//        );
+//
+//        PowerWheelAdapter adapter = new PowerWheelAdapter(data);
+//        binding.myWheelPicker.setAdapter(adapter);
+//        binding.myWheelPicker.addItemEffector(timeEffector);
+//
+//        timeEffector.setOnSettledListener((position, value) -> {
+//            workoutViewModel.selWorkoutTime.set(position * 60);
+//
+//            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
+//        });
+//    }
 
-        //初始值
-        binding.myWheelPicker.setCurrentPosition(OPT_SETTINGS.TARGET_TIME_DEF * 60);
 
 
-        List<String> data = CommonUtils.generateTimeOptions(0, 99);
 
-
-        PowerWheelItemEffector timeEffector = new PowerWheelItemEffector(
-                context,        // Context
-                binding.myWheelPicker, // WheelPicker 實例
-                R.color.white,            // ✅ 選中顏色
-                R.color.color5a7085,      // ✅ 未選中顏色
-                R.font.inter_bold,        // ✅ 選中字型
-                R.font.inter_regular,     // ✅ 未選中字型
-                54f,                      // ✅ 中心文字大小 (24sp)
-                0.9f,                     // ✅ 文字縮小
-                64f,                      // ✅ 項目高度 (72dp)
-                1.2f,                     //  首層間距 120% (加大 20%)
-                0.8f                      //  之後的間距 80% 遞減
-        );
-
-        PowerWheelAdapter adapter = new PowerWheelAdapter(data);
-        binding.myWheelPicker.setAdapter(adapter);
-        binding.myWheelPicker.addItemEffector(timeEffector);
-
-        timeEffector.setOnSettledListener((position, value) -> {
-            workoutViewModel.selWorkoutTime.set(position * 60);
-
-            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
-        });
-    }
 
 }

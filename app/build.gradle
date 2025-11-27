@@ -437,7 +437,8 @@ dependencies {
     implementation 'com.google.zxing:core:3.4.1'
     implementation 'com.github.bumptech.glide:glide:5.0.5'
     ksp 'com.github.bumptech.glide:ksp:5.0.5'
-    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+//    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
+    implementation 'com.github.michaellee123:LiveEventBus:1.8.14'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
 

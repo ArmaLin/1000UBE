@@ -46,9 +46,7 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.TIME_LIMIT;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.USER_TYPE_EGYM;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.USER_TYPE_GUEST;
 import static com.dyaco.spirit_commercial.support.intdef.MainDashboardBottomButtonIntDef.DISAPPEAR;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_INC_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_LEVEL_MAX;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_RPM;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_IU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MAX_SPD_MU_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_MAX;
@@ -733,14 +731,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
         } else {
-//            if (isTreadmill) {
-//                getBinding().tvSummaryDistanceAndPower.setText(getConvert(w.currentDistance.get(), orgUnit, 3, 2)); // mi km
-//                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentElevationGain.get(), orgUnit, 0, 1)); // ft cm
-//                getBinding().tvSpeedAndLevelNum.setText(getConvert(w.avgSpeed.get(), orgUnit, 2, 1));
-//                getBinding().tvSummaryPaceAndSpeed.setText(CommonUtils.formatSecToM((long) Float.parseFloat(getConvert(w.summaryPace.get(), orgUnit, 3, 1))));
-//            } else {
-//                getBinding().tvSummaryElevationAndDistance.setText(getConvert(w.currentDistance.get(), orgUnit, 1, 2)); // ft cm
-//            }
+
         }
     }
 
@@ -1307,16 +1298,16 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                         .forEach(i -> inclineTartgetDataList.get(i).setSecTime(inclineOutcomeDataList.get(i).getSecTime()));
 
 
-                getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_INC_MAX / 2));
-                getBinding().stackedBarChartInclineView.setOutcomeData(inclineOutcomeDataList);
-                getBinding().stackedBarChartInclineView.setTargetData(inclineTartgetDataList);
-
-
-                getBinding().stackedBarChartInclineView.setBarColors(
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_90),
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_20),
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_30)  // Target 颜色
-                );
+//                getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_INC_MAX / 2));
+//                getBinding().stackedBarChartInclineView.setOutcomeData(inclineOutcomeDataList);
+//                getBinding().stackedBarChartInclineView.setTargetData(inclineTartgetDataList);
+//
+//
+//                getBinding().stackedBarChartInclineView.setBarColors(
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_90),
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_20),
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_30)  // Target 颜色
+//                );
 
 
             } else {
@@ -1374,13 +1365,6 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 getBinding().layoutEgym.tvActiveCalorieTextE.setText(formatDecimal((float) w.avgPower.get()));//watts
                 getBinding().layoutEgym.tvAvgPaceTextE.setText(formatDecimal((float) w.avgMet.get())); // METS
 
-//                if (MODE == ModeEnum.CE1000ENT) {
-//                    getBinding().layoutEgym.tvAvgMetsUnitE.setText(R.string.SPM);
-//                    getBinding().layoutEgym.tvAvgMetsTextE.setText(formatDecimal((float) (w.avgRpm.get() * 2))); //Cadence RPM
-//                } else {
-//                    getBinding().layoutEgym.tvAvgMetsUnitE.setText(R.string.RPM);
-//                    getBinding().layoutEgym.tvAvgMetsTextE.setText(formatDecimal((float) w.avgRpm.get())); //Cadence RPM
-//                }
 
                 getBinding().tvSpeedAndLevelNumE.setText(R.string.resistance_chart);
 
@@ -1398,7 +1382,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
                 //Cadence Chart
-                getBinding().tvInclineTitle.setText(R.string.Candence_Chart);
+          //      getBinding().tvInclineTitle.setText(R.string.Candence_Chart);
 
 
                 List<StackedBarBean> rpmOutcomeDataList;
@@ -1437,7 +1421,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                             .orElse(0.0));
 
 
-                    getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_RPM * 2));
+                //    getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_RPM * 2));
 
                     getBinding().layoutEgym.tvAvgMetsUnitE.setText(R.string.SPM);
                     getBinding().layoutEgym.tvAvgMetsTextE.setText(formatDecimal((float) (w.avgRpm.get()))); //Cadence RPM
@@ -1472,7 +1456,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                             .average()
                             .orElse(0.0));
 
-                    getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_RPM));
+               //     getBinding().stackedBarChartInclineView.setMaxDataValue((MAX_RPM));
 
                     getBinding().layoutEgym.tvAvgMetsUnitE.setText(R.string.RPM);
                     getBinding().layoutEgym.tvAvgMetsTextE.setText(formatDecimal((float) w.avgRpm.get())); //Cadence RPM
@@ -1490,13 +1474,13 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                         .forEach(i -> rpmTartgetDataList.get(i).setSecTime(rpmOutcomeDataList.get(i).getSecTime()));
 
 
-                getBinding().stackedBarChartInclineView.setOutcomeData(rpmOutcomeDataList);
-                getBinding().stackedBarChartInclineView.setTargetData(rpmTartgetDataList);
-                getBinding().stackedBarChartInclineView.setBarColors(
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_90),
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_20),
-                        ContextCompat.getColor(mContext, R.color.colorCd5bff_30)  // Target 颜色
-                );
+//                getBinding().stackedBarChartInclineView.setOutcomeData(rpmOutcomeDataList);
+//                getBinding().stackedBarChartInclineView.setTargetData(rpmTartgetDataList);
+//                getBinding().stackedBarChartInclineView.setBarColors(
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_90),
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_20),
+//                        ContextCompat.getColor(mContext, R.color.colorCd5bff_30)  // Target 颜色
+//                );
 
 
             }
@@ -1512,9 +1496,87 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
         } else {
 
+
             //非EGYM
             getBinding().baseScrollView.setVisibility(View.VISIBLE);
+
             getBinding().baseScrollViewEgym.setVisibility(View.GONE);
+
+//
+//            //已跑過的 Resistance LEVEL
+//            List<StackedBarBean> levelOutcomeDataList = egymDataViewModel.woIntervalData.stream()
+//                    .map(interval -> {
+//                        double value = Optional.ofNullable(interval.getResistance()).orElse(0);
+//                        int secTime = Optional.ofNullable(interval.getDuration()).orElse(0) / 1000;
+//                        StackedBarBean bean = new StackedBarBean();
+//                        bean.setValue(value);
+//                        bean.setSecTime(secTime);
+//                        return bean;
+//                    }).collect(Collectors.toList());
+//
+//// 階段 1：平路 (Level 5, 45秒)
+//            StackedBarBean climb1 = new StackedBarBean();
+//            climb1.setValue(5.0);
+//            climb1.setSecTime(45);
+//            levelOutcomeDataList.add(climb1);
+//
+//// 階段 2：緩坡 (Level 10, 45秒)
+//            StackedBarBean climb2 = new StackedBarBean();
+//            climb2.setValue(10.0);
+//            climb2.setSecTime(45);
+//            levelOutcomeDataList.add(climb2);
+//
+//// 階段 3：陡坡 (Level 15, 60秒)
+//            StackedBarBean climb3 = new StackedBarBean();
+//            climb3.setValue(15.0);
+//            climb3.setSecTime(60);
+//            levelOutcomeDataList.add(climb3);
+//
+//// 階段 4：最高峰 (Level 20, 30秒) - 假設 maxDataValue 為 20
+//            StackedBarBean climb4 = new StackedBarBean();
+//            climb4.setValue(20.0);
+//            climb4.setSecTime(30);
+//            levelOutcomeDataList.add(climb4);
+//
+//// 階段 5：下坡 (Level 8, 60秒)
+//            StackedBarBean climb5 = new StackedBarBean();
+//            climb5.setValue(8.0);
+//            climb5.setSecTime(60);
+//            levelOutcomeDataList.add(climb5);
+
+
+//            //目標 Resistance LEVEL
+//            List<StackedBarBean> levelTartgetDataList = egymDataViewModel.selTrainer.getIntervals().stream()
+//                    .map(interval -> {
+//                        double value = Optional.ofNullable(interval.getResistance()).orElse(0);
+//                        int secTime = Optional.ofNullable(interval.getDuration()).orElse(0) / 1000;
+//                        StackedBarBean bean = new StackedBarBean();
+//                        bean.setValue(value);
+//                        bean.setSecTime(secTime);
+//                        return bean;
+//                    }).collect(Collectors.toList());
+//
+//            //如果Target duration 為0, 就把 實際跑過的時間放入
+//            IntStream.range(0, levelTartgetDataList.size())
+//                    .filter(i -> levelTartgetDataList.get(i).getSecTime() == 0 && i < levelOutcomeDataList.size())
+//                    .forEach(i -> levelTartgetDataList.get(i).setSecTime(levelOutcomeDataList.get(i).getSecTime()));
+//
+
+//            getBinding().tvSpeedAndLevelNumE.setText(R.string.resistance_chart);
+//            getBinding().stackedBarChartSpeedView.setMaxDataValue(MAX_LEVEL_MAX);// 24 or 15
+//            getBinding().stackedBarChartSpeedView.setOutcomeData(levelOutcomeDataList);
+//            getBinding().stackedBarChartSpeedView.setTargetData(levelOutcomeDataList);
+//
+//            getBinding().stackedBarChartSpeedView.setBarColors(
+//                    ContextCompat.getColor(mContext, R.color.color1396ef_90),
+//                    ContextCompat.getColor(mContext, R.color.color1396ef_20),
+////                    ContextCompat.getColor(mContext, R.color.color1A1396ef)  // Target 颜色
+//                    ContextCompat.getColor(mContext, android.R.color.transparent)  // Target 颜色
+//            );
+
+
+
+
 
             if (isTreadmill) {
                 Glide.with(getApp())
@@ -1528,10 +1590,6 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(getBinding().ivDiagramSpeedAndLevel);
 
-
-//            int[] levelData = ProfileChartView.parseDataString(w.speedAndLevelChartNum);
-//            getBinding().ivDiagramSpeedAndLevel.setData(levelData);
-//            getBinding().ivDiagramSpeedAndLevel.setMaxValue(40);
 
 
             if (w.avgHeartRate.get() == 0) {
@@ -1549,26 +1607,6 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         }
     }
 
-
-    private double[] distributeTarget(List<Double> speeds, List<Integer> positions) {
-        //    Log.d("AAAACCVVVV", "onChangeUnit: " + speeds +","+ positions);
-        int size = positions.get(positions.size() - 1) + 1; // 取最後一個索引作為陣列長度
-        double[] result = new double[size];
-
-        int startIndex = 0;
-        for (int i = 0; i < speeds.size(); i++) {
-            int endIndex = positions.get(i);
-            double speedValue = Math.floor(speeds.get(i) * 10) / 10; // 取小數點 1 位，不四捨五入
-
-            for (int j = startIndex; j <= endIndex; j++) {
-                result[j] = speedValue;
-            }
-
-            startIndex = endIndex + 1; // 更新起始索引
-        }
-
-        return result;
-    }
 
     @Override
     public void dismiss() {

@@ -90,11 +90,9 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -188,6 +186,7 @@ import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.ScreenReceiver;
 import com.dyaco.spirit_commercial.support.SystemProperty;
 import com.dyaco.spirit_commercial.support.TimeUpdateManager;
+import com.dyaco.spirit_commercial.support.UnknownSourcesHelper;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingActivity;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupMsgWindow;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
@@ -650,15 +649,29 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
 
 
         //未知來源安裝檢查
-        if (getPackageManager().canRequestPackageInstalls()) {
-            checkUpdate();
-        } else {
-            new RxTimer().timer(3000, number -> {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
-                someActivityResultLauncher.launch(intent);
-            });
-        }
+//        if (getPackageManager().canRequestPackageInstalls()) {
+//            checkUpdate();
+//        } else {
+//            new RxTimer().timer(3000, number -> {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
+//                someActivityResultLauncher.launch(intent);
+//            });
+//        }
 
+//        if (getPackageManager().canRequestPackageInstalls()) {
+//            Timber.tag("UnknownSourcesHelper").d("OOOOOOOOO: ");
+//        } else {
+//            Timber.tag("UnknownSourcesHelper").d("XXXXXXXXXXXX: ");
+//        }
+
+        UnknownSourcesHelper helper = new UnknownSourcesHelper(getApplicationContext());
+        boolean result = helper.enableUnknownSources();
+        if (result) {
+            checkUpdate();
+            Timber.tag("UnknownSourcesHelper").d("權限開啟成功: ");
+        } else {
+            Timber.tag("UnknownSourcesHelper").d("權限開啟失敗: ");
+        }
 
         DeviceSettingBean deviceSettingBean = App.getApp().getDeviceSettingBean();
         if (deviceSettingBean.getCurrentVersionCode() == 0) {
@@ -2852,13 +2865,28 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     DyacoDataEmitter mDyacoEmitter = new DyacoDataEmitter();
     DyacoDataReceiver mDyacoDataReceiver;               // BITGYM, KINOMAP
 
+    /**
+     * public void startReceiveCtrl(Context context) {
+     *         // Android 14 ---
+     *         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+ (API 33+)
+     *              // 這裡必須使用 EXPORTED
+     *             context.getApplicationContext().registerReceiver(this.mDyacoCtrlReceiver, this.mDaycoCtrlDataFilter, Context.RECEIVER_EXPORTED);
+     *         } else {
+     *             context.getApplicationContext().registerReceiver(this.mDyacoCtrlReceiver, this.mDaycoCtrlDataFilter);
+     *         }
+     *         this.mIsRegistered = true;
+     *     }
+     */
     public void initReceiver() {  // BITGYM, KINOMAP
         Timber.tag("GYM_APP").d("setListener, startReceiveInfo & startReceiveCtrl");
-
         mDyacoDataReceiver = DyacoDataReceiver.getInstance();
         mDyacoDataReceiver.setListener(dyacoDataListener);
-        mDyacoDataReceiver.startReceiveInfo(this);
-        mDyacoDataReceiver.startReceiveCtrl(this);
+        // TODO: EEEEEEEEEE
+
+        if(!isEmulator) {
+            mDyacoDataReceiver.startReceiveInfo(this);
+            mDyacoDataReceiver.startReceiveCtrl(this);
+        }
     }
 
     // BITGYM, KINOMAP

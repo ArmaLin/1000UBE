@@ -28,12 +28,18 @@ object RootTools {
      * @return 指令是否成功執行。
      */
     private fun execute(command: String, actionName: String): Boolean {
-        val result = executeAsRoot(command)
-        return if (result.isSuccessful()) {
-            Timber.tag(TAG).i("Successfully executed: $actionName")
-            true
-        } else {
-            Timber.tag(TAG).e("Failed to $actionName. Exit code: ${result.exitCode}, Error: ${result.error}")
+        return try {
+            val result = executeAsRoot(command)
+            if (result.isSuccessful()) {
+                Timber.tag(TAG).i("Successfully executed: $actionName")
+                true
+            } else {
+                Timber.tag(TAG).e("Failed to $actionName. Exit code: ${result.exitCode}, Error: ${result.error}")
+                false
+            }
+        } catch (e: Exception) {
+            // 捕捉 IOException (Permission denied) 或其他錯誤，防止閃退
+            Timber.tag(TAG).e(e, "Exception while executing: $actionName. (Device might not be rooted)")
             false
         }
     }

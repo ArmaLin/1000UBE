@@ -37,7 +37,6 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HEART_RA
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HIIT;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioButton;
@@ -353,6 +352,7 @@ public class SetTimeFragment extends BaseBindingFragment<FragmentSetTimeBinding>
             case CARDIO:
             case STRENGTH:
             case INTERVAL:
+            case PLATEAU:
 
                 timeTitle = R.string.time_min;
                 topIcon = R.drawable.icon_time_48;

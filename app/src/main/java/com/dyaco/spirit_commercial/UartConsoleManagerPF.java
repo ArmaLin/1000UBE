@@ -631,9 +631,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     }
 
     public void setBuzzer() {
-//        if (dsVM.isBeep.get() && !woVM.isLongClicking.get()) {
-        consoleUart.setBuzzer(DeviceDyacoMedical.BEEP.SHORT, 1);
-//        }
+//        if (dsVM.beep.getValue() && !woVM.isLongClicking.get()) {
+        if (dsVM.beep.getValue()) {
+            consoleUart.setBuzzer(DeviceDyacoMedical.BEEP.SHORT, 1);
+        }
     }
 
     public void setDevEnterEngineerMode() {
@@ -773,12 +774,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onDataSend(String dataSendInHex) {
-        //   Timber.d(">>>%s", dataSendInHex);
+      //     Timber.tag("PPPWQQQQQQ").d(">>>>>>>>%s", dataSendInHex);
     }
 
     @Override
     public void onDataReceive(String dataReceiveInHex) {
-        //   Timber.d("🔥 <<<%s", dataReceiveInHex);
+     //   Timber.tag("PPPWQQQQQQ").d("🔥 <<<<<<<<%s", dataReceiveInHex);
         uartVM.lwrTimeoutCounter.set(0);
         uartVM.isLcbNotResponding.set(false);
     }
@@ -809,7 +810,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             return;
         }
 
-        Timber.d("key = %s", key.name());
+        Timber.tag("PPPWQQQQQQ").d("key = %s", key.name());
 
         switch (key) {
             case KEY23: // -
@@ -828,11 +829,23 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 }
 
                 break;
+
+            case KEY_UNKNOWN: //長按結束
+                // 若長按後放掉, 會收到KEY_UNKNOWN 0xFF屬正常
+
+                LiveEventBus.get(KEY_UNKNOWN).post(true);
         }
     }
 
     @Override
     public void onMultiKey(int i, List<DeviceDyacoMedical.KEY> list) {
+
+     //   Timber.tag("PPPWQQQQQQ").d("QQQQQQ = %s", list.toArray());
+
+
+//        for (DeviceDyacoMedical.KEY key : list) {
+//            Timber.tag("PPPWQQQQQQ").d("multi-key = %s", key.name());
+//        }
 
         if (list == null) return;
 
@@ -846,7 +859,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
 
         for (DeviceDyacoMedical.KEY key : list) {
-            Timber.d("multi-key = %s", key.name());
+            Timber.tag("PPPWQQQQQQ").d("multi-key = %s", key.name());
         }
 
         // 長按
@@ -858,11 +871,6 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                     break;
                 case KEY07:  // +
                     LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(LONG_CLICK_PLUS);
-                    break;
-//                case KEY15: //START / STOP
-//                    break;
-                case KEY_UNKNOWN:
-                    LiveEventBus.get(KEY_UNKNOWN).post(true);
                     break;
             }
         }
