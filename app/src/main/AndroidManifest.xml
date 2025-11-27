@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:sharedUserId="android.uid.system"
     package="com.dyaco.spirit_commercial">
 
 <!--    &lt;!&ndash; Include these declarations if your application does not function without BLE features. &ndash;&gt;-->
