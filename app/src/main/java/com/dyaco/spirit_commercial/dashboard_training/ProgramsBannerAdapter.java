@@ -13,6 +13,12 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_DFT;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_DEF;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_MIN;
@@ -96,7 +102,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         holder.binding.setIsDefaultProgram(isDefaultProgram);
 
-      //  holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+        //  holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 //        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
         holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
         holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
@@ -143,7 +149,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             case WFI:
             case CTT_PREDICTION:
 
-           //     if ("en_US".equalsIgnoreCase(LanguageUtils.getLan())) {
+                //     if ("en_US".equalsIgnoreCase(LanguageUtils.getLan())) {
 
                 String valueStr2;
                 if (programInfo == ProgramsEnum.CTT_PREDICTION) {
@@ -197,15 +203,55 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         if (programInfo == ProgramsEnum.MANUAL || programInfo == ProgramsEnum.CALORIES || programInfo == ProgramsEnum.WATTS) {
             holder.binding.timePicker.setVisibility(VISIBLE);
-            initTimePicker(holder.binding,programInfo);
+            initTimePicker(holder.binding, programInfo);
         } else {
             holder.binding.timePicker.setVisibility(INVISIBLE);
+            holder.binding.wPicker.setVisibility(INVISIBLE);
+            holder.binding.kcalUnit.setVisibility(INVISIBLE);
+            holder.binding.wUnit.setVisibility(INVISIBLE);
         }
     }
 
     private void initTimePicker(ProgramsDetailsItemBinding binding, ProgramsEnum programsEnum) {
-       list5 = CommonUtils.generateTimeOptions(0, 99);
+        // 1. 設定 LayoutParams (調整 MarginEnd)
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.timePicker.getLayoutParams();
 
+        // 判斷是否為 WATTS 模式，設定 Margin 與 wPicker 可見性
+        if (programsEnum == ProgramsEnum.WATTS) {
+            layoutParams.setMarginEnd((int) CommonUtils.dp2px(239));
+            binding.wPicker.setVisibility(View.VISIBLE);
+            binding.wUnit.setVisibility(View.VISIBLE);
+
+            // 初始化 Watts 資料列表 (每次都 new 新的以防重複)
+            listW = new ArrayList<>();
+            for (int i = POWER_MIN; i <= POWER_MAX; i++) {
+                listW.add(String.valueOf(i));
+            }
+        } else {
+            layoutParams.setMarginEnd((int) CommonUtils.dp2px(439));
+            binding.wPicker.setVisibility(View.INVISIBLE);
+            binding.wUnit.setVisibility(View.INVISIBLE);
+        }
+        binding.timePicker.setLayoutParams(layoutParams);
+
+        // 2. 準備 Time/Calories 資料列表
+        int defaultOpt = TARGET_TIME_DEF;
+        list5 = new ArrayList<>(); // 重置列表
+
+        if (programsEnum == ProgramsEnum.CALORIES) {
+            defaultOpt = TARGET_CALORIES_DEF + TARGET_CALORIES_MIN;
+            binding.kcalUnit.setVisibility(View.VISIBLE);
+
+            for (int i = TARGET_CALORIES_MIN; i <= TARGET_CALORIES_MAX; i++) {
+                list5.add(String.valueOf(i));
+            }
+        } else {
+            binding.kcalUnit.setVisibility(View.INVISIBLE);
+            list5 = CommonUtils.generateTimeOptions(0, 99);
+        }
+
+        // 3. 設定 Time/Calories Picker (左側)
+        // 取得 View 並指定泛型為 String
         OptionsPickerView<String> timePicker = binding.timePicker;
 
         timePicker.setData(list5);
@@ -219,19 +265,51 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         timePicker.setCurvedArcDirectionFactor(1.0f);
         timePicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
 
-//        timePicker.setOpt1SelectedPosition(TARGET_TIME_DEF, false);
-
         timePicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
             if (opt1Data == null) {
                 return;
             }
 
-            Log.d("AAAAAAAAAA", "initTimePicker: " + opt1Data +","+ opt1Pos); //11 * 60
-            workoutViewModel.selWorkoutTime.set(opt1Pos * 60);
+            Log.d("initTimePicker", "Time/Cal Select: " + opt1Data);
+
+            if (programsEnum == ProgramsEnum.CALORIES) {
+                workoutViewModel.targetCalories.set(Double.parseDouble(opt1Data));
+            } else {
+                workoutViewModel.selWorkoutTime.set(opt1Pos * 60);
+            }
         });
 
-        timePicker.setOpt1SelectedPosition(TARGET_TIME_DEF, false);
+        // 設定 Time/Calories 預設選中位置
+        timePicker.setOpt1SelectedPosition(defaultOpt, false);
 
+
+        // 4. 設定 Watts Picker (右側，僅 Watts 模式)
+        if (programsEnum == ProgramsEnum.WATTS) {
+            OptionsPickerView<String> wPicker = binding.wPicker;
+
+            wPicker.setData(listW);
+            wPicker.setVisibleItems(8);
+            wPicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+            wPicker.setTextSize(54, false);
+            wPicker.setCurved(true);
+            wPicker.setCyclic(true);
+            wPicker.setTextBoundaryMargin(0, true);
+            wPicker.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+            wPicker.setCurvedArcDirectionFactor(1.0f);
+            wPicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+
+            wPicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+                if (opt1Data == null) {
+                    return;
+                }
+
+                Log.d("initTimePicker", "POWER: " + opt1Data);
+                workoutViewModel.constantPowerW.set(Integer.parseInt(opt1Data));
+            });
+
+            // 設定 Watts 預設選中位置
+            wPicker.setOpt1SelectedPosition(POWER_DFT - POWER_MIN, false);
+        }
     }
 
     public interface OnItemClickListener {
@@ -259,6 +337,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
     List<String> list3;
     List<String> list4;
     List<String> list5;
+    List<String> listW;
 
     private void initFitnessData() {
 
@@ -459,9 +538,6 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 //            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
 //        });
 //    }
-
-
-
 
 
 }
