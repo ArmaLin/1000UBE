@@ -177,6 +177,7 @@ import com.dyaco.spirit_commercial.viewmodel.ErrorInfo;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.programs.AirForce;
 import com.dyaco.spirit_commercial.workout.programs.Army;
+import com.dyaco.spirit_commercial.workout.programs.CaloriesProg;
 import com.dyaco.spirit_commercial.workout.programs.CoastGuard;
 import com.dyaco.spirit_commercial.workout.programs.CommonPrograms;
 import com.dyaco.spirit_commercial.workout.programs.CttPerformance;
@@ -2774,6 +2775,10 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             w.currentCalories.set(calc.getKcalAccumulate() >= 9999 ? 9999 : calc.getKcalAccumulate());
         }
 
+        double d1 = w.targetCalories.get() - w.currentCalories.get();
+        d1 = d1 >= 0 ? d1 : 0;
+        w.caloriesLeft.set(d1);
+
 //        w.avgPace.set(calc.getPaceAverage());
         w.currentPower.set(calc.getWatt());
    //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
@@ -2866,6 +2871,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             case FITNESS_TEST:
                 iPrograms = new FitnessTest(w, this, calc);
                 break;
+            case CALORIES:
+                iPrograms = new CaloriesProg(w,this);
+                break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
         }
@@ -2897,6 +2905,15 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             new RxTimer().timer(300, number -> initCoolDown());
 
             //   w.setWorkoutDone(true);
+        }
+    }
+
+
+    public void targetCalories() {
+
+        if (w.caloriesLeft.get() <= 0) {
+            isWorkoutTimerRunning = false;
+            new RxTimer().timer(300, number -> initCoolDown());
         }
     }
 

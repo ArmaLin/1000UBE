@@ -19,7 +19,7 @@ android {
     ext {
         HardWareVersion = "V1.0"
         SoftWareVersion = "A.1.0.0"  //A.x.x.0測試
-        sVersion = "B"
+        sVersion = "A"
         SerialNumber = getFormattedDate('MMdd') + sVersion
         FirmWareVersion = "37"
     }
@@ -28,7 +28,7 @@ android {
         applicationId "com.dyaco.spirit_commercial"
         minSdk 34
         targetSdk 36
-        versionCode 9
+        versionCode 10
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -99,8 +99,9 @@ android {
 
 
 
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
        //     buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/PlanetFitness/"'
 
 
 
@@ -116,7 +117,8 @@ android {
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
 
             //production
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/PlanetFitness/"'
       //      buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
 
 

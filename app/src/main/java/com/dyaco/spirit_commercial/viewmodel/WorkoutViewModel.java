@@ -227,6 +227,9 @@ public final ObservableDouble peakRpm = new ObservableDouble();
     public final ObservableDouble currentCalories = new ObservableDouble();
     public final ObservableDouble totalCalories = new ObservableDouble();
     public final ObservableDouble targetCalories = new ObservableDouble();
+    public final ObservableDouble caloriesLeft = new ObservableDouble();
+
+
     public final ObservableInt currentPower = new ObservableInt();
     public final ObservableDouble currentMets = new ObservableDouble();
     public final ObservableDouble avgMet = new ObservableDouble();

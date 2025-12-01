@@ -1133,6 +1133,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         setFirstHeartRate();
 
+
         // for UBE
         if (MODE.isUbeType()) {
             woVM.currentRpm.set(rpm_ECB);
@@ -1152,6 +1153,11 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
 
         }
+
+
+
+        // TODO: test rpm
+        woVM.currentRpm.set(100);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.dyaco.spirit_commercial.maintenance_mode;
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.SETTING_SHOW;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
@@ -1787,13 +1786,13 @@ public class MaintenanceModeFragment extends BaseBindingFragment<PopupMaintenanc
 
 
         // TODO:
-      //  setSleepMode(time);
+        setSleepMode(time);
 
-        if (MODE.isStepperType()) {
-            setSleepMode(28800000);
-        } else {
-            setSleepMode(time);
-        }
+//        if (MODE.isStepperType()) {
+//            setSleepMode(28800000);
+//        } else {
+//            setSleepMode(time);
+//        }
     }
 
 

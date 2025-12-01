@@ -600,6 +600,8 @@ public class FormulaUtil {
         w.setAppleWatchCalories(0);
         w.setAppleWatchHr(0);
         w.currentCalories.set(0);
+        w.targetCalories.set(0);
+        w.caloriesLeft.set(0);
         w.currentSpeed.set(0);
         w.currentInclineValue.set(0);
         w.currentInclineLevel.set(0);

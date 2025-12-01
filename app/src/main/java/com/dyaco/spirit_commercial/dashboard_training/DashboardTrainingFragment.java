@@ -14,7 +14,6 @@ import static com.dyaco.spirit_commercial.login.LoginFragment.isGuestQuickStart;
 import static com.dyaco.spirit_commercial.support.CommonUtils.getSleepTime;
 import static com.dyaco.spirit_commercial.support.CommonUtils.iExc;
 import static com.dyaco.spirit_commercial.support.CommonUtils.ignoringExc;
-import static com.dyaco.spirit_commercial.support.CommonUtils.setSleepMode;
 import static com.dyaco.spirit_commercial.support.CommonUtils.showException;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.kg2lbPure;
 import static com.dyaco.spirit_commercial.support.FormulaUtil.lb2kgPure;
@@ -207,11 +206,11 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
         }
 
 
-        Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
-
-        if (MODE.isStepperType()) {
-            setSleepMode(28800000);
-        }
+//        Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
+//
+//        if (MODE.isStepperType()) {
+//            setSleepMode(28800000);
+//        }
 
         Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
     }

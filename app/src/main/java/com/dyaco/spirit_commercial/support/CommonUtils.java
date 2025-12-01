@@ -2089,7 +2089,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_REMAINING_CALORIES:
-                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    value = formatDecimal(workoutViewModel.caloriesLeft.get());
                     break;
 
                 case STATS_TOTAL_REVOLUTIONS:
@@ -2348,7 +2348,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_REMAINING_CALORIES:
-                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view1Text = formatDecimal(workoutViewModel.caloriesLeft.get());
                     view2Text = context.getString(R.string.Remaining_Calories);
                     view3Text = "";
                     break;
