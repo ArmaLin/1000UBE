@@ -276,8 +276,6 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         super.onViewCreated(view, savedInstanceState);
 
 
-        OPT_SETTINGS.MAX_LEVEL_MAX = MODE.isUbeType() ? 30: 50;
-
         u = parent.uartConsole;
         appStatusViewModel = new ViewModelProvider(requireActivity()).get(AppStatusViewModel.class);
         w = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
@@ -2749,7 +2747,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         } else {
             // calc.setData(w.currentRpm.get(), 0, 0, w.pwmLevelDA.get());
             calc.setData(w.currentRpm.get(), 0, 0, w.currentLevel.get());
-            Timber.tag("WWWWEEEERRRRR").d("setData: " + w.currentRpm.get() +","+ w.currentLevel.get());
+       //     Timber.tag("WWWWEEEERRRRR").d("setData: " + w.currentRpm.get() +","+ w.currentLevel.get());
         }
         w.currentPace.set(calc.getPace());
 

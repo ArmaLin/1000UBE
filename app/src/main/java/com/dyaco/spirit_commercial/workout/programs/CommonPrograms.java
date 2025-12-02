@@ -147,7 +147,7 @@ public class CommonPrograms implements IPrograms {
             //profile中最大的值
             IntSummaryStatistics sSpeed = Arrays.stream(w.orgArraySpeedAndLevel).summaryStatistics();
             w.orgMaxSpeedInProfile.set(sSpeed.getMax());
-            w.selMaxSpeedOrLevel.set(sSpeed.getMax());
+          //  w.selMaxSpeedOrLevel.set(sSpeed.getMax());
 
             // TODO EGYM
             //初始值為EGYM提供

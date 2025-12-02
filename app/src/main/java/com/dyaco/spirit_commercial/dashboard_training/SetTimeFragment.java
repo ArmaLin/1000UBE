@@ -681,6 +681,7 @@ public class SetTimeFragment extends BaseBindingFragment<FragmentSetTimeBinding>
             case INTERVAL:
             case HILL:
             case STRENGTH:
+            case PLATEAU:
                 workoutViewModel.selMaxSpeedOrLevel.set(isTreadmill ? getSpeedLevel(value) : Math.round(value));
                 break;
             case HEART_RATE:

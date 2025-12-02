@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isNetworkAvailable;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_EGYM;
@@ -17,7 +18,10 @@ import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.databinding.FragmentMainDashboardTrainingBinding;
 import com.dyaco.spirit_commercial.egym.EgymUtil;
 import com.dyaco.spirit_commercial.support.base_component.BaseBindingFragment;
+import com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+
+import timber.log.Timber;
 
 /**
  * DashboardTrainingFragment
@@ -59,6 +63,9 @@ public class MainDashboardTrainingFragment extends BaseBindingFragment<FragmentM
 //                }
             }
         });
+
+
+        OPT_SETTINGS.MAX_LEVEL_MAX = MODE.isUbeType() ? 30: 50;
     }
 
     @Override
