@@ -22,6 +22,7 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.LONG_CLICK_PLUS
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.corestar.libs.device.DeviceDyacoMedical;
 import com.corestar.libs.ota.LwrMcuUpdateManager;
@@ -462,6 +463,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             resAd = uartVM.at_valuePwm.get();
         }
 
+        Log.d(TAG, "WAAWAWAWAWA: " + uartVM.at_valuePwm.get() +","+ resAd +","+ devStep);
+
         // 限定pwm level D/A值在範圍內 0~1023
 //        resAd = Math.max(resAd, 0);
 //        resAd = Math.min(resAd, 1023);
@@ -471,6 +474,9 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // 後面下達的AD值, 需配合ACTION_MODE為NORMAL, 否則即使異動, 也不會作動
 
         //   Timber.d("ECB setControl, resAd = %s", resAd);
+
+     //   Log.d("WAAWAWAWAWA", "⭕setControl: " + resAd +","+ UartConst.DS_ECB_ERR_OCCURRED);
+
         consoleUart.setControl(0,
                 (devStep == UartConst.DS_ECB_ERR_OCCURRED) ?
                         DeviceDyacoMedical.ACTION_MODE.STOP :   // 拉線器發生錯誤時, 則直接設定為停止
@@ -508,6 +514,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         int pwmLevelDA = MODE.getPwmViaLevel(level);
         uartVM.at_valuePwm.set(pwmLevelDA);
 
+        //⭐️ 每秒 mcucontrol 執行 at_valuePwm 的 level ad
         //     Timber.d("依LEVEL constant, 取得D/A Level: level = " + level + ", m_pwmLevelDA = " + pwmLevelDA);
 
     }
@@ -527,7 +534,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         power = Math.max(power, UartConst.EMS_LWR_POWER_MIN);
         int currentRpm = woVM.currentRpm.get();
         int pwmValue = MODE.getPwmViaPower(power, currentRpm);
-        Timber.d("currentRpm = " + currentRpm + ", power = " + power + ", pwmValue = " + pwmValue);
+        Timber.tag("WAAWAWAWAWA").d("currentRpm = " + currentRpm + ", power = " + power + ", 🌶️pwmValue = " + pwmValue);
         uartVM.at_valuePwm.set(pwmValue);
     }
 

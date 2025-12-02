@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.corestar.calculation_libs.Calculation;
 import com.dyaco.spirit_commercial.R;
+import com.dyaco.spirit_commercial.UartVM;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment;
 import com.dyaco.spirit_commercial.workout.WorkoutChartsFragment;
@@ -20,11 +21,13 @@ public class Watt implements IPrograms {
     WorkoutViewModel w;
     MainWorkoutTrainingFragment m;
     Calculation calc;
+    UartVM uartVM;
 
-    public Watt(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, Calculation calc) {
+    public Watt(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, Calculation calc, UartVM uartVM) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.calc = calc;
+        this.uartVM = uartVM;
         w.constantPowerW.set(w.selConstantPowerW.get());
         w.currentLevel.set(calc.getLevel(w.selConstantPowerW.get(), w.currentRpm.get()));
         Log.d("##########", "1111111updateSpeedOrLevelNum: " +w.selConstantPowerW.get() + "," + w.currentRpm.get() +","+ calc.getLevel(w.constantPowerW.get(),w.currentRpm.get()));
@@ -43,6 +46,8 @@ public class Watt implements IPrograms {
 
     @Override
     public void init() {
+
+      //  uartVM.constantType.set(CT_POWER);
 
         w.currentMaxSpeed.set(POWER_MAX);
 

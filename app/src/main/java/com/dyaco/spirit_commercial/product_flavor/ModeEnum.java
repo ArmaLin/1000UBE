@@ -42,7 +42,7 @@ public enum ModeEnum {
         this.modelName = modelName;
         this.typeName = typeName;
 
-
+        this.wattTableValues = wattTableValues;
         wattTable = new WattTable(wattTableValues);
     }
 

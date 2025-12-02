@@ -242,7 +242,6 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                     if (programInfoList.get(position).getCode() == ProgramsEnum.FITNESS_TEST.getCode()) {
                         appStatusViewModel.changeMainButtonType(START_THIS_TEST);
 
-                        // TODO: AAAA
                     } else if (programInfoList.get(position).getCode() == ProgramsEnum.MANUAL.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.CALORIES.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.WATTS.getCode()) {

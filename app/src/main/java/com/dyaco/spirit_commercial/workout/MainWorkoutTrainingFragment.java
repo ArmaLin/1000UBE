@@ -14,6 +14,7 @@ import static com.dyaco.spirit_commercial.MainActivity.isSummary;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.MainActivity.userProfileViewModel;
+import static com.dyaco.spirit_commercial.UartConst.CT_DEFAULT;
 import static com.dyaco.spirit_commercial.egym.EgymUtil.SYMBOL_DURATION;
 import static com.dyaco.spirit_commercial.support.CommonUtils.formatSecToM;
 import static com.dyaco.spirit_commercial.support.CommonUtils.isNumeric;
@@ -147,6 +148,7 @@ import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.UartConsoleManagerPF;
+import com.dyaco.spirit_commercial.UartVM;
 import com.dyaco.spirit_commercial.alert_message.CautionSpeedWindow;
 import com.dyaco.spirit_commercial.alert_message.ModalHrMaxWindow;
 import com.dyaco.spirit_commercial.alert_message.ModalHrUpdateWindow;
@@ -243,6 +245,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      */
     public boolean isGsMode;
     private AppStatusViewModel appStatusViewModel;
+    private UartVM uartVM;
     private WorkoutViewModel w;
     private DeviceSettingViewModel deviceSettingViewModel;
     private EgymDataViewModel egymDataViewModel;
@@ -281,6 +284,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
         egymDataViewModel = new ViewModelProvider(requireActivity()).get(EgymDataViewModel.class);
+        uartVM = new ViewModelProvider(requireActivity()).get(UartVM.class);
 
 
         deviceCsafe = ((MainActivity) requireActivity()).deviceCsafe;
@@ -424,12 +428,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 (UNIT_E == IMPERIAL) ? Calculation.UNIT.IMPERIAL : Calculation.UNIT.METRIC,
                 weight, height, age);
 
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " +age);
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " +weight);
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " +height);
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " +deviceSettingViewModel.typeCode.get());
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " + parent.calculation);
-//        Log.d("VVVBBBNNN", "XXXXXXXinit: " + MODE.getWattTable());
+
         parent.calculation.setWattTable(MODE.getWattTable());
 
 
@@ -1500,7 +1499,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                     u.setDevWorkload(level);
                     w.currentLevel.set(level);
 
-                    Log.d("FITNESS_TEST_PROGRAM", "11111setPwmLevel_POWER: " + w.currentLevel.get());
+                    Log.d("WAAWAWAWAWA", "11111setPwmLevel_POWER: " + w.currentLevel.get() +","+ w.constantPowerW.get() +","+ w.currentRpm.get());
                 } else {
                //     Log.d("UartConsoleManagerPF", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
                     u.setDevWorkload(w.currentLevel.get());
@@ -1522,11 +1521,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
-        Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+     //   Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
 
         if (workoutChartsFragment == null) return false;
 
         if (workoutChartsFragment.updateSpeedNum(num)) {
+
             u.setDevWorkload(w.currentLevel.get());
             return true;
         }
@@ -2339,8 +2339,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             //POWER要每秒送
             if (w.selProgram == WATTS) {
-                //   if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
-                //  w.currentLevel.set(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
+                // TODO: PF
                 updateSpeedOrLevelNumWATT(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
             }
 
@@ -2815,7 +2814,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     }
 
     private void initProgramData() {
-
+        uartVM.constantType.set(CT_DEFAULT);
         switch (w.selProgram) {
             case ARMY:
                 iPrograms = new Army(w, this);
@@ -2864,7 +2863,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new Hiit(w, this, u);
                 break;
             case WATTS:
-                iPrograms = new Watt(w, this, calc);
+                iPrograms = new Watt(w, this, calc,uartVM);
                 break;
             case FITNESS_TEST:
                 iPrograms = new FitnessTest(w, this, calc);

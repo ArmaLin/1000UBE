@@ -304,7 +304,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 }
 
                 Log.d("initTimePicker", "POWER: " + opt1Data);
-                workoutViewModel.constantPowerW.set(Integer.parseInt(opt1Data));
+                workoutViewModel.selConstantPowerW.set(Integer.parseInt(opt1Data));
             });
 
             // 設定 Watts 預設選中位置
