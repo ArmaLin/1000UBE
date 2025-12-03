@@ -1461,7 +1461,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             if ((w.constantPowerW.get() + x) > POWER_MAX || (w.constantPowerW.get() + x) < POWER_MIN) {
                 return false;
             }
-
+            // TODO: PF  增加 watt
             w.constantPowerW.set(w.constantPowerW.get() + x);
 
             Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
@@ -1491,6 +1491,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
                     int level;
                     if (w.selProgram == WATTS) {
+                        // TODO: PF  ,watt
                         level = calc.getLevel(w.constantPowerW.get(), w.currentRpm.get());
                         //       Log.d("EEEEEEFFFF", "updateSpeedOrLevelNum: " + level);
                     } else {
@@ -1516,6 +1517,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      * @param isSpecify 是否為指定數值
      */
     public boolean updateSpeedOrLevelNumWATT(int num, boolean isSpecify) {
+        // TODO: PF 每秒送???
         if (CheckDoubleClick.isFastClick2()) return false;
         if (!w.isSafeKey.get()) return false;
 
