@@ -778,10 +778,8 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
         int newCurrentSpeedLevel = currentSpeedLevel + (updateSpeedLevel);
 
-        // TODO: PF    <= 0
         if (newCurrentSpeedLevel <= 0) return false;
 
-        Log.d("AAASSDDFFAA", "updateSpeedOrLevelNumWATT: " + currentSpeedLevel + ", " + newCurrentSpeedLevel );
 
         //ftms 同階 回成功
         if (currentSpeedLevel == newCurrentSpeedLevel) {

@@ -1464,16 +1464,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             // TODO: PF  增加 watt
             w.constantPowerW.set(w.constantPowerW.get() + x);
 
-            Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
+      //      Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
         }
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
-        //電跑的 HeartRateProgram 最大速度不同
-//        if (isTreadmill && w.selProgram == HEART_RATE) {
-//            if ((w.currentSpeedLevel.get() + num) > (UNIT_E == IMPERIAL ? getSpeedLevel(HEART_IU_MAX_SPEED) : getSpeedLevel(HEART_MU_MAX_SPEED))){
-//                return false;
-//            }
-//        }
+
 
         //HIIT WarmUp And Cooldown 調整speed或level 不可超過 Sprint
         if ((w.isWarmUpIng.get() || w.isCoolDowning.get()) && w.selProgram == HIIT) {
@@ -1483,7 +1478,6 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
 
         if (workoutChartsFragment == null) return false;
-
         if (workoutChartsFragment.updateSpeedNum(num)) {
             if (isTreadmill) {
               //  u.setDevSpeedAndIncline();
@@ -1512,27 +1506,17 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         return false;
     }
 
-    /**
-     * @param num       階數
-     * @param isSpecify 是否為指定數值
-     */
-    public boolean updateSpeedOrLevelNumWATT(int num, boolean isSpecify) {
-        // TODO: PF 每秒送???
-        if (CheckDoubleClick.isFastClick2()) return false;
-        if (!w.isSafeKey.get()) return false;
+    public void updateSpeedOrLevelNumWATT(int num, boolean isSpecify) {
+        // TODO: PF 每秒
 
+        if (!w.isSafeKey.get()) return;
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
-
-     //   Log.d("VVVVVVVV", "WATTupdateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()));
-
-        if (workoutChartsFragment == null) return false;
+        if (workoutChartsFragment == null) return;
 
         if (workoutChartsFragment.updateSpeedNum(num)) {
 
             u.setDevWorkload(w.currentLevel.get());
-            return true;
         }
-        return false;
     }
 
     /**
@@ -2342,7 +2326,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //POWER要每秒送
             if (w.selProgram == WATTS) {
                 // TODO: PF
-                updateSpeedOrLevelNumWATT(calc.getWattLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
+                updateSpeedOrLevelNumWATT(calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()), true);
             }
 
 
