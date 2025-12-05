@@ -69,10 +69,20 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
 
 
+
+
         //下方按鈕
         if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts) {
-            // TODO: AAAA
-            appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+            // TODO: PF
+       //     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+
+            if (MODE.isStepperType()) {
+                if (programId == R.id.btn_Calories) {// stepper CUSTOM
+                    appStatusViewModel.changeMainButtonType(CHOOSE);
+                }
+            } else {
+                appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+            }
         } else {
             appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
         }

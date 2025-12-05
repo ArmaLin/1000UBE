@@ -212,7 +212,19 @@ public class DashboardTrainingFragment extends BaseBindingFragment<FragmentDashb
 //            setSleepMode(28800000);
 //        }
 
+//        String apk = Environment.getExternalStorageDirectory().getAbsolutePath() + "/CoreStar/Dyaco/Spirit/PlanetFitnessV1.0.A.1.0.0.1204A_[dev].apk";
+//        String md5 = AppMd5Utils.getFileMd5(apk);
+//        if (md5 != null) {
+//            // 使用 MD5
+//            Log.d("MD5", "current apk md5 = " + md5);
+//        } else {
+//            Log.e("MD5", "failed to get apk md5");
+//        }
+
         Log.d("AAAAADWFWF", "onCreate: " + getSleepTime());
+
+
+
     }
 
     EgymBannerAdapter egymBannerAdapter;

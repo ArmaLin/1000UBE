@@ -1,3 +1,4 @@
+import java.security.MessageDigest
 import java.util.regex.Pattern
 
 plugins {
@@ -331,6 +332,20 @@ def getCurrentFlavor() {
 static def getFormattedDate(String pattern) {
     def date = new Date()
     return date.format(pattern)
+}
+
+
+// 共用：計算檔案 MD5（16 進位字串）
+static String calculateMd5(File file) {
+    MessageDigest md = MessageDigest.getInstance("MD5")
+    file.withInputStream { is ->
+        byte[] buffer = new byte[8192]
+        int read
+        while ((read = is.read(buffer)) != -1) {
+            md.update(buffer, 0, read)
+        }
+    }
+    return md.digest().collect { String.format("%02x", it) }.join()
 }
 
 dependencies {

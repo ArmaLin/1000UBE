@@ -12,6 +12,7 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.setMinSpeedDiagram
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.setTreadmillInclineDiagram;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.setTreadmillSpeedPresentDiagram;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.CUSTOM;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.EGYM;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
 
@@ -147,7 +148,9 @@ public class CommonPrograms implements IPrograms {
             //profile中最大的值
             IntSummaryStatistics sSpeed = Arrays.stream(w.orgArraySpeedAndLevel).summaryStatistics();
             w.orgMaxSpeedInProfile.set(sSpeed.getMax());
-          //  w.selMaxSpeedOrLevel.set(sSpeed.getMax());
+            if (w.selProgram == CUSTOM) {
+                w.selMaxSpeedOrLevel.set(sSpeed.getMax());
+            }
 
             // TODO EGYM
             //初始值為EGYM提供
