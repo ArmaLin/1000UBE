@@ -2762,6 +2762,14 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         d1 = d1 >= 0 ? d1 : 0;
         w.caloriesLeft.set(d1);
 
+
+        double ss1 = w.targetSteps.get() - w.currentStep.get();
+        ss1 = ss1 >= 0 ? ss1 : 0;
+        w.stepLeft.set(ss1);
+
+
+
+
 //        w.avgPace.set(calc.getPaceAverage());
         w.currentPower.set(calc.getWatt());
    //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
