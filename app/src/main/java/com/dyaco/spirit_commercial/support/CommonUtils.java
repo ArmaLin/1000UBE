@@ -2097,11 +2097,11 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_STEPS:
-                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    value = formatDecimal(workoutViewModel.totalStep.get());
                     break;
 
                 case STATS_REMAINING_STEPS:
-                    value = formatDecimal(workoutViewModel.currentCalories.get());
+                    value = formatDecimal(workoutViewModel.stepLeft.get());
                     break;
 
 
@@ -2360,13 +2360,13 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_STEPS:
-                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view1Text = formatDecimal(workoutViewModel.totalStep.get());
                     view2Text = context.getString(R.string.Total_Steps);
                     view3Text = "";
                     break;
 
                 case STATS_REMAINING_STEPS:
-                    view1Text = formatDecimal(workoutViewModel.currentHeartRate.get());
+                    view1Text = formatDecimal(workoutViewModel.stepLeft.get());
                     view2Text = context.getString(R.string.Remaining_Steps);
                     view3Text = "";
                     break;
@@ -3134,7 +3134,7 @@ public class CommonUtils {
             case DEVICE_TYPE_STEPPER:
                 s = R.string.Stepper;
                 break;
-            default: // TODO: 找不到會crash
+            default:
                 s = R.string.none;
         }
 

@@ -71,20 +71,29 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
 
 
 
-        //下方按鈕
+        //從外面點進來時 (不是滑動banner)  下方按鈕的變化
         if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts) {
             // TODO: PF
        //     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
 
             if (MODE.isStepperType()) {
-                if (programId == R.id.btn_Calories) {// stepper CUSTOM
+                if (programId == R.id.btn_Calories) {// stepper >>>> CUSTOM
                     appStatusViewModel.changeMainButtonType(CHOOSE);
+                }
+
+                if (programId == R.id.btn_Watts) {// stepper >>> Steps
+                    appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                 }
             } else {
                 appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
             }
         } else {
-            appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
+
+            if (MODE.isStepperType() && programId == R.id.btn_HeartRate) {
+                appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+            } else {
+                appStatusViewModel.changeMainButtonType((programType != WorkoutIntDef.DEFAULT_PROGRAM) ? START_THIS_TEST : CHOOSE);
+            }
         }
 
 
@@ -253,7 +262,9 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                         appStatusViewModel.changeMainButtonType(START_THIS_TEST);
 
                     } else if (programInfoList.get(position).getCode() == ProgramsEnum.MANUAL.getCode() ||
+                            programInfoList.get(position).getCode() == ProgramsEnum.STEPS.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.CALORIES.getCode() ||
+                            programInfoList.get(position).getCode() == ProgramsEnum.WINGATE_TEST.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.WATTS.getCode()) {
                         appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                     } else {
