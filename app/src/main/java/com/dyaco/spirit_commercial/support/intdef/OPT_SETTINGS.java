@@ -147,6 +147,7 @@ public class OPT_SETTINGS {
     public static final int TARGET_STEPS_DEF = 1200;
     public static final int TARGET_STEPS_MIN = 300;
     public static final int TARGET_STEPS_MAX = 10000;
+    public static final int MT_TARGET_STEPS_INC = 50;
 
     // for Distance
     public static final int TARGET_DISTANCE_IU_DEF = 15;        // 1.5 Mile

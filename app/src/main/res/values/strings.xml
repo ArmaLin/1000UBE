@@ -813,6 +813,7 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="Peak_Heart_Rate">Peak Heart Rate</string>
     <string name="Peak_METs">Peak METs</string>
     <string name="Select_Time">Select Time</string>
+    <string name="steps">steps</string>
 
     <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
 </resources>

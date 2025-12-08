@@ -351,7 +351,7 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                 programInfoList.add(ProgramsEnum.CALORIES);
                 programInfoList.add(ProgramsEnum.STEPS);
                 programInfoList.add(ProgramsEnum.HEART_RATE);
-                programInfoList.add(ProgramsEnum.WATTS);
+                programInfoList.add(ProgramsEnum.METS);
                 programInfoList.add(ProgramsEnum.WINGATE_TEST);
             }
         }

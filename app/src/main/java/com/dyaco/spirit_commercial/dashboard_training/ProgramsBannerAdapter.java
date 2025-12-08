@@ -13,12 +13,16 @@ import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MT_TARGET_STEPS_INC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_DFT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_DEF;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_MIN;
@@ -201,7 +205,12 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         }
 
 
-        if (programInfo == ProgramsEnum.MANUAL || programInfo == ProgramsEnum.CALORIES || programInfo == ProgramsEnum.WATTS) {
+        if (programInfo == ProgramsEnum.MANUAL ||
+                programInfo == ProgramsEnum.CALORIES ||
+                programInfo == ProgramsEnum.WATTS ||
+                programInfo == ProgramsEnum.METS ||
+                programInfo == ProgramsEnum.WINGATE_TEST ||
+                programInfo == ProgramsEnum.STEPS) {
             holder.binding.timePicker.setVisibility(VISIBLE);
             initTimePicker(holder.binding, programInfo);
         } else {
@@ -216,7 +225,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         // 1. 設定 LayoutParams (調整 MarginEnd)
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.timePicker.getLayoutParams();
 
-        // 判斷是否為 WATTS 模式，設定 Margin 與 wPicker 可見性
+        // WATTS 要調整 wheel picker 位置
         if (programsEnum == ProgramsEnum.WATTS) {
             layoutParams.setMarginEnd((int) CommonUtils.dp2px(239));
             binding.wPicker.setVisibility(View.VISIBLE);
@@ -241,17 +250,39 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         if (programsEnum == ProgramsEnum.CALORIES) {
             defaultOpt = TARGET_CALORIES_DEF + TARGET_CALORIES_MIN;
             binding.kcalUnit.setVisibility(View.VISIBLE);
-
+            binding.kcalUnit.setText(R.string.kcal);
             for (int i = TARGET_CALORIES_MIN; i <= TARGET_CALORIES_MAX; i++) {
                 list5.add(String.valueOf(i));
             }
+        } else if (programsEnum == ProgramsEnum.STEPS) {
+
+//            defaultOpt = TARGET_STEPS_DEF + TARGET_STEPS_MIN;
+//            binding.kcalUnit.setVisibility(View.VISIBLE);
+//            binding.kcalUnit.setText(R.string.steps);
+//
+//            for (int i = TARGET_STEPS_MIN; i <= TARGET_STEPS_MAX; i++) {
+//                list5.add(String.valueOf(i));
+//            }
+
+            // 計算預設選中的索引位置： (預設值 1200 - 最小值 300) / 間隔 50 = 索引 18
+            defaultOpt = (TARGET_STEPS_DEF - TARGET_STEPS_MIN) / MT_TARGET_STEPS_INC;
+
+            binding.kcalUnit.setVisibility(View.VISIBLE);
+            binding.kcalUnit.setText(R.string.steps);
+
+            // 迴圈：從 MIN 開始，每次增加 INC (50)，直到 MAX
+            for (int i = TARGET_STEPS_MIN; i <= TARGET_STEPS_MAX; i += MT_TARGET_STEPS_INC) {
+                list5.add(String.valueOf(i));
+            }
+
+
         } else {
+            //time
             binding.kcalUnit.setVisibility(View.INVISIBLE);
             list5 = CommonUtils.generateTimeOptions(0, 99);
         }
 
         // 3. 設定 Time/Calories Picker (左側)
-        // 取得 View 並指定泛型為 String
         OptionsPickerView<String> timePicker = binding.timePicker;
 
         timePicker.setData(list5);
@@ -274,12 +305,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
             if (programsEnum == ProgramsEnum.CALORIES) {
                 workoutViewModel.targetCalories.set(Double.parseDouble(opt1Data));
+            } else if (programsEnum == ProgramsEnum.STEPS) {
+                workoutViewModel.targetSteps.set(Double.parseDouble(opt1Data));
             } else {
                 workoutViewModel.selWorkoutTime.set(opt1Pos * 60);
             }
         });
 
-        // 設定 Time/Calories 預設選中位置
         timePicker.setOpt1SelectedPosition(defaultOpt, false);
 
 
@@ -414,74 +446,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 //        fitnessPickAge.setOpt1SelectedPosition(userProfileViewModel.getUserAge() - AGE_MIN, false);
 
 
-//        if (programsEnum.getProgramType() == WorkoutIntDef.FITNESS_TESTS) {
-//            if (programsEnum != ProgramsEnum.GERKIN && programsEnum != ProgramsEnum.WFI) {
-//
-//                showGender(binding.fitnessPickGender);
-//            } else {
-//                binding.fitnessPickGender.setVisibility(View.GONE);
-//            }
-//        } else {
-//            binding.fitnessPickGender.setVisibility(View.GONE);
-//        }
-
-//        if (programsEnum == ProgramsEnum.WFI) {
-//            showHeight(binding.fitnessPickHeight, binding.fitnessHeightUnit);
-//        } else {
-//            binding.fitnessPickHeight.setVisibility(View.GONE);
-//            binding.fitnessHeightUnit.setVisibility(View.GONE);
-//        }
     }
 
-//    private void showGender(OptionsPickerView<String> fitnessPickGender) {
-//        fitnessPickGender.setVisibility(VISIBLE);
-//
-//        fitnessPickGender.setData(list3);
-//        fitnessPickGender.setVisibleItems(2);
-//        //   opv1.setDividerPaddingForWrap(10, true);
-//        fitnessPickGender.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-//        fitnessPickGender.setTextSize(54, false);
-//        fitnessPickGender.setCurved(true);
-//        fitnessPickGender.setCyclic(false);
-//        fitnessPickGender.setTextBoundaryMargin(0, true);
-//        fitnessPickGender.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-//        fitnessPickGender.setCurvedArcDirectionFactor(1.0f);
-//        fitnessPickGender.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-//        fitnessPickGender.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-//            if (opt1Data == null) {
-//                return;
-//            }
-//            workoutViewModel.selGender.set(opt1Pos);
-//        });
-//
-//        fitnessPickGender.setOpt1SelectedPosition(userProfileViewModel.getUserGender(), false);
-//    }
-//
-//
-//    private void showHeight(OptionsPickerView<String> fitnessPickHeight, TextView tvHeightUnit) {
-//        fitnessPickHeight.setVisibility(VISIBLE);
-//        tvHeightUnit.setVisibility(VISIBLE);
-//        fitnessPickHeight.setData(list4);
-//        fitnessPickHeight.setVisibleItems(8);
-//        //   opv1.setDividerPaddingForWrap(10, true);
-//        fitnessPickHeight.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-//        fitnessPickHeight.setTextSize(54, false);
-//        fitnessPickHeight.setCurved(true);
-//        fitnessPickHeight.setCyclic(false);
-//        fitnessPickHeight.setTextBoundaryMargin(0, true);
-//        fitnessPickHeight.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-//        fitnessPickHeight.setCurvedArcDirectionFactor(1.0f);
-//        fitnessPickHeight.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-//        fitnessPickHeight.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-//            if (opt1Data == null) return;
-//
-//            int height = Integer.parseInt(opt1Data);
-//            workoutViewModel.selHeightIU.set(UNIT_E == IMPERIAL ? height : FormulaUtil.kg2lb(height));
-//            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? height : FormulaUtil.lb2kg(height));
-//        });
-//
-//        fitnessPickHeight.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getHeight_imperial() - HEIGHT_IU_MIN : userProfileViewModel.getHeight_metric() - HEIGHT_MU_MIN), false);
-//    }
 
     private SpannableString setSpannableStr(String str1, String str2) {
 
@@ -498,46 +464,6 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         return spannableString;
 
     }
-
-
-//    private void initWheelPicker(ProgramsDetailsItemBinding binding) {
-//
-//
-//        if (binding.myWheelPicker.getAdapter() instanceof PowerWheelAdapter) {
-//            return;
-//        }
-//
-//        //初始值
-//        binding.myWheelPicker.setCurrentPosition(OPT_SETTINGS.TARGET_TIME_DEF);
-//
-//
-//        List<String> data = CommonUtils.generateTimeOptions(0, 99);
-//
-//
-//        PowerWheelItemEffector timeEffector = new PowerWheelItemEffector(
-//                context,        // Context
-//                binding.myWheelPicker, // WheelPicker 實例
-//                R.color.white,            // ✅ 選中顏色
-//                R.color.color5a7085,      // ✅ 未選中顏色
-//                R.font.inter_bold,        // ✅ 選中字型
-//                R.font.inter_regular,     // ✅ 未選中字型
-//                54f,                      // ✅ 中心文字大小 (24sp)
-//                0.9f,                     // ✅ 文字縮小
-//                64f,                      // ✅ 項目高度 (72dp)
-//                1.2f,                     //  首層間距 120% (加大 20%)
-//                0.8f                      //  之後的間距 80% 遞減
-//        );
-//
-//        PowerWheelAdapter adapter = new PowerWheelAdapter(data);
-//        binding.myWheelPicker.setAdapter(adapter);
-//        binding.myWheelPicker.addItemEffector(timeEffector);
-//
-//        timeEffector.setOnSettledListener((position, value) -> {
-//            workoutViewModel.selWorkoutTime.set(position * 60);
-//
-//            Timber.tag("GGGGGDDDDDDD").d("選中: " + position + "," + value);
-//        });
-//    }
 
 
 }
