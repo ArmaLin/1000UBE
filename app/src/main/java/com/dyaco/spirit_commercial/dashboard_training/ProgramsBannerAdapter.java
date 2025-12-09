@@ -248,8 +248,12 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                     listW.add(String.valueOf(i));
                 }
             } else {
-                for (int i = TARGET_METS_MIN; i <= TARGET_METS_MAX; i++) {
-                    listW.add(String.valueOf(i));
+                int min = (int) (TARGET_METS_MIN * 10);
+                int max = (int) (TARGET_METS_MAX * 10);
+
+                for (int i = min; i <= max; i++) {
+                    // 將 int 轉回 double 字串，例如 14 -> "1.4"
+                    listW.add(String.format(java.util.Locale.US, "%.1f", i / 10.0));
                 }
             }
 
@@ -337,10 +341,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         timePicker.setOpt1SelectedPosition(defaultOpt, false);
 
 
-        // 4. 設定 Watts Picker (右側，僅 Watts 模式)
         if (programsEnum == ProgramsEnum.WATTS || programsEnum == ProgramsEnum.METS) {
             OptionsPickerView<String> wPicker = binding.wPicker;
-
             wPicker.setData(listW);
             wPicker.setVisibleItems(8);
             wPicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
@@ -352,7 +354,9 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             wPicker.setCurvedArcDirectionFactor(1.0f);
             wPicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
 
+
             wPicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+
                 if (opt1Data == null) {
                     return;
                 }
@@ -371,7 +375,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 // 設定 Watts 預設選中位置
                 wPicker.setOpt1SelectedPosition(POWER_DFT - POWER_MIN, false);
             } else {
-                wPicker.setOpt1SelectedPosition(TARGET_METS_DEF - TARGET_METS_MIN, false);
+                wPicker.setOpt1SelectedPosition((int) ((TARGET_METS_DEF - TARGET_METS_MIN) * 10), false);
             }
         }
     }

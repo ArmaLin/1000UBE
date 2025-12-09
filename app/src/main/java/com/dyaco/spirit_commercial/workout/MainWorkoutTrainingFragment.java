@@ -190,6 +190,7 @@ import com.dyaco.spirit_commercial.workout.programs.HeartRate;
 import com.dyaco.spirit_commercial.workout.programs.HeartRateTreadmill;
 import com.dyaco.spirit_commercial.workout.programs.Hiit;
 import com.dyaco.spirit_commercial.workout.programs.IPrograms;
+import com.dyaco.spirit_commercial.workout.programs.METsProg;
 import com.dyaco.spirit_commercial.workout.programs.MarineCorps;
 import com.dyaco.spirit_commercial.workout.programs.Navy;
 import com.dyaco.spirit_commercial.workout.programs.Peb;
@@ -2874,6 +2875,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 break;
             case STEPS:
                 iPrograms = new StepsProg(w,this);
+                break;
+            case METS:
+                iPrograms = new METsProg(w,this);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
