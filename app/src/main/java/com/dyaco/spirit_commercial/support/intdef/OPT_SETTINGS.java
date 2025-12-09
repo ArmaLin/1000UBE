@@ -185,6 +185,7 @@ public class OPT_SETTINGS {
     public static final int TARGET_METS_DEF = 35;       // 3.5
     public static final int TARGET_METS_MIN = 14;       // 1.4
     public static final int TARGET_METS_MAX = 134;      // 13.4
+    public static final int TARGET_METS_INC = 1;      // 13.4
 
     // for Elevation Gain (Metric, Imperial Units)
     public static final int TARGET_VERTICAL_MU_DEF = 50;  // Meter(m)

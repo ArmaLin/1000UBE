@@ -210,7 +210,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 app:ubeText="@{modeEnum}"
                 app:textUbe="@{String.valueOf(workoutData.rpmCounter)}"
-                app:textOther="@{String.valueOf(workoutData.rpmCounter)}"
+                app:textOther="@{String.valueOf(workoutData.currentStep)}"
                 android:id="@+id/tvP2Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

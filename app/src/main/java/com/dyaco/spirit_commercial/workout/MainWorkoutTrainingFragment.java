@@ -196,6 +196,7 @@ import com.dyaco.spirit_commercial.workout.programs.Peb;
 import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 import com.dyaco.spirit_commercial.workout.programs.Run10K;
 import com.dyaco.spirit_commercial.workout.programs.Run5K;
+import com.dyaco.spirit_commercial.workout.programs.StepsProg;
 import com.dyaco.spirit_commercial.workout.programs.Watt;
 import com.dyaco.spirit_commercial.workout.programs.Wfi;
 import com.garmin.health.Device;
@@ -2758,6 +2759,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             w.currentCalories.set(calc.getKcalAccumulate() >= 9999 ? 9999 : calc.getKcalAccumulate());
         }
 
+
         double d1 = w.targetCalories.get() - w.currentCalories.get();
         d1 = d1 >= 0 ? d1 : 0;
         w.caloriesLeft.set(d1);
@@ -2766,6 +2768,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         double ss1 = w.targetSteps.get() - w.currentStep.get();
         ss1 = ss1 >= 0 ? ss1 : 0;
         w.stepLeft.set(ss1);
+
+
+        double mm1 = w.targetMets.get() - w.currentMets.get();
+        mm1 = mm1 >= 0 ? mm1 : 0;
+        w.metsLeft.set(mm1);
 
 
 
@@ -2865,6 +2872,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             case CALORIES:
                 iPrograms = new CaloriesProg(w,this);
                 break;
+            case STEPS:
+                iPrograms = new StepsProg(w,this);
+                break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
         }
@@ -2903,6 +2913,14 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     public void targetCalories() {
 
         if (w.caloriesLeft.get() <= 0) {
+            isWorkoutTimerRunning = false;
+            new RxTimer().timer(300, number -> initCoolDown());
+        }
+    }
+
+    public void targetSteps() {
+
+        if (w.stepLeft.get() <= 0) {
             isWorkoutTimerRunning = false;
             new RxTimer().timer(300, number -> initCoolDown());
         }

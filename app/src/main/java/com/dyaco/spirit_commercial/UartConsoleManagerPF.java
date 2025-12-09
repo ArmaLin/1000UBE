@@ -1190,7 +1190,31 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // MAINTENANCE MODE
         // for stepper, Sensor Test - Pulley RPM Optical Sensor的數值
         uartVM.aa_stepPulleyRpmOpticalSensor.set(rpm2_D2D3);
+
+
+
+
+
+// ----------- 🧪 測試模擬開始 🧪 -----------
+
+//        // 1. 模擬步數增加：假設每次呼叫增加 15 步 (為了讓溢位發生得快一點)
+//        m_debugSimulatedCount += 30;
+//
+//        // 2. 模擬硬體行為：只取 0~255 (Byte 溢位)
+//        // 當 m_debugSimulatedCount 變成 256 時，這裡會變回 0
+//        int simulatedByteStep = m_debugSimulatedCount % 256;
+//
+//        Timber.tag("onCurrentStepCount").d("🧪 [測試模擬] 真實步數=" + m_debugSimulatedCount +
+//                ", 模擬Byte(0-255)=" + simulatedByteStep);
+//
+//        // 3. 將模擬的 Byte 值傳入你的處理函式
+//        onCurrentStepCount(1, 2, simulatedByteStep);
+
+        // ----------- 🧪 測試模擬結束 🧪 -----------
     }
+
+    // [測試用] 模擬硬體實際發送的步數累積
+    private int m_debugSimulatedCount = 0;
 
 
     private void setFirstHeartRate() {
@@ -1635,7 +1659,63 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // Ex: 如果New Step的舊值是100, 新值是103,
         //     已累計的總步數是3000
         //     則 新總步數 = 3000 + (103 - 100) = 3003
-        uartVM.ad_newStep.set(newStep);
+//        uartVM.ad_newStep.set(newStep);
+
+        // 呼叫計算函式，取得最新的總步數
+        int currentTotalSteps = calculateTotalSteps(newStep);
+
+        // 將計算結果設定給 ViewModel
+        woVM.currentStep.set(currentTotalSteps);
+
+        Timber.tag("onCurrentStepCount").d("onCurrentStepCount:" + woVM.currentStep.get());
+
+
+    }
+
+
+
+    // 用來記錄上一次接收到的 newStep (範圍 0~255)
+// 初始值設為 -1，用來判斷是否為第一次接收數據
+    private int m_lastNewStep = -1;
+
+    // 用來儲存計算後的總累計步數
+    private int m_totalSteps = 0;
+
+    /**
+     * 計算累加步數
+     * @param currentNewStep 硬體回傳的當前步數 byte (0~255)
+     * @return 累加後的總步數
+     */
+    private int calculateTotalSteps(int currentNewStep) {
+
+        // 狀況 A: 第一次初始化
+        // 如果是第一次收到數據，我們只同步數值，不進行累加，避免步數突然暴增
+        if (m_lastNewStep == -1) {
+            m_lastNewStep = currentNewStep;
+            return m_totalSteps;
+        }
+
+        // 狀況 B: 數值有變化，進行計算
+        if (currentNewStep != m_lastNewStep) {
+            int diff = currentNewStep - m_lastNewStep;
+
+            // 處理溢位 (Overflow)
+            // 當 currentNewStep 小於 m_lastNewStep 時 (例如從 255 變成 2)
+            // diff 會是負數 (-253)，加上 256 後修正為正確的增量 (+3)
+            if (diff < 0) {
+                diff += 256;
+            }
+
+            // 累加步數
+            m_totalSteps += diff;
+
+            // 更新舊值，供下一次計算使用
+            m_lastNewStep = currentNewStep;
+
+            // Log.d("StepCalc", "Inc: " + diff + ", Total: " + m_totalSteps);
+        }
+
+        return m_totalSteps;
     }
 
 

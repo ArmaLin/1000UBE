@@ -658,6 +658,26 @@ public class FormulaUtil {
         w.targetDistance.set(0);
         w.currentStage.set(1);
         w.distanceLeft.set(0);
+
+
+//        w.totalStep.set(0);
+        w.stepLeft.set(0);
+        w.targetSteps.set(0);
+        w.currentStep.set(0);
+
+        w.metsLeft.set(0);
+        w.targetMets.set(0);
+        w.totalMets.set(0);
+        w.currentMets.set(0);
+
+
+
+
+
+
+
+
+
         w.currentShowTimeText.set("00:00");
         w.selRestSpeedLevel.set(0);
         w.selSprintSpeedLevel.set(0);

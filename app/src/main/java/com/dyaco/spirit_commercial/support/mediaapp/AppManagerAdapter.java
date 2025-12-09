@@ -1,6 +1,7 @@
 package com.dyaco.spirit_commercial.support.mediaapp;
 
 import static com.dyaco.spirit_commercial.App.getApp;
+import static com.dyaco.spirit_commercial.MainActivity.isGMS;
 import static com.dyaco.spirit_commercial.maintenance_mode.MaintenanceAppManagerFragment.UPDATE_N;
 import static com.dyaco.spirit_commercial.maintenance_mode.MaintenanceAppManagerFragment.UPDATE_X;
 import static com.dyaco.spirit_commercial.maintenance_mode.MaintenanceAppManagerFragment.UPDATE_Y;
@@ -170,7 +171,7 @@ public class AppManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             //已安裝的WEB
             if (appStoreBean.getGmsNeeded().equalsIgnoreCase("YES") && appStoreBean.getIsUpdate() == UPDATE_N) {
-                consoleVersionName = "*WEB";
+                if (!isGMS) consoleVersionName = "*WEB";
             }
 
 //            if (appStoreBean.getGmsNeeded().equalsIgnoreCase("YES") && appStoreBean.getIsUpdate() == UPDATE_X) {

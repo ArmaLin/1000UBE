@@ -20,6 +20,9 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_CALORIES_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_METS_DEF;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_METS_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_METS_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STEPS_MIN;
@@ -226,21 +229,37 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.timePicker.getLayoutParams();
 
         // WATTS 要調整 wheel picker 位置
-        if (programsEnum == ProgramsEnum.WATTS) {
+        if (programsEnum == ProgramsEnum.WATTS || programsEnum == ProgramsEnum.METS) {
             layoutParams.setMarginEnd((int) CommonUtils.dp2px(239));
             binding.wPicker.setVisibility(View.VISIBLE);
-            binding.wUnit.setVisibility(View.VISIBLE);
+
+            if (programsEnum == ProgramsEnum.WATTS) {
+                binding.wUnit.setVisibility(View.VISIBLE);
+            } else {
+                binding.wUnit.setVisibility(View.INVISIBLE);
+            }
 
             // 初始化 Watts 資料列表 (每次都 new 新的以防重複)
             listW = new ArrayList<>();
-            for (int i = POWER_MIN; i <= POWER_MAX; i++) {
-                listW.add(String.valueOf(i));
+
+
+            if (programsEnum == ProgramsEnum.WATTS) {
+                for (int i = POWER_MIN; i <= POWER_MAX; i++) {
+                    listW.add(String.valueOf(i));
+                }
+            } else {
+                for (int i = TARGET_METS_MIN; i <= TARGET_METS_MAX; i++) {
+                    listW.add(String.valueOf(i));
+                }
             }
+
         } else {
             layoutParams.setMarginEnd((int) CommonUtils.dp2px(439));
             binding.wPicker.setVisibility(View.INVISIBLE);
             binding.wUnit.setVisibility(View.INVISIBLE);
         }
+
+
         binding.timePicker.setLayoutParams(layoutParams);
 
         // 2. 準備 Time/Calories 資料列表
@@ -248,7 +267,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         list5 = new ArrayList<>(); // 重置列表
 
         if (programsEnum == ProgramsEnum.CALORIES) {
-            defaultOpt = TARGET_CALORIES_DEF + TARGET_CALORIES_MIN;
+            defaultOpt = TARGET_CALORIES_DEF - TARGET_CALORIES_MIN;
             binding.kcalUnit.setVisibility(View.VISIBLE);
             binding.kcalUnit.setText(R.string.kcal);
             for (int i = TARGET_CALORIES_MIN; i <= TARGET_CALORIES_MAX; i++) {
@@ -256,13 +275,6 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             }
         } else if (programsEnum == ProgramsEnum.STEPS) {
 
-//            defaultOpt = TARGET_STEPS_DEF + TARGET_STEPS_MIN;
-//            binding.kcalUnit.setVisibility(View.VISIBLE);
-//            binding.kcalUnit.setText(R.string.steps);
-//
-//            for (int i = TARGET_STEPS_MIN; i <= TARGET_STEPS_MAX; i++) {
-//                list5.add(String.valueOf(i));
-//            }
 
             // 計算預設選中的索引位置： (預設值 1200 - 最小值 300) / 間隔 50 = 索引 18
             defaultOpt = (TARGET_STEPS_DEF - TARGET_STEPS_MIN) / MT_TARGET_STEPS_INC;
@@ -276,7 +288,15 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             }
 
 
+//        } else if (programsEnum == ProgramsEnum.METS) {
+//            defaultOpt = TARGET_METS_DEF - TARGET_METS_MIN;
+//            binding.kcalUnit.setVisibility(INVISIBLE);
+//            for (int i = TARGET_METS_MIN; i <= TARGET_METS_MAX; i++) {
+//                list5.add(String.valueOf(i));
+//            }
+
         } else {
+
             //time
             binding.kcalUnit.setVisibility(View.INVISIBLE);
             list5 = CommonUtils.generateTimeOptions(0, 99);
@@ -307,6 +327,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 workoutViewModel.targetCalories.set(Double.parseDouble(opt1Data));
             } else if (programsEnum == ProgramsEnum.STEPS) {
                 workoutViewModel.targetSteps.set(Double.parseDouble(opt1Data));
+//            } else if (programsEnum == ProgramsEnum.METS) {
+//                workoutViewModel.targetMets.set(Double.parseDouble(opt1Data));
             } else {
                 workoutViewModel.selWorkoutTime.set(opt1Pos * 60);
             }
@@ -316,7 +338,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
 
         // 4. 設定 Watts Picker (右側，僅 Watts 模式)
-        if (programsEnum == ProgramsEnum.WATTS) {
+        if (programsEnum == ProgramsEnum.WATTS || programsEnum == ProgramsEnum.METS) {
             OptionsPickerView<String> wPicker = binding.wPicker;
 
             wPicker.setData(listW);
@@ -335,12 +357,22 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                     return;
                 }
 
+
+                if (programsEnum == ProgramsEnum.WATTS) {
+                    workoutViewModel.selConstantPowerW.set(Integer.parseInt(opt1Data));
+                } else {
+                    workoutViewModel.targetMets.set(Double.parseDouble(opt1Data));
+                }
                 Log.d("initTimePicker", "POWER: " + opt1Data);
-                workoutViewModel.selConstantPowerW.set(Integer.parseInt(opt1Data));
+
             });
 
-            // 設定 Watts 預設選中位置
-            wPicker.setOpt1SelectedPosition(POWER_DFT - POWER_MIN, false);
+            if (programsEnum == ProgramsEnum.WATTS) {
+                // 設定 Watts 預設選中位置
+                wPicker.setOpt1SelectedPosition(POWER_DFT - POWER_MIN, false);
+            } else {
+                wPicker.setOpt1SelectedPosition(TARGET_METS_DEF - TARGET_METS_MIN, false);
+            }
         }
     }
 

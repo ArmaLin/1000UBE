@@ -72,7 +72,7 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
 
 
         //從外面點進來時 (不是滑動banner)  下方按鈕的變化
-        if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts) {
+        if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts || programId == R.id.btn_program9) {
             // TODO: PF
        //     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
 
@@ -82,6 +82,10 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                 }
 
                 if (programId == R.id.btn_Watts) {// stepper >>> Steps
+                    appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+                }
+
+                if (programId == R.id.btn_program9) {// stepper >>> METs
                     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                 }
             } else {
@@ -265,6 +269,7 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                             programInfoList.get(position).getCode() == ProgramsEnum.STEPS.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.CALORIES.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.WINGATE_TEST.getCode() ||
+                            programInfoList.get(position).getCode() == ProgramsEnum.METS.getCode() ||
                             programInfoList.get(position).getCode() == ProgramsEnum.WATTS.getCode()) {
                         appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                     } else {

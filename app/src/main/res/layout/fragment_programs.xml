@@ -285,7 +285,7 @@
                 android:id="@+id/btn_program9"
                 style="@style/ProgramsButtonStyle"
                 android:layout_marginTop="448dp"
-                android:text="@string/Watts"
+                android:text="@string/METs"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:visibility="@{modeEnum.isUbeType ? View.GONE : View.VISIBLE}"

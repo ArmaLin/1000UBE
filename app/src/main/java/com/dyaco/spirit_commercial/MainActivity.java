@@ -251,7 +251,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public boolean isEgymNoData = false;
     public static String forcePkName;
     public static int forcePkNameSort;
-    public static boolean isGMS = false;//此機器無GMS
+    public static boolean isGMS = true;//此機器無GMS
     public static boolean isHomeScreen;
     public static String mRetailVideoPath;
     public static String splashImagePath;
