@@ -6,6 +6,7 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.setBikeLevelDiagra
 import android.util.Log;
 import android.view.View;
 
+import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment;
 import com.dyaco.spirit_commercial.workout.WorkoutChartsFragment;
@@ -21,10 +22,14 @@ public class METsProg implements IPrograms {
 
     WorkoutViewModel w;
     MainWorkoutTrainingFragment m;
+    int weightInKg;
+    MainActivity mainActivity;
 
-    public METsProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment) {
+    public METsProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
+        this.weightInKg = weightInKg;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -45,7 +50,8 @@ public class METsProg implements IPrograms {
     @Override
     public void init() {
 
-        Log.d("initTimePicker", "targetMets: " + w.targetMets.get());
+        Log.d("MMMMEEEEETTTTT", "targetMets: " + w.targetMets.get());
+        Log.d("MMMMEEEEETTTTT", "targetMets: " + weightInKg);
 
         //MaxIncline給最大值
         m.hideBtnSkip();
@@ -67,6 +73,11 @@ public class METsProg implements IPrograms {
 
     @Override
     public void runTime() {
+
+        int targetPower = (int) ((w.targetMets.get() - 2) / 3.0857 * weightInKg);
+
+        mainActivity.getUartConsoleManager().setPwmViaPower(targetPower);
+     //   Log.d("MMMMEEEEETTTTT", "runTime: " + targetPower);
     }
 
     @Override

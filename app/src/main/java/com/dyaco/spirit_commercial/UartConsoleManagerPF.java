@@ -36,6 +36,7 @@ import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import kotlinx.coroutines.Job;
 import timber.log.Timber;
@@ -534,7 +535,9 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         power = Math.max(power, UartConst.EMS_LWR_POWER_MIN);
         int currentRpm = woVM.currentRpm.get();
         int pwmValue = MODE.getPwmViaPower(power, currentRpm);
-        Timber.tag("WAAWAWAWAWA").d("currentRpm = " + currentRpm + ", power = " + power + ", 🌶️pwmValue = " + pwmValue);
+        Timber.tag("MMMMEEEEETTTTT").d("currentRpm = " + currentRpm + ", power = " + power + ", 🌶️pwmValue = " + pwmValue);
+
+        //⭐️ 每秒 mcucontrol 執行 at_valuePwm 的 level ad
         uartVM.at_valuePwm.set(pwmValue);
     }
 
@@ -1163,8 +1166,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
 
 
-        // TODO: test rpm d
-      //  woVM.currentRpm.set(100);
+//        // TODO: test rpm d
+//        woVM.currentRpm.set(ThreadLocalRandom.current().nextInt(50, 100 + 1));
     }
 
     @Override
@@ -1191,7 +1194,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // for stepper, Sensor Test - Pulley RPM Optical Sensor的數值
         uartVM.aa_stepPulleyRpmOpticalSensor.set(rpm2_D2D3);
 
-
+        // TODO: test rpm stepper
+      //  woVM.currentRpm.set(ThreadLocalRandom.current().nextInt(50, 100 + 1));
 
 
 
@@ -1261,8 +1265,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         woVM.currentHeartRate.set(currentHr);
 
-        // TODO:USSSSSS
-        //   w.currentHeartRate.set(80);
+
 
         woVM.setIsHrConnected(woVM.currentHeartRate.get() > 0);
     }

@@ -2877,7 +2877,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new StepsProg(w,this);
                 break;
             case METS:
-                iPrograms = new METsProg(w,this);
+                iPrograms = new METsProg(w,this, (int) userProfileViewModel.getWeight_metric(),parent);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
