@@ -2,6 +2,7 @@ package com.dyaco.spirit_commercial.workout.programs;
 
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.setBikeLevelDiagram;
+import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
 
 import android.util.Log;
 import android.view.View;
@@ -89,7 +90,10 @@ public class METsProg implements IPrograms {
 
     @Override
     public void out() {
-
+        if (w.selWorkoutTime.get() != UNLIMITED && w.remainingTime.get() <= 0) {
+            //沒有設定cooldown時間會直接結束workout
+            m.initCoolDown();
+        }
     }
 
     @Override
