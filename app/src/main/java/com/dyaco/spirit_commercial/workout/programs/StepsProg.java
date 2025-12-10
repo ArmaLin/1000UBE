@@ -49,7 +49,7 @@ public class StepsProg implements IPrograms {
         //MaxIncline給最大值
         m.hideBtnSkip();
         if (isUs) {
-         //   m.usWorkoutStopLong();
+            m.usWorkoutStopLong();
             m.getBinding().cStatsUsNoView.setVisibility(View.GONE);
         }
     }

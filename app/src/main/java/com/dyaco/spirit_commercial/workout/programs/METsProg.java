@@ -6,6 +6,7 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.setBikeLevelDiagra
 import android.util.Log;
 import android.view.View;
 
+import com.corestar.calculation_libs.Calculation;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment;
@@ -24,12 +25,14 @@ public class METsProg implements IPrograms {
     MainWorkoutTrainingFragment m;
     int weightInKg;
     MainActivity mainActivity;
+    Calculation calc;
 
-    public METsProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity) {
+    public METsProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity, Calculation calc) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.weightInKg = weightInKg;
         this.mainActivity = mainActivity;
+        this.calc = calc;
     }
 
     @Override
@@ -55,8 +58,11 @@ public class METsProg implements IPrograms {
 
         //MaxIncline給最大值
         m.hideBtnSkip();
+
+        w.disabledLevelUpdate.set(true);
+
         if (isUs) {
-         //   m.usWorkoutStopLong();
+            m.usWorkoutStopLong();
             m.getBinding().cStatsUsNoView.setVisibility(View.GONE);
         }
     }
@@ -76,7 +82,8 @@ public class METsProg implements IPrograms {
 
         int targetPower = (int) ((w.targetMets.get() - 2) / 3.0857 * weightInKg);
 
-        mainActivity.getUartConsoleManager().setPwmViaPower(targetPower);
+        m.updateSpeedOrLevelNumWATT(calc.getLevel(targetPower, w.currentRpm.get()), true);
+    //    mainActivity.getUartConsoleManager().setPwmViaPower(targetPower);
      //   Log.d("MMMMEEEEETTTTT", "runTime: " + targetPower);
     }
 

@@ -1455,6 +1455,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      * @param isSpecify 是否為指定數值
      */
     public boolean updateSpeedOrLevelNum(int num, boolean isSpecify) {
+
+        if (w.disabledLevelUpdate.get()) return false;
+
         if (CheckDoubleClick.isFastClick2()) return false;
         if (!w.isSafeKey.get()) return false;
 
@@ -1515,6 +1518,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
         if (workoutChartsFragment == null) return;
 
+        Log.d("MMEEEEEEE", "updateSpeedOrLevelNumWATT: " + num);
         if (workoutChartsFragment.updateSpeedNum(num)) {
 
             u.setDevWorkload(w.currentLevel.get());
@@ -2877,7 +2881,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new StepsProg(w,this);
                 break;
             case METS:
-                iPrograms = new METsProg(w,this, (int) userProfileViewModel.getWeight_metric(),parent);
+                iPrograms = new METsProg(w,this, (int) userProfileViewModel.getWeight_metric(),parent,calc);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
