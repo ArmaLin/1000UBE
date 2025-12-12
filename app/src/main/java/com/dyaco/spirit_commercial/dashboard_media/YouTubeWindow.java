@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -50,6 +51,20 @@ public class YouTubeWindow extends BasePopupWindow2 implements AdvancedWebView.L
 
     public YouTubeWindow(Context context,String webUrl) {
         super(context, 0, 0, 0, GENERAL.FADE, false, false);
+
+
+
+        // ★ 攔截 PopupWindow 的觸控事件，避免走到預設的 onTouchEvent → dismiss()
+        setTouchInterceptor((v, event) -> {
+            // 這裡你可以視需求縮小條件，先粗暴一點全吃掉
+            if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                Log.d("WEB_VIEW", "ignore ACTION_OUTSIDE for YouTubeWindow");
+                return true; // 事件消費掉，不往下傳 → 不會觸發 dismiss()
+            }
+            return false;
+        });
+
+
         this.webUrl = webUrl;
         initHookWebView();
         isWebViewOn = true;
@@ -214,46 +229,72 @@ public class YouTubeWindow extends BasePopupWindow2 implements AdvancedWebView.L
 
         @Override
         public void onHideCustomView() {
+            // ★ PopupWindow 已經沒在顯示就不要亂動
+            if (!YouTubeWindow.this.isShowing()) {
+                Log.w("WEB_VIEW", "onHideCustomView() called but popup not showing, ignore");
+                return;
+            }
+            // ★ mainActivity 或 mCustomView 為 null 就不要做後面動作
+            if (mainActivity == null || mCustomView == null) {
+                Log.w("WEB_VIEW", "onHideCustomView() mainActivity or mCustomView is null, ignore");
+                return;
+            }
+
+            // ★ 離開全螢幕時，把 PopupWindow 的觸控打開
+            YouTubeWindow.this.setTouchable(true);
+
             isFullScreenOn = false;
+
+            // popup 視窗大小恢復
             update(vWidth, vHeight);
+
             ((FrameLayout) mainActivity.getWindow().getDecorView()).removeView(this.mCustomView);
             this.mCustomView = null;
-            mainActivity.getWindow().getDecorView().setSystemUiVisibility(this.mOriginalSystemUiVisibility);
-          //  mainActivity.setRequestedOrientation(this.mOriginalOrientation); //回到原本的螢幕方向
+
+            mainActivity.getWindow()
+                    .getDecorView()
+                    .setSystemUiVisibility(this.mOriginalSystemUiVisibility);
+
             if (mCustomViewCallback != null) {
                 mCustomViewCallback.onCustomViewHidden();
                 mCustomViewCallback = null;
             }
         }
 
+
+
+
         @Override
         public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback) {
-
 
             if (this.mCustomView != null) {
                 onHideCustomView();
                 return;
             }
+
             isFullScreenOn = true;
+
+            // ★ 全螢幕播放時，讓 PopupWindow 不吃任何觸控事件
+            YouTubeWindow.this.setTouchable(false);
+
             this.mCustomView = paramView;
             this.mOriginalSystemUiVisibility = mainActivity.getWindow().getDecorView().getSystemUiVisibility();
             this.mOriginalOrientation = mainActivity.getRequestedOrientation();
             this.mCustomViewCallback = paramCustomViewCallback;
 
+            ((FrameLayout) mainActivity.getWindow().getDecorView())
+                    .addView(this.mCustomView, new FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.MATCH_PARENT,
+                            FrameLayout.LayoutParams.MATCH_PARENT));
 
-//            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-//            layoutParams.width = -1;
-//            layoutParams.height = -1;
-//            layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-//            ((FrameLayout) mainActivity.getWindow().getDecorView()).addView(this.mCustomView, layoutParams);
+            mainActivity.getWindow()
+                    .getDecorView()
+                    .setSystemUiVisibility(3846 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
-            ((FrameLayout) mainActivity.getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
-            mainActivity.getWindow().getDecorView().setSystemUiVisibility(3846 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-
+            // 把 PopupWindow 本身縮到 0x0（你原本就有）
             update(0, 0);
-
-            //    mainActivity.showMediaMenu(true);
         }
+
     }
 
 
@@ -319,12 +360,31 @@ public class YouTubeWindow extends BasePopupWindow2 implements AdvancedWebView.L
 
     @Override
     public void dismiss() {
-        super.dismiss();
-        LiveEventBus.get(CLOSE_YOUTUBE_FULL_SCREEN, boolean.class).removeObserver(observer1);
-        LiveEventBus.get(ON_WEBVIEW_BACK, boolean.class).removeObserver(observer2);
-        if (advancedWebView != null) advancedWebView.onDestroy();
-        mainActivity = null;
+        Log.d("WEB_VIEW", "dismiss() called (Ask Gemini)",
+                new Exception("YouTubeWindow dismiss stack"));
+
+        // 全螢幕時，不讓 PopupWindow 直接把整個視窗收掉
+        if (isFullScreenOn) {
+            Log.d("WEB_VIEW", "ignore dismiss from PopupDecorView while fullscreen");
+            return;
+        }
+
+        LiveEventBus.get(CLOSE_YOUTUBE_FULL_SCREEN, boolean.class)
+                .removeObserver(observer1);
+        LiveEventBus.get(ON_WEBVIEW_BACK, boolean.class)
+                .removeObserver(observer2);
 
         isWebViewOn = false;
+
+        // 先不要設為 null，避免 WebView 晚一點才 callback onHideCustomView() 時 NPE
+        // mainActivity = null;
+
+        super.dismiss();
+
+        Log.d("WEB_VIEW", "dismiss done");
     }
+
+
+
+
 }
