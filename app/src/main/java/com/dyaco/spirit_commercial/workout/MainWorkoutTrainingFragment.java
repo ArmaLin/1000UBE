@@ -119,6 +119,7 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.GERKIN;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HEART_RATE;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HIIT;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.METS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WFI;
 
@@ -3390,6 +3391,42 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
                 getBinding().tvTopTextUs.setText((w.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);
                 getBinding().tvBottomTextUs.setText((w.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);
+
+
+                if (w.selProgram == METS) {
+                    getBinding().viewBikeLevelTitleUs.setText(R.string.target_mets);
+                    getBinding().tvTopTextUs.setText( R.string.direct_mets);
+                    getBinding().tvBottomTextUs.setText(R.string.direct_mets);
+                   //  TARGET_METS_DEF = 3.5;
+                    //TARGET_METS_MIN = 1.4;
+                   // TARGET_METS_MAX = 13.4;
+                    // TARGET_METS_INC = 0.1;
+
+                    getBinding().tvTopNumberUs1.setText("1.4");
+                    getBinding().tvTopNumberUs2.setText("1.4");
+                    getBinding().tvTopNumberUs3.setText("1.4");
+                    getBinding().tvTopNumberUs4.setText("1.4");
+                    getBinding().tvTopNumberUs5.setText("1.4");
+                    getBinding().tvTopNumberUs6.setText("1.4");
+                    getBinding().tvTopNumberUs7.setText("1.4");
+                    getBinding().tvTopNumberUs8.setText("1.4");
+                    getBinding().tvTopNumberUs9.setText("1.4");
+                    getBinding().tvTopNumberUs10.setText("1.4");
+
+                    getBinding().tvBottomNumberUs1.setText("1.4");
+                    getBinding().tvBottomNumberUs2.setText("1.4");
+                    getBinding().tvBottomNumberUs3.setText("1.4");
+                    getBinding().tvBottomNumberUs4.setText("1.4");
+                    getBinding().tvBottomNumberUs5.setText("1.4");
+                    getBinding().tvBottomNumberUs6.setText("1.4");
+                    getBinding().tvBottomNumberUs7.setText("1.4");
+                    getBinding().tvBottomNumberUs8.setText("1.4");
+                    getBinding().tvBottomNumberUs9.setText("1.4");
+                    getBinding().tvBottomNumberUs10.setText("13.4");
+
+                }
+
+
 
             }
 

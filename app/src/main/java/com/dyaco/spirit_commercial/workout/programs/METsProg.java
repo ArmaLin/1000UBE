@@ -60,7 +60,7 @@ public class METsProg implements IPrograms {
         //MaxIncline給最大值
         m.hideBtnSkip();
 
-        w.disabledLevelUpdate.set(true);
+  //      w.disabledLevelUpdate.set(true);
 
         if (isUs) {
             m.usWorkoutStopLong();

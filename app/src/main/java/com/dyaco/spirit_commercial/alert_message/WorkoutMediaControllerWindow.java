@@ -22,6 +22,7 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.DS_PAUSE_STANDB
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.DS_RUNNING_STANDBY;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_INCLINE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_LEVEL;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_METS;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_POWER;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_SPEED;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_IMPERIAL_US_NUM_1;
@@ -50,6 +51,7 @@ import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.TREADMILL_SPEED_METRIC_US_NUM_9;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.FITNESS_TEST;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HEART_RATE;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.METS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
 
 import android.content.Context;
@@ -372,6 +374,16 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
             }
 
             getBinding().tvTopTextUs.setText((workoutViewModel.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);
+
+
+            if (workoutViewModel.selProgram == METS) {
+                // TODO: mets
+                getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.currentLevel.get()));
+                valueType = STATS_METS;
+                getBinding().tvTopTextUs.setText(R.string.direct_mets);
+            }
+
+
         }
 
     }
@@ -459,6 +471,23 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tv1615.setText("190");
                 getBinding().tv1616.setText("200");
                 break;
+            case STATS_METS:
+                getBinding().tv161.setText("1.4");
+                getBinding().tv162.setText("1.4");
+                getBinding().tv163.setText("1.4");
+                getBinding().tv164.setText("1.4");
+                getBinding().tv165.setText("1.4");
+                getBinding().tv166.setText("100");
+                getBinding().tv167.setText("110");
+                getBinding().tv168.setText("120");
+                getBinding().tv169.setText("130");
+                getBinding().tv1610.setText("140");
+                getBinding().tv1611.setText("150");
+                getBinding().tv1612.setText("160");
+                getBinding().tv1613.setText("170");
+                getBinding().tv1614.setText("180");
+                getBinding().tv1615.setText("190");
+                getBinding().tv1616.setText("13.4");
         }
     }
 
