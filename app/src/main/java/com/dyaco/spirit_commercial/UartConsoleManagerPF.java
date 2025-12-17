@@ -8,12 +8,14 @@ import static com.dyaco.spirit_commercial.UartConst.DS_ECB_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.DS_ECB_PAUSE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.DS_EMS_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.WORKLOAD_MIN;
+import static com.dyaco.spirit_commercial.alert_message.WorkoutMediaControllerWindow.isMediaWorkoutController;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_SPEED;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_START_OR_RESUME;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_START_OR_RESUME_PF;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.KEY_UNKNOWN;
+import static com.dyaco.spirit_commercial.support.intdef.EventKey.NEW_UPDATE_VALUE;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.ON_USB_MODE_SET;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.CLICK_MINUS;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.CLICK_PLUS;
@@ -436,6 +438,9 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         Timber.d("setMyCareEms: setDevPwmLevel, workload = " + uartVM.workload.get() + ", pwmLevelDA = " + pwmLevelDA);
 
         consoleUart.setMyCareEms(DeviceDyacoMedical.MODEL.EMS_M2, pwmLevelDA);
+        if (isMediaWorkoutController) {
+            LiveEventBus.get(NEW_UPDATE_VALUE).post(true);
+        }
     }
 
     /**
@@ -485,6 +490,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 DeviceDyacoMedical.ACTION_MODE.STOP,
                 0,
                 0);
+
+        if (isMediaWorkoutController) {
+            LiveEventBus.get(NEW_UPDATE_VALUE).post(true);
+        }
     }
 
     public void setDevTargetRpm(int targetRpm) {
@@ -1195,7 +1204,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         // TODO: test rpm stepper
     //    woVM.currentRpm.set(ThreadLocalRandom.current().nextInt(50, 120 + 1));
-
+        woVM.currentRpm.set(100);
 
 
 // ----------- 🧪 測試模擬開始 🧪 -----------

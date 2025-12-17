@@ -71,6 +71,7 @@ import static com.dyaco.spirit_commercial.support.intdef.GENERAL.NO_LIMIT;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.SELECT_HR_EXCEEDS_AGE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_INCLINE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_LEVEL;
+import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_METS;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_POWER;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.STATS_SPEED;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.TIME_LIMIT;
@@ -105,6 +106,8 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MIN_SPD_MU
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.NO_HR_HR;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_METS_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_METS_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.THR_CONSTANT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_DEF;
@@ -435,7 +438,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         parent.calculation.setWattTable(MODE.getWattTable());
 
 
-       // Log.d("OOODDDODODO", "init CALC-  AGE: " + age + ", weight:" + weight + ", height:" + height + "," + userProfileViewModel.getHeight_metric() + "," + userProfileViewModel.getHeight_imperial());
+        // Log.d("OOODDDODODO", "init CALC-  AGE: " + age + ", weight:" + weight + ", height:" + height + "," + userProfileViewModel.getHeight_metric() + "," + userProfileViewModel.getHeight_imperial());
         //   Log.d("OOODDDODODO", "init CALC-  AGE: " + w.selYO.get() +", weight:"+ w.selWeightIU.get() +", height:"+ w.selWeightMU.get() +","+w.selGender.get());
         calc = parent.calculation;
 
@@ -729,13 +732,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     public Calculation.TYPE getCalculationMachineType() {
 
 
-
         Calculation.TYPE calculationType = Calculation.TYPE.Treadmill;
 
 
         if (MODE.isUbeType()) {
             calculationType = Calculation.TYPE.UBE;
-        } else if (MODE.isStepperType()){
+        } else if (MODE.isStepperType()) {
             calculationType = Calculation.TYPE.RecumbentStepper;
         }
 
@@ -1190,9 +1192,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             if (appStatusViewModel.currentStatus.get() != AppStatusIntDef.STATUS_RUNNING) return;
 
-            Log.d("@@@", "FTMS: Control Point:" + s);
+        //    Log.d("@@@", "FTMS: Control Point:" + s);
             Integer n = (Integer) s;
-            Log.d("@@@", "FTMS: Control Point:" + n);
+         //   Log.d("@@@", "FTMS: Control Point:" + n);
             if (n == CLICK_PLUS) { // SPEED +
 
                 if (isTreadmill) {
@@ -1442,9 +1444,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         if (workoutChartsFragment == null) return false;
 
-     //   Log.d("OOOOOOOOOO", "updateInclineNum: " + num + "," + isSpecify);
+        //   Log.d("OOOOOOOOOO", "updateInclineNum: " + num + "," + isSpecify);
         if (workoutChartsFragment.updateInclineNum(num)) {
-       //     u.setDevSpeedAndIncline();
+            //     u.setDevSpeedAndIncline();
             return true;
         } else {
             return false;
@@ -1457,7 +1459,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      */
     public boolean updateSpeedOrLevelNum(int num, boolean isSpecify) {
 
-        if (w.disabledLevelUpdate.get()) return false;
+        //     if (w.disabledLevelUpdate.get()) return false;
 
         if (CheckDoubleClick.isFastClick2()) return false;
         if (!w.isSafeKey.get()) return false;
@@ -1470,10 +1472,26 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             // TODO: PF  增加 watt
             w.constantPowerW.set(w.constantPowerW.get() + x);
 
-      //      Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
+            //      Log.d("VVVVVVVV", "updateSpeedOrLevelNum: " + w.constantPowerW.get() + "," + w.currentRpm.get() + "," + calc.getLevel(w.constantPowerW.get(), w.currentRpm.get()));
         }
-        num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
+
+        if (w.selProgram == METS) {
+        //    Log.d("MMMMMMWWWWEEEE", "############updateSpeedOrLevelNum: " );
+            num = isSpecify ? num * 10: num;
+
+            int x = getSpecifyValue(w.targetMets.get(), num, isSpecify);
+            if ((w.targetMets.get() + x) > TARGET_METS_MAX || (w.targetMets.get() + x) < TARGET_METS_MIN) {
+                return false;
+            }
+            w.targetMets.set(w.targetMets.get() + x);
+            Log.d("MMMMMMWWWWEEEE", "updateSpeedOrLevelNum: " + w.targetMets.get());
+
+            return false;
+        }
+
+
+        num = getSpecifyValue(isTreadmill ? w.currentSpeedLevel.get() : w.currentLevel.get(), num, isSpecify);
 
 
         //HIIT WarmUp And Cooldown 調整speed或level 不可超過 Sprint
@@ -1486,7 +1504,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         if (workoutChartsFragment == null) return false;
         if (workoutChartsFragment.updateSpeedNum(num)) {
             if (isTreadmill) {
-              //  u.setDevSpeedAndIncline();
+                //  u.setDevSpeedAndIncline();
             } else {
                 if (w.selProgram == WATTS || w.selProgram == FITNESS_TEST) {
                     int level;
@@ -1500,9 +1518,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                     u.setDevWorkload(level);
                     w.currentLevel.set(level);
 
-                    Log.d("WAAWAWAWAWA", "11111setPwmLevel_POWER: " + w.currentLevel.get() +","+ w.constantPowerW.get() +","+ w.currentRpm.get());
+                    Log.d("WAAWAWAWAWA", "11111setPwmLevel_POWER: " + w.currentLevel.get() + "," + w.constantPowerW.get() + "," + w.currentRpm.get());
                 } else {
-               //     Log.d("UartConsoleManagerPF", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
+                    //     Log.d("UartConsoleManagerPF", "updateSpeedOrLevelNumWATT: " + w.currentLevel.get());
                     u.setDevWorkload(w.currentLevel.get());
                 }
                 //    u.setDevWorkload(w.currentLevel.get(), resistance);
@@ -1794,6 +1812,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 case STATS_SPEED:
                 case STATS_LEVEL:
                 case STATS_POWER:
+                case STATS_METS:
                     Log.d("KKJJHHGG", "initEvent: " + data.getValue());
                     updateSpeedOrLevelNum(data.getValue(), true);
                     break;
@@ -2497,13 +2516,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w.avgIncline.set((float) eTotalInclineSet / w.egymTimePerSets.get());
 
 
-
         // ⭐️ 時間設定為 00:00(-99)，就先給30分鐘， TargetDistance到了，就換下一個 SET
         if ((egymDataViewModel.durationTimesListKnowZero.get(w.egymCurrentSet.get()) == SYMBOL_DURATION) && !Objects.equals(w.egymTargetDistance.get(), E_BLANK)) {
             String targetDistanceStr = w.egymTargetDistance.get();
             if (isNumeric(targetDistanceStr)) {
                 double targetDistance = Double.parseDouble(targetDistanceStr);
-           //     Log.d(EgymUtil.TAG, "此set已跑距離: " + w.egymIntervalDistance.get() + ", 目標距離" + targetDistance);
+                //     Log.d(EgymUtil.TAG, "此set已跑距離: " + w.egymIntervalDistance.get() + ", 目標距離" + targetDistance);
                 if (w.egymIntervalDistance.get() >= targetDistance) {
                     Log.d(EgymUtil.TAG, "⭐已到達目標");
 
@@ -2519,8 +2537,8 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                     //往下跑，到下一個SET
 
 
-               //     Log.d(EgymUtil.TAG, "新時間: " + w.elapsedTime.get() + ", " + formatSecToM(w.remainingTime.get()));
-              //      Log.d(EgymUtil.TAG, "新剩餘時間: " + w.remainingTime.get() + ", " + w.remainingTimeShow.get());
+                    //     Log.d(EgymUtil.TAG, "新時間: " + w.elapsedTime.get() + ", " + formatSecToM(w.remainingTime.get()));
+                    //      Log.d(EgymUtil.TAG, "新剩餘時間: " + w.remainingTime.get() + ", " + w.remainingTimeShow.get());
 //                    Log.d(EgymUtil.TAG, "每個SET的秒數: " + egymDataViewModel.durationRealTimesList.toString());
 //                    Log.d(EgymUtil.TAG, "當前Set 秒數: " + egymDataViewModel.durationRealTimesList.get(w.egymCurrentSet.get()));
 //                    Log.d(EgymUtil.TAG, "當前總秒數: " + w.elapsedTime.get());
@@ -2533,12 +2551,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         }
 
 
-    //    Log.d(EgymUtil.TAG, "@#############此Set 秒數: " + w.egymTimePerSets.get());
+        //    Log.d(EgymUtil.TAG, "@#############此Set 秒數: " + w.egymTimePerSets.get());
 
         //每個Set在第幾秒 [120, 480]  最後一個+2秒, 因為要到summary才算
         //‼️時間到了，要換下一個SET
         if (!egymDataViewModel.durationRealTimesList.contains(w.elapsedTime.get())) return;
-        Log.d(EgymUtil.TAG, "開始進入下一個SET, 計算數值 " +  " Set秒數: " + w.egymTimePerSets.get() +"秒,   當前Set:" + (w.egymCurrentSet.get() + 1) );
+        Log.d(EgymUtil.TAG, "開始進入下一個SET, 計算數值 " + " Set秒數: " + w.egymTimePerSets.get() + "秒,   當前Set:" + (w.egymCurrentSet.get() + 1));
 
         tempDistance = calc.getDistanceAccumulate();
 
@@ -2735,11 +2753,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         }
 
         if (isTreadmill) {
-            calc.setData((double) w.currentSpeed.get(), (double) w.currentInclineValue.get(),0);
+            calc.setData((double) w.currentSpeed.get(), (double) w.currentInclineValue.get(), 0);
         } else {
             // calc.setData(w.currentRpm.get(), 0, 0, w.pwmLevelDA.get());
             calc.setData(w.currentRpm.get(), 0, 0, w.currentLevel.get());
-       //     Timber.tag("WWWWEEEERRRRR").d("setData: " + w.currentRpm.get() +","+ w.currentLevel.get());
+            //     Timber.tag("WWWWEEEERRRRR").d("setData: " + w.currentRpm.get() +","+ w.currentLevel.get());
         }
         w.currentPace.set(calc.getPace());
 
@@ -2761,7 +2779,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             w.currentCalories.set(w.getAppleWatchCalories() >= 9999 ? 9999 : w.getAppleWatchCalories());
         } else {
 
-         //   Timber.tag("WWWWEEEERRRRR").d("CALORIES: " + calc.getKcalAccumulate());
+            //   Timber.tag("WWWWEEEERRRRR").d("CALORIES: " + calc.getKcalAccumulate());
             w.currentCalories.set(calc.getKcalAccumulate() >= 9999 ? 9999 : calc.getKcalAccumulate());
         }
 
@@ -2781,11 +2799,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w.metsLeft.set(mm1);
 
 
-
-
 //        w.avgPace.set(calc.getPaceAverage());
         w.currentPower.set(calc.getWatt());
-   //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
+        //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
 
 
         w.currentMets.set(calc.getMets());
@@ -2797,9 +2813,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w.peakRpm.set(calc.getRpmMax());
 
 
-      //  calc.getRpmMax()
+        //  calc.getRpmMax()
 
-      //  Log.d("DDDDDDDDD", "calcWorkoutData: " +calc.getRpmMax());
+        //  Log.d("DDDDDDDDD", "calcWorkoutData: " +calc.getRpmMax());
 
         w.avgMet.set(calc.getMetsAverage());
         w.totalCalories.set(calc.getKcalAccumulate());
@@ -2870,19 +2886,19 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new Hiit(w, this, u);
                 break;
             case WATTS:
-                iPrograms = new Watt(w, this, calc,uartVM);
+                iPrograms = new Watt(w, this, calc, uartVM);
                 break;
             case FITNESS_TEST:
                 iPrograms = new FitnessTest(w, this, calc);
                 break;
             case CALORIES:
-                iPrograms = new CaloriesProg(w,this);
+                iPrograms = new CaloriesProg(w, this);
                 break;
             case STEPS:
-                iPrograms = new StepsProg(w,this);
+                iPrograms = new StepsProg(w, this);
                 break;
             case METS:
-                iPrograms = new METsProg(w,this, (int) userProfileViewModel.getWeight_metric(),parent,calc);
+                iPrograms = new METsProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
@@ -3102,51 +3118,6 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         }
     }
 
-//    //只提示
-//    public void showWarring2(int type) {
-//
-//        if (warringWindow != null) {
-//            warringWindow.dismiss();
-//            warringWindow = null;
-//        }
-//
-//        if (!isAdded()) return;
-//
-//        switch (type) {
-//            case WARRING_NO_HR:
-//            case WARRING_NO_RPM:
-//            case INVALID_TEST_RPM_OUT_OF_RANGE:
-//            case INVALID_TEST_HR_OUT_OF_RANGE:
-//                try {
-//                    warringWindow = new WarringNoButtonWindow(requireActivity(), type, w);
-//                    warringWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
-//                    ((WarringNoButtonWindow) warringWindow).setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
-//                        @Override
-//                        public void onStartDismiss(MsgEvent value) {
-//                        }
-//
-//                        @Override
-//                        public void onDismiss() {
-//                            warringWindow = null;
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                break;
-//        }
-//
-//        new RxTimer().timer(2000, number -> {
-//            try {
-//                if (warringWindow != null) {
-//                    warringWindow.dismiss();
-//                    warringWindow = null;
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
 
     private WarringCountDownWindow warringCountDownWindow;
 
@@ -3366,27 +3337,27 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 }
 
 
-                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_1 : STEPPER_LEVEL_US_NUM_1));
-                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 :(MODE.isUbeType() ?  UBE_LEVEL_US_NUM_2 : STEPPER_LEVEL_US_NUM_2));
-                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_3 : STEPPER_LEVEL_US_NUM_3));
-                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_4 : STEPPER_LEVEL_US_NUM_4));
-                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_5 : STEPPER_LEVEL_US_NUM_5));
-                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_6 : STEPPER_LEVEL_US_NUM_6));
-                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_7 : STEPPER_LEVEL_US_NUM_7));
-                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_8 : STEPPER_LEVEL_US_NUM_8));
-                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_9 : STEPPER_LEVEL_US_NUM_9));
-                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_10 : STEPPER_LEVEL_US_NUM_10));
+                getBinding().tvTopNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_1 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_1 : STEPPER_LEVEL_US_NUM_1));
+                getBinding().tvTopNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_2 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_2 : STEPPER_LEVEL_US_NUM_2));
+                getBinding().tvTopNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_3 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_3 : STEPPER_LEVEL_US_NUM_3));
+                getBinding().tvTopNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_4 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_4 : STEPPER_LEVEL_US_NUM_4));
+                getBinding().tvTopNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_5 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_5 : STEPPER_LEVEL_US_NUM_5));
+                getBinding().tvTopNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_6 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_6 : STEPPER_LEVEL_US_NUM_6));
+                getBinding().tvTopNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_7 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_7 : STEPPER_LEVEL_US_NUM_7));
+                getBinding().tvTopNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_8 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_8 : STEPPER_LEVEL_US_NUM_8));
+                getBinding().tvTopNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_9 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_9 : STEPPER_LEVEL_US_NUM_9));
+                getBinding().tvTopNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_10 : STEPPER_LEVEL_US_NUM_10));
 
-                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_11 : STEPPER_LEVEL_US_NUM_11));
-                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_12 : STEPPER_LEVEL_US_NUM_12));
-                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_13 : STEPPER_LEVEL_US_NUM_13));
-                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_14 : STEPPER_LEVEL_US_NUM_14));
-                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_15 : STEPPER_LEVEL_US_NUM_15));
-                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_16 : STEPPER_LEVEL_US_NUM_16));
-                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_17 : STEPPER_LEVEL_US_NUM_17));
-                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_18 : STEPPER_LEVEL_US_NUM_18));
-                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_19 : STEPPER_LEVEL_US_NUM_19));
-                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ?  UBE_LEVEL_US_NUM_20 : STEPPER_LEVEL_US_NUM_20));
+                getBinding().tvBottomNumberUs1.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_10 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_11 : STEPPER_LEVEL_US_NUM_11));
+                getBinding().tvBottomNumberUs2.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_11 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_12 : STEPPER_LEVEL_US_NUM_12));
+                getBinding().tvBottomNumberUs3.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_12 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_13 : STEPPER_LEVEL_US_NUM_13));
+                getBinding().tvBottomNumberUs4.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_13 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_14 : STEPPER_LEVEL_US_NUM_14));
+                getBinding().tvBottomNumberUs5.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_14 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_15 : STEPPER_LEVEL_US_NUM_15));
+                getBinding().tvBottomNumberUs6.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_15 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_16 : STEPPER_LEVEL_US_NUM_16));
+                getBinding().tvBottomNumberUs7.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_16 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_17 : STEPPER_LEVEL_US_NUM_17));
+                getBinding().tvBottomNumberUs8.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_17 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_18 : STEPPER_LEVEL_US_NUM_18));
+                getBinding().tvBottomNumberUs9.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_19 : STEPPER_LEVEL_US_NUM_19));
+                getBinding().tvBottomNumberUs10.setText((w.selProgram == WATTS) ? BIKE_WATT_US_NUM_18 : (MODE.isUbeType() ? UBE_LEVEL_US_NUM_20 : STEPPER_LEVEL_US_NUM_20));
 
 
                 getBinding().tvTopTextUs.setText((w.selProgram == WATTS) ? R.string.direct_watts : R.string.direct_level);
@@ -3395,37 +3366,44 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
                 if (w.selProgram == METS) {
                     getBinding().viewBikeLevelTitleUs.setText(R.string.target_mets);
-                    getBinding().tvTopTextUs.setText( R.string.direct_mets);
+                    getBinding().tvTopTextUs.setText(R.string.direct_mets);
                     getBinding().tvBottomTextUs.setText(R.string.direct_mets);
-                   //  TARGET_METS_DEF = 3.5;
+                    //  TARGET_METS_DEF = 3.5;
                     //TARGET_METS_MIN = 1.4;
-                   // TARGET_METS_MAX = 13.4;
+                    // TARGET_METS_MAX = 13.4;
                     // TARGET_METS_INC = 0.1;
 
-                    getBinding().tvTopNumberUs1.setText("1.4");
-                    getBinding().tvTopNumberUs2.setText("1.4");
-                    getBinding().tvTopNumberUs3.setText("1.4");
-                    getBinding().tvTopNumberUs4.setText("1.4");
-                    getBinding().tvTopNumberUs5.setText("1.4");
-                    getBinding().tvTopNumberUs6.setText("1.4");
-                    getBinding().tvTopNumberUs7.setText("1.4");
-                    getBinding().tvTopNumberUs8.setText("1.4");
-                    getBinding().tvTopNumberUs9.setText("1.4");
-                    getBinding().tvTopNumberUs10.setText("1.4");
+                    getBinding().tvTopNumberUs7.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs8.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs9.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs10.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs11.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs12.setVisibility(View.GONE);
 
-                    getBinding().tvBottomNumberUs1.setText("1.4");
-                    getBinding().tvBottomNumberUs2.setText("1.4");
-                    getBinding().tvBottomNumberUs3.setText("1.4");
-                    getBinding().tvBottomNumberUs4.setText("1.4");
-                    getBinding().tvBottomNumberUs5.setText("1.4");
-                    getBinding().tvBottomNumberUs6.setText("1.4");
-                    getBinding().tvBottomNumberUs7.setText("1.4");
-                    getBinding().tvBottomNumberUs8.setText("1.4");
-                    getBinding().tvBottomNumberUs9.setText("1.4");
-                    getBinding().tvBottomNumberUs10.setText("13.4");
+                    getBinding().tvBottomNumberUs7.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs8.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs9.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs10.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs11.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs12.setVisibility(View.GONE);
+
+                    getBinding().tvTopNumberUs1.setText("2");
+                    getBinding().tvTopNumberUs2.setText("3");
+                    getBinding().tvTopNumberUs3.setText("4");
+                    getBinding().tvTopNumberUs4.setText("5");
+                    getBinding().tvTopNumberUs5.setText("6");
+                    getBinding().tvTopNumberUs6.setText("7");
+
+
+                    getBinding().tvBottomNumberUs1.setText("8");
+                    getBinding().tvBottomNumberUs2.setText("9");
+                    getBinding().tvBottomNumberUs3.setText("10");
+                    getBinding().tvBottomNumberUs4.setText("11");
+                    getBinding().tvBottomNumberUs5.setText("12");
+                    getBinding().tvBottomNumberUs6.setText("13");
+
 
                 }
-
 
 
             }

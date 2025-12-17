@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.alert_message;
 
+import static android.view.View.GONE;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.MainActivity.isEmulator;
@@ -55,9 +56,11 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.METS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
+import androidx.databinding.Observable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -79,6 +82,7 @@ import com.google.android.material.button.MaterialButton;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutMediaControllerBinding> {
+    private Observable.OnPropertyChangedCallback targetMetsCallback;
     public static boolean isMediaWorkoutController = false;
     private AppStatusViewModel appStatusViewModel;
     public DeviceSettingViewModel deviceSettingViewModel;
@@ -117,6 +121,17 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
         getMenu();
 
+
+        if (workoutViewModel.selProgram == METS) {
+            targetMetsCallback = new Observable.OnPropertyChangedCallback() {
+                @Override
+                public void onPropertyChanged(Observable sender, int propertyId) {
+                    getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.targetMets.get() / 10f));
+                }
+            };
+            workoutViewModel.targetMets.addOnPropertyChangedCallback(targetMetsCallback);
+        }
+
         getBinding().btnClose.setOnClickListener(view -> {
             returnValue(new MsgEvent(true));
             dismiss();
@@ -131,12 +146,12 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.currentSpeed.get()));
 
                 getBinding().c12.setVisibility(View.VISIBLE);
-                getBinding().c16.setVisibility(View.GONE);
+                getBinding().c16.setVisibility(GONE);
             } else {
                 getBinding().tvTopTextUs.setText(R.string.direct_incline);
                 valueType = STATS_INCLINE;
                 getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.currentInclineValue.get()));
-                getBinding().c12.setVisibility(View.GONE);
+                getBinding().c12.setVisibility(GONE);
                 getBinding().c16.setVisibility(View.VISIBLE);
             }
 
@@ -202,6 +217,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                     break;
                 case STATS_LEVEL:
                 case STATS_POWER:
+                case STATS_METS:
                     LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(CLICK_PLUS_2);
                     break;
             }
@@ -218,6 +234,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                     break;
                 case STATS_LEVEL:
                 case STATS_POWER:
+                case STATS_METS:
                     LiveEventBus.get(FTMS_SET_TARGET_SPEED).post(CLICK_MINUS_2);
                     break;
             }
@@ -308,6 +325,11 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 type = STATS_POWER;
                 value = getConNum(btn);
                 break;
+            case STATS_METS:
+                type = STATS_METS;
+                value = getConNum(btn);
+                Log.d("MMMMMMWWWWEEEE", "updateSpecify: " + value);
+                break;
 
         }
         LiveEventBus.get(NEW_VALUE_UPDATE).post(new NewUpdateData(type, value));
@@ -316,6 +338,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
     private void updateValue() {
         //  new RxTimer().timer(200, number -> {
+
         String valuee = "0";
         switch (valueType) {
             case STATS_INCLINE:
@@ -329,6 +352,9 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 break;
             case STATS_POWER:
                 valuee = String.valueOf(workoutViewModel.constantPowerW.get());
+                break;
+            case STATS_METS:
+                valuee = String.valueOf(workoutViewModel.targetMets.get() / 10f);
                 break;
         }
         try {
@@ -346,7 +372,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
             getBinding().tvTopTextUs.setText(R.string.direct_speed);
             getBinding().c12.setVisibility(View.VISIBLE);
-            getBinding().c16.setVisibility(View.GONE);
+            getBinding().c16.setVisibility(GONE);
 
             if (workoutViewModel.selProgram == HEART_RATE) {
                 getBinding().rgSelectProgram.setVisibility(View.INVISIBLE);
@@ -354,7 +380,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
         } else {
 
-            getBinding().c12.setVisibility(View.GONE);
+            getBinding().c12.setVisibility(GONE);
 
             getBinding().c16.setVisibility(View.VISIBLE);
 
@@ -378,7 +404,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
             if (workoutViewModel.selProgram == METS) {
                 // TODO: mets
-                getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.currentLevel.get()));
+                getBinding().tvTimeNum.setText(String.valueOf(workoutViewModel.targetMets.get() / 10f));
                 valueType = STATS_METS;
                 getBinding().tvTopTextUs.setText(R.string.direct_mets);
             }
@@ -472,22 +498,22 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
                 getBinding().tv1616.setText("200");
                 break;
             case STATS_METS:
-                getBinding().tv161.setText("1.4");
-                getBinding().tv162.setText("1.4");
-                getBinding().tv163.setText("1.4");
-                getBinding().tv164.setText("1.4");
-                getBinding().tv165.setText("1.4");
-                getBinding().tv166.setText("100");
-                getBinding().tv167.setText("110");
-                getBinding().tv168.setText("120");
-                getBinding().tv169.setText("130");
-                getBinding().tv1610.setText("140");
-                getBinding().tv1611.setText("150");
-                getBinding().tv1612.setText("160");
-                getBinding().tv1613.setText("170");
-                getBinding().tv1614.setText("180");
-                getBinding().tv1615.setText("190");
-                getBinding().tv1616.setText("13.4");
+                getBinding().tv161.setText("2");
+                getBinding().tv162.setText("3");
+                getBinding().tv163.setText("4");
+                getBinding().tv164.setText("5");
+                getBinding().tv165.setText("6");
+                getBinding().tv166.setText("7");
+                getBinding().tv167.setText("8");
+                getBinding().tv168.setText("9");
+                getBinding().tv169.setText("10");
+                getBinding().tv1610.setText("11");
+                getBinding().tv1611.setText("12");
+                getBinding().tv1612.setText("13");
+                getBinding().tv1613.setVisibility(GONE);
+                getBinding().tv1614.setVisibility(GONE);
+                getBinding().tv1615.setVisibility(GONE);
+                getBinding().tv1616.setVisibility(GONE);
         }
     }
 
@@ -523,5 +549,10 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
 
 //        ClickUtils.detachF(getBinding().btnTimePlus);
 //        ClickUtils.detachF(getBinding().btnTimeMinus);
+
+
+        if (targetMetsCallback != null) {
+            workoutViewModel.targetMets.removeOnPropertyChangedCallback(targetMetsCallback);
+        }
     }
 }

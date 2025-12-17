@@ -71,10 +71,11 @@
                 android:layout_marginTop="224dp"
                 android:fontFamily="@font/inter_regular"
                 android:textColor="@color/white"
-                app:c_textSize="@{isDefaultProgram ? 54 : 44}"
-                tools:textSize="54sp"
+                app:c_textSize="@{isDefaultProgram ? 44 : 44}"
+                tools:textSize="44sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
 
 <!--            android:visibility="@{isDefaultProgram ? View.VISIBLE : View.GONE}"-->

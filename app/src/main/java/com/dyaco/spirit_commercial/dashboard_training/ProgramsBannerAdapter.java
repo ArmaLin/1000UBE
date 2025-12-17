@@ -248,8 +248,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                     listW.add(String.valueOf(i));
                 }
             } else {
-                int min = (int) (TARGET_METS_MIN * 10);
-                int max = (int) (TARGET_METS_MAX * 10);
+                int min = (int) (TARGET_METS_MIN );
+                int max = (int) (TARGET_METS_MAX );
 
                 for (int i = min; i <= max; i++) {
                     // 將 int 轉回 double 字串，例如 14 -> "1.4"
@@ -365,9 +365,11 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 if (programsEnum == ProgramsEnum.WATTS) {
                     workoutViewModel.selConstantPowerW.set(Integer.parseInt(opt1Data));
                 } else {
-                    workoutViewModel.targetMets.set(Double.parseDouble(opt1Data));
+                    float metsFloat = Float.parseFloat(opt1Data);
+                    int finalMets = Math.round(metsFloat * 10);
+                    workoutViewModel.targetMets.set(finalMets);
                 }
-                Log.d("initTimePicker", "POWER: " + opt1Data);
+                Log.d("MMMMMMWWWWEEEE", "POWER: " + workoutViewModel.targetMets.get());
 
             });
 
@@ -375,7 +377,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 // 設定 Watts 預設選中位置
                 wPicker.setOpt1SelectedPosition(POWER_DFT - POWER_MIN, false);
             } else {
-                wPicker.setOpt1SelectedPosition((int) ((TARGET_METS_DEF - TARGET_METS_MIN) * 10), false);
+                wPicker.setOpt1SelectedPosition((int) (TARGET_METS_DEF - TARGET_METS_MIN), false);
             }
         }
     }

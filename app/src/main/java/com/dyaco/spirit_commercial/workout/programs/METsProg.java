@@ -54,8 +54,8 @@ public class METsProg implements IPrograms {
     @Override
     public void init() {
 
-        Log.d("MMMMEEEEETTTTT", "targetMets: " + w.targetMets.get());
-        Log.d("MMMMEEEEETTTTT", "targetMets: " + weightInKg);
+        Log.d("MMMMMMWWWWEEEE", "targetMets: " + w.targetMets.get());
+        Log.d("MMMMMMWWWWEEEE", "kg: " + weightInKg);
 
         //MaxIncline給最大值
         m.hideBtnSkip();
@@ -80,8 +80,8 @@ public class METsProg implements IPrograms {
 
     @Override
     public void runTime() {
-
-        int targetPower = (int) ((w.targetMets.get() - 2) / 3.0857 * weightInKg);
+        double targetMets = w.targetMets.get() / 10f;
+        int targetPower = (int) ((targetMets - 2) / 3.0857 * weightInKg);
 
         m.updateSpeedOrLevelNumWATT(calc.getLevel(targetPower, w.currentRpm.get()), true);
     //    mainActivity.getUartConsoleManager().setPwmViaPower(targetPower);

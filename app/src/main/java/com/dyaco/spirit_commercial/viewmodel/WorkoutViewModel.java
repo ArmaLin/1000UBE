@@ -239,7 +239,7 @@ public final ObservableDouble peakRpm = new ObservableDouble();
     public final ObservableDouble currentMets = new ObservableDouble();
     public final ObservableDouble totalMets = new ObservableDouble();
     public final ObservableDouble metsLeft = new ObservableDouble();
-    public final ObservableDouble targetMets = new ObservableDouble();
+    public final ObservableInt targetMets = new ObservableInt();
 
 
     public final ObservableInt currentPower = new ObservableInt();
