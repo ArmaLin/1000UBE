@@ -106,16 +106,16 @@
 
 
             <!--        SELECT-->
-            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
-                android:visibility="invisible"
-                android:id="@+id/fitnessPickAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="106dp"
-                android:layout_marginEnd="794dp"
-                android:fontFamily="@font/inter_bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView-->
+<!--                android:visibility="invisible"-->
+<!--                android:id="@+id/fitnessPickAge"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="106dp"-->
+<!--                android:layout_marginEnd="794dp"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
 <!--            <TextView-->
 <!--                android:id="@+id/fitnessAgeUnit"-->
@@ -132,30 +132,30 @@
 <!--                app:layout_constraintStart_toEndOf="@id/fitnessPickAge"-->
 <!--                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />-->
 
-            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
-                android:id="@+id/fitnessPickWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="280dp"
-                android:fontFamily="@font/inter_bold"
-                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
-                app:layout_constraintStart_toStartOf="@id/ivDiagram"
-                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+<!--            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView-->
+<!--                android:id="@+id/fitnessPickWeight"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="280dp"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"-->
+<!--                app:layout_constraintStart_toStartOf="@id/ivDiagram"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />-->
 
-            <TextView
-                android:id="@+id/fitnessWeightUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/inter_bold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"
-                android:textColor="@color/white"
-                android:textSize="54sp"
-                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"
-                app:layout_constraintStart_toEndOf="@id/fitnessPickWeight"
-                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />
+<!--            <TextView-->
+<!--                android:id="@+id/fitnessWeightUnit"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="64dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:fontFamily="@font/inter_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:includeFontPadding="false"-->
+<!--                android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="54sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/fitnessPickAge"-->
+<!--                app:layout_constraintStart_toEndOf="@id/fitnessPickWeight"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/fitnessPickAge" />-->
 
 <!--            <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView-->
 <!--                android:id="@+id/fitnessPickGender"-->
@@ -260,22 +260,6 @@
 
 
 
-
-
-
-
-<!--            <com.cheonjaeung.powerwheelpicker.android.WheelPicker-->
-<!--                android:layout_marginTop="76dp"-->
-<!--                android:layout_marginEnd="439dp"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:id="@+id/my_wheel_picker"-->
-<!--                android:layout_width="170dp"-->
-<!--                android:layout_height="560dp"-->
-<!--                app:selectorHeight="72dp"-->
-<!--                app:circular="true"-->
-<!--                android:orientation="vertical" />-->
-
             <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
                 android:id="@+id/timePicker"
                 android:gravity="center_vertical"
@@ -329,6 +313,95 @@
                 app:layout_constraintBottom_toBottomOf="@+id/wPicker"
                 app:layout_constraintStart_toEndOf="@id/wPicker"
                 app:layout_constraintTop_toTopOf="@+id/wPicker" />
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginEnd="140dp"
+                    android:layout_marginTop="52dp"
+                    android:id="@+id/gWingate"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="916dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp">
+                    <TextView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/tvBodyWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/body_weight"
+                        android:textColor="@color/white"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/tvForce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/Force"
+                        android:textColor="@color/white"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/tvTotalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/Total_Time"
+                        android:textColor="@color/white"
+                        android:textSize="32sp" />
+
+
+
+
+
+                    <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                        android:layout_marginTop="-12dp"
+                        android:id="@+id/opvBodyWeight"
+                        android:gravity="center_vertical"
+                        android:layout_width="170dp"
+                        android:layout_height="560dp"
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintStart_toStartOf="@+id/tvBodyWeight"
+                        app:layout_constraintEnd_toEndOf="@+id/tvBodyWeight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                    <TextView
+                        android:layout_marginStart="-12dp"
+                        android:id="@+id/unitBodyWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/kg"
+                        android:textColor="@color/white"
+                        android:textSize="54sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/opvBodyWeight"
+                        app:layout_constraintStart_toEndOf="@id/opvBodyWeight"
+                        app:layout_constraintTop_toTopOf="@+id/opvBodyWeight" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

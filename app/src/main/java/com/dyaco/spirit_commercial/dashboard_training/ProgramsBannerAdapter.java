@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.dashboard_training;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
@@ -11,8 +12,6 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMarinesTarget;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getNavyTarget;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MAX;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.AGE_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MT_TARGET_STEPS_INC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_DFT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MAX;
@@ -29,9 +28,7 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STE
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_MIN;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMaxHeight;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMaxWeight;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMinHeight;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMinWeight;
 import static com.dyaco.spirit_commercial.support.intdef.UnitEnum.DISTANCE2;
 import static com.dyaco.spirit_commercial.support.intdef.UnitEnum.getUnit;
@@ -111,13 +108,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
         //  holder.binding.fitnessPickGender.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 //        holder.binding.fitnessAgeUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
-        holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+//        holder.binding.fitnessPickWeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
+//        holder.binding.fitnessWeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 //        holder.binding.fitnessPickAge.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 //        holder.binding.fitnessPickHeight.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 //        holder.binding.fitnessHeightUnit.setVisibility(isDefaultProgram ? View.GONE : VISIBLE);
 
-        if (!isDefaultProgram) initFitnessSelected(holder.binding, programInfo);
+//        if (!isDefaultProgram) initFitnessSelected(holder.binding, programInfo);
 
         holder.binding.tvProgramName.setText(programInfo.getProgramName());
 //        holder.binding.vBG.setBackgroundResource(programInfo.getPhoto() != 0 ? programInfo.getPhoto() : R.drawable.panel_bg_all_20_252e37_press);
@@ -212,16 +209,77 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 programInfo == ProgramsEnum.CALORIES ||
                 programInfo == ProgramsEnum.WATTS ||
                 programInfo == ProgramsEnum.METS ||
-                programInfo == ProgramsEnum.WINGATE_TEST ||
                 programInfo == ProgramsEnum.STEPS) {
             holder.binding.timePicker.setVisibility(VISIBLE);
+            holder.binding.gWingate.setVisibility(GONE);
             initTimePicker(holder.binding, programInfo);
+
+        } else if (programInfo == ProgramsEnum.WINGATE_TEST) {
+
+            initWingateTestPick(holder.binding);
+
         } else {
+
             holder.binding.timePicker.setVisibility(INVISIBLE);
             holder.binding.wPicker.setVisibility(INVISIBLE);
             holder.binding.kcalUnit.setVisibility(INVISIBLE);
             holder.binding.wUnit.setVisibility(INVISIBLE);
+            holder.binding.gWingate.setVisibility(GONE);
         }
+    }
+
+
+    List<String> listWingate;
+    private void initWingateTestPick(ProgramsDetailsItemBinding binding) {
+        binding.gWingate.setVisibility(VISIBLE);
+        binding.timePicker.setVisibility(INVISIBLE);
+        binding.wPicker.setVisibility(INVISIBLE);
+        binding.kcalUnit.setVisibility(INVISIBLE);
+        binding.wUnit.setVisibility(INVISIBLE);
+
+
+        listWingate = new ArrayList<>();
+
+        listWingate = new ArrayList<>(1);
+        for (int i = getMinWeight(); i <= getMaxWeight(); i++) {
+            listWingate.add(String.valueOf(i));
+        }
+
+
+
+        OptionsPickerView<String> weightPicker = binding.opvBodyWeight;
+
+        weightPicker.setData(listWingate);
+        weightPicker.setVisibleItems(8);
+        weightPicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+        weightPicker.setTextSize(54, false);
+        weightPicker.setCurved(true);
+        weightPicker.setCyclic(true);
+        weightPicker.setTextBoundaryMargin(0, true);
+        weightPicker.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+        weightPicker.setCurvedArcDirectionFactor(1.0f);
+        weightPicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+
+        weightPicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+            if (opt1Data == null) {
+                return;
+            }
+
+            Log.d("initTimePicker", "Time/Cal Select: " + opt1Data);
+
+            int weight = Integer.parseInt(opt1Data);
+            workoutViewModel.selWeightIU.set(UNIT_E == IMPERIAL ? weight : FormulaUtil.kg2lb(weight));
+            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? weight : FormulaUtil.lb2kg(weight));
+        });
+
+        weightPicker.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getWeight_imperial() - WEIGHT_IU_MIN : userProfileViewModel.getWeight_metric() - WEIGHT_MU_MIN), false);
+
+
+
+
+
+
+
     }
 
     private void initTimePicker(ProgramsDetailsItemBinding binding, ProgramsEnum programsEnum) {
@@ -248,8 +306,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                     listW.add(String.valueOf(i));
                 }
             } else {
-                int min = (int) (TARGET_METS_MIN );
-                int max = (int) (TARGET_METS_MAX );
+                int min = (int) (TARGET_METS_MIN);
+                int max = (int) (TARGET_METS_MAX);
 
                 for (int i = min; i <= max; i++) {
                     // 將 int 轉回 double 字串，例如 14 -> "1.4"
@@ -402,89 +460,8 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         this.onImageClickListener = onImageClickListener;
     }
 
-    List<String> list1;
-    List<String> list2;
-    List<String> list3;
-    List<String> list4;
     List<String> list5;
     List<String> listW;
-
-    private void initFitnessData() {
-
-        list1 = new ArrayList<>(1);
-        for (int i = AGE_MIN; i <= AGE_MAX; i++) {
-            list1.add(String.valueOf(i));
-        }
-
-        list2 = new ArrayList<>(1);
-        for (int i = getMinWeight(); i <= getMaxWeight(); i++) {
-            list2.add(String.valueOf(i));
-        }
-
-        list3 = new ArrayList<>(1);
-        list3.add(context.getString(R.string.Female));
-        list3.add(context.getString(R.string.Male));
-
-        //Height
-        list4 = new ArrayList<>(1);
-        for (int i = getMinHeight(); i <= getMaxHeight(); i++) {
-            list4.add(String.valueOf(i));
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initFitnessSelected(ProgramsDetailsItemBinding binding, ProgramsEnum programsEnum) {
-
-        initFitnessData();
-
-        binding.tvProgramDesc.setTextSize(44);
-
-//        OptionsPickerView<String> fitnessPickAge = binding.fitnessPickAge;
-        OptionsPickerView<String> fitnessPickWeight = binding.fitnessPickWeight;
-
-//        fitnessPickAge.setData(list1);
-//        fitnessPickAge.setVisibleItems(8);
-//        fitnessPickAge.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-//        fitnessPickAge.setTextSize(54, false);
-//        fitnessPickAge.setCurved(true);
-//        fitnessPickAge.setCyclic(true);
-//        fitnessPickAge.setTextBoundaryMargin(0, true);
-//        fitnessPickAge.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-//        fitnessPickAge.setCurvedArcDirectionFactor(1.0f);
-//        fitnessPickAge.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-//        // fitnessPickAge.setOpt1SelectedPosition(AGE_DEF - AGE_MIN, false);
-//        fitnessPickAge.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-//            if (opt1Data == null) {
-//                return;
-//            }
-//            workoutViewModel.selYO.set(Integer.parseInt(opt1Data));
-//        });
-
-        fitnessPickWeight.setData(list2);
-        fitnessPickWeight.setVisibleItems(8);
-        //   opv1.setDividerPaddingForWrap(10, true);
-        fitnessPickWeight.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
-        fitnessPickWeight.setTextSize(54, false);
-        fitnessPickWeight.setCurved(true);
-        fitnessPickWeight.setCyclic(true);
-        fitnessPickWeight.setTextBoundaryMargin(0, true);
-        fitnessPickWeight.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
-        fitnessPickWeight.setCurvedArcDirectionFactor(1.0f);
-        fitnessPickWeight.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
-        fitnessPickWeight.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-            if (opt1Data == null) {
-                return;
-            }
-            int weight = Integer.parseInt(opt1Data);
-            workoutViewModel.selWeightIU.set(UNIT_E == IMPERIAL ? weight : FormulaUtil.kg2lb(weight));
-            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? weight : FormulaUtil.lb2kg(weight));
-        });
-
-        fitnessPickWeight.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getWeight_imperial() - WEIGHT_IU_MIN : userProfileViewModel.getWeight_metric() - WEIGHT_MU_MIN), false);
-//        fitnessPickAge.setOpt1SelectedPosition(userProfileViewModel.getUserAge() - AGE_MIN, false);
-
-
-    }
 
 
     private SpannableString setSpannableStr(String str1, String str2) {
