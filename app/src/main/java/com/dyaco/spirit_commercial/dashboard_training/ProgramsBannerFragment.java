@@ -72,7 +72,7 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
 
 
         //從外面點進來時 (不是滑動banner)  下方按鈕的變化
-        if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts || programId == R.id.btn_program9) {
+        if (programId == R.id.btn_manual || programId == R.id.btn_Calories || programId == R.id.btn_Watts || programId == R.id.btn_program9 || programId == R.id.btn_program10) {
             // TODO: PF
        //     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
 
@@ -86,6 +86,11 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
                 }
 
                 if (programId == R.id.btn_program9) {// stepper >>> METs
+                    appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+                }
+
+            //    Log.d("WWINNNNNNN", "onViewCreated: " + programId +", "+ R.id.btn_program10);
+                if (programId == R.id.btn_program10) {// stepper >>> Wingate
                     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
                 }
             } else {

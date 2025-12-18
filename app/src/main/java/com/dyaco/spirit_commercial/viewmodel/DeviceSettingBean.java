@@ -68,6 +68,15 @@ public class DeviceSettingBean implements Parcelable {
     private int type; //typeCode DEVICE_TYPE_TREADMILL
     private int antPlusDeviceId;
 
+    private boolean isFittttttt;
+
+    public boolean isFittttttt() {
+        return isFittttttt;
+    }
+
+    public void setFittttttt(boolean fittttttt) {
+        isFittttttt = fittttttt;
+    }
 
     //EGYM
     private int consoleSystem;

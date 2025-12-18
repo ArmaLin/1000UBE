@@ -8,6 +8,8 @@ import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_TREADMILL;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.OFF;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.ON;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_GLOBAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_JAPAN;
@@ -67,6 +69,13 @@ public class MaintenanceDeviceTerritoryChooseFragment extends BaseBindingDialogF
         }
 
         initEvent();
+
+
+
+        getBinding().cbFIT.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            deviceSettingViewModel.isFittttttt.set(isChecked  ? ON : OFF);
+
+        });
     }
 
     int radioTag = -1;

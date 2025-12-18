@@ -156,6 +156,18 @@
             android:layout_height="wrap_content" />
 
 
+        <CheckBox
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="300dp"
+            android:id="@+id/cbFIT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_checkbox_s"
+            android:button="@null"/>
+
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnConvert"
             android:layout_width="match_parent"

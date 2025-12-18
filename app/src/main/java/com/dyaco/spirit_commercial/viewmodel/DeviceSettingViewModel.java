@@ -23,6 +23,8 @@ import java.util.Locale;
 
 public class DeviceSettingViewModel extends ViewModel {
 
+    public final ObservableInt isFittttttt = new ObservableInt(0);
+
     public final ObservableField<Locale> locale = new ObservableField<>();
 
     public final ObservableInt consoleSystem = new ObservableInt(CONSOLE_SYSTEM_SPIRIT);

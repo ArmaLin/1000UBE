@@ -204,6 +204,7 @@ import com.dyaco.spirit_commercial.workout.programs.Run5K;
 import com.dyaco.spirit_commercial.workout.programs.StepsProg;
 import com.dyaco.spirit_commercial.workout.programs.Watt;
 import com.dyaco.spirit_commercial.workout.programs.Wfi;
+import com.dyaco.spirit_commercial.workout.programs.WingateProg;
 import com.garmin.health.Device;
 import com.google.android.material.transition.MaterialFadeThrough;
 import com.jeremyliao.liveeventbus.LiveEventBus;
@@ -1500,7 +1501,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             if ((n + num) > w.selSprintSpeedLevel.get()) return false;
         }
 
-
+        Log.d("WWWWWWIIIIIIIII", "updateSpeedOrLevelNum: " + num);
         if (workoutChartsFragment == null) return false;
         if (workoutChartsFragment.updateSpeedNum(num)) {
             if (isTreadmill) {
@@ -2899,6 +2900,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 break;
             case METS:
                 iPrograms = new METsProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
+                break;
+            case WINGATE_TEST:
+                iPrograms = new WingateProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);

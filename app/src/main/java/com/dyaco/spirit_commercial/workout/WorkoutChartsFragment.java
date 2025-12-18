@@ -809,6 +809,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
             case CALORIES:
             case STEPS:
             case METS:
+            case WINGATE_TEST:
                 //調整 SPEED 的 CHART (將還未跑到的Chart全部調整成同樣數值)
                 return updateSpeedChart(newCurrentSpeedLevel, updateSpeedLevel);
             case HILL:
