@@ -12,6 +12,10 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMarinesTarget;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getNavyTarget;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_DEFAULT;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_INC;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.MT_TARGET_STEPS_INC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_DFT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.POWER_MAX;
@@ -28,6 +32,10 @@ import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_STE
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.TARGET_TIME_DEF;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_IU_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WEIGHT_MU_MIN;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WINGATE_TIME_DFT;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WINGATE_TIME_INC;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WINGATE_TIME_MAX;
+import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.WINGATE_TIME_MIN;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMaxWeight;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.getMinWeight;
 import static com.dyaco.spirit_commercial.support.intdef.UnitEnum.DISTANCE2;
@@ -229,7 +237,9 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
     }
 
 
-    List<String> listWingate;
+    List<String> listBodyWeight;
+    List<String> listForce;
+    List<String> listWingateTime;
     private void initWingateTestPick(ProgramsDetailsItemBinding binding) {
         binding.gWingate.setVisibility(VISIBLE);
         binding.timePicker.setVisibility(INVISIBLE);
@@ -238,18 +248,13 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         binding.wUnit.setVisibility(INVISIBLE);
 
 
-        listWingate = new ArrayList<>();
-
-        listWingate = new ArrayList<>(1);
+        listBodyWeight = new ArrayList<>(1);
         for (int i = getMinWeight(); i <= getMaxWeight(); i++) {
-            listWingate.add(String.valueOf(i));
+            listBodyWeight.add(String.valueOf(i));
         }
 
-
-
         OptionsPickerView<String> weightPicker = binding.opvBodyWeight;
-
-        weightPicker.setData(listWingate);
+        weightPicker.setData(listBodyWeight);
         weightPicker.setVisibleItems(8);
         weightPicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
         weightPicker.setTextSize(54, false);
@@ -280,6 +285,99 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
 
 
 
+        listForce = new ArrayList<>(1);
+        for (int i = FORCE_KG_MIN; i <= FORCE_KG_MAX; i += FORCE_KG_INC) {
+            listForce.add(String.format(java.util.Locale.US, "%.1f", i / 10.0));
+        }
+
+        OptionsPickerView<String> forcePicker = binding.opvForce;
+        forcePicker.setData(listForce);
+        forcePicker.setVisibleItems(8);
+        forcePicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+        forcePicker.setTextSize(54, false);
+        forcePicker.setCurved(true);
+        forcePicker.setCyclic(true);
+        forcePicker.setTextBoundaryMargin(0, true);
+        forcePicker.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+        forcePicker.setCurvedArcDirectionFactor(1.0f);
+        forcePicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+
+        forcePicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+            if (opt1Data == null) {
+                return;
+            }
+
+            Log.d("initTimePicker", "Force Select: " + opt1Data);
+
+            try {
+                // 解析顯示的浮點數 (例如 "5.0")
+                double selectedVal = Double.parseDouble(opt1Data);
+                // 轉回內部邏輯需要的數值 (例如 5.0 * 10 = 50.0)
+                workoutViewModel.selForce.set(selectedVal);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        });
+
+        forcePicker.setOpt1SelectedPosition((FORCE_KG_DEFAULT - FORCE_KG_MIN) / FORCE_KG_INC, false);
+
+
+
+
+
+
+
+
+
+        listWingateTime = new ArrayList<>();
+        for (int i = WINGATE_TIME_MIN; i <= WINGATE_TIME_MAX; i += WINGATE_TIME_INC) {
+            int min = i / 60;
+            int sec = i % 60;
+            listWingateTime.add(String.format(java.util.Locale.US, "%d:%02d", min, sec));
+        }
+
+        OptionsPickerView<String> wTimePicker = binding.opvWTime;
+        wTimePicker.setData(listWingateTime);
+        wTimePicker.setVisibleItems(8);
+        wTimePicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
+        wTimePicker.setTextSize(54, false);
+        wTimePicker.setCurved(true);
+        wTimePicker.setCyclic(true);
+        wTimePicker.setTextBoundaryMargin(0, true);
+        wTimePicker.setCurvedArcDirection(WheelView.CURVED_ARC_DIRECTION_CENTER);
+        wTimePicker.setCurvedArcDirectionFactor(1.0f);
+        wTimePicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
+
+        wTimePicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
+            if (opt1Data == null) {
+                return;
+            }
+
+            try {
+                // 解析 MM:SS 格式回傳秒數
+                if (opt1Data.contains(":")) {
+                    String[] parts = opt1Data.split(":");
+                    if (parts.length == 2) {
+                        int m = Integer.parseInt(parts[0]);
+                        int s = Integer.parseInt(parts[1]);
+                        int totalSeconds = (m * 60) + s;
+                        workoutViewModel.selWorkoutTime.set(totalSeconds);
+                    }
+                } else {
+                    // 防呆：如果格式只有數字 (雖然目前邏輯不會發生)
+                    workoutViewModel.selWorkoutTime.set(Integer.parseInt(opt1Data));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            Log.d("WWINNNNNNN", "時間: " + workoutViewModel.selWorkoutTime.get());
+        });
+
+        wTimePicker.setOpt1SelectedPosition((WINGATE_TIME_DFT - WINGATE_TIME_MIN) / WINGATE_TIME_INC, false);
+
+
     }
 
     private void initTimePicker(ProgramsDetailsItemBinding binding, ProgramsEnum programsEnum) {
@@ -297,7 +395,6 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
                 binding.wUnit.setVisibility(View.INVISIBLE);
             }
 
-            // 初始化 Watts 資料列表 (每次都 new 新的以防重複)
             listW = new ArrayList<>();
 
 

@@ -178,6 +178,25 @@ public class OPT_SETTINGS {
     public static final int TARGET_CALORIES_MIN = 50;
     public static final int TARGET_CALORIES_MAX = 1000;
 
+
+
+
+
+    // EMS Wingate
+    public static final int WINGATE_TIME_DFT = 60;     // seconds
+    public static final int WINGATE_TIME_MIN = 30;      // seconds
+    public static final int WINGATE_TIME_MAX = 1140;    // seconds
+    public static final int WINGATE_TIME_INC = 5;      // seconds
+
+    public static final int FORCE_KG_MIN = 10;     // 1.0 KG
+    public static final int FORCE_KG_MAX = 100;    // 10 KG (限制在10)
+    public static final int FORCE_KG_DEFAULT = 50;
+    public static final int FORCE_KG_INC = 5;      // 0.1 KG
+
+
+
+
+
     // for METs
 //    public static final double TARGET_METS_DEF = 3.5;       // 3.5
 //    public static final double TARGET_METS_MIN = 1.4;       // 1.4

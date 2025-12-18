@@ -317,7 +317,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginEnd="140dp"
+                    android:layout_marginEnd="150dp"
                     android:layout_marginTop="52dp"
                     android:id="@+id/gWingate"
                     android:visibility="visible"
@@ -392,12 +392,63 @@
                         android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/kg"
+                        android:text="@{deviceSetting.unitCode == deviceSettingIntDef.IMPERIAL ? @string/lb : @string/kg}"
                         android:textColor="@color/white"
                         android:textSize="54sp"
                         app:layout_constraintBottom_toBottomOf="@+id/opvBodyWeight"
                         app:layout_constraintStart_toEndOf="@id/opvBodyWeight"
                         app:layout_constraintTop_toTopOf="@+id/opvBodyWeight" />
+
+
+
+
+
+
+
+
+
+                    <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                        android:layout_marginTop="-12dp"
+                        android:id="@+id/opvForce"
+                        android:gravity="center_vertical"
+                        android:layout_width="170dp"
+                        android:layout_height="560dp"
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintStart_toStartOf="@+id/tvForce"
+                        app:layout_constraintEnd_toEndOf="@+id/tvForce"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                    <TextView
+                        android:layout_marginStart="-12dp"
+                        android:id="@+id/unitForce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/kg"
+                        android:textColor="@color/white"
+                        android:textSize="54sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/opvForce"
+                        app:layout_constraintStart_toEndOf="@id/opvForce"
+                        app:layout_constraintTop_toTopOf="@+id/opvForce" />
+
+
+
+
+                    <com.dyaco.spirit_commercial.support.custom_view.wheelPicker.OptionsPickerView
+                        android:layout_marginTop="-12dp"
+                        android:id="@+id/opvWTime"
+                        android:gravity="center_vertical"
+                        android:layout_width="170dp"
+                        android:layout_height="560dp"
+                        android:fontFamily="@font/inter_bold"
+                        app:layout_constraintStart_toStartOf="@+id/tvTotalTime"
+                        app:layout_constraintEnd_toEndOf="@+id/tvTotalTime"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

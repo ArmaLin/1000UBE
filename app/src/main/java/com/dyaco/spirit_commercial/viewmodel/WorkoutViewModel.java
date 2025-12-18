@@ -111,6 +111,8 @@ public final ObservableDouble peakRpm = new ObservableDouble();
     public final ObservableInt orgMaxSpeedInProfile = new ObservableInt(); //預設profile中的最大值
     public final ObservableInt orgMaxInclineInProfile = new ObservableInt(); //預設profile中的最大值
 
+    public final ObservableDouble selForce = new ObservableDouble();
+
 
     public final ObservableInt constantPowerW = new ObservableInt();
     public final ObservableInt selConstantPowerW = new ObservableInt();
