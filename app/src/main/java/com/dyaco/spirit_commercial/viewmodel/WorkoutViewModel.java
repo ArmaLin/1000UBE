@@ -320,6 +320,8 @@ public final ObservableDouble peakRpm = new ObservableDouble();
     public List<Double> metsList = new ArrayList<>();
     public List<Double> cttLevelHrList = new ArrayList<>();
 
+    public List<Integer> wingateWattsList = new ArrayList<>();
+
     public List<DiagramBarBean> inclineDiagramBarList = new ArrayList<>();
     public List<DiagramBarBean> speedDiagramBarList = new ArrayList<>();
     public List<DiagramBarBean> blankDiagramBarList = new ArrayList<>();

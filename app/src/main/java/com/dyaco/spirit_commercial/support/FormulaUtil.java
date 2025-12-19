@@ -659,6 +659,8 @@ public class FormulaUtil {
         w.currentStage.set(1);
         w.distanceLeft.set(0);
 
+        w.wingateWattsList.clear();
+
 
 //        w.totalStep.set(0);
         w.stepLeft.set(0);

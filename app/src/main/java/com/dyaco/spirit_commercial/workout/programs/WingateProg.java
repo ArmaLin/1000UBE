@@ -28,6 +28,9 @@ public class WingateProg implements IPrograms {
     int weightInKg;
     MainActivity mainActivity;
     Calculation calc;
+    int levelllll;
+
+    int watt5;
 
     public WingateProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity, Calculation calc) {
         this.w = workoutViewModel;
@@ -62,12 +65,13 @@ public class WingateProg implements IPrograms {
         Log.d("WWINNNNNNN", "selWeightMU: " + w.selWeightMU.get());
 
 
-        int lllevel = App.MODE.getLevelViaPowerAndRpm((int) (w.selForce.get() * 60), 60);
+        levelllll = App.MODE.getLevelViaPowerAndRpm((int) (w.selForce.get() * 60), 60);
 
-        Log.d("WWINNNNNNN", "#######LEVEL: " + lllevel);
+        Log.d("WWINNNNNNN", "#######LEVEL: " + levelllll);
         //MaxIncline給最大值
       //  m.hideBtnSkip();
 
+//        w.warmUpTime.set(60 * 5);
         w.warmUpTime.set(60 * 5);
         w.coolDownTime.set(0);
         m.setMaxInclineMax();
@@ -93,12 +97,21 @@ public class WingateProg implements IPrograms {
 
     @Override
     public void runTime() {
-        if (w.elapsedTime.get() == 1) {
-            m.getBinding().btnSkipUs.setVisibility(View.INVISIBLE);
-            m.usWorkoutStopLong();
-            m.showCooldownButton(false);
-            w.disabledLevelUpdate.set(true);
+        int t = w.elapsedTime.get();
+
+        if (t == 1) {
+            m.updateSpeedOrLevelNum(levelllll, true);
+            watt5 = 0;
         }
+
+        watt5 += calc.getWatt();
+
+        if (t % 5 == 0) {
+            w.wingateWattsList.add(watt5);
+            watt5 = 0;
+        }
+
+
     }
 
     @Override

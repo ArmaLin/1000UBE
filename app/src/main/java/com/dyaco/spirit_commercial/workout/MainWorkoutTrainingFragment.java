@@ -125,6 +125,7 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.METS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WFI;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WINGATE_TEST;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -932,6 +933,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             }
             //   getBinding().workoutFragmentContainerView.setVisibility(View.VISIBLE);
             finishWorkout(false);
+
         });
 
 
@@ -2144,9 +2146,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         getBinding().tvWarmUpAndCoolDownTime.setText("");
 
-//        if (w.selProgram == ProgramsEnum.GERKIN) {
-//            showCooldownButton(false);
-//        }
+        if (w.selProgram == WINGATE_TEST) {
+            getBinding().btnSkipUs.setVisibility(View.INVISIBLE);
+            usWorkoutStopLong();
+            showCooldownButton(false);
+            w.disabledLevelUpdate.set(true);
+        }
     }
 
     private void changeFragment(Fragment fragment) {
