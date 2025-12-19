@@ -12,7 +12,6 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMarinesTarget;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getNavyTarget;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.METRIC;
-import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_DEFAULT;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_INC;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_MAX;
 import static com.dyaco.spirit_commercial.support.intdef.OPT_SETTINGS.FORCE_KG_MIN;
@@ -248,11 +247,19 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         binding.wUnit.setVisibility(INVISIBLE);
 
 
+
+
+        listForce = new ArrayList<>(1);
+        for (int i = FORCE_KG_MIN; i <= FORCE_KG_MAX; i += FORCE_KG_INC) {
+            listForce.add(String.format(java.util.Locale.US, "%.1f", i / 10.0));
+        }
+
+
         listBodyWeight = new ArrayList<>(1);
         for (int i = getMinWeight(); i <= getMaxWeight(); i++) {
             listBodyWeight.add(String.valueOf(i));
         }
-
+        OptionsPickerView<String> forcePicker = binding.opvForce;
         OptionsPickerView<String> weightPicker = binding.opvBodyWeight;
         weightPicker.setData(listBodyWeight);
         weightPicker.setVisibleItems(8);
@@ -266,31 +273,46 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
         weightPicker.setSelectedItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.white));
 
         weightPicker.setOnOptionsSelectedListener((opt1Pos, opt1Data, opt2Pos, opt2Data, opt3Pos, opt3Data) -> {
-            if (opt1Data == null) {
-                return;
+            if (opt1Data == null || listForce == null) return;
+
+            int inputWeight = Integer.parseInt(opt1Data);
+
+            // 1. 先根據目前單位，正確存入 ViewModel
+            if (UNIT_E == IMPERIAL) {
+                workoutViewModel.selWeightIU.set(inputWeight);
+                workoutViewModel.selWeightMU.set((int) FormulaUtil.lb2kg(inputWeight));
+            } else {
+                workoutViewModel.selWeightMU.set(inputWeight);
+                workoutViewModel.selWeightIU.set((int) FormulaUtil.kg2lb(inputWeight));
             }
 
-            Log.d("initTimePicker", "Time/Cal Select: " + opt1Data);
+            // 2. 取得公制體重 (KG)
+            double weightInKg = workoutViewModel.selWeightMU.get();
 
-            int weight = Integer.parseInt(opt1Data);
-            workoutViewModel.selWeightIU.set(UNIT_E == IMPERIAL ? weight : FormulaUtil.kg2lb(weight));
-            workoutViewModel.selWeightMU.set(UNIT_E == METRIC ? weight : FormulaUtil.lb2kg(weight));
+            // 3. 計算 7.5% 阻力 (KG)
+            double targetForceKg = weightInKg * 0.075;
+
+            // 4. 計算 Index (修正浮點數運算)
+            // 公式: ( (目標KG * 10) - 最小值 ) / 增量
+            // 使用 double 運算後再 round，避免整數除法自動捨去
+            double rawIndex = (targetForceKg * 10.0 - (double) FORCE_KG_MIN) / (double) FORCE_KG_INC;
+            int forceIndex = (int) Math.round(rawIndex);
+
+            // 5. 邊界檢查
+            if (forceIndex < 0) forceIndex = 0;
+            if (forceIndex >= listForce.size()) forceIndex = listForce.size() - 1;
+
+            Log.d("WWINNNNNNN", "體重(KG): " + weightInKg + " -> 建議阻力(KG): " + String.format("%.2f", targetForceKg) + " -> Index: " + forceIndex);
+
+            // 平滑滾動
+            forcePicker.setOpt1SelectedPosition(forceIndex, true);
         });
 
         weightPicker.setOpt1SelectedPosition((int) (UNIT_E == IMPERIAL ? userProfileViewModel.getWeight_imperial() - WEIGHT_IU_MIN : userProfileViewModel.getWeight_metric() - WEIGHT_MU_MIN), false);
 
 
 
-
-
-
-
-        listForce = new ArrayList<>(1);
-        for (int i = FORCE_KG_MIN; i <= FORCE_KG_MAX; i += FORCE_KG_INC) {
-            listForce.add(String.format(java.util.Locale.US, "%.1f", i / 10.0));
-        }
-
-        OptionsPickerView<String> forcePicker = binding.opvForce;
+//        OptionsPickerView<String> forcePicker = binding.opvForce;
         forcePicker.setData(listForce);
         forcePicker.setVisibleItems(8);
         forcePicker.setNormalItemTextColor(ContextCompat.getColor(context.getApplicationContext(), R.color.color5a7085));
@@ -319,9 +341,24 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             }
         });
 
-        forcePicker.setOpt1SelectedPosition((FORCE_KG_DEFAULT - FORCE_KG_MIN) / FORCE_KG_INC, false);
+//        forcePicker.setOpt1SelectedPosition((FORCE_KG_DEFAULT - FORCE_KG_MIN) / FORCE_KG_INC, false);
 
+// 5. 設定初始位置
+        int initialWeightPos = (int) (UNIT_E == IMPERIAL
+                ? userProfileViewModel.getWeight_imperial() - WEIGHT_IU_MIN
+                : userProfileViewModel.getWeight_metric() - WEIGHT_MU_MIN);
+        weightPicker.setOpt1SelectedPosition(initialWeightPos, false);
 
+        // 初始 Force 預設值為初始體重的 7.5%
+        double initialWeightKg = UNIT_E == METRIC
+                ? userProfileViewModel.getWeight_metric()
+                : FormulaUtil.lb2kg((int) userProfileViewModel.getWeight_imperial());
+        int initialForceIndex = (int) Math.round((initialWeightKg * 0.075 * 10 - FORCE_KG_MIN) / (double) FORCE_KG_INC);
+
+        if (initialForceIndex < 0) initialForceIndex = 0;
+        if (initialForceIndex >= listForce.size()) initialForceIndex = listForce.size() - 1;
+
+        forcePicker.setOpt1SelectedPosition(initialForceIndex, false);
 
 
 

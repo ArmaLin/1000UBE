@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.corestar.calculation_libs.Calculation;
+import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.MainWorkoutTrainingFragment;
@@ -60,6 +61,10 @@ public class WingateProg implements IPrograms {
         Log.d("WWINNNNNNN", "selForce: " + w.selForce.get());
         Log.d("WWINNNNNNN", "selWeightMU: " + w.selWeightMU.get());
 
+
+        int lllevel = App.MODE.getLevelViaPowerAndRpm((int) (w.selForce.get() * 60), 60);
+
+        Log.d("WWINNNNNNN", "#######LEVEL: " + lllevel);
         //MaxIncline給最大值
       //  m.hideBtnSkip();
 

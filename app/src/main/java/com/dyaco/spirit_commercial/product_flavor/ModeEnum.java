@@ -675,6 +675,10 @@ public enum ModeEnum {
         return 0;
     }
 
+    public int getLevelViaPowerAndRpm(int power, int rpm) {
+        return wattTable.getLevel(power, rpm);  // 傳回對應的PWM
+    }
+
 
     public boolean isUbeType() {
         return (modelCode == DEVICE_MODEL_UBE);
