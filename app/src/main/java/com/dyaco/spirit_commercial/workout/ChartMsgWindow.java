@@ -14,12 +14,13 @@ import androidx.core.content.ContextCompat;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.WindowChartMsgBinding;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupMsgFWindow;
+import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 
 import java.util.Locale;
 
 public class ChartMsgWindow extends BasePopupMsgFWindow<WindowChartMsgBinding> {
 
-    public ChartMsgWindow(Context context, float value, int type) {
+    public ChartMsgWindow(Context context, float value, int type, ProgramsEnum currentProgram) {
         super(context);
 
         if (type == BAR_TYPE_BLANK) {
@@ -33,17 +34,25 @@ public class ChartMsgWindow extends BasePopupMsgFWindow<WindowChartMsgBinding> {
             getBinding().msgValue.setBackgroundResource(type == BAR_TYPE_INCLINE ? R.drawable.element_popup_diagram_incline : R.drawable.element_popup_diagram_speed);
             getBinding().msgValue.setText(type == BAR_TYPE_INCLINE ? String.format("%s%%", value) : value + " ");
         } else {
-            getBinding().msgValue.setBackgroundResource(R.drawable.element_popup_diagram_level);
+            if (currentProgram == ProgramsEnum.WINGATE_TEST) {
+                getBinding().msgValue.setBackgroundResource(R.drawable.element_popup_diagram_watt);
+            } else {
+                getBinding().msgValue.setBackgroundResource(R.drawable.element_popup_diagram_level);
+            }
             getBinding().msgValue.setText(String.format(Locale.getDefault(), "%d ", (int) value));
         }
     }
 
-    public void setMsgType(int type, float value) {
+    public void setMsgType(int type, float value,ProgramsEnum currentProgram) {
         if (isTreadmill) {
             getBinding().msgValue.setBackgroundResource(type == BAR_TYPE_INCLINE ? R.drawable.element_popup_diagram_incline : R.drawable.element_popup_diagram_speed);
             getBinding().msgValue.setText(type == BAR_TYPE_INCLINE ? String.format("%s%%", value) : value + " ");
         } else {
+            if (currentProgram == ProgramsEnum.WINGATE_TEST) {
+                getBinding().msgValue.setBackgroundResource(R.drawable.element_popup_diagram_watt);
+            } else {
             getBinding().msgValue.setBackgroundResource(R.drawable.element_popup_diagram_level);
+            }
             getBinding().msgValue.setText(String.format(Locale.getDefault(), "%d ", (int) value));
         }
 

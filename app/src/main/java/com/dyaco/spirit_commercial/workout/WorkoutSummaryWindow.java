@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static android.view.View.VISIBLE;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
 import static com.dyaco.spirit_commercial.App.getApp;
@@ -192,22 +193,6 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         //   LiveEventBus.get(DISMISS_WINDOW_EVENT, String.class).observeForever(observer1);
         LiveEventBus.get(SET_ALPHA_BACKGROUND, Boolean.class).observeForever(observer2);
 
-
-        if (w.selProgram == ProgramsEnum.WINGATE_TEST) {
-            m.calculation.setWingateWatt(w.wingateWattsList);
-            Log.d("WWINNNNNNN", "WorkoutSummaryWindow: " + w.wingateWattsList);
-            Log.d("WWINNNNNNN", "wattMax: " + m.calculation.getWingate_WattMax());
-            Log.d("WWINNNNNNN", "wattMax_kg: " + m.calculation.getWingate_WattMax_kg());
-            Log.d("WWINNNNNNN", "wattAvg: " + m.calculation.getWingate_WattAvg());
-            Log.d("WWINNNNNNN", "wattAvg_kg: " + m.calculation.getWingate_WattAvg_kg());
-            Log.d("WWINNNNNNN", "jouleMax: " + m.calculation.getWingate_JouleMax());
-            Log.d("WWINNNNNNN", "jouleAvg: " + m.calculation.getWingate_JouleAvg());
-            Log.d("WWINNNNNNN", "jouleMax_kg: " + m.calculation.getWingate_JouleMax_kg());
-            Log.d("WWINNNNNNN", "jouleAvg_kg: " + m.calculation.getWingate_JouleAvg_kg());
-            Log.d("WWINNNNNNN", "fatigueIndex: " + m.calculation.getWingate_FatigueIndex());
-
-        }
-
         try {
             addLastRawData();
         } catch (Exception e) {
@@ -350,12 +335,102 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 //        }
 
         m.getUartConsoleManager().setDevEndWorkout(true);
+
+
+
+
+
+
+        if (w.selProgram == ProgramsEnum.WINGATE_TEST) {
+            m.calculation.setWingateWatt(w.wingateWattsList);
+            Log.d("WWINNNNNNN", "WorkoutSummaryWindow: " + w.wingateWattsList);
+            Log.d("WWINNNNNNN", "wattMax: " + m.calculation.getWingate_WattMax());
+            Log.d("WWINNNNNNN", "wattMax_kg: " + m.calculation.getWingate_WattMax_kg());
+            Log.d("WWINNNNNNN", "wattAvg: " + m.calculation.getWingate_WattAvg());
+            Log.d("WWINNNNNNN", "wattAvg_kg: " + m.calculation.getWingate_WattAvg_kg());
+            Log.d("WWINNNNNNN", "jouleMax: " + m.calculation.getWingate_JouleMax());
+            Log.d("WWINNNNNNN", "jouleAvg: " + m.calculation.getWingate_JouleAvg());
+            Log.d("WWINNNNNNN", "jouleMax_kg: " + m.calculation.getWingate_JouleMax_kg());
+            Log.d("WWINNNNNNN", "jouleAvg_kg: " + m.calculation.getWingate_JouleAvg_kg());
+            Log.d("WWINNNNNNN", "fatigueIndex: " + m.calculation.getWingate_FatigueIndex());
+            getBinding().executePendingBindings();
+
+            getBinding().tvP1Text.setText(formatDecimal((float) m.calculation.getWingate_WattMax()));
+            getBinding().tvP1Unit.setText(R.string.watts);
+            getBinding().tvP1UnitText.setText(R.string.Peak_Power);
+            getBinding().ivP1.setImageResource(R.drawable.icon_power_32);
+
+
+            getBinding().tvP2Text.setText(formatDecimal((float) m.calculation.getWingate_JouleMax()));
+            getBinding().tvP2Unit.setText(R.string.joules);
+            getBinding().tvP2UnitText.setText(R.string.Peak_Power);
+            getBinding().ivP2.setImageResource(R.drawable.icon_calories_32);
+
+            getBinding().tvP3Text.setText(formatDecimal((float) m.calculation.getWingate_WattMax_kg()));
+            getBinding().tvP3Unit.setText(R.string.watts_kg);
+            getBinding().tvP3UnitText.setText(R.string.Peak_Relative_Power);
+            getBinding().ivP3.setImageResource(R.drawable.icon_power_32);
+
+            getBinding().tvP4Text.setText(formatDecimal((float) m.calculation.getWingate_JouleMax_kg()));
+            getBinding().tvP4Unit.setText(R.string.watts_kg);
+            getBinding().tvP4UnitText.setText(R.string.Peak_Relative_Energy);
+            getBinding().ivP4.setImageResource(R.drawable.icon_calories_32);
+
+            getBinding().tvP5Text.setText(formatDecimal((float) m.calculation.getWingate_WattAvg()));
+            getBinding().tvP5Unit.setText(R.string.watts);
+            getBinding().tvP5UnitText.setText(R.string.Avg_Power);
+            getBinding().ivP5.setImageResource(R.drawable.icon_power_32);
+
+
+            getBinding().tvP6Text.setText(formatDecimal((float) m.calculation.getWingate_JouleAvg()));
+            getBinding().tvP6Unit.setText(R.string.joules);
+            getBinding().tvP6UnitText.setText(R.string.Avg_Energy);
+            getBinding().ivP6.setImageResource(R.drawable.icon_calories_32);
+
+
+            getBinding().tvP7Text.setText(formatDecimal((float) m.calculation.getWingate_JouleAvg_kg()));
+            getBinding().tvP7Unit.setText(R.string.watts_kg);
+            getBinding().tvP7UnitText.setText(R.string.Avg_Relative_Power);
+            getBinding().ivP7.setImageResource(R.drawable.icon_power_32);
+
+            getBinding().tvP8Text.setText(formatDecimal((float) m.calculation.getWingate_WattAvg_kg()));
+            getBinding().tvP8Unit.setText(R.string.joules_kg);
+            getBinding().tvP8UnitText.setText(R.string.Avg_Relative_Energy);
+            getBinding().ivP8.setImageResource(R.drawable.icon_calories_32);
+
+            getBinding().tvP9Text.setText(CommonUtils.formatSecToM(w.totalElapsedTimeShow.get()));
+            getBinding().tvP9Unit.setText("");
+            getBinding().tvP9UnitText.setText(R.string.Total_Time);
+            getBinding().ivP9.setImageResource(R.drawable.icon_time_32);
+
+            getBinding().tvP10Text.setText(formatDecimal((float) m.calculation.getRpmAverage() * 6) + "º");
+            getBinding().tvP10Unit.setText(R.string.per_sec); // TODO: per sec
+            getBinding().tvP10UnitText.setText(R.string.Avg_Speed);
+            getBinding().ivP10.setImageResource(R.drawable.icon_speed_32);
+
+            getBinding().tvP11Text.setText(formatDecimal(w.avgHeartRate.get()));
+            getBinding().tvP11Unit.setText(R.string.BPM);
+            getBinding().tvP11UnitText.setText(R.string.Avg_Heart_Rate);
+            getBinding().ivP11.setImageResource(R.drawable.icon_hr_32);
+
+            getBinding().tvP12Text.setText(formatDecimal((float) w.peakHeartRate.get()));
+            getBinding().tvP12Unit.setText(R.string.BPM);
+            getBinding().tvP12UnitText.setText(R.string.Peak_Heart_Rate);
+            getBinding().ivP12.setImageResource(R.drawable.icon_hr_32);
+
+
+            getBinding().viewScore.setVisibility(VISIBLE);
+            getBinding().viewScoreText1.setText(R.string.Your_Fatigue_Index);
+            getBinding().viewScoreTextNum.setText(formatDecimal(m.calculation.getWingate_FatigueIndex(),1));
+            getBinding().tvResult.setText("");
+
+        }
     }
 
     private void initSummaryEgymBottom() {
         if (deviceSettingViewModel.consoleSystem.get() != CONSOLE_SYSTEM_EGYM) return;
-        getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(View.VISIBLE);
-        getBinding().layoutEgymBottom.egymProgress.setVisibility(View.VISIBLE);
+        getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(VISIBLE);
+        getBinding().layoutEgymBottom.egymProgress.setVisibility(VISIBLE);
         getBinding().layoutEgymBottom.setWorkoutData(w);
 
 
@@ -373,9 +448,9 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 //避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
                 isEgymNfc = true;
 
-                getBinding().cLoginEgym.setVisibility(View.VISIBLE);
-                getBinding().vBackground.setVisibility(View.VISIBLE);
-                ((MainActivity) mContext).getBinding().bgE.setVisibility(View.VISIBLE);
+                getBinding().cLoginEgym.setVisibility(VISIBLE);
+                getBinding().vBackground.setVisibility(VISIBLE);
+                ((MainActivity) mContext).getBinding().bgE.setVisibility(VISIBLE);
 
 
                 getDeviceGEM().nfcMessageEnableNfcRadio(DeviceGEM.NFC_READ_EVENT.NFC_READ);
@@ -416,8 +491,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
             getBinding().layoutEgymBottom.tvEgymApiResult.setIconTint(ContextCompat.getColorStateList(mContext, R.color.colore24b44));
 
-            getBinding().layoutEgymBottom.btnHomeE.setVisibility(View.VISIBLE);
-            getBinding().layoutEgymBottom.btnLogoutE.setVisibility(View.VISIBLE);
+            getBinding().layoutEgymBottom.btnHomeE.setVisibility(VISIBLE);
+            getBinding().layoutEgymBottom.btnLogoutE.setVisibility(VISIBLE);
 
             getBinding().layoutEgymBottom.egymProgress.setVisibility(View.INVISIBLE);
             getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(View.INVISIBLE);
@@ -501,7 +576,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             //非EGYM
             //   getBinding().layoutEgym.summaryLeftView.setVisibility(View.GONE);
             //  getBinding().gEgym.setVisibility(View.GONE);
-            getBinding().gSpirit.setVisibility(View.VISIBLE);
+            getBinding().gSpirit.setVisibility(VISIBLE);
             webApiUploadWorkoutFromMachineBean();
         }
     }
@@ -573,11 +648,11 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                     //     getBinding().layoutEgymBottom.tvEgymApiResult.setVisibility(View.VISIBLE);
 
                     getBinding().layoutEgymBottom.tvEgymLogoutTimeText.setAlpha(0f);
-                    getBinding().layoutEgymBottom.tvEgymLogoutTimeText.setVisibility(View.VISIBLE);
+                    getBinding().layoutEgymBottom.tvEgymLogoutTimeText.setVisibility(VISIBLE);
                     getBinding().layoutEgymBottom.tvEgymLogoutTimeText.animate().alpha(1f).setDuration(600).start();
 
-                    getBinding().layoutEgymBottom.btnHomeE.setVisibility(View.VISIBLE);
-                    getBinding().layoutEgymBottom.btnLogoutE.setVisibility(View.VISIBLE);
+                    getBinding().layoutEgymBottom.btnHomeE.setVisibility(VISIBLE);
+                    getBinding().layoutEgymBottom.btnLogoutE.setVisibility(VISIBLE);
                 }
 
                 Log.d(EgymUtil.TAG, "apiCreateWorkout 上傳成功: " + result);
@@ -588,8 +663,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 if (getBinding() != null) {
                     getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(View.GONE);
                     getBinding().layoutEgymBottom.egymProgress.setVisibility(View.GONE);
-                    getBinding().layoutEgymBottom.btnHomeE.setVisibility(View.VISIBLE);
-                    getBinding().layoutEgymBottom.btnLogoutE.setVisibility(View.VISIBLE);
+                    getBinding().layoutEgymBottom.btnHomeE.setVisibility(VISIBLE);
+                    getBinding().layoutEgymBottom.btnLogoutE.setVisibility(VISIBLE);
                     egymApiError();
                 }
                 Log.d(EgymUtil.TAG, "apiCreateWorkout  ErrorMsg:" + error.getMessage() + ",httpCode:" + httpCode);
@@ -648,7 +723,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         animateMarginStart(getBinding().layoutEgymBottom.mC, getBinding().layoutEgymBottom.tvEgymApiResult, 774, 32, 300);
         getBinding().layoutEgymBottom.tvEgymApiResult.setText(R.string.queued_to_sync_when_back_online);
         //    getBinding().layoutEgymBottom.tvEgymApiResult.setVisibility(View.VISIBLE);
-        getBinding().layoutEgymBottom.tvEgymLogoutTimeText.setVisibility(View.VISIBLE);
+        getBinding().layoutEgymBottom.tvEgymLogoutTimeText.setVisibility(VISIBLE);
     }
 
     //設定值
@@ -997,7 +1072,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
     Observer<Boolean> observer2 = s -> {
         if (getBinding() != null)
-            getBinding().vBackground.setVisibility(s ? View.VISIBLE : View.INVISIBLE);
+            getBinding().vBackground.setVisibility(s ? VISIBLE : View.INVISIBLE);
     };
 
 
@@ -1010,7 +1085,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 } else {
                     //    if (!isUploadDone) return;
                     if (CheckDoubleClick.isFastClick()) return;
-                    getBinding().vBackground.setVisibility(View.VISIBLE);
+                    getBinding().vBackground.setVisibility(VISIBLE);
                     m.onUserInteraction();
                     dismiss();
                 }
@@ -1020,7 +1095,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 //  if (!isUploadDone) return;
                 if (CheckDoubleClick.isFastClick()) return;
                 try {
-                    getBinding().vBackground.setVisibility(View.VISIBLE);
+                    getBinding().vBackground.setVisibility(VISIBLE);
                     dismiss();
                 } catch (Exception e) {
                     showException(e);
@@ -1036,7 +1111,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 } else {
                     if (!isUploadDone) return;
                     if (CheckDoubleClick.isFastClick()) return;
-                    getBinding().vBackground.setVisibility(View.VISIBLE);
+                    getBinding().vBackground.setVisibility(VISIBLE);
                     dismiss();
                 }
             });
@@ -1046,7 +1121,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                 if (!isUploadDone) return;
                 if (CheckDoubleClick.isFastClick()) return;
                 try {
-                    getBinding().vBackground.setVisibility(View.VISIBLE);
+                    getBinding().vBackground.setVisibility(VISIBLE);
                     dismiss();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1278,7 +1353,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
             getBinding().baseScrollView.setVisibility(View.GONE);
-            getBinding().baseScrollViewEgym.setVisibility(View.VISIBLE);
+            getBinding().baseScrollViewEgym.setVisibility(VISIBLE);
 
 
             if (MODE == ModeEnum.CT1000ENT) {
@@ -1514,7 +1589,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
             //非EGYM
-            getBinding().baseScrollView.setVisibility(View.VISIBLE);
+            getBinding().baseScrollView.setVisibility(VISIBLE);
 
             getBinding().baseScrollViewEgym.setVisibility(View.GONE);
 
@@ -1609,10 +1684,10 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
 
             if (w.avgHeartRate.get() == 0) {
-                getBinding().ivNoHr.setVisibility(View.VISIBLE);
+                getBinding().ivNoHr.setVisibility(VISIBLE);
                 getBinding().ivDiagramHeartRate.setVisibility(View.INVISIBLE);
             } else {
-                getBinding().ivDiagramHeartRate.setVisibility(View.VISIBLE);
+                getBinding().ivDiagramHeartRate.setVisibility(VISIBLE);
                 getBinding().ivNoHr.setVisibility(View.INVISIBLE);
 
                 Glide.with(getApp())

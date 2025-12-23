@@ -579,12 +579,16 @@ android:alpha="0"-->
             android:id="@+id/btnAppleWatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0"
+            android:alpha="@{AppStatusViewModel.isGem3On ? 1f : 0.5f}"
             android:background="@drawable/btn_apple_watch_xml"
             android:clickable="@{AppStatusViewModel.isGem3On}"
             app:layout_constraintEnd_toStartOf="@id/btnSamsungWatch"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />
+            android:visibility="gone" />
+<!--        app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />-->
+
+
+
 
         <!--        btnGarmin 不在就找 tvSpo2Unit -->
         <androidx.constraintlayout.widget.Barrier
@@ -619,13 +623,13 @@ android:alpha="0"-->
             android:id="@+id/btnSamsungWatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0"
+            android:alpha="@{AppStatusViewModel.isGem3On ? 1f : 0.5f}"
             android:background="@drawable/btn_samsung_watch_xml"
             android:clickable="@{AppStatusViewModel.isGem3On}"
             app:layout_constraintEnd_toStartOf="@id/barrierA"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />
-
+            android:visibility="gone"/>
+<!--            app:visibility="@{(WorkoutData.isGarminConnected || WorkoutData.isSamsungWatchEnabled || WorkoutData.isAppleWatchEnabled || AppStatusViewModel.currentStatus == status.STATUS_RUNNING || AppStatusViewModel.currentStatus == status.STATUS_MAINTENANCE || AppStatusViewModel.currentStatus == status.STATUS_PAUSE) ? View.GONE : View.VISIBLE}" />-->
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSamsungWatchEnabled"

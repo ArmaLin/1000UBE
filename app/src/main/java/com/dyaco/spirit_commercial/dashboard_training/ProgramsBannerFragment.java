@@ -77,6 +77,10 @@ public class ProgramsBannerFragment extends BaseBindingFragment<FragmentPrograms
        //     appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
 
             if (MODE.isStepperType()) {
+                if (programId == R.id.btn_manual) {
+                    appStatusViewModel.changeMainButtonType(START_THIS_PROGRAM);
+                }
+
                 if (programId == R.id.btn_Calories) {// stepper >>>> CUSTOM
                     appStatusViewModel.changeMainButtonType(CHOOSE);
                 }

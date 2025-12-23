@@ -818,5 +818,16 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="target_mets">Target METs</string>
     <string name="body_weight">Body Weight</string>
     <string name="Force">Force</string>
-    <!--    <string name="to_sync_your_workout_data_please_log_in">To sync your workout data, please <span style='color:#1396ef;'><b>Log In</b></span></string>-->
+    <string name="Peak_Power">Peak Power</string>
+    <string name="Peak_Energy">Peak Energy</string>
+    <string name="Peak_Relative_Energy">Peak Relative Energy</string>
+    <string name="Peak_Relative_Power">Peak Relative Power</string>
+    <string name="joules">joules</string>
+    <string name="watts_kg">watts/kg</string>
+    <string name="joules_kg">joules/kg</string>
+    <string name="Avg_Energy">Avg Energy</string>
+    <string name="Avg_Relative_Power">Avg Relative Power</string>
+    <string name="Avg_Relative_Energy">Avg Relative Energy</string>
+    <string name="Your_Fatigue_Index">Your Fatigue Index</string>
+    <string name="per_sec">per sec</string>
 </resources>

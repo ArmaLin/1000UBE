@@ -112,6 +112,8 @@ public class WingateProg implements IPrograms {
         }
 
 
+        // TODO: update watts
+
     }
 
     @Override

@@ -53,6 +53,7 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HEART_RA
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HIIT;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WINGATE_TEST;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -188,7 +189,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
             if (MODE != ModeEnum.CT1000ENT) {
                 //EGYM BIKE
-            //    new RxTimer().timer(1000, number -> updateDiagramBarNumCadence());
+                //    new RxTimer().timer(1000, number -> updateDiagramBarNumCadence());
 
                 w.currentRpm.addOnPropertyChangedCallback(rpmCallback);
 
@@ -230,6 +231,10 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         //  diagramBarsView.setBarWidth(currentProgram != GERKIN ? BAR_WIDTH_NORMAL : BAR_WIDTH_GERKIN);
 
         int barMaxLevel = (int) (getFloat(getMaxSpeedValue(currentProgram)) > 0 ? getMaxSpeedValue(currentProgram) + 1 : getMaxSpeedValue(currentProgram));
+
+        if (currentProgram == WINGATE_TEST) {
+            barMaxLevel = 1200;
+        }
 
         Log.d("PPEPEPEPFPE", "initDiagram: " + barMaxLevel);
 
@@ -522,7 +527,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     }
 
                     if (chartMsgSpeedWindow == null) {
-                        chartMsgSpeedWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type);
+                        chartMsgSpeedWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type,currentProgram);
                         chartMsgSpeedWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgSpeedWindow.getWidth()), makeDropDownMeasureSpec(chartMsgSpeedWindow.getHeight()));
                         msgWidth = chartMsgSpeedWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -530,7 +535,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                         chartMsgSpeedWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.START | Gravity.TOP, x, y);
 
                     } else {
-                        chartMsgSpeedWindow.setMsgType(type, bar.getLevel());
+                        chartMsgSpeedWindow.setMsgType(type, bar.getLevel(),currentProgram);
 
                         msgWidth = chartMsgSpeedWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -555,7 +560,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     }
 
                     if (chartMsgInclineWindow == null) {
-                        chartMsgInclineWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type);
+                        chartMsgInclineWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type,currentProgram);
                         chartMsgInclineWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgInclineWindow.getWidth()), makeDropDownMeasureSpec(chartMsgInclineWindow.getHeight()));
                         msgWidth = chartMsgInclineWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -563,7 +568,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                         chartMsgInclineWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.START | Gravity.TOP, x, y);
 
                     } else {
-                        chartMsgInclineWindow.setMsgType(type, bar.getLevel());
+                        chartMsgInclineWindow.setMsgType(type, bar.getLevel(),currentProgram);
 
                         msgWidth = chartMsgInclineWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -596,7 +601,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         int currentIncline = w.currentInclineLevel.get();
         int newCurrentIncline = currentIncline + (updateInclineNum);
 
-     //   Log.d("@@@@@@@@@@", "updateInclineNum: " + currentIncline + "," + updateInclineNum);
+        //   Log.d("@@@@@@@@@@", "updateInclineNum: " + currentIncline + "," + updateInclineNum);
         //ftms 傳同階回成功
         if (currentIncline == newCurrentIncline) {
             parentFragment.ftmsResponse(SET_TARGET_INCLINATION, SUCCESS);
@@ -1028,7 +1033,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
     private void showNotifyWindow(@GENERAL.barType int type, int updateNum) {
 
         if (type == BAR_TYPE_INCLINE) {
-        //    Log.d("VVCCSS", "showNotifyWindow: " + appStatusViewModel.currentPage.get());
+            //    Log.d("VVCCSS", "showNotifyWindow: " + appStatusViewModel.currentPage.get());
             //上面的在Media時才顯示
             if ((appStatusViewModel.currentPage.get() == AppStatusIntDef.CURRENT_PAGE_MEDIA || appStatusViewModel.isMediaPlaying.get()) && w.selProgram != HEART_RATE) {
                 int drawableRes2 = updateNum > 0 ? R.drawable.bg_control_center_increase : R.drawable.bg_control_center_decrease;
@@ -1485,7 +1490,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     chartMsgStageWindow = null;
                 }
                 DiagramBarsView.Bar bar = diagramBarsView.getBar(BAR_TYPE_BLANK, w.currentSegment.get());
-                chartMsgStageWindow = new ChartMsgWindow(requireActivity(), w.currentStage.get(), BAR_TYPE_BLANK);
+                chartMsgStageWindow = new ChartMsgWindow(requireActivity(), w.currentStage.get(), BAR_TYPE_BLANK,currentProgram);
                 chartMsgStageWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgStageWindow.getWidth()), makeDropDownMeasureSpec(chartMsgStageWindow.getHeight()));
                 int msgWidth = chartMsgStageWindow.getContentView().getMeasuredWidth();
 
@@ -1528,6 +1533,30 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
             Log.d("PPPOOEEEE", "hidden: " + hidden);
         }
+    }
+
+
+    public boolean updateWattChart(int updateSpeedLevel) {
+
+        //  int currentSpeedLevel = isTreadmill ? w.currentSpeedLevel.get() : Math.round(w.currentLevel.get());
+        int currentSpeedLevel;
+
+        currentSpeedLevel = isTreadmill ? w.currentSpeedLevel.get() : Math.round(w.currentLevel.get());
+
+        int newCurrentSpeedLevel = currentSpeedLevel + (updateSpeedLevel);
+
+        if (newCurrentSpeedLevel <= 0) return false;
+
+
+        //ftms 同階 回成功
+        if (currentSpeedLevel == newCurrentSpeedLevel) {
+            parentFragment.ftmsResponse(isTreadmill ? SET_TARGET_SPEED : SET_TARGET_RESISTANCE_LEVEL, SUCCESS);
+            return false;
+        }
+
+
+        return updateSpeedChart(newCurrentSpeedLevel, updateSpeedLevel);
+
     }
 
 }
