@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.UNIT_E;
@@ -363,7 +364,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
             getBinding().tvP2Text.setText(formatDecimal((float) m.calculation.getWingate_JouleMax()));
             getBinding().tvP2Unit.setText(R.string.joules);
-            getBinding().tvP2UnitText.setText(R.string.Peak_Power);
+            getBinding().tvP2UnitText.setText(R.string.Peak_Energy);
             getBinding().ivP2.setImageResource(R.drawable.icon_calories_32);
 
             getBinding().tvP3Text.setText(formatDecimal((float) m.calculation.getWingate_WattMax_kg()));
@@ -424,6 +425,10 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             getBinding().viewScoreTextNum.setText(formatDecimal(m.calculation.getWingate_FatigueIndex(),1));
             getBinding().tvResult.setText("");
 
+
+            getBinding().viewSpeedAndLevel.setVisibility(GONE);
+            getBinding().ivDiagramSpeedAndLevel.setVisibility(GONE);
+
         }
     }
 
@@ -467,9 +472,9 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
                     //避免 Apple Watch 開啟 NFC 時 被 EGYM 登入
                     isEgymNfc = false;
                     isLogin = false;
-                    getBinding().cLoginEgym.setVisibility(View.GONE);
-                    getBinding().vBackground.setVisibility(View.GONE);
-                    ((MainActivity) mContext).getBinding().bgE.setVisibility(View.GONE);
+                    getBinding().cLoginEgym.setVisibility(GONE);
+                    getBinding().vBackground.setVisibility(GONE);
+                    ((MainActivity) mContext).getBinding().bgE.setVisibility(GONE);
                     getDeviceGEM().nfcMessageDisableNfcRadio();
                 }
             });
@@ -525,7 +530,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             getBinding().layoutEgym.setIsTreadmill(isTreadmill);
             //  getBinding().gEgym.setVisibility(View.VISIBLE);
             //    getBinding().layoutEgym.summaryLeftView.setVisibility(View.VISIBLE);
-            getBinding().gSpirit.setVisibility(View.GONE);
+            getBinding().gSpirit.setVisibility(GONE);
 
 
             //Egym Heart Rate Diagram
@@ -641,8 +646,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             @Override
             public void onSuccess(String result) {
                 if (getBinding() != null) {
-                    getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(View.GONE);
-                    getBinding().layoutEgymBottom.egymProgress.setVisibility(View.GONE);
+                    getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(GONE);
+                    getBinding().layoutEgymBottom.egymProgress.setVisibility(GONE);
 
                     animateMarginStart(getBinding().layoutEgymBottom.mC, getBinding().layoutEgymBottom.tvEgymApiResult, 774, 32, 300);
                     //     getBinding().layoutEgymBottom.tvEgymApiResult.setVisibility(View.VISIBLE);
@@ -661,8 +666,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             @Override
             public void onFail(Throwable error, Integer httpCode) {
                 if (getBinding() != null) {
-                    getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(View.GONE);
-                    getBinding().layoutEgymBottom.egymProgress.setVisibility(View.GONE);
+                    getBinding().layoutEgymBottom.btnEgymSyncText.setVisibility(GONE);
+                    getBinding().layoutEgymBottom.egymProgress.setVisibility(GONE);
                     getBinding().layoutEgymBottom.btnHomeE.setVisibility(VISIBLE);
                     getBinding().layoutEgymBottom.btnLogoutE.setVisibility(VISIBLE);
                     egymApiError();
@@ -1352,7 +1357,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         if (w.selProgram == ProgramsEnum.EGYM) {
 
 
-            getBinding().baseScrollView.setVisibility(View.GONE);
+            getBinding().baseScrollView.setVisibility(GONE);
             getBinding().baseScrollViewEgym.setVisibility(VISIBLE);
 
 
@@ -1591,7 +1596,7 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
             //非EGYM
             getBinding().baseScrollView.setVisibility(VISIBLE);
 
-            getBinding().baseScrollViewEgym.setVisibility(View.GONE);
+            getBinding().baseScrollViewEgym.setVisibility(GONE);
 
 //
 //            //已跑過的 Resistance LEVEL
@@ -1706,8 +1711,8 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
         getDeviceGEM().nfcMessageDisableNfcRadio();
         isEgymNfc = false;
         isLogin = false;
-        getBinding().cLoginEgym.setVisibility(View.GONE);
-        ((MainActivity) mContext).getBinding().bgE.setVisibility(View.GONE);
+        getBinding().cLoginEgym.setVisibility(GONE);
+        ((MainActivity) mContext).getBinding().bgE.setVisibility(GONE);
         if (EgymUtil.getInstance().termsAndConditionsWindow != null) {
             EgymUtil.getInstance().termsAndConditionsWindow.dismiss();
             EgymUtil.getInstance().termsAndConditionsWindow = null;

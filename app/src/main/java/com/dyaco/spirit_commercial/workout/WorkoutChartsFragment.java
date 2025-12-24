@@ -376,7 +376,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
     boolean isFirst = true;
 
     public void updateDiagramBarNum(@GENERAL.chartUpdateType int updateType, boolean isFlow) {
-
+        Log.d("WWINNNNNNN", "updateDiagramBarNum: ");
 
         int xi = 0;
         for (int i = 0; i < w.orgArraySpeedAndLevel.length; i++) {
@@ -527,7 +527,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     }
 
                     if (chartMsgSpeedWindow == null) {
-                        chartMsgSpeedWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type,currentProgram);
+                        chartMsgSpeedWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type, currentProgram);
                         chartMsgSpeedWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgSpeedWindow.getWidth()), makeDropDownMeasureSpec(chartMsgSpeedWindow.getHeight()));
                         msgWidth = chartMsgSpeedWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -535,7 +535,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                         chartMsgSpeedWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.START | Gravity.TOP, x, y);
 
                     } else {
-                        chartMsgSpeedWindow.setMsgType(type, bar.getLevel(),currentProgram);
+                        chartMsgSpeedWindow.setMsgType(type, bar.getLevel(), currentProgram);
 
                         msgWidth = chartMsgSpeedWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -560,7 +560,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     }
 
                     if (chartMsgInclineWindow == null) {
-                        chartMsgInclineWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type,currentProgram);
+                        chartMsgInclineWindow = new ChartMsgWindow(requireActivity(), bar.getLevel(), type, currentProgram);
                         chartMsgInclineWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgInclineWindow.getWidth()), makeDropDownMeasureSpec(chartMsgInclineWindow.getHeight()));
                         msgWidth = chartMsgInclineWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -568,7 +568,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                         chartMsgInclineWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.START | Gravity.TOP, x, y);
 
                     } else {
-                        chartMsgInclineWindow.setMsgType(type, bar.getLevel(),currentProgram);
+                        chartMsgInclineWindow.setMsgType(type, bar.getLevel(), currentProgram);
 
                         msgWidth = chartMsgInclineWindow.getContentView().getMeasuredWidth();
                         x = Math.round((bar.getBarLocation().getX() + viewX) - Math.abs(msgWidth - BAR_WIDTH_NORMAL) / 2);
@@ -1168,10 +1168,20 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         int res;
         if (status == BAR_STATUS_SEGMENT_PENDING) {
             res = barType == BAR_TYPE_INCLINE ? R.color.color_incline_bar_end : R.color.color_level_speed_bar_end;
+            if (currentProgram == WINGATE_TEST) {
+                res = R.color.color_watt_bar_end;
+            }
         } else if (status == BAR_STATUS_SEGMENT_RUNNING) {
             res = barType == BAR_TYPE_INCLINE ? R.color.color_incline_bar_run : R.color.color_level_speed_bar_run;
+            if (currentProgram == WINGATE_TEST) {
+                res = R.color.color_watt_bar_run;
+            }
         } else {
             res = barType == BAR_TYPE_INCLINE ? R.color.color_incline_bar_run : R.color.color_level_speed_bar_run;
+
+            if (currentProgram == WINGATE_TEST) {
+                res = R.color.color_watt_bar_run;
+            }
         }
         return res;
     }
@@ -1308,7 +1318,11 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     }
                 }
 
-                updateDiagramBarNum(isTreadmill ? UPDATE_ALL_BAR : UPDATE_SPEED_BAR, true);
+                if (currentProgram == WINGATE_TEST) {
+                    updateDiagramWatt(UPDATE_SPEED_BAR,true);
+                } else {
+                    updateDiagramBarNum(isTreadmill ? UPDATE_ALL_BAR : UPDATE_SPEED_BAR, true);
+                }
 
 
                 if (isTreadmill) {
@@ -1490,7 +1504,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     chartMsgStageWindow = null;
                 }
                 DiagramBarsView.Bar bar = diagramBarsView.getBar(BAR_TYPE_BLANK, w.currentSegment.get());
-                chartMsgStageWindow = new ChartMsgWindow(requireActivity(), w.currentStage.get(), BAR_TYPE_BLANK,currentProgram);
+                chartMsgStageWindow = new ChartMsgWindow(requireActivity(), w.currentStage.get(), BAR_TYPE_BLANK, currentProgram);
                 chartMsgStageWindow.getContentView().measure(makeDropDownMeasureSpec(chartMsgStageWindow.getWidth()), makeDropDownMeasureSpec(chartMsgStageWindow.getHeight()));
                 int msgWidth = chartMsgStageWindow.getContentView().getMeasuredWidth();
 
@@ -1536,27 +1550,71 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
     }
 
 
-    public boolean updateWattChart(int updateSpeedLevel) {
+    public void updateWattChart(int updateWatt) {
+//        Log.d("WWINNNNNNN", "11111updateWattChart: " + updateWatt);
+        if (updateWatt == w.currentPower.get()) return;
 
-        //  int currentSpeedLevel = isTreadmill ? w.currentSpeedLevel.get() : Math.round(w.currentLevel.get());
-        int currentSpeedLevel;
-
-        currentSpeedLevel = isTreadmill ? w.currentSpeedLevel.get() : Math.round(w.currentLevel.get());
-
-        int newCurrentSpeedLevel = currentSpeedLevel + (updateSpeedLevel);
-
-        if (newCurrentSpeedLevel <= 0) return false;
+        if (updateWatt <= 0 || updateWatt >= 1200) return;
 
 
-        //ftms 同階 回成功
-        if (currentSpeedLevel == newCurrentSpeedLevel) {
-            parentFragment.ftmsResponse(isTreadmill ? SET_TARGET_SPEED : SET_TARGET_RESISTANCE_LEVEL, SUCCESS);
-            return false;
+        w.currentPower.set(updateWatt);
+        Log.d("WWINNNNNNN", "222222updateWattChart: " + updateWatt);
+
+
+        //MANUAL 當前及之後Segment的CurrentSpeed 變一樣
+        for (int i = 0; i < diagramBarsView.getBarCount(); i++) {
+            DiagramBarBean diagramBean = w.speedDiagramBarList.get(i);
+            if (diagramBean.getBarStatus() == BAR_STATUS_SEGMENT_RUNNING || diagramBean.getBarStatus() == BAR_STATUS_SEGMENT_PENDING) {
+                diagramBean.setBarNum(updateWatt);
+
+            }
         }
 
+        //更新圖
 
-        return updateSpeedChart(newCurrentSpeedLevel, updateSpeedLevel);
+        updateDiagramWatt(UPDATE_SPEED_BAR, false);
+        //Show Notify
+        showBarMsg(diagramBarsView.getBar(BAR_TYPE_LEVEL_SPEED, w.currentSegment.get()), BAR_TYPE_LEVEL_SPEED);
 
     }
+
+
+    public void updateDiagramWatt(@GENERAL.chartUpdateType int updateType, boolean isFlow) {
+
+
+        int xi = 0;
+        for (int i = 0; i < w.orgArraySpeedAndLevel.length; i++) {
+
+            DiagramBarBean diagramBarBlankBean = w.blankDiagramBarList.get(i);
+
+            DiagramBarBean diagramBarInclineBean = w.inclineDiagramBarList.get(i);
+
+            //設定圖時 跳過warmup 和 cooldown
+            if (currentProgram != HIIT && diagramBarInclineBean.getBarK() != 0) continue;
+
+            diagramBarsView.setBarLevel(diagramBarInclineBean.getBarType(), xi, diagramBarInclineBean.getBarNum());
+            diagramBarsView.setBarColor(diagramBarInclineBean.getBarType(), xi, getBarColorFormStatus(diagramBarInclineBean.getBarType(), diagramBarInclineBean.getBarStatus()));
+
+            diagramBarsView.setBarLevel(BAR_TYPE_BLANK, xi, diagramBarBlankBean.getBarStatus() == BAR_STATUS_SEGMENT_BLANK ? diagramBarsView.getBarMaxLevel() : 0);
+            diagramBarsView.setBarColor(BAR_TYPE_BLANK, xi, R.color.color_bar_blank);
+
+            //SPEED BAR
+            DiagramBarBean diagramBarSpeedBean = w.speedDiagramBarList.get(i);
+
+            //設定圖時 跳過warmup 和 cooldown
+            if (currentProgram != HIIT && diagramBarSpeedBean.getBarK() != 0) continue;
+
+            diagramBarsView.setBarLevel(diagramBarSpeedBean.getBarType(), xi, diagramBarSpeedBean.getBarNum());
+            diagramBarsView.setBarColor(diagramBarSpeedBean.getBarType(), xi, getBarColorFormStatus(diagramBarSpeedBean.getBarType(), diagramBarSpeedBean.getBarStatus()));
+
+
+
+            diagramBarsView.setBarLevel(BAR_TYPE_BLANK, xi, diagramBarBlankBean.getBarStatus() == BAR_STATUS_SEGMENT_BLANK ? diagramBarsView.getBarMaxLevel() : 0);
+            diagramBarsView.setBarColor(BAR_TYPE_BLANK, xi, R.color.color_bar_blank);
+
+            xi++;
+        }
+    }
+
 
 }

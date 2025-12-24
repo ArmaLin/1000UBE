@@ -446,9 +446,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         setFtmsEquipmentType(true);
 
-        initProgramData();
+//        initProgramData();
 
         initFragment();
+
+        initProgramData();
 
         initEvent();
 
@@ -2806,7 +2808,10 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
 
 //        w.avgPace.set(calc.getPaceAverage());
-        w.currentPower.set(calc.getWatt());
+
+        if (w.selProgram != WINGATE_TEST) {
+            w.currentPower.set(calc.getWatt());
+        }
         //     Timber.tag("WWWWEEEERRRRR").d("WATT: " + calc.getWatt());
 
 
@@ -2907,7 +2912,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new METsProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
                 break;
             case WINGATE_TEST:
-                iPrograms = new WingateProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
+                iPrograms = new WingateProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc,workoutChartsFragment);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);

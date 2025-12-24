@@ -88,6 +88,7 @@ public class GENERAL {
     public static final int BAR_TYPE_INCLINE = 1;
     public static final int BAR_TYPE_LEVEL_SPEED = 2;
     public static final int BAR_TYPE_BLANK = 3;
+    public static final int BAR_TYPE_WATT = 4;
     public static final int UPDATE_ALL_BAR = 0;
     public static final int UPDATE_INCLINE_BAR = 1;
     public static final int UPDATE_SPEED_BAR = 2;

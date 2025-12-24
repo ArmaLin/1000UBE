@@ -28,16 +28,18 @@ public class WingateProg implements IPrograms {
     int weightInKg;
     MainActivity mainActivity;
     Calculation calc;
+    WorkoutChartsFragment c;
     int levelllll;
 
     int watt5;
 
-    public WingateProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity, Calculation calc) {
+    public WingateProg(WorkoutViewModel workoutViewModel, MainWorkoutTrainingFragment mainWorkoutTrainingFragment, int weightInKg, MainActivity mainActivity, Calculation calc,WorkoutChartsFragment c) {
         this.w = workoutViewModel;
         this.m = mainWorkoutTrainingFragment;
         this.weightInKg = weightInKg;
         this.mainActivity = mainActivity;
         this.calc = calc;
+        this.c = c;
     }
 
     @Override
@@ -111,7 +113,7 @@ public class WingateProg implements IPrograms {
             watt5 = 0;
         }
 
-
+        c.updateWattChart(calc.getWatt());
         // TODO: update watts
 
     }

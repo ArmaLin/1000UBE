@@ -119,6 +119,8 @@
     <color name="color_incline_bar_end">#4DCD5BfF</color>
     <color name="color_level_speed_bar_run">#999600FA</color>
     <color name="color_incline_bar_run">#99CD5BFF</color>
+    <color name="color_watt_bar_run">#99FFD66D</color>
+    <color name="color_watt_bar_end">#4dFFD66D</color>
     <color name="color_bar_blank">#26FFFFFF</color>
     <color name="colorFF715e_60">#99FF715e</color>
     <color name="colorFF715e">#FF715e</color>
