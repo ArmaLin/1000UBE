@@ -4,7 +4,6 @@ import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.setBikeLevelDiagram;
 import static com.dyaco.spirit_commercial.support.intdef.WorkoutIntDef.UNLIMITED;
 
-import android.util.Log;
 import android.view.View;
 
 import com.corestar.calculation_libs.Calculation;
@@ -17,6 +16,8 @@ import com.dyaco.spirit_commercial.workout.WorkoutStatsFragment;
 
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
+
+import timber.log.Timber;
 
 /**
  * Target :
@@ -62,19 +63,20 @@ public class WingateProg implements IPrograms {
     @Override
     public void init() {
 
-        Log.d("WWINNNNNNN", "selTime: " + w.selWorkoutTime.get());
-        Log.d("WWINNNNNNN", "selForce: " + w.selForce.get());
-        Log.d("WWINNNNNNN", "selWeightMU: " + w.selWeightMU.get());
+        Timber.tag("WWINNNNNNN").d("selTime: " + w.selWorkoutTime.get());
+        Timber.tag("WWINNNNNNN").d("selForce: " + w.selForce.get());
+        Timber.tag("WWINNNNNNN").d("selWeightMU: " + w.selWeightMU.get());
 
 
         levelllll = App.MODE.getLevelViaPowerAndRpm((int) (w.selForce.get() * 60), 60);
 
-        Log.d("WWINNNNNNN", "#######LEVEL: " + levelllll);
+        Timber.tag("WWINNNNNNN").d("#######LEVEL: " + levelllll);
         //MaxIncline給最大值
       //  m.hideBtnSkip();
 
 //        w.warmUpTime.set(60 * 5);
         w.warmUpTime.set(60 * 5);
+//        w.warmUpTime.set(5);
         w.coolDownTime.set(0);
         m.setMaxInclineMax();
 
@@ -102,7 +104,7 @@ public class WingateProg implements IPrograms {
         int t = w.elapsedTime.get();
 
         if (t == 1) {
-            m.updateSpeedOrLevelNum(levelllll, true);
+//            m.updateSpeedOrLevelNum(levelllll, true);
             watt5 = 0;
         }
 

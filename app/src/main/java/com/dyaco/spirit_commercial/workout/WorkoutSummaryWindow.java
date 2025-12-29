@@ -344,16 +344,16 @@ public class WorkoutSummaryWindow extends BasePopupWindow<WindowWorkoutSummaryBi
 
         if (w.selProgram == ProgramsEnum.WINGATE_TEST) {
             m.calculation.setWingateWatt(w.wingateWattsList);
-            Log.d("WWINNNNNNN", "WorkoutSummaryWindow: " + w.wingateWattsList);
-            Log.d("WWINNNNNNN", "wattMax: " + m.calculation.getWingate_WattMax());
-            Log.d("WWINNNNNNN", "wattMax_kg: " + m.calculation.getWingate_WattMax_kg());
-            Log.d("WWINNNNNNN", "wattAvg: " + m.calculation.getWingate_WattAvg());
-            Log.d("WWINNNNNNN", "wattAvg_kg: " + m.calculation.getWingate_WattAvg_kg());
-            Log.d("WWINNNNNNN", "jouleMax: " + m.calculation.getWingate_JouleMax());
-            Log.d("WWINNNNNNN", "jouleAvg: " + m.calculation.getWingate_JouleAvg());
-            Log.d("WWINNNNNNN", "jouleMax_kg: " + m.calculation.getWingate_JouleMax_kg());
-            Log.d("WWINNNNNNN", "jouleAvg_kg: " + m.calculation.getWingate_JouleAvg_kg());
-            Log.d("WWINNNNNNN", "fatigueIndex: " + m.calculation.getWingate_FatigueIndex());
+//            Log.d("WWINNNNNNN", "WorkoutSummaryWindow: " + w.wingateWattsList);
+//            Log.d("WWINNNNNNN", "wattMax: " + m.calculation.getWingate_WattMax());
+//            Log.d("WWINNNNNNN", "wattMax_kg: " + m.calculation.getWingate_WattMax_kg());
+//            Log.d("WWINNNNNNN", "wattAvg: " + m.calculation.getWingate_WattAvg());
+//            Log.d("WWINNNNNNN", "wattAvg_kg: " + m.calculation.getWingate_WattAvg_kg());
+//            Log.d("WWINNNNNNN", "jouleMax: " + m.calculation.getWingate_JouleMax());
+//            Log.d("WWINNNNNNN", "jouleAvg: " + m.calculation.getWingate_JouleAvg());
+//            Log.d("WWINNNNNNN", "jouleMax_kg: " + m.calculation.getWingate_JouleMax_kg());
+//            Log.d("WWINNNNNNN", "jouleAvg_kg: " + m.calculation.getWingate_JouleAvg_kg());
+//            Log.d("WWINNNNNNN", "fatigueIndex: " + m.calculation.getWingate_FatigueIndex());
             getBinding().executePendingBindings();
 
             getBinding().tvP1Text.setText(formatDecimal((float) m.calculation.getWingate_WattMax()));

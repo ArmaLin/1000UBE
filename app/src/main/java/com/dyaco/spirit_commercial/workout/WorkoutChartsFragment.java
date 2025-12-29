@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static android.view.View.VISIBLE;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_INCLINATION;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_RESISTANCE_LEVEL;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_SPEED;
@@ -59,9 +60,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.Observable;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -152,6 +155,57 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
         //從InitTimer啟動
 //        updateDiagramBarNum(isTreadmill ? UPDATE_ALL_BAR : UPDATE_SPEED_BAR, false);
+
+
+        getBinding().executePendingBindings();
+
+        // 檢查是否為 WINGATE_TEST
+        if (w.selProgram == WINGATE_TEST) {
+            updateChartLayoutSize();
+        }
+    }
+
+
+    private void updateChartLayoutSize() {
+
+
+        getBinding().bgWingateBottom.setVisibility(VISIBLE);
+        getBinding().tvWingateBottom.setVisibility(VISIBLE);
+
+        ConstraintLayout chartLayout = getBinding().viewChartLayout;
+
+        ViewGroup.LayoutParams params = chartLayout.getLayoutParams();
+
+        if (params != null) {
+//                params.width = width;
+//                params.height = height;
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+
+            chartLayout.setLayoutParams(params);
+        }
+
+
+        View touchBarView = getBinding().touchBarView;
+        ViewGroup.MarginLayoutParams touchBarViewParams =
+                (ViewGroup.MarginLayoutParams) touchBarView.getLayoutParams();
+
+        if (params != null) {
+            // 設定長寬
+//            touchBarViewParams.width = width;
+//            touchBarViewParams.height = height;
+
+            // 設定上下左右邊距 (順序：左、上、右、下)
+            touchBarViewParams.setMargins(0, 600, 0, 80);
+
+            touchBarView.setLayoutParams(touchBarViewParams);
+
+
+            OPT_SETTINGS.viewX = 312;
+            OPT_SETTINGS.viewY = 720;
+        }
+
+
     }
 
 
@@ -163,7 +217,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
             getBinding().touchBarView.setVisibility(View.GONE);
             getBinding().bbbbbb.setVisibility(View.GONE);
-            getBinding().egymDiagramBarsView.setVisibility(View.VISIBLE);
+            getBinding().egymDiagramBarsView.setVisibility(VISIBLE);
 
 
             initEgymWorkoutData(egymDataViewModel);
@@ -376,7 +430,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
     boolean isFirst = true;
 
     public void updateDiagramBarNum(@GENERAL.chartUpdateType int updateType, boolean isFlow) {
-        Log.d("WWINNNNNNN", "updateDiagramBarNum: ");
+        //    Log.d("WWINNNNNNN", "updateDiagramBarNum: ");
 
         int xi = 0;
         for (int i = 0; i < w.orgArraySpeedAndLevel.length; i++) {
@@ -1319,7 +1373,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                 }
 
                 if (currentProgram == WINGATE_TEST) {
-                    updateDiagramWatt(UPDATE_SPEED_BAR,true);
+                    updateDiagramWatt(UPDATE_SPEED_BAR, true);
                 } else {
                     updateDiagramBarNum(isTreadmill ? UPDATE_ALL_BAR : UPDATE_SPEED_BAR, true);
                 }
@@ -1558,7 +1612,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
 
         w.currentPower.set(updateWatt);
-        Log.d("WWINNNNNNN", "222222updateWattChart: " + updateWatt);
+        //    Log.d("WWINNNNNNN", "222222updateWattChart: " + updateWatt);
 
 
         //MANUAL 當前及之後Segment的CurrentSpeed 變一樣
@@ -1606,7 +1660,6 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
             diagramBarsView.setBarLevel(diagramBarSpeedBean.getBarType(), xi, diagramBarSpeedBean.getBarNum());
             diagramBarsView.setBarColor(diagramBarSpeedBean.getBarType(), xi, getBarColorFormStatus(diagramBarSpeedBean.getBarType(), diagramBarSpeedBean.getBarStatus()));
-
 
 
             diagramBarsView.setBarLevel(BAR_TYPE_BLANK, xi, diagramBarBlankBean.getBarStatus() == BAR_STATUS_SEGMENT_BLANK ? diagramBarsView.getBarMaxLevel() : 0);

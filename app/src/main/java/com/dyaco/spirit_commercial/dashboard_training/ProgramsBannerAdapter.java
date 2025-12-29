@@ -71,6 +71,8 @@ import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 import java.util.ArrayList;
 import java.util.List;
 
+import timber.log.Timber;
+
 
 public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerView.ViewHolder> {
     Context context;
@@ -302,7 +304,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             if (forceIndex < 0) forceIndex = 0;
             if (forceIndex >= listForce.size()) forceIndex = listForce.size() - 1;
 
-            Log.d("WWINNNNNNN", "體重(KG): " + weightInKg + " -> 建議阻力(KG): " + String.format("%.2f", targetForceKg) + " -> Index: " + forceIndex);
+            Timber.tag("WWINNNNNNN").d("體重(KG): " + weightInKg + " -> 建議阻力(KG): " + targetForceKg + " -> Index: " + forceIndex);
 
             // 平滑滾動
             forcePicker.setOpt1SelectedPosition(forceIndex, true);
@@ -409,7 +411,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             }
 
 
-            Log.d("WWINNNNNNN", "時間: " + workoutViewModel.selWorkoutTime.get());
+            Timber.tag("WWINNNNNNN").d("時間: " + workoutViewModel.selWorkoutTime.get());
         });
 
         wTimePicker.setOpt1SelectedPosition((WINGATE_TIME_DFT - WINGATE_TIME_MIN) / WINGATE_TIME_INC, false);

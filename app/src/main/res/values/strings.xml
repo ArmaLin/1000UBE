@@ -830,4 +830,6 @@ Saturday 10:00—15:00 Sunday Closed Sorry for any inconvinience. If you have an
     <string name="Avg_Relative_Energy">Avg Relative Energy</string>
     <string name="Your_Fatigue_Index">Your Fatigue Index</string>
     <string name="per_sec">per sec</string>
+    <string name="pedal_as_fast_as_you_can_in">Pedal <font fgcolor='#E24B43'>as fast as you can</font> in</string>
+    <string name="pedal_as_fast_as_you_can">Pedal as fast as you can</string>
 </resources>

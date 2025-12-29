@@ -1,5 +1,6 @@
 package com.dyaco.spirit_commercial.workout;
 
+import static android.view.View.GONE;
 import static androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_INCLINATION;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_SPEED;
@@ -338,6 +339,15 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         OPT_SETTINGS.viewY = isUs && !isGGG ? 280 : 254;
 
 
+        // TODO: WWINNNNNNN
+        if (w.selProgram == WINGATE_TEST) { //824
+            params.setMargins(312, 40, 312, 40);
+            getBinding().workoutFragmentContainerView.setLayoutParams(params);
+//            OPT_SETTINGS.viewX = 312;
+//            OPT_SETTINGS.viewY = 280;
+        }
+
+
         Glide.with(getApp())
                 .load(drawableRs[n])
                 .transition(DrawableTransitionOptions.withCrossFade(1500))
@@ -569,7 +579,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             getBinding().phRightTopControllerUs.setContentId(R.id.speed_controller_us);
         } else {
 
-            getBinding().speedControllerUs.setVisibility(View.GONE);
+            getBinding().speedControllerUs.setVisibility(GONE);
 
             getBinding().phRightTopControllerUs.setContentId(R.id.cStatsUs);
 
@@ -593,12 +603,12 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         //Skip
         //   getBinding().btnSkipUs.setVisibility(View.VISIBLE);
 
-        getBinding().btnSkip.setVisibility(View.GONE);
+        getBinding().btnSkip.setVisibility(GONE);
         // getBinding().warmUpAndCoolDownTitle.setVisibility(View.GONE);
 
 
         if (w.disabledSpeedUpdate.get()) {
-            getBinding().btnCoolDownUs.setVisibility(View.GONE);
+            getBinding().btnCoolDownUs.setVisibility(GONE);
         }
 
         getBinding().btnWorkoutStopUs.setOnClickListener(new View.OnClickListener() {
@@ -684,6 +694,35 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         getBinding().btnWorkoutStopUs.setLayoutParams(layoutParams);
     }
 
+
+    // TODO: WWINNNNNNN
+    public void showWingateStop() {
+        ViewGroup.LayoutParams layoutParams = getBinding().btnWorkoutStopUs.getLayoutParams();
+        layoutParams.height = 824;
+        getBinding().btnWorkoutStopUs.setLayoutParams(layoutParams);
+
+
+        getBinding().cTopNumberUs.setVisibility(GONE);
+        getBinding().cBottomNumberUs.setVisibility(GONE);
+
+        getBinding().phLeftStatsTreadmillUs.setVisibility(GONE);
+        getBinding().phRightTopControllerUs.setVisibility(GONE);
+
+        getBinding().cStatsUs.setVisibility(GONE);
+
+        getBinding().rgStatss.setVisibility(GONE);
+
+        getBinding().cStatsUsNoView.setVisibility(GONE);
+        getBinding().cStatsUsNoViewBike.setVisibility(GONE);
+        getBinding().tvTopTextUs.setVisibility(GONE);
+        getBinding().tvBottomTextUs.setVisibility(GONE);
+        getBinding().vBottomUs1.setVisibility(GONE);
+        getBinding().vBottomUs2.setVisibility(GONE);
+        getBinding().vTopUs1.setVisibility(GONE);
+        getBinding().vTopUs2.setVisibility(GONE);
+
+    }
+
     /**
      * init fragment
      */
@@ -702,9 +741,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
 
         if (w.selProgram == EGYM) {
-            getBinding().warmUpAndCoolDownTitle.setVisibility(View.GONE);
-            getBinding().tvWarmUpAndCoolDownTime.setVisibility(View.GONE);
-            getBinding().btnSkip.setVisibility(View.GONE);
+            getBinding().warmUpAndCoolDownTitle.setVisibility(GONE);
+            getBinding().tvWarmUpAndCoolDownTime.setVisibility(GONE);
+            getBinding().btnSkip.setVisibility(GONE);
         }
 
         new RxTimer().timer(100, number -> {
@@ -792,7 +831,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //一定都會執行到
             if (CheckDoubleClick.isFastClick()) return;
             warmUpSkip();
-            initTimer(false);
+
+            if (w.selProgram != WINGATE_TEST) {
+                initTimer(false);
+            }
+
             setFtmsEquipmentType(true);
         });
 
@@ -1197,9 +1240,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
             if (appStatusViewModel.currentStatus.get() != AppStatusIntDef.STATUS_RUNNING) return;
 
-        //    Log.d("@@@", "FTMS: Control Point:" + s);
+            //    Log.d("@@@", "FTMS: Control Point:" + s);
             Integer n = (Integer) s;
-         //   Log.d("@@@", "FTMS: Control Point:" + n);
+            //   Log.d("@@@", "FTMS: Control Point:" + n);
             if (n == CLICK_PLUS) { // SPEED +
 
                 if (isTreadmill) {
@@ -1482,8 +1525,8 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
 
         if (w.selProgram == METS) {
-        //    Log.d("MMMMMMWWWWEEEE", "############updateSpeedOrLevelNum: " );
-            num = isSpecify ? num * 10: num;
+            //    Log.d("MMMMMMWWWWEEEE", "############updateSpeedOrLevelNum: " );
+            num = isSpecify ? num * 10 : num;
 
             int x = getSpecifyValue(w.targetMets.get(), num, isSpecify);
             if ((w.targetMets.get() + x) > TARGET_METS_MAX || (w.targetMets.get() + x) < TARGET_METS_MIN) {
@@ -1683,21 +1726,21 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         switch (type) {
             case PANEL_ALL_SHOW://全出現
                 getBinding().groupTreadmillViewIncline.setVisibility(View.VISIBLE);
-                getBinding().groupTreadmillViewInclineNoView.setVisibility(View.GONE);
+                getBinding().groupTreadmillViewInclineNoView.setVisibility(GONE);
                 getBinding().groupTreadmillViewSpeed.setVisibility(View.VISIBLE);
-                getBinding().groupTreadmillViewSpeedNoView.setVisibility(View.GONE);
+                getBinding().groupTreadmillViewSpeedNoView.setVisibility(GONE);
                 break;
             case PANEL_INCLINE_SHOW://show incline
                 getBinding().groupTreadmillViewIncline.setVisibility(View.VISIBLE);
-                getBinding().groupTreadmillViewInclineNoView.setVisibility(View.GONE);
-                getBinding().groupTreadmillViewSpeed.setVisibility(View.GONE);
+                getBinding().groupTreadmillViewInclineNoView.setVisibility(GONE);
+                getBinding().groupTreadmillViewSpeed.setVisibility(GONE);
                 getBinding().groupTreadmillViewSpeedNoView.setVisibility(View.VISIBLE);
                 break;
             case PANEL_SPEED_SHOW://show SPEED
-                getBinding().groupTreadmillViewIncline.setVisibility(View.GONE);
+                getBinding().groupTreadmillViewIncline.setVisibility(GONE);
                 getBinding().groupTreadmillViewInclineNoView.setVisibility(View.VISIBLE);
                 getBinding().groupTreadmillViewSpeed.setVisibility(View.VISIBLE);
-                getBinding().groupTreadmillViewSpeedNoView.setVisibility(View.GONE);
+                getBinding().groupTreadmillViewSpeedNoView.setVisibility(GONE);
                 break;
             case PANEL_ALL_DISAPPEAR://全消失
                 getBinding().groupTreadmillViewIncline.setVisibility(View.INVISIBLE);
@@ -1738,7 +1781,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         } else {
             if (isUs) {
-                getBinding().btnCoolDownUs.setVisibility(View.GONE);
+                getBinding().btnCoolDownUs.setVisibility(GONE);
             } else {
                 getBinding().btnCoolDown.setBackgroundResource(R.drawable.panel_no_cooldown);
                 getBinding().btnCoolDown.setText("");
@@ -1757,7 +1800,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      * @param isShow isShow
      */
     public void showWorkoutStopButton(boolean isShow) {
-        getBinding().btnWorkoutStop.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        getBinding().btnWorkoutStop.setVisibility(isShow ? View.VISIBLE : GONE);
     }
 
     /**
@@ -2037,7 +2080,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             getBinding().hhBG.setVisibility(View.VISIBLE);
             new RxTimer().timer(1000, number -> {
                 if (getBinding() != null) {
-                    getBinding().hhBG.setVisibility(View.GONE);
+                    getBinding().hhBG.setVisibility(GONE);
                 }
             });
 
@@ -2140,21 +2183,50 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
 
         crossFade(getBinding().workoutFragmentContainerView, getBinding().viewWarmUpAndCoolDown, 200);
         if (isUs) {
-            getBinding().cStatsUsNoView.setVisibility(View.GONE);
-            getBinding().cStatsUsNoViewBike.setVisibility(View.GONE);
+            getBinding().cStatsUsNoView.setVisibility(GONE);
+            getBinding().cStatsUsNoViewBike.setVisibility(GONE);
             //   getBinding().cStatsUs.setVisibility(View.VISIBLE);
         }
 
 
         getBinding().tvWarmUpAndCoolDownTime.setText("");
 
+
+        // TODO: WWINNNNNNN
         if (w.selProgram == WINGATE_TEST) {
+            Timber.tag("WWINNNNNNN").d("跳出倒數 ");
+
+            //調整level
+            int levelllll = App.MODE.getLevelViaPowerAndRpm((int) (w.selForce.get() * 60), 60);
+            updateSpeedOrLevelNum(levelllll, true);
+
+            wingateReadyWindow = new WingateReadyWindow(requireActivity());
+            wingateReadyWindow.showAtLocation(requireActivity().getWindow().getDecorView(), Gravity.END | Gravity.BOTTOM, 0, 0);
+            wingateReadyWindow.setOnCustomDismissListener(new BasePopupWindow.OnCustomDismissListener() {
+                @Override
+                public void onStartDismiss(MsgEvent value) {
+
+                    LiveEventBus.get(SELECT_WORKOUT_PAGE).post(WORKOUT_PAGE_CHARTS);
+                }
+
+                @Override
+                public void onDismiss() {
+                    Timber.tag("WWINNNNNNN").d("開始主訓練 ");
+                    initTimer(false);
+                }
+            });
+
+
             getBinding().btnSkipUs.setVisibility(View.INVISIBLE);
-            usWorkoutStopLong();
             showCooldownButton(false);
             w.disabledLevelUpdate.set(true);
+            showWingateStop();
+
+
         }
     }
+
+    private WingateReadyWindow wingateReadyWindow;
 
     private void changeFragment(Fragment fragment) {
 
@@ -2195,7 +2267,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
      */
     private void onSelect(int id) {
 
-        getBinding().ivLapAnimationM.setVisibility(View.GONE);
+        getBinding().ivLapAnimationM.setVisibility(GONE);
         if (id == WORKOUT_PAGE_STATS) {
             changeFragment(workoutStatsFragment);
             //   showBackground(R.drawable.img_workout_1);
@@ -2912,7 +2984,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 iPrograms = new METsProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc);
                 break;
             case WINGATE_TEST:
-                iPrograms = new WingateProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc,workoutChartsFragment);
+                iPrograms = new WingateProg(w, this, (int) userProfileViewModel.getWeight_metric(), parent, calc, workoutChartsFragment);
                 break;
             default:
                 iPrograms = new CommonPrograms(w, this, workoutChartsFragment, u, egymDataViewModel);
@@ -2998,6 +3070,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         workoutStatsFragment = null;
         workoutChartsFragment = null;
         workoutTrackFragment = null;
+
     }
 
     @Override
@@ -3307,7 +3380,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         getBinding().btnCoolDown.setVisibility(View.INVISIBLE);
 
         if (isUs) {
-            getBinding().btnCoolDownUs.setVisibility(View.GONE);
+            getBinding().btnCoolDownUs.setVisibility(GONE);
         }
     }
 
@@ -3338,16 +3411,16 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                 getBinding().groupTopNumberUs.setVisibility(View.VISIBLE);
                 getBinding().groupBottomNumberUs.setVisibility(View.VISIBLE);
 
-                getBinding().tvTopNumberUs11.setVisibility(View.GONE);
-                getBinding().tvTopNumberUs12.setVisibility(View.GONE);
+                getBinding().tvTopNumberUs11.setVisibility(GONE);
+                getBinding().tvTopNumberUs12.setVisibility(GONE);
 
-                getBinding().tvBottomNumberUs11.setVisibility(View.GONE);
-                getBinding().tvBottomNumberUs12.setVisibility(View.GONE);
+                getBinding().tvBottomNumberUs11.setVisibility(GONE);
+                getBinding().tvBottomNumberUs12.setVisibility(GONE);
 
 
                 if (w.selProgram == WATTS) {
-                    getBinding().tvTopNumberUs10.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs10.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs10.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs10.setVisibility(GONE);
                 }
 
 
@@ -3387,19 +3460,19 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
                     // TARGET_METS_MAX = 13.4;
                     // TARGET_METS_INC = 0.1;
 
-                    getBinding().tvTopNumberUs7.setVisibility(View.GONE);
-                    getBinding().tvTopNumberUs8.setVisibility(View.GONE);
-                    getBinding().tvTopNumberUs9.setVisibility(View.GONE);
-                    getBinding().tvTopNumberUs10.setVisibility(View.GONE);
-                    getBinding().tvTopNumberUs11.setVisibility(View.GONE);
-                    getBinding().tvTopNumberUs12.setVisibility(View.GONE);
+                    getBinding().tvTopNumberUs7.setVisibility(GONE);
+                    getBinding().tvTopNumberUs8.setVisibility(GONE);
+                    getBinding().tvTopNumberUs9.setVisibility(GONE);
+                    getBinding().tvTopNumberUs10.setVisibility(GONE);
+                    getBinding().tvTopNumberUs11.setVisibility(GONE);
+                    getBinding().tvTopNumberUs12.setVisibility(GONE);
 
-                    getBinding().tvBottomNumberUs7.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs8.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs9.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs10.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs11.setVisibility(View.GONE);
-                    getBinding().tvBottomNumberUs12.setVisibility(View.GONE);
+                    getBinding().tvBottomNumberUs7.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs8.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs9.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs10.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs11.setVisibility(GONE);
+                    getBinding().tvBottomNumberUs12.setVisibility(GONE);
 
                     getBinding().tvTopNumberUs1.setText("2");
                     getBinding().tvTopNumberUs2.setText("3");
@@ -3711,6 +3784,11 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
     }
 
     private void closeWindow() {
+
+        if (wingateReadyWindow != null) {
+            wingateReadyWindow.dismiss();
+            wingateReadyWindow = null;
+        }
 
         if (cautionSpeedWindow != null) {
             cautionSpeedWindow.dismiss();

@@ -49,6 +49,7 @@
     -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewChartLayout"
         android:layout_width="1398dp"
         android:layout_height="856dp"
         android:animateLayoutChanges="true"
@@ -165,20 +166,20 @@
 
 
         <com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet
-            tools:visibility="visible"
             android:id="@+id/egymDiagramBarsView"
             android:layout_width="1344dp"
             android:layout_height="720dp"
-            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 72 : 28}"
             android:visibility="gone"
             app:backLineColorS_E="#1c242a"
             app:barCountS_E="20"
             app:barMaxLevelS_E="20"
+            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 72 : 28}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_height="@{isUs &amp;&amp; !isGGG ? 448 : 720 }"
             app:layout_width="@{isUs &amp;&amp; !isGGG ? 1240 : 1344 }"
-            app:layout_height="@{isUs &amp;&amp; !isGGG ? 448 : 720 }" />
+            tools:visibility="visible" />
         <!--        GLOBAL-->
         <!--        android:layout_width="1344dp"-->
         <!--        android:layout_height="720dp"-->
@@ -187,11 +188,40 @@
         <!--    app:barWidth="24" 61.55-->
         <!--    app:barCount="44"  20-->
 
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/bgWingateBottom"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:background="@color/colore24b44_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvWingateBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/pedal_as_fast_as_you_can"
+            android:textColor="@color/colore24b44"
+            android:textSize="32sp"
+            app:drawableStartCompat="@drawable/icon_warning_32"
+            app:layout_constraintBottom_toBottomOf="@+id/bgWingateBottom"
+            app:layout_constraintEnd_toEndOf="@+id/bgWingateBottom"
+            app:layout_constraintStart_toStartOf="@+id/bgWingateBottom"
+            app:layout_constraintTop_toTopOf="@+id/bgWingateBottom" />
+
+
         <View
             android:id="@+id/eBG"
-            android:background="@color/color11151a"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/color11151a"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
