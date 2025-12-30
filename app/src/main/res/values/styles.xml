@@ -27,8 +27,8 @@
 
 <!--    <item name="windowSplashScreenAnimatedIcon">@drawable/transparent_drawable</item>-->
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/color1396ef</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/logoooo</item>
+        <item name="windowSplashScreenBackground">@color/color1c242a</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/transparent_drawable</item>
         <item name="postSplashScreenTheme">@style/LauncherTheme</item>
     </style>
 

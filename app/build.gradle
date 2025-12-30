@@ -29,7 +29,7 @@ android {
         applicationId "com.dyaco.spirit_commercial"
         minSdk 34
         targetSdk 36
-        versionCode 10
+        versionCode 1
         versionName HardWareVersion + "." + SoftWareVersion + "." + SerialNumber
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -100,9 +100,9 @@ android {
 
 
 
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/1000UBE/"'
        //     buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/PlanetFitness/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/1000UBE/"'
 
 
 
@@ -118,8 +118,8 @@ android {
             buildConfigField "String", "API_DOMAIN", '"https://connect.spiritcommercial.net/mapi/"'
 
             //production
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/PlanetFitness/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/PlanetFitness/"'
+//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/1000UBE/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/1000UBE/"'
       //      buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
 
 
@@ -154,7 +154,7 @@ android {
     }
 
     def updateFileName = "update.json"
-    def brandName = "PlanetFitness"
+    def brandName = "1000UBE"
     def Model = "TREADMILL"
     def Model_Name = "CT1000ENT"
     def OS_Version = "V30"
@@ -168,7 +168,7 @@ android {
     def downloadUrl_GLOBAL
     def sub_mcu = "CS31004_V10A05_20221116.bin" //V10A1 > V10A3  ,662
     def lwr = "CS56011_FW0107_20221114.bin" //V1A7
-    def GLOBAL_EditionFolder = "PlanetFitness_Edition"
+    def GLOBAL_EditionFolder = "1000UBE_Edition"
     def UpdateFolderName
 
     android.applicationVariants.configureEach { variant ->
@@ -224,8 +224,8 @@ android {
             def flavor      = variant.flavorName                       // e.g. "dev" 或 "production"
             def buildType   = variant.buildType.name                   // e.g. "release" 或 "debug"
             def versionName = defaultConfig.versionName
-            def apkName     = "PlanetFitness${versionName}_[${flavor}].apk"
-            def destDir     = file("$projectDir/updateApp/PlanetFitness${versionName}[${flavor}]")
+            def apkName     = "1000UBE${versionName}_[${flavor}].apk"
+            def destDir     = file("$projectDir/updateApp/1000UBE${versionName}[${flavor}]")
 
             // 2.1 用 layout API 取得 APK Provider
             def apkFileProvider = project.layout

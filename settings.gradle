@@ -36,5 +36,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PlanetFitness"
+rootProject.name = "1000UBE"
 include ':app'
