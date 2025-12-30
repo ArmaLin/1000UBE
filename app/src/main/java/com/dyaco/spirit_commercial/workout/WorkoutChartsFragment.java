@@ -6,12 +6,10 @@ import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_OPERATION.SET_TARGET_SPEED;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_RESPONSE.INVALID_PARAMETER;
 import static com.corestar.libs.device.DeviceGEM.EQUIPMENT_CONTROL_RESPONSE.SUCCESS;
-import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.MainActivity.isUs;
 import static com.dyaco.spirit_commercial.support.CommonUtils.getFloat;
 import static com.dyaco.spirit_commercial.support.CommonUtils.makeDropDownMeasureSpec;
-import static com.dyaco.spirit_commercial.support.FormulaUtil.initEgymWorkoutData;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getInclineAd;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getInclineValue;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMaxSpeedLevel;
@@ -19,7 +17,6 @@ import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMaxSpeedValue;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getMinSpeedLevel;
 import static com.dyaco.spirit_commercial.support.WorkoutUtil.getSpeedValue;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.IMPERIAL;
-import static com.dyaco.spirit_commercial.support.intdef.EventKey.EGYM_STATS_INIT;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.SELECT_WORKOUT_PAGE;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.BAR_STATUS_SEGMENT_BLANK;
 import static com.dyaco.spirit_commercial.support.intdef.GENERAL.BAR_STATUS_SEGMENT_FINISH;
@@ -71,9 +68,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.corestar.calculation_libs.Calculation;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.FragmentWorkoutChartsBinding;
-import com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet;
-import com.dyaco.spirit_commercial.egym.EgymUtil;
-import com.dyaco.spirit_commercial.product_flavor.ModeEnum;
 import com.dyaco.spirit_commercial.support.FormulaUtil;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.WorkoutUtil;
@@ -90,8 +84,6 @@ import com.dyaco.spirit_commercial.viewmodel.EgymDataViewModel;
 import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 import com.jeremyliao.liveeventbus.LiveEventBus;
-
-import java.util.List;
 
 
 public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutChartsBinding> {
@@ -140,7 +132,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         onSelect();
 
 
-        initEgym();
+    //    initEgym();
 
         initDiagram();
 
@@ -171,6 +163,10 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
         getBinding().bgWingateBottom.setVisibility(VISIBLE);
         getBinding().tvWingateBottom.setVisibility(VISIBLE);
+        getBinding().tvWingateRemainingTime.setVisibility(VISIBLE);
+        getBinding().tvWingateRemainingTimeUnit.setVisibility(VISIBLE);
+        getBinding().tvWingateWatt.setVisibility(VISIBLE);
+        getBinding().tvWingateWattUnit.setVisibility(VISIBLE);
 
         ConstraintLayout chartLayout = getBinding().viewChartLayout;
 
@@ -187,76 +183,34 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 
 
         View touchBarView = getBinding().touchBarView;
-        ViewGroup.MarginLayoutParams touchBarViewParams =
-                (ViewGroup.MarginLayoutParams) touchBarView.getLayoutParams();
+//        ViewGroup.MarginLayoutParams touchBarViewParams = (ViewGroup.MarginLayoutParams) touchBarView.getLayoutParams();
+
+        ConstraintLayout.LayoutParams touchBarViewParams = (ConstraintLayout.LayoutParams) touchBarView.getLayoutParams();
 
         if (params != null) {
             // 設定長寬
-//            touchBarViewParams.width = width;
-//            touchBarViewParams.height = height;
+            touchBarViewParams.width = 0;
+            touchBarViewParams.height = 0;
+
+            touchBarViewParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID;
+            touchBarViewParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID;
+            touchBarViewParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+            touchBarViewParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
 
             // 設定上下左右邊距 (順序：左、上、右、下)
-            touchBarViewParams.setMargins(0, 600, 0, 80);
+            touchBarViewParams.setMargins(2, 230, 2, 80);
 
             touchBarView.setLayoutParams(touchBarViewParams);
 
 
-            OPT_SETTINGS.viewX = 312;
-            OPT_SETTINGS.viewY = 720;
+            OPT_SETTINGS.viewX = 318; //數字越小 越往左 ,0左
+            OPT_SETTINGS.viewY = 330; //數字越小 越往上 ,0上
+
         }
 
 
     }
 
-
-    public EgymDiagramBarsViewBySet egymDiagramBarsView;
-//    List<Integer> setsTimePosition = new ArrayList<>();//每個set 最後一個 index
-
-    private void initEgym() {
-        if (currentProgram == ProgramsEnum.EGYM) {
-
-            getBinding().touchBarView.setVisibility(View.GONE);
-            getBinding().bbbbbb.setVisibility(View.GONE);
-            getBinding().egymDiagramBarsView.setVisibility(VISIBLE);
-
-
-            initEgymWorkoutData(egymDataViewModel);
-
-            egymDiagramBarsView = getBinding().egymDiagramBarsView;
-
-            egymDiagramBarsView.isTreadmill(isTreadmill);
-
-            int barMaxLevel = (int) (getFloat(getMaxSpeedValue(currentProgram)) > 0 ? getMaxSpeedValue(currentProgram) + 1 : getMaxSpeedValue(currentProgram));
-            //bar 長度
-            egymDiagramBarsView.setBarMaxLevel(barMaxLevel);
-            //bar 數量
-            egymDiagramBarsView.setDurationTimesList(egymDataViewModel.durationTimesList);
-
-
-            LiveEventBus.get(EGYM_STATS_INIT, List.class).post(egymDataViewModel.setsTimePosition);
-
-            egymDiagramBarsView.setWhiteLinePosition(0);
-
-            w.egymTotalInterval.set(egymDataViewModel.durationTimesList.size());
-            w.egymCurrentSet.set(0);
-
-
-            if (MODE != ModeEnum.CT1000ENT) {
-                //EGYM BIKE
-                //    new RxTimer().timer(1000, number -> updateDiagramBarNumCadence());
-
-                w.currentRpm.addOnPropertyChangedCallback(rpmCallback);
-
-
-//                w.inclineDiagramBarList.get(0).setBarNum(40);
-//                w.inclineDiagramBarList.get(1).setBarNum(40);
-//                w.inclineDiagramBarList.get(2).setBarNum(40);
-//                w.inclineDiagramBarList.get(3).setBarNum(40);
-            }
-
-        }
-
-    }
 
     //RPM 改變時觸發
     private final Observable.OnPropertyChangedCallback rpmCallback = new Observable.OnPropertyChangedCallback() {
@@ -264,7 +218,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         public void onPropertyChanged(Observable sender, int propertyId) {
             if (getBinding() != null) {
                 Log.d("EEEQQQDDDAAA", "onPropertyChanged: " + w.currentRpm.get());
-                egymDiagramBarsView.setBarLevel(BAR_TYPE_INCLINE, w.egymCurrentSet.get(), w.currentRpm.get(), w.egymCurrentSet.get(), false);
+          //      egymDiagramBarsView.setBarLevel(BAR_TYPE_INCLINE, w.egymCurrentSet.get(), w.currentRpm.get(), w.egymCurrentSet.get(), false);
 
             }
         }
@@ -414,16 +368,6 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
         }
 
 
-    }
-
-    public void updateDiagramBarNumCadence() {
-        int xi = 0;
-        for (int i = 0; i < w.orgArrayIncline.length; i++) {
-            DiagramBarBean diagramBarInclineBean = w.inclineDiagramBarList.get(i);
-            egymDiagramBarsView.setBarLevel(diagramBarInclineBean.getBarType(), xi, diagramBarInclineBean.getBarNum(), w.currentSegment.get(), false);
-
-            xi++;
-        }
     }
 
 
@@ -698,7 +642,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
 //                    updateDiagramBarNum(UPDATE_INCLINE_BAR, false);
 
                     if (currentProgram == EGYM) {
-                        EgymUtil.getInstance().updateInclineNumE(updateInclineNum, egymDiagramBarsView, w, false);
+                  //      EgymUtil.getInstance().updateInclineNumE(updateInclineNum, egymDiagramBarsView, w, false);
                     } else {
                         updateDiagramBarNum(UPDATE_INCLINE_BAR, false);
                         //Show Notify
@@ -1049,7 +993,7 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
             //更新圖
 
             if (currentProgram == EGYM) {
-                EgymUtil.getInstance().updateSpeedNumE(updateSpeedLevel, egymDiagramBarsView, w, false);
+             //   EgymUtil.getInstance().updateSpeedNumE(updateSpeedLevel, egymDiagramBarsView, w, false);
             } else {
                 updateDiagramBarNum(UPDATE_SPEED_BAR, false);
             }
@@ -1593,11 +1537,11 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
             }
         } else {
 
-            if (currentProgram == EGYM) {
-                if (egymDiagramBarsView != null) {
-                    egymDiagramBarsView.dismissPopupText();
-                }
-            }
+//            if (currentProgram == EGYM) {
+//                if (egymDiagramBarsView != null) {
+//                    egymDiagramBarsView.dismissPopupText();
+//                }
+//            }
 
             Log.d("PPPOOEEEE", "hidden: " + hidden);
         }

@@ -35,6 +35,8 @@
         <variable
             name="programsEnum"
             type="com.dyaco.spirit_commercial.workout.programs.ProgramsEnum" />
+
+        <import type="com.dyaco.spirit_commercial.support.CommonUtils" />
     </data>
 
 
@@ -138,6 +140,9 @@
             tools:visibility="gone" />
 
 
+
+
+
         <!--        android:layout_marginTop="150dp"-->
         <com.dyaco.spirit_commercial.support.custom_view.DiagramBarsView
             android:id="@+id/touch_bar_view"
@@ -165,21 +170,21 @@
             app:layout_height="@{isUs &amp;&amp; !isGGG ? 20 : 2 }" />
 
 
-        <com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet
-            android:id="@+id/egymDiagramBarsView"
-            android:layout_width="1344dp"
-            android:layout_height="720dp"
-            android:visibility="gone"
-            app:backLineColorS_E="#1c242a"
-            app:barCountS_E="20"
-            app:barMaxLevelS_E="20"
-            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 72 : 28}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_height="@{isUs &amp;&amp; !isGGG ? 448 : 720 }"
-            app:layout_width="@{isUs &amp;&amp; !isGGG ? 1240 : 1344 }"
-            tools:visibility="visible" />
+<!--        <com.dyaco.spirit_commercial.egym.EgymDiagramBarsViewBySet-->
+<!--            android:id="@+id/egymDiagramBarsView"-->
+<!--            android:layout_width="1344dp"-->
+<!--            android:layout_height="720dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:backLineColorS_E="#1c242a"-->
+<!--            app:barCountS_E="20"-->
+<!--            app:barMaxLevelS_E="20"-->
+<!--            app:layoutMarginBottom="@{isUs &amp;&amp; !isGGG ? 72 : 28}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_height="@{isUs &amp;&amp; !isGGG ? 448 : 720 }"-->
+<!--            app:layout_width="@{isUs &amp;&amp; !isGGG ? 1240 : 1344 }"-->
+<!--            tools:visibility="visible" />-->
         <!--        GLOBAL-->
         <!--        android:layout_width="1344dp"-->
         <!--        android:layout_height="720dp"-->
@@ -208,12 +213,73 @@
             android:gravity="center"
             android:text="@string/pedal_as_fast_as_you_can"
             android:textColor="@color/colore24b44"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:drawableStartCompat="@drawable/icon_warning_32"
             app:layout_constraintBottom_toBottomOf="@+id/bgWingateBottom"
             app:layout_constraintEnd_toEndOf="@+id/bgWingateBottom"
             app:layout_constraintStart_toStartOf="@+id/bgWingateBottom"
             app:layout_constraintTop_toTopOf="@+id/bgWingateBottom" />
+
+
+        <TextView
+            android:layout_marginBottom="-8dp"
+            android:text="@{CommonUtils.formatSecToM(workoutViewModel.remainingTimeShow)}"
+            android:visibility="gone"
+            android:textSize="96sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_extrabold"
+            app:layout_constraintBottom_toTopOf="@+id/tvWingateRemainingTimeUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvWingateRemainingTimeUnit"
+            app:layout_constraintEnd_toEndOf="@+id/tvWingateRemainingTimeUnit"
+            android:id="@+id/tvWingateRemainingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:visibility="gone"
+            android:text="@string/Remaining_Time"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="130dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="220dp"
+            android:id="@+id/tvWingateRemainingTimeUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+
+
+
+        <TextView
+            android:layout_marginBottom="-8dp"
+            android:text="@{String.valueOf(workoutViewModel.currentPower)}"
+            android:visibility="gone"
+            android:textSize="96sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_extrabold"
+            app:layout_constraintBottom_toTopOf="@+id/tvWingateWattUnit"
+            app:layout_constraintStart_toStartOf="@+id/tvWingateWattUnit"
+            app:layout_constraintEnd_toEndOf="@+id/tvWingateWattUnit"
+            android:id="@+id/tvWingateWatt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:visibility="gone"
+            android:text="@string/Watts"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toTopOf="@+id/tvWingateRemainingTimeUnit"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="240dp"
+            android:id="@+id/tvWingateWattUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
         <View

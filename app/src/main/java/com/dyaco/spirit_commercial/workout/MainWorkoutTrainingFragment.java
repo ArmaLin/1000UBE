@@ -200,7 +200,6 @@ import com.dyaco.spirit_commercial.workout.programs.METsProg;
 import com.dyaco.spirit_commercial.workout.programs.MarineCorps;
 import com.dyaco.spirit_commercial.workout.programs.Navy;
 import com.dyaco.spirit_commercial.workout.programs.Peb;
-import com.dyaco.spirit_commercial.workout.programs.ProgramsEnum;
 import com.dyaco.spirit_commercial.workout.programs.Run10K;
 import com.dyaco.spirit_commercial.workout.programs.Run5K;
 import com.dyaco.spirit_commercial.workout.programs.StepsProg;
@@ -2347,9 +2346,9 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             //初始化圖表
             workoutChartsFragment.updateDiagramBarNum(isTreadmill ? UPDATE_ALL_BAR : UPDATE_SPEED_BAR, false);
 
-            if (w.selProgram == ProgramsEnum.EGYM) {
-                EgymUtil.getInstance().initEgymDiagramData(UPDATE_ALL_BAR, workoutChartsFragment.egymDiagramBarsView, w, false);
-            }
+//            if (w.selProgram == ProgramsEnum.EGYM) {
+//                EgymUtil.getInstance().initEgymDiagramData(UPDATE_ALL_BAR, workoutChartsFragment.egymDiagramBarsView, w, false);
+//            }
 
             //設定下控一開始的速度
             if (isTreadmill) {
@@ -2480,7 +2479,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             ((MainActivity) requireActivity()).sendGymAppData();
 
             //更新Egym資料
-            setEgymCloudIntervalData();
+       //     setEgymCloudIntervalData();
             //更新STATS的資料
             workoutStatsFragment.updateStatsData();
 
@@ -2647,7 +2646,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         //當前Set(Interval) 加 1
         w.egymCurrentSet.set(w.egymCurrentSet.get() + 1);
 
-        workoutChartsFragment.getBinding().egymDiagramBarsView.setWhiteLinePosition(w.egymCurrentSet.get());
+    //    workoutChartsFragment.getBinding().egymDiagramBarsView.setWhiteLinePosition(w.egymCurrentSet.get());
 
         //進入下一個set時，調整 speed incline level
         EgymUtil.getInstance().updateFlowData(this, w, u);

@@ -38,7 +38,6 @@ import com.dyaco.spirit_commercial.viewmodel.WorkoutViewModel;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import kotlinx.coroutines.Job;
 import timber.log.Timber;
@@ -1204,7 +1203,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         uartVM.aa_stepPulleyRpmOpticalSensor.set(rpm2_D2D3);
 
         // TODO: test rpm stepper
-        woVM.currentRpm.set(ThreadLocalRandom.current().nextInt(50, 120 + 1));
+    //    woVM.currentRpm.set(ThreadLocalRandom.current().nextInt(50, 120 + 1));
      //   woVM.currentRpm.set(100);
 
 
