@@ -13,8 +13,6 @@ import com.dyaco.spirit_commercial.workout.WorkoutStatsFragment;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 
-import timber.log.Timber;
-
 /**
  * Target :
  */
@@ -51,7 +49,7 @@ public class CaloriesProg implements IPrograms {
         //MaxIncline給最大值
         m.hideBtnSkip();
         if (isUs) {
-         //   m.usWorkoutStopLong();
+            m.usWorkoutStopLong();
             m.getBinding().cStatsUsNoView.setVisibility(View.GONE);
         }
     }

@@ -50,6 +50,7 @@ import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.GERKIN;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HEART_RATE;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.HIIT;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.MANUAL;
+import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.METS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WATTS;
 import static com.dyaco.spirit_commercial.workout.programs.ProgramsEnum.WINGATE_TEST;
 
@@ -1122,7 +1123,9 @@ public class WorkoutChartsFragment extends BaseBindingFragment<FragmentWorkoutCh
                     valueMax = w.currentMaxSpeed.get();
                 }
 
-                parent.showNotifyWindow(drawableRes1, showView1, value, valueMax, isTreadmill, type);
+                if (currentProgram != METS) {
+                    parent.showNotifyWindow(drawableRes1, showView1, value, valueMax, isTreadmill, type);
+                }
             }
         }
     }

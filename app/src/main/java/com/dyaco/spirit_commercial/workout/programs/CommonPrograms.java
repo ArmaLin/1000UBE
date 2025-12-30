@@ -55,7 +55,7 @@ public class CommonPrograms implements IPrograms {
         if (EGYM == w.selProgram) {
             s.showStatsGroup(s.EGYM_STATS);
 
-            s.initEgymInterval();
+        //    s.initEgymInterval();
         } else {
             s.showStatsGroup(s.NORMAL_STATS);
         }
