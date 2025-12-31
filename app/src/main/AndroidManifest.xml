@@ -236,6 +236,11 @@
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
+
+        <receiver android:name=".support.KeepAliveService$RestartReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver" />
+
     </application>
 
 </manifest>

@@ -100,9 +100,7 @@ android {
 
 
 
-//            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/1000UBE/"'
-       //     buildConfigField "String", "UPDATE_URL_GLOBAL", '"http://192.168.70.3:8080/"'
-            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/production/1000UBE/"'
+            buildConfigField "String", "UPDATE_URL_GLOBAL", '"https://corestar-ota.s3.ap-northeast-1.amazonaws.com/debug/1000UBE/"'
 
 
 

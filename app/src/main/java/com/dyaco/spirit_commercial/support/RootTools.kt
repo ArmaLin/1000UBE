@@ -385,5 +385,21 @@ object RootTools {
     }
 
 
+    /**
+     * adb shell pidof com.dyaco.spirit_commercial
+     * 10082
+     * adb shell cat /proc/8914/oom_score_adj
+     * -1000 <<< Native System
+     */
+    @JvmStatic
+    fun setSelfOomScore(score: Int): Boolean {
+        val pid = android.os.Process.myPid()
+        return execute(
+            "echo $score > /proc/$pid/oom_score_adj",
+            "set PID $pid OOM_ADJ to $score"
+        )
+    }
+
+
 
 }
