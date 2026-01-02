@@ -216,18 +216,20 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             uartVM.increaseLwrTimeoutCounter();
         }
 
-        setRealTimePwm();  // workout可能不是每秒執行 setDevWorkload, 在這裡重新計算設定at_valudAd
+        setRealTimePwm();  // workout可能不是每秒執行 setDevWorkload, 在這裡重新計算設定 at_valueAd
 
-        // 這裡依機型要定時傳送心跳包
-        if (MODE == UBE) {
-            // UBE
-            // 定時傳送 0x80
-            setDevResLevel();
-        } else {
-            // Stepper
-            // 定時傳送0x80
-            setDevPwmLevel();
-        }
+//        // 這裡依機型要定時傳送心跳包
+//        if (MODE == UBE) {
+//            // UBE
+//            // 定時傳送 0x80
+//            setDevResLevel();
+//        } else {
+//            // Stepper
+//            // 定時傳送0x80
+//            setDevPwmLevel();
+//        }
+        // TODO: 都是Stepper控制器
+        setDevPwmLevel();
 
         if (uartVM.lwrTimeoutCounter.get() > 5) { // 5
             Timber.d("‼️‼️‼️‼️doEchoTask postUartError");
