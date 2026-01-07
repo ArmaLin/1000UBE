@@ -50,6 +50,7 @@ public class DeviceIntDef {
     public static final int DEVICE_TYPE_RECUMBENT_BIKE = 3; //臥式腳踏車
     public static final int DEVICE_TYPE_UBE = 4; //臥式腳踏車
     public static final int DEVICE_TYPE_STEPPER = 5; //臥式腳踏車
+    public static final int DEVICE_TYPE_1000UBE = 6; //臥式腳踏車
 
     public static final int DEVICE_MODEL_CT1000ENT = 0;
     public static final int DEVICE_MODEL_CE1000ENT = 1;
@@ -57,6 +58,7 @@ public class DeviceIntDef {
     public static final int DEVICE_MODEL_CR1000ENT = 3;
     public static final int DEVICE_MODEL_UBE = 4;
     public static final int DEVICE_MODEL_STEPPER = 5;
+    public static final int DEVICE_MODEL_1000UBE = 6;
 
     public static final int TERRITORY_US = 1;
     public static final int TERRITORY_GLOBAL = 0;

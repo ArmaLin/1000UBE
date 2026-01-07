@@ -17,6 +17,7 @@ import static com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef.STATUS_
 import static com.dyaco.spirit_commercial.support.intdef.AppStatusIntDef.STATUS_SUMMARY;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_EGYM;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.CONSOLE_SYSTEM_SPIRIT;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_1000UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_ELLIPTICAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_STEPPER;
@@ -3129,6 +3130,9 @@ public class CommonUtils {
                 s = R.string.recumbent_bike;
                 break;
             case DEVICE_TYPE_UBE:
+                s = R.string.UBE;
+                break;
+            case DEVICE_TYPE_1000UBE:
                 s = R.string.UBE;
                 break;
             case DEVICE_TYPE_STEPPER:

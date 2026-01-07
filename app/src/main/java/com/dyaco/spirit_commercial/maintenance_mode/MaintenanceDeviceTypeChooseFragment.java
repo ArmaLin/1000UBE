@@ -10,7 +10,7 @@ import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CR1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CT1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.CU1000ENT;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.STEPPER;
-import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
+import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE1000;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_CANADA;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.TERRITORY_US;
@@ -54,7 +54,7 @@ public class MaintenanceDeviceTypeChooseFragment extends BaseBindingDialogFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Log.d("CCCCCCCCC", "onViewCreated: " + deviceSettingViewModel.typeCode.get());
         ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
         for (int i = 0; i < getBinding().rgSelectItemTreadmill.getChildCount(); i++) {
             View o = getBinding().rgSelectItemTreadmill.getChildAt(i);
@@ -64,6 +64,7 @@ public class MaintenanceDeviceTypeChooseFragment extends BaseBindingDialogFragme
                     if (deviceSettingViewModel.typeCode.get() == Integer.parseInt((String) radioButtonArrayList.get(i).getTag())) {
                         radioButtonArrayList.get(i).setChecked(true);
                         radioTag = Integer.parseInt((String) radioButtonArrayList.get(i).getTag());
+                        Log.d("CCCCCCCCC", "onViewCreated: " + radioTag);
                     }
                 }
             }
@@ -114,9 +115,9 @@ public class MaintenanceDeviceTypeChooseFragment extends BaseBindingDialogFragme
                     type = DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
                     modeEnum = CR1000ENT;
                     break;
-                case 4:
-                    type = DeviceIntDef.DEVICE_TYPE_UBE;
-                    modeEnum = UBE;
+                case 6:
+                    type = DeviceIntDef.DEVICE_TYPE_1000UBE;
+                    modeEnum = UBE1000;
                     break;
                 case 5:
                     type = DeviceIntDef.DEVICE_TYPE_STEPPER;

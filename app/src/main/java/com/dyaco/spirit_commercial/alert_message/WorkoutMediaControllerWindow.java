@@ -93,7 +93,7 @@ public class WorkoutMediaControllerWindow extends BasePopupWindow<WindowWorkoutM
     private int valueType = STATS_SPEED;
 
 
-    boolean isUBE = MODE == ModeEnum.UBE;
+    boolean isUBE = MODE == ModeEnum.UBE1000;
 
     public WorkoutMediaControllerWindow(Context context) {
         super(context, 300, 472, 0, GENERAL.TRANSLATION_Y, false, true, true, true);

@@ -292,7 +292,7 @@
 
 
         <TextView
-            android:visibility="visible"
+            android:visibility="invisible"
             android:gravity="center_vertical"
             android:autoSizeTextType="uniform"
             android:maxLines="1"
@@ -311,7 +311,7 @@
 
 
         <CheckBox
-            android:visibility="visible"
+            android:visibility="invisible"
             android:id="@+id/cbSystem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

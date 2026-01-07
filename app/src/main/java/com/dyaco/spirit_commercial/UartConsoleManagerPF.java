@@ -53,7 +53,9 @@ import timber.log.Timber;
  * <p>
  * {@link #startEcho} → 每秒執行{@link #doEchoTask} →
  * #<UBE> {@link #setDevResLevel} →  執行[setControl} → {@link #onMcuControl}
- * #<Stepper> {@link #setDevPwmLevel} → 執行[setMyCareEms] → {@link #onMcuControl}   {@link #onStepPerMin}
+ * #<Stepper>
+ *     {@link #setRealTimePwm} case UartConst.CT_LEVEL: //🔥只有跑這裡,查level ad 值 設定到 at_valuePwm 再通過 setDevPwmLevel  把at_valuePwm 設定到 setMyCareEms  調整level
+ *     {@link #setDevPwmLevel} → 執行[setMyCareEms] → {@link #onMcuControl}   {@link #onStepPerMin}
  * 每秒收到 {@link #onMcuControl}
  */
 public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListener {
@@ -156,13 +158,13 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         @UartConst.ConstantType int constantType = uartVM.constantType.get();
 
         int workload = uartVM.workload.get();
-
+        Log.d(TAG, "setRealTimePwm: " + constantType);
         switch (constantType) {
             case UartConst.CT_SPEED:
                 setDevTargetRpm(workload);
                 break;
 
-            case UartConst.CT_LEVEL:
+            case UartConst.CT_LEVEL: //🔥只有跑這裡,查level ad 值 設定到 at_valuePwm 再通過 setDevPwmLevel  把at_valuePwm 設定到 setMyCareEms  調整level
                 setPwmViaLevel(workload);
                 break;
 
@@ -218,23 +220,21 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         setRealTimePwm();  // workout可能不是每秒執行 setDevWorkload, 在這裡重新計算設定 at_valueAd
 
-//        // 這裡依機型要定時傳送心跳包
-//        if (MODE == UBE) {
-//            // UBE
-//            // 定時傳送 0x80
-//            setDevResLevel();
-//        } else {
-//            // Stepper
-//            // 定時傳送0x80
-//            setDevPwmLevel();
-//        }
-        // TODO: 都是Stepper控制器
-        setDevPwmLevel();
+        // 這裡依機型要定時傳送心跳包
+        if (MODE == UBE) {
+            // UBE
+            // 定時傳送 0x80
+            setDevResLevel();
+        } else {
+            // Stepper
+            // 定時傳送0x80
+            setDevPwmLevel();
+        }
 
         if (uartVM.lwrTimeoutCounter.get() > 5) { // 5
             Timber.d("‼️‼️‼️‼️doEchoTask postUartError");
 
-            // 下控未回應, 有可能是APP端已經CRASH, 直接設定為緊急錯誤
+            // 下控未回應, 直接設定為緊急錯誤
             uartVM.isLcbNotResponding.set(true);
             postUartError(ErrorInfoEnum.APP_UART_E401);
             m_criticalError = true;
@@ -1009,7 +1009,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         if (MODE == UBE) {
             if (model != DeviceDyacoMedical.MODEL.ECB) {
-                Timber.d("LWR MODEL不符, 僅彈出錯誤訊息");
+                Timber.d("11LWR MODEL不符, 僅彈出錯誤訊息");
                 if (model == DeviceDyacoMedical.MODEL.UNKNOWN) {
                     Timber.tag(TAG).d("onDeviceInfo:  DeviceDyacoMedical.MODEL.UNKNOWN");
 //                    postUartError(GENERAL.UE_UNKNOWN_MACHINE_TYPE, "", GENERAL.LC_MT_UNKNOWN);
@@ -1030,13 +1030,13 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         } else {
             // Stepper
             if (model != DeviceDyacoMedical.MODEL.EMS_M2) {
-                Timber.d("LWR MODEL不符, 僅彈出錯誤訊息");
+                Timber.d("22LWR MODEL不符, 僅彈出錯誤訊息");
                 if (model == DeviceDyacoMedical.MODEL.UNKNOWN) {
 //                 postUartError(GENERAL.UE_UNKNOWN_MACHINE_TYPE, "", GENERAL.LC_MT_UNKNOWN);
-                    Timber.d("LWR MODEL不符, 僅彈出錯誤訊息");
+                    Timber.d("33LWR MODEL不符, 僅彈出錯誤訊息");
                 } else {
 //                 postUartError(GENERAL.UE_MACHINE_TYPE, "", GENERAL.LC_MT_MISMATCH);
-                    Timber.d("LWR MODEL不符, 僅彈出錯誤訊息");
+                    Timber.d("44LWR MODEL不符, 僅彈出錯誤訊息");
                 }
                 return;
             } else {

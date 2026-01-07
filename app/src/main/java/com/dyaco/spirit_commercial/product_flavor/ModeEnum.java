@@ -1,12 +1,14 @@
 package com.dyaco.spirit_commercial.product_flavor;
 
 import static com.dyaco.spirit_commercial.App.getApp;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_1000UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CE1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CR1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CT1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_CU1000ENT;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_STEPPER;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_MODEL_UBE;
+import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_1000UBE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_ELLIPTICAL;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_RECUMBENT_BIKE;
 import static com.dyaco.spirit_commercial.support.intdef.DeviceIntDef.DEVICE_TYPE_STEPPER;
@@ -29,6 +31,7 @@ public enum ModeEnum {
     CU1000ENT(DEVICE_TYPE_UPRIGHT_BIKE, DEVICE_MODEL_CU1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getBikeLevelAD(), "CU1000", "UPRIGHT BIKE"),
     CR1000ENT(DEVICE_TYPE_RECUMBENT_BIKE, DEVICE_MODEL_CR1000ENT, DeviceSpiritC.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getBikeLevelAD(), "CR1000", "RECUMBENT BIKE"),
     UBE(DEVICE_TYPE_UBE, DEVICE_MODEL_UBE, DeviceDyacoMedical.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getPWMs_RZ(), "UBE", "UBE"),
+    UBE1000(DEVICE_TYPE_1000UBE, DEVICE_MODEL_1000UBE, DeviceDyacoMedical.MODEL.ECB_AND_INC.getType(), getWattTable_RZ(), getPWMs_RZ(), "UBE", "UBE"),
     STEPPER(DEVICE_TYPE_STEPPER, DEVICE_MODEL_STEPPER, DeviceDyacoMedical.MODEL.ECB_AND_INC.getType(), getWattTable_MS(), getPWMs_MS(), "STEPPER", "STEPPER");
 
     private WattTable wattTable = null;
@@ -681,7 +684,7 @@ public enum ModeEnum {
 
 
     public boolean isUbeType() {
-        return (modelCode == DEVICE_MODEL_UBE);
+        return (modelCode == DEVICE_MODEL_1000UBE);
 
     }
 

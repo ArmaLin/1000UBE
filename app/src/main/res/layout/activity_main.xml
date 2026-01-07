@@ -803,6 +803,18 @@ android:alpha="0"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent" />-->
 
+
+<!--        <ImageView-->
+<!--            tools:visibility="gone"-->
+<!--            android:id="@+id/sssssplashView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/logoooo"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:elevation="100dp" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
