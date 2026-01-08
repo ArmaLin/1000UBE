@@ -4,6 +4,7 @@ package com.dyaco.spirit_commercial;
 import static com.dyaco.spirit_commercial.App.MODE;
 import static com.dyaco.spirit_commercial.App.getApp;
 import static com.dyaco.spirit_commercial.UartConst.DS_A0_PAUSE_STANDBY;
+import static com.dyaco.spirit_commercial.UartConst.DS_A9_SYMM_ANGLE_RSP;
 import static com.dyaco.spirit_commercial.UartConst.DS_ECB_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.DS_ECB_PAUSE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.DS_EMS_IDLE_STANDBY;
@@ -158,7 +159,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         @UartConst.ConstantType int constantType = uartVM.constantType.get();
 
         int workload = uartVM.workload.get();
-        Log.d(TAG, "setRealTimePwm: " + constantType);
+     //   Log.d(TAG, "setRealTimePwm: " + constantType);
         switch (constantType) {
             case UartConst.CT_SPEED:
                 setDevTargetRpm(workload);
@@ -437,7 +438,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         pwmLevelDA = Math.max(pwmLevelDA, 0);
         pwmLevelDA = Math.min(pwmLevelDA, 1023);
 
-        Timber.d("setMyCareEms: setDevPwmLevel, workload = " + uartVM.workload.get() + ", pwmLevelDA = " + pwmLevelDA);
+//        Timber.d("setMyCareEms: setDevPwmLevel, workload = " + uartVM.workload.get() + ", pwmLevelDA = " + pwmLevelDA);
+        Timber.d("setMyCareEms: setDevPwmLevel, LEVEL AD = " + pwmLevelDA);
 
         consoleUart.setMyCareEms(DeviceDyacoMedical.MODEL.EMS_M2, pwmLevelDA);
         if (isMediaWorkoutController) {
@@ -1028,7 +1030,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 consoleUart.setECBErrorNotify(true);     // 啟動逾時發送錯誤
             }
         } else {
-            // Stepper
+            // Stepper及 1000UBE 都同model // TODO: 1000UBE
             if (model != DeviceDyacoMedical.MODEL.EMS_M2) {
                 Timber.d("22LWR MODEL不符, 僅彈出錯誤訊息");
                 if (model == DeviceDyacoMedical.MODEL.UNKNOWN) {
@@ -1192,12 +1194,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     @Override
     public void onStepPerMin(int spm, int rpm2_D2D3) {
 
-        Timber.d("⭕️onStepPerMin: " + spm + "," + rpm2_D2D3);
+    //    Timber.d("⭕️onStepPerMin: " + spm + "," + rpm2_D2D3);
 
         // WORKOUT
         // for stepper, SPM (step per minute) value
         uartVM.aa_spm.set(spm);           // spm
-        uartVM.aa_rpm.set(rpm2_D2D3);     // current RP<
+        uartVM.aa_rpm.set(rpm2_D2D3);     // current RPM  <--  此值也是 1000UBE 的RPM // TODO: 1000UBE
         woVM.currentRpm.set(rpm2_D2D3);        // current RPM
 
         // MAINTENANCE MODE
@@ -1423,11 +1425,10 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 consoleUart.setBrakeMode(brakeMode);
                 break;
 
-            case UartConst.DS_A9_SYMM_ANGLE_RSP:
-                int anglePositiveA9 = uartVM.a9_anglePositive.get();
-                int angleNegativeA9 = uartVM.a9_angleNegative.get();
-                Timber.d("設定SYMMETRY ANGLE (DS_A9_SYMM_ANGLE_RSP), 重送指令, anglePositiveA9 =" + anglePositiveA9 + ", angleNegativeA9 = " + angleNegativeA9 + " (0xA9)");
-                setSymmetryAngle(anglePositiveA9, angleNegativeA9);
+            case DS_A9_SYMM_ANGLE_RSP: // TODO: 1000UBE
+
+                Timber.d("設定SYMMETRY ANGLE (DS_A9_SYMM_ANGLE_RSP), 重送指令, anglePositiveA9 =" + uartVM.a9_anglePositive + ", angleNegativeA9 = " + uartVM.a9_angleNegative + " (0xA9)");
+                setSymmetryAngle();
                 break;
 
             case UartConst.DS_FA_UPDATE_RESET_RSP:
@@ -1548,10 +1549,29 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 }
                 break;
 
-            case UartConst.DS_A0_IDLE_RSP:
+            case UartConst.DS_A0_IDLE_RSP: // TODO: 1000UBE
                 if (consoleMode == DeviceDyacoMedical.CONSOLE_MODE.IDLE) {
-                    setDevStep(DS_EMS_IDLE_STANDBY);
-                    Timber.d("CONSOLE MODE符合, IDLE待命中");
+
+                    if (MODE.isStepperType()) {
+                        setDevStep(DS_EMS_IDLE_STANDBY);
+                        Timber.d("CONSOLE MODE符合, IDLE待命中");
+                    } else {
+                        if (MODE.isUbeType()) {
+
+                            // 設定正踩及反踩的角度 (這個數值是M2的, 看客戶有沒有要更新)
+                            uartVM.a9_anglePositive.set(135);
+                            uartVM.a9_angleNegative.set(45);
+                            Timber.d("CONSOLE MODE符合, 設定Symmetry Angle (DS_A9_SYMM_ANGLE_RSP)," +
+                                            " a9_anglePositive =" + uartVM.a9_anglePositive.get() +
+                                            ", a9_angleNegative = " + uartVM.a9_angleNegative.get());
+
+                            setDevStep(DS_A9_SYMM_ANGLE_RSP);
+
+
+
+                            setSymmetryAngle();
+                        }
+                    }
                 } else {
                     Timber.d("CONSOLE MODE不符 (DS_A0_IDLE_RSP), 重送指令");
                     setDevConsoleMode(DeviceDyacoMedical.CONSOLE_MODE.IDLE);
@@ -1598,6 +1618,19 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 ", consoleMode = " + devConsoleMode);
 
         consoleUart.setConsoleMode(devMachineType, devConsoleMode);
+    }
+
+
+    private void setSymmetryAngle() {
+
+        // 限定symmetry angle在範圍內
+//        positive = Math.max(positive, 0);
+//        positive = Math.min(positive, 359);
+//        negative = Math.max(negative, 0);
+//        negative = Math.min(negative, 359);
+        consoleUart.setAngleSetting(
+                uartVM.a9_anglePositive.get(),
+                uartVM.a9_angleNegative.get());
     }
 
     private void setSymmetryAngle(int positive, int negative) {
@@ -1655,7 +1688,19 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onAngleSetting(int positive, int negative) {
+        Timber.d("positive(正踩角度0~359) = " + positive + ", negative(反踩角度0~359) = " + negative);
+        @UartConst.DeviceStep int devStep = getDevStep();
 
+        if (devStep == DS_A9_SYMM_ANGLE_RSP) {
+            if ((uartVM.a9_anglePositive.get() == positive) && (uartVM.a9_angleNegative.get() == negative)) {
+                Timber.d("symmetry angle數值符合, 進入DS_EMS_IDLE_STANDBY");
+                setDevStep(UartConst.DS_EMS_IDLE_STANDBY);
+            }
+            else {
+                Timber.d("symmetry angle數值不符, positive = " + positive + ", negative = " + negative + " 重送指令");
+                setSymmetryAngle();
+            }
+        }
     }
 
     @Override
@@ -1680,7 +1725,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         // 將計算結果設定給 ViewModel
         woVM.currentStep.set(currentTotalSteps);
 
-        Timber.tag("onCurrentStepCount").d("onCurrentStepCount:" + woVM.currentStep.get());
+        Timber.d("onCurrentStepCount:" + woVM.currentStep.get());
 
 
     }
@@ -1854,6 +1899,13 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onSensorState(int pulseCount, DeviceDyacoMedical.SENSOR hallSensorStatus) {
+        // TODO: 1000UBE
+        // 工程模式顯示數值
+        if (MODE.isUbeType()) { // 非拉線器的UBE
+            Timber.d("onSensorState: " + pulseCount +","+ hallSensorStatus.name());
+            uartVM.ad_pulseCount.set(pulseCount);       // int
+            uartVM.ad_hallSensorStatus.set(hallSensorStatus == DeviceDyacoMedical.SENSOR.ON); // boolean
+        }
     }
 
     @Override
@@ -1900,7 +1952,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
                 devStep == DS_ECB_IDLE_STANDBY ||
                         devStep == DS_EMS_IDLE_STANDBY);
 
-        //   Timber.d("⭕️setDevStep: %s", woVM.isWorkoutReadyStart.get());
+           Timber.d("⭕️setDevStep: %s", devStep);
 
         //workout 可以開始下指令
         uartVM.isEnterRunningReady.set(

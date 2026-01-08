@@ -27,6 +27,9 @@ public class UartVM extends AndroidViewModel {
 
     }
 
+    public final ObservableBoolean ad_hallSensorStatus = new ObservableBoolean(false);
+    public final ObservableInt ad_pulseCount = new ObservableInt(0);
+
     public final ObservableBoolean isExStart = new ObservableBoolean(false);
     public final ObservableBoolean isExStop = new ObservableBoolean(false);
 
