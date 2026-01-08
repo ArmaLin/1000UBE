@@ -1366,7 +1366,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     @SuppressLint("SwitchIntDef")
     private void checkEmsSteps(int pwmLevel) {
 
-        Timber.d("checkEmsSteps, m_devStep = %s", uartVM.getStepString());
+     //   Timber.d("checkEmsSteps, m_devStep = %s", uartVM.getStepString());
 
         DeviceDyacoMedical.MACHINE_TYPE devMachineType = uartVM.a0_machineType.get();
         @UartConst.DeviceStep int devStep = getDevStep();
