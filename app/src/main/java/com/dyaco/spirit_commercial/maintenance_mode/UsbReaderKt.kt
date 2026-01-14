@@ -9,15 +9,14 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Build
 import android.util.ArrayMap
-import android.util.Log
 import android.webkit.MimeTypeMap
 import com.github.mjdev.libaums.UsbMassStorageDevice
 import com.github.mjdev.libaums.driver.scsi.commands.sense.UnitAttention
 import com.github.mjdev.libaums.fs.FileSystem
 import com.github.mjdev.libaums.fs.UsbFile
 import com.github.mjdev.libaums.fs.UsbFileStreamFactory
-import com.github.mjdev.libaums.partition.Partition
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -73,10 +72,10 @@ class UsbReaderKt(private val context: Context) {
         attachedDevices.clear()
         if (listener != null && broadcastReceiver != null) {
             context.registerReceiver(broadcastReceiver, filter)
-            Log.d(TAG, "已註冊廣播接收器")
+            Timber.tag(TAG).d("已註冊廣播接收器")
             scanExistingDevices()
         } else {
-            Log.d(TAG, "註冊廣播接收器失敗")
+            Timber.tag(TAG).d("註冊廣播接收器失敗")
         }
     }
 
@@ -87,7 +86,7 @@ class UsbReaderKt(private val context: Context) {
         getUsbDevice().forEach { csUsb ->
             val name = csUsb.name
             if (attachedDevices.add(name)) {
-                Log.d(TAG, "scanExistingDevices: 模擬 onDeviceAttached → $name")
+                Timber.tag(TAG).d("scanExistingDevices: 模擬 onDeviceAttached → $name")
                 scope.launch { listener?.onDeviceAttached(name) }
             }
         }
@@ -97,13 +96,13 @@ class UsbReaderKt(private val context: Context) {
      * 自動流程：取得裝置、申請權限、搜尋檔案
      */
     fun autoFindFile(fileName: String, type: FileType, kind: FileKind) {
-        Log.d(TAG, "啟動自動尋找流程 → 檔名：$fileName，類型：$type，種類：$kind")
+        Timber.tag(TAG).d( "啟動自動尋找流程 → 檔名：$fileName，類型：$type，種類：$kind")
         autoFileName = fileName
         autoFileType = type
         autoFileKind = kind
         getUsbDevice().firstOrNull()?.let { requestPermission(it) }
             ?: run {
-                Log.d(TAG, "無 USB 裝置")
+                Timber.tag(TAG).d( "無 USB 裝置")
                 scope.launch { listener?.onError(UsbError.NO_USB_DEVICE) }
             }
     }
@@ -115,12 +114,12 @@ class UsbReaderKt(private val context: Context) {
         device: CSUsbDevice?, fileName: String?, type: FileType?, kind: FileKind?
     ) {
         if (device == null || fileName == null || type == null || kind == null) {
-            Log.d(TAG, "參數有誤")
+            Timber.tag(TAG).d( "參數有誤")
             scope.launch { listener?.onError(UsbError.PARAMETER_ERROR) }
             return
         }
         if (isFinding) {
-            Log.d(TAG, "已有尋找作業進行中")
+            Timber.tag(TAG).d( "已有尋找作業進行中")
             return
         }
         isFinding = true
@@ -131,7 +130,7 @@ class UsbReaderKt(private val context: Context) {
             val data = if (type in setOf(FileType.APK, FileType.MP4, FileType.IMAGE, FileType.JSON))
                 copyResult as? String else null
             val raw = if (type == FileType.BIN) copyResult as? ByteArray else null
-            Log.d(TAG, "尋找結果 → 狀態：$status，data：$data，raw 長度：${raw?.size ?: 0}")
+            Timber.tag(TAG).d( "尋找結果 → 狀態：$status，data：$data，raw 長度：${raw?.size ?: 0}")
             listener?.onFindFile(fileName, status, type, data, raw, kind)
         }
     }
@@ -139,7 +138,7 @@ class UsbReaderKt(private val context: Context) {
     private suspend fun findFileInBackground(
         device: CSUsbDevice, fileName: String, type: FileType, kind: FileKind
     ): Pair<FileStatus, Any?> = withContext(Dispatchers.IO) {
-        Log.d(TAG, "背景尋找檔案：$fileName")
+        Timber.tag(TAG).d( "背景尋找檔案：$fileName")
         var fileStatus = FileStatus.FILE_NOT_FOUND
         var copyResult: Any? = null
 
@@ -152,19 +151,19 @@ class UsbReaderKt(private val context: Context) {
                 device.device.init()
                 initialized = true
                 break
-            } catch (e: UnitAttention) {
+            } catch (_: UnitAttention) {
                 attempts++
-                Log.w(TAG, "UnitAttention，重試 init 第 $attempts 次")
+                Timber.tag(TAG).w("UnitAttention，重試 init 第 $attempts 次")
                 delay(200)
             } catch (e: IOException) {
-                Log.e(TAG, "初始化時 IOException：${e.localizedMessage}", e)
+                Timber.tag(TAG).e(e, "初始化時 IOException：${e.localizedMessage}")
                 withContext(Dispatchers.Main) { listener?.onError(UsbError.BACKGROUND_SEARCH_ERROR) }
                 return@withContext Pair(FileStatus.FILE_NOT_FOUND, null)
             }
         }
 
         if (!initialized) {
-            Log.e(TAG, "初始化 UnitAttention 重試失敗")
+            Timber.tag(TAG).e("初始化 UnitAttention 重試失敗")
             withContext(Dispatchers.Main) { listener?.onError(UsbError.BACKGROUND_SEARCH_ERROR) }
             return@withContext Pair(FileStatus.FILE_NOT_FOUND, null)
         }
@@ -179,13 +178,13 @@ class UsbReaderKt(private val context: Context) {
             }
 
             if (usbFile == null) {
-                Log.d(TAG, "找不到檔案：$fileName")
+                Timber.tag(TAG).d("找不到檔案：$fileName")
             } else {
-                Log.d(TAG, "找到檔案：${usbFile.name}，開始複製")
+                Timber.tag(TAG).d("找到檔案：${usbFile.name}，開始複製")
                 fileStatus = FileStatus.FILE_FOUND
 
                 if (type == FileType.MP4 && !checkVideo(usbFile)) {
-                    Log.e(TAG, "影片檢查失敗 → ${usbFile.name}")
+                    Timber.tag(TAG).e("影片檢查失敗 → ${usbFile.name}")
                     withContext(Dispatchers.Main) { listener?.onError(UsbError.VIDEO_VALIDATION_FAILED) }
                     return@withContext Pair(FileStatus.FILE_NOT_FOUND, null)
                 }
@@ -199,17 +198,17 @@ class UsbReaderKt(private val context: Context) {
             }
         } catch (e: Exception) {
             if (!isCancelled) {
-                Log.e(TAG, "背景尋找檔案錯誤：${e.localizedMessage}", e)
+                Timber.tag(TAG).e(e, "背景尋找檔案錯誤：${e.localizedMessage}")
                 withContext(Dispatchers.Main) { listener?.onError(UsbError.BACKGROUND_SEARCH_ERROR) }
             }
         } finally {
             try {
                 device.device.close()
             } catch (_: Exception) {}
-            Log.d(TAG, "搜尋結束，已關閉裝置：${device.name}")
+            Timber.tag(TAG).d("搜尋結束，已關閉裝置：${device.name}")
         }
 
-        Log.d(TAG, "背景尋找結束 → 狀態：$fileStatus")
+        Timber.tag(TAG).d("背景尋找結束 → 狀態：$fileStatus")
         Pair(fileStatus, copyResult)
     }
 
@@ -218,51 +217,81 @@ class UsbReaderKt(private val context: Context) {
         fileSystem: FileSystem, fromFile: UsbFile, toFile: File,
         chunkSize: Int, type: FileType
     ): Any? {
-        Log.d(TAG, "開始複製檔案：${fromFile.name}")
+        Timber.tag(TAG).d("開始串流複製檔案：${fromFile.name} 至 ${toFile.absolutePath}")
         val totalSize = fromFile.length
-        val content = ByteArray(totalSize.toInt())
-        val buffer = ByteArray(chunkSize.coerceAtMost(16 * 1024)) // 最多16KB
-        var current = 0
+        // 使用一個固定大小的緩衝區，例如 16KB，避免一次載入整個檔案
+        val buffer = ByteArray(chunkSize.coerceAtMost(16 * 1024))
+        var currentBytesCopied = 0L // 使用 Long 來避免大檔案時的溢位
 
         try {
+            // 建立從 USB 檔案讀取的輸入流
             BufferedInputStream(
                 UsbFileStreamFactory.createBufferedInputStream(fromFile, fileSystem)
             ).use { inputStream ->
+                // 建立寫入到 app 快取目錄的輸出流
                 BufferedOutputStream(Files.newOutputStream(toFile.toPath()), buffer.size).use { outputStream ->
                     while (!isCancelled) {
                         val bytesRead = inputStream.read(buffer)
-                        if (bytesRead <= 0) break
+                        if (bytesRead <= 0) break // 讀取完畢
+
+                        // 將讀取到的緩衝區內容直接寫入輸出流
                         outputStream.write(buffer, 0, bytesRead)
-                        System.arraycopy(buffer, 0, content, current, bytesRead)
-                        current += bytesRead
+
+                        currentBytesCopied += bytesRead
+
+                        // 更新進度
+                        val finalCurrentBytes = currentBytesCopied
                         scope.launch {
-                            listener?.onProgress(current.toLong(), totalSize)
+                            // 這裡的 onProgress 參數 current 應該是 Long 型別以支援大檔案
+                            listener?.onProgress(finalCurrentBytes, totalSize)
                         }
                     }
+                    // 確保所有緩衝區的資料都寫入檔案
+                    outputStream.flush()
                 }
             }
+
             if (isCancelled) {
-                Log.d(TAG, "檔案下載被取消")
+                Timber.tag(TAG).d("檔案複製被使用者取消")
+                // 如果取消了，刪除不完整的檔案
+                if (toFile.exists()) {
+                    toFile.delete()
+                }
                 return null
             }
+
+            Timber.tag(TAG).d("檔案複製完成，總大小: $currentBytesCopied bytes")
+
+            // 檔案成功複製到 toFile 後，再根據類型決定回傳內容
             val result = when (type) {
-                FileType.JSON -> String(content)
+                // 對於需要內容的類型，從已儲存的 toFile 讀取
+                FileType.JSON -> toFile.readText(Charsets.UTF_8)
+                FileType.BIN -> toFile.readBytes()
+                // 對於只需要路徑的類型，直接回傳路徑
                 FileType.APK, FileType.MP4, FileType.IMAGE -> toFile.absolutePath
-                FileType.BIN -> content
             }
-            Log.d(TAG, "複製完成 → 結果：$result")
+            Timber.tag(TAG).d("複製完成 → 回傳結果類型：${result?.javaClass?.simpleName}")
             return result
+
         } catch (e: IOException) {
             if (!isCancelled) {
-                Log.e(TAG, "複製時IOException：${e.localizedMessage}", e)
+                Timber.tag(TAG).e(e, "複製檔案時發生 IOException：${e.localizedMessage}")
                 scope.launch { listener?.onError(UsbError.COPY_FILE_ERROR) }
             } else {
-                Log.d(TAG, "複製中使用者取消，不回報錯誤")
+                Timber.tag(TAG).d("複製過程中斷 (使用者取消)，不回報錯誤")
+            }
+            // 發生錯誤時刪除不完整的檔案
+            if (toFile.exists()) {
+                toFile.delete()
             }
             return null
         } catch (e: Exception) {
-            Log.e(TAG, "複製其他錯誤：${e.localizedMessage}", e)
+            Timber.tag(TAG).e(e, "複製檔案時發生其他錯誤：${e.localizedMessage}")
             scope.launch { listener?.onError(UsbError.COPY_FILE_ERROR) }
+            // 發生錯誤時刪除不完整的檔案
+            if (toFile.exists()) {
+                toFile.delete()
+            }
             return null
         }
     }
@@ -275,7 +304,8 @@ class UsbReaderKt(private val context: Context) {
     ): Boolean {
         val mime = getMimeType(usbFile.absolutePath)
         val fileSizeMb = byte2Mb(usbFile.length)
-        Log.e(TAG, "檢查影片 → ${usbFile.name}，檔案大小：${usbFile.length}，約 ${fileSizeMb}MB，是否符合 $expectedMime：${mime == expectedMime}")
+        Timber.tag(TAG)
+            .e("檢查影片 → ${usbFile.name}，檔案大小：${usbFile.length}，約 ${fileSizeMb}MB，是否符合 $expectedMime：${mime == expectedMime}")
         val errors = IntArray(4).apply {
             this[0] = if (mime == expectedMime) 1 else 2
             this[1] = 0
@@ -290,7 +320,7 @@ class UsbReaderKt(private val context: Context) {
 
     fun requestPermission(csUsb: CSUsbDevice?) {
         csUsb?.let { device ->
-            Log.d(TAG, "申請權限 → 裝置：${device.name}")
+            Timber.tag(TAG).d("申請權限 → 裝置：${device.name}")
             if (usbManager.hasPermission(device.device.usbDevice)) {
                 device.isPermissionGranted = true
                 if (autoFileName != null && autoFileType != null && autoFileKind != null) {
@@ -305,9 +335,9 @@ class UsbReaderKt(private val context: Context) {
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
                 usbManager.requestPermission(device.device.usbDevice, intent)
-                Log.d(TAG, "已向系統申請權限：${device.name}")
+                Timber.tag(TAG).d("已向系統申請權限：${device.name}")
             } else {
-                Log.w(TAG, "裝置不存在或已拔除：${device.name}")
+                Timber.tag(TAG).w("裝置不存在或已拔除：${device.name}")
                 scope.launch { listener?.onError(UsbError.PERMISSION_FAILED) }
             }
         } ?: scope.launch { listener?.onError(UsbError.PARAMETER_ERROR) }
@@ -316,17 +346,17 @@ class UsbReaderKt(private val context: Context) {
     fun getUsbDevice(): List<CSUsbDevice> {
         usbDevicesMap.clear()
         UsbMassStorageDevice.getMassStorageDevices(context).forEach { dev ->
-            Log.d(TAG, "加入裝置：${dev.usbDevice.deviceName}")
+            Timber.tag(TAG).d("加入裝置：${dev.usbDevice.deviceName}")
             usbDevicesMap[dev.usbDevice.deviceName] = CSUsbDevice(dev)
         }
-        Log.d(TAG, "找到 ${usbDevicesMap.size} 個 USB 裝置")
+        Timber.tag(TAG).d("找到 ${usbDevicesMap.size} 個 USB 裝置")
         return usbDevicesMap.values.toList()
     }
 
     private fun createBroadcastReceiver(): BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             intent ?: return
-            Log.d(TAG, "接收到廣播：${intent.action}")
+            Timber.tag(TAG).d("接收到廣播：${intent.action}")
             when (intent.action) {
                 ACTION_USB_PERMISSION -> {
                     synchronized(this) {
@@ -338,7 +368,7 @@ class UsbReaderKt(private val context: Context) {
                         device?.deviceName?.let { name ->
                             usbDevicesMap[name]?.let { csUsb ->
                                 csUsb.isPermissionGranted = granted
-                                Log.d(TAG, "權限回傳 → 裝置：$name，是否授權：$granted")
+                                Timber.tag(TAG).d("權限回傳 → 裝置：$name，是否授權：$granted")
                                 if (!granted) {
                                     scope.launch { listener?.onError(UsbError.PERMISSION_FAILED) }
                                 } else if (autoFileName != null && autoFileType != null && autoFileKind != null) {
@@ -358,12 +388,12 @@ class UsbReaderKt(private val context: Context) {
                         @Suppress("DEPRECATION") intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
                     dev?.deviceName?.let { name ->
                         if (attachedDevices.add(name)) {
-                            Log.d(TAG, "裝置插入：$name，開始自動取得 USB 裝置")
+                            Timber.tag(TAG).d("裝置插入：$name，開始自動取得 USB 裝置")
                             getUsbDevice().firstOrNull()?.let { requestPermission(it) }
-                                ?: Log.d(TAG, "自動流程：未找到 USB 裝置")
+                                ?: Timber.tag(TAG).d("自動流程：未找到 USB 裝置")
                             scope.launch { listener?.onDeviceAttached(name) }
                         } else {
-                            Log.d(TAG, "裝置插入，但已處理過 → $name")
+                            Timber.tag(TAG).d("裝置插入，但已處理過 → $name")
                         }
                     }
                 }
@@ -379,10 +409,10 @@ class UsbReaderKt(private val context: Context) {
                             try {
                                 massDev.close()
                             } catch (e: Exception) {
-                                Log.e(TAG, "關閉裝置時出錯：${e.localizedMessage}", e)
+                                Timber.tag(TAG).e(e, "關閉裝置時出錯：${e.localizedMessage}")
                             }
                         }
-                        Log.d(TAG, "檔案下載停止（USB 已拔除）")
+                        Timber.tag(TAG).d("檔案下載停止（USB 已拔除）")
                         attachedDevices.remove(name)
                         scope.launch { listener?.onDeviceDetached(name) }
                     }
@@ -401,7 +431,7 @@ class UsbReaderKt(private val context: Context) {
                 try {
                     it.device.close()
                 } catch (e: Exception) {
-                    Log.e(TAG, "關閉裝置錯誤：${e.localizedMessage}", e)
+                    Timber.tag(TAG).e(e, "關閉裝置錯誤：${e.localizedMessage}")
                 }
             }
             usbDevicesMap.clear()
@@ -415,9 +445,9 @@ class UsbReaderKt(private val context: Context) {
             broadcastReceiver = null
 
             listener = null
-            Log.d(TAG, "所有 USB 資源已釋放")
+            Timber.tag(TAG).d("所有 USB 資源已釋放")
         } catch (e: Exception) {
-            Log.e(TAG, "關閉 USB 時發生錯誤：${e.localizedMessage}", e)
+            Timber.tag(TAG).e(e, "關閉 USB 時發生錯誤：${e.localizedMessage}")
         }
     }
 

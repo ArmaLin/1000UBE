@@ -1,7 +1,6 @@
 package com.dyaco.spirit_commercial.maintenance_mode;
 
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
-import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,10 +8,9 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.corestar.libs.device.DeviceDyacoMedical;
+import com.corestar.libs.ota.ArterySubMcuUpdateManager;
 import com.corestar.libs.ota.LwrMcuUpdateManager;
 import com.corestar.libs.ota.SubMcuUpdateManager;
-import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
 import com.dyaco.spirit_commercial.R;
 import com.dyaco.spirit_commercial.databinding.WindowUpdateFirmwareBinding;
@@ -20,6 +18,8 @@ import com.dyaco.spirit_commercial.support.MsgEvent;
 import com.dyaco.spirit_commercial.support.RxTimer;
 import com.dyaco.spirit_commercial.support.base_component.BasePopupWindow;
 import com.dyaco.spirit_commercial.support.intdef.GENERAL;
+
+import timber.log.Timber;
 
 public class UpdateFirmwareWindow extends BasePopupWindow<WindowUpdateFirmwareBinding> {
     private final Context mContext;
@@ -42,22 +42,103 @@ public class UpdateFirmwareWindow extends BasePopupWindow<WindowUpdateFirmwareBi
 
         getBinding().binName.setText(binName);
 
-        if (isTreadmill) {
-            App.isFirmwareUpdating = true;
-        } else {
-            getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.AA);
-        }
+//        if (isTreadmill) {
+//            App.isFirmwareUpdating = true;
+//        } else {
+//            getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.AA);
+//        }
 
-        if (type == GENERAL.SUB_MCU) {
-            getBinding().updateTitle.setText(R.string.SUB_MCU_Update);
-            initSubMcuUpdateManager();
-        } else {
-            getBinding().updateTitle.setText(R.string.LWR_Update);
-            initLwrUpdateManager();
-        }
+        new RxTimer().timer(1000, new RxTimer.RxAction() {
+            @Override
+            public void action(long number) {
+                if (type == GENERAL.SUB_MCU) {
+                    getBinding().updateTitle.setText(R.string.SUB_MCU_Update);
+                    initSubMcuUpdateManager2();
+                } else {
+                    getBinding().updateTitle.setText(R.string.LWR_Update);
+                    initLwrUpdateManager();
+                }
+            }
+        });
+
 
         downloadProgress.setProgress(0);
 
+    }
+
+    private void initSubMcuUpdateManager2(){
+
+        ArterySubMcuUpdateManager arterySubMcuUpdateManager = getDeviceSpiritC().getArterySubMcuUpdateManager();
+
+    //    Timber.tag("🦐🦐").d("onUpdateState: Length=%d", binRaw != null ? binRaw.length : 0);
+        arterySubMcuUpdateManager.setListener(new ArterySubMcuUpdateManager.ArterySubMcuUpdateEventListener() {
+            @Override
+            public void onUpdateState(ArterySubMcuUpdateManager.UPDATE_STATE updateState, ArterySubMcuUpdateManager.MCU_STATE mcuState) {
+                Timber.tag("🦐🦐").d("onUpdateState: " + updateState +", "+ mcuState);
+                switch (updateState) {
+                    case START:
+                        Timber.tag("🦐🦐").d("onUpdateState: START");
+                        break;
+
+                    case RUNNING:   // 成功啟動更新時通知一次
+                        Timber.tag("🦐🦐").d("onUpdateState: RUNNING");
+                        break;
+
+                    case FINAL:        // 更新結束時通知一次
+                        Timber.tag("🦐🦐").d("onUpdateState: FINAL");
+                        if (isShowing()) {
+//                            getBinding().getRoot().post(() -> showUiState(UiState.RESULT_SUCCESS));
+                        }
+
+//                        showUiState(UsbUpdateWindow.UiState.COPYING);
+                        break;
+
+                    case FINISH:
+                        Timber.tag("🦐🦐").d("onUpdateState: FINISH 成功");
+                        ((MainActivity) mContext).runOnUiThread(() -> {
+                            returnValue(new MsgEvent(updateType, true));
+                            dismiss();
+                        });
+                        break;
+
+                    case ERROR:        // 更新結束時通知一次
+                        Timber.tag("🦐🦐").d("onUpdateState: ERROR");
+                        ((MainActivity) mContext).runOnUiThread(() -> {
+                            returnValue(new MsgEvent(updateType, false));
+                            dismiss();
+                        });
+                        break;
+                }
+            }
+
+            @Override
+            public void onUpdateProgress(int current, int total) {
+
+                int progress = (100 * current / total);
+                if (total > 0) {
+                    ((MainActivity) mContext).runOnUiThread(() -> {
+                        downloadProgress.setProgress(progress);
+                        if (progress >= 100) {
+                            getBinding().progress.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
+
+                Timber.tag("🦐🦐").d("onUpdateState: " + progress + " / " + total);
+
+            }
+
+            @Override
+            public void onTimeOut(String timeOut) {
+                ((MainActivity) mContext).runOnUiThread(() -> {
+                    returnValue(new MsgEvent(updateType, false));
+                    dismiss();
+                });
+
+            }
+        });
+
+        new RxTimer().timer(500, number -> arterySubMcuUpdateManager.updateMcu(binRaw));
     }
 
     private void initSubMcuUpdateManager() {

@@ -208,7 +208,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
 
         if (uartVM.stopHeartbeat.get()) {
-            Timber.d("停止心跳包傳送");
+         //   Timber.tag("🦐🦐").d("停止心跳包傳送");
             return;
         }
 
@@ -977,9 +977,9 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
 
         Timber.d(
-                " onDeviceInfo:{裝置資訊}" +
+                "🦐🦐onDeviceInfo:{裝置資訊}" +
                         "  model = " + model +  // 在東庚案, 不具參考價值, 直接以 getDeviceInfo的第二個參數為表 (MACHINE_TYPE)
-                        ", subMcuFwVer = " + subMcuFwVer +
+                        ",⭐️⭐️⭐️subMcuFwVer = " + subMcuFwVer +
 //                        ", firmwareVersionInt = " + getInstance().m_medicalBean.getFirmwareVersionInt() +
                         ", firmwareVersionInt = " + fwVersionInt +
                         ", keyStatus = " + keyStatus +
@@ -1050,8 +1050,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             }
         }
 
-        Timber.d("onDeviceInfo: ");
-        Timber.tag("GEM3").d("onDeviceInfo: ");
+//        Timber.d("onDeviceInfo: ");
+//        Timber.tag("GEM3").d("onDeviceInfo: ");
         // 確定取得device info之後, 再初始化GEM3
 
         m.initGem3();
@@ -1120,7 +1120,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
 //        Timber.d("onMcuControl: pwmLevel:" + pwmLevel );
 //
-//        Timber.d(
+//        Timber.tag("⭐️⭐️⭐️⭐️").d(
 //                "\n[0x80] model = " + model +
 //                        "\n, mcuErrors = " + mcuErrors.toString() +
 //                        "\n, hpHr = " + hpHr +
@@ -1190,6 +1190,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     /**
      * Stepper 每秒會有
+     *
+     * RPM 這裡來
      */
     @Override
     public void onStepPerMin(int spm, int rpm2_D2D3) {
@@ -1440,7 +1442,7 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
     @Override
     public void onEchoMode(DeviceDyacoMedical.ECHO_MODE echoMode) {
-        Timber.d("echoMode = %s", echoMode);
+        Timber.tag("🦐🦐").d("echoMode = %s", echoMode);
     }
 
     @Override

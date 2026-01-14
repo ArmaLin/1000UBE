@@ -1,7 +1,6 @@
 package com.dyaco.spirit_commercial.maintenance_mode;
 
 import static com.dyaco.spirit_commercial.App.getDeviceSpiritC;
-import static com.dyaco.spirit_commercial.MainActivity.isTreadmill;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.ON_USB_MODE_SET;
 
@@ -15,9 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.corestar.libs.device.DeviceDyacoMedical;
-import com.corestar.libs.device.DeviceSpiritC;
-import com.dyaco.spirit_commercial.App;
 import com.dyaco.spirit_commercial.MainActivity;
+import com.dyaco.spirit_commercial.UartVM;
 import com.dyaco.spirit_commercial.databinding.FragmentMaintenanceFirmwareTestBinding;
 import com.dyaco.spirit_commercial.model.webapi.bean.UpdateBean;
 import com.dyaco.spirit_commercial.support.MsgEvent;
@@ -44,6 +42,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
     private static final String TAG = "USB_UPDATE";
     private final String FILE_JSON_NAME = "update.json";
     private DeviceSettingViewModel deviceSettingViewModel;
+    UartVM uartVM;
 //    private final String FILE_JSON_NAME = "update_fw.json";
 
     @Override
@@ -56,6 +55,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
         super.onViewCreated(view, savedInstanceState);
 
         deviceSettingViewModel = new ViewModelProvider(requireActivity()).get(DeviceSettingViewModel.class);
+        uartVM = new ViewModelProvider(requireActivity()).get(UartVM.class);
 
         initEvent();
 
@@ -366,7 +366,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
         if (CheckDoubleClick.isFastClick()) return;
 
         closeUpdateWindow();
-
+        uartVM.stopHeartbeat.set(true);
         byte[] binRaw = type == GENERAL.SUB_MCU ? binRawSubMcu : binRawLwr;
         String binName = type == GENERAL.SUB_MCU ? subMcuBinName : lwrBinName;
         updateFirmwareWindow = new UpdateFirmwareWindow(requireActivity(), binRaw, type, binName);
@@ -382,11 +382,11 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                         if (!(boolean) value.getObj()) {
                             //失敗
                             Toasty.error(requireActivity(), "", Toasty.LENGTH_LONG).show();
-                            if (isTreadmill) {
-                                App.isFirmwareUpdating = false;
-                            } else {
-                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
-                            }
+//                            if (isTreadmill) {
+//                                App.isFirmwareUpdating = false;
+//                            } else {
+//                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
+//                            }
                             if (getBinding() != null) {
                                 getBinding().btnUpdateSubMcu.setVisibility(View.INVISIBLE);
                                 getBinding().btnNoUpdateSubMcu.setVisibility(View.VISIBLE);
@@ -398,8 +398,8 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                                 getBinding().btnUpdateSubMcu.setVisibility(View.INVISIBLE);
                                 getBinding().btnNoUpdateSubMcu.setVisibility(View.VISIBLE);
                             }
-
-                            Toasty.success(requireActivity(), "", Toasty.LENGTH_LONG).show();
+                         //   ((MainActivity) requireActivity()).showGoBackground(true);
+                            Toasty.success(requireActivity(), "Restarting....", Toasty.LENGTH_LONG).show();
                             //    ((MainActivity) requireActivity()).mRestartApp();
 
                             Log.d(TAG, "重啟APP: ");
@@ -410,11 +410,11 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                         //LWR 下控
                         if (!(boolean) value.getObj()) {
                             Toasty.error(requireActivity(), "LWR Install Failed", Toasty.LENGTH_LONG).show();
-                            if (isTreadmill) {
-                                App.isFirmwareUpdating = false;
-                            } else {
-                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
-                            }
+//                            if (isTreadmill) {
+//                                App.isFirmwareUpdating = false;
+//                            } else {
+//                                getDeviceSpiritC().setEchoMode(DeviceDyacoMedical.ECHO_MODE.SECOND);
+//                            }
                             if (getBinding() != null) {
                                 getBinding().btnUpdateSubMcu.setVisibility(View.INVISIBLE);
                                 getBinding().btnNoUpdateSubMcu.setVisibility(View.VISIBLE);
@@ -432,6 +432,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
                                     ((MainActivity) requireActivity()).uartConsole.resetLwrAfterUpdate();
                                     ((MainActivity) requireActivity()).showLoading(true);
                                 } else {
+                                 //   ((MainActivity) requireActivity()).showGoBackground(true);
                                     restartApp((MainActivity) requireActivity());
                                 }
 
@@ -445,6 +446,7 @@ public class MaintenanceFirmwareTestFragment extends BaseBindingDialogFragment<F
 
             @Override
             public void onDismiss() {
+                uartVM.stopHeartbeat.set(false);
             }
         });
     }
