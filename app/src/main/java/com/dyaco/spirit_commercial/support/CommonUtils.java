@@ -2094,7 +2094,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_REVOLUTIONS:
-                    value = String.valueOf(workoutViewModel.rpmCounter.get());
+                    value = String.valueOf(workoutViewModel.totalRevolutions.get());
                     break;
 
                 case STATS_TOTAL_STEPS:
@@ -2355,7 +2355,7 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_REVOLUTIONS:
-                    view1Text = String.valueOf(workoutViewModel.rpmCounter.get());
+                    view1Text = String.valueOf(workoutViewModel.totalRevolutions.get());
                     view2Text = context.getString(R.string.Total_Revolutions);
                     view3Text = "";
                     break;

@@ -559,6 +559,8 @@ public class FormulaUtil {
     public void clearWorkoutViewModel(WorkoutViewModel w) {
 
         if (w == null) return;
+        w.totalRevolutions.set(0);
+
         w.egymIntervalDistance.set(0);
         w.egymTimePerSets.set(0);
         w.isWorkoutGarmin.set(false);

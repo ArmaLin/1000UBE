@@ -24,6 +24,9 @@ import java.util.Date;
 import java.util.List;
 
 public class WorkoutViewModel extends ViewModel implements Serializable {
+
+    public final ObservableInt totalRevolutions = new ObservableInt(0);
+
     public final ObservableInt egymTimePerSets = new ObservableInt(0);
     public final ObservableDouble egymIntervalDistance = new ObservableDouble();
     public int[] orgArraySpeedAndLevelE; // 從 iProgram > initChart 產生
