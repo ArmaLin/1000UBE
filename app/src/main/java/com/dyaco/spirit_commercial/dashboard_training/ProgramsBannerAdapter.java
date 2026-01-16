@@ -524,7 +524,7 @@ public class ProgramsBannerAdapter extends BannerAdapter<ProgramsEnum, RecyclerV
             if (programsEnum == ProgramsEnum.CALORIES) {
                 workoutViewModel.targetCalories.set(Double.parseDouble(opt1Data));
             } else if (programsEnum == ProgramsEnum.STEPS) {
-                workoutViewModel.targetSteps.set(Double.parseDouble(opt1Data));
+                workoutViewModel.targetSteps.set(Integer.parseInt(opt1Data));
 //            } else if (programsEnum == ProgramsEnum.METS) {
 //                workoutViewModel.targetMets.set(Double.parseDouble(opt1Data));
             } else {

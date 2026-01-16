@@ -2869,7 +2869,7 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
         w.caloriesLeft.set(d1);
 
 
-        double ss1 = w.targetSteps.get() - w.currentStep.get();
+        int ss1 = w.targetSteps.get() - w.currentStep.get();
         ss1 = ss1 >= 0 ? ss1 : 0;
         w.stepLeft.set(ss1);
 

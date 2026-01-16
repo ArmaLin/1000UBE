@@ -668,6 +668,7 @@ public class FormulaUtil {
         w.stepLeft.set(0);
         w.targetSteps.set(0);
         w.currentStep.set(0);
+        w.totalStep.set(0);
 
         w.metsLeft.set(0);
         w.targetMets.set(0);

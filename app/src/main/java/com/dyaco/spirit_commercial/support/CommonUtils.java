@@ -2098,11 +2098,11 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_STEPS:
-                    value = formatDecimal(workoutViewModel.currentStep.get());
+                    value = String.valueOf(workoutViewModel.currentStep.get());
                     break;
 
                 case STATS_REMAINING_STEPS:
-                    value = formatDecimal(workoutViewModel.stepLeft.get());
+                    value = String.valueOf(workoutViewModel.stepLeft.get());
                     break;
 
 
@@ -2361,13 +2361,13 @@ public class CommonUtils {
                     break;
 
                 case STATS_TOTAL_STEPS:
-                    view1Text = formatDecimal(workoutViewModel.currentStep.get());
+                    view1Text = String.valueOf(workoutViewModel.currentStep.get());
                     view2Text = context.getString(R.string.Total_Steps);
                     view3Text = "";
                     break;
 
                 case STATS_REMAINING_STEPS:
-                    view1Text = formatDecimal(workoutViewModel.stepLeft.get());
+                    view1Text = String.valueOf(workoutViewModel.stepLeft.get());
                     view2Text = context.getString(R.string.Remaining_Steps);
                     view3Text = "";
                     break;

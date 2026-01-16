@@ -235,10 +235,10 @@ public final ObservableDouble peakRpm = new ObservableDouble();
     public final ObservableDouble caloriesLeft = new ObservableDouble();
 
 
-    public final ObservableDouble currentStep = new ObservableDouble();
-    public final ObservableDouble totalStep = new ObservableDouble();
-    public final ObservableDouble stepLeft = new ObservableDouble();
-    public final ObservableDouble targetSteps = new ObservableDouble();
+    public final ObservableInt currentStep = new ObservableInt();
+    public final ObservableInt totalStep = new ObservableInt();
+    public final ObservableInt stepLeft = new ObservableInt();
+    public final ObservableInt targetSteps = new ObservableInt();
 
 
     public final ObservableDouble currentMets = new ObservableDouble();
