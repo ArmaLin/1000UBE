@@ -1017,7 +1017,7 @@ public class EgymUtil {
             eSpeed = mph2kph((float) w.avgSpeed.get()) / 3.6;
         }
 
-        eStepsPerMinute = w.currentRpm.get() * 2; //SPM
+        eStepsPerMinute = w.currentRpm.get(); //SPM
         eRotations = w.currentRpm.get();
 
         eIncline = w.avgIncline.get();

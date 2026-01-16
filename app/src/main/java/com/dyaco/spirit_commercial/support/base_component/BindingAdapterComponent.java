@@ -200,7 +200,8 @@ public class BindingAdapterComponent {
         int rpm = rpmField.get();
 
         if (MODE.isStepperType()) {
-            rpm *= 2;
+            //spm 不要 * 2
+        //    rpm *= 2;
         }
 
         Context context = view.getContext();

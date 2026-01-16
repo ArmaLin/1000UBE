@@ -2075,7 +2075,7 @@ public class CommonUtils {
                     if (!isTarget) {
                         if (MODE.isStepperType()) {
                             // TODO: PF  SPM
-                            value = String.valueOf((workoutViewModel.currentRpm.get() * 2));
+                            value = String.valueOf((workoutViewModel.currentRpm.get()));
                         } else {
                             value = String.valueOf(workoutViewModel.currentRpm.get());
                         }
@@ -2332,7 +2332,7 @@ public class CommonUtils {
                 case STATS_CADENCE:
 //                    view1Text = String.valueOf(workoutViewModel.currentRpm.get());
                     if (MODE.isStepperType()) {
-                        view1Text = String.valueOf(workoutViewModel.currentRpm.get() * 2);
+                        view1Text = String.valueOf(workoutViewModel.currentRpm.get());
                         view2Text = context.getString(R.string.Cadence_SPM);
                     } else {
                         view1Text = String.valueOf(workoutViewModel.currentRpm.get());

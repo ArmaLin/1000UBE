@@ -2763,7 +2763,8 @@ public class MainWorkoutTrainingFragment extends BaseBindingFragment<FragmentMai
             case FTMS_TYPE_CROSS_TRAINER:
                 workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.POWER, w.currentPower.get());
                 workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.SPEED, speed);
-                workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.CADENCE, w.currentRpm.get() * 2 * 10);
+//                workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.CADENCE, w.currentRpm.get() * 2 * 10);
+                workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.CADENCE, w.currentRpm.get() * 10);
                 workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.AVERAGE_CADENE, (int) (w.avgRpm.get() * 20));
                 workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.AVERAGE_POWER, (int) w.avgPower.get());
                 workoutData.put(DeviceGEM.WORKOUT_DATA_FIELD.CUMULATIVE_VERTICAL_DISTANCE, 0);

@@ -385,7 +385,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 app:ubeText="@{modeEnum}"
                 app:textUbe="@{String.valueOf(workoutData.peakRpm)}"
-                app:textOther="@{String.valueOf(workoutData.peakRpm * 2)}"
+                app:textOther="@{String.valueOf(workoutData.peakRpm)}"
                 android:id="@+id/tvP8Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -613,7 +613,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 app:ubeText="@{modeEnum}"
                 app:textUbe="@{comm.formatDecimal(workoutData.avgRpm,0)}"
-                app:textOther="@{comm.formatDecimal(workoutData.avgRpm * 2,0)}"
+                app:textOther="@{comm.formatDecimal(workoutData.avgRpm,0)}"
                 android:id="@+id/tvP7Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -2998,7 +2998,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     mph2kph(workoutViewModel.currentSpeed.get()));
 
             if (!isTreadmill) {
-                anplusBean.setSpm(workoutViewModel.currentRpm.get() * 2);
+                anplusBean.setSpm(workoutViewModel.currentRpm.get()); //SPM 不要 * 2
                 anplusBean.setCur_level(workoutViewModel.currentLevel.get());
                 anplusBean.setCur_incline(0);
             } else {
