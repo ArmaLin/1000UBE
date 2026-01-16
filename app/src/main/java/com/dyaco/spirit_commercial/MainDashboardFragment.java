@@ -390,6 +390,7 @@ public class MainDashboardFragment extends BaseBindingFragment<FragmentMainDashb
 
                     new FormulaUtil().clearEgymViewModel(egymDataViewModel);
 
+                    parent.getUartConsoleManager().clearAccumulatedValues();
 //                    if (appStatusViewModel.isMediaPlaying.get()) {
 //                        Log.d("BBBBBBVVVVV", "??????????: " + appStatusViewModel.isMediaPlaying.get());
 //                        mbMedia.callOnClick();

@@ -2027,4 +2027,12 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
         }
 
     }
+
+
+    public void clearAccumulatedValues() {
+        m_totalSteps = 0;
+        m_lastNewStep = -1;
+
+        m_totalRevolutions = 0;
+    }
 }
