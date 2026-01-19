@@ -62,14 +62,14 @@ import timber.log.Timber;
  * <p>
  * <p>
  * PF UBE 的 RPM > {@link #onMcuControl} > rpm_ECB
- * PF Stepper 的 RPM > {@link #onStepPerMin} > rpm2_D2D3
- * <p>
+ * PF Stepper 的 RPM > {@link #onStepPerMin} > spm
+ *
  * PF UBE 的 revolution {@link #onMcuControl} > pwmLevel > {accumulateRevolutionsRZ}
- * <p>
+ *
  * 1000UBE UBE 的 revolution {@link #onCurrentRpm} > revolution > {@link #accumulateRevolutionsMUMRMZ}
- * <p>
+ *
  * 1000UBE UBE 的 RPM > {@link #onStepPerMin} > rpm2_D2D3
- * 1000UBE STEPPER 的 RPM > {@link #onStepPerMin} > rpm2_D2D3
+ * 1000UBE STEPPER 的 RPM > {@link #onStepPerMin} > spm
  */
 public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListener {
     private static final String TAG = "UartConsoleManager";
@@ -1206,9 +1206,16 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
 
         // WORKOUT
         // for stepper, SPM (step per minute) value
-        uartVM.aa_spm.set(spm);           // spm
-        uartVM.aa_rpm.set(rpm2_D2D3);     // current RPM  <--  此值也是 1000UBE 的RPM // TODO: 1000UBE
-        woVM.currentRpm.set(rpm2_D2D3);        // current RPM
+//        uartVM.aa_spm.set(spm);           // spm
+//        uartVM.aa_rpm.set(rpm2_D2D3);     // current RPM  <--  此值也是 1000UBE 的RPM // TODO: 1000UBE
+//        woVM.currentRpm.set(rpm2_D2D3);        // current RPM
+
+        if (MODE.isStepperType()) {
+            woVM.currentRpm.set(spm);
+        } else {
+            woVM.currentRpm.set(rpm2_D2D3);
+        }
+
 
         // MAINTENANCE MODE
         // for stepper, Sensor Test - Pulley RPM Optical Sensor的數值
