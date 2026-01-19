@@ -27,6 +27,9 @@ import java.util.List;
 public class MaintenanceBrakeTestFragment extends BaseBindingDialogFragment<FragmentMaintenanceBrakeTestBinding> {
     public UartConsoleManagerPF uartConsole;
     private DeviceSettingViewModel dsViewModel;
+    // TODO: BRAKE TEST
+    public static boolean isBrakeTesting = false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,8 @@ public class MaintenanceBrakeTestFragment extends BaseBindingDialogFragment<Frag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // TODO: BRAKE TEST
+        isBrakeTesting = true;
         initEvent();
 
         uartConsole = ((MainActivity) requireActivity()).uartConsole;
@@ -148,5 +152,12 @@ public class MaintenanceBrakeTestFragment extends BaseBindingDialogFragment<Frag
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // TODO: BRAKE TEST
+        isBrakeTesting = false;
     }
 }

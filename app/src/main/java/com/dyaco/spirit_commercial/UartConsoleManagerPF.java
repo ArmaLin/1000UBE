@@ -10,6 +10,7 @@ import static com.dyaco.spirit_commercial.UartConst.DS_ECB_PAUSE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.DS_EMS_IDLE_STANDBY;
 import static com.dyaco.spirit_commercial.UartConst.WORKLOAD_MIN;
 import static com.dyaco.spirit_commercial.alert_message.WorkoutMediaControllerWindow.isMediaWorkoutController;
+import static com.dyaco.spirit_commercial.maintenance_mode.MaintenanceBrakeTestFragment.isBrakeTesting;
 import static com.dyaco.spirit_commercial.product_flavor.ModeEnum.UBE;
 import static com.dyaco.spirit_commercial.support.CommonUtils.restartApp;
 import static com.dyaco.spirit_commercial.support.intdef.EventKey.FTMS_SET_TARGET_SPEED;
@@ -439,12 +440,14 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
             }
         }
         //  工程模式如果有Brake Test, 則需enable 此段
-//        else {
-//            if (dKcityWorkout.getMyPosition() == R.id.posBrakeTest) {
-//                // EMS在工程模式有brake test, 在此階段要讀取此值, 否則會造成沒阻力(僅送了一次)
-//                pwmLevelDA = getValuePWM();
-//            }
-//        }
+        else {
+            // TODO: BRAKE TEST
+            if (isBrakeTesting) {
+                Timber.d("⚠️⚠️⚠️⚠️工程模式 BRAKE TEST: " + uartVM.at_valuePwm.get());
+                // EMS在工程模式有brake test, 在此階段要讀取此值, 否則會造成沒阻力(僅送了一次)
+                pwmLevelDA = uartVM.at_valuePwm.get();
+            }
+        }
 
         // 限定pwm level D/A值在範圍內 0~1023
         pwmLevelDA = Math.max(pwmLevelDA, 0);
@@ -534,6 +537,8 @@ public class UartConsoleManagerPF implements DeviceDyacoMedical.DeviceEventListe
     }
 
     public void setPwmViaLevel(int level) {
+        // TODO: BRAKE TEST
+        if (isBrakeTesting) return;
 
         // workload為LEVEL constant, 取得PWM level
         int pwmLevelDA = MODE.getPwmViaLevel(level);
