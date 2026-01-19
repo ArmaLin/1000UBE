@@ -1644,6 +1644,7 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:visibility="invisible"
             android:id="@+id/btnKeyTest"
             style="@style/MaintenanceTextStyleMaterial"
             android:text="@string/key_test"
