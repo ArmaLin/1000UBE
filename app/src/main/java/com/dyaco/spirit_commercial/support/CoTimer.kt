@@ -1,81 +1,126 @@
 package com.dyaco.spirit_commercial.support
 
+import android.os.SystemClock
 import kotlinx.coroutines.*
 
-/**
- * 全域單例 CoTimer，底層使用 MainDispatcher（Dispatchers.Main）
- */
 object CoTimer {
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
-    /** 延遲執行一次的回呼介面 */
-    interface AfterListener {
-        fun onFinish()
-    }
+    interface AfterListener { fun onFinish() }
+    interface EveryListener { fun onTick(elapsedMillis: Long) }
+    interface RepeatListener { fun onTick(count: Int); fun onComplete() }
+    interface CountDownListener { fun onTick(remaining: Int); fun onComplete() }
 
-    /** 定期執行的回呼介面 */
-    interface EveryListener {
-        fun onTick(elapsedMillis: Long)
-    }
 
-    /** 重複次數執行的回呼介面 */
-    interface RepeatListener {
-        fun onTick(count: Int)
-        fun onComplete()
-    }
-
-    /** 倒數執行的回呼介面 */
-    interface CountDownListener {
-        fun onTick(remaining: Int)
-        fun onComplete()
-    }
-
-    /** 延遲 [delayMillis] 毫秒後呼叫 onFinish() */
     @JvmStatic
-    fun after(delayMillis: Long, listener: AfterListener): Job =
-        scope.launch {
+    fun after(delayMillis: Long, listener: AfterListener): Job {
+        require(delayMillis >= 0) { "delayMillis must be >= 0" }
+        return scope.launch {
             delay(delayMillis)
-            listener.onFinish()
-        }
-
-    /** 每隔 [periodMillis] 毫秒呼叫 onTick(elapsed) */
-    @JvmStatic
-    fun every(periodMillis: Long, listener: EveryListener): Job =
-        scope.launch {
-            var elapsed = 0L
-            while (isActive) {
-                listener.onTick(elapsed)
-                delay(periodMillis)
-                elapsed += periodMillis
+            withContext(Dispatchers.Main.immediate) {
+                listener.onFinish()
             }
         }
+    }
 
-    /** 重複執行 [times] 次，間隔 [periodMillis] 毫秒 */
+    @JvmStatic
+    fun every(periodMillis: Long, listener: EveryListener): Job {
+        require(periodMillis > 0) { "periodMillis must be > 0" }
+        return scope.launch {
+            val base = SystemClock.elapsedRealtime()
+            var emitted = 0L
+            var nextAt = base
+
+            while (isActive) {
+                withContext(Dispatchers.Main.immediate) {
+                    listener.onTick(emitted * periodMillis)
+                }
+                emitted++
+                nextAt += periodMillis
+
+                var now = SystemClock.elapsedRealtime()
+                var delayMs = nextAt - now
+                if (delayMs <= 0) {
+                    val behind = -delayMs
+                    val skip = behind / periodMillis + 1
+                    emitted += skip
+                    nextAt += periodMillis * skip
+                    now = SystemClock.elapsedRealtime()
+                    delayMs = nextAt - now
+                }
+                delay(delayMs.coerceAtLeast(0))
+            }
+        }
+    }
+
     @JvmStatic
     fun repeat(
         times: Int,
         periodMillis: Long,
         listener: RepeatListener
-    ): Job = scope.launch {
-        repeat(times) { index ->
-            listener.onTick(index + 1)
-            if (index < times - 1) delay(periodMillis)
+    ): Job {
+        require(times >= 0) { "times must be >= 0" }
+        require(periodMillis > 0) { "periodMillis must be > 0" }
+
+        return scope.launch {
+            val base = SystemClock.elapsedRealtime()
+            var nextAt = base
+
+            for (i in 1..times) {
+                withContext(Dispatchers.Main.immediate) { listener.onTick(i) }
+
+                if (i < times) {
+                    nextAt += periodMillis
+                    var now = SystemClock.elapsedRealtime()
+                    var delayMs = nextAt - now
+                    if (delayMs <= 0) {
+                        val behind = -delayMs
+                        val skip = behind / periodMillis + 1
+                        nextAt += periodMillis * skip
+                        now = SystemClock.elapsedRealtime()
+                        delayMs = nextAt - now
+                    }
+                    delay(delayMs.coerceAtLeast(0))
+                }
+            }
+
+            withContext(Dispatchers.Main.immediate) { listener.onComplete() }
         }
-        listener.onComplete()
     }
 
-    /** 從 [startCount] 倒數到 0，每隔 [periodMillis] 毫秒 */
     @JvmStatic
     fun countDown(
         startCount: Int,
         periodMillis: Long,
         listener: CountDownListener
-    ): Job = scope.launch {
-        for (i in startCount downTo 0) {
-            listener.onTick(i)
-            if (i > 0) delay(periodMillis)
+    ): Job {
+        require(startCount >= 0) { "startCount must be >= 0" }
+        require(periodMillis > 0) { "periodMillis must be > 0" }
+
+        return scope.launch {
+            val base = SystemClock.elapsedRealtime()
+            var nextAt = base
+
+            for (remaining in startCount downTo 0) {
+                withContext(Dispatchers.Main.immediate) { listener.onTick(remaining) }
+
+                if (remaining > 0) {
+                    nextAt += periodMillis
+                    var now = SystemClock.elapsedRealtime()
+                    var delayMs = nextAt - now
+                    if (delayMs <= 0) {
+                        val behind = -delayMs
+                        val skip = behind / periodMillis + 1
+                        nextAt += periodMillis * skip
+                        now = SystemClock.elapsedRealtime()
+                        delayMs = nextAt - now
+                    }
+                    delay(delayMs.coerceAtLeast(0))
+                }
+            }
+
+            withContext(Dispatchers.Main.immediate) { listener.onComplete() }
         }
-        listener.onComplete()
     }
 
     @JvmStatic
@@ -84,28 +129,34 @@ object CoTimer {
     }
 
 
-    /**
-     * 一个可暂停／恢复的“every”定时器。
-     * Java 侧可通过 CoTimer.pausableEvery(...) 拿到实例并调用 start/pause/resume/cancel。
-     */
     class PausableTimer internal constructor(
         private val periodMillis: Long,
         private val listener: EveryListener
     ) {
-        private var elapsed = 0L
         private var job: Job? = null
+        private var base: Long = 0L
+        private var cachedElapsed: Long = 0L
 
-        /** 开始或从头（elapsed=0）启动 */
         @JvmOverloads
-        fun start(reset: Boolean = false): PausableTimer {
-            if (reset) elapsed = 0L
-            // 已在跑的先取消
+        fun start(reset: Boolean = true): PausableTimer {
+            require(periodMillis > 0) { "periodMillis must be > 0" }
+
+            if (reset) cachedElapsed = 0L
             job?.cancel()
+
+            base = SystemClock.elapsedRealtime() - cachedElapsed
+
             job = scope.launch {
                 while (isActive) {
-                    listener.onTick(elapsed)
-                    delay(periodMillis)
-                    elapsed += periodMillis
+                    val now = SystemClock.elapsedRealtime()
+                    val elapsed = now - base
+                    withContext(Dispatchers.Main.immediate) {
+                        listener.onTick(elapsed)
+                    }
+
+                    val nextAt = base + ((elapsed / periodMillis) + 1) * periodMillis
+                    val delayMs = (nextAt - SystemClock.elapsedRealtime()).coerceAtLeast(0)
+                    delay(delayMs)
                 }
             }
             return this
@@ -114,39 +165,27 @@ object CoTimer {
         fun pause(): PausableTimer {
             job?.cancel()
             job = null
+            cachedElapsed = SystemClock.elapsedRealtime() - base
             return this
         }
 
         fun resume(): PausableTimer {
-            if (job == null) {
-                job = scope.launch {
-                    while (isActive) {
-                        listener.onTick(elapsed)
-                        delay(periodMillis)
-                        elapsed += periodMillis
-                    }
-                }
-            }
+            if (job == null) start(reset = false)
             return this
         }
 
         fun cancel(): PausableTimer {
             job?.cancel()
             job = null
-            elapsed = 0L
+            cachedElapsed = 0L
+            base = 0L
             return this
         }
 
-        /** 返回当前已过毫秒数 */
-        fun getElapsed(): Long = elapsed
+        fun getElapsed(): Long =
+            if (job == null) cachedElapsed else SystemClock.elapsedRealtime() - base
     }
 
-    /**
-     * 創建一個可暂停／續跑的定時器，
-     * @param periodMillis 周期毫秒
-     * @param listener callback
-     * @return PausableTimer instance，可調用 start/pause/resume/cancel
-     */
     @JvmStatic
     fun pausableEvery(
         periodMillis: Long,
@@ -154,54 +193,61 @@ object CoTimer {
     ): PausableTimer = PausableTimer(periodMillis, listener)
 
 
-
-
-    /**
-     * 一個可暫停／恢復的倒數計時器。
-     */
     class PausableCountDownTimer internal constructor(
         private val startCount: Int,
         private val periodMillis: Long,
         private val listener: CountDownListener
     ) {
         private var job: Job? = null
-        private var remainingCount: Int = startCount
-        private var isRunning: Boolean = false
+        @Volatile private var remainingCount: Int = startCount
+        @Volatile private var isRunning: Boolean = false
 
-        /**
-         * 開始或從頭重新開始倒數。
-         * @param reset 如果為 true，則無論當前狀態如何，都從初始的 startCount 重新計時。
-         */
         @JvmOverloads
         fun start(reset: Boolean = true): PausableCountDownTimer {
-            if (isRunning && !reset) return this // 如果正在運行且不要求重置，則不執行任何操作
+            require(startCount >= 0) { "startCount must be >= 0" }
+            require(periodMillis > 0) { "periodMillis must be > 0" }
+
+            if (isRunning && !reset) return this
             if (reset) {
                 remainingCount = startCount
             }
-            job?.cancel() // 取消任何正在運行的舊任務
+
+            job?.cancel()
             isRunning = true
 
-            job = scope.launch {
+            var nextAt = SystemClock.elapsedRealtime()
+
+            val launched = scope.launch {
                 try {
                     for (i in remainingCount downTo 0) {
-                        remainingCount = i // 更新當前剩餘計數
-                        listener.onTick(i)
+                        remainingCount = i
+
+                        val delayMs = (nextAt - SystemClock.elapsedRealtime()).coerceAtLeast(0)
+                        delay(delayMs)
+
+                        withContext(Dispatchers.Main.immediate) {
+                            listener.onTick(i)
+                        }
+
                         if (i > 0) {
-                            delay(periodMillis)
+                            nextAt += periodMillis
                         }
                     }
-                    listener.onComplete()
+
+                    withContext(Dispatchers.Main.immediate) {
+                        listener.onComplete()
+                    }
                 } finally {
-                    // 無論是正常完成還是被取消，都重置狀態
-                    resetState()
+                    isRunning = false
+                    val current = coroutineContext[Job]
+                    if (job === current) job = null
                 }
             }
+
+            job = launched
             return this
         }
 
-        /**
-         * 暫停倒數。
-         */
         fun pause(): PausableCountDownTimer {
             job?.cancel()
             job = null
@@ -209,19 +255,13 @@ object CoTimer {
             return this
         }
 
-        /**
-         * 從暫停的地方繼續倒數。
-         */
         fun resume(): PausableCountDownTimer {
-            if (isRunning || remainingCount <= 0) return this // 如果正在運行或已完成，則不執行任何操作
-            // 從當前剩餘的秒數開始，但不重置
-            start(reset = false)
+            if (!isRunning && remainingCount > 0) {
+                start(reset = false)
+            }
             return this
         }
 
-        /**
-         * 完全取消並重置計時器。
-         */
         fun cancel(): PausableCountDownTimer {
             job?.cancel()
             resetState()
@@ -233,17 +273,14 @@ object CoTimer {
             isRunning = false
             remainingCount = startCount
         }
+
+        fun getRemainingCount(): Int = remainingCount
     }
 
-    /**
-     * 創建一個可暫停／恢復的倒數計時器實例。
-     * 這個方法只會創建物件，需要手動呼叫 .start() 來啟動。
-     */
     @JvmStatic
     fun pausableCountDown(
         startCount: Int,
         periodMillis: Long,
         listener: CountDownListener
     ): PausableCountDownTimer = PausableCountDownTimer(startCount, periodMillis, listener)
-
 }
